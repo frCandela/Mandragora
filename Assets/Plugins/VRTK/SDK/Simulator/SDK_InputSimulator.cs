@@ -29,6 +29,8 @@ namespace VRTK
 
         [Tooltip("Show control information in the upper left corner of the screen.")]
         public bool showControlHints = true;
+        [Tooltip("What do you think that does ?")]
+        public bool hideAndLockCursor = true;
         [Tooltip("Hide hands when disabling them.")]
         public bool hideHandsAtSwitch = false;
         [Tooltip("Reset hand position and rotation when enabling them.")]
@@ -165,6 +167,9 @@ namespace VRTK
             rightController.Selected = true;
             leftController.Selected = false;
             destroyed = false;
+
+            Cursor.visible = !hideAndLockCursor;
+            Cursor.lockState = hideAndLockCursor ? CursorLockMode.Locked : CursorLockMode.None;
 
             var controllerSDK = VRTK_SDK_Bridge.GetControllerSDK() as SDK_SimController;
             if (controllerSDK != null)
