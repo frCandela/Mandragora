@@ -153,13 +153,16 @@ namespace VRTK
             crossHairPanel = transform.Find("Canvas/CrosshairPanel").gameObject;
             hintText = hintCanvas.GetComponentInChildren<Text>();
             hintCanvas.SetActive(showControlHints);
-            rightHand = transform.Find("RightHand");
-            rightHand.gameObject.SetActive(false);
-            leftHand = transform.Find("LeftHand");
-            leftHand.gameObject.SetActive(false);
+            
             currentHand = rightHand;
             oldPos = Input.mousePosition;
+
             neck = transform.Find("Neck");
+            rightHand = neck.Find("RightHand");
+            rightHand.gameObject.SetActive(false);
+            leftHand = neck.Find("LeftHand");
+            leftHand.gameObject.SetActive(false);
+
             leftHand.Find("Hand").GetComponent<Renderer>().material.color = Color.red;
             rightHand.Find("Hand").GetComponent<Renderer>().material.color = Color.green;
             rightController = rightHand.GetComponent<SDK_ControllerSim>();
