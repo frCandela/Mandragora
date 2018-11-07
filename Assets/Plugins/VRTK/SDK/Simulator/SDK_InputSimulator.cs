@@ -255,7 +255,23 @@ namespace VRTK
             }
             else
             {
-                UpdateRotation();
+                // Hand displacement
+                rightHand.transform.localPosition = leftHand.transform.localPosition += Vector3.forward * Input.mouseScrollDelta.y / 100;
+
+                // Hand rotation
+                GameObject hand = rightHand ? VRTK_DeviceFinder.GetControllerRightHand() : VRTK_DeviceFinder.GetControllerLeftHand();
+                GameObject grabbed = hand.GetComponent<VRTK_InteractGrab>().GetGrabbedObject();
+
+                if (Input.GetMouseButton(1) && grabbed)
+                {
+                    Vector3 mouseDelta = GetMouseDelta();
+                    leftHand.Rotate(neck.forward, -mouseDelta.x, Space.World);
+                    leftHand.Rotate(neck.right, mouseDelta.y, Space.World);
+                    rightHand.rotation = leftHand.rotation;
+                }
+                else
+                    UpdateRotation();
+                
                 if(Input.GetKeyDown(distancePickupRight) && Input.GetKey(distancePickupModifier))
                 {
                     TryPickup(true);
