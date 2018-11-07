@@ -52,6 +52,8 @@ namespace VRTK
         public float playerRotationMultiplier = 0.5f;
         [Tooltip("Adjust player sprint speed.")]
         public float playerSprintMultiplier = 2;
+        [SerializeField]
+        float playerCrouchHeight = .5f;
 
         [Header("Operation Key Bindings")]
 
@@ -73,6 +75,8 @@ namespace VRTK
         public KeyCode distancePickupRight = KeyCode.Mouse1;
         [Tooltip("Key used to enable distance pickup.")]
         public KeyCode distancePickupModifier = KeyCode.LeftControl;
+        [SerializeField]
+        KeyCode crouchKey = KeyCode.C;
 
         [Header("Movement Key Bindings")]
 
@@ -108,6 +112,7 @@ namespace VRTK
         #endregion
         #region Private fields
 
+        private float baseHeight;
         private bool isHand = false;
         private GameObject hintCanvas;
         private Text hintText;
@@ -153,13 +158,18 @@ namespace VRTK
             crossHairPanel = transform.Find("Canvas/CrosshairPanel").gameObject;
             hintText = hintCanvas.GetComponentInChildren<Text>();
             hintCanvas.SetActive(showControlHints);
-            rightHand = transform.Find("RightHand");
-            rightHand.gameObject.SetActive(false);
-            leftHand = transform.Find("LeftHand");
-            leftHand.gameObject.SetActive(false);
+            
             currentHand = rightHand;
             oldPos = Input.mousePosition;
+
             neck = transform.Find("Neck");
+            baseHeight = neck.position.y;
+
+            rightHand = neck.Find("RightHand");
+            rightHand.gameObject.SetActive(false);
+            leftHand = neck.Find("LeftHand");
+            leftHand.gameObject.SetActive(false);
+
             leftHand.Find("Hand").GetComponent<Renderer>().material.color = Color.red;
             rightHand.Find("Hand").GetComponent<Renderer>().material.color = Color.green;
             rightController = rightHand.GetComponent<SDK_ControllerSim>();
@@ -246,13 +256,32 @@ namespace VRTK
                 }
             }
 
+            //Crouch
+            neck.localPosition = Vector3.up * (Input.GetKey(crouchKey) ? playerCrouchHeight : baseHeight);
+
             if (isHand)
             {
                 UpdateHands();
             }
             else
             {
-                UpdateRotation();
+                // Hand displacement
+                rightHand.transform.localPosition = leftHand.transform.localPosition += Vector3.forward * Input.mouseScrollDelta.y / 100;
+
+                // Hand rotation
+                GameObject hand = rightHand ? VRTK_DeviceFinder.GetControllerRightHand() : VRTK_DeviceFinder.GetControllerLeftHand();
+                GameObject grabbed = hand.GetComponent<VRTK_InteractGrab>().GetGrabbedObject();
+
+                if (Input.GetMouseButton(1) && grabbed)
+                {
+                    Vector3 mouseDelta = GetMouseDelta();
+                    leftHand.Rotate(neck.forward, -mouseDelta.x, Space.World);
+                    leftHand.Rotate(neck.right, mouseDelta.y, Space.World);
+                    rightHand.rotation = leftHand.rotation;
+                }
+                else
+                    UpdateRotation();
+                
                 if(Input.GetKeyDown(distancePickupRight) && Input.GetKey(distancePickupModifier))
                 {
                     TryPickup(true);
