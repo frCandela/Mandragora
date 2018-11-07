@@ -52,6 +52,8 @@ namespace VRTK
         public float playerRotationMultiplier = 0.5f;
         [Tooltip("Adjust player sprint speed.")]
         public float playerSprintMultiplier = 2;
+        [SerializeField]
+        float playerCrouchHeight = .5f;
 
         [Header("Operation Key Bindings")]
 
@@ -73,6 +75,8 @@ namespace VRTK
         public KeyCode distancePickupRight = KeyCode.Mouse1;
         [Tooltip("Key used to enable distance pickup.")]
         public KeyCode distancePickupModifier = KeyCode.LeftControl;
+        [SerializeField]
+        KeyCode crouchKey = KeyCode.C;
 
         [Header("Movement Key Bindings")]
 
@@ -108,6 +112,7 @@ namespace VRTK
         #endregion
         #region Private fields
 
+        private float baseHeight;
         private bool isHand = false;
         private GameObject hintCanvas;
         private Text hintText;
@@ -158,6 +163,8 @@ namespace VRTK
             oldPos = Input.mousePosition;
 
             neck = transform.Find("Neck");
+            baseHeight = neck.position.y;
+
             rightHand = neck.Find("RightHand");
             rightHand.gameObject.SetActive(false);
             leftHand = neck.Find("LeftHand");
@@ -248,6 +255,9 @@ namespace VRTK
                     leftController.Selected = true;
                 }
             }
+
+            //Crouch
+            neck.localPosition = Vector3.up * (Input.GetKey(crouchKey) ? playerCrouchHeight : baseHeight);
 
             if (isHand)
             {
