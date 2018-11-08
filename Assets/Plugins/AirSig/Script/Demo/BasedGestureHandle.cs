@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using AirSig;
+using VRTK;
 
 public class BasedGestureHandle : MonoBehaviour {
 
@@ -11,7 +12,7 @@ public class BasedGestureHandle : MonoBehaviour {
     public AirSigManager airsigManager;
 
     // Reference to the vive right hand controller for handing key pressing
-    public SteamVR_TrackedObject rightHandControl;
+    public VRTK_ControllerEvents handControl;
 
     public ParticleSystem track;
 
@@ -100,12 +101,11 @@ public class BasedGestureHandle : MonoBehaviour {
             textToUpdate = null;
         }
 
-        if (-1 != (int)rightHandControl.index) {
-            var device = SteamVR_Controller.Input((int)rightHandControl.index);
-            if (device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger)) {
+        {
+            if (handControl.triggerClicked) {
                 track.Clear();
                 track.Play();
-            } else if (device.GetPressUp(SteamVR_Controller.ButtonMask.Trigger)) {
+            } else{
                 track.Stop();
             }
         }

@@ -148,11 +148,16 @@ public class PlayerSignature : BasedGestureHandle {
     void Update() {
         UpdateUIandHandleControl();
 
-        if (-1 != (int)rightHandControl.index) {
-            var device = SteamVR_Controller.Input((int)rightHandControl.index);
-            if (device.GetPressUp(SteamVR_Controller.ButtonMask.ApplicationMenu)) {
-                ResetSignature();
-            }
+        // if (-1 != (int)handControl.index) {
+        //     var device = SteamVR_Controller.Input((int)handControl.index);
+        //     if (device.GetPressUp(SteamVR_Controller.ButtonMask.ApplicationMenu)) {
+        //         ResetSignature();
+        //     }
+        // }
+
+        if (handControl.buttonTwoPressed)
+        {
+            ResetSignature();
         }
     }
 }

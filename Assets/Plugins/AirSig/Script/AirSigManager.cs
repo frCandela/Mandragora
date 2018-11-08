@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading;
 using UnityEngine;
 
+using VRTK;
+
 namespace AirSig {
     public class AirSigManager : MonoBehaviour {
 
@@ -2500,7 +2502,7 @@ namespace AirSig {
         // ====================================================================
 #endif
 
-        void startRightHandCollecting() {
+        void startRightHandCollecting(object sender, ControllerInteractionEventArgs e) {
             if (DEBUG_LOG_ENABLED) Debug.Log("[AirSigManager] RightHand starts collecting...");
             mIsCollectingRightControllerData = true;
             mRightHandPrevTimeElapsed = 0;
@@ -2508,7 +2510,7 @@ namespace AirSig {
             mRightHandStopWatch.Reset();
         }
 
-        void startLeftHandCollecting() {
+        void startLeftHandCollecting(object sender, ControllerInteractionEventArgs e) {
             if (DEBUG_LOG_ENABLED) Debug.Log("[AirSigManager] LeftHand starts collecting...");
             mIsCollectingLeftControllerData = true;
             mLeftHandPrevTimeElapsed = 0;
@@ -2516,7 +2518,7 @@ namespace AirSig {
             mLeftHandStopWatch.Reset();
         }
 
-        void stopRightHandCollecting() {
+        void stopRightHandCollecting(object sender, ControllerInteractionEventArgs e) {
             if (DEBUG_LOG_ENABLED) Debug.Log(string.Format("[AirSigManager] RightHand stopped collecting... {0} samples", mCollectedRightHandSamples.Count));
             mIsCollectingRightControllerData = false;
 
@@ -2530,7 +2532,7 @@ namespace AirSig {
             mRightHandStopWatch.Reset();
         }
 
-        void stopLeftHandCollecting() {
+        void stopLeftHandCollecting(object sender, ControllerInteractionEventArgs e) {
             if (DEBUG_LOG_ENABLED) Debug.Log(string.Format("[AirSigManager] LeftHand stopped collecting... {0} samples", mCollectedRightHandSamples.Count));
             mIsCollectingLeftControllerData = false;
 
@@ -2549,158 +2551,161 @@ namespace AirSig {
         long mRightHandPrevTimeElapsed = 0;
         long mLeftHandPrevTimeElapsed = 0;
 
-        void Update () {
-            if(mCVRSystem == null) {
-                Debug.LogWarning("Unable to find the VR system");
-                return;
-            }
+        void Update ()
+        {
+            // if(mCVRSystem == null) {
+            //     Debug.LogWarning("Unable to find the VR system");
+            //     return;
+            // }
+
             // Determine right hand status
-            int rightHandIndex = (int)mCVRSystem.GetTrackedDeviceIndexForControllerRole(Valve.VR.ETrackedControllerRole.RightHand);
-            if(rightHandIndex != -1) {
-                var rightHandDevice = SteamVR_Controller.Input(rightHandIndex);
+            // int rightHandIndex = (int)mCVRSystem.GetTrackedDeviceIndexForControllerRole(Valve.VR.ETrackedControllerRole.RightHand);
+            // if(rightHandIndex != -1)
+            // {
+            //     var rightHandDevice = SteamVR_Controller.Input(rightHandIndex);
 
-                if (mIsCollectingRightControllerData == false) {
-                    // Has not started collecting
-                    if(mRightHandTriggerStartMask != 0) {
-                        if(mRightHandTriggerStartPressOrTouch == PressOrTouch.PRESS) {
-                            // Use press
-                            if (rightHandDevice.GetPressDown(mRightHandTriggerStartMask)) {
-                                startRightHandCollecting();
-                            }
-                        }
-                        else {
-                            // Use touch
-                            if (rightHandDevice.GetTouchDown(mRightHandTriggerStartMask)) {
-                                startRightHandCollecting();
-                            }
-                        }
-                    }
-                }
-                else {
-                    // Already started collecting
-                    if (mRightHandTriggerEndMask != 0) {
-                        if (mRightHandTriggerEndPressOrTouch == PressOrTouch.PRESS) {
-                            // Use press
-                            if (rightHandDevice.GetPressDown(mRightHandTriggerEndMask)) {
-                                stopRightHandCollecting();
-                            }
-                        } else {
-                            // Use touch
-                            if (rightHandDevice.GetTouchDown(mRightHandTriggerEndMask)) {
-                                stopRightHandCollecting();
-                            }
+            //     if (mIsCollectingRightControllerData == false) {
+            //         // Has not started collecting
+            //         if(mRightHandTriggerStartMask != 0) {
+            //             if(mRightHandTriggerStartPressOrTouch == PressOrTouch.PRESS) {
+            //                 // Use press
+            //                 if (rightHandDevice.GetPressDown(mRightHandTriggerStartMask)) {
+            //                     startRightHandCollecting();
+            //                 }
+            //             }
+            //             else {
+            //                 // Use touch
+            //                 if (rightHandDevice.GetTouchDown(mRightHandTriggerStartMask)) {
+            //                     startRightHandCollecting();
+            //                 }
+            //             }
+            //         }
+            //     }
+            //     else {
+            //         // Already started collecting
+            //         if (mRightHandTriggerEndMask != 0) {
+            //             if (mRightHandTriggerEndPressOrTouch == PressOrTouch.PRESS) {
+            //                 // Use press
+            //                 if (rightHandDevice.GetPressDown(mRightHandTriggerEndMask)) {
+            //                     stopRightHandCollecting();
+            //                 }
+            //             } else {
+            //                 // Use touch
+            //                 if (rightHandDevice.GetTouchDown(mRightHandTriggerEndMask)) {
+            //                     stopRightHandCollecting();
+            //                 }
 
-                        }
-                    }
-                    else {
-                        // End key is not defined, use pressUp and touchUp of startMask
-                        if (mRightHandTriggerStartPressOrTouch == PressOrTouch.PRESS) {
-                            // Use press
-                            if (rightHandDevice.GetPressUp(mRightHandTriggerStartMask)) {
-                                stopRightHandCollecting();
-                            }
-                        } else {
-                            // Use touch
-                            if (rightHandDevice.GetTouchUp(mRightHandTriggerStartMask)) {
-                                stopRightHandCollecting();
-                            }
+            //             }
+            //         }
+            //         else {
+            //             // End key is not defined, use pressUp and touchUp of startMask
+            //             if (mRightHandTriggerStartPressOrTouch == PressOrTouch.PRESS) {
+            //                 // Use press
+            //                 if (rightHandDevice.GetPressUp(mRightHandTriggerStartMask)) {
+            //                     stopRightHandCollecting();
+            //                 }
+            //             } else {
+            //                 // Use touch
+            //                 if (rightHandDevice.GetTouchUp(mRightHandTriggerStartMask)) {
+            //                     stopRightHandCollecting();
+            //                 }
 
-                        }
-                    }
-                }
+            //             }
+            //         }
+            //     }
                 
-                if (mIsCollectingRightControllerData) {
-                    mRightHandStopWatch.Stop();
-                    long timeElapsedMilliseconds = mRightHandStopWatch.ElapsedMilliseconds;
-                    if (timeElapsedMilliseconds - mRightHandPrevTimeElapsed >= 16) {
-                        Sample sample = new Sample();
-                        sample.time = timeElapsedMilliseconds;
-                        Valve.VR.TrackedDevicePose_t pose = rightHandDevice.GetPose();
-                        SteamVR_Utils.RigidTransform transform = new SteamVR_Utils.RigidTransform(pose.mDeviceToAbsoluteTracking);
-                        transform.Inverse();
-                        Vector3 transformAngularVelocity = transform * new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2);
+            if (mIsCollectingRightControllerData) {
+                mRightHandStopWatch.Stop();
+                long timeElapsedMilliseconds = mRightHandStopWatch.ElapsedMilliseconds;
+                if (timeElapsedMilliseconds - mRightHandPrevTimeElapsed >= 16) {
+                    Sample sample = new Sample();
+                    sample.time = timeElapsedMilliseconds;
+                    Valve.VR.TrackedDevicePose_t pose = rightHandDevice.GetPose();
+                    SteamVR_Utils.RigidTransform transform = new SteamVR_Utils.RigidTransform(pose.mDeviceToAbsoluteTracking);
+                    transform.Inverse();
+                    Vector3 transformAngularVelocity = transform * new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2);
 
-                        sample.rotation.x = transformAngularVelocity.x;
-                        sample.rotation.y = transformAngularVelocity.y;
-                        sample.rotation.z = transformAngularVelocity.z;
-                        mCollectedRightHandSamples.Add(sample);
-                        mRightHandPrevTimeElapsed = timeElapsedMilliseconds;
-                    }
-                    mRightHandStopWatch.Start();
+                    sample.rotation.x = transformAngularVelocity.x;
+                    sample.rotation.y = transformAngularVelocity.y;
+                    sample.rotation.z = transformAngularVelocity.z;
+                    mCollectedRightHandSamples.Add(sample);
+                    mRightHandPrevTimeElapsed = timeElapsedMilliseconds;
                 }
+                mRightHandStopWatch.Start();
             }
+            // }
 
-            int leftHandIndex = (int)mCVRSystem.GetTrackedDeviceIndexForControllerRole(Valve.VR.ETrackedControllerRole.LeftHand);
-            if (leftHandIndex != -1) {
-                var leftHandDevice = SteamVR_Controller.Input(leftHandIndex);
+            // int leftHandIndex = (int)mCVRSystem.GetTrackedDeviceIndexForControllerRole(Valve.VR.ETrackedControllerRole.LeftHand);
+            // if (leftHandIndex != -1) {
+            //     var leftHandDevice = SteamVR_Controller.Input(leftHandIndex);
 
-                if (mIsCollectingLeftControllerData == false) {
-                    // Has not started collecting
-                    if (mLeftHandTriggerStartMask != 0) {
-                        if (mLeftHandTriggerStartPressOrTouch == PressOrTouch.PRESS) {
-                            // Use press
-                            if (leftHandDevice.GetPressDown(mLeftHandTriggerStartMask)) {
-                                startLeftHandCollecting();
-                            }
-                        } else {
-                            // Use touch
-                            if (leftHandDevice.GetTouchDown(mLeftHandTriggerStartMask)) {
-                                startLeftHandCollecting();
-                            }
-                        }
-                    }
-                } else {
-                    // Already started collecting
-                    if (mLeftHandTriggerEndMask != 0) {
-                        if (mLeftHandTriggerEndPressOrTouch == PressOrTouch.PRESS) {
-                            // Use press
-                            if (leftHandDevice.GetPressDown(mLeftHandTriggerEndMask)) {
-                                stopLeftHandCollecting();
-                            }
-                        } else {
-                            // Use touch
-                            if (leftHandDevice.GetTouchDown(mLeftHandTriggerEndMask)) {
-                                stopLeftHandCollecting();
-                            }
+            //     if (mIsCollectingLeftControllerData == false) {
+            //         // Has not started collecting
+            //         if (mLeftHandTriggerStartMask != 0) {
+            //             if (mLeftHandTriggerStartPressOrTouch == PressOrTouch.PRESS) {
+            //                 // Use press
+            //                 if (leftHandDevice.GetPressDown(mLeftHandTriggerStartMask)) {
+            //                     startLeftHandCollecting();
+            //                 }
+            //             } else {
+            //                 // Use touch
+            //                 if (leftHandDevice.GetTouchDown(mLeftHandTriggerStartMask)) {
+            //                     startLeftHandCollecting();
+            //                 }
+            //             }
+            //         }
+            //     } else {
+            //         // Already started collecting
+            //         if (mLeftHandTriggerEndMask != 0) {
+            //             if (mLeftHandTriggerEndPressOrTouch == PressOrTouch.PRESS) {
+            //                 // Use press
+            //                 if (leftHandDevice.GetPressDown(mLeftHandTriggerEndMask)) {
+            //                     stopLeftHandCollecting();
+            //                 }
+            //             } else {
+            //                 // Use touch
+            //                 if (leftHandDevice.GetTouchDown(mLeftHandTriggerEndMask)) {
+            //                     stopLeftHandCollecting();
+            //                 }
 
-                        }
-                    } else {
-                        // End key is not defined, use pressUp and touchUp of startMask
-                        if (mLeftHandTriggerStartPressOrTouch == PressOrTouch.PRESS) {
-                            // Use press
-                            if (leftHandDevice.GetPressUp(mLeftHandTriggerStartMask)) {
-                                stopLeftHandCollecting();
-                            }
-                        } else {
-                            // Use touch
-                            if (leftHandDevice.GetTouchUp(mLeftHandTriggerStartMask)) {
-                                stopLeftHandCollecting();
-                            }
+            //             }
+            //         } else {
+            //             // End key is not defined, use pressUp and touchUp of startMask
+            //             if (mLeftHandTriggerStartPressOrTouch == PressOrTouch.PRESS) {
+            //                 // Use press
+            //                 if (leftHandDevice.GetPressUp(mLeftHandTriggerStartMask)) {
+            //                     stopLeftHandCollecting();
+            //                 }
+            //             } else {
+            //                 // Use touch
+            //                 if (leftHandDevice.GetTouchUp(mLeftHandTriggerStartMask)) {
+            //                     stopLeftHandCollecting();
+            //                 }
 
-                        }
-                    }
+            //             }
+            //         }
+            //     }
+
+            if (mIsCollectingLeftControllerData) {
+                mLeftHandStopWatch.Stop();
+                long timeElapsedMilliseconds = mLeftHandStopWatch.ElapsedMilliseconds;
+                if (timeElapsedMilliseconds - mLeftHandPrevTimeElapsed >= 16) {
+                    Sample sample = new Sample();
+                    sample.time = timeElapsedMilliseconds;
+                    Valve.VR.TrackedDevicePose_t pose = leftHandDevice.GetPose();
+                    SteamVR_Utils.RigidTransform transform = new SteamVR_Utils.RigidTransform(pose.mDeviceToAbsoluteTracking);
+                    transform.Inverse();
+                    Vector3 transformAngularVelocity = transform * new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2);
+
+                    sample.rotation.x = transformAngularVelocity.x;
+                    sample.rotation.y = transformAngularVelocity.y;
+                    sample.rotation.z = transformAngularVelocity.z;
+                    mCollectedLeftHandSamples.Add(sample);
+                    mLeftHandPrevTimeElapsed = timeElapsedMilliseconds;
                 }
-
-                if (mIsCollectingLeftControllerData) {
-                    mLeftHandStopWatch.Stop();
-                    long timeElapsedMilliseconds = mLeftHandStopWatch.ElapsedMilliseconds;
-                    if (timeElapsedMilliseconds - mLeftHandPrevTimeElapsed >= 16) {
-                        Sample sample = new Sample();
-                        sample.time = timeElapsedMilliseconds;
-                        Valve.VR.TrackedDevicePose_t pose = leftHandDevice.GetPose();
-                        SteamVR_Utils.RigidTransform transform = new SteamVR_Utils.RigidTransform(pose.mDeviceToAbsoluteTracking);
-                        transform.Inverse();
-                        Vector3 transformAngularVelocity = transform * new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2);
-
-                        sample.rotation.x = transformAngularVelocity.x;
-                        sample.rotation.y = transformAngularVelocity.y;
-                        sample.rotation.z = transformAngularVelocity.z;
-                        mCollectedLeftHandSamples.Add(sample);
-                        mLeftHandPrevTimeElapsed = timeElapsedMilliseconds;
-                    }
-                    mLeftHandStopWatch.Start();
-                }
+                mLeftHandStopWatch.Start();
             }
+            // }
         }
 
         
@@ -2736,10 +2741,13 @@ namespace AirSig {
             }
         }
 
-        Valve.VR.CVRSystem mCVRSystem;
+        // Valve.VR.CVRSystem mCVRSystem;
+        [SerializeField]
+        VRTK_ControllerEvents m_controllerRight, m_controllerLeft;
 
         bool mIsInitReady = false;
-        void Awake() {
+        void Awake()
+        {
             // Application.targetFrameRate = 45;
             // print("[AirSigManager] after changing framerate target: " + Application.targetFrameRate);
 
@@ -2751,7 +2759,29 @@ namespace AirSig {
             }
             sInstance = this;
 
-            mCVRSystem = Valve.VR.OpenVR.System;
+            // mCVRSystem = Valve.VR.OpenVR.System;
+
+            if(mRightHandTriggerStartPressOrTouch == PressOrTouch.PRESS)
+            {
+                m_controllerRight.TriggerClicked += new ControllerInteractionEventHandler(startRightHandCollecting);
+                m_controllerRight.TriggerUnclicked += new ControllerInteractionEventHandler(stopRightHandCollecting);
+            }
+            else 
+            {
+                m_controllerRight.TriggerTouchStart += new ControllerInteractionEventHandler(startRightHandCollecting);
+                m_controllerRight.TriggerTouchEnd += new ControllerInteractionEventHandler(stopRightHandCollecting);
+            }
+            
+            if(mLeftHandTriggerStartPressOrTouch == PressOrTouch.PRESS)
+            {
+                m_controllerLeft.TriggerClicked += new ControllerInteractionEventHandler(startLeftHandCollecting);
+                m_controllerLeft.TriggerUnclicked += new ControllerInteractionEventHandler(stopLeftHandCollecting);
+            }
+            else 
+            {
+                m_controllerLeft.TriggerTouchStart += new ControllerInteractionEventHandler(startLeftHandCollecting);
+                m_controllerLeft.TriggerTouchEnd += new ControllerInteractionEventHandler(stopLeftHandCollecting);
+            }
 
             // Shorten the debug message
             //Application.SetStackTraceLogType(LogType.Log, StackTraceLogType.None);

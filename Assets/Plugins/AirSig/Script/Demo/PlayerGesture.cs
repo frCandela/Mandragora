@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 using AirSig;
+using VRTK;
 
 public class PlayerGesture : BasedGestureHandle {
 
@@ -142,6 +143,8 @@ public class PlayerGesture : BasedGestureHandle {
             SteamVR_Controller.ButtonMask.Touchpad,
             AirSigManager.PressOrTouch.PRESS);
 
+        // new ControllerInteractionEventArgs();
+        // handControl.TriggerClicked += new ControllerInteractionEventHandler(this, EnterGesture(PLAYER_GESTURE_ONE));
     }
 
 
@@ -154,11 +157,16 @@ public class PlayerGesture : BasedGestureHandle {
     void Update() {
         UpdateUIandHandleControl();
 
-        if (-1 != (int)rightHandControl.index) {
-            var device = SteamVR_Controller.Input((int)rightHandControl.index);
-            if (device.GetPressUp(SteamVR_Controller.ButtonMask.ApplicationMenu)) {
-                EnterGesture(PLAYER_GESTURE_ONE);
-            }
+        // if (-1 != (int)handControl.index) {
+        //     var device = SteamVR_Controller.Input((int)handControl.index);
+        //     if (device.GetPressUp(SteamVR_Controller.ButtonMask.ApplicationMenu)) {
+        //         EnterGesture(PLAYER_GESTURE_ONE);
+        //     }
+        // }
+
+        if (handControl.buttonTwoPressed)
+        {
+            EnterGesture(PLAYER_GESTURE_ONE);
         }
     }
 }
