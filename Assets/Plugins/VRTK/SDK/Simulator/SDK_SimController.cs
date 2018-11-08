@@ -262,10 +262,10 @@ namespace VRTK
                 switch (hand)
                 {
                     case ControllerHand.Left:
-                        model = simPlayer.transform.Find(string.Format("{0}/Hand", LEFT_HAND_CONTROLLER_NAME)).gameObject;
+                        model = simPlayer.transform.Find("Neck").transform.Find(string.Format("{0}/Hand", LEFT_HAND_CONTROLLER_NAME)).gameObject;
                         break;
                     case ControllerHand.Right:
-                        model = simPlayer.transform.Find(string.Format("{0}/Hand", RIGHT_HAND_CONTROLLER_NAME)).gameObject;
+                        model = simPlayer.transform.Find("Neck").transform.Find(string.Format("{0}/Hand", RIGHT_HAND_CONTROLLER_NAME)).gameObject;
                         break;
                 }
             }
@@ -436,8 +436,8 @@ namespace VRTK
                 GameObject simPlayer = SDK_InputSimulator.FindInScene();
                 if (simPlayer != null)
                 {
-                    rightController = (rightController == null ? simPlayer.transform.Find(RIGHT_HAND_CONTROLLER_NAME).GetComponent<SDK_ControllerSim>() : rightController);
-                    leftController = (leftController == null ? simPlayer.transform.Find(LEFT_HAND_CONTROLLER_NAME).GetComponent<SDK_ControllerSim>() : leftController);
+                    rightController = (rightController == null ? simPlayer.transform.Find("Neck").transform.Find(RIGHT_HAND_CONTROLLER_NAME).GetComponent<SDK_ControllerSim>() : rightController);
+                    leftController = (leftController == null ? simPlayer.transform.Find("Neck").transform.Find(LEFT_HAND_CONTROLLER_NAME).GetComponent<SDK_ControllerSim>() : leftController);
                 }
             }
         }
