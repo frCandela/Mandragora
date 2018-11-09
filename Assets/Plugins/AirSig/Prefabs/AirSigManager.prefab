@@ -28,7 +28,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4000012895131270
 Transform:
   m_ObjectHideFlags: 1
@@ -53,7 +53,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46964b142a8b343b3919fa771e2f7294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mController: {fileID: 0}
+  m_buttonAlias: 3
+  m_controllerRight: {fileID: 0}
+  m_controllerLeft: {fileID: 0}
+  m_controllerRightSim: {fileID: 0}
+  m_controllerLeftSim: {fileID: 0}
 --- !u!114 &114728460213039062
 MonoBehaviour:
   m_ObjectHideFlags: 1

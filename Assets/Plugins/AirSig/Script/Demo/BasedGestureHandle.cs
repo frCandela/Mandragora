@@ -14,7 +14,7 @@ public class BasedGestureHandle : MonoBehaviour {
     // Reference to the vive right hand controller for handing key pressing
     public VRTK_ControllerEvents handControl;
 
-    public ParticleSystem track;
+    public TrailRenderer track;
 
     // UI for displaying current status and operation results 
     public Text textMode;
@@ -101,14 +101,7 @@ public class BasedGestureHandle : MonoBehaviour {
             textToUpdate = null;
         }
 
-        {
-            if (handControl.triggerClicked) {
-                track.Clear();
-                track.Play();
-            } else{
-                track.Stop();
-            }
-        }
+        track.emitting = airsigManager.IsCollectingData();
 
         if (nextUiAction != null) {
             nextUiAction();

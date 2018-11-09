@@ -2723,6 +2723,11 @@ namespace AirSig {
         private List<Sample> mCollectedRightHandSamples = new List<Sample>();
         private List<Sample> mCollectedLeftHandSamples = new List<Sample>();
 
+        public bool IsCollectingData()
+        {
+            return mIsCollectingRightControllerData || mIsCollectingLeftControllerData;
+        }
+
         private void processCollectData(List<Sample> data) {
             if (data.Count <= 0) return;
             float[] transformData = new float[data.Count * 10];
@@ -2747,6 +2752,8 @@ namespace AirSig {
 
         // Valve.VR.CVRSystem mCVRSystem;
         [SerializeField]
+        VRTK_ControllerEvents.ButtonAlias m_buttonAlias;
+        [SerializeField]
         VRTK_ControllerEvents m_controllerRight, m_controllerLeft;
         [SerializeField]
         SDK_ControllerSim m_controllerRightSim, m_controllerLeftSim;
@@ -2767,27 +2774,33 @@ namespace AirSig {
 
             // mCVRSystem = Valve.VR.OpenVR.System;
 
-            if(mRightHandTriggerStartPressOrTouch == PressOrTouch.PRESS)
-            {
-                m_controllerRight.TriggerClicked += new ControllerInteractionEventHandler(startRightHandCollecting);
-                m_controllerRight.TriggerUnclicked += new ControllerInteractionEventHandler(stopRightHandCollecting);
-            }
-            else 
-            {
-                m_controllerRight.TriggerTouchStart += new ControllerInteractionEventHandler(startRightHandCollecting);
-                m_controllerRight.TriggerTouchEnd += new ControllerInteractionEventHandler(stopRightHandCollecting);
-            }
+            // if(mRightHandTriggerStartPressOrTouch == PressOrTouch.PRESS)
+            // {
+            //     // m_controllerRight.TriggerClicked += new ControllerInteractionEventHandler(startRightHandCollecting);
+            //     // m_controllerRight.TriggerUnclicked += new ControllerInteractionEventHandler(stopRightHandCollecting);
+            // }
+            // else 
+            // {
+            //     // m_controllerRight.TriggerTouchStart += new ControllerInteractionEventHandler(startRightHandCollecting);
+            //     // m_controllerRight.TriggerTouchEnd += new ControllerInteractionEventHandler(stopRightHandCollecting);
+            // }
             
-            if(mLeftHandTriggerStartPressOrTouch == PressOrTouch.PRESS)
-            {
-                m_controllerLeft.TriggerClicked += new ControllerInteractionEventHandler(startLeftHandCollecting);
-                m_controllerLeft.TriggerUnclicked += new ControllerInteractionEventHandler(stopLeftHandCollecting);
-            }
-            else 
-            {
-                m_controllerLeft.TriggerTouchStart += new ControllerInteractionEventHandler(startLeftHandCollecting);
-                m_controllerLeft.TriggerTouchEnd += new ControllerInteractionEventHandler(stopLeftHandCollecting);
-            }
+            // if(mLeftHandTriggerStartPressOrTouch == PressOrTouch.PRESS)
+            // {
+            //     // m_controllerLeft.TriggerClicked += new ControllerInteractionEventHandler(startLeftHandCollecting);
+            //     // m_controllerLeft.TriggerUnclicked += new ControllerInteractionEventHandler(stopLeftHandCollecting);
+            // }
+            // else 
+            // {
+            //     // m_controllerLeft.TriggerTouchStart += new ControllerInteractionEventHandler(startLeftHandCollecting);
+            //     // m_controllerLeft.TriggerTouchEnd += new ControllerInteractionEventHandler(stopLeftHandCollecting);
+            // }
+
+            m_controllerRight.SubscribeToButtonAliasEvent(m_buttonAlias, true, startRightHandCollecting);
+            m_controllerRight.SubscribeToButtonAliasEvent(m_buttonAlias, false, stopRightHandCollecting);
+
+            m_controllerLeft.SubscribeToButtonAliasEvent(m_buttonAlias, true, startLeftHandCollecting);
+            m_controllerLeft.SubscribeToButtonAliasEvent(m_buttonAlias, false, stopLeftHandCollecting);
 
             // Shorten the debug message
             //Application.SetStackTraceLogType(LogType.Log, StackTraceLogType.None);
