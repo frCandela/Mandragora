@@ -2620,10 +2620,12 @@ namespace AirSig {
                 if (timeElapsedMilliseconds - mRightHandPrevTimeElapsed >= 16) {
                     Sample sample = new Sample();
                     sample.time = timeElapsedMilliseconds;
-                    Valve.VR.TrackedDevicePose_t pose = rightHandDevice.GetPose();
-                    SteamVR_Utils.RigidTransform transform = new SteamVR_Utils.RigidTransform(pose.mDeviceToAbsoluteTracking);
-                    transform.Inverse();
-                    Vector3 transformAngularVelocity = transform * new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2);
+                    // Valve.VR.TrackedDevicePose_t pose = rightHandDevice.GetPose();
+                    // SteamVR_Utils.RigidTransform transform = new SteamVR_Utils.RigidTransform(pose.mDeviceToAbsoluteTracking);
+                    // transform.Inverse();
+                    // Vector3 transformAngularVelocity = transform * new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2);
+
+                    Vector3 transformAngularVelocity = m_controllerRightSim.GetAngularVelocity();
 
                     sample.rotation.x = transformAngularVelocity.x;
                     sample.rotation.y = transformAngularVelocity.y;
@@ -2692,10 +2694,12 @@ namespace AirSig {
                 if (timeElapsedMilliseconds - mLeftHandPrevTimeElapsed >= 16) {
                     Sample sample = new Sample();
                     sample.time = timeElapsedMilliseconds;
-                    Valve.VR.TrackedDevicePose_t pose = leftHandDevice.GetPose();
-                    SteamVR_Utils.RigidTransform transform = new SteamVR_Utils.RigidTransform(pose.mDeviceToAbsoluteTracking);
-                    transform.Inverse();
-                    Vector3 transformAngularVelocity = transform * new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2);
+                    // Valve.VR.TrackedDevicePose_t pose = leftHandDevice.GetPose();
+                    // SteamVR_Utils.RigidTransform transform = new SteamVR_Utils.RigidTransform(pose.mDeviceToAbsoluteTracking);
+                    // transform.Inverse();
+                    // Vector3 transformAngularVelocity = transform * new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2);
+
+                    Vector3 transformAngularVelocity = m_controllerLeftSim.GetAngularVelocity();
 
                     sample.rotation.x = transformAngularVelocity.x;
                     sample.rotation.y = transformAngularVelocity.y;
@@ -2744,6 +2748,8 @@ namespace AirSig {
         // Valve.VR.CVRSystem mCVRSystem;
         [SerializeField]
         VRTK_ControllerEvents m_controllerRight, m_controllerLeft;
+        [SerializeField]
+        SDK_ControllerSim m_controllerRightSim, m_controllerLeftSim;
 
         bool mIsInitReady = false;
         void Awake()
