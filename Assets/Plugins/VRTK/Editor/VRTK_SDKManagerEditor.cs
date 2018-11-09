@@ -163,6 +163,8 @@
 
             EditorGUILayout.PropertyField(serializedObject.FindProperty("persistOnLoad"));
 
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("m_onEndSetup"));
+
             const string manageNowButtonText = "Manage Now";
 
             using (new EditorGUILayout.VerticalScope("Box"))

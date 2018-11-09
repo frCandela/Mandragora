@@ -3,6 +3,7 @@ namespace VRTK
 {
     using UnityEngine;
     using UnityEngine.VR;
+    using UnityEngine.Events;
 #if UNITY_EDITOR
     using UnityEditor;
     using UnityEditor.Callbacks;
@@ -435,7 +436,13 @@ namespace VRTK
 
             index = index == -1 ? 0 : index;
             TryLoadSDKSetup(index, false, setups.ToArray());
+
+            // End setup
+            m_onEndSetup.Invoke();
         }
+
+        [SerializeField]
+        UnityEvent m_onEndSetup;
 
         /// <summary>
         /// Tries to load a valid <see cref="VRTK_SDKSetup"/> from a list.
