@@ -5,9 +5,12 @@ using UnityEngine;
 public class FluidsContainer : MonoBehaviour
 {
     [SerializeField] private Material fluidMaterial = null;
-    [SerializeField, Range(3,  100)] private int   sides = 4;    // cubic
-    [SerializeField, Range(0f, 10f)] private float radius = 0.5f;
-    [SerializeField, Range(0f, 10f)] private float height = 0f;
+    [SerializeField, Range(3,  20)] private int   sides = 4;    // cubic
+    [SerializeField, Range(0f, 1f)] private float radius = 0.5f;
+    [SerializeField, Range(0f, 1f)] private float height = 0.5f;
+
+    [SerializeField, Range(-90, 90)] private float angleX = 0f;
+    [SerializeField, Range(-90, 90)] private float angleZ = 0f;
 
     private MeshRenderer m_meshRenderer = null;
     private MeshFilter m_meshFilter = null;
@@ -40,12 +43,35 @@ public class FluidsContainer : MonoBehaviour
         int offsetVerticesSides = offsetVerticesBot + sides + 1;
         int offsetIndicesSides = offsetIndicesBot + 3 * sides;
 
+        
+        Vector3 containerRotation = transform.rotation.eulerAngles;
+        Quaternion rot = Quaternion.Euler(-containerRotation.x, 0, -containerRotation.z);
+
+        Plane plane = new Plane(rot*Vector3.up, height * Vector3.up);
+
         // Creates the top fluid mesh face ( polygon with sides sides)
         vertices[sides] = new Vector3(0, height, 0);
         for (int i = 0; i < sides; ++i)
         {
             float angle = i * 2 * Mathf.PI / (sides) + Mathf.PI / sides;
-            vertices[i ] =  new Vector3(radius * Mathf.Cos(angle), height, radius * Mathf.Sin(angle));
+            vertices[i] = new Vector3(radius * Mathf.Cos(angle), height, radius * Mathf.Sin(angle));
+
+            Ray ray = new Ray(vertices[i], Vector3.up);
+            float enter;
+            if(  plane.Raycast(ray, out enter))
+            {
+                vertices[i] = ray.GetPoint(enter);
+            }
+            else
+            {
+                ray = new Ray(vertices[i], -Vector3.up);
+                if (plane.Raycast(ray, out enter))
+                {
+                    vertices[i] = ray.GetPoint(enter);
+                }
+            }
+
+
         }
         for (int i = 0; i < sides; ++i)
         {
@@ -55,11 +81,11 @@ public class FluidsContainer : MonoBehaviour
         }
 
         // Creates the bottom fluid mesh face ( polygon with sides sides)
-        vertices[sides + offsetVerticesBot] = new Vector3(0, -height, 0);
+        vertices[sides + offsetVerticesBot] = new Vector3(0, 0, 0);
         for ( int i = 0; i < sides; ++i)
         {
             float angle = i * 2 * Mathf.PI / (sides) + Mathf.PI / sides;
-            vertices[i + offsetVerticesBot] =  new Vector3(radius * Mathf.Cos(angle), -height, radius * Mathf.Sin(angle));
+            vertices[i + offsetVerticesBot] =  new Vector3(radius * Mathf.Cos(angle), 0, radius * Mathf.Sin(angle));
         }
         for (int i = 0; i < sides; ++i)
         {
