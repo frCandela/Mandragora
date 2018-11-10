@@ -5,8 +5,9 @@ using UnityEngine;
 public class FluidsContainer : MonoBehaviour
 {
     [SerializeField] private Material fluidMaterial = null;
-    [SerializeField] private int containerSides = 4;    // cubic
-    [SerializeField] private float radius = 0.5f;    // cubic
+    [SerializeField] private int sides = 4;    // cubic
+    [SerializeField] private float radius = 0.5f;
+    [SerializeField, Range(0f,1f)] private float height = 0f;
 
     private MeshRenderer m_meshRenderer = null;
     private MeshFilter m_meshFilter = null;
@@ -25,40 +26,58 @@ public class FluidsContainer : MonoBehaviour
         if (fluidMaterial)
             m_meshRenderer.material = fluidMaterial;
 
-        createGeometry();
+        UpdateGeometry();
     }
 
-    void createGeometry()
+    void UpdateGeometry()
     {
         m_liquidMesh.Clear();
 
-        Vector3[] vertices = new Vector3[containerSides + 1];
-        vertices[containerSides] = new Vector3(0, 0, 0);
-        for ( int i = 0; i < containerSides; ++i)
+        Vector3[] vertices = new Vector3[2*(sides + 1)];
+        int[] indices = new int[2*(3 * sides)];
+        int offsetVertices = 0;
+        int offsetIndices = 0;
+
+        // Creates the top fluid mesh face ( polygon with sides sides)
+        vertices[sides + offsetVertices] = new Vector3(0, height, 0);
+        for (int i = 0; i < sides; ++i)
         {
-            float angle = i * 2 * Mathf.PI / (containerSides) + Mathf.PI / containerSides;
-            vertices[i] = radius * new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle));
+            float angle = i * 2 * Mathf.PI / (sides) + Mathf.PI / sides;
+            vertices[i + offsetVertices] =  new Vector3(radius * Mathf.Cos(angle), height, radius * Mathf.Sin(angle));
         }
+        offsetVertices += sides + 1;
+        for (int i = 0; i < sides; ++i)
+        {
+            indices[i * 3 + 0 + offsetIndices] = sides + offsetIndices;
+            indices[i * 3 + 1 + offsetIndices] = (i + 2) % (sides) + offsetIndices;
+            indices[i * 3 + 2 + offsetIndices] = (i + 1) % (sides) + offsetIndices; 
+        }
+        offsetIndices += 3*sides;
+
+
+        // Creates the bottom fluid mesh face ( polygon with sides sides)
+        vertices[sides + offsetVertices] = new Vector3(0, -height, 0);
+        for ( int i = 0; i < sides; ++i)
+        {
+            float angle = i * 2 * Mathf.PI / (sides) + Mathf.PI / sides;
+            vertices[i + offsetVertices] =  new Vector3(radius * Mathf.Cos(angle), -height, radius * Mathf.Sin(angle));
+        }
+        for (int i = 0; i < sides; ++i)
+        {
+            indices[i * 3 + 0 + offsetIndices] = sides + offsetVertices;
+            indices[i * 3 + 1 + offsetIndices] = (i+1) % (sides) + offsetVertices;
+            indices[i * 3 + 2 + offsetIndices] = (i+2) % (sides) + offsetVertices;
+        }
+
         m_liquidMesh.vertices = vertices;
-
-
-        int[] indices = new int[ 3 * containerSides ];
-        for (int i = 0; i < containerSides; ++i)
-        {
-            indices[i * 3 + 0] = containerSides;
-            indices[i * 3 + 1] = (i+1) % (containerSides);
-            indices[i * 3 + 2] = (i+2) % (containerSides);
-
-        }
         m_liquidMesh.SetIndices(indices, MeshTopology.Triangles, 0);
-
-        for (int i = 0; i < indices.Length; ++i)
-            print(indices[i]);
+        
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-		
-	}
+        UpdateGeometry();
+
+    }
 }
