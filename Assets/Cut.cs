@@ -17,10 +17,11 @@ public class Cut : MonoBehaviour
     void Awake ()
     {
         m_gameObject = new GameObject("Test");
-        m_gameObject.transform.position = transform.position + 2*Vector3.up;
+        m_gameObject.transform.position = transform.position + 3*Vector3.up;
 
         m_mesh = new Mesh();
         m_mesh.name = "liquidMesh";
+        m_mesh.MarkDynamic();
 
         m_meshFilter = m_gameObject.AddComponent<MeshFilter>();
         m_meshFilter.mesh = m_mesh;
@@ -34,14 +35,63 @@ public class Cut : MonoBehaviour
     
 	void Update ()
     {
-        Plane cutPlanePlane = new Plane(cuttingPlane.transform.position, cuttingPlane.transform.up);
+        Plane cutPlane = new Plane(cuttingPlane.transform.up, cuttingPlane.transform.position);
 
-        Vector3[] vertices = insideMesh.vertices;
+        List<Vector3> vertices = new List<Vector3>(insideMesh.vertices);
         int[] indices = insideMesh.GetIndices(0);
 
-        m_mesh.vertices = vertices;
-        m_mesh.SetIndices(indices, MeshTopology.Triangles, 0);
+        List<int> newIndices = new List<int>();
 
+        Ray ray = new Ray(Vector3.zero, Vector3.down);
+
+
+        /*for ( int i = 0; i < indices.Length; ++i)
+        {
+            if (cutPlane.GetSide(vertices[indices[i]]))
+            {
+                ray.origin = vertices[indices[i]];
+                float distance;
+                if (cutPlane.Raycast(ray, out distance))
+                    vertices[indices[i]].y = ray.GetPoint(distance).y;
+            }                
+            newIndices.Add(indices[i]);
+        }*/
+
+        int[] cuts = new int[3];
+        for (int i = 0; i < indices.Length/3; ++i)
+        {
+            int nbCut = 0;
+            for (int j = 0; j < 3; ++j)
+            {
+                int index = i * 3 + j;
+
+                if (cutPlane.GetSide(vertices[indices[index]]))                
+                    cuts[ nbCut ++ ] = j; 
+            }
+
+            if(nbCut == 0)
+            {
+                newIndices.Add(indices[i * 3 + 0]);
+                newIndices.Add(indices[i * 3 + 1]);
+                newIndices.Add(indices[i * 3 + 2]);
+            }
+            else if(nbCut == 1)
+            {
+                Vector3 p1 = vertices[indices[i * 3 + cuts[0]]];
+                Vector3 p2 = vertices[indices[i * 3 + cuts[0]]] + 0.1f*Vector3.up; 
+                Debug.DrawLine(
+                    m_gameObject.transform.position + m_gameObject.transform.rotation * p1,
+                    m_gameObject.transform.position + m_gameObject.transform.rotation * p2,
+                    Color.red 
+                    );
+            }
+
+
+
+        }
+
+        m_mesh.vertices = vertices.ToArray();
+        m_mesh.SetIndices(newIndices.ToArray(), MeshTopology.Triangles, 0);
     }
 
     void UpdateGeometry()
