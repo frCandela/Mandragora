@@ -10,10 +10,6 @@ public class FluidsContainer : MonoBehaviour
     [SerializeField, Range(0f, 1f)] private float heightContainer = 1f;
     [SerializeField, Range(0f, 1f)] private float heightLiquid = 0.5f;
 
-
-    [SerializeField, Range(-90, 90)] private float angleX = 0f;
-    [SerializeField, Range(-90, 90)] private float angleZ = 0f;
-
     private MeshRenderer m_meshRenderer = null;
     private MeshFilter m_meshFilter = null;
     private Mesh m_liquidMesh = null;
@@ -37,8 +33,15 @@ public class FluidsContainer : MonoBehaviour
     void UpdateGeometry()
     {
         m_liquidMesh.Clear();
-        if( heightLiquid > 0)
+        if (heightLiquid > 0)
         {
+            Vector3 containerRotation = transform.rotation.eulerAngles;
+            Quaternion rotation = Quaternion.Euler(-containerRotation.x, 0, -containerRotation.z);
+            Plane topPlane = new Plane(rotation * Vector3.up, heightLiquid * Vector3.up);
+            Plane botPlane = new Plane(Vector3.up, Vector3.zero);
+            float spillage = 0f;
+
+
             Vector3[] vertices = new Vector3[2 * (sides + 1)];
             int[] indices = new int[2 * (3 * sides) + 2 * 3 * sides];
             int offsetVerticesBot = sides + 1;
@@ -51,7 +54,26 @@ public class FluidsContainer : MonoBehaviour
             for (int i = 0; i < sides; ++i)
             {
                 float angle = i * 2 * Mathf.PI / (sides) + Mathf.PI / sides;
-                vertices[i] = new Vector3(radius * Mathf.Cos(angle), heightLiquid, radius * Mathf.Sin(angle));
+                Vector3 dir = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle));
+                vertices[i] = radius * ( dir).normalized + heightLiquid * Vector3.up;
+
+                //Plane sidePlane = new Plane(-dir, radius * dir.normalized);
+                float enter;
+                Ray ray = new Ray(vertices[i], Vector3.up);
+                if (topPlane.Raycast(ray, out enter))
+                {
+                    vertices[i] = ray.GetPoint(enter);  
+                }
+                else
+                {
+                    ray = new Ray(vertices[i], -Vector3.up);
+                    if (topPlane.Raycast(ray, out enter))
+                    {
+                        vertices[i] = ray.GetPoint(enter);
+                    }
+                    else
+                        print("Invalid topPlane raycast");
+                }
             }
             for (int i = 0; i < sides; ++i)// Set indexes
             {
@@ -60,6 +82,49 @@ public class FluidsContainer : MonoBehaviour
                 indices[i * 3 + 2] = (i + 1) % (sides);
             }
 
+            for (int i = 0; i < sides; ++i)// Set indexes
+            {
+                Vector3 vec1 = vertices[ indices[i * 3 + 1]];
+                Vector3 vec2 = vertices[ indices[i * 3 + 2]];
+
+                if(vec1.y < 0)
+                {
+                    float enter;
+                    Ray ray = new Ray(vec1, vec2 - vec1);
+                    if (botPlane.Raycast(ray, out enter))
+                    {
+                        vertices[indices[i * 3 + 1]] = ray.GetPoint(enter);
+                    }
+                }
+                if (vec2.y < 0)
+                {
+                    float enter;
+                    Ray ray = new Ray(vec2, vec1 - vec2);
+                    if (botPlane.Raycast(ray, out enter))
+                    {
+                        vertices[indices[i * 3 + 2]] = ray.GetPoint(enter);
+                    }
+                }
+
+                if( vec1.y > heightContainer)
+                {
+                    spillage = Mathf.Max(spillage, vec1.y-heightContainer);
+                }
+
+
+                Debug.DrawLine(
+                    transform.position + transform.rotation * vertices[indices[i * 3 + 1]],
+                    transform.position + transform.rotation * vertices[indices[i * 3 + 2]],
+                    Color.red
+                    );
+
+            }
+
+            print(spillage);
+            heightLiquid = Mathf.Max(0, heightLiquid - spillage);
+
+
+            /*
             // Creates the bottom fluid mesh face ( polygon with sides sides)
             vertices[sides + offsetVerticesBot] = new Vector3(0, 0, 0);
             for (int i = 0; i < sides; ++i)
@@ -115,14 +180,6 @@ public class FluidsContainer : MonoBehaviour
 
                         if (vertices[i].y < 0)
                         {
-                            //Out of container
-                            /* Plane plane2 = new Plane(rot * Vector3.up, Vector3.zero);
-                             ray = new Ray(vertices[i], -vertices[i]);
-                             if (plane2.Raycast(ray, out enter))
-                             {
-                                 print("zob");
-                                 vertices[i] = ray.GetPoint(enter);
-                             }*/
                         }
 
 
@@ -150,26 +207,12 @@ public class FluidsContainer : MonoBehaviour
 
                     Debug.DrawLine(ray.GetPoint(enter), vertices[i + offsetVerticesBot]);
 
-                    /* ray = new Ray(ray.GetPoint(enter), -Vector3.forward);
-                     if (planeBot.Raycast(ray, out enter))
-                     {
-                         print("zob");
-                         vertices[i] = ray.GetPoint(enter);
-                     }*/
 
-
-
-                    /*ray = new Ray(vertices[i + offsetVerticesBot], -vertices[i + offsetVerticesBot]);
-                    if (plane.Raycast(ray, out enter))
-                    {
-                        vertices[i + offsetVerticesBot] = ray.GetPoint(enter);
-                    }*/
 
                 }
 
 
-            }
-
+            }*/
             m_liquidMesh.vertices = vertices;
             m_liquidMesh.SetIndices(indices, MeshTopology.Triangles, 0);
 
