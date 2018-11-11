@@ -13,6 +13,8 @@ public class FluidsContainer : MonoBehaviour
     private MeshRenderer m_meshRenderer = null;
     private MeshFilter m_meshFilter = null;
     private Mesh m_liquidMesh = null;
+    
+    Vector3 m_spillagePosition;
 
     // Use this for initialization
     void Awake ()
@@ -98,7 +100,14 @@ public class FluidsContainer : MonoBehaviour
                     }
                 }
                 else if (vec1.y > heightContainer)
-                    spillage = Mathf.Max(spillage, vec1.y - heightContainer);
+                {
+                    if(vec1.y - heightContainer > spillage)
+                    {
+                        spillage = vec1.y - heightContainer;
+                        m_spillagePosition = vec1;
+                    }
+                }
+                    
             }
             
             // Reduce height of liquid if overflow
@@ -163,5 +172,10 @@ public class FluidsContainer : MonoBehaviour
     {
         UpdateGeometry();
 
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(m_spillagePosition, 0.1f);
     }
 }
