@@ -10,12 +10,6 @@ public class FluidsContainer : MonoBehaviour
     [SerializeField, Range(0f, 1f)] private float heightContainer = 1f;
     [SerializeField, Range(0f, 1f)] private float heightLiquid = 0.5f;
 
-    [SerializeField, Range(0f, 10f)] private float delta = 100f;
-    [SerializeField] private bool testA = true;
-    [SerializeField] private bool testB = true;
-    [SerializeField] private bool testC = true;
-    [SerializeField] private bool testD = true;
-
     private MeshRenderer m_meshRenderer = null;
     private MeshFilter m_meshFilter = null;
     private Mesh m_liquidMesh = null;
@@ -64,19 +58,17 @@ public class FluidsContainer : MonoBehaviour
 
                 float enter;
                 Ray ray = new Ray(vertices[i], Vector3.up);
-                if (topPlane.Raycast(ray, out enter) && testA)
+                if (topPlane.Raycast(ray, out enter))
                 {
                     vertices[i] = ray.GetPoint(enter);  
                 }
 
-                if( testB )
+                ray = new Ray(vertices[i], -Vector3.up);
+                if (topPlane.Raycast(ray, out enter))
                 {
-                    ray = new Ray(vertices[i], -Vector3.up);
-                    if (topPlane.Raycast(ray, out enter))
-                    {
-                        vertices[i] = ray.GetPoint(enter);
-                    }
+                    vertices[i] = ray.GetPoint(enter);
                 }
+                
             }
             for (int i = 0; i < sides; ++i)// Set indexes
             {
@@ -137,11 +129,6 @@ public class FluidsContainer : MonoBehaviour
                     if ((transform.rotation *vec3).y < (transform.rotation * vec2).y)
                         vec2 = vec3;
 
-                    Debug.DrawLine(
-                    transform.position + transform.rotation * vec,
-                    transform.position + transform.rotation * (vec + 0.5f*(vec2- vec)),
-                    Color.green);
-
                     Ray ray = new Ray(vec, vec2 - vec);
                     float enter;
                     if (topPlane.Raycast(ray, out enter))
@@ -149,11 +136,6 @@ public class FluidsContainer : MonoBehaviour
                         vertices[i + offsetVerticesBot] = ray.GetPoint(enter);
                     }
                 }
-
-                Debug.DrawLine(
-                transform.position + transform.rotation * Vector3.zero,
-                transform.position + transform.rotation * Vector3.up,
-                Color.yellow);
             }
 
             // Creates sides
