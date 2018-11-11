@@ -6,9 +6,15 @@ public class FluidsContainer : MonoBehaviour
 {
     [SerializeField] private Material fluidMaterial = null;
     [SerializeField, Range(3,  20)] private int   sides = 4;    // cubic
-    [SerializeField, Range(0f, 1f)] private float radius = 0.5f;
+    [SerializeField, Range(0f, 1f)] private float radius = 0.64f;
     [SerializeField, Range(0f, 1f)] private float heightContainer = 1f;
     [SerializeField, Range(0f, 1f)] private float heightLiquid = 0.5f;
+
+    [SerializeField, Range(0f, 10f)] private float delta = 100f;
+    [SerializeField] private bool testA = true;
+    [SerializeField] private bool testB = true;
+    [SerializeField] private bool testC = true;
+    [SerializeField] private bool testD = true;
 
     private MeshRenderer m_meshRenderer = null;
     private MeshFilter m_meshFilter = null;
@@ -41,7 +47,6 @@ public class FluidsContainer : MonoBehaviour
             Plane botPlane = new Plane(Vector3.up, Vector3.zero);
             float spillage = 0f;
 
-
             Vector3[] vertices = new Vector3[2 * (sides + 1)];
             int[] indices = new int[2 * (3 * sides) + 2 * 3 * sides];
             int offsetVerticesBot = sides + 1;
@@ -57,14 +62,14 @@ public class FluidsContainer : MonoBehaviour
                 Vector3 dir = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle));
                 vertices[i] = radius * ( dir).normalized + heightLiquid * Vector3.up;
 
-                //Plane sidePlane = new Plane(-dir, radius * dir.normalized);
                 float enter;
                 Ray ray = new Ray(vertices[i], Vector3.up);
-                if (topPlane.Raycast(ray, out enter))
+                if (topPlane.Raycast(ray, out enter) && testA)
                 {
                     vertices[i] = ray.GetPoint(enter);  
                 }
-                else
+
+                if( testB )
                 {
                     ray = new Ray(vertices[i], -Vector3.up);
                     if (topPlane.Raycast(ray, out enter))
@@ -81,50 +86,34 @@ public class FluidsContainer : MonoBehaviour
                 indices[i * 3 + 1] = (i + 2) % (sides);
                 indices[i * 3 + 2] = (i + 1) % (sides);
             }
-
+            
+            // If edges from the top surface below the surface of the glass clamps them on it
             for (int i = 0; i < sides; ++i)// Set indexes
             {
-                Vector3 vec1 = vertices[ indices[i * 3 + 1]];
-                Vector3 vec2 = vertices[ indices[i * 3 + 2]];
+                Vector3 vec1 = vertices[i];
 
-                if(vec1.y < 0)
+                if (vec1.y < 0)
                 {
+
+                    Vector3 vec = vertices[(i + 1) % sides];
+                    Vector3 vec3 = vertices[(i + sides - 1) % sides];
+                    if (vec.y < vec3.y)
+                        vec = vec3;
+
                     float enter;
-                    Ray ray = new Ray(vec1, vec2 - vec1);
+                    Ray ray = new Ray(vec1, vec - vec1);
                     if (botPlane.Raycast(ray, out enter))
                     {
-                        vertices[indices[i * 3 + 1]] = ray.GetPoint(enter);
+                        vertices[i] = ray.GetPoint(enter);
                     }
                 }
-                if (vec2.y < 0)
-                {
-                    float enter;
-                    Ray ray = new Ray(vec2, vec1 - vec2);
-                    if (botPlane.Raycast(ray, out enter))
-                    {
-                        vertices[indices[i * 3 + 2]] = ray.GetPoint(enter);
-                    }
-                }
-
-                if( vec1.y > heightContainer)
-                {
-                    spillage = Mathf.Max(spillage, vec1.y-heightContainer);
-                }
-
-
-                Debug.DrawLine(
-                    transform.position + transform.rotation * vertices[indices[i * 3 + 1]],
-                    transform.position + transform.rotation * vertices[indices[i * 3 + 2]],
-                    Color.red
-                    );
-
+                else if (vec1.y > heightContainer)
+                    spillage = Mathf.Max(spillage, vec1.y - heightContainer);
             }
-
-            print(spillage);
+            
+            // Reduce height of liquid if overflow
             heightLiquid = Mathf.Max(0, heightLiquid - spillage);
 
-
-            /*
             // Creates the bottom fluid mesh face ( polygon with sides sides)
             vertices[sides + offsetVerticesBot] = new Vector3(0, 0, 0);
             for (int i = 0; i < sides; ++i)
@@ -139,6 +128,48 @@ public class FluidsContainer : MonoBehaviour
                 indices[i * 3 + 2 + offsetIndicesBot] = (i + 2) % sides + offsetVerticesBot;
             }
 
+            for (int i = 0; i < sides; ++i)// Set indexes
+            {
+                Vector3 vec1 = vertices[ indices[i * 3 + 1 + offsetIndicesBot]];
+                Vector3 vec2 = vertices[ indices[i * 3 + 2 + offsetIndicesBot]];
+
+                if (  topPlane.GetSide(vec1))
+                {
+                    float enter;
+                    Ray ray = new Ray(vec1, vec2 - vec1);
+                    if (topPlane.Raycast(ray, out enter) && enter < delta)
+                    {
+                        vertices[indices[i * 3 + 1 + offsetIndicesBot]] = ray.GetPoint(enter);
+
+                        if (enter > 1f)
+                            print(enter);
+                    }
+                       
+                }
+
+                if (topPlane.GetSide(vec2))
+                {
+                    float enter;
+
+                    
+                    Ray ray = new Ray(vec2, vec1 - vec2);
+                    if (topPlane.Raycast(ray, out enter) && enter < delta)
+                    {
+                        vertices[indices[i * 3 + 2 + offsetIndicesBot]] = ray.GetPoint(enter);
+                        if( enter > 1f)
+                        print(enter);
+                    }
+                        
+                }
+
+
+                Debug.DrawLine(
+                    transform.position + transform.rotation * vertices[indices[i * 3 + 1 + offsetIndicesBot]],
+                    transform.position + transform.rotation * vertices[indices[i * 3 + 2 + offsetIndicesBot]],
+                    Color.red
+                );
+            }
+
             // Creates sides
             for (int i = 0; i < sides; ++i)
             {
@@ -150,69 +181,7 @@ public class FluidsContainer : MonoBehaviour
                 indices[offsetIndicesSides + 6 * i + 4] = offsetVerticesBot + (i + 1) % sides;
                 indices[offsetIndicesSides + 6 * i + 5] = offsetVerticesBot + (i + 0) % sides;
             }
-
-
-            // Creates the top fluid mesh face ( polygon with sides sides)
-            float maxHeight = 0f;
-            Vector3 containerRotation = transform.rotation.eulerAngles;
-            Quaternion rot = Quaternion.Euler(-containerRotation.x, 0, -containerRotation.z);
-            Plane topPlane = new Plane(rot * Vector3.up, heightLiquid * Vector3.up);
-            Plane botPlane = new Plane(rot * Vector3.up, Vector3.zero);
-
-            vertices[sides] = new Vector3(0, heightLiquid, 0);
-            for (int i = 0; i < sides; ++i)
-            {
-                float angle = i * 2 * Mathf.PI / (sides) + Mathf.PI / sides;
-                Ray ray = new Ray(vertices[i], Vector3.up);
-                float enter;
-                if (topPlane.Raycast(ray, out enter)) // Raycast up
-                {
-                    vertices[i] = ray.GetPoint(enter);
-                    maxHeight = Mathf.Max(maxHeight, enter);
-                }
-                else // Raycast Down
-                {
-                    ray = new Ray(vertices[i], -Vector3.up);
-                    if (topPlane.Raycast(ray, out enter))
-                    {
-                        vertices[i] = ray.GetPoint(enter);
-                        maxHeight = Mathf.Max(maxHeight, enter);
-
-                        if (vertices[i].y < 0)
-                        {
-                        }
-
-
-                    }
-                }
-            }
-
-            // Liquid overflow
-            if (heightLiquid + maxHeight > heightContainer)
-                heightLiquid -= heightLiquid + maxHeight - heightContainer;
-
-            // Creates the bottom fluid mesh face ( polygon with sides sides)
-            vertices[sides + offsetVerticesBot] = new Vector3(0, 0, 0);
-            for (int i = 0; i < sides; ++i)
-            {
-                float angle = i * 2 * Mathf.PI / (sides) + Mathf.PI / sides;
-                // Surface of liquid is below the vertex
-                Ray ray = new Ray(vertices[i + offsetVerticesBot], Vector3.down);
-                float enter;
-                if (topPlane.Raycast(ray, out enter))
-                {
-                    Plane planeBot = new Plane(rot * Vector3.up, Vector3.zero);
-                    Vector3 dir = transform.forward;
-                    dir.y = 0;
-
-                    Debug.DrawLine(ray.GetPoint(enter), vertices[i + offsetVerticesBot]);
-
-
-
-                }
-
-
-            }*/
+            
             m_liquidMesh.vertices = vertices;
             m_liquidMesh.SetIndices(indices, MeshTopology.Triangles, 0);
 
