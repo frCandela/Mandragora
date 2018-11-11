@@ -76,8 +76,6 @@ public class FluidsContainer : MonoBehaviour
                     {
                         vertices[i] = ray.GetPoint(enter);
                     }
-                    else
-                        print("Invalid topPlane raycast");
                 }
             }
             for (int i = 0; i < sides; ++i)// Set indexes
@@ -87,7 +85,7 @@ public class FluidsContainer : MonoBehaviour
                 indices[i * 3 + 2] = (i + 1) % (sides);
             }
             
-            // If edges from the top surface below the surface of the glass clamps them on it
+            // If edges from the top surface  are below container
             for (int i = 0; i < sides; ++i)// Set indexes
             {
                 Vector3 vec1 = vertices[i];
@@ -128,46 +126,34 @@ public class FluidsContainer : MonoBehaviour
                 indices[i * 3 + 2 + offsetIndicesBot] = (i + 2) % sides + offsetVerticesBot;
             }
 
-            for (int i = 0; i < sides; ++i)// Set indexes
+            // Check if the bot surface is higher than the liquid level
+            for (int i = 0; i < sides; ++i)
             {
-                Vector3 vec1 = vertices[ indices[i * 3 + 1 + offsetIndicesBot]];
-                Vector3 vec2 = vertices[ indices[i * 3 + 2 + offsetIndicesBot]];
-
-                if (  topPlane.GetSide(vec1))
+                Vector3 vec = vertices[i + offsetVerticesBot];
+                if (topPlane.GetSide(vec))
                 {
+                    Vector3 vec2 = vertices[(i+1)% sides + offsetVerticesBot];
+                    Vector3 vec3 = vertices[(i + sides - 1) % sides + offsetVerticesBot];
+                    if ((transform.rotation *vec3).y < (transform.rotation * vec2).y)
+                        vec2 = vec3;
+
+                    Debug.DrawLine(
+                    transform.position + transform.rotation * vec,
+                    transform.position + transform.rotation * (vec + 0.5f*(vec2- vec)),
+                    Color.green);
+
+                    Ray ray = new Ray(vec, vec2 - vec);
                     float enter;
-                    Ray ray = new Ray(vec1, vec2 - vec1);
-                    if (topPlane.Raycast(ray, out enter) && enter < delta)
+                    if (topPlane.Raycast(ray, out enter))
                     {
-                        vertices[indices[i * 3 + 1 + offsetIndicesBot]] = ray.GetPoint(enter);
-
-                        if (enter > 1f)
-                            print(enter);
+                        vertices[i + offsetVerticesBot] = ray.GetPoint(enter);
                     }
-                       
                 }
-
-                if (topPlane.GetSide(vec2))
-                {
-                    float enter;
-
-                    
-                    Ray ray = new Ray(vec2, vec1 - vec2);
-                    if (topPlane.Raycast(ray, out enter) && enter < delta)
-                    {
-                        vertices[indices[i * 3 + 2 + offsetIndicesBot]] = ray.GetPoint(enter);
-                        if( enter > 1f)
-                        print(enter);
-                    }
-                        
-                }
-
 
                 Debug.DrawLine(
-                    transform.position + transform.rotation * vertices[indices[i * 3 + 1 + offsetIndicesBot]],
-                    transform.position + transform.rotation * vertices[indices[i * 3 + 2 + offsetIndicesBot]],
-                    Color.red
-                );
+                transform.position + transform.rotation * Vector3.zero,
+                transform.position + transform.rotation * Vector3.up,
+                Color.yellow);
             }
 
             // Creates sides
