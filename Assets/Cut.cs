@@ -159,13 +159,20 @@ public class Cut : MonoBehaviour
         duration = 1000f*(Time.realtimeSinceStartup - t);
     }
 
+
+    List<HashSet<int>> matchSet = new List<HashSet<int>>();
+    List<List<Vector3>> matchEdges = new List<List<Vector3>>();
     void Match( Vector3 proj1, Vector3 proj2)
     {
-        List<int> matchSet = new List<int>();
+        matchSet.Clear();
+        matchEdges.Clear();
         for (int setIndex = 0; setIndex < sets.Count; ++setIndex)
         {
             if (sets[setIndex].Count == 0 || sets[setIndex].Contains(proj1.GetHashCode()) || sets[setIndex].Contains(proj2.GetHashCode()))
-                matchSet.Add(setIndex);
+            {
+                matchSet.Add(sets[setIndex]);
+                matchEdges.Add(edges[setIndex]);
+            }                
         }
 
         if (matchSet.Count == 0)
@@ -179,16 +186,20 @@ public class Cut : MonoBehaviour
         }
         else
         {
-            sets[matchSet[0]].Add(proj1.GetHashCode());
-            sets[matchSet[0]].Add(proj2.GetHashCode());
-            edges[matchSet[0]].Add(proj1);
-            edges[matchSet[0]].Add(proj2);
+            matchSet[0].Add(proj1.GetHashCode());
+            matchSet[0].Add(proj2.GetHashCode());
+            matchEdges[0].Add(proj1);
+            matchEdges[0].Add(proj2);
+
+            for( int i = 1; i < matchSet.Count; ++i)
+            {
+                matchSet[0].UnionWith(matchSet[i]);
+                matchEdges[0].AddRange(matchEdges[i]);
+            }
             while (matchSet.Count > 1)
             {
-                sets[matchSet[0]].UnionWith(sets[matchSet[1]]);
-                edges[matchSet[0]].AddRange(edges[matchSet[1]]);
-                sets.RemoveAt(matchSet[1]);
-                edges.RemoveAt(matchSet[1]);
+                sets.Remove(matchSet[1]);
+                edges.Remove(matchEdges[1]);
                 matchSet.RemoveAt(1);
             }
         }
