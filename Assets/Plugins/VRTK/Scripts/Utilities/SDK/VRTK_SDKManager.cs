@@ -436,9 +436,6 @@ namespace VRTK
 
             index = index == -1 ? 0 : index;
             TryLoadSDKSetup(index, false, setups.ToArray());
-
-            // End setup
-            m_onEndSetup.Invoke();
         }
 
         [SerializeField]
@@ -714,6 +711,9 @@ namespace VRTK
             loadedSetup.OnLoaded(this);
             ToggleBehaviours(true);
             OnLoadedSetupChanged(new LoadedSetupChangeEventArgs(previousLoadedSetup, loadedSetup, null));
+
+            // End setup
+            m_onEndSetup.Invoke();
         }
 
         private void ToggleBehaviours(bool state)
