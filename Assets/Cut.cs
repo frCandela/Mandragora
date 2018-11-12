@@ -43,19 +43,17 @@ public class Cut : MonoBehaviour
         m_baseIndices = insideMesh.GetIndices(0); ;
         m_baseVertices = insideMesh.vertices;
 
-        newVertices = new Vector3[2* m_baseVertices.Length];
-
+        newVertices = new Vector3[3 * m_baseVertices.Length];
+        m_baseVertices.CopyTo(newVertices, 0);
     }
 
     Plane cutPlane = new Plane();   // Cut plane
     Ray ray = new Ray();            // Usefull for plane raycast
 
-    Vector3[] newVertices;
-   // int[] newIndices;
-    List<int> newIndices = new List<int>();     // Dynamic indices of the cut mesh  
-    
+    Vector3[] newVertices;                      // Vertices of the final cut mesh  
+    List<int> newIndices = new List<int>();       // Indices of the final cut mesh  
 
-    int[] cuts = new int[3];                    // Indices of vertices cut    
+    int[] cuts = new int[3];    // Indices of vertices cut on a single triangle    
 
     // Time & perf measurement
     private float m_timeSinceLastCall = 0f;
@@ -145,14 +143,16 @@ public class Cut : MonoBehaviour
             );
         }
     }
+    
 
     // Update the mesh 
+    int m_additionalVerticesCount = 0;
     void UpdateGeometry()
     {
         cutPlane.SetNormalAndPosition(cuttingPlane.transform.up, cuttingPlane.transform.position);
         newIndices.Clear();
         float distance;
-
+        m_additionalVerticesCount = 0;
         for (int i = 0; i < sets.Count; ++i)
         {
             sets[i].Clear();
@@ -198,6 +198,13 @@ public class Cut : MonoBehaviour
                     RelativeDebugLine(proj1, p2, Color.red);
                     RelativeDebugLine(p2, p3, Color.red);
                     RelativeDebugLine(p3, proj1, Color.red);
+
+                    // Adds the new vertice and triangle
+                    newIndices.Add(m_baseVertices.Length + m_additionalVerticesCount);
+                    newIndices.Add(m_baseIndices[i * 3 + (cuts[0] + 1) % 3]);       //p2
+                    newIndices.Add(m_baseIndices[i * 3 + (cuts[0] + 3 - 1) % 3]);   // p3
+                    newVertices[m_baseVertices.Length + m_additionalVerticesCount] = proj1;
+                    ++m_additionalVerticesCount;
                 }
 
                 ray.origin = p1;
@@ -205,6 +212,16 @@ public class Cut : MonoBehaviour
                 if (cutPlane.Raycast(ray, out distance))
                 {
                     proj2 = ray.GetPoint(distance);
+
+                    // Adds the new vertice and triangle
+                    newIndices.Add(m_baseVertices.Length + m_additionalVerticesCount - 1);
+
+                    newIndices.Add(m_baseIndices[i * 3 + (cuts[0] + 3 - 1) % 3]);//P3
+                    newIndices.Add(m_baseVertices.Length + m_additionalVerticesCount);
+                    newVertices[m_baseVertices.Length + m_additionalVerticesCount] = proj2;
+                    ++m_additionalVerticesCount;
+
+
                     RelativeDebugLine(proj2, p3, Color.red);
                     RelativeDebugLine(p3, proj1, Color.red);
                 }
@@ -237,12 +254,40 @@ public class Cut : MonoBehaviour
                     RelativeDebugLine(proj2, p3, Color.blue);
                 }
                 Match(proj1, proj2);
+
+                // Check the triangle orientation
+                Vector3 norm1 = Vector3.Cross(
+                    m_baseVertices[m_baseIndices[i * 3 + 1]] - m_baseVertices[m_baseIndices[i * 3 + 0]],
+                    m_baseVertices[m_baseIndices[i * 3 + 2]] - m_baseVertices[m_baseIndices[i * 3 + 0]]);
+                Vector3 norm2 = Vector3.Cross(proj2 - proj1, p3 - proj1);
+                if( Vector3.Dot(norm1, norm2) > 0)
+                {
+                    // Adds triangles indices
+                    newIndices.Add(m_baseVertices.Length + m_additionalVerticesCount);
+                    newIndices.Add(m_baseVertices.Length + m_additionalVerticesCount + 1);
+                    newIndices.Add(m_baseIndices[i * 3 + cuts[2]]); // P3
+                }
+                else
+                {
+                    // Adds triangles indices
+                    newIndices.Add(m_baseVertices.Length + m_additionalVerticesCount);
+                    newIndices.Add(m_baseIndices[i * 3 + cuts[2]]); // P3
+                    newIndices.Add(m_baseVertices.Length + m_additionalVerticesCount + 1);
+                } 
+
+                // Adds projected vertices
+                newVertices[m_baseVertices.Length + m_additionalVerticesCount] = proj1;
+                ++m_additionalVerticesCount;
+                newVertices[m_baseVertices.Length + m_additionalVerticesCount] = proj2;
+                ++m_additionalVerticesCount;
+
             }
         }
     }
 
     void UpdateMesh()
     {
+        m_mesh.Clear();
         // Draw the lines
         for (int j = 0; j < edges.Count; ++j)
         {
@@ -251,18 +296,41 @@ public class Cut : MonoBehaviour
                 center += edges[j][2 * i];
             center /= edges[j].Count / 2;
 
-            Vector3 normal = cutPlane.normal;
-            RelativeDebugLine(center, center + 0.3f * normal, colors[j % colors.Length]);
-
+            RelativeDebugLine(center, center + 0.3f * cutPlane.normal, colors[j % colors.Length]);
             for (int i = 0; i < edges[j].Count / 2; ++i)
             {
                 RelativeDebugLine(edges[j][2 * i], edges[j][2 * i + 1], colors[j % colors.Length]);
+
+                Vector3 normal = Vector3.Cross(center - edges[j][2 * i], center - edges[j][2 * i + 1]);
+
+                if (Vector3.Dot(normal, cutPlane.normal)> 0)
+                {
+                    newIndices.Add(m_baseVertices.Length + m_additionalVerticesCount);
+                    newIndices.Add(m_baseVertices.Length + m_additionalVerticesCount + 1);
+                    newIndices.Add(m_baseVertices.Length + m_additionalVerticesCount + 2);
+                }
+                else
+                {
+                    newIndices.Add(m_baseVertices.Length + m_additionalVerticesCount + 1);
+                    newIndices.Add(m_baseVertices.Length + m_additionalVerticesCount);
+                    newIndices.Add(m_baseVertices.Length + m_additionalVerticesCount + 2);
+                }
+
+
+                newVertices[m_baseVertices.Length + m_additionalVerticesCount] = edges[j][2 * i];
+                ++m_additionalVerticesCount;
+                newVertices[m_baseVertices.Length + m_additionalVerticesCount] = edges[j][2 * i + 1];
+                ++m_additionalVerticesCount;
+                newVertices[m_baseVertices.Length + m_additionalVerticesCount] = center;
+                ++m_additionalVerticesCount;
+
+
             }
         }
 
-        m_mesh.vertices = m_baseVertices;
+
+        m_mesh.vertices = newVertices;
         m_mesh.SetIndices(newIndices.ToArray(), MeshTopology.Triangles, 0);
+        m_mesh.RecalculateNormals();
     }
-
-
 }
