@@ -19,6 +19,9 @@ public class Spawner_DebugGesture : Spawner
 		    tm.color = Color.green;
         }
 
+        tm.transform.LookAt(Camera.main.transform);
+        tm.transform.localScale = new Vector3(-1,1,1);
+
         Destroy(tm.gameObject, 1);
     }
 }
