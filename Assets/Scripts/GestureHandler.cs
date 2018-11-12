@@ -8,7 +8,6 @@ using VRTK;
 public class GestureHandler : MonoBehaviour
 {
 	[SerializeField] AirSigManager m_airsigManager;
-	[SerializeField] TrailRenderer m_trail;
 
 	[SerializeField] int MAX_TRAIN_COUNT = 5;
 	int m_currentGestureID = 100;
@@ -22,15 +21,10 @@ public class GestureHandler : MonoBehaviour
 	{
 		m_airsigManager.onPlayerGestureAdd += HandleOnPlayerGestureAdd;
 		m_airsigManager.onPlayerGestureMatch += HandleOnPlayerGestureMatch;
-
-		AddGesture();
 	}
 
 	void Update()
 	{
-		// Activate trail
-		m_trail.emitting = m_airsigManager.IsCollectingData();
-
 		if(m_lastMatch != 0)
 		{
 			m_onGestureRecognition.Invoke(m_lastMatch);
@@ -48,7 +42,7 @@ public class GestureHandler : MonoBehaviour
         m_airsigManager.SetTarget(new List<int>{m_currentGestureID});
     }
 
-	void DeleteGesture(int target)
+	public void DeleteGesture(int target)
 	{
 		m_airsigManager.DeletePlayerRecord(target);
 	}

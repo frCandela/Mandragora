@@ -9,7 +9,7 @@ public abstract class Spawner : MonoBehaviour
 	
 	public GameObject Spawn()
 	{
-		return Instantiate(m_object, transform.position, transform.rotation, transform);
+		return Instantiate(m_object, transform.position, transform.rotation);
 	}
 
 	public virtual void SpawnIntParameter(int parameter){}

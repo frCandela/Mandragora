@@ -133,13 +133,11 @@ public class PlayerGesture : BasedGestureHandle {
         EnterGesture(PLAYER_GESTURE_ONE);
 
         airsigManager.SetTriggerStartKeys(
-            AirSigManager.Controller.RIGHT_HAND,
             SteamVR_Controller.ButtonMask.Trigger,
             AirSigManager.PressOrTouch.PRESS);
 
 
         airsigManager.SetTriggerStartKeys(
-            AirSigManager.Controller.LEFT_HAND,
             SteamVR_Controller.ButtonMask.Touchpad,
             AirSigManager.PressOrTouch.PRESS);
 

@@ -126,13 +126,11 @@ public class PlayerSignature : BasedGestureHandle {
         airsigManager.SetTarget(new List<int> { PLAYER_SIGNATURE_INDEX });
 
         airsigManager.SetTriggerStartKeys(
-            AirSigManager.Controller.RIGHT_HAND,
             SteamVR_Controller.ButtonMask.Trigger,
             AirSigManager.PressOrTouch.PRESS);
 
 
         airsigManager.SetTriggerStartKeys(
-            AirSigManager.Controller.LEFT_HAND,
             SteamVR_Controller.ButtonMask.Touchpad,
             AirSigManager.PressOrTouch.PRESS);
 

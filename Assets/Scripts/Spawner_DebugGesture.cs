@@ -18,5 +18,7 @@ public class Spawner_DebugGesture : Spawner
             tm.text = parameter.ToString();
 		    tm.color = Color.green;
         }
+
+        Destroy(tm.gameObject, 1);
     }
 }
