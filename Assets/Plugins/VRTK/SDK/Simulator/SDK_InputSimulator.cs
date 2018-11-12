@@ -272,7 +272,7 @@ namespace VRTK
                 GameObject hand = rightHand ? VRTK_DeviceFinder.GetControllerRightHand() : VRTK_DeviceFinder.GetControllerLeftHand();
                 GameObject grabbed = hand.GetComponent<VRTK_InteractGrab>().GetGrabbedObject();
 
-                if (Input.GetMouseButton(1) && grabbed)
+                if (Input.GetKey(KeyCode.R) && grabbed)
                 {
                     Vector3 mouseDelta = GetMouseDelta();
                     leftHand.Rotate(neck.forward, -mouseDelta.x, Space.World);

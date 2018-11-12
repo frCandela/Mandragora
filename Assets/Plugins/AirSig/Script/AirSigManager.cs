@@ -2383,272 +2383,79 @@ namespace AirSig {
         public bool IsTwoGestureSimilar(float[] gesture1, float[] gesture2) {
             return IsTwoGestureSimilar(viveControllerHelper, gesture1, gesture1.Length / 10, 10, gesture2, gesture2.Length / 10, 10);
         }
-
-        public enum Controller {
-            RIGHT_HAND = 1,
-            LEFT_HAND = 2
-        }
-
-        public enum PressOrTouch {
-            PRESS = 0,
-            TOUCH = 1
-        }
-
-        ////[SerializeField]
-        //public enum TriggerMethod: ulong {
-        //    Trigger = SteamVR_Controller.ButtonMask.Trigger,
-        //    Touchpad = SteamVR_Controller.ButtonMask.Touchpad,
-        //    Grip = SteamVR_Controller.ButtonMask.Grip
-        //}
-
-        //[SerializeField]
-        //public TriggerMethod rightHandStartTrigger {
-        //    set {
-        //        if (value == TriggerMethod.Trigger) {
-        //            mRightHandTriggerStartMask = (ulong)TriggerMethod.Trigger;
-        //        }
-        //        else if(value == TriggerMethod.Touchpad) {
-        //            mRightHandTriggerStartMask = (ulong)TriggerMethod.Touchpad;
-        //        }
-        //        else if(value == TriggerMethod.Grip) {
-        //            mRightHandTriggerStartMask = (ulong)TriggerMethod.Grip;
-        //        }
-        //    }
-        //}
-
-        //public TriggerMethod leftHandStartTrigger {
-        //    set {
-        //        if (value == TriggerMethod.Trigger) {
-        //            mLeftHandTriggerStartMask = (ulong)TriggerMethod.Trigger;
-        //        } else if (value == TriggerMethod.Touchpad) {
-        //            mLeftHandTriggerStartMask = (ulong)TriggerMethod.Touchpad;
-        //        } else if (value == TriggerMethod.Grip) {
-        //            mLeftHandTriggerStartMask = (ulong)TriggerMethod.Grip;
-        //        }
-        //    }
-        //}
-
-        //public TriggerMethod rightHandEndTrigger {
-        //    set {
-        //        if (value == TriggerMethod.Trigger) {
-        //            mRightHandTriggerEndMask = (ulong)TriggerMethod.Trigger;
-        //        } else if (value == TriggerMethod.Touchpad) {
-        //            mRightHandTriggerEndMask = (ulong)TriggerMethod.Touchpad;
-        //        } else if (value == TriggerMethod.Grip) {
-        //            mRightHandTriggerEndMask = (ulong)TriggerMethod.Grip;
-        //        }
-        //    }
-        //}
         
-        //public TriggerMethod leftHandEndTrigger {
-        //    set {
-        //        if (value == TriggerMethod.Trigger) {
-        //            mLeftHandTriggerEndMask = (ulong)TriggerMethod.Trigger;
-        //        } else if (value == TriggerMethod.Touchpad) {
-        //            mLeftHandTriggerEndMask = (ulong)TriggerMethod.Touchpad;
-        //        } else if (value == TriggerMethod.Grip) {
-        //            mLeftHandTriggerEndMask = (ulong)TriggerMethod.Grip;
-        //        }
-        //    }
-        //}
-
-        ulong mRightHandTriggerStartMask = SteamVR_Controller.ButtonMask.Trigger;
-        PressOrTouch mRightHandTriggerStartPressOrTouch = PressOrTouch.PRESS;
-        
-        ulong mLeftHandTriggerStartMask = 0;
-        PressOrTouch mLeftHandTriggerStartPressOrTouch = 0;
-        
-        ulong mRightHandTriggerEndMask = 0;
-        PressOrTouch mRightHandTriggerEndPressOrTouch = 0;
-        
-        ulong mLeftHandTriggerEndMask = 0;
-        PressOrTouch mLeftHandTriggerEndPressOrTouch = 0;
-
-        public void SetTriggerStartKeys(Controller ctrl, ulong buttonMask, PressOrTouch pressOrTouch) {
-            if (ctrl == Controller.RIGHT_HAND) {
-                mRightHandTriggerStartMask = buttonMask;
-                mRightHandTriggerStartPressOrTouch = pressOrTouch;
-            } else if (ctrl == Controller.LEFT_HAND) {
-                mLeftHandTriggerStartMask = buttonMask;
-                mLeftHandTriggerStartPressOrTouch = pressOrTouch;
-            }
-        }
-
-        public void SetTriggerEndKeys(Controller ctrl, ulong buttonMask, PressOrTouch pressOrTouch) {
-            if (ctrl == Controller.RIGHT_HAND) {
-                mRightHandTriggerEndMask = buttonMask;
-                mRightHandTriggerEndPressOrTouch = pressOrTouch;
-            } else if (ctrl == Controller.LEFT_HAND) {
-                mLeftHandTriggerEndMask = buttonMask;
-                mLeftHandTriggerEndPressOrTouch = pressOrTouch;
-            }
-        }
-        public void ClearTriggerStartKeys(Controller ctrl) {
-            if(ctrl == Controller.RIGHT_HAND) {
-                mRightHandTriggerStartMask = 0;
-            }
-            else if(ctrl == Controller.LEFT_HAND) {
-                mLeftHandTriggerStartMask = 0;
-            }
-        }
-
-        public void ClearTriggerEndKeys(Controller ctrl) {
-            if (ctrl == Controller.RIGHT_HAND) {
-                mRightHandTriggerEndMask = 0;
-            } else if (ctrl == Controller.LEFT_HAND) {
-                mLeftHandTriggerEndMask = 0;
-            }
-        }
         // ====================================================================
 #endif
 
-        void startRightHandCollecting(object sender, ControllerInteractionEventArgs e) {
-            if (DEBUG_LOG_ENABLED) Debug.Log("[AirSigManager] RightHand starts collecting...");
-            mIsCollectingRightControllerData = true;
-            mRightHandPrevTimeElapsed = 0;
-            mRightHandStopWatch.Stop();
-            mRightHandStopWatch.Reset();
+        public void startCollecting()
+        {
+            if (DEBUG_LOG_ENABLED) Debug.Log("[AirSigManager] Hand starts collecting...");
+
+            mIsCollectingControllerData = true;
+            mHandPrevTimeElapsed = 0;
+            mHandStopWatch.Stop();
+            mHandStopWatch.Reset();
         }
 
-        void startLeftHandCollecting(object sender, ControllerInteractionEventArgs e) {
-            if (DEBUG_LOG_ENABLED) Debug.Log("[AirSigManager] LeftHand starts collecting...");
-            mIsCollectingLeftControllerData = true;
-            mLeftHandPrevTimeElapsed = 0;
-            mLeftHandStopWatch.Stop();
-            mLeftHandStopWatch.Reset();
-        }
+        public void stopCollecting()
+        {
+            if (DEBUG_LOG_ENABLED)
+                Debug.Log(string.Format("[AirSigManager] Hand stopped collecting... {0} samples", mCollectedHandSamples.Count));
 
-        void stopRightHandCollecting(object sender, ControllerInteractionEventArgs e) {
-            if (DEBUG_LOG_ENABLED) Debug.Log(string.Format("[AirSigManager] RightHand stopped collecting... {0} samples", mCollectedRightHandSamples.Count));
-            mIsCollectingRightControllerData = false;
+            mIsCollectingControllerData = false;
 
-            List<Sample> listToSend = new List<Sample>(mCollectedRightHandSamples);
+            List<Sample> listToSend = new List<Sample>(mCollectedHandSamples);
             Thread t = new Thread(() => processCollectData(listToSend));
             t.IsBackground = true;
             t.Start();
 
-            mCollectedRightHandSamples.Clear();
-            mRightHandStopWatch.Stop();
-            mRightHandStopWatch.Reset();
+            mCollectedHandSamples.Clear();
+            mHandStopWatch.Stop();
+            mHandStopWatch.Reset();
         }
 
-        void stopLeftHandCollecting(object sender, ControllerInteractionEventArgs e) {
-            if (DEBUG_LOG_ENABLED) Debug.Log(string.Format("[AirSigManager] LeftHand stopped collecting... {0} samples", mCollectedRightHandSamples.Count));
-            mIsCollectingLeftControllerData = false;
+        System.Diagnostics.Stopwatch mHandStopWatch = new System.Diagnostics.Stopwatch();
+        long mHandPrevTimeElapsed = 0;
 
-            List<Sample> listToSend = new List<Sample>(mCollectedLeftHandSamples);
-            Thread t = new Thread(() => processCollectData(listToSend));
-            t.IsBackground = true;
-            t.Start();
-
-            mCollectedLeftHandSamples.Clear();
-            mLeftHandStopWatch.Stop();
-            mLeftHandStopWatch.Reset();
-        }
-
-        System.Diagnostics.Stopwatch mRightHandStopWatch = new System.Diagnostics.Stopwatch();
-        System.Diagnostics.Stopwatch mLeftHandStopWatch = new System.Diagnostics.Stopwatch();
-        long mRightHandPrevTimeElapsed = 0;
-        long mLeftHandPrevTimeElapsed = 0;
-
-        SteamVR_Controller.Device rightHandDevice, leftHandDevice;
+        [HideInInspector]
+        public AngularVelocityTracker m_angularTracker;
 
         void Update ()
         {
-            Vector3 transformAngularVelocityRight, transformAngularVelocityLeft;
-
-            if(m_useSim)
+            if(m_angularTracker)
             {
-                transformAngularVelocityRight = m_controllerRightSim.GetAngularVelocity();
-                transformAngularVelocityLeft = m_controllerLeftSim.GetAngularVelocity();
-            }
-            else
-            {
-                if(mCVRSystem == null)
-                {
-                    Debug.LogWarning("Unable to find the VR system");
-                    return;
+                Vector3 transformAngularVelocity = m_angularTracker.GetAngularVelocity();
+
+                if (mIsCollectingControllerData) {
+                    mHandStopWatch.Stop();
+                    long timeElapsedMilliseconds = mHandStopWatch.ElapsedMilliseconds;
+                    if (timeElapsedMilliseconds - mHandPrevTimeElapsed >= 16) {
+                        Sample sample = new Sample();
+                        sample.time = timeElapsedMilliseconds;
+
+                        sample.rotation.x = transformAngularVelocity.x;
+                        sample.rotation.y = transformAngularVelocity.y;
+                        sample.rotation.z = transformAngularVelocity.z;
+                        mCollectedHandSamples.Add(sample);
+                        mHandPrevTimeElapsed = timeElapsedMilliseconds;
+                    }
+                    mHandStopWatch.Start();
                 }
-
-                Valve.VR.TrackedDevicePose_t pose;
-                SteamVR_Utils.RigidTransform transform;
-
-                int rightHandIndex = (int)mCVRSystem.GetTrackedDeviceIndexForControllerRole(Valve.VR.ETrackedControllerRole.RightHand);
-                if(rightHandIndex != -1)
-                    rightHandDevice = SteamVR_Controller.Input(rightHandIndex);
-
-                if(rightHandDevice != null)
-                {
-                    pose = rightHandDevice.GetPose();
-                    transform = new SteamVR_Utils.RigidTransform(pose.mDeviceToAbsoluteTracking);
-                    transform.Inverse();
-                    transformAngularVelocityRight = transform * new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2);
-                } 
-                else
-                    return;        
-
-                int leftHandIndex = (int)mCVRSystem.GetTrackedDeviceIndexForControllerRole(Valve.VR.ETrackedControllerRole.LeftHand);
-                if (leftHandIndex != -1)
-                    leftHandDevice = SteamVR_Controller.Input(leftHandIndex);
-
-                if(leftHandDevice != null)
-                {
-                    pose = leftHandDevice.GetPose();
-                    transform = new SteamVR_Utils.RigidTransform(pose.mDeviceToAbsoluteTracking);
-                    transform.Inverse();
-                    transformAngularVelocityLeft = transform * new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2);
-                }
-                else
-                    return;
-            }
-
-            if (mIsCollectingRightControllerData) {
-                mRightHandStopWatch.Stop();
-                long timeElapsedMilliseconds = mRightHandStopWatch.ElapsedMilliseconds;
-                if (timeElapsedMilliseconds - mRightHandPrevTimeElapsed >= 16) {
-                    Sample sample = new Sample();
-                    sample.time = timeElapsedMilliseconds;
-
-                    sample.rotation.x = transformAngularVelocityRight.x;
-                    sample.rotation.y = transformAngularVelocityRight.y;
-                    sample.rotation.z = transformAngularVelocityRight.z;
-                    mCollectedRightHandSamples.Add(sample);
-                    mRightHandPrevTimeElapsed = timeElapsedMilliseconds;
-                }
-                mRightHandStopWatch.Start();
-            }
-
-            if (mIsCollectingLeftControllerData) {
-                mLeftHandStopWatch.Stop();
-                long timeElapsedMilliseconds = mLeftHandStopWatch.ElapsedMilliseconds;
-                if (timeElapsedMilliseconds - mLeftHandPrevTimeElapsed >= 16) {
-                    Sample sample = new Sample();
-                    sample.time = timeElapsedMilliseconds;
-
-                    sample.rotation.x = transformAngularVelocityLeft.x;
-                    sample.rotation.y = transformAngularVelocityLeft.y;
-                    sample.rotation.z = transformAngularVelocityLeft.z;
-                    mCollectedLeftHandSamples.Add(sample);
-                    mLeftHandPrevTimeElapsed = timeElapsedMilliseconds;
-                }
-                mLeftHandStopWatch.Start();
             }
         }
 
         
         private Thread thread;
-        private bool mIsCollectingRightControllerData;
-        private bool mIsCollectingLeftControllerData;
+        private bool mIsCollectingControllerData;
         private struct Sample {
             public long time;
             public Vector3 rotation;
         }
-        private List<Sample> mCollectedRightHandSamples = new List<Sample>();
-        private List<Sample> mCollectedLeftHandSamples = new List<Sample>();
+        private List<Sample> mCollectedHandSamples = new List<Sample>();
 
         public bool IsCollectingData()
         {
-            return mIsCollectingRightControllerData || mIsCollectingLeftControllerData;
+            return mIsCollectingControllerData;
         }
 
         private void processCollectData(List<Sample> data) {
@@ -2673,16 +2480,6 @@ namespace AirSig {
             }
         }
 
-        Valve.VR.CVRSystem mCVRSystem;
-        [SerializeField]
-        VRTK_ControllerEvents.ButtonAlias m_buttonAlias;
-        [SerializeField]
-        VRTK_ControllerEvents m_controllerRight, m_controllerLeft;
-        [SerializeField]
-        SDK_ControllerSim m_controllerRightSim, m_controllerLeftSim;
-
-        bool m_useSim = false;
-
         bool mIsInitReady = false;
         void Awake()
         {
@@ -2696,38 +2493,6 @@ namespace AirSig {
                 return;
             }
             sInstance = this;
-
-            m_useSim = VRTK_SDKManager.instance.loadedSetup.name == "Simulator";
-
-            mCVRSystem = Valve.VR.OpenVR.System;
-
-            // if(mRightHandTriggerStartPressOrTouch == PressOrTouch.PRESS)
-            // {
-            //     // m_controllerRight.TriggerClicked += new ControllerInteractionEventHandler(startRightHandCollecting);
-            //     // m_controllerRight.TriggerUnclicked += new ControllerInteractionEventHandler(stopRightHandCollecting);
-            // }
-            // else 
-            // {
-            //     // m_controllerRight.TriggerTouchStart += new ControllerInteractionEventHandler(startRightHandCollecting);
-            //     // m_controllerRight.TriggerTouchEnd += new ControllerInteractionEventHandler(stopRightHandCollecting);
-            // }
-            
-            // if(mLeftHandTriggerStartPressOrTouch == PressOrTouch.PRESS)
-            // {
-            //     // m_controllerLeft.TriggerClicked += new ControllerInteractionEventHandler(startLeftHandCollecting);
-            //     // m_controllerLeft.TriggerUnclicked += new ControllerInteractionEventHandler(stopLeftHandCollecting);
-            // }
-            // else 
-            // {
-            //     // m_controllerLeft.TriggerTouchStart += new ControllerInteractionEventHandler(startLeftHandCollecting);
-            //     // m_controllerLeft.TriggerTouchEnd += new ControllerInteractionEventHandler(stopLeftHandCollecting);
-            // }
-
-            m_controllerRight.SubscribeToButtonAliasEvent(m_buttonAlias, true, startRightHandCollecting);
-            m_controllerRight.SubscribeToButtonAliasEvent(m_buttonAlias, false, stopRightHandCollecting);
-
-            m_controllerLeft.SubscribeToButtonAliasEvent(m_buttonAlias, true, startLeftHandCollecting);
-            m_controllerLeft.SubscribeToButtonAliasEvent(m_buttonAlias, false, stopLeftHandCollecting);
 
             // Shorten the debug message
             //Application.SetStackTraceLogType(LogType.Log, StackTraceLogType.None);
@@ -2780,7 +2545,7 @@ namespace AirSig {
             _MovementCallbackHolder = new MovementCallback(onMovementDetected);
             SetMovementCallback(viveControllerHelper, _MovementCallbackHolder);
 
-            //SetTriggerStartKeys(Controller.RIGHT_HAND, SteamVR_Controller.ButtonMask.Trigger, PressOrTouch.PRESS);
+            //SetTriggerStartKeys(Controller._HAND, SteamVR_Controller.ButtonMask.Trigger, PressOrTouch.PRESS);
             
             // ====================================================================
 #endif
