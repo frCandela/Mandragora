@@ -16,6 +16,8 @@ public class GestureHandler : MonoBehaviour
 
 	[SerializeField] UnityEventInt m_onGestureRecognition;
 
+	int m_lastMatch = 0;
+
 	void Awake()
 	{
 		m_airsigManager.onPlayerGestureAdd += HandleOnPlayerGestureAdd;
@@ -28,6 +30,12 @@ public class GestureHandler : MonoBehaviour
 	{
 		// Activate trail
 		m_trail.emitting = m_airsigManager.IsCollectingData();
+
+		if(m_lastMatch != 0)
+		{
+			m_onGestureRecognition.Invoke(m_lastMatch);
+			m_lastMatch = 0;
+		}
 	}
 
 	[ContextMenu("AddGesture")]
@@ -64,6 +72,10 @@ public class GestureHandler : MonoBehaviour
 	void HandleOnPlayerGestureMatch(long gestureId, int match)
 	{
 		print("GestureID : " + gestureId + " - Match : " + match + " - Exist : " + m_airsigManager.IsPlayerGestureExisted(m_airsigManager.GetFromCache(gestureId)));
-		m_onGestureRecognition.Invoke(match);
+		
+		m_lastMatch = match;
+
+		if(m_lastMatch > 0)
+			m_lastMatch -= 100;
     }
 }

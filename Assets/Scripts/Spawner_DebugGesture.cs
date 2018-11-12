@@ -6,8 +6,17 @@ public class Spawner_DebugGesture : Spawner
 {
     public override void SpawnIntParameter(int parameter)
     {
-        GameObject go = Spawn();
+        TextMesh tm = Spawn().GetComponent<TextMesh>();
 
-		go.GetComponent<TextMesh>().text = parameter.ToString();
+        if(parameter < 0)
+        {
+            tm.text = "?";
+		    tm.color = Color.red;
+        }
+        else
+        {
+            tm.text = parameter.ToString();
+		    tm.color = Color.green;
+        }
     }
 }
