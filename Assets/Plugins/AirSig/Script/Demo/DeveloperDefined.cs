@@ -35,16 +35,6 @@ public class DeveloperDefined : BasedGestureHandle {
         airsigManager.SetClassifier("SampleGestureProfile", "");
 
         checkDbExist();
-
-        airsigManager.SetTriggerStartKeys(
-            SteamVR_Controller.ButtonMask.Trigger,
-            AirSigManager.PressOrTouch.PRESS);
-
-
-        airsigManager.SetTriggerStartKeys(
-            SteamVR_Controller.ButtonMask.Touchpad,
-            AirSigManager.PressOrTouch.PRESS);
-
     }
 
 

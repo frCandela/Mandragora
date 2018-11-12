@@ -2383,51 +2383,25 @@ namespace AirSig {
         public bool IsTwoGestureSimilar(float[] gesture1, float[] gesture2) {
             return IsTwoGestureSimilar(viveControllerHelper, gesture1, gesture1.Length / 10, 10, gesture2, gesture2.Length / 10, 10);
         }
-
-        public enum PressOrTouch {
-            PRESS = 0,
-            TOUCH = 1
-        }
-
-        ulong mHandTriggerStartMask = SteamVR_Controller.ButtonMask.Trigger;
-        PressOrTouch mHandTriggerStartPressOrTouch = PressOrTouch.PRESS;
         
-        ulong mHandTriggerEndMask = 0;
-        PressOrTouch mHandTriggerEndPressOrTouch = 0;
-
-        public void SetTriggerStartKeys(ulong buttonMask, PressOrTouch pressOrTouch)
-        {
-                mHandTriggerStartMask = buttonMask;
-                mHandTriggerStartPressOrTouch = pressOrTouch;
-        }
-
-        public void SetTriggerEndKeys(ulong buttonMask, PressOrTouch pressOrTouch)
-        {
-                mHandTriggerEndMask = buttonMask;
-                mHandTriggerEndPressOrTouch = pressOrTouch;
-        }
-        public void ClearTriggerStartKeys()
-        {
-                mHandTriggerStartMask = 0;
-        }
-
-        public void ClearTriggerEndKeys()
-        {
-            mHandTriggerEndMask = 0;
-        }
         // ====================================================================
 #endif
 
-        void startHandCollecting(object sender, ControllerInteractionEventArgs e) {
+        public void startCollecting()
+        {
             if (DEBUG_LOG_ENABLED) Debug.Log("[AirSigManager] Hand starts collecting...");
+
             mIsCollectingControllerData = true;
             mHandPrevTimeElapsed = 0;
             mHandStopWatch.Stop();
             mHandStopWatch.Reset();
         }
 
-        void stopHandCollecting(object sender, ControllerInteractionEventArgs e) {
-            if (DEBUG_LOG_ENABLED) Debug.Log(string.Format("[AirSigManager] Hand stopped collecting... {0} samples", mCollectedHandSamples.Count));
+        public void stopCollecting()
+        {
+            if (DEBUG_LOG_ENABLED)
+                Debug.Log(string.Format("[AirSigManager] Hand stopped collecting... {0} samples", mCollectedHandSamples.Count));
+
             mIsCollectingControllerData = false;
 
             List<Sample> listToSend = new List<Sample>(mCollectedHandSamples);
@@ -2441,29 +2415,32 @@ namespace AirSig {
         }
 
         System.Diagnostics.Stopwatch mHandStopWatch = new System.Diagnostics.Stopwatch();
-        System.Diagnostics.Stopwatch mLeftHandStopWatch = new System.Diagnostics.Stopwatch();
         long mHandPrevTimeElapsed = 0;
-        long mLeftHandPrevTimeElapsed = 0;
-        AngularVelocityTracker m_angularTracker;
+
+        [HideInInspector]
+        public AngularVelocityTracker m_angularTracker;
 
         void Update ()
         {
-            Vector3 transformAngularVelocity = m_angularTracker.GetAngularVelocity();
+            if(m_angularTracker)
+            {
+                Vector3 transformAngularVelocity = m_angularTracker.GetAngularVelocity();
 
-            if (mIsCollectingControllerData) {
-                mHandStopWatch.Stop();
-                long timeElapsedMilliseconds = mHandStopWatch.ElapsedMilliseconds;
-                if (timeElapsedMilliseconds - mHandPrevTimeElapsed >= 16) {
-                    Sample sample = new Sample();
-                    sample.time = timeElapsedMilliseconds;
+                if (mIsCollectingControllerData) {
+                    mHandStopWatch.Stop();
+                    long timeElapsedMilliseconds = mHandStopWatch.ElapsedMilliseconds;
+                    if (timeElapsedMilliseconds - mHandPrevTimeElapsed >= 16) {
+                        Sample sample = new Sample();
+                        sample.time = timeElapsedMilliseconds;
 
-                    sample.rotation.x = transformAngularVelocity.x;
-                    sample.rotation.y = transformAngularVelocity.y;
-                    sample.rotation.z = transformAngularVelocity.z;
-                    mCollectedHandSamples.Add(sample);
-                    mHandPrevTimeElapsed = timeElapsedMilliseconds;
+                        sample.rotation.x = transformAngularVelocity.x;
+                        sample.rotation.y = transformAngularVelocity.y;
+                        sample.rotation.z = transformAngularVelocity.z;
+                        mCollectedHandSamples.Add(sample);
+                        mHandPrevTimeElapsed = timeElapsedMilliseconds;
+                    }
+                    mHandStopWatch.Start();
                 }
-                mHandStopWatch.Start();
             }
         }
 

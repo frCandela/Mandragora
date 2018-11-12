@@ -131,18 +131,6 @@ public class PlayerGesture : BasedGestureHandle {
         airsigManager.onPlayerGestureMatch += playerGestureMatch;
 
         EnterGesture(PLAYER_GESTURE_ONE);
-
-        airsigManager.SetTriggerStartKeys(
-            SteamVR_Controller.ButtonMask.Trigger,
-            AirSigManager.PressOrTouch.PRESS);
-
-
-        airsigManager.SetTriggerStartKeys(
-            SteamVR_Controller.ButtonMask.Touchpad,
-            AirSigManager.PressOrTouch.PRESS);
-
-        // new ControllerInteractionEventArgs();
-        // handControl.TriggerClicked += new ControllerInteractionEventHandler(this, EnterGesture(PLAYER_GESTURE_ONE));
     }
 
 

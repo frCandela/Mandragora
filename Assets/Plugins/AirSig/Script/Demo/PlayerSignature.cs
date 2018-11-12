@@ -124,16 +124,6 @@ public class PlayerSignature : BasedGestureHandle {
         textMode.text = string.Format("Mode: {0}", AirSigManager.Mode.TrainPlayerSignature.ToString());
         airsigManager.SetMode(AirSigManager.Mode.TrainPlayerSignature);
         airsigManager.SetTarget(new List<int> { PLAYER_SIGNATURE_INDEX });
-
-        airsigManager.SetTriggerStartKeys(
-            SteamVR_Controller.ButtonMask.Trigger,
-            AirSigManager.PressOrTouch.PRESS);
-
-
-        airsigManager.SetTriggerStartKeys(
-            SteamVR_Controller.ButtonMask.Touchpad,
-            AirSigManager.PressOrTouch.PRESS);
-
     }
 
 

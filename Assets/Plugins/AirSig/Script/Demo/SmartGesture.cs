@@ -110,16 +110,6 @@ public class SmartGesture : BasedGestureHandle {
         airsigManager.onSmartIdentifyDeveloperDefinedMatch += smartDeveloperDefined;
 
         ResetSmartGesture();
-
-        airsigManager.SetTriggerStartKeys(
-            SteamVR_Controller.ButtonMask.Trigger,
-            AirSigManager.PressOrTouch.PRESS);
-
-
-        airsigManager.SetTriggerStartKeys(
-            SteamVR_Controller.ButtonMask.Touchpad,
-            AirSigManager.PressOrTouch.PRESS);
-
     }
 
 

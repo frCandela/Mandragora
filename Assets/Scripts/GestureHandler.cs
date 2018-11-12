@@ -17,6 +17,17 @@ public class GestureHandler : MonoBehaviour
 
 	int m_lastMatch = 0;
 
+	public bool Collecting
+	{
+		set
+		{
+			if(value)
+				m_airsigManager.startCollecting();
+			else
+				m_airsigManager.stopCollecting();
+		}
+	}
+
 	void Awake()
 	{
 		m_airsigManager.onPlayerGestureAdd += HandleOnPlayerGestureAdd;
@@ -31,6 +42,11 @@ public class GestureHandler : MonoBehaviour
 			m_lastMatch = 0;
 		}
 	}
+
+	public void InitTracker(AngularVelocityTracker tracker)
+	{
+		m_airsigManager.m_angularTracker = tracker;
+    }
 
 	[ContextMenu("AddGesture")]
 	public void AddGesture()
