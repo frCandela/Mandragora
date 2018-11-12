@@ -12,6 +12,8 @@ public class Cut : MonoBehaviour
     private MeshRenderer m_meshRenderer = null;
     private MeshFilter m_meshFilter = null;
     private Mesh m_mesh = null;
+    private Vector3[] m_baseVertices;
+    private int[] m_baseIndices;
 
     [SerializeField] float executionTime;
 
@@ -40,11 +42,14 @@ public class Cut : MonoBehaviour
             sets.Add( new HashSet<int>());
             edges.Add( new List<Vector3>());
         }
+
+        m_baseIndices = insideMesh.GetIndices(0); ;
+        m_baseVertices = insideMesh.vertices;
+
     }
 
 
     Plane cutPlane = new Plane();
-    Vector3[] vertices;
     List<int> newIndices = new List<int>();
     Ray ray = new Ray();
     int[] cuts = new int[3];
@@ -61,7 +66,7 @@ public class Cut : MonoBehaviour
         if (m_timeSinceLastCall > delay)
         {
             float t = Time.realtimeSinceStartup;
-            UpdateGeometry();
+            UpdateGeometry();   
             executionTime = 1000f * (Time.realtimeSinceStartup - t);
             m_timeSinceLastCall = 0;
         }
@@ -133,8 +138,6 @@ public class Cut : MonoBehaviour
     void UpdateGeometry()
     {   
         cutPlane.SetNormalAndPosition(cuttingPlane.transform.up, cuttingPlane.transform.position);
-        vertices = insideMesh.vertices;
-        int[] indices = insideMesh.GetIndices(0);
         newIndices.Clear();
         float distance;
 
@@ -145,14 +148,14 @@ public class Cut : MonoBehaviour
         }
         nbSets = 0;
 
-        for (int i = 0; i < indices.Length / 3; ++i)
+        for (int i = 0; i < m_baseIndices.Length / 3; ++i)
         {
             int nbCut = 0;
             for (int j = 0; j < 3; ++j)
             {
                 int index = i * 3 + j;
 
-                if (cutPlane.GetSide(vertices[indices[index]]))
+                if (cutPlane.GetSide(m_baseVertices[m_baseIndices[index]]))
                     cuts[nbCut++] = j;
                 else
                     cuts[2] = j;
@@ -160,15 +163,15 @@ public class Cut : MonoBehaviour
 
             if (nbCut == 0)
             {
-                newIndices.Add(indices[i * 3 + 0]);
-                newIndices.Add(indices[i * 3 + 1]);
-                newIndices.Add(indices[i * 3 + 2]);
+                newIndices.Add(m_baseIndices[i * 3 + 0]);
+                newIndices.Add(m_baseIndices[i * 3 + 1]);
+                newIndices.Add(m_baseIndices[i * 3 + 2]);
             }
             else if (nbCut == 1)
             {
-                Vector3 p1 = vertices[indices[i * 3 + cuts[0]]];
-                Vector3 p2 = vertices[indices[i * 3 + (cuts[0] + 1) % 3]];
-                Vector3 p3 = vertices[indices[i * 3 + (cuts[0] + 3 - 1) % 3]];
+                Vector3 p1 = m_baseVertices[m_baseIndices[i * 3 + cuts[0]]];
+                Vector3 p2 = m_baseVertices[m_baseIndices[i * 3 + (cuts[0] + 1) % 3]];
+                Vector3 p3 = m_baseVertices[m_baseIndices[i * 3 + (cuts[0] + 3 - 1) % 3]];
 
                 Vector3 proj1 = Vector3.zero;
                 Vector3 proj2 = Vector3.zero;
@@ -196,9 +199,9 @@ public class Cut : MonoBehaviour
             }
             else if (nbCut == 2)
             {
-                Vector3 p1 = vertices[indices[i * 3 + cuts[0]]];
-                Vector3 p2 = vertices[indices[i * 3 + cuts[1]]];
-                Vector3 p3 = vertices[indices[i * 3 + cuts[2]]];
+                Vector3 p1 = m_baseVertices[m_baseIndices[i * 3 + cuts[0]]];
+                Vector3 p2 = m_baseVertices[m_baseIndices[i * 3 + cuts[1]]];
+                Vector3 p3 = m_baseVertices[m_baseIndices[i * 3 + cuts[2]]];
 
                 Vector3 proj1 = Vector3.zero;
                 Vector3 proj2 = Vector3.zero;
@@ -238,7 +241,7 @@ public class Cut : MonoBehaviour
             }
         }
 
-        m_mesh.vertices = vertices;
+        m_mesh.vertices = m_baseVertices;
         m_mesh.SetIndices(newIndices.ToArray(), MeshTopology.Triangles, 0);
     }
 }
