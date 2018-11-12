@@ -13,8 +13,10 @@ public class Cut : MonoBehaviour
     private MeshFilter m_meshFilter = null;
     private Mesh m_mesh = null;
 
-    [SerializeField] float duration;
+    [SerializeField] float executionTime;
 
+    List<HashSet<int>> sets = new List<HashSet<int>>();
+    List<List<Vector3>> edges = new List<List<Vector3>>();
 
     // Use this for initialization
     void Awake ()
@@ -32,33 +34,117 @@ public class Cut : MonoBehaviour
         m_meshRenderer = m_gameObject.AddComponent<MeshRenderer>();
         if (material)
             m_meshRenderer.material = material;
+
+        for( int i = 0; i < 30; ++i)
+        {
+            sets.Add( new HashSet<int>());
+            edges.Add( new List<Vector3>());
+        }
     }
 
-    List<HashSet<int>> sets = new List<HashSet<int>>();
-    List<List<Vector3>> edges = new List<List<Vector3>>();
+
     Plane cutPlane = new Plane();
     Vector3[] vertices;
     List<int> newIndices = new List<int>();
     Ray ray = new Ray();
     int[] cuts = new int[3];
     Color[] colors = { Color.yellow, Color.green, Color.blue, Color.red, Color.magenta, Color.cyan };
+    int nbSets = 0;
+
+    private float m_timeSinceLastCall = 0f;
+    [SerializeField] private float delay = 0f;
 
     // Update is called once per frame
     void Update ()
     {
-        float t = Time.realtimeSinceStartup;
+        m_timeSinceLastCall += Time.deltaTime;
+        if (m_timeSinceLastCall > delay)
+        {
+            float t = Time.realtimeSinceStartup;
+            UpdateGeometry();
+            executionTime = 1000f * (Time.realtimeSinceStartup - t);
+            m_timeSinceLastCall = 0;
+        }
+    }
 
+    
+    List<HashSet<int>> matchSet = new List<HashSet<int>>();
+    List<List<Vector3>> matchEdges = new List<List<Vector3>>();
+    void Match( Vector3 proj1, Vector3 proj2)
+    {
+        matchSet.Clear();
+        matchEdges.Clear();
+        for (int setIndex = 0; setIndex < nbSets; ++setIndex)
+        {
+            if (sets[setIndex].Count == 0 || sets[setIndex].Contains(proj1.GetHashCode()) || sets[setIndex].Contains(proj2.GetHashCode()))
+            {
+                matchSet.Add(sets[setIndex]);
+                matchEdges.Add(edges[setIndex]);
+            }                
+        }
+
+        if (matchSet.Count == 0)
+        {
+            sets[nbSets].Add(proj1.GetHashCode());
+            sets[nbSets].Add(proj2.GetHashCode());
+            edges[nbSets].Add(proj1);
+            edges[nbSets].Add(proj2);
+            nbSets++;
+        }
+        else
+        {
+            matchSet[0].Add(proj1.GetHashCode());
+            matchSet[0].Add(proj2.GetHashCode());
+            matchEdges[0].Add(proj1);
+            matchEdges[0].Add(proj2);
+
+            for( int i = 1; i < matchSet.Count; ++i)
+            {
+                matchSet[0].UnionWith(matchSet[i]);
+                matchEdges[0].AddRange(matchEdges[i]);
+            }
+            while (matchSet.Count > 1)
+            {
+                List<Vector3> oldEdges = matchEdges[1];
+                HashSet<int> oldSet = matchSet[1];
+                sets.Remove(oldSet);
+                edges.Remove(oldEdges);
+                oldSet.Clear();
+                oldEdges.Clear();
+                sets.Add(oldSet);
+                edges.Add(oldEdges);
+                matchSet.RemoveAt(1);
+                nbSets--;
+            }
+        }
+    }
+
+    public bool test = true;
+    void RelativeDebugLine( Vector3 start, Vector3 end, Color color)
+    {
+        if(test)
+        Debug.DrawLine(
+        m_gameObject.transform.position + m_gameObject.transform.rotation * start,
+        m_gameObject.transform.position + m_gameObject.transform.rotation * end,
+        color
+    );
+    }
+
+    void UpdateGeometry()
+    {   
         cutPlane.SetNormalAndPosition(cuttingPlane.transform.up, cuttingPlane.transform.position);
         vertices = insideMesh.vertices;
         int[] indices = insideMesh.GetIndices(0);
         newIndices.Clear();
-        float distance;        
-        sets.Clear();
-        edges.Clear();
-        sets.Add(new HashSet<int>());
-        edges.Add(new List<Vector3>());
+        float distance;
 
-        
+        for (int i = 0; i < sets.Count; ++i)
+        {
+            sets[i].Clear();
+            edges[i].Clear();
+        }
+        nbSets = 0;
+
         for (int i = 0; i < indices.Length / 3; ++i)
         {
             int nbCut = 0;
@@ -135,17 +221,16 @@ public class Cut : MonoBehaviour
                 Match(proj1, proj2);
             }
         }
-
-        for(int j = 0; j < edges.Count; ++j)
+        for (int j = 0; j < edges.Count; ++j)
         {
             Vector3 center = Vector3.zero;
-            for (int i = 0; i < edges[j].Count / 2; ++i)            
-                center += edges[j][2*i];
-            center /= edges[j].Count/2;
+            for (int i = 0; i < edges[j].Count / 2; ++i)
+                center += edges[j][2 * i];
+            center /= edges[j].Count / 2;
 
 
             Vector3 normal = cutPlane.normal;
-            RelativeDebugLine(center, center+0.3f* normal, colors[j % colors.Length]);
+            RelativeDebugLine(center, center + 0.3f * normal, colors[j % colors.Length]);
 
             for (int i = 0; i < edges[j].Count / 2; ++i)
             {
@@ -155,67 +240,5 @@ public class Cut : MonoBehaviour
 
         m_mesh.vertices = vertices;
         m_mesh.SetIndices(newIndices.ToArray(), MeshTopology.Triangles, 0);
-
-        duration = 1000f*(Time.realtimeSinceStartup - t);
-    }
-
-
-    List<HashSet<int>> matchSet = new List<HashSet<int>>();
-    List<List<Vector3>> matchEdges = new List<List<Vector3>>();
-    void Match( Vector3 proj1, Vector3 proj2)
-    {
-        matchSet.Clear();
-        matchEdges.Clear();
-        for (int setIndex = 0; setIndex < sets.Count; ++setIndex)
-        {
-            if (sets[setIndex].Count == 0 || sets[setIndex].Contains(proj1.GetHashCode()) || sets[setIndex].Contains(proj2.GetHashCode()))
-            {
-                matchSet.Add(sets[setIndex]);
-                matchEdges.Add(edges[setIndex]);
-            }                
-        }
-
-        if (matchSet.Count == 0)
-        {
-            sets.Add(new HashSet<int>());
-            edges.Add(new List<Vector3>());
-            sets[sets.Count - 1].Add(proj1.GetHashCode());
-            sets[sets.Count - 1].Add(proj2.GetHashCode());
-            edges[edges.Count - 1].Add(proj1);
-            edges[edges.Count - 1].Add(proj2);
-        }
-        else
-        {
-            matchSet[0].Add(proj1.GetHashCode());
-            matchSet[0].Add(proj2.GetHashCode());
-            matchEdges[0].Add(proj1);
-            matchEdges[0].Add(proj2);
-
-            for( int i = 1; i < matchSet.Count; ++i)
-            {
-                matchSet[0].UnionWith(matchSet[i]);
-                matchEdges[0].AddRange(matchEdges[i]);
-            }
-            while (matchSet.Count > 1)
-            {
-                sets.Remove(matchSet[1]);
-                edges.Remove(matchEdges[1]);
-                matchSet.RemoveAt(1);
-            }
-        }
-    }
-
-    void RelativeDebugLine( Vector3 start, Vector3 end, Color color)
-    {
-        Debug.DrawLine(
-        m_gameObject.transform.position + m_gameObject.transform.rotation * start,
-        m_gameObject.transform.position + m_gameObject.transform.rotation * end,
-        color
-    );
-    }
-
-    void UpdateGeometry()
-    {
-
     }
 }
