@@ -12,13 +12,10 @@ public class Cut : MonoBehaviour
     private MeshRenderer m_meshRenderer = null;
     private MeshFilter m_meshFilter = null;
     private Mesh m_mesh = null;
-    private Vector3[] m_baseVertices;
-    private int[] m_baseIndices;
+    private Vector3[] m_baseVertices;   // Vertices of the mesh to cut 
+    private int[] m_baseIndices;        // indices of the mesh to cut 
 
-    [SerializeField] float executionTime;
-
-    List<HashSet<int>> sets = new List<HashSet<int>>();
-    List<List<Vector3>> edges = new List<List<Vector3>>();
+    [SerializeField] float executionTime;   // Raw perf measurement
 
     // Use this for initialization
     void Awake ()
@@ -46,16 +43,21 @@ public class Cut : MonoBehaviour
         m_baseIndices = insideMesh.GetIndices(0); ;
         m_baseVertices = insideMesh.vertices;
 
+        newVertices = new Vector3[2* m_baseVertices.Length];
+
     }
 
+    Plane cutPlane = new Plane();   // Cut plane
+    Ray ray = new Ray();            // Usefull for plane raycast
 
-    Plane cutPlane = new Plane();
-    List<int> newIndices = new List<int>();
-    Ray ray = new Ray();
-    int[] cuts = new int[3];
-    Color[] colors = { Color.yellow, Color.green, Color.blue, Color.red, Color.magenta, Color.cyan };
-    int nbSets = 0;
+    Vector3[] newVertices;
+   // int[] newIndices;
+    List<int> newIndices = new List<int>();     // Dynamic indices of the cut mesh  
+    
 
+    int[] cuts = new int[3];                    // Indices of vertices cut    
+
+    // Time & perf measurement
     private float m_timeSinceLastCall = 0f;
     [SerializeField] private float delay = 0f;
 
@@ -66,15 +68,20 @@ public class Cut : MonoBehaviour
         if (m_timeSinceLastCall > delay)
         {
             float t = Time.realtimeSinceStartup;
-            UpdateGeometry();   
+            UpdateGeometry();
+            UpdateMesh();   
             executionTime = 1000f * (Time.realtimeSinceStartup - t);
             m_timeSinceLastCall = 0;
         }
     }
 
-    
-    List<HashSet<int>> matchSet = new List<HashSet<int>>();
-    List<List<Vector3>> matchEdges = new List<List<Vector3>>();
+    int nbSets = 0;                                             // Count of connex vertices edges
+    List<HashSet<int>> matchSet = new List<HashSet<int>>();     // List of HashSet for grouping edges 
+    List<List<Vector3>> matchEdges = new List<List<Vector3>>(); // List of Vector3 for saving edges
+    List<HashSet<int>> sets = new List<HashSet<int>>();
+    List<List<Vector3>> edges = new List<List<Vector3>>();
+
+    //  Match an edge with the others connex groups of edges
     void Match( Vector3 proj1, Vector3 proj2)
     {
         matchSet.Clear();
@@ -124,19 +131,24 @@ public class Cut : MonoBehaviour
         }
     }
 
-    public bool test = true;
+    // Debug line relative to the Gameobject transform
+    [SerializeField] private bool showDebugLines = true;
+    Color[] colors = { Color.yellow, Color.green, Color.blue, Color.red, Color.magenta, Color.cyan };// Debug lines colors
     void RelativeDebugLine( Vector3 start, Vector3 end, Color color)
     {
-        if(test)
-        Debug.DrawLine(
-        m_gameObject.transform.position + m_gameObject.transform.rotation * start,
-        m_gameObject.transform.position + m_gameObject.transform.rotation * end,
-        color
-    );
+        if(showDebugLines)
+        {
+            Debug.DrawLine(
+            m_gameObject.transform.position + m_gameObject.transform.rotation * start,
+            m_gameObject.transform.position + m_gameObject.transform.rotation * end,
+            color
+            );
+        }
     }
 
+    // Update the mesh 
     void UpdateGeometry()
-    {   
+    {
         cutPlane.SetNormalAndPosition(cuttingPlane.transform.up, cuttingPlane.transform.position);
         newIndices.Clear();
         float distance;
@@ -161,12 +173,14 @@ public class Cut : MonoBehaviour
                     cuts[2] = j;
             }
 
+            // No cut 
             if (nbCut == 0)
             {
                 newIndices.Add(m_baseIndices[i * 3 + 0]);
                 newIndices.Add(m_baseIndices[i * 3 + 1]);
                 newIndices.Add(m_baseIndices[i * 3 + 2]);
             }
+            // 1 edge cut
             else if (nbCut == 1)
             {
                 Vector3 p1 = m_baseVertices[m_baseIndices[i * 3 + cuts[0]]];
@@ -197,6 +211,7 @@ public class Cut : MonoBehaviour
                 Match(proj1, proj2);
 
             }
+            // 2 edges cut
             else if (nbCut == 2)
             {
                 Vector3 p1 = m_baseVertices[m_baseIndices[i * 3 + cuts[0]]];
@@ -224,13 +239,17 @@ public class Cut : MonoBehaviour
                 Match(proj1, proj2);
             }
         }
+    }
+
+    void UpdateMesh()
+    {
+        // Draw the lines
         for (int j = 0; j < edges.Count; ++j)
         {
             Vector3 center = Vector3.zero;
             for (int i = 0; i < edges[j].Count / 2; ++i)
                 center += edges[j][2 * i];
             center /= edges[j].Count / 2;
-
 
             Vector3 normal = cutPlane.normal;
             RelativeDebugLine(center, center + 0.3f * normal, colors[j % colors.Length]);
@@ -244,4 +263,6 @@ public class Cut : MonoBehaviour
         m_mesh.vertices = m_baseVertices;
         m_mesh.SetIndices(newIndices.ToArray(), MeshTopology.Triangles, 0);
     }
+
+
 }
