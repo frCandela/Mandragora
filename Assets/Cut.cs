@@ -34,9 +34,10 @@ public class Cut : MonoBehaviour
             m_meshRenderer.material = material;
     }
 
-
+    List<HashSet<int>> sets = new List<HashSet<int>>();
+    List<List<Vector3>> edges = new List<List<Vector3>>();
     // Update is called once per frame
-	void Update ()
+    void Update ()
     {
         float t = Time.realtimeSinceStartup;
 
@@ -51,8 +52,8 @@ public class Cut : MonoBehaviour
         float distance;
 
         Color[] colors = { Color.yellow, Color.green , Color.blue , Color.red , Color.magenta , Color.cyan};
-        List<HashSet<int>> sets = new List<HashSet<int>>();
-        List <List<Vector3 >> edges = new List<List<Vector3>>();
+        sets.Clear();
+        edges.Clear();
         sets.Add(new HashSet<int>());
         edges.Add(new List<Vector3>());
 
@@ -100,42 +101,11 @@ public class Cut : MonoBehaviour
                 if (cutPlane.Raycast(ray, out distance))
                 {
                     proj2 = ray.GetPoint(distance);
-                    //RelativeDebugLine(proj1, proj2, Color.yellow);//////////////////////////////////////////////////////////////
                     RelativeDebugLine(proj2, p3, Color.red);
                     RelativeDebugLine(p3, proj1, Color.red);
                 }
+                Match(proj1, proj2);
 
-                List<int> matchSet = new List<int>();
-                for (int setIndex = 0 ; setIndex < sets.Count; ++setIndex)
-                {
-                    if (sets[setIndex].Count == 0 || sets[setIndex].Contains(proj1.GetHashCode()) || sets[setIndex].Contains(proj2.GetHashCode()))                    
-                        matchSet.Add(setIndex);                    
-                }
-
-                if (matchSet.Count == 0)
-                {
-                    sets.Add(new HashSet<int>());
-                    edges.Add(new List<Vector3>());
-                    sets[sets.Count - 1].Add(proj1.GetHashCode());
-                    sets[sets.Count - 1].Add(proj2.GetHashCode());
-                    edges[edges.Count - 1].Add(proj1);
-                    edges[edges.Count - 1].Add(proj2);
-                }
-                else
-                {
-                    sets[matchSet[0]].Add(proj1.GetHashCode());
-                    sets[matchSet[0]].Add(proj2.GetHashCode());
-                    edges[matchSet[0]].Add(proj1);
-                    edges[matchSet[0]].Add(proj2);
-                    while (matchSet.Count > 1)
-                    {
-                        sets[matchSet[0]].UnionWith(sets[matchSet[1]]);
-                        edges[matchSet[0]].AddRange(edges[matchSet[1]]);
-                        sets.RemoveAt(matchSet[1]);
-                        edges.RemoveAt(matchSet[1]);
-                        matchSet.RemoveAt(1);
-                    }
-                }
             }
             else if (nbCut == 2)
             {
@@ -161,38 +131,7 @@ public class Cut : MonoBehaviour
                     proj2 = ray.GetPoint(distance);
                     RelativeDebugLine(proj2, p3, Color.blue);
                 }
-                List<int> matchSet = new List<int>();
-                for (int setIndex = 0; setIndex < sets.Count; ++setIndex)
-                {
-                    if (sets[setIndex].Count == 0 || sets[setIndex].Contains(proj1.GetHashCode()) || sets[setIndex].Contains(proj2.GetHashCode()))
-                        matchSet.Add(setIndex);
-                }
-
-                if (matchSet.Count == 0)
-                {
-                    sets.Add(new HashSet<int>());
-                    edges.Add(new List<Vector3>());
-                    sets[sets.Count - 1].Add(proj1.GetHashCode());
-                    sets[sets.Count - 1].Add(proj2.GetHashCode());
-                    edges[edges.Count - 1].Add(proj1);
-                    edges[edges.Count - 1].Add(proj2);
-                }
-                else
-                {
-                    sets[matchSet[0]].Add(proj1.GetHashCode());
-                    sets[matchSet[0]].Add(proj2.GetHashCode());
-                    edges[matchSet[0]].Add(proj1);
-                    edges[matchSet[0]].Add(proj2);
-                    while (matchSet.Count > 1)
-                    {
-                        sets[matchSet[0]].UnionWith(sets[matchSet[1]]);
-                        edges[matchSet[0]].AddRange(edges[matchSet[1]]);
-                        sets.RemoveAt(matchSet[1]);
-                        edges.RemoveAt(matchSet[1]);
-                        matchSet.RemoveAt(1);
-                    }
-                }
-                //RelativeDebugLine(proj1, proj2, Color.yellow);//////////////////////////////////////////////////////////////
+                Match(proj1, proj2);
             }
         }
 
@@ -213,13 +152,45 @@ public class Cut : MonoBehaviour
             }
         }
 
-
-        print(sets[0].Count);
-
         m_mesh.vertices = vertices.ToArray();
         m_mesh.SetIndices(newIndices.ToArray(), MeshTopology.Triangles, 0);
 
         duration = 1000f*(Time.realtimeSinceStartup - t);
+    }
+
+    void Match( Vector3 proj1, Vector3 proj2)
+    {
+        List<int> matchSet = new List<int>();
+        for (int setIndex = 0; setIndex < sets.Count; ++setIndex)
+        {
+            if (sets[setIndex].Count == 0 || sets[setIndex].Contains(proj1.GetHashCode()) || sets[setIndex].Contains(proj2.GetHashCode()))
+                matchSet.Add(setIndex);
+        }
+
+        if (matchSet.Count == 0)
+        {
+            sets.Add(new HashSet<int>());
+            edges.Add(new List<Vector3>());
+            sets[sets.Count - 1].Add(proj1.GetHashCode());
+            sets[sets.Count - 1].Add(proj2.GetHashCode());
+            edges[edges.Count - 1].Add(proj1);
+            edges[edges.Count - 1].Add(proj2);
+        }
+        else
+        {
+            sets[matchSet[0]].Add(proj1.GetHashCode());
+            sets[matchSet[0]].Add(proj2.GetHashCode());
+            edges[matchSet[0]].Add(proj1);
+            edges[matchSet[0]].Add(proj2);
+            while (matchSet.Count > 1)
+            {
+                sets[matchSet[0]].UnionWith(sets[matchSet[1]]);
+                edges[matchSet[0]].AddRange(edges[matchSet[1]]);
+                sets.RemoveAt(matchSet[1]);
+                edges.RemoveAt(matchSet[1]);
+                matchSet.RemoveAt(1);
+            }
+        }
     }
 
     void RelativeDebugLine( Vector3 start, Vector3 end, Color color)
