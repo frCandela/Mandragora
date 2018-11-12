@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Cut : MonoBehaviour
 {
-    [SerializeField] private Transform cuttingPlane = null;
     [SerializeField] private Mesh insideMesh = null;
     [SerializeField] private Material material = null;
+    [SerializeField,] private float maxHeight = 2.55f;
+    [SerializeField, Range(0, 3f)] private float height = 0;
+    [SerializeField] private Vector3 liquidMeshOffset;
+    [SerializeField] float executionTime;   // Raw perf measurement
+    [SerializeField] private float delay = 0f;
+    [SerializeField] private bool showDebugLines = false;
 
     private GameObject m_gameObject = null;
     private MeshRenderer m_meshRenderer = null;
@@ -15,13 +20,15 @@ public class Cut : MonoBehaviour
     private Vector3[] m_baseVertices;   // Vertices of the mesh to cut 
     private int[] m_baseIndices;        // indices of the mesh to cut 
 
-    [SerializeField] float executionTime;   // Raw perf measurement
+
 
     // Use this for initialization
     void Awake ()
     {
         m_gameObject = new GameObject("Test");
-        m_gameObject.transform.position = transform.position + 3*Vector3.up;
+        m_gameObject.transform.position = transform.position + liquidMeshOffset;
+        m_gameObject.transform.parent = transform;
+        m_gameObject.transform.localScale = new Vector3(1,1,1);
 
         m_mesh = new Mesh();
         m_mesh.name = "liquidMesh";
@@ -43,21 +50,28 @@ public class Cut : MonoBehaviour
         m_baseIndices = insideMesh.GetIndices(0); ;
         m_baseVertices = insideMesh.vertices;
 
-        newVertices = new Vector3[3 * m_baseVertices.Length];
+        newVertices = new Vector3[4* m_baseVertices.Length];
         m_baseVertices.CopyTo(newVertices, 0);
     }
+
+    
 
     Plane cutPlane = new Plane();   // Cut plane
     Ray ray = new Ray();            // Usefull for plane raycast
 
-    Vector3[] newVertices;                      // Vertices of the final cut mesh  
+    Vector3[] newVertices;                          // Vertices of the final cut mesh  
     List<int> newIndices = new List<int>();       // Indices of the final cut mesh  
 
     int[] cuts = new int[3];    // Indices of vertices cut on a single triangle    
 
     // Time & perf measurement
     private float m_timeSinceLastCall = 0f;
-    [SerializeField] private float delay = 0f;
+
+    private void OnValidate()
+    {
+        if(m_gameObject)
+            m_gameObject.transform.position = transform.position + liquidMeshOffset;
+    }
 
     // Update is called once per frame
     void Update ()
@@ -130,7 +144,7 @@ public class Cut : MonoBehaviour
     }
 
     // Debug line relative to the Gameobject transform
-    [SerializeField] private bool showDebugLines = true;
+
     Color[] colors = { Color.yellow, Color.green, Color.blue, Color.red, Color.magenta, Color.cyan };// Debug lines colors
     void RelativeDebugLine( Vector3 start, Vector3 end, Color color)
     {
@@ -143,13 +157,19 @@ public class Cut : MonoBehaviour
             );
         }
     }
+
+
+
     
 
     // Update the mesh 
     int m_additionalVerticesCount = 0;
     void UpdateGeometry()
     {
-        cutPlane.SetNormalAndPosition(cuttingPlane.transform.up, cuttingPlane.transform.position);
+        Vector3 p = Quaternion.Inverse(transform.rotation) * (height * transform.up);
+
+        cutPlane.SetNormalAndPosition(Quaternion.Inverse(transform.rotation) * Vector3.up, p.y * Vector3.up);
+
         newIndices.Clear();
         float distance;
         m_additionalVerticesCount = 0;
