@@ -2570,23 +2570,36 @@ namespace AirSig {
                     return;
                 }
 
+                Valve.VR.TrackedDevicePose_t pose;
+                SteamVR_Utils.RigidTransform transform;
+
                 int rightHandIndex = (int)mCVRSystem.GetTrackedDeviceIndexForControllerRole(Valve.VR.ETrackedControllerRole.RightHand);
                 if(rightHandIndex != -1)
                     rightHandDevice = SteamVR_Controller.Input(rightHandIndex);
-                
-                Valve.VR.TrackedDevicePose_t pose = rightHandDevice.GetPose();
-                SteamVR_Utils.RigidTransform transform = new SteamVR_Utils.RigidTransform(pose.mDeviceToAbsoluteTracking);
-                transform.Inverse();
-                transformAngularVelocityRight = transform * new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2);
+
+                if(rightHandDevice != null)
+                {
+                    pose = rightHandDevice.GetPose();
+                    transform = new SteamVR_Utils.RigidTransform(pose.mDeviceToAbsoluteTracking);
+                    transform.Inverse();
+                    transformAngularVelocityRight = transform * new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2);
+                } 
+                else
+                    return;        
 
                 int leftHandIndex = (int)mCVRSystem.GetTrackedDeviceIndexForControllerRole(Valve.VR.ETrackedControllerRole.LeftHand);
                 if (leftHandIndex != -1)
                     leftHandDevice = SteamVR_Controller.Input(leftHandIndex);
 
-                pose = leftHandDevice.GetPose();
-                transform = new SteamVR_Utils.RigidTransform(pose.mDeviceToAbsoluteTracking);
-                transform.Inverse();
-                transformAngularVelocityLeft = transform * new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2);
+                if(leftHandDevice != null)
+                {
+                    pose = leftHandDevice.GetPose();
+                    transform = new SteamVR_Utils.RigidTransform(pose.mDeviceToAbsoluteTracking);
+                    transform.Inverse();
+                    transformAngularVelocityLeft = transform * new Vector3(-pose.vAngularVelocity.v0, -pose.vAngularVelocity.v1, pose.vAngularVelocity.v2);
+                }
+                else
+                    return;
             }
 
             if (mIsCollectingRightControllerData) {
