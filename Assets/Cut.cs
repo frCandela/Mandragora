@@ -36,28 +36,29 @@ public class Cut : MonoBehaviour
 
     List<HashSet<int>> sets = new List<HashSet<int>>();
     List<List<Vector3>> edges = new List<List<Vector3>>();
+    Plane cutPlane = new Plane();
+    Vector3[] vertices;
+    List<int> newIndices = new List<int>();
+    Ray ray = new Ray();
+    int[] cuts = new int[3];
+    Color[] colors = { Color.yellow, Color.green, Color.blue, Color.red, Color.magenta, Color.cyan };
+
     // Update is called once per frame
     void Update ()
     {
         float t = Time.realtimeSinceStartup;
 
-        Plane cutPlane = new Plane(cuttingPlane.transform.up, cuttingPlane.transform.position);
-
-        List<Vector3> vertices = new List<Vector3>(insideMesh.vertices);
+        cutPlane.SetNormalAndPosition(cuttingPlane.transform.up, cuttingPlane.transform.position);
+        vertices = insideMesh.vertices;
         int[] indices = insideMesh.GetIndices(0);
-
-        List<int> newIndices = new List<int>();
-
-        Ray ray = new Ray(Vector3.zero, Vector3.down);
-        float distance;
-
-        Color[] colors = { Color.yellow, Color.green , Color.blue , Color.red , Color.magenta , Color.cyan};
+        newIndices.Clear();
+        float distance;        
         sets.Clear();
         edges.Clear();
         sets.Add(new HashSet<int>());
         edges.Add(new List<Vector3>());
 
-        int[] cuts = new int[3];
+        
         for (int i = 0; i < indices.Length / 3; ++i)
         {
             int nbCut = 0;
@@ -152,7 +153,7 @@ public class Cut : MonoBehaviour
             }
         }
 
-        m_mesh.vertices = vertices.ToArray();
+        m_mesh.vertices = vertices;
         m_mesh.SetIndices(newIndices.ToArray(), MeshTopology.Triangles, 0);
 
         duration = 1000f*(Time.realtimeSinceStartup - t);
