@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 using UnityEngine;
 
 public class WithLiquid : MonoBehaviour
@@ -9,9 +14,11 @@ public class WithLiquid : MonoBehaviour
     [SerializeField] private Mesh insideMesh = null;
     [SerializeField] private Material material = null;
     [SerializeField,] private float minHeight = 0f;
+    [SerializeField,] private float centerHeight = 0.5f;
     [SerializeField,] private float maxHeight = 2.55f;
     [SerializeField, Range(0, 3f)] private float liquidHeight = 0.5f;
     [SerializeField] private bool containerClosed = true;
+    [SerializeField] float speed = 2f;
 
     [Header("Debug & Performance")]    
     [SerializeField] private float executionDelay = 0f;
@@ -24,15 +31,11 @@ public class WithLiquid : MonoBehaviour
     private MeshFilter m_meshFilter = null;
     private Mesh m_mesh = null;
 
-    // Preprocessed data
-    private float m_heightCenter = 0f;
-
     // Mesh data
     private Vector3[] m_baseVertices;       // Vertices of the mesh to cut 
     private int[] m_baseIndices;            // indices of the mesh to cut 
     Vector3[] newVertices;                  // Vertices of the final cut mesh  
     List<int> newIndices = new List<int>(); // Indices of the final cut mesh  
-
 
     // Usefull tools
     Plane cutPlane = new Plane();   // Cut plane
@@ -88,7 +91,27 @@ public class WithLiquid : MonoBehaviour
         m_baseVertices.CopyTo(newVertices, 0);
     }
 
+    private void OnDrawGizmos()
+    {
+        if( ! EditorApplication.isPlaying)
+        {
+            
+            Gizmos.DrawLine(    Vector3.Scale(transform.localScale, transform.position + minHeight * Vector3.up - 0.5f * Vector3.right),
+                                Vector3.Scale(transform.localScale, transform.position + minHeight * Vector3.up + 0.5f * Vector3.right));
+            Gizmos.DrawLine(    Vector3.Scale(transform.localScale, transform.position + minHeight * Vector3.up - 0.5f * Vector3.forward),
+                                Vector3.Scale(transform.localScale, transform.position + minHeight * Vector3.up + 0.5f * Vector3.forward));
 
+            Gizmos.DrawLine(    Vector3.Scale(transform.localScale, transform.position + maxHeight * Vector3.up - 0.5f * Vector3.right),
+                                Vector3.Scale(transform.localScale, transform.position + maxHeight * Vector3.up + 0.5f * Vector3.right));
+            Gizmos.DrawLine(    Vector3.Scale(transform.localScale, transform.position + maxHeight * Vector3.up - 0.5f * Vector3.forward),
+                                Vector3.Scale(transform.localScale, transform.position + maxHeight * Vector3.up + 0.5f * Vector3.forward));
+
+            Gizmos.DrawLine(    Vector3.Scale(transform.localScale, transform.position + centerHeight * Vector3.up - 0.5f * Vector3.right),
+                                Vector3.Scale(transform.localScale, transform.position + centerHeight * Vector3.up + 0.5f * Vector3.right));
+            Gizmos.DrawLine(    Vector3.Scale(transform.localScale, transform.position + centerHeight * Vector3.up - 0.5f * Vector3.forward),
+                                Vector3.Scale(transform.localScale, transform.position + centerHeight * Vector3.up + 0.5f * Vector3.forward));
+        }
+    }
 
     // Update is called once per frame
     void Update ()
@@ -117,7 +140,7 @@ public class WithLiquid : MonoBehaviour
     private void Start()
     {
         Vector3 unscale = new Vector3(1f / transform.localScale.x, 1f / transform.localScale.y, 1f / transform.localScale.z);
-        m_heightCenter = Vector3.Scale(unscale, center.position - bot.position).magnitude;
+       // m_heightCenter = Vector3.Scale(unscale, center.position - bot.position).magnitude;
     }
 
 
@@ -126,13 +149,12 @@ public class WithLiquid : MonoBehaviour
         highestEdge = Vector3.negativeInfinity;
 
         Vector3 unscale = new Vector3(1f / transform.localScale.x, 1f / transform.localScale.y, 1f / transform.localScale.z);
-        Vector3 botPoint = Vector3.Scale(unscale, (center.position- transform.position )) - m_heightCenter * Vector3.up;
+        Vector3 botPoint = transform.rotation * (centerHeight   * Vector3.up) - centerHeight * Vector3.up;    
         Vector3 meshSpaceBotPoint = Quaternion.Inverse(transform.rotation) * botPoint;
         Vector3 normal = Quaternion.Inverse(transform.rotation) * Vector3.up;
         Vector3 p = meshSpaceBotPoint + normal * liquidHeight;
+
         RelativeDebugLine(meshSpaceBotPoint, meshSpaceBotPoint + 2*Vector3.up, Color.red);
-
-
         cutPlane.SetNormalAndPosition(normal, p);
 
         newIndices.Clear();
@@ -336,11 +358,6 @@ public class WithLiquid : MonoBehaviour
          }
 
     }
-
-    [SerializeField] float speed = 0.01f;
-    public Transform top;
-    public Transform center;
-    public Transform bot;
 
     void UpdateMesh()
     {
