@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,8 +10,8 @@ public class WithLiquid : MonoBehaviour
     [SerializeField] private Material material = null;
     [SerializeField,] private float minHeight = 0f;
     [SerializeField,] private float maxHeight = 2.55f;
-    [SerializeField, Range(0, 3f)] private float height = 0;
-    [SerializeField] private Vector3 liquidMeshOffset;
+    [SerializeField, Range(0, 3f)] private float liquidHeight = 0.5f;
+    [SerializeField] private bool containerClosed = true;
 
     [Header("Debug & Performance")]    
     [SerializeField] private float executionDelay = 0f;
@@ -51,12 +52,13 @@ public class WithLiquid : MonoBehaviour
     // Init
     void Awake ()
     {
-
+        // new GameObject
         m_gameObject = new GameObject("LiquidMesh");
         m_gameObject.transform.position = transform.position + minHeight * Vector3.up;
         m_gameObject.transform.parent = transform;
         m_gameObject.transform.localScale = new Vector3(1,1,1);
 
+        // Mesh & utility
         m_mesh = new Mesh();
         m_mesh.name = "liquidMesh";
         m_mesh.MarkDynamic();
@@ -68,6 +70,7 @@ public class WithLiquid : MonoBehaviour
         if (material)
             m_meshRenderer.material = material;
 
+        // Init data 
         for( int i = 0; i < 30; ++i)
         {
             sets.Add( new HashSet<int>());
@@ -77,7 +80,7 @@ public class WithLiquid : MonoBehaviour
         m_baseIndices = insideMesh.GetIndices(0); ;
         m_baseVertices = insideMesh.vertices;
 
-        newVertices = new Vector3[4* m_baseVertices.Length];
+        newVertices = new Vector3[m_baseVertices.Length];
         m_baseVertices.CopyTo(newVertices, 0);
     }
 
@@ -89,67 +92,19 @@ public class WithLiquid : MonoBehaviour
         if (m_timeSinceLastCall > executionDelay)
         {
             float t = Time.realtimeSinceStartup;
-            UpdateGeometry();
-            UpdateMesh();   
+            BuildEges();
+            BuildTopFace();
+            UpdateMesh();
             executionTime = 1000f * (Time.realtimeSinceStartup - t);
             m_timeSinceLastCall = 0;
         }
     }
 
-    //  Match an edge with the others connex groups of edges
-    void Match( Vector3 proj1, Vector3 proj2)
+    void BuildEges()
     {
-        matchSet.Clear();
-        matchEdges.Clear();
-        for (int setIndex = 0; setIndex < nbSets; ++setIndex)
-        {
-            if (sets[setIndex].Count == 0 || sets[setIndex].Contains(proj1.GetHashCode()) || sets[setIndex].Contains(proj2.GetHashCode()))
-            {
-                matchSet.Add(sets[setIndex]);
-                matchEdges.Add(edges[setIndex]);
-            }                
-        }
-
-        if (matchSet.Count == 0)
-        {
-            sets[nbSets].Add(proj1.GetHashCode());
-            sets[nbSets].Add(proj2.GetHashCode());
-            edges[nbSets].Add(proj1);
-            edges[nbSets].Add(proj2);
-            nbSets++;
-        }
-        else
-        {
-            matchSet[0].Add(proj1.GetHashCode());
-            matchSet[0].Add(proj2.GetHashCode());
-            matchEdges[0].Add(proj1);
-            matchEdges[0].Add(proj2);
-
-            for( int i = 1; i < matchSet.Count; ++i)
-            {
-                matchSet[0].UnionWith(matchSet[i]);
-                matchEdges[0].AddRange(matchEdges[i]);
-            }
-            while (matchSet.Count > 1)
-            {
-                List<Vector3> oldEdges = matchEdges[1];
-                HashSet<int> oldSet = matchSet[1];
-                sets.Remove(oldSet);
-                edges.Remove(oldEdges);
-                oldSet.Clear();
-                oldEdges.Clear();
-                sets.Add(oldSet);
-                edges.Add(oldEdges);
-                matchSet.RemoveAt(1);
-                nbSets--;
-            }
-        }
-    }
-
-    // Trash
-    void UpdateGeometry()
-    {
-        Vector3 p = Quaternion.Inverse(transform.rotation) * (height * transform.up);
+        if (liquidHeight > maxHeight)
+            liquidHeight = maxHeight;
+        Vector3 p = Quaternion.Inverse(transform.rotation) * (liquidHeight * transform.up);
 
         cutPlane.SetNormalAndPosition(Quaternion.Inverse(transform.rotation) * Vector3.up, p.y * Vector3.up);
 
@@ -206,7 +161,7 @@ public class WithLiquid : MonoBehaviour
                     newIndices.Add(m_baseVertices.Length + m_additionalVerticesCount);
                     newIndices.Add(m_baseIndices[i * 3 + (cuts[0] + 1) % 3]);       //p2
                     newIndices.Add(m_baseIndices[i * 3 + (cuts[0] + 3 - 1) % 3]);   // p3
-                    newVertices[m_baseVertices.Length + m_additionalVerticesCount] = proj1;
+                    AddNewVertice(m_baseVertices.Length + m_additionalVerticesCount, proj1);
                     ++m_additionalVerticesCount;
                 }
 
@@ -221,7 +176,7 @@ public class WithLiquid : MonoBehaviour
 
                     newIndices.Add(m_baseIndices[i * 3 + (cuts[0] + 3 - 1) % 3]);//P3
                     newIndices.Add(m_baseVertices.Length + m_additionalVerticesCount);
-                    newVertices[m_baseVertices.Length + m_additionalVerticesCount] = proj2;
+                    AddNewVertice(m_baseVertices.Length + m_additionalVerticesCount, proj2);
                     ++m_additionalVerticesCount;
 
 
@@ -276,22 +231,20 @@ public class WithLiquid : MonoBehaviour
                     newIndices.Add(m_baseVertices.Length + m_additionalVerticesCount);
                     newIndices.Add(m_baseIndices[i * 3 + cuts[2]]); // P3
                     newIndices.Add(m_baseVertices.Length + m_additionalVerticesCount + 1);
-                } 
+                }
 
                 // Adds projected vertices
-                newVertices[m_baseVertices.Length + m_additionalVerticesCount] = proj1;
+                AddNewVertice(m_baseVertices.Length + m_additionalVerticesCount,proj1);
                 ++m_additionalVerticesCount;
-                newVertices[m_baseVertices.Length + m_additionalVerticesCount] = proj2;
+                AddNewVertice(m_baseVertices.Length + m_additionalVerticesCount, proj2);
                 ++m_additionalVerticesCount;
-
             }
         }
     }
 
-    void UpdateMesh()
+    void BuildTopFace()
     {
-        m_mesh.Clear();
-        // Draw the lines
+        // Draw the topFace
         for (int j = 0; j < edges.Count; ++j)
         {
             Vector3 center = Vector3.zero;
@@ -319,22 +272,90 @@ public class WithLiquid : MonoBehaviour
                     newIndices.Add(m_baseVertices.Length + m_additionalVerticesCount + 2);
                 }
 
-
-                newVertices[m_baseVertices.Length + m_additionalVerticesCount] = edges[j][2 * i];
+                AddNewVertice(m_baseVertices.Length + m_additionalVerticesCount, edges[j][2 * i]);
                 ++m_additionalVerticesCount;
-                newVertices[m_baseVertices.Length + m_additionalVerticesCount] = edges[j][2 * i + 1];
+                AddNewVertice(m_baseVertices.Length + m_additionalVerticesCount, edges[j][2 * i + 1]);
                 ++m_additionalVerticesCount;
-                newVertices[m_baseVertices.Length + m_additionalVerticesCount] = center;
+                AddNewVertice(m_baseVertices.Length + m_additionalVerticesCount, center);
                 ++m_additionalVerticesCount;
-
-
             }
         }
 
 
+    }
+
+    void UpdateMesh()
+    {
+        m_mesh.Clear();
         m_mesh.vertices = newVertices;
         m_mesh.SetIndices(newIndices.ToArray(), MeshTopology.Triangles, 0);
         m_mesh.RecalculateNormals();
+    }
+   
+    //  Match an edge with the others connex groups of edges
+    void Match(Vector3 proj1, Vector3 proj2)
+    {
+        matchSet.Clear();
+        matchEdges.Clear();
+        for (int setIndex = 0; setIndex < nbSets; ++setIndex)
+        {
+            if (sets[setIndex].Count == 0 || sets[setIndex].Contains(proj1.GetHashCode()) || sets[setIndex].Contains(proj2.GetHashCode()))
+            {
+                matchSet.Add(sets[setIndex]);
+                matchEdges.Add(edges[setIndex]);
+            }
+        }
+
+        if (matchSet.Count == 0)
+        {
+            sets[nbSets].Add(proj1.GetHashCode());
+            sets[nbSets].Add(proj2.GetHashCode());
+            edges[nbSets].Add(proj1);
+            edges[nbSets].Add(proj2);
+            nbSets++;
+        }
+        else
+        {
+            matchSet[0].Add(proj1.GetHashCode());
+            matchSet[0].Add(proj2.GetHashCode());
+            matchEdges[0].Add(proj1);
+            matchEdges[0].Add(proj2);
+
+            for (int i = 1; i < matchSet.Count; ++i)
+            {
+                matchSet[0].UnionWith(matchSet[i]);
+                matchEdges[0].AddRange(matchEdges[i]);
+            }
+            while (matchSet.Count > 1)
+            {
+                List<Vector3> oldEdges = matchEdges[1];
+                HashSet<int> oldSet = matchSet[1];
+                sets.Remove(oldSet);
+                edges.Remove(oldEdges);
+                oldSet.Clear();
+                oldEdges.Clear();
+                sets.Add(oldSet);
+                edges.Add(oldEdges);
+                matchSet.RemoveAt(1);
+                nbSets--;
+            }
+        }
+    }
+
+    // Add a new vertice to ther newVertices array with error checking
+    void AddNewVertice(int index ,  Vector3 vertice)
+    {
+        try
+        {
+            newVertices[index] = vertice;
+        }
+        catch(IndexOutOfRangeException)
+        {
+            Vector3[] newArray = new Vector3[2 * newVertices.Length];
+            newVertices.CopyTo(newArray, 0);
+            newVertices = newArray;
+            AddNewVertice(index, vertice);
+        }
     }
 
     // Draws a debug line relative to the liquidMesh gameobject
@@ -353,6 +374,6 @@ public class WithLiquid : MonoBehaviour
     private void OnValidate()
     {
         if (m_gameObject)
-            m_gameObject.transform.position = transform.position + liquidMeshOffset;
+            m_gameObject.transform.position = transform.position + minHeight * Vector3.up;
     }
 }
