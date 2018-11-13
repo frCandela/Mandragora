@@ -125,7 +125,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: dee83b4df08c2044dbb7465644a06cc2, type: 2}
+  - {fileID: 2100000, guid: f71819766ca687246a2150260bcfc1c5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -178,7 +178,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 947b27445602ed640b885db7e667dfc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_telekinesis: {fileID: 114621526404562942}
   grabButton: 7
   grabPrecognition: 0
   throwMultiplier: 1
@@ -245,10 +244,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9042904a85a62f04b99e3ce191cdf701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactGrab: {fileID: 114097891265613090}
   m_joint: {fileID: 145425633217437398}
   m_rayPreview: {fileID: 4144728744721084}
-  m_maxDistance: 5
+  m_maxDistance: 10
 --- !u!114 &114647960302852938
 MonoBehaviour:
   m_ObjectHideFlags: 1

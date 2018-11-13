@@ -30,10 +30,6 @@ namespace VRTK
     [AddComponentMenu("VRTK/Scripts/Interactions/VRTK_InteractGrab")]
     public class VRTK_InteractGrab : MonoBehaviour
     {
-        [Header("Telekinesis")]
-        [SerializeField]
-        TelekinesisPointer m_telekinesis;
-
         [Header("Grab Settings")]
 
         [Tooltip("The button used to grab/release a touched object.")]
@@ -548,7 +544,6 @@ namespace VRTK
             else
             {
                 grabPrecognitionTimer = Time.time + grabPrecognition;
-                m_telekinesis.StartAttract();
             }
         }
 
@@ -596,12 +591,6 @@ namespace VRTK
             {
                 InitUngrabbedObject(true);
             }
-            else
-            {
-                m_telekinesis.StopAttract();
-            }
-
-            m_telekinesis.enabled = true;
         }
 
         protected virtual void DoGrabObject(object sender, ControllerInteractionEventArgs e)

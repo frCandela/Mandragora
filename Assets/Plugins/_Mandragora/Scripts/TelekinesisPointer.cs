@@ -4,10 +4,9 @@ using UnityEngine;
 
 using VRTK;
 
+[RequireComponent(typeof(VRTK_InteractGrab))]
 public class TelekinesisPointer : MonoBehaviour
 {
-	[SerializeField]
-	VRTK_InteractGrab m_interactGrab;
 	[SerializeField]
 	SpringJoint m_joint;
 	[SerializeField]
@@ -17,9 +16,9 @@ public class TelekinesisPointer : MonoBehaviour
 	[SerializeField, Range(0,10)]
 	float m_maxDistance = 5;
 
+	VRTK_InteractGrab m_interactGrab;
 	VRTK_InteractableObject m_currentInteractable;
 	RaycastHit m_currentHit;
-	
 
 	VRTK_InteractableObject Target
 	{
@@ -51,17 +50,18 @@ public class TelekinesisPointer : MonoBehaviour
 		}
 	}
 
+	void Awake()
+	{
+		m_interactGrab = GetComponent<VRTK_InteractGrab>();
+
+		m_interactGrab.interactTouch.ControllerStartTouchInteractableObject += GrabIfTarget;
+		m_interactGrab.GrabButtonReleased += StopAttract;
+		m_interactGrab.GrabButtonPressed += StartAttract;
+	}
+
 	void Update()
 	{
-		if(m_joint.connectedBody)
-		{
-			if(m_joint.connectedBody.gameObject == m_interactGrab.GetGrabbableObject())
-			{
-				m_interactGrab.PerformGrabAttempt(Target.gameObject);
-				StopAttract();
-			}
-		}
-		else
+		if(!m_joint.connectedBody)
 		{
 			Ray newRay = new Ray(transform.position, transform.forward);
 			// Update Target
@@ -75,20 +75,16 @@ public class TelekinesisPointer : MonoBehaviour
 		}
 	}
 
-	public void StartAttract()
+	void StartAttract(object sender, ControllerInteractionEventArgs e)
 	{
 		if(Target)
 		{
-			m_joint.connectedBody = Target.GetComponent<Rigidbody>();
-			m_joint.connectedBody.useGravity = false;
-			m_joint.connectedBody.drag = 4;
+			Ungrab();
 		}
 	}
 
-	public void StopAttract()
+	void StopAttract(object sender, ControllerInteractionEventArgs e)
 	{
-		enabled = false;
-
 		if(m_joint.connectedBody)
 		{
 			m_joint.connectedBody.useGravity = true;
@@ -96,6 +92,25 @@ public class TelekinesisPointer : MonoBehaviour
 			m_joint.connectedBody = null;
 
 			Target = null;
+		}
+	}
+
+	void Ungrab()
+	{
+		m_joint.connectedBody = Target.GetComponent<Rigidbody>();
+		m_joint.connectedBody.useGravity = false;
+		m_joint.connectedBody.drag = 6;
+	}
+
+	void GrabIfTarget(object sender, ObjectInteractEventArgs e)
+	{
+		if(m_joint.connectedBody)
+		{
+			if(m_joint.connectedBody.gameObject == e.target)
+			{
+				m_interactGrab.PerformGrabAttempt(Target.gameObject);
+				Ungrab();
+			}
 		}
 	}
 }
