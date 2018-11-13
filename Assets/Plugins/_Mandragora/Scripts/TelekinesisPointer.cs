@@ -46,9 +46,9 @@ public class TelekinesisPointer : MonoBehaviour
 
 	void Update()
 	{
-		if(IsAttracting())
+		if(m_joint.connectedBody)
 		{
-			if(Vector3.Distance(m_joint.connectedBody.position, transform.position) < .5f)
+			if(m_joint.connectedBody.gameObject == m_interactGrab.GetGrabbableObject())
 			{
 				m_interactGrab.PerformGrabAttempt(Target.gameObject);
 				StopAttract();
@@ -81,10 +81,5 @@ public class TelekinesisPointer : MonoBehaviour
 			m_joint.connectedBody = null;
 			Target = null;
 		}
-	}
-
-	bool IsAttracting()
-	{
-		return m_joint.connectedBody != null;
 	}
 }

@@ -500,7 +500,7 @@ namespace VRTK
             grabbedObject = null;
         }
 
-        protected virtual GameObject GetGrabbableObject()
+        public virtual GameObject GetGrabbableObject()
         {
             GameObject obj = (interactTouch != null ? interactTouch.GetTouchedObject() : null);
             if (obj != null && interactTouch.IsObjectInteractable(obj))
