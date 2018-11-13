@@ -2,58 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WithLiquid : MonoBehaviour
+public class Cut : MonoBehaviour
 {
-    [Header("Parameters")]
     [SerializeField] private Mesh insideMesh = null;
     [SerializeField] private Material material = null;
-    [SerializeField,] private float minHeight = 0f;
     [SerializeField,] private float maxHeight = 2.55f;
     [SerializeField, Range(0, 3f)] private float height = 0;
     [SerializeField] private Vector3 liquidMeshOffset;
-
-    [Header("Debug & Performance")]    
-    [SerializeField] private float executionDelay = 0f;
-    [SerializeField] private bool showDebugLines = false;
     [SerializeField] float executionTime;   // Raw perf measurement
+    [SerializeField] private float delay = 0f;
+    [SerializeField] private bool showDebugLines = false;
 
-    // Liquid mesh references
     private GameObject m_gameObject = null;
     private MeshRenderer m_meshRenderer = null;
     private MeshFilter m_meshFilter = null;
     private Mesh m_mesh = null;
+    private Vector3[] m_baseVertices;   // Vertices of the mesh to cut 
+    private int[] m_baseIndices;        // indices of the mesh to cut 
 
-    // Mesh data
-    private Vector3[] m_baseVertices;       // Vertices of the mesh to cut 
-    private int[] m_baseIndices;            // indices of the mesh to cut 
-    Vector3[] newVertices;                  // Vertices of the final cut mesh  
-    List<int> newIndices = new List<int>(); // Indices of the final cut mesh  
 
-    // Usefull tools
-    Plane cutPlane = new Plane();   // Cut plane
-    Ray ray = new Ray();            // Usefull for plane raycast
 
-    // Cutting algorithm
-    int[] cuts = new int[3];            // Indices of vertices cut on a single triangle    
-    int m_additionalVerticesCount = 0;  // Count of additionnal vertices created
-
-    // Matching data structures
-    int nbSets = 0;                                             // Count of connex vertices edges
-    List<HashSet<int>> matchSet = new List<HashSet<int>>();     // List of HashSet for matching vertices 
-    List<List<Vector3>> matchEdges = new List<List<Vector3>>(); // List of Vector3 for saving matched edges
-    List<HashSet<int>> sets = new List<HashSet<int>>();         // List of vertex hash in a connex group
-    List<List<Vector3>> edges = new List<List<Vector3>>();      // List of edges of the same connex group
-
-    // Other
-    private float m_timeSinceLastCall = 0f;    // raw perf measurement
-    Color[] colors = { Color.yellow, Color.green, Color.blue, Color.red, Color.magenta, Color.cyan };// Debug lines colors
-
-    // Init
+    // Use this for initialization
     void Awake ()
     {
-
-        m_gameObject = new GameObject("LiquidMesh");
-        m_gameObject.transform.position = transform.position + minHeight * Vector3.up;
+        m_gameObject = new GameObject("Test");
+        m_gameObject.transform.position = transform.position + liquidMeshOffset;
         m_gameObject.transform.parent = transform;
         m_gameObject.transform.localScale = new Vector3(1,1,1);
 
@@ -81,12 +54,30 @@ public class WithLiquid : MonoBehaviour
         m_baseVertices.CopyTo(newVertices, 0);
     }
 
+    
+
+    Plane cutPlane = new Plane();   // Cut plane
+    Ray ray = new Ray();            // Usefull for plane raycast
+
+    Vector3[] newVertices;                          // Vertices of the final cut mesh  
+    List<int> newIndices = new List<int>();       // Indices of the final cut mesh  
+
+    int[] cuts = new int[3];    // Indices of vertices cut on a single triangle    
+
+    // Time & perf measurement
+    private float m_timeSinceLastCall = 0f;
+
+    private void OnValidate()
+    {
+        if(m_gameObject)
+            m_gameObject.transform.position = transform.position + liquidMeshOffset;
+    }
+
     // Update is called once per frame
     void Update ()
     {
-        // Calls Update every executionDelay
         m_timeSinceLastCall += Time.deltaTime;
-        if (m_timeSinceLastCall > executionDelay)
+        if (m_timeSinceLastCall > delay)
         {
             float t = Time.realtimeSinceStartup;
             UpdateGeometry();
@@ -95,6 +86,12 @@ public class WithLiquid : MonoBehaviour
             m_timeSinceLastCall = 0;
         }
     }
+
+    int nbSets = 0;                                             // Count of connex vertices edges
+    List<HashSet<int>> matchSet = new List<HashSet<int>>();     // List of HashSet for grouping edges 
+    List<List<Vector3>> matchEdges = new List<List<Vector3>>(); // List of Vector3 for saving edges
+    List<HashSet<int>> sets = new List<HashSet<int>>();
+    List<List<Vector3>> edges = new List<List<Vector3>>();
 
     //  Match an edge with the others connex groups of edges
     void Match( Vector3 proj1, Vector3 proj2)
@@ -146,7 +143,27 @@ public class WithLiquid : MonoBehaviour
         }
     }
 
-    // Trash
+    // Debug line relative to the Gameobject transform
+
+    Color[] colors = { Color.yellow, Color.green, Color.blue, Color.red, Color.magenta, Color.cyan };// Debug lines colors
+    void RelativeDebugLine( Vector3 start, Vector3 end, Color color)
+    {
+        if(showDebugLines)
+        {
+            Debug.DrawLine(
+            m_gameObject.transform.position + m_gameObject.transform.rotation * start,
+            m_gameObject.transform.position + m_gameObject.transform.rotation * end,
+            color
+            );
+        }
+    }
+
+
+
+    
+
+    // Update the mesh 
+    int m_additionalVerticesCount = 0;
     void UpdateGeometry()
     {
         Vector3 p = Quaternion.Inverse(transform.rotation) * (height * transform.up);
@@ -335,24 +352,5 @@ public class WithLiquid : MonoBehaviour
         m_mesh.vertices = newVertices;
         m_mesh.SetIndices(newIndices.ToArray(), MeshTopology.Triangles, 0);
         m_mesh.RecalculateNormals();
-    }
-
-    // Draws a debug line relative to the liquidMesh gameobject
-    void RelativeDebugLine(Vector3 start, Vector3 end, Color color)
-    {
-        if (showDebugLines)
-        {
-            Debug.DrawLine(
-            m_gameObject.transform.position + m_gameObject.transform.rotation * start,
-            m_gameObject.transform.position + m_gameObject.transform.rotation * end,
-            color
-            );
-        }
-    }
-
-    private void OnValidate()
-    {
-        if (m_gameObject)
-            m_gameObject.transform.position = transform.position + liquidMeshOffset;
     }
 }
