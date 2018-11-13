@@ -61,7 +61,7 @@ public class TelekinesisPointer : MonoBehaviour
 
 	void Update()
 	{
-		if(!m_joint.connectedBody)
+		if(!m_joint.connectedBody && !m_interactGrab.CanRelease())
 		{
 			Ray newRay = new Ray(transform.position, transform.forward);
 			// Update Target
@@ -73,33 +73,43 @@ public class TelekinesisPointer : MonoBehaviour
 				m_rayPreview.localPosition = new Vector3(0, 0, m_currentHit.distance / 2);
 			}
 		}
+		else
+		{
+			m_rayPreview.localScale = Vector3.zero;
+			m_rayPreview.localPosition = Vector3.zero;
+		}
 	}
 
 	void StartAttract(object sender, ControllerInteractionEventArgs e)
 	{
 		if(Target)
-		{
-			Ungrab();
-		}
+			Attract(true);
 	}
 
 	void StopAttract(object sender, ControllerInteractionEventArgs e)
 	{
 		if(m_joint.connectedBody)
+			Attract(false);
+	}
+
+	void Attract(bool input)
+	{
+		if(input)
+		{
+			m_joint.connectedBody = Target.GetComponent<Rigidbody>();
+
+			m_joint.connectedBody.useGravity = false;
+			m_joint.connectedBody.drag = 6;
+		}
+		else
 		{
 			m_joint.connectedBody.useGravity = true;
 			m_joint.connectedBody.drag = 0;
+
 			m_joint.connectedBody = null;
 
 			Target = null;
 		}
-	}
-
-	void Ungrab()
-	{
-		m_joint.connectedBody = Target.GetComponent<Rigidbody>();
-		m_joint.connectedBody.useGravity = false;
-		m_joint.connectedBody.drag = 6;
 	}
 
 	void GrabIfTarget(object sender, ObjectInteractEventArgs e)
@@ -109,7 +119,7 @@ public class TelekinesisPointer : MonoBehaviour
 			if(m_joint.connectedBody.gameObject == e.target)
 			{
 				m_interactGrab.PerformGrabAttempt(Target.gameObject);
-				Ungrab();
+				Attract(false);
 			}
 		}
 	}

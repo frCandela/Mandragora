@@ -575,7 +575,7 @@ namespace VRTK
             return initialGrabAttempt;
         }
 
-        protected virtual bool CanRelease()
+        public virtual bool CanRelease()
         {
             if (grabbedObject != null)
             {
