@@ -15,10 +15,15 @@ public class TelekinesisPointer : MonoBehaviour
 	[Header("Settings")]
 	[SerializeField, Range(0,10)]
 	float m_maxDistance = 5;
+	[SerializeField, Range(0,50)]
+	float m_minMangitudeToAttract = 5;
 
 	VRTK_InteractGrab m_interactGrab;
+	AngularVelocityTracker m_angularVelocity;
+
 	VRTK_InteractableObject m_currentInteractable;
 	RaycastHit m_currentHit;
+	bool m_attract;
 
 	VRTK_InteractableObject Target
 	{
@@ -53,6 +58,7 @@ public class TelekinesisPointer : MonoBehaviour
 	void Awake()
 	{
 		m_interactGrab = GetComponent<VRTK_InteractGrab>();
+		m_angularVelocity = GetComponent<AngularVelocityTracker>();
 
 		m_interactGrab.interactTouch.ControllerStartTouchInteractableObject += GrabIfTarget;
 		m_interactGrab.GrabButtonReleased += StopAttract;
@@ -61,7 +67,7 @@ public class TelekinesisPointer : MonoBehaviour
 
 	void Update()
 	{
-		if(!m_joint.connectedBody && !m_interactGrab.CanRelease())
+		if(!m_attract && !m_joint.connectedBody && !m_interactGrab.CanRelease())
 		{
 			Ray newRay = new Ray(transform.position, transform.forward);
 			// Update Target
@@ -78,16 +84,22 @@ public class TelekinesisPointer : MonoBehaviour
 			m_rayPreview.localScale = Vector3.zero;
 			m_rayPreview.localPosition = Vector3.zero;
 		}
+
+		if(m_attract && Target)
+		{
+			if(m_angularVelocity.GetAngularVelocity().magnitude > m_minMangitudeToAttract)
+				Attract(true);
+		}
 	}
 
 	void StartAttract(object sender, ControllerInteractionEventArgs e)
 	{
-		if(Target)
-			Attract(true);
+		m_attract = true;
 	}
 
 	void StopAttract(object sender, ControllerInteractionEventArgs e)
 	{
+		m_attract = false;
 		if(m_joint.connectedBody)
 			Attract(false);
 	}
