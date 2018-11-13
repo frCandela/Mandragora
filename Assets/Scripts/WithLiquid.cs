@@ -24,11 +24,15 @@ public class WithLiquid : MonoBehaviour
     private MeshFilter m_meshFilter = null;
     private Mesh m_mesh = null;
 
+    // Preprocessed data
+    private float m_heightCenter = 0f;
+
     // Mesh data
     private Vector3[] m_baseVertices;       // Vertices of the mesh to cut 
     private int[] m_baseIndices;            // indices of the mesh to cut 
     Vector3[] newVertices;                  // Vertices of the final cut mesh  
     List<int> newIndices = new List<int>(); // Indices of the final cut mesh  
+
 
     // Usefull tools
     Plane cutPlane = new Plane();   // Cut plane
@@ -84,11 +88,7 @@ public class WithLiquid : MonoBehaviour
         m_baseVertices.CopyTo(newVertices, 0);
     }
 
-    private void Start()
-    {
-        float h = top.position.y - bot.position.y;
-        liquidHeight = h / 2;
-    }
+
 
     // Update is called once per frame
     void Update ()
@@ -114,18 +114,24 @@ public class WithLiquid : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Vector3 unscale = new Vector3(1f / transform.localScale.x, 1f / transform.localScale.y, 1f / transform.localScale.z);
+        m_heightCenter = Vector3.Scale(unscale, center.position - bot.position).magnitude;
+    }
+
+
     void BuildEges()
     {
         highestEdge = Vector3.negativeInfinity;
-        /*float h = top.position.y - bot.position.y;
-        if (liquidHeight > h)
-            liquidHeight = h;*/
 
-        Vector3 botPoint = center.position - Vector3.Distance(center.position,bot.position) * Vector3.up;
+        Vector3 unscale = new Vector3(1f / transform.localScale.x, 1f / transform.localScale.y, 1f / transform.localScale.z);
+        Vector3 botPoint = Vector3.Scale(unscale, (center.position- transform.position )) - m_heightCenter * Vector3.up;
         Vector3 meshSpaceBotPoint = Quaternion.Inverse(transform.rotation) * botPoint;
         Vector3 normal = Quaternion.Inverse(transform.rotation) * Vector3.up;
         Vector3 p = meshSpaceBotPoint + normal * liquidHeight;
-        RelativeDebugLine(meshSpaceBotPoint, p, Color.red); 
+        RelativeDebugLine(meshSpaceBotPoint, meshSpaceBotPoint + 2*Vector3.up, Color.red);
+
 
         cutPlane.SetNormalAndPosition(normal, p);
 
@@ -416,8 +422,8 @@ public class WithLiquid : MonoBehaviour
         if (showDebugLines)
         {
             Debug.DrawLine(
-            m_gameObject.transform.position + m_gameObject.transform.rotation * start,
-            m_gameObject.transform.position + m_gameObject.transform.rotation * end,
+            m_gameObject.transform.position + Vector3.Scale(transform.localScale, m_gameObject.transform.rotation * start),
+            m_gameObject.transform.position + Vector3.Scale(transform.localScale, m_gameObject.transform.rotation * end),
             color
             );
         }
