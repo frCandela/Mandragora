@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,9 +10,16 @@ public class TelekinesisPointer : MonoBehaviour
 	VRTK_InteractGrab m_interactGrab;
 	[SerializeField]
 	SpringJoint m_joint;
+	[SerializeField]
+	Transform m_rayPreview;
 
-	RaycastHit m_currentHit;
+	[Header("Settings")]
+	[SerializeField, Range(0,10)]
+	float m_maxDistance = 5;
+
 	VRTK_InteractableObject m_currentInteractable;
+	RaycastHit m_currentHit;
+	
 
 	VRTK_InteractableObject Target
 	{
@@ -56,9 +63,15 @@ public class TelekinesisPointer : MonoBehaviour
 		}
 		else
 		{
+			Ray newRay = new Ray(transform.position, transform.forward);
 			// Update Target
-			if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out m_currentHit, Mathf.Infinity))
+			if (Physics.Raycast(newRay, out m_currentHit, m_maxDistance))
+			{
 				Target = m_currentHit.collider.GetComponent<VRTK_InteractableObject>();
+
+				m_rayPreview.localScale = new Vector3(0.003f, 0.003f, m_currentHit.distance);
+				m_rayPreview.localPosition = new Vector3(0, 0, m_currentHit.distance / 2);
+			}
 		}
 	}
 
@@ -74,11 +87,14 @@ public class TelekinesisPointer : MonoBehaviour
 
 	public void StopAttract()
 	{
+		enabled = false;
+
 		if(m_joint.connectedBody)
 		{
 			m_joint.connectedBody.useGravity = true;
 			m_joint.connectedBody.drag = 0;
 			m_joint.connectedBody = null;
+
 			Target = null;
 		}
 	}

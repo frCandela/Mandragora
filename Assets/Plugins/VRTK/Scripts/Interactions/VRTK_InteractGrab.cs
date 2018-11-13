@@ -193,8 +193,6 @@ namespace VRTK
             }
 
             VRTK_SDKManager.instance.AddBehaviourToToggleOnLoadedSetupChange(this);
-
-            // m_telekinesis.m_onEndAttract += PerformGrabAttempt;
         }
 
         protected virtual void OnEnable()
@@ -602,6 +600,8 @@ namespace VRTK
             {
                 m_telekinesis.StopAttract();
             }
+
+            m_telekinesis.enabled = true;
         }
 
         protected virtual void DoGrabObject(object sender, ControllerInteractionEventArgs e)
