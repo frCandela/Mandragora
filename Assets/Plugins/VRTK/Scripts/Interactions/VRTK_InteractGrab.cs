@@ -194,7 +194,7 @@ namespace VRTK
 
             VRTK_SDKManager.instance.AddBehaviourToToggleOnLoadedSetupChange(this);
 
-            m_telekinesis.m_onEndAttract += PerformGrabAttempt;
+            // m_telekinesis.m_onEndAttract += PerformGrabAttempt;
         }
 
         protected virtual void OnEnable()
@@ -554,7 +554,7 @@ namespace VRTK
             }
         }
 
-        protected virtual void PerformGrabAttempt(GameObject objectToGrab)
+        public virtual void PerformGrabAttempt(GameObject objectToGrab)
         {
             IncrementGrabState();
             bool initialGrabAttempt = IsValidGrabAttempt(objectToGrab);

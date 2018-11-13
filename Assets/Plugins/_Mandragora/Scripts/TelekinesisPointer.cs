@@ -7,19 +7,19 @@ using VRTK;
 public class TelekinesisPointer : MonoBehaviour
 {
 	[SerializeField]
-	VRTK_ControllerEvents m_controllerEvents;
+	VRTK_InteractGrab m_interactGrab;
 	[SerializeField]
 	SpringJoint m_joint;
 
 	RaycastHit m_currentHit;
 	VRTK_InteractableObject m_currentInteractable;
-	bool m_isAttracting;
-
-	public delegate void OnEndAttract(GameObject go);
-	public OnEndAttract m_onEndAttract;
 
 	VRTK_InteractableObject Target
 	{
+		get
+		{
+			return m_currentInteractable;
+		}
 		set
 		{
 			if(value == null)
@@ -46,39 +46,45 @@ public class TelekinesisPointer : MonoBehaviour
 
 	void Update()
 	{
-		if(m_isAttracting)
+		if(IsAttracting())
 		{
-			if(Vector3.Distance(m_joint.connectedBody.position, transform.position) < 1)
+			if(Vector3.Distance(m_joint.connectedBody.position, transform.position) < .5f)
 			{
-				m_onEndAttract.Invoke(m_joint.connectedBody.gameObject);
+				m_interactGrab.PerformGrabAttempt(Target.gameObject);
 				StopAttract();
 			}
+		}
+		else
+		{
+			// Update Target
+			if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out m_currentHit, Mathf.Infinity))
+				Target = m_currentHit.collider.GetComponent<VRTK_InteractableObject>();
 		}
 	}
 
 	public void StartAttract()
 	{
-		// Update Target
-		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out m_currentHit, Mathf.Infinity))
-			Target = m_currentHit.collider.GetComponent<VRTK_InteractableObject>();
-
-		if(m_currentInteractable)
+		if(Target)
 		{
-			m_isAttracting = true;
-
-			m_joint.connectedBody = m_currentInteractable.GetComponent<Rigidbody>();
+			m_joint.connectedBody = Target.GetComponent<Rigidbody>();
 			m_joint.connectedBody.useGravity = false;
+			m_joint.connectedBody.drag = 4;
 		}
 	}
 
 	public void StopAttract()
 	{
-		m_isAttracting = false;
-
 		if(m_joint.connectedBody)
 		{
 			m_joint.connectedBody.useGravity = true;
+			m_joint.connectedBody.drag = 0;
 			m_joint.connectedBody = null;
+			Target = null;
 		}
+	}
+
+	bool IsAttracting()
+	{
+		return m_joint.connectedBody != null;
 	}
 }

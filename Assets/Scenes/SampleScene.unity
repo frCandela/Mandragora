@@ -475,8 +475,8 @@ MonoBehaviour:
   autoManageVRSettings: 1
   autoLoadSetup: 1
   setups:
-  - {fileID: 1753781343}
   - {fileID: 1753781341}
+  - {fileID: 1753781343}
   m_onEndSetup:
     m_PersistentCalls:
       m_Calls: []
@@ -3931,7 +3931,7 @@ SpringJoint:
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 10
+  m_ConnectedMassScale: 1
 --- !u!54 &1774315350
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4936,7 +4936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9042904a85a62f04b99e3ce191cdf701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_controllerEvents: {fileID: 1907295027}
+  m_interactGrab: {fileID: 1907295025}
   m_joint: {fileID: 1774315349}
 --- !u!1 &1920299964
 GameObject:
