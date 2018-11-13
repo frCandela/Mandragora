@@ -104,7 +104,9 @@ public class WithLiquid : MonoBehaviour
     {
         if (liquidHeight > maxHeight)
             liquidHeight = maxHeight;
-        Vector3 p = Quaternion.Inverse(transform.rotation) * (liquidHeight * transform.up);
+
+        float y = (Quaternion.Inverse(transform.rotation) * (liquidHeight * transform.up)).y;
+        Vector3 p = Quaternion.Inverse(transform.rotation) * (y * transform.up);
 
         cutPlane.SetNormalAndPosition(Quaternion.Inverse(transform.rotation) * Vector3.up, p.y * Vector3.up);
 
@@ -244,6 +246,8 @@ public class WithLiquid : MonoBehaviour
 
     void BuildTopFace()
     {
+        Vector3 highestEdge = Vector3.negativeInfinity;
+
         // Draw the topFace
         for (int j = 0; j < edges.Count; ++j)
         {
@@ -255,6 +259,9 @@ public class WithLiquid : MonoBehaviour
             RelativeDebugLine(center, center + 0.3f * cutPlane.normal, colors[j % colors.Length]);
             for (int i = 0; i < edges[j].Count / 2; ++i)
             {
+                if (edges[j][2 * i].y > highestEdge.y)
+                    highestEdge = edges[j][2 * i];
+
                 RelativeDebugLine(edges[j][2 * i], edges[j][2 * i + 1], colors[j % colors.Length]);
 
                 Vector3 normal = Vector3.Cross(center - edges[j][2 * i], center - edges[j][2 * i + 1]);
@@ -281,8 +288,24 @@ public class WithLiquid : MonoBehaviour
             }
         }
 
+        //
+        //RelativeDebugLine(highestEdge, highestEdge + cutPlane.normal, Color.red);
+        if ( !containerClosed)
+        {
+            
+            if (highestEdge.y > maxHeight)
+            {
+                print(highestEdge.y);
+                Vector3 p = Quaternion.Inverse(transform.rotation) * (highestEdge);
+                RelativeDebugLine(p, p + 2*cutPlane.normal, Color.blue);
+
+                liquidHeight = Mathf.Max(0f, liquidHeight - speed * Time.deltaTime);
+            }
+        }
 
     }
+
+    [SerializeField] float speed = 0.01f;
 
     void UpdateMesh()
     {
