@@ -13,6 +13,12 @@ public class Liquid : MonoBehaviour
     private float m_liquidVolume = 0f;
     private Vector3 m_top = new Vector3();
     private Vector3 m_bottom = new Vector3();
+    private LiquidEffect m_liquidEffect = null;
+
+    private void Awake()
+    {
+        m_liquidEffect = GetComponent<LiquidEffect>();
+    }
 
     // Adds liquid
     public void AddLiquid(float volume)
@@ -43,6 +49,11 @@ public class Liquid : MonoBehaviour
         RaycastHit hit;
          if ( Physics.Raycast(m_bottom, Vector3.down, out hit,  speed))
          {
+            if (m_liquidEffect)
+            {
+                m_liquidEffect.ApplyEffect(hit.collider.gameObject);
+            }
+
             // If hits a liquid container
             WithLiquid wl = hit.collider.gameObject.GetComponent<WithLiquid>();
             if (wl )
@@ -63,4 +74,5 @@ public class Liquid : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 }
