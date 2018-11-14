@@ -16,9 +16,13 @@ public class WithLiquid : MonoBehaviour
     [SerializeField,] private float minHeight = 0f;
     [SerializeField,] private float centerHeight = 0.5f;
     [SerializeField,] private float maxHeight = 2.55f;
-    [SerializeField, Range(0, 3f)] private float liquidHeight = 0.5f;
+    [SerializeField, Range(0, 3f)] public float liquidHeight = 0.5f;
     [SerializeField] private bool containerClosed = true;
-    [SerializeField] float speed = 2f;
+
+    [Header("Liquid Simulation")]
+    [SerializeField] private Liquid LiquidGameObject;
+    [SerializeField] private float leakDistance = 1f;
+    [SerializeField] float speed = 0.1f;
 
     [Header("Debug & Performance")]    
     [SerializeField] private float executionDelay = 0f;
@@ -30,6 +34,7 @@ public class WithLiquid : MonoBehaviour
     private MeshRenderer m_meshRenderer = null;
     private MeshFilter m_meshFilter = null;
     private Mesh m_mesh = null;
+    private Liquid m_liquidRef = null;
 
     // Mesh data
     private Vector3[] m_baseVertices;       // Vertices of the mesh to cut 
@@ -136,13 +141,6 @@ public class WithLiquid : MonoBehaviour
             m_timeSinceLastCall = 0;
         }
     }
-
-    private void Start()
-    {
-        Vector3 unscale = new Vector3(1f / transform.localScale.x, 1f / transform.localScale.y, 1f / transform.localScale.z);
-       // m_heightCenter = Vector3.Scale(unscale, center.position - bot.position).magnitude;
-    }
-
 
     void BuildEges()
     {
@@ -344,7 +342,7 @@ public class WithLiquid : MonoBehaviour
 
         RelativeDebugLine(highestEdge, highestEdge + Vector3.up, Color.blue);
 
-        //
+        float delta = 0f;
         //RelativeDebugLine(highestEdge, highestEdge + cutPlane.normal, Color.red);
          if ( !containerClosed)
          {
@@ -353,10 +351,32 @@ public class WithLiquid : MonoBehaviour
                  Vector3 p = Quaternion.Inverse(transform.rotation) * (highestEdge);
                  RelativeDebugLine(p, p + 2*cutPlane.normal, Color.blue);
 
-                 liquidHeight = Mathf.Max(0f, liquidHeight - speed * Time.deltaTime);
-             }
-         }
+                 delta = speed * Time.deltaTime;
+                 liquidHeight = Mathf.Max(0f, liquidHeight - delta);
+            }
 
+            Leak(delta, transform.position + Vector3.Scale(transform.localScale, transform.rotation * highestEdge));
+        }
+    }
+    void Leak( float flow, Vector3 leakPos)
+    {
+        if (flow > 0)
+        {
+            if ( !m_liquidRef || Vector3.SqrMagnitude(leakPos - m_liquidRef.m_top) > leakDistance)
+            {
+                m_liquidRef = Instantiate(LiquidGameObject);
+                m_liquidRef.UpdateTransform(leakPos, leakPos);
+            }
+            m_liquidRef.UpdateTransform(leakPos, m_liquidRef.m_bottom);
+
+            m_liquidRef.liquidVolume += flow;
+        }
+        else
+        { 
+            if (m_liquidRef)
+            {
+            }
+        }
     }
 
     void UpdateMesh()
