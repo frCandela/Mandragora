@@ -18,8 +18,8 @@ public class TelekinesisPointer : MonoBehaviour
 	float m_minMangitudeToAttract = 5;
 	[SerializeField, Range(0,1000)]
 	float m_forceScale = 500;
-	[SerializeField, Range(0,10)]
-	float m_initForceScale = 2;
+	[SerializeField, Range(0,1f)]
+	float m_initForceScale = 1;
 
 	VRTK_InteractGrab m_interactGrab;
 
@@ -28,7 +28,6 @@ public class TelekinesisPointer : MonoBehaviour
 	bool m_attract;
 	float m_initDistanceToTarget;
 
-	List<Vector3> m_velList = new List<Vector3>(5);
 	Vector3 m_lastPos;
 
 	VRTK_InteractableObject Target
@@ -92,17 +91,9 @@ public class TelekinesisPointer : MonoBehaviour
 			m_rayPreview.localPosition = Vector3.zero;
 		}
 
-		// Update Velocity
-		m_velList.Add(transform.position - m_lastPos);
-
-		if (m_velList.Count > 4)
-			m_velList.RemoveAt(0);
-			
-		m_lastPos = transform.position;
-
 		if(m_attract && Target)
 		{
-			Vector3 force = GetVelocity() * 1000;
+			Vector3 force = (transform.position - m_lastPos) * 1000;
 			
 			if(force.magnitude > m_minMangitudeToAttract)
 				Attract(force);
@@ -115,6 +106,9 @@ public class TelekinesisPointer : MonoBehaviour
 
 			m_joint.xDrive = m_joint.yDrive = m_joint.zDrive = drive;
 		}
+
+		// Update vel
+		m_lastPos = transform.position;
 	}
 
 	void StartAttract(object sender, ControllerInteractionEventArgs e)
@@ -129,12 +123,11 @@ public class TelekinesisPointer : MonoBehaviour
 			Attract(Vector3.zero);
 	}
 
+	Vector3 m_lastForceApplied;
 	void Attract(Vector3 force)
 	{
-		if(force != Vector3.zero)
+		if(force.sqrMagnitude > m_lastForceApplied.sqrMagnitude)
 		{
-			m_attract = false;
-
 			m_joint.connectedBody = Target.GetComponent<Rigidbody>();
 			m_joint.connectedBody.AddForce(force * m_initForceScale, ForceMode.Impulse);
 			m_joint.connectedBody.angularVelocity = force;
@@ -143,8 +136,10 @@ public class TelekinesisPointer : MonoBehaviour
 			m_joint.connectedBody.drag = 0;
 
 			m_initDistanceToTarget = GetDistanceToTarget();
+
+			m_lastForceApplied = force;
 		}
-		else
+		else if(force == Vector3.zero)
 		{
 			m_joint.connectedBody.useGravity = true;
 			m_joint.connectedBody.drag = 0;
@@ -172,14 +167,5 @@ public class TelekinesisPointer : MonoBehaviour
 	float GetDistanceToTarget()
 	{
 		return Vector3.Distance(transform.position, Target.transform.position);
-	}
-
-	Vector3 GetVelocity()
-	{
-		Vector3 angularVelocity = Vector3.zero;
-		foreach (Vector3 vel in m_velList)
-			angularVelocity += vel;
-
-		return angularVelocity / m_velList.Count;
 	}
 }
