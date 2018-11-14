@@ -16,6 +16,10 @@ public class TelekinesisPointer : MonoBehaviour
 	float m_maxDistance = 5;
 	[SerializeField, Range(0,50)]
 	float m_minMangitudeToAttract = 5;
+	[SerializeField, Range(0,1000)]
+	float m_forceScale = 500;
+	[SerializeField, Range(0,10)]
+	float m_initForceScale = 2;
 
 	VRTK_InteractGrab m_interactGrab;
 
@@ -103,6 +107,14 @@ public class TelekinesisPointer : MonoBehaviour
 			if(force.magnitude > m_minMangitudeToAttract)
 				Attract(force);
 		}
+
+		if(m_joint.connectedBody)
+		{
+			JointDrive drive = m_joint.xDrive;
+			drive.positionSpring = 50 + (1 - GetDistanceToTarget() / m_initDistanceToTarget) * m_forceScale;
+
+			m_joint.xDrive = m_joint.yDrive = m_joint.zDrive = drive;
+		}
 	}
 
 	void StartAttract(object sender, ControllerInteractionEventArgs e)
@@ -124,7 +136,7 @@ public class TelekinesisPointer : MonoBehaviour
 			m_attract = false;
 
 			m_joint.connectedBody = Target.GetComponent<Rigidbody>();
-			m_joint.connectedBody.AddForce(force * 100);
+			m_joint.connectedBody.AddForce(force * m_initForceScale, ForceMode.Impulse);
 			m_joint.connectedBody.angularVelocity = force;
 
 			m_joint.connectedBody.useGravity = false;
