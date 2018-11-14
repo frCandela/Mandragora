@@ -87,8 +87,9 @@ public class TelekinesisPointer : MonoBehaviour
 
 		if(m_attract && Target)
 		{
-			if(m_angularVelocity.GetAngularVelocity().magnitude > m_minMangitudeToAttract)
-				Attract(true);
+			float force = m_angularVelocity.GetAngularVelocity().magnitude;
+			if(force > m_minMangitudeToAttract)
+				Attract(force*10);
 		}
 	}
 
@@ -101,22 +102,24 @@ public class TelekinesisPointer : MonoBehaviour
 	{
 		m_attract = false;
 		if(m_joint.connectedBody)
-			Attract(false);
+			Attract(0);
 	}
 
-	void Attract(bool input)
+	void Attract(float force)
 	{
-		if(input)
+		if(force > 0)
 		{
 			m_joint.connectedBody = Target.GetComponent<Rigidbody>();
 
 			m_joint.connectedBody.useGravity = false;
 			m_joint.connectedBody.drag = 6;
+			m_joint.spring = force;
 		}
 		else
 		{
 			m_joint.connectedBody.useGravity = true;
 			m_joint.connectedBody.drag = 0;
+			m_joint.spring = 0;
 
 			m_joint.connectedBody = null;
 
@@ -130,8 +133,10 @@ public class TelekinesisPointer : MonoBehaviour
 		{
 			if(m_joint.connectedBody.gameObject == e.target)
 			{
+				VRTK_ControllerHaptics.TriggerHapticPulse(VRTK_ControllerReference.GetControllerReference(gameObject), 1);
+
 				m_interactGrab.PerformGrabAttempt(Target.gameObject);
-				Attract(false);
+				Attract(0);
 			}
 		}
 	}

@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114921759072529684}
   - component: {fileID: 114877646696370830}
   - component: {fileID: 114156922897969330}
+  - component: {fileID: 114497601270597862}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -184,8 +185,8 @@ MonoBehaviour:
   throwMultiplier: 1
   createRigidBodyWhenNotTouching: 0
   controllerAttachPoint: {fileID: 0}
-  controllerEvents: {fileID: 0}
-  interactTouch: {fileID: 0}
+  controllerEvents: {fileID: 114520803900038150}
+  interactTouch: {fileID: 114948092885348020}
 --- !u!114 &114156922897969330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -195,6 +196,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0218f8a3a632f66499377f4c0ce5f49a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114497601270597862
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1021361465511840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e157110b6939bc14a8c421447193d994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114520803900038150
