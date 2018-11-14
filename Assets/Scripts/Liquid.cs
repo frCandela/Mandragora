@@ -9,10 +9,8 @@ public class Liquid : MonoBehaviour
     public Vector3 m_top = new Vector3();
     public Vector3 m_bottom = new Vector3();
 
-    float test = 0;
-
     public float liquidVolume = 0f;
-    public float maxDiameter = 0.1f;
+    public float maxDiameter = 0.3f;
 
     public void UpdateTransform( Vector3 top, Vector3 bottom)
     {
@@ -21,20 +19,14 @@ public class Liquid : MonoBehaviour
 
         float d = 0.5f * (top.y - bottom.y);
 
-        float diameter;
-        if (d > 0)
-            diameter = Mathf.Min(maxDiameter, liquidVolume / (2f * d));
-        else
-            diameter = 0f;
-
-        transform.localScale = new Vector3(diameter, d, diameter);
-        transform.position = new Vector3(top.x, top.y - d, bottom.z);
+        transform.localScale = new Vector3(transform.localScale.x, d, transform.localScale.z);
+        transform.position = new Vector3(top.x, top.y - d, top.z);
     }
 
     // Update is called once per frame
     void Update ()
     {
-        m_top -= 0.5f*speed * Vector3.up;
+        m_top -= 0.8f*speed * Vector3.up;
 
         UpdateTransform(m_top, m_bottom);
 
@@ -43,31 +35,28 @@ public class Liquid : MonoBehaviour
         RaycastHit hit;
          if ( Physics.Raycast(m_bottom, Vector3.down, out hit,  speed))
          {
-            Debug.DrawLine(transform.position, hit.point, Color.red);
+            Debug.DrawLine(m_bottom, hit.point, Color.red);
 
-            float delta = speed * transform.localScale.x;
+
             WithLiquid wl = hit.collider.gameObject.GetComponent<WithLiquid>();
             if (wl )
             {
-                wl.liquidHeight += liquidVolume;
-                liquidVolume = 0;
-            }
-            else
-                print("zob");
+                float delta = Mathf.Min(0.5f * speed, liquidVolume) ;
 
-            
+
+                wl.Fill(delta);
+
+
+                liquidVolume -= delta;
+            }            
          }	
          else
-        {
-            m_bottom -= speed * Vector3.up; 
-        }
-
+         {
+                m_bottom -= speed * Vector3.up; 
+         }
         if (m_top.y < m_bottom.y)
         {
-            print(liquidVolume);
             Destroy(gameObject);
         }
-
-
     }
 }

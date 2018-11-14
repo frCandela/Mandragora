@@ -22,7 +22,8 @@ public class WithLiquid : MonoBehaviour
     [Header("Liquid Simulation")]
     [SerializeField] private Liquid LiquidGameObject;
     [SerializeField] private float leakDistance = 1f;
-    [SerializeField] float speed = 0.1f;
+    [SerializeField] public float speed = 0.1f;
+    [SerializeField] public float volume = 1f;
 
     [Header("Debug & Performance")]    
     [SerializeField] private float executionDelay = 0f;
@@ -358,18 +359,34 @@ public class WithLiquid : MonoBehaviour
             Leak(delta, transform.position + Vector3.Scale(transform.localScale, transform.rotation * highestEdge));
         }
     }
-    void Leak( float flow, Vector3 leakPos)
+
+    public void Fill( float volumeDelta)
     {
-        if (flow > 0)
+        float height = maxHeight - minHeight;
+        float ratio = volumeDelta / volume;
+        float heightDelta = ratio *  height;
+        liquidHeight = Mathf.Min(liquidHeight + heightDelta, maxHeight);
+
+
+    }
+
+    public void Leak( float heightDelta, Vector3 leakPos)
+    {
+        if (heightDelta > 0)
         {
-            if ( !m_liquidRef || Vector3.SqrMagnitude(leakPos - m_liquidRef.m_top) > leakDistance)
+
+            float height = maxHeight - minHeight;
+            float ratio = heightDelta / height;
+            float volumeDelta = volume * ratio;
+
+            if ( !m_liquidRef || Vector3.SqrMagnitude(leakPos - m_liquidRef.m_top) > leakDistance* leakDistance)
             {
                 m_liquidRef = Instantiate(LiquidGameObject);
                 m_liquidRef.UpdateTransform(leakPos, leakPos);
             }
             m_liquidRef.UpdateTransform(leakPos, m_liquidRef.m_bottom);
 
-            m_liquidRef.liquidVolume += flow;
+            m_liquidRef.liquidVolume += volumeDelta;
         }
         else
         { 

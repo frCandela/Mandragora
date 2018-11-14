@@ -43,8 +43,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1972552287025020}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.22, y: 1.053, z: 0.386}
-  m_LocalScale: {x: 0.15244, y: 0.15244, z: 0.15244}
+  m_LocalPosition: {x: -0.28, y: 0.577, z: 0.384}
+  m_LocalScale: {x: 0.100000024, y: 0.099999994, z: 0.100000024}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -102,7 +102,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -146,10 +146,14 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 151af668eb18f3a4c8bb64b2d68a9f3c, type: 2}
   minHeight: 0
   centerHeight: 0.5
-  maxHeight: 1.55
-  liquidHeight: 0.64
+  maxHeight: 1.57
+  liquidHeight: 1.57
   containerClosed: 0
-  speed: 2
+  LiquidGameObject: {fileID: 114494266503143566, guid: 6babcb4eefb3a7e4a860730913bd17f6,
+    type: 2}
+  leakDistance: 0.05
+  speed: 0.3
+  volume: 1
   executionDelay: 0
   showDebugLines: 1
   executionTime: 0
@@ -174,7 +178,7 @@ MonoBehaviour:
   breakForce: 1500
 --- !u!114 &114433106906221830
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1972552287025020}
@@ -190,7 +194,7 @@ MonoBehaviour:
   _assetGuid: 03644209f3c7247458c546dcaaab05fe
 --- !u!114 &114624777878226448
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1972552287025020}
