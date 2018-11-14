@@ -344,11 +344,10 @@ public class WithLiquid : MonoBehaviour
         RelativeDebugLine(highestEdge, highestEdge + Vector3.up, Color.blue);
 
         float delta = 0f;
-        //RelativeDebugLine(highestEdge, highestEdge + cutPlane.normal, Color.red);
          if ( !containerClosed)
          {
-             if (highestEdge.y > maxHeight)
-             {               
+            if (highestEdge.y > maxHeight)
+            {               
                  Vector3 p = Quaternion.Inverse(transform.rotation) * (highestEdge);
                  RelativeDebugLine(p, p + 2*cutPlane.normal, Color.blue);
 
@@ -356,43 +355,38 @@ public class WithLiquid : MonoBehaviour
                  liquidHeight = Mathf.Max(0f, liquidHeight - delta);
             }
 
-            Leak(delta, transform.position + Vector3.Scale(transform.localScale, transform.rotation * highestEdge));
+            // Liquid overflow
+            float height = maxHeight - minHeight;
+            float ratio = delta / height;
+            float volumeDelta = volume * ratio;
+            Leak(volumeDelta, transform.position + Vector3.Scale(transform.localScale, transform.rotation * highestEdge));
         }
     }
 
-    public void Fill( float volumeDelta)
+    // Fills the container with liquid
+    public void Fill( float volumeDelta )
     {
         float height = maxHeight - minHeight;
         float ratio = volumeDelta / volume;
         float heightDelta = ratio *  height;
         liquidHeight = Mathf.Min(liquidHeight + heightDelta, maxHeight);
-
-
     }
 
-    public void Leak( float heightDelta, Vector3 leakPos)
+    // Creates a liquid leak
+    public void Leak( float volumeDelta, Vector3 leakPos)
     {
-        if (heightDelta > 0)
+        if (volumeDelta > 0)
         {
-
-            float height = maxHeight - minHeight;
-            float ratio = heightDelta / height;
-            float volumeDelta = volume * ratio;
-
-            if ( !m_liquidRef || Vector3.SqrMagnitude(leakPos - m_liquidRef.m_top) > leakDistance* leakDistance)
+            // Reinstanciate the liquid if it's too far or null
+            if ( !m_liquidRef || Vector3.SqrMagnitude(leakPos - m_liquidRef.top) > leakDistance* leakDistance)
             {
                 m_liquidRef = Instantiate(LiquidGameObject);
-                m_liquidRef.UpdateTransform(leakPos, leakPos);
+                m_liquidRef.SetTransform(leakPos, leakPos);
             }
-            m_liquidRef.UpdateTransform(leakPos, m_liquidRef.m_bottom);
 
-            m_liquidRef.liquidVolume += volumeDelta;
-        }
-        else
-        { 
-            if (m_liquidRef)
-            {
-            }
+            // Updates the liquid
+            m_liquidRef.SetTransform(leakPos, m_liquidRef.bottom);
+            m_liquidRef.AddLiquid(volumeDelta);
         }
     }
 
