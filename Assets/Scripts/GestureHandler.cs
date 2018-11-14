@@ -8,7 +8,7 @@ using VRTK;
 
 public class GestureHandler : MonoBehaviour
 {
-	AirSigManager m_airsigManager = AirSigManager.sInstance;
+	AirSigManager m_airsigManager;
 	[SerializeField] AngularVelocityTracker m_tracker;
 
 	[SerializeField] int MAX_TRAIN_COUNT = 5;
@@ -53,6 +53,11 @@ public class GestureHandler : MonoBehaviour
 				DeleteGestures();
 			}
 		}
+	}
+
+	void Start()
+	{
+		m_airsigManager = AirSigManager.sInstance;
 	}
 
 	void Update()
