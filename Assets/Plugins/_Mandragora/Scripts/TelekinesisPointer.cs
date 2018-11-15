@@ -91,6 +91,7 @@ public class TelekinesisPointer : MonoBehaviour
 			m_rayPreview.localPosition = Vector3.zero;
 		}
 
+		// Detect movement to trigger attraction
 		if(m_attract && Target)
 		{
 			Vector3 force = (transform.position - m_lastPos) * 20; // Scale from 0 to 1
@@ -102,6 +103,7 @@ public class TelekinesisPointer : MonoBehaviour
 				Attract(force);
 		}
 
+		// Apply various forces
 		if(m_joint.connectedBody)
 		{
 			float distanceScale = Mathf.Min(GetDistanceToTarget() / m_initDistanceToTarget, 1); // 1 -> 0
@@ -112,10 +114,10 @@ public class TelekinesisPointer : MonoBehaviour
 
 			m_joint.xDrive = m_joint.yDrive = m_joint.zDrive = drive;
 
-			m_joint.targetRotation = transform.rotation;
+			m_joint.connectedBody.rotation = Quaternion.RotateTowards(m_joint.connectedBody.rotation, transform.rotation, (1 - distanceScale) * 10);
 		}
 
-		// Update vel
+		// Update force
 		m_lastPos = transform.position;
 	}
 
@@ -138,7 +140,6 @@ public class TelekinesisPointer : MonoBehaviour
 		{
 			m_joint.connectedBody = Target.GetComponent<Rigidbody>();
 			m_joint.connectedBody.AddForce(force.normalized * Mathf.Sqrt(force.magnitude) * m_initForceScale, ForceMode.Impulse);
-			m_joint.connectedBody.angularVelocity = force;
 
 			m_joint.connectedBody.useGravity = false;
 			m_joint.connectedBody.drag = 0;
@@ -167,6 +168,7 @@ public class TelekinesisPointer : MonoBehaviour
 			{
 				VRTK_ControllerHaptics.TriggerHapticPulse(VRTK_ControllerReference.GetControllerReference(m_interactGrab.gameObject), 1);
 
+				e.target.transform.rotation = transform.rotation;
 				m_interactGrab.PerformGrabAttempt(Target.gameObject);
 				Attract(Vector3.zero);
 			}
