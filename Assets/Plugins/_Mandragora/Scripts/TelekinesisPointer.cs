@@ -14,11 +14,11 @@ public class TelekinesisPointer : MonoBehaviour
 	[Header("Settings")]
 	[SerializeField, Range(0,10)]
 	float m_maxDistance = 5;
-	[SerializeField, Range(0,50)]
-	float m_minMangitudeToAttract = 5;
+	[SerializeField, Range(0,1)]
+	float m_minMangitudeToAttract = .2f;
 	[SerializeField, Range(0,1000)]
-	float m_forceScale = 500;
-	[SerializeField, Range(0,1f)]
+	float m_forceScale = 300;
+	[SerializeField, Range(0,10f)]
 	float m_initForceScale = 1;
 
 	VRTK_InteractGrab m_interactGrab;
@@ -93,7 +93,10 @@ public class TelekinesisPointer : MonoBehaviour
 
 		if(m_attract && Target)
 		{
-			Vector3 force = (transform.position - m_lastPos) * 1000;
+			Vector3 force = (transform.position - m_lastPos) * 20; // Scale from 0 to 1
+
+			if(force.sqrMagnitude > 1)
+				force.Normalize();
 			
 			if(force.magnitude > m_minMangitudeToAttract)
 				Attract(force);
@@ -101,8 +104,11 @@ public class TelekinesisPointer : MonoBehaviour
 
 		if(m_joint.connectedBody)
 		{
+			float distanceScale = Mathf.Min(GetDistanceToTarget() / m_initDistanceToTarget, 1); // 1 -> 0
+
 			JointDrive drive = m_joint.xDrive;
-			drive.positionSpring = 50 + (1 - GetDistanceToTarget() / m_initDistanceToTarget) * m_forceScale;
+			drive.positionSpring = 50 + (1 - distanceScale) * m_forceScale * m_lastForceApplied.sqrMagnitude;
+			drive.positionDamper = 15 * distanceScale + 5;
 
 			m_joint.xDrive = m_joint.yDrive = m_joint.zDrive = drive;
 		}
@@ -129,7 +135,7 @@ public class TelekinesisPointer : MonoBehaviour
 		if(force.sqrMagnitude > m_lastForceApplied.sqrMagnitude)
 		{
 			m_joint.connectedBody = Target.GetComponent<Rigidbody>();
-			m_joint.connectedBody.AddForce(force * m_initForceScale, ForceMode.Impulse);
+			m_joint.connectedBody.AddForce(force.normalized * Mathf.Sqrt(force.magnitude) * m_initForceScale, ForceMode.Impulse);
 			m_joint.connectedBody.angularVelocity = force;
 
 			m_joint.connectedBody.useGravity = false;
@@ -145,6 +151,7 @@ public class TelekinesisPointer : MonoBehaviour
 			m_joint.connectedBody.drag = 0;
 
 			m_joint.connectedBody = null;
+			m_lastForceApplied = Vector3.zero;
 
 			Target = null;
 		}
