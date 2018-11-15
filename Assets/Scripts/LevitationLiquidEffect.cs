@@ -6,10 +6,12 @@ public class LevitationLiquidEffect : LiquidEffect
 {    
     [SerializeField] private Material material;
     [SerializeField] private float duration = 10f;
+    [SerializeField] private float removeDuration = 2f;
 
     private Rigidbody m_rb = null;
     private MeshRenderer m_meshRenderer = null;
-    private Color m_previousColor;
+    private Material m_previousMat;
+    private float m_startTime = 0f;
 
     public override void ApplyEffect(GameObject gameObject) 
     {
@@ -21,7 +23,7 @@ public class LevitationLiquidEffect : LiquidEffect
         }
     }
 
-    private float m_startTime = 0f; 
+
     private void Start()
     {
         m_startTime = Time.time;
@@ -29,24 +31,30 @@ public class LevitationLiquidEffect : LiquidEffect
         m_meshRenderer = gameObject.GetComponent<MeshRenderer>();
         if (m_meshRenderer && m_meshRenderer.material)
         {
-            m_previousColor = m_meshRenderer.material.color;
-            m_meshRenderer.material.color = m_meshRenderer.material.color * material.color;
+            m_previousMat = m_meshRenderer.material;
+            m_meshRenderer.material = material;
         }
 
         m_rb = gameObject.GetComponent<Rigidbody>();
         if (m_rb)
         {
-            m_rb.useGravity = false;
-            m_rb.AddForce(0.05f * Vector3.up, ForceMode.Impulse);
-            m_rb.AddTorque(0.05f * new Vector3(1,1,1) , ForceMode.Impulse);
+            m_rb.useGravity = false;            
 
+            m_rb.AddForce(0.05f * Vector3.up, ForceMode.Impulse);
+            m_rb.AddTorque(0.05f * new Vector3(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f)).normalized , ForceMode.Impulse);
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (Time.time > m_startTime + duration)
-            RemoveEffect(gameObject);
+        {
+            float scale = (Time.time - (m_startTime + duration)) / ( duration + removeDuration);
+            m_rb.AddForce(scale * Physics.gravity);
+
+            if (Time.time > m_startTime + duration + removeDuration)
+                RemoveEffect(gameObject);
+        }
     }
 
     public override void RemoveEffect(GameObject go)
@@ -58,7 +66,7 @@ public class LevitationLiquidEffect : LiquidEffect
         }
         if (m_meshRenderer && m_meshRenderer.material)
         {
-            m_meshRenderer.material.color = m_previousColor;
+            m_meshRenderer.material = m_previousMat;
         }
         Destroy(this);
     }
