@@ -5,7 +5,6 @@ using UnityEngine;
 using AirSig;
 using VRTK;
 
-
 public class GestureHandler : MonoBehaviour
 {
 	[SerializeField] AirSigManager m_airsigManager;
