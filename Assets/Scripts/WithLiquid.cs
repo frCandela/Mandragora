@@ -146,8 +146,7 @@ public class WithLiquid : MonoBehaviour
     void BuildEges()
     {
         highestEdge = Vector3.negativeInfinity;
-
-        Vector3 unscale = new Vector3(1f / transform.localScale.x, 1f / transform.localScale.y, 1f / transform.localScale.z);
+        
         Vector3 botPoint = transform.rotation * (centerHeight   * Vector3.up) - centerHeight * Vector3.up;    
         Vector3 meshSpaceBotPoint = Quaternion.Inverse(transform.rotation) * botPoint;
         Vector3 normal = Quaternion.Inverse(transform.rotation) * Vector3.up;
