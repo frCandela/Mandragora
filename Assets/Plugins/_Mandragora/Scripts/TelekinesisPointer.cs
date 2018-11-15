@@ -111,6 +111,8 @@ public class TelekinesisPointer : MonoBehaviour
 			drive.positionDamper = 15 * distanceScale + 5;
 
 			m_joint.xDrive = m_joint.yDrive = m_joint.zDrive = drive;
+
+			m_joint.targetRotation = transform.rotation;
 		}
 
 		// Update vel
