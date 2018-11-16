@@ -59,7 +59,6 @@ public class LevitationLiquidEffect : LiquidEffect
 
     public override void RemoveEffect(GameObject go)
     {
-        print("zob2");
         if (m_rb)
         {
             m_rb.useGravity = true;

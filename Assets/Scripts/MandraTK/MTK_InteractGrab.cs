@@ -13,8 +13,6 @@ public class MTK_InteractGrab : MonoBehaviour
     private MTK_Interactable m_objectInTrigger = null;
     private SteamVR_TrackedController m_trackedController = null;
 
-
-
     // Use this for initialization
     void Awake ()
     {
