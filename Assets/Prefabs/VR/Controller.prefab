@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114286590450060536}
   - component: {fileID: 114535465496784588}
   - component: {fileID: 114528081652675874}
-  - component: {fileID: 114332539703582828}
+  - component: {fileID: 114851999963855840}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -107,7 +107,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1021361465511840}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -272,40 +272,6 @@ MonoBehaviour:
     - {fileID: 1854503262484600}
     - {fileID: 1785088622345828}
   _assetGuid: a9451f3ebb49fad4b9c4d5600828f89a
---- !u!114 &114332539703582828
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1021361465511840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fc65878c7102524bb8c2bcfbefff497, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playareaCursor: {fileID: 0}
-  directionIndicator: {fileID: 0}
-  customRaycast: {fileID: 0}
-  layersToIgnore:
-    serializedVersion: 2
-    m_Bits: 4
-  pointerOriginSmoothingSettings:
-    smoothsPosition: 0
-    maxAllowedPerFrameDistanceDifference: 0.003
-    smoothsRotation: 0
-    maxAllowedPerFrameAngleDifference: 1.5
-  validCollisionColor: {r: 0, g: 1, b: 0, a: 1}
-  invalidCollisionColor: {r: 1, g: 0, b: 0, a: 1}
-  tracerVisibility: 0
-  cursorVisibility: 0
-  maximumLength: 100
-  scaleFactor: 0.002
-  cursorScaleMultiplier: 25
-  cursorMatchTargetRotation: 0
-  cursorDistanceRescale: 0
-  maximumCursorScale: {x: Infinity, y: Infinity, z: Infinity}
-  customTracer: {fileID: 0}
-  customCursor: {fileID: 0}
 --- !u!114 &114520803900038150
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -367,7 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableTeleport: 1
   targetListPolicy: {fileID: 0}
-  pointerRenderer: {fileID: 114332539703582828}
+  pointerRenderer: {fileID: 114851999963855840}
   activationButton: 10
   holdButtonToActivate: 1
   activateOnEnable: 0
@@ -407,8 +373,8 @@ MonoBehaviour:
   m_joint: {fileID: 153886505549112170}
   m_rayPreview: {fileID: 4144728744721084}
   m_maxDistance: 10
-  m_minMangitudeToAttract: 0.2
-  m_forceScale: 700
+  m_minMagnitudeToAttract: 0.1
+  m_forceScale: 1000
   m_initForceScale: 5
 --- !u!114 &114746773248430542
 MonoBehaviour:
@@ -425,6 +391,44 @@ MonoBehaviour:
   controllerEvents: {fileID: 114520803900038150}
   interactTouch: {fileID: 114948092885348020}
   interactGrab: {fileID: 114097891265613090}
+--- !u!114 &114851999963855840
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1021361465511840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd904f4ca6767424eaf8e050bc174741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playareaCursor: {fileID: 0}
+  directionIndicator: {fileID: 0}
+  customRaycast: {fileID: 0}
+  layersToIgnore:
+    serializedVersion: 2
+    m_Bits: 4
+  pointerOriginSmoothingSettings:
+    smoothsPosition: 0
+    maxAllowedPerFrameDistanceDifference: 0.003
+    smoothsRotation: 0
+    maxAllowedPerFrameAngleDifference: 1.5
+  validCollisionColor: {r: 0, g: 1, b: 0, a: 1}
+  invalidCollisionColor: {r: 1, g: 0, b: 0, a: 1}
+  tracerVisibility: 0
+  cursorVisibility: 0
+  maximumLength: {x: 10, y: Infinity}
+  tracerDensity: 10
+  cursorRadius: 0.5
+  heightLimitAngle: 100
+  curveOffset: 1
+  rescaleTracer: 0
+  cursorMatchTargetRotation: 0
+  collisionCheckFrequency: 0
+  customTracer: {fileID: 0}
+  customCursor: {fileID: 0}
+  validLocationObject: {fileID: 0}
+  invalidLocationObject: {fileID: 0}
 --- !u!114 &114861602236450628
 MonoBehaviour:
   m_ObjectHideFlags: 1

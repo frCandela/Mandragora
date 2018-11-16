@@ -15,7 +15,7 @@ public class TelekinesisPointer : MonoBehaviour
 	[SerializeField, Range(0,10)]
 	float m_maxDistance = 5;
 	[SerializeField, Range(0,1)]
-	float m_minMangitudeToAttract = .2f;
+	float m_minMagnitudeToAttract = .2f;
 	[SerializeField, Range(0,1000)]
 	float m_forceScale = 300;
 	[SerializeField, Range(0,10f)]
@@ -91,30 +91,33 @@ public class TelekinesisPointer : MonoBehaviour
 			m_rayPreview.localPosition = Vector3.zero;
 		}
 
-		// Detect movement to trigger attraction
-		if(m_attract && Target)
-		{
-			Vector3 force = (transform.position - m_lastPos) * 20; // Scale from 0 to 1
-
-			if(force.sqrMagnitude > 1)
-				force.Normalize();
-			
-			if(force.magnitude > m_minMangitudeToAttract)
-				Attract(force);
-		}
-
-		// Apply various forces
-		if(m_joint.connectedBody)
+		if(Target)
 		{
 			float distanceScale = Mathf.Min(GetDistanceToTarget() / m_initDistanceToTarget, 1); // 1 -> 0
 
-			JointDrive drive = m_joint.xDrive;
-			drive.positionSpring = 50 + (1 - distanceScale) * m_forceScale * m_lastForceApplied.sqrMagnitude;
-			drive.positionDamper = 15 * distanceScale + 5;
+			// Detect movement to trigger attraction
+			if(m_attract)
+			{
+				Vector3 force = (transform.position - m_lastPos) * 20 * distanceScale; // Scale from 0 to 1
 
-			m_joint.xDrive = m_joint.yDrive = m_joint.zDrive = drive;
+				if(force.sqrMagnitude > 1)
+					force.Normalize();
+				
+				if(force.magnitude > m_minMagnitudeToAttract)
+					Attract(force);
+			}
 
-			m_joint.connectedBody.rotation = Quaternion.RotateTowards(m_joint.connectedBody.rotation, transform.rotation, (1 - distanceScale) * 10);
+			// Apply various forces
+			if(m_joint.connectedBody)
+			{
+				JointDrive drive = m_joint.xDrive;
+				drive.positionSpring = 10 + (1 - distanceScale) * m_forceScale * (m_lastForceApplied.sqrMagnitude - m_minMagnitudeToAttract * m_minMagnitudeToAttract);
+				drive.positionDamper = 15 * distanceScale + 5;
+
+				m_joint.xDrive = m_joint.yDrive = m_joint.zDrive = drive;
+
+				m_joint.connectedBody.rotation = Quaternion.RotateTowards(m_joint.connectedBody.rotation, transform.rotation, (1 - distanceScale) * 2);
+			}
 		}
 
 		// Update force
