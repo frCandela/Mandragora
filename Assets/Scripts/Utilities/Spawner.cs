@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Spawner : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
 	[SerializeField]
 	GameObject m_object;
-	
-	public GameObject Spawn()
+
+	protected GameObject m_spawned;
+
+	public void Spawn()
 	{
-		return Instantiate(m_object, transform.position, transform.rotation);
+		m_spawned = Instantiate(m_object, transform.position, transform.rotation);
 	}
 
 	public virtual void SpawnIntParameter(int parameter){}

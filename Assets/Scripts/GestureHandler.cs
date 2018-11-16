@@ -16,6 +16,8 @@ public class GestureHandler : MonoBehaviour
 	List<int> m_allGestureIDs = new List<int>(10);
 
 	[SerializeField] UnityEventInt m_onGestureRecognition;
+	[SerializeField] UnityEvent m_onGestureRecognitionSucceeded;
+	[SerializeField] UnityEvent m_onGestureRecognitionFailed;
 	[SerializeField] UnityEventBool m_onCollecting;
 
 	int m_lastMatch = 0;
@@ -65,6 +67,11 @@ public class GestureHandler : MonoBehaviour
 		// Invoke Ddbug Messages if any
 		if(m_lastMatch != 0)
 		{
+			if(m_lastMatch > 0)
+				m_onGestureRecognitionSucceeded.Invoke();
+			else
+				m_onGestureRecognitionFailed.Invoke();
+
 			m_onGestureRecognition.Invoke(m_lastMatch);
 			m_lastMatch = 0;
 		}
