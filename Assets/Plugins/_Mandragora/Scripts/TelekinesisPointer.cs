@@ -27,7 +27,7 @@ public class TelekinesisPointer : MonoBehaviour
 	RaycastHit m_currentHit;
 	bool m_attract;
 	float m_initDistanceToTarget;
-
+	Vector3 m_lastForceApplied;
 	Vector3 m_lastPos;
 
 	VRTK_InteractableObject Target
@@ -85,11 +85,6 @@ public class TelekinesisPointer : MonoBehaviour
 				m_rayPreview.localPosition = new Vector3(0, 0, m_currentHit.distance / 2);
 			}
 		}
-		else
-		{
-			m_rayPreview.localScale = Vector3.zero;
-			m_rayPreview.localPosition = Vector3.zero;
-		}
 
 		if(Target)
 		{
@@ -103,7 +98,7 @@ public class TelekinesisPointer : MonoBehaviour
 				if(force.sqrMagnitude > 1)
 					force.Normalize();
 				
-				if(force.magnitude > m_minMagnitudeToAttract)
+				if(force.magnitude > m_minMagnitudeToAttract && force.sqrMagnitude > m_lastForceApplied.sqrMagnitude)
 					Attract(force);
 			}
 
@@ -133,34 +128,30 @@ public class TelekinesisPointer : MonoBehaviour
 	{
 		m_attract = false;
 		if(m_joint.connectedBody)
-			Attract(Vector3.zero);
+			UnAttract();
 	}
 
-	Vector3 m_lastForceApplied;
 	void Attract(Vector3 force)
 	{
-		if(force.sqrMagnitude > m_lastForceApplied.sqrMagnitude)
-		{
-			m_joint.connectedBody = Target.GetComponent<Rigidbody>();
-			m_joint.connectedBody.AddForce(force.normalized * Mathf.Sqrt(force.magnitude) * m_initForceScale, ForceMode.Impulse);
+		m_joint.connectedBody = Target.GetComponent<Rigidbody>();
+		m_joint.connectedBody.AddForce(force.normalized * Mathf.Sqrt(force.magnitude) * m_initForceScale, ForceMode.Impulse);
 
-			m_joint.connectedBody.useGravity = false;
-			m_joint.connectedBody.drag = 0;
+		m_joint.connectedBody.useGravity = false;
+		m_joint.connectedBody.drag = 0;
 
-			m_initDistanceToTarget = GetDistanceToTarget();
+		m_initDistanceToTarget = GetDistanceToTarget();
+		m_lastForceApplied = force;
+	}
 
-			m_lastForceApplied = force;
-		}
-		else if(force == Vector3.zero)
-		{
-			m_joint.connectedBody.useGravity = true;
-			m_joint.connectedBody.drag = 0;
+	void UnAttract()
+	{
+		m_joint.connectedBody.useGravity = true;
+		m_joint.connectedBody.drag = 0;
 
-			m_joint.connectedBody = null;
-			m_lastForceApplied = Vector3.zero;
+		m_joint.connectedBody = null;
+		m_lastForceApplied = Vector3.zero;
 
-			Target = null;
-		}
+		Target = null;
 	}
 
 	void GrabIfTarget(object sender, ObjectInteractEventArgs e)
@@ -173,7 +164,7 @@ public class TelekinesisPointer : MonoBehaviour
 
 				e.target.transform.rotation = transform.rotation;
 				m_interactGrab.PerformGrabAttempt(Target.gameObject);
-				Attract(Vector3.zero);
+				UnAttract();
 			}
 		}
 	}
