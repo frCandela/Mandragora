@@ -5,13 +5,15 @@ using Valve.VR;
 
 public class MTK_InteractGrab : MonoBehaviour
 {
+    public enum InputButtons { Trigger, Grip, Pad };
+    public InputButtons inputButton = InputButtons.Trigger;
+
     public MTK_Interactable objectGrabbed = null;
 
     private MTK_Interactable m_objectInTrigger = null;
     private SteamVR_TrackedController m_trackedController = null;
 
-    public enum InputButtons{Trigger, Grip, Pad };
-    public InputButtons inputButton = InputButtons.Trigger;
+
 
     // Use this for initialization
     void Awake ()
@@ -42,29 +44,52 @@ public class MTK_InteractGrab : MonoBehaviour
 
     void InputPressed( object sender, ClickedEventArgs args)
     {
-        if(m_objectInTrigger)
+        if (m_objectInTrigger)
         {
-            objectGrabbed = m_objectInTrigger;
-            objectGrabbed.jointType.JoinWith(gameObject);
+            Grab(m_objectInTrigger);
         }
-            
     }
 
     void InputReleased(object sender, ClickedEventArgs args)
     {
+        if(objectGrabbed)       
+            Release();        
+    }
+
+    void JointFailed(MTK_JointType joint)
+    {
+        objectGrabbed.jointType.onJointBreak.RemoveListener(JointFailed);
+        Release();        
+    }
+
+    void Grab( MTK_Interactable obj)
+    {
+        if (obj.jointType.Used())
+            obj.jointType.RemoveJoint();
+
+        objectGrabbed = obj;
+        if (!objectGrabbed.jointType.JoinWith(gameObject))
+            print("zob");
+        
+        objectGrabbed.jointType.onJointBreak.AddListener(JointFailed);
+    }
+
+    void Release()
+    {
         if(objectGrabbed)
         {
-            objectGrabbed.jointType.RemoveJoinWith(gameObject);
             Rigidbody rb = objectGrabbed.GetComponent<Rigidbody>();
+            objectGrabbed.jointType.RemoveJoint();
             rb.velocity = m_trackedController.GetVelocity();
             rb.angularVelocity = m_trackedController.GetAngularVelocity();
+            objectGrabbed = null;
         }
     }
 
     void EvaluateTrigger(GameObject obj)
     {
         MTK_Interactable interactable = obj.GetComponent<MTK_Interactable>();
-        if (interactable && interactable.isGrabbable)
+        if (interactable && interactable.isGrabbable && interactable != objectGrabbed)
         {
             if (m_objectInTrigger)
             {
