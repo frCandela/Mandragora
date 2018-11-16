@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MTK_Interactable : MonoBehaviour {
+public class MTK_Interactable : MonoBehaviour
+{
+    [SerializeField] public bool isGrabbable = true;
+    [SerializeField] public MTK_JointType jointType = null;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    // Use this for initialization
+    void Awake ()
+    {
+        if (!jointType)
+            jointType = gameObject.AddComponent<MTK_JointType_Fixed>();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
