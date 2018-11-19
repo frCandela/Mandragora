@@ -7,12 +7,6 @@ using UnityEngine.Events;
 public class MTK_JointType_Fixed : MTK_JointType
 {
     public float breakForce = 1500f;
-    private Rigidbody m_rb;
-
-    private void Awake()
-    {
-        m_rb = GetComponent<Rigidbody>();
-    }
 
     public override bool JoinWith(GameObject other)
     {

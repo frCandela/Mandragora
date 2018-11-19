@@ -2,27 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+[ExecuteInEditMode]
 public class MTK_Manager : MonoBehaviour
 {
-    [HideInInspector] public MTK_Setup activeSetup = null;
+    public MTK_Setup activeSetup = null;
 
-    // Use this for initialization
-    void Awake ()
-    {            
-        // Activates the first MTK_Setup in the child hierarchy
-        for (int i = 0; i < transform.childCount; ++i)
+    private void Awake()
+    {
+        Util.EditorAssert(activeSetup != null, "Please select a MTK_Setup in the MTK_Manager");
+    }
+
+    private void OnValidate()
+    {
+        if (activeSetup && ! EditorApplication.isPlaying)
         {
-            MTK_Setup setup = transform.GetChild(i).GetComponent<MTK_Setup>();
-            if ( ! activeSetup && setup)
+            activeSetup.gameObject.SetActive(true);
+            activeSetup.UpdateSettings();
+            // Activates the first MTK_Setup in the child hierarchy
+            foreach (MTK_Setup setup in FindObjectsOfType<MTK_Setup>())
             {
-                activeSetup = setup;
-                setup.gameObject.SetActive(true);
+                if (setup != activeSetup)
+                {
+                    setup.gameObject.SetActive(false);
+                }
             }
-            else
-                setup.gameObject.SetActive(false);
-        }        
-	}
-	
-
-
+        }
+    }
 }

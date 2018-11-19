@@ -2,16 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class MTK_SetupSimulator : MTK_Setup
 {
-    public override Vector3 AngularVelocityRight() { return Vector3.zero; }
-    public override Vector3 AngularVelocityLeft() { return Vector3.zero; }
-    public override Vector3 VelocityRight() { return Vector3.zero; }
-    public override Vector3 VelocityLeft() { return Vector3.zero; }
+    public override Vector3 GetAngularVelocityRight() { return Vector3.zero; }
+    public override Vector3 GetAngularVelocityLeft() { return Vector3.zero; }
+    public override Vector3 GetVelocityRight() { return Vector3.zero; }
+    public override Vector3 GetVelocityLeft() { return Vector3.zero; }
 
-    private void Update()
+    /* private void Update()
+     {
+         if (Input.GetMouseButtonDown(0))
+             print("test");
+     }*/
+
+    public override void UpdateSettings()
     {
-        if (Input.GetMouseButtonDown(0))
-            print("test");
+
+        PlayerSettings.virtualRealitySupported = false;
     }
 }

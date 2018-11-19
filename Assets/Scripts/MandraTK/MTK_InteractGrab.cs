@@ -10,7 +10,18 @@ public class MTK_InteractGrab : MonoBehaviour
     private MTK_Interactable m_objectInTrigger = null;
     private MTK_Setup m_setup;
 
-    void InputPressed( object sender, ClickedEventArgs args)
+    private void Start()
+    {
+        m_setup = FindObjectOfType<MTK_Manager>().activeSetup;
+        if (!m_setup)
+            print("zob");
+
+        m_setup.onPrimaryInputLeftPressed.AddListener(InputPressed);
+        m_setup.onPrimaryInputLeftReleased.AddListener(InputReleased);
+
+    }
+
+    void InputPressed()
     {
         if (m_objectInTrigger)
         {
@@ -18,7 +29,7 @@ public class MTK_InteractGrab : MonoBehaviour
         }
     }
 
-    void InputReleased(object sender, ClickedEventArgs args)
+    void InputReleased()
     {
         if(objectGrabbed)       
             Release();        
@@ -48,8 +59,8 @@ public class MTK_InteractGrab : MonoBehaviour
         {
             Rigidbody rb = objectGrabbed.GetComponent<Rigidbody>();
             objectGrabbed.jointType.RemoveJoint();
-            rb.velocity = m_trackedController.GetVelocity();
-            rb.angularVelocity = m_trackedController.GetAngularVelocity();
+            rb.velocity = m_setup.GetVelocityLeft();
+            rb.angularVelocity = m_setup.GetAngularVelocityLeft();
             objectGrabbed = null;
         }
     }

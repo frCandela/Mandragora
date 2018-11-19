@@ -20,7 +20,7 @@ public class WithLiquid : MonoBehaviour
     [SerializeField] private bool containerClosed = true;
 
     [Header("Liquid Simulation")]
-    [SerializeField] private Liquid LiquidGameObject;
+    [SerializeField] private Liquid LiquidGameObject = null;
     [SerializeField] private float leakDistance = 1f;
     [SerializeField] public float speed = 0.1f;
     [SerializeField] public float volume = 1f;
@@ -28,7 +28,7 @@ public class WithLiquid : MonoBehaviour
     [Header("Debug & Performance")]    
     [SerializeField] private float executionDelay = 0f;
     [SerializeField] private bool showDebugLines = false;
-    [SerializeField] float executionTime;   // Raw perf measurement
+    //[SerializeField] float executionTime;   // Raw perf measurement
 
     // Liquid mesh references
     private GameObject m_gameObject = null;
@@ -138,7 +138,7 @@ public class WithLiquid : MonoBehaviour
                 m_meshRenderer.enabled = false;
 
  
-            executionTime = 1000f * (Time.realtimeSinceStartup - t);
+            //executionTime = 1000f * (Time.realtimeSinceStartup - t);
             m_timeSinceLastCall = 0;
         }
     }

@@ -6,15 +6,15 @@ using Valve.VR;
 
 public abstract class MTK_Setup : MonoBehaviour
 {
-    public UnityEvent primaryInputLeftPressed;
-    public UnityEvent primaryInputLeftReseased;
+    [HideInInspector] public UnityEvent onPrimaryInputLeftPressed;
+    [HideInInspector] public UnityEvent onPrimaryInputLeftReleased;
+    [HideInInspector] public UnityEvent onPrimaryInputRightPressed;
+    [HideInInspector] public UnityEvent onPrimaryInputRightReleased;
 
-    public UnityEvent primaryInputRightPressed;
-    public UnityEvent primaryInputRightReleased;
+    public abstract Vector3 GetAngularVelocityRight();
+    public abstract Vector3 GetAngularVelocityLeft( );
+    public abstract Vector3 GetVelocityRight();
+    public abstract Vector3 GetVelocityLeft();
 
-
-    public abstract Vector3 AngularVelocityRight();
-    public abstract Vector3 AngularVelocityLeft( );
-    public abstract Vector3 VelocityRight();
-    public abstract Vector3 VelocityLeft();
+    public abstract void UpdateSettings();
 }
