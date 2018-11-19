@@ -12,9 +12,6 @@ public class MTK_InteractGrab : MonoBehaviour
     private MTK_Setup m_setup;
     private MTK_InputManager m_inputManager;
 
-    [SerializeField] private Hand hand;
-    public enum Hand {  left, right }
-
     private void Start()
     {
         m_setup = FindObjectOfType<MTK_Manager>().activeSetup;
@@ -53,7 +50,7 @@ public class MTK_InteractGrab : MonoBehaviour
         if (!objectGrabbed.jointType.JoinWith(gameObject))
             print("zob");
         
-        objectGrabbed.jointType.onJointBreak.AddListener(JointFailed);
+        objectGrabbed.jointType.onJointBreak.AddListener(JointFailed);// null ref exception here
     }
 
     void Release()
