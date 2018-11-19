@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
+[RequireComponent(typeof(MTK_InputManager))]
 public class MTK_InteractGrab : MonoBehaviour
 {
     public MTK_Interactable objectGrabbed = null;
 
     private MTK_Interactable m_objectInTrigger = null;
     private MTK_Setup m_setup;
+    private MTK_InputManager m_inputManager;
+
+    [SerializeField] private Hand hand;
+    public enum Hand {  left, right }
 
     private void Start()
     {
         m_setup = FindObjectOfType<MTK_Manager>().activeSetup;
-        if (!m_setup)
-            print("zob");
+        m_inputManager = GetComponent<MTK_InputManager>();
 
-        m_setup.onPrimaryInputLeftPressed.AddListener(InputPressed);
-        m_setup.onPrimaryInputLeftReleased.AddListener(InputReleased);
-
+        m_inputManager.onPrimaryInputPressed.AddListener(InputPressed);
+        m_inputManager.onPrimaryInputReleased.AddListener(InputReleased);
     }
 
     void InputPressed()
@@ -59,8 +62,10 @@ public class MTK_InteractGrab : MonoBehaviour
         {
             Rigidbody rb = objectGrabbed.GetComponent<Rigidbody>();
             objectGrabbed.jointType.RemoveJoint();
-            rb.velocity = m_setup.GetVelocityLeft();
-            rb.angularVelocity = m_setup.GetAngularVelocityLeft();
+
+            rb.velocity = m_inputManager.GetVelocity();
+            rb.angularVelocity = m_inputManager.GetAngularVelocity();
+
             objectGrabbed = null;
         }
     }

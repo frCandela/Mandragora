@@ -14,9 +14,4 @@ public class MTK_Interactable : MonoBehaviour
             jointType = gameObject.AddComponent<MTK_JointType_Fixed>();
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
