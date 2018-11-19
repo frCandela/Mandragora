@@ -5,40 +5,10 @@ using Valve.VR;
 
 public class MTK_InteractGrab : MonoBehaviour
 {
-    public enum InputButtons { Trigger, Grip, Pad };
-    public InputButtons inputButton = InputButtons.Trigger;
-
     public MTK_Interactable objectGrabbed = null;
 
     private MTK_Interactable m_objectInTrigger = null;
-    private SteamVR_TrackedController m_trackedController = null;
-
-    // Use this for initialization
-    void Awake ()
-    {
-        m_trackedController = GetComponent<SteamVR_TrackedController>();
-        SetInputs();
-
-    }
-
-    void SetInputs()
-    {
-        switch(inputButton)
-        {
-            case InputButtons.Trigger:
-                m_trackedController.TriggerClicked += InputPressed;
-                m_trackedController.TriggerUnclicked += InputReleased;
-                break;
-            case InputButtons.Grip:
-                m_trackedController.Gripped += InputPressed;
-                m_trackedController.Ungripped += InputReleased;
-                break;
-            case InputButtons.Pad:
-                m_trackedController.PadClicked += InputPressed;
-                m_trackedController.PadUnclicked+= InputReleased;
-                break;
-        }
-    }
+    private MTK_Setup m_setup;
 
     void InputPressed( object sender, ClickedEventArgs args)
     {

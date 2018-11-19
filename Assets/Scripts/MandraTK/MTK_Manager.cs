@@ -23,9 +23,6 @@ public class MTK_Manager : MonoBehaviour
         }        
 	}
 	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
+
+
 }

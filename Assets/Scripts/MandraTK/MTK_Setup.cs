@@ -1,32 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using Valve.VR;
 
-public class MTK_Setup : MonoBehaviour
+public abstract class MTK_Setup : MonoBehaviour
 {
-    public GameObject leftHand = null;
-    public GameObject rightHand = null;
-    public GameObject head = null;
+    public UnityEvent primaryInputLeftPressed;
+    public UnityEvent primaryInputLeftReseased;
 
-    // Use this for initialization
-    void Awake ()
-    {
-        if (!leftHand)
-            leftHand = new GameObject("leftHand");
-        if (!rightHand)
-            rightHand = new GameObject("rightHand");
-        if (!head)
-            head = new GameObject("head");
+    public UnityEvent primaryInputRightPressed;
+    public UnityEvent primaryInputRightReleased;
 
 
-        leftHand.transform.parent = transform;
-        rightHand.transform.parent = transform;
-        head.transform.parent = transform;
-        Camera.main.transform.parent = head.transform;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public abstract Vector3 AngularVelocityRight();
+    public abstract Vector3 AngularVelocityLeft( );
+    public abstract Vector3 VelocityRight();
+    public abstract Vector3 VelocityLeft();
 }
