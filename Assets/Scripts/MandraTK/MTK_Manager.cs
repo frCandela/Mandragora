@@ -11,9 +11,24 @@ public class MTK_Manager : MonoBehaviour
 {
     public MTK_Setup activeSetup = null;
 
+    [Header("Available setups")]
+    [SerializeField]
+    MTK_Setup setupSimulation;
+    [SerializeField]
+    MTK_Setup setupSteamVR; 
+
     private void Awake()
     {
         Util.EditorAssert(activeSetup != null, "Please select a MTK_Setup in the MTK_Manager");
+    }
+
+    public void SwitchSetup()
+    {
+        if(activeSetup)
+        {
+            activeSetup = (activeSetup == setupSteamVR) ? setupSimulation : setupSteamVR;
+            OnValidate();
+        }
     }
 
     private void OnValidate()
