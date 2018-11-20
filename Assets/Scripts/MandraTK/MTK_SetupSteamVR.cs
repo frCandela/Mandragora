@@ -19,8 +19,6 @@ public class MTK_SetupSteamVR : MTK_Setup
         Util.EditorAssert(head != null, "Please select a head gameobject in the MTK_SetupSteamVR");
         Util.EditorAssert(leftHand != null, "Please select a leftHand gameobject in the MTK_SetupSteamVR");
         Util.EditorAssert(rightHand != null, "Please select a rightHand gameobject in the MTK_SetupSteamVR");
-
-        Camera.main.transform.parent = head.transform;
     }
 
     public override void UpdateSettings()

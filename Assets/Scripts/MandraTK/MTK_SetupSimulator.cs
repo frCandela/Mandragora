@@ -18,13 +18,7 @@ public class MTK_SetupSimulator : MTK_Setup
         Util.EditorAssert(leftHand != null, "Please select a leftHand gameobject in the MTK_SetupSteamVR");
         Util.EditorAssert(rightHand != null, "Please select a rightHand gameobject in the MTK_SetupSteamVR");
 
-        Camera.main.transform.position = head.transform.position;
-        Camera.main.transform.parent = transform;
         Camera.main.transform.localRotation = Quaternion.identity;
-
-        head.transform.parent = Camera.main.transform;
-        leftHand.transform.parent = Camera.main.transform;
-        rightHand.transform.parent = Camera.main.transform;
     }
 
     public override void UpdateSettings()

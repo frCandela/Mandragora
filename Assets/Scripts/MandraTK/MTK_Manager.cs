@@ -24,17 +24,10 @@ public class MTK_Manager : MonoBehaviour
 
     public void SwitchSetup()
     {
-        if(activeSetup)
+        #if UNITY_EDITOR
+        if (!EditorApplication.isPlaying)
         {
             activeSetup = (activeSetup == setupSteamVR) ? setupSimulation : setupSteamVR;
-            OnValidate();
-        }
-    }
-
-    private void OnValidate()
-    {
-        if (activeSetup && ! EditorApplication.isPlaying)
-        {
             activeSetup.gameObject.SetActive(true);
             activeSetup.UpdateSettings();
             // Activates the first MTK_Setup in the child hierarchy
@@ -46,5 +39,7 @@ public class MTK_Manager : MonoBehaviour
                 }
             }
         }
+        #endif
     }
+    
 }
