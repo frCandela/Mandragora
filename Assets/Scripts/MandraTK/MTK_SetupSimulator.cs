@@ -23,6 +23,8 @@ public class MTK_SetupSimulator : MTK_Setup
 
     public override void UpdateSettings()
     {
+        #if UNITY_EDITOR
         PlayerSettings.virtualRealitySupported = false;
+        #endif
     }
 }

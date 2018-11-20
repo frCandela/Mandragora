@@ -23,6 +23,8 @@ public class MTK_SetupSteamVR : MTK_Setup
 
     public override void UpdateSettings()
     {
+        #if UNITY_EDITOR
         PlayerSettings.virtualRealitySupported = true;
+        #endif
     }
 }

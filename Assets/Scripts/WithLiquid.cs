@@ -99,7 +99,8 @@ public class WithLiquid : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if( ! EditorApplication.isPlaying)
+        #if UNITY_EDITOR
+        if ( ! EditorApplication.isPlaying)
         {
             
             Gizmos.DrawLine(    Vector3.Scale(transform.localScale, transform.position + minHeight * Vector3.up - 0.5f * Vector3.right),
@@ -117,6 +118,7 @@ public class WithLiquid : MonoBehaviour
             Gizmos.DrawLine(    Vector3.Scale(transform.localScale, transform.position + centerHeight * Vector3.up - 0.5f * Vector3.forward),
                                 Vector3.Scale(transform.localScale, transform.position + centerHeight * Vector3.up + 0.5f * Vector3.forward));
         }
+        #endif
     }
 
     // Update is called once per frame
