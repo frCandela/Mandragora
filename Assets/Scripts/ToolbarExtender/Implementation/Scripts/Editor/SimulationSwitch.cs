@@ -1,7 +1,5 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEditor.SceneManagement;
 
 namespace UnityToolbarExtender
 {
@@ -23,46 +21,50 @@ namespace UnityToolbarExtender
 	
 	[InitializeOnLoad]
 	static class SimulationSwitch
-	{
-		static bool m_enabled;
-		static bool m_visible;
-		
+	{		
 		static MTK_Manager m_mtkManager;
 
-		public static bool Enabled
+		static bool Enabled
 		{
-			get { return m_enabled; }
+			get
+			{
+				return m_mtkManager.activeSetup.GetType() == typeof(MTK_SetupSimulator);
+			}
 			set
 			{
-				m_enabled = value;
 				m_mtkManager.SwitchSetup();
+			}
+		}
+
+		static bool Visible
+		{
+			get
+			{
+				return m_mtkManager != null;
 			}
 		}
 
 		static SimulationSwitch()
 		{
-			EditorSceneManager.sceneOpened += OnSceneOpened;
+			EditorApplication.hierarchyChanged += UpdateDisplay;
+			
 			ToolbarExtender.LeftToolbarGUI.Add(OnToolbarGUI);
 		}
 
-		static void OnSceneOpened(Scene scene, OpenSceneMode mode)
+		static void UpdateDisplay()
 		{
 			m_mtkManager = GameObject.FindObjectOfType<MTK_Manager>();
-			m_visible = m_mtkManager != null;
-
-			if(m_visible)
-				m_enabled = m_mtkManager.activeSetup.GetType() == typeof(MTK_SetupSimulator);
 		}
 		
 		static void OnToolbarGUI()
 		{
-			if(m_visible)
+			if(Visible)
 			{
 				GUI.changed = false;
 
 				GUILayout.FlexibleSpace();
 
-				GUILayout.Toggle(m_enabled, new GUIContent("S", "Simulation Mode"), ToolbarStyles.commandButtonStyle);
+				GUILayout.Toggle(Enabled, new GUIContent("S", "Simulation Mode"), ToolbarStyles.commandButtonStyle);
 
 				if (GUI.changed)
 				{
