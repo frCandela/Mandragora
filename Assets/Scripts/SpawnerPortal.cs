@@ -8,6 +8,7 @@ public class SpawnerPortal : Spawner
 {
     VRTK_InteractGrab m_inputHand;
     bool m_correctEntry = false;
+    bool m_canSpawn = false;
 
     Vector3 GetTriggerNormal(Vector3 origin)
     {
@@ -27,8 +28,7 @@ public class SpawnerPortal : Spawner
             m_inputHand = other.GetComponentInParent<VRTK_InteractGrab>();
 
             m_correctEntry = GetTriggerNormal(other.transform.position) == Vector3.up;
-
-            Destroy(m_spawned);
+            m_canSpawn = false;
         }
     }
 
@@ -39,11 +39,21 @@ public class SpawnerPortal : Spawner
                 if(GetTriggerNormal(other.transform.position) == Vector3.down)
                 {
                     // vibration
-                    Spawn(other.transform.position, other.transform.rotation, null);
+                    m_canSpawn = true;
                 }
         // else
         //     print("failure");
+    }
 
+    public void Cancel()
+    {
         m_correctEntry = false;
+        m_canSpawn = false;
+    }
+
+    private void Update()
+    {
+        if(m_canSpawn)
+            VRTK_ControllerHaptics.TriggerHapticPulse(VRTK_ControllerReference.GetControllerReference(m_inputHand.gameObject), 1, Time.deltaTime, 0);
     }
 }
