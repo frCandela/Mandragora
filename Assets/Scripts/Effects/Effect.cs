@@ -17,18 +17,22 @@ public abstract class Effect : MonoBehaviour
     // Called with a prefab so customize particles and stuff
     public virtual Effect AddEffectTo( GameObject target )
     { 
-        Effect effect = (Effect)target.AddComponent(GetType());
-        if( effect.ApplyEffect())
+        if( ! target.GetComponent( GetType()))
         {
-            // Adds particles
-            if (m_particlesPrefab)
+            Effect effect = (Effect)target.AddComponent(GetType());
+            if (effect.ApplyEffect())
             {
-                effect.m_particles = Instantiate(m_particlesPrefab, target.transform);
-                effect.m_particles.transform.localRotation = Quaternion.identity;
-                effect.m_particles.transform.localPosition = Vector3.zero;
+                // Adds particles
+                if (m_particlesPrefab)
+                {
+                    effect.m_particles = Instantiate(m_particlesPrefab, target.transform);
+                    effect.m_particles.transform.localRotation = Quaternion.identity;
+                    effect.m_particles.transform.localPosition = Vector3.zero;
+                }
             }
+            return effect;
         }
-        return effect;
+        return null;
     }
 
     public abstract bool ApplyEffect();    
