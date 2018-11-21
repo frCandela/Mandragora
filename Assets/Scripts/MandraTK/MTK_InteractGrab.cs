@@ -76,15 +76,12 @@ public class MTK_InteractGrab : MonoBehaviour
             {
                 if (Vector3.SqrMagnitude(interactable.transform.position - transform.position) < Vector3.SqrMagnitude(m_objectInTrigger.transform.position - transform.position))
                 {
-                    interactable.GetComponent<MeshRenderer>().material.color = Color.blue;
-                    m_objectInTrigger.GetComponent<MeshRenderer>().material.color = Color.white;
                     m_objectInTrigger = interactable;
                 }
             }
             else
             {
                 m_objectInTrigger = interactable;
-                m_objectInTrigger.GetComponent<MeshRenderer>().material.color = Color.blue;
             }
         }
     }
@@ -103,7 +100,6 @@ public class MTK_InteractGrab : MonoBehaviour
     {
         if (m_objectInTrigger && other.gameObject == m_objectInTrigger.gameObject)
         {
-            m_objectInTrigger.GetComponent<MeshRenderer>().material.color = Color.white;
             m_objectInTrigger = null;
         }
     }
