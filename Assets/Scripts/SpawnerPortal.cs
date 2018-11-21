@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using VRTK;
-
 public class SpawnerPortal : Spawner
 {
-    VRTK_InteractGrab m_inputHand;
+    MTK_InputManager m_inputHand;
     bool m_correctEntry = false;
     bool m_canSpawn = false;
 
@@ -23,9 +21,9 @@ public class SpawnerPortal : Spawner
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<VRTK_PlayerObject>())
+        if(other.GetComponent<MTK_InputManager>())
         {
-            m_inputHand = other.GetComponentInParent<VRTK_InteractGrab>();
+            m_inputHand = other.GetComponent<MTK_InputManager>();
 
             m_correctEntry = GetTriggerNormal(other.transform.position) == Vector3.up;
             m_canSpawn = false;
@@ -34,7 +32,7 @@ public class SpawnerPortal : Spawner
 
     private void OnTriggerExit(Collider other)
     {
-        if(m_inputHand == other.GetComponentInParent<VRTK_InteractGrab>())
+        if(m_inputHand == other.GetComponent<MTK_InputManager>())
             if(m_correctEntry)
                 if(GetTriggerNormal(other.transform.position) == Vector3.down)
                 {
@@ -54,6 +52,6 @@ public class SpawnerPortal : Spawner
     private void Update()
     {
         if(m_canSpawn)
-            VRTK_ControllerHaptics.TriggerHapticPulse(VRTK_ControllerReference.GetControllerReference(m_inputHand.gameObject), 1, Time.deltaTime, 0);
+            m_inputHand.Haptic(Time.deltaTime);
     }
 }
