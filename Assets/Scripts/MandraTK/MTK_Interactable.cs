@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ public class MTK_Interactable : MonoBehaviour
     // Use this for initialization
     void Awake ()
     {
-        if (!jointType)
+        if (isGrabbable && !jointType)
             jointType = gameObject.AddComponent<MTK_JointType_Fixed>();
 
     }
