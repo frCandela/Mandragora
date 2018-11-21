@@ -56,7 +56,27 @@ public class SteamVR_TrackedController : MonoBehaviour
 		}
 	}
 
-	public void SetDeviceIndex(int index)
+    public Vector3 GetVelocity()
+    {
+        if (controllerIndex <= (uint)SteamVR_TrackedObject.EIndex.Hmd || controllerIndex >= OpenVR.k_unTrackedDeviceIndexInvalid)
+        {
+            return Vector3.zero;
+        }
+        SteamVR_Controller.Device device = SteamVR_Controller.Input((int)controllerIndex);
+        return device.velocity;
+    }
+
+    public Vector3 GetAngularVelocity()
+    {
+        if (controllerIndex <= (uint)SteamVR_TrackedObject.EIndex.Hmd || controllerIndex >= OpenVR.k_unTrackedDeviceIndexInvalid)
+        {
+            return Vector3.zero;
+        }
+        SteamVR_Controller.Device device = SteamVR_Controller.Input((int)controllerIndex);
+        return device.angularVelocity;
+    }
+
+    public void SetDeviceIndex(int index)
 	{
 		this.controllerIndex = (uint)index;
 	}
@@ -131,10 +151,12 @@ public class SteamVR_TrackedController : MonoBehaviour
 	protected virtual void Update()
 	{
 		var system = OpenVR.System;
-		if (system != null && system.GetControllerState(controllerIndex, ref controllerState, (uint)System.Runtime.InteropServices.Marshal.SizeOf(typeof(VRControllerState_t))))
+
+
+        if (system != null && system.GetControllerState(controllerIndex, ref controllerState, (uint)System.Runtime.InteropServices.Marshal.SizeOf(typeof(VRControllerState_t))))
 		{
-			ulong trigger = controllerState.ulButtonPressed & (1UL << ((int)EVRButtonId.k_EButton_SteamVR_Trigger));
-			if (trigger > 0L && !triggerPressed)
+            ulong trigger = controllerState.ulButtonPressed & (1UL << ((int)EVRButtonId.k_EButton_SteamVR_Trigger));
+            if (controllerState.rAxis1.x == 1f && !triggerPressed)
 			{
 				triggerPressed = true;
 				ClickedEventArgs e;
@@ -143,9 +165,8 @@ public class SteamVR_TrackedController : MonoBehaviour
 				e.padX = controllerState.rAxis0.x;
 				e.padY = controllerState.rAxis0.y;
 				OnTriggerClicked(e);
-
-			}
-			else if (trigger == 0L && triggerPressed)
+            }
+			else if (controllerState.rAxis1.x < 1f && triggerPressed)
 			{
 				triggerPressed = false;
 				ClickedEventArgs e;
