@@ -29,4 +29,8 @@ public class MTK_InputManagerSimulator : MTK_InputManager
         }
     }
 
+    public override void Haptic(float Time)
+    {
+        print("bzz bzz");
+    }
 }
