@@ -2,3 +2,6 @@
 
 [System.Serializable]
 public class UnityEventInt : UnityEvent<int> {}
+
+[System.Serializable]
+public class UnityEventBool : UnityEvent<bool> {}

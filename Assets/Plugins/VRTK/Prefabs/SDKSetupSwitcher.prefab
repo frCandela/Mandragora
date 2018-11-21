@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 114000010769450900}
   - component: {fileID: 114478723367177640}
   - component: {fileID: 114705015677033990}
+  - component: {fileID: 114999177003197768}
   m_Layer: 5
   m_Name: SDKSetupSwitcher
   m_TagString: Untagged
@@ -1321,6 +1322,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 4e3e7952-dc56-4701-b742-f602f6f35c71
+--- !u!114 &114999177003197768
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012696903278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c08517e04830d6d44a13c5ea5f574181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
+  unhighlightOnDisable: 1
+  thickness: 1
+  customOutlineModels: []
+  customOutlineModelPaths: []
+  enableSubmeshHighlight: 0
 --- !u!124 &124000011415618170
 Behaviour:
   m_ObjectHideFlags: 1

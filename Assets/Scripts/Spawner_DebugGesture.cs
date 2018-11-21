@@ -6,7 +6,9 @@ public class Spawner_DebugGesture : Spawner
 {
     public override void SpawnIntParameter(int parameter)
     {
-        TextMesh tm = Spawn().GetComponent<TextMesh>();
+        Spawn();
+        
+        TextMesh tm = m_spawned.GetComponent<TextMesh>();
 
         if(parameter < 0)
         {

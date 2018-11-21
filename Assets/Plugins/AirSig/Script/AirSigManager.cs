@@ -84,7 +84,7 @@ namespace AirSig {
         }
 
         // Keep the current instance
-        private static AirSigManager sInstance;
+        public static AirSigManager sInstance;
 
         /// Event handler for receiving common gesture matching result
         public delegate void OnGestureDrawStart(bool start);

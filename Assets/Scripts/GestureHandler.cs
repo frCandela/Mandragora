@@ -1,19 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 using AirSig;
 using VRTK;
 
 public class GestureHandler : MonoBehaviour
 {
-	[SerializeField] AirSigManager m_airsigManager;
+	AirSigManager m_airsigManager;
+	[SerializeField] AngularVelocityTracker m_tracker;
 
 	[SerializeField] int MAX_TRAIN_COUNT = 5;
 	int m_currentGestureID = 100;
 	List<int> m_allGestureIDs = new List<int>(10);
 
 	[SerializeField] UnityEventInt m_onGestureRecognition;
+	[SerializeField] UnityEvent m_onGestureRecognitionSucceeded;
+	[SerializeField] UnityEvent m_onGestureRecognitionFailed;
+	[SerializeField] UnityEventBool m_onCollecting;
 
 	int m_lastMatch = 0;
 
@@ -25,31 +30,55 @@ public class GestureHandler : MonoBehaviour
 				m_airsigManager.startCollecting();
 			else
 				m_airsigManager.stopCollecting();
+
+			m_onCollecting.Invoke(value);
 		}
 	}
 
-	void Awake()
+	public bool Active
 	{
-		m_airsigManager.onPlayerGestureAdd += HandleOnPlayerGestureAdd;
-		m_airsigManager.onPlayerGestureMatch += HandleOnPlayerGestureMatch;
+		set
+		{
+			if(value)
+			{
+				m_airsigManager.onPlayerGestureAdd += HandleOnPlayerGestureAdd;
+				m_airsigManager.onPlayerGestureMatch += HandleOnPlayerGestureMatch;
+
+				m_airsigManager.m_angularTracker = m_tracker;
+				AddGesture();
+			}
+			else
+			{
+				m_airsigManager.onPlayerGestureAdd -= HandleOnPlayerGestureAdd;
+				m_airsigManager.onPlayerGestureMatch -= HandleOnPlayerGestureMatch;
+
+				DeleteGestures();
+			}
+		}
+	}
+
+	void Start()
+	{
+		m_airsigManager = AirSigManager.sInstance;
 	}
 
 	void Update()
 	{
+		// Invoke Ddbug Messages if any
 		if(m_lastMatch != 0)
 		{
+			if(m_lastMatch > 0)
+				m_onGestureRecognitionSucceeded.Invoke();
+			else
+				m_onGestureRecognitionFailed.Invoke();
+
 			m_onGestureRecognition.Invoke(m_lastMatch);
 			m_lastMatch = 0;
 		}
 	}
 
-	public void InitTracker(AngularVelocityTracker tracker)
-	{
-		m_airsigManager.m_angularTracker = tracker;
-    }
-
 	[ContextMenu("AddGesture")]
-	public void AddGesture()
+	void AddGesture()
 	{
 		m_currentGestureID++;
 		m_allGestureIDs.Add(m_currentGestureID);
@@ -58,9 +87,10 @@ public class GestureHandler : MonoBehaviour
         m_airsigManager.SetTarget(new List<int>{m_currentGestureID});
     }
 
-	public void DeleteGesture(int target)
+	void DeleteGestures()
 	{
-		m_airsigManager.DeletePlayerRecord(target);
+		foreach (int gestureID in m_allGestureIDs)
+			m_airsigManager.DeletePlayerRecord(gestureID);
 	}
 
 	void SwitchToIdentify()
@@ -81,7 +111,7 @@ public class GestureHandler : MonoBehaviour
 
 	void HandleOnPlayerGestureMatch(long gestureId, int match)
 	{
-		print("GestureID : " + gestureId + " - Match : " + match + " - Exist : " + m_airsigManager.IsPlayerGestureExisted(m_airsigManager.GetFromCache(gestureId)));
+		// print("GestureID : " + gestureId + " - Match : " + match + " - Exist : " + m_airsigManager.IsPlayerGestureExisted(m_airsigManager.GetFromCache(gestureId)));
 		
 		m_lastMatch = match;
 
