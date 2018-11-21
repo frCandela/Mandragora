@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23000012659493238}
   - component: {fileID: 33000013070956526}
   - component: {fileID: 114000011497762404}
-  - component: {fileID: 114894752546270446}
+  - component: {fileID: 114257202032971682}
   m_Layer: 0
   m_Name: '[CameraRig]'
   m_TagString: Untagged
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000012380036172}
   - component: {fileID: 114000012735907508}
-  - component: {fileID: 114228332191366588}
+  - component: {fileID: 114049641479425280}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -57,7 +57,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000010499113332}
   - component: {fileID: 114000011515022730}
-  - component: {fileID: 114332122613146198}
+  - component: {fileID: 114990137638250452}
   m_Layer: 0
   m_Name: Controller (left)
   m_TagString: Untagged
@@ -73,8 +73,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000011368645488}
-  - component: {fileID: 114466788384657382}
-  - component: {fileID: 114481650262307124}
+  - component: {fileID: 114848352896182068}
+  - component: {fileID: 114550643508438518}
   m_Layer: 0
   m_Name: SDKSetups
   m_TagString: Untagged
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 4000013858448892}
   - component: {fileID: 114000010035616626}
   - component: {fileID: 114177628815396416}
-  - component: {fileID: 114834606492342824}
+  - component: {fileID: 114925157644547812}
   m_Layer: 0
   m_Name: Simulator
   m_TagString: Untagged
@@ -109,7 +109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000012126931720}
   - component: {fileID: 114000013988598532}
-  - component: {fileID: 114165325751982158}
+  - component: {fileID: 114318237329315536}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 20000012316479598}
   - component: {fileID: 114000011243730024}
   - component: {fileID: 92000014137301068}
-  - component: {fileID: 114783488063888296}
+  - component: {fileID: 114563727765362284}
   m_Layer: 0
   m_Name: Camera (head)
   m_TagString: MainCamera
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 4000013003015800}
   - component: {fileID: 81000010459235146}
   - component: {fileID: 114000013937090930}
-  - component: {fileID: 114565349557668714}
+  - component: {fileID: 114745476578532942}
   m_Layer: 0
   m_Name: Camera (ears)
   m_TagString: Untagged
@@ -163,7 +163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000010318492766}
   - component: {fileID: 114000010715554644}
-  - component: {fileID: 114798376237553688}
+  - component: {fileID: 114146982143367290}
   m_Layer: 0
   m_Name: '[SteamVR]'
   m_TagString: Untagged
@@ -180,7 +180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000013143429836}
   - component: {fileID: 114000012377227750}
-  - component: {fileID: 114794722242895052}
+  - component: {fileID: 114901343034576856}
   m_Layer: 0
   m_Name: Controller (right)
   m_TagString: Untagged
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 20000011176388890}
   - component: {fileID: 124000012904963108}
   - component: {fileID: 114000012849300506}
-  - component: {fileID: 114075905609723284}
+  - component: {fileID: 114914456813861972}
   m_Layer: 0
   m_Name: Camera (eye)
   m_TagString: MainCamera
@@ -216,7 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000010114616428}
   - component: {fileID: 114000012492157348}
-  - component: {fileID: 114489714715426246}
+  - component: {fileID: 114169714258541320}
   m_Layer: 0
   m_Name: SteamVR
   m_TagString: Untagged
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 222659378603951862}
   - component: {fileID: 114553881252494556}
   - component: {fileID: 114028517825988162}
-  - component: {fileID: 114276736168960960}
+  - component: {fileID: 114989031776173420}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -252,27 +252,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4544606604026690}
   - component: {fileID: 114485273770408838}
-  - component: {fileID: 114606803962082722}
+  - component: {fileID: 114947424330133970}
   m_Layer: 0
   m_Name: VRSimulatorCameraRig
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1096841195907458
-GameObject:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4710561254633352}
-  - component: {fileID: 33732450369776070}
-  - component: {fileID: 23446891710443486}
-  - component: {fileID: 114299309372424636}
-  m_Layer: 0
-  m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -288,7 +270,7 @@ GameObject:
   - component: {fileID: 224404646041754224}
   - component: {fileID: 222076954967341718}
   - component: {fileID: 114139617658199918}
-  - component: {fileID: 114742712507952932}
+  - component: {fileID: 114559517970549312}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -306,7 +288,7 @@ GameObject:
   - component: {fileID: 4411886164628736}
   - component: {fileID: 33143588836442744}
   - component: {fileID: 23309286407344146}
-  - component: {fileID: 114696007995819660}
+  - component: {fileID: 114095338044160236}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -324,7 +306,7 @@ GameObject:
   - component: {fileID: 224560391512848994}
   - component: {fileID: 222494597383388484}
   - component: {fileID: 114937927333928090}
-  - component: {fileID: 114305307609989792}
+  - component: {fileID: 114154702831808554}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -342,7 +324,7 @@ GameObject:
   - component: {fileID: 224524241622015492}
   - component: {fileID: 222764303921283172}
   - component: {fileID: 114256248042405202}
-  - component: {fileID: 114367476800832854}
+  - component: {fileID: 114346183979493776}
   m_Layer: 5
   m_Name: Hints
   m_TagString: Untagged
@@ -361,7 +343,7 @@ GameObject:
   - component: {fileID: 223855797544061864}
   - component: {fileID: 114386419681534186}
   - component: {fileID: 114470552119183920}
-  - component: {fileID: 114649303654710776}
+  - component: {fileID: 114524995679349496}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -378,9 +360,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4570902433673696}
   - component: {fileID: 114287009055141332}
-  - component: {fileID: 114186841044836164}
+  - component: {fileID: 114872823649746160}
   m_Layer: 0
-  m_Name: RightHand
+  m_Name: LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -398,7 +380,7 @@ GameObject:
   - component: {fileID: 124773307230718130}
   - component: {fileID: 92889010644976706}
   - component: {fileID: 81148597224790644}
-  - component: {fileID: 114960639369127978}
+  - component: {fileID: 114436027096075236}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -415,9 +397,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4638816166759130}
   - component: {fileID: 114506970677581486}
-  - component: {fileID: 114477905486646152}
+  - component: {fileID: 114378767284777518}
   m_Layer: 0
-  m_Name: LeftHand
+  m_Name: RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -433,7 +415,7 @@ GameObject:
   - component: {fileID: 224866091687141246}
   - component: {fileID: 222160259198723864}
   - component: {fileID: 114142560881240212}
-  - component: {fileID: 114199818255905640}
+  - component: {fileID: 114825497507188938}
   m_Layer: 5
   m_Name: Control Hints
   m_TagString: Untagged
@@ -450,7 +432,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224803638045886176}
   - component: {fileID: 222700446465388342}
-  - component: {fileID: 114744354962196072}
+  - component: {fileID: 114219887214859904}
   m_Layer: 5
   m_Name: CrosshairPanel
   m_TagString: Untagged
@@ -468,7 +450,7 @@ GameObject:
   - component: {fileID: 4896411298990530}
   - component: {fileID: 33730288935558720}
   - component: {fileID: 23234970347119936}
-  - component: {fileID: 114019859703715508}
+  - component: {fileID: 114981720645564186}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -484,7 +466,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4486131483486730}
-  - component: {fileID: 114269445770563336}
+  - component: {fileID: 114668482218959320}
   m_Layer: 0
   m_Name: Neck
   m_TagString: Untagged
@@ -687,8 +669,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.025, y: 0.025, z: 0.025}
-  m_Children:
-  - {fileID: 4523072362746774}
+  m_Children: []
   m_Father: {fileID: 4570902433673696}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -703,21 +684,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4780196163704912}
+  - {fileID: 4638816166759130}
+  - {fileID: 4570902433673696}
   m_Father: {fileID: 4544606604026690}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4523072362746774
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1878776753057470}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.800004}
-  m_LocalScale: {x: 0.08000002, y: 0.08000001, z: 0.80000013}
-  m_Children: []
-  m_Father: {fileID: 4411886164628736}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4544606604026690
 Transform:
@@ -731,8 +701,6 @@ Transform:
   m_Children:
   - {fileID: 224873053336738018}
   - {fileID: 4486131483486730}
-  - {fileID: 4638816166759130}
-  - {fileID: 4570902433673696}
   m_Father: {fileID: 4000013858448892}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -743,12 +711,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1482862149177702}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.2, y: 1.2, z: 0.5}
+  m_LocalPosition: {x: 0, y: -0.100000024, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4411886164628736}
-  m_Father: {fileID: 4544606604026690}
-  m_RootOrder: 3
+  m_Father: {fileID: 4486131483486730}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4638816166759130
 Transform:
@@ -757,25 +725,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1674857996131884}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.2, y: 1.2, z: 0.5}
+  m_LocalPosition: {x: 0, y: -0.100000024, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4896411298990530}
-  m_Father: {fileID: 4544606604026690}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4710561254633352
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1096841195907458}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0.800004}
-  m_LocalScale: {x: 0.08000002, y: 0.08000001, z: 0.80000013}
-  m_Children: []
-  m_Father: {fileID: 4896411298990530}
-  m_RootOrder: 0
+  m_Father: {fileID: 4486131483486730}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4780196163704912
 Transform:
@@ -799,8 +754,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 0.025, y: 0.025, z: 0.025}
-  m_Children:
-  - {fileID: 4710561254633352}
+  m_Children: []
   m_Father: {fileID: 4638816166759130}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1120,20 +1074,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1792433507857292}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!33 &33732450369776070
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1096841195907458}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!33 &33919096032766460
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1878776753057470}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!81 &81000010459235146
 AudioListener:
   m_ObjectHideFlags: 1
@@ -1176,10 +1116,10 @@ MonoBehaviour:
   autoPopulateObjectReferences: 0
   actualBoundaries: {fileID: 1033027119906706}
   actualHeadset: {fileID: 1537013185507012}
-  actualLeftController: {fileID: 1674857996131884}
-  actualRightController: {fileID: 1482862149177702}
-  modelAliasLeftController: {fileID: 1792433507857292}
-  modelAliasRightController: {fileID: 1203450424098014}
+  actualLeftController: {fileID: 1482862149177702}
+  actualRightController: {fileID: 1674857996131884}
+  modelAliasLeftController: {fileID: 1203450424098014}
+  modelAliasRightController: {fileID: 1792433507857292}
   cachedSystemSDKInfo:
     baseTypeName: VRTK.SDK_BaseSystem
     fallbackTypeName: VRTK.SDK_FallbackSystem
@@ -1491,7 +1431,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011766909148}
+  m_GameObject: {fileID: 1293377288567530}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
@@ -1509,12 +1449,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c731730425e54447ae6bfcc41d6fe585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114186841044836164
+--- !u!114 &114219887214859904
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1482862149177702}
+  m_GameObject: {fileID: 1784851627834954}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
@@ -1875,8 +1815,8 @@ MonoBehaviour:
   lockMouseToView: 1
   handMoveMultiplier: 0.2
   handRotationMultiplier: 30
-  playerMoveMultiplier: 5
-  playerRotationMultiplier: 0.5
+  playerMoveMultiplier: 3
+  playerRotationMultiplier: 2
   playerSprintMultiplier: 2
   playerCrouchHeight: 0.5
   mouseMovementKey: 325
@@ -1896,7 +1836,7 @@ MonoBehaviour:
   sprint: 304
   triggerAlias: 324
   gripAlias: 323
-  touchpadAlias: 113
+  touchpadAlias: 325
   buttonOneAlias: 101
   buttonTwoAlias: 114
   startMenuAlias: 102
@@ -2123,7 +2063,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1537013185507012}
+  m_GameObject: {fileID: 1000010636551700}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
@@ -2237,10 +2177,10 @@ RectTransform:
   m_Father: {fileID: 224560391512848994}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 41, y: -8}
+  m_SizeDelta: {x: 82, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224560391512848994
 RectTransform:
@@ -2257,10 +2197,10 @@ RectTransform:
   m_Father: {fileID: 224866091687141246}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 51, y: -18}
+  m_SizeDelta: {x: 82, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224796602067391340
 RectTransform:
