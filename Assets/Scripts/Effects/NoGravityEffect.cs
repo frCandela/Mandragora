@@ -6,16 +6,20 @@ public class NoGravityEffect : Effect
 {
     private Rigidbody m_rb;
 
-    public override void ApplyEffect()
+    public override bool ApplyEffect()
     {
         m_rb = GetComponent<Rigidbody>();
-        if (m_rb)
+        if (m_rb && !m_rb.isKinematic)
         {
             ManageEffectsCollisions();
             m_rb.useGravity = false;
+            return true;
         }
         else
+        {
             Destroy(this);
+            return false;
+        }
     }
 
     void ManageEffectsCollisions()

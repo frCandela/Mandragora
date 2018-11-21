@@ -14,7 +14,6 @@ public class Liquid : MonoBehaviour
     private float m_liquidVolume = 0f;
     private Vector3 m_top = new Vector3();
     private Vector3 m_bottom = new Vector3();
-    private Effect m_liquidEffectPrefab = null;
 
     // Adds liquid
     public void AddLiquid(float volume)
@@ -43,13 +42,13 @@ public class Liquid : MonoBehaviour
 
         // Raycast down
         RaycastHit hit;
-         if ( Physics.Raycast(m_bottom, Vector3.down, out hit,  speed))
-         {
+        // if ( Physics.Raycast(m_top, Vector3.down, out hit, (m_top.y - m_bottom.y) * speed))
+        if (Physics.Raycast(m_bottom, Vector3.down, out hit, speed))
+        {
             if(effectPrefab)
             {
-                hit.collider.gameObject.AddComponent(effectPrefab.GetType());
+                effectPrefab.AddEffectTo(hit.collider.gameObject);
             }
-
 
             // If hits a liquid container
             WithLiquid wl = hit.collider.gameObject.GetComponent<WithLiquid>();

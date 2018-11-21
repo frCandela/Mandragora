@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23000012659493238}
   - component: {fileID: 33000013070956526}
   - component: {fileID: 114000011497762404}
-  - component: {fileID: 114257202032971682}
+  - component: {fileID: 114894752546270446}
   m_Layer: 0
   m_Name: '[CameraRig]'
   m_TagString: Untagged
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000012380036172}
   - component: {fileID: 114000012735907508}
-  - component: {fileID: 114049641479425280}
+  - component: {fileID: 114228332191366588}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -57,7 +57,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4000010499113332}
   - component: {fileID: 114000011515022730}
-  - component: {fileID: 114990137638250452}
+  - component: {fileID: 114332122613146198}
+  - component: {fileID: 114960639369127978}
   m_Layer: 0
   m_Name: Controller (left)
   m_TagString: Untagged
@@ -73,8 +74,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000011368645488}
-  - component: {fileID: 114848352896182068}
-  - component: {fileID: 114550643508438518}
+  - component: {fileID: 114466788384657382}
+  - component: {fileID: 114481650262307124}
   m_Layer: 0
   m_Name: SDKSetups
   m_TagString: Untagged
@@ -92,7 +93,7 @@ GameObject:
   - component: {fileID: 4000013858448892}
   - component: {fileID: 114000010035616626}
   - component: {fileID: 114177628815396416}
-  - component: {fileID: 114925157644547812}
+  - component: {fileID: 114834606492342824}
   m_Layer: 0
   m_Name: Simulator
   m_TagString: Untagged
@@ -109,7 +110,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4000012126931720}
   - component: {fileID: 114000013988598532}
-  - component: {fileID: 114318237329315536}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 20000012316479598}
   - component: {fileID: 114000011243730024}
   - component: {fileID: 92000014137301068}
-  - component: {fileID: 114563727765362284}
+  - component: {fileID: 114783488063888296}
   m_Layer: 0
   m_Name: Camera (head)
   m_TagString: MainCamera
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 4000013003015800}
   - component: {fileID: 81000010459235146}
   - component: {fileID: 114000013937090930}
-  - component: {fileID: 114745476578532942}
+  - component: {fileID: 114565349557668714}
   m_Layer: 0
   m_Name: Camera (ears)
   m_TagString: Untagged
@@ -163,7 +163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000010318492766}
   - component: {fileID: 114000010715554644}
-  - component: {fileID: 114146982143367290}
+  - component: {fileID: 114798376237553688}
   m_Layer: 0
   m_Name: '[SteamVR]'
   m_TagString: Untagged
@@ -180,7 +180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000013143429836}
   - component: {fileID: 114000012377227750}
-  - component: {fileID: 114901343034576856}
+  - component: {fileID: 114794722242895052}
   m_Layer: 0
   m_Name: Controller (right)
   m_TagString: Untagged
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 20000011176388890}
   - component: {fileID: 124000012904963108}
   - component: {fileID: 114000012849300506}
-  - component: {fileID: 114914456813861972}
+  - component: {fileID: 114075905609723284}
   m_Layer: 0
   m_Name: Camera (eye)
   m_TagString: MainCamera
@@ -216,7 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000010114616428}
   - component: {fileID: 114000012492157348}
-  - component: {fileID: 114169714258541320}
+  - component: {fileID: 114489714715426246}
   m_Layer: 0
   m_Name: SteamVR
   m_TagString: Untagged
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 222659378603951862}
   - component: {fileID: 114553881252494556}
   - component: {fileID: 114028517825988162}
-  - component: {fileID: 114989031776173420}
+  - component: {fileID: 114276736168960960}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -252,7 +252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4544606604026690}
   - component: {fileID: 114485273770408838}
-  - component: {fileID: 114947424330133970}
+  - component: {fileID: 114606803962082722}
   m_Layer: 0
   m_Name: VRSimulatorCameraRig
   m_TagString: Untagged
@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 224404646041754224}
   - component: {fileID: 222076954967341718}
   - component: {fileID: 114139617658199918}
-  - component: {fileID: 114559517970549312}
+  - component: {fileID: 114742712507952932}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 4411886164628736}
   - component: {fileID: 33143588836442744}
   - component: {fileID: 23309286407344146}
-  - component: {fileID: 114095338044160236}
+  - component: {fileID: 114696007995819660}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -306,7 +306,8 @@ GameObject:
   - component: {fileID: 224560391512848994}
   - component: {fileID: 222494597383388484}
   - component: {fileID: 114937927333928090}
-  - component: {fileID: 114154702831808554}
+  - component: {fileID: 114165325751982158}
+  - component: {fileID: 114305307609989792}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -324,7 +325,7 @@ GameObject:
   - component: {fileID: 224524241622015492}
   - component: {fileID: 222764303921283172}
   - component: {fileID: 114256248042405202}
-  - component: {fileID: 114346183979493776}
+  - component: {fileID: 114367476800832854}
   m_Layer: 5
   m_Name: Hints
   m_TagString: Untagged
@@ -343,7 +344,7 @@ GameObject:
   - component: {fileID: 223855797544061864}
   - component: {fileID: 114386419681534186}
   - component: {fileID: 114470552119183920}
-  - component: {fileID: 114524995679349496}
+  - component: {fileID: 114649303654710776}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -360,7 +361,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4570902433673696}
   - component: {fileID: 114287009055141332}
-  - component: {fileID: 114872823649746160}
   m_Layer: 0
   m_Name: LeftHand
   m_TagString: Untagged
@@ -380,7 +380,6 @@ GameObject:
   - component: {fileID: 124773307230718130}
   - component: {fileID: 92889010644976706}
   - component: {fileID: 81148597224790644}
-  - component: {fileID: 114436027096075236}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -397,7 +396,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4638816166759130}
   - component: {fileID: 114506970677581486}
-  - component: {fileID: 114378767284777518}
+  - component: {fileID: 114477905486646152}
   m_Layer: 0
   m_Name: RightHand
   m_TagString: Untagged
@@ -415,7 +414,7 @@ GameObject:
   - component: {fileID: 224866091687141246}
   - component: {fileID: 222160259198723864}
   - component: {fileID: 114142560881240212}
-  - component: {fileID: 114825497507188938}
+  - component: {fileID: 114199818255905640}
   m_Layer: 5
   m_Name: Control Hints
   m_TagString: Untagged
@@ -433,6 +432,7 @@ GameObject:
   - component: {fileID: 224803638045886176}
   - component: {fileID: 222700446465388342}
   - component: {fileID: 114219887214859904}
+  - component: {fileID: 114744354962196072}
   m_Layer: 5
   m_Name: CrosshairPanel
   m_TagString: Untagged
@@ -450,7 +450,7 @@ GameObject:
   - component: {fileID: 4896411298990530}
   - component: {fileID: 33730288935558720}
   - component: {fileID: 23234970347119936}
-  - component: {fileID: 114981720645564186}
+  - component: {fileID: 114019859703715508}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -466,7 +466,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4486131483486730}
-  - component: {fileID: 114668482218959320}
+  - component: {fileID: 114269445770563336}
   m_Layer: 0
   m_Name: Neck
   m_TagString: Untagged
@@ -481,8 +481,7 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4523072362746774}
-  - component: {fileID: 33919096032766460}
+  - component: {fileID: 4505356847049300}
   - component: {fileID: 23182341452655700}
   - component: {fileID: 114548770374709806}
   m_Layer: 0
@@ -688,6 +687,19 @@ Transform:
   - {fileID: 4570902433673696}
   m_Father: {fileID: 4544606604026690}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4505356847049300
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1878776753057470}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4544606604026690
 Transform:
@@ -999,41 +1011,6 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 167fe894cb53b584bbce353eb367fbda, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!23 &23446891710443486
-MeshRenderer:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1096841195907458}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1449,18 +1426,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c731730425e54447ae6bfcc41d6fe585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114219887214859904
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1784851627834954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _guid: b69c9cac-3c3d-4614-aa4a-1134575fd839
 --- !u!114 &114199818255905640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1473,6 +1438,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 5ca35c21-f61c-4549-bc2e-edac87fea66a
+--- !u!114 &114219887214859904
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1784851627834954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: b69c9cac-3c3d-4614-aa4a-1134575fd839
 --- !u!114 &114228332191366588
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1558,7 +1535,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1096841195907458}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
@@ -1624,7 +1601,7 @@ MonoBehaviour:
   m_DynamicPixelsPerUnit: 1
 --- !u!114 &114466788384657382
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010709762058}
@@ -1751,7 +1728,7 @@ MonoBehaviour:
     - {fileID: 1537013185507012}
     - {fileID: 1674857996131884}
     - {fileID: 1792433507857292}
-    - {fileID: 1096841195907458}
+    - {fileID: 0}
     - {fileID: 1482862149177702}
     - {fileID: 1203450424098014}
     - {fileID: 1878776753057470}
@@ -1786,7 +1763,7 @@ MonoBehaviour:
   _guid: 160e7e65-bf77-4c6f-b7a6-9c342910e821
 --- !u!114 &114481650262307124
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010709762058}
@@ -1844,7 +1821,7 @@ MonoBehaviour:
   hairTouchModifier: 104
 --- !u!114 &114489714715426246
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014262144886}
@@ -2014,7 +1991,7 @@ MonoBehaviour:
   _guid: 02fc2a93-3942-4f76-805b-090367753f59
 --- !u!114 &114834606492342824
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010728847870}
