@@ -62,20 +62,15 @@ public class MTK_InteractHand : MonoBehaviour
 
     private void OnJointBreak(float breakForce)
     {
-        print("OnJointBreak");
         if (m_grabbed)
-        {
             Release();
-        }
     }
 
     void Grab( MTK_Interactable obj)
     {
         if( obj.jointType.Used())
-        {
             obj.jointType.RemoveJoint();
-            print("remove");
-        }
+
         obj.jointType.onJointBreak.AddListener(Release);
         obj.jointType.JoinWith(gameObject);
         m_grabbed = obj;
@@ -85,7 +80,6 @@ public class MTK_InteractHand : MonoBehaviour
     {
         if(m_grabbed)
         {
-            print("Release");
             m_grabbed.jointType.onJointBreak.RemoveListener(Release);
             m_grabbed.jointType.RemoveJoint();
             Rigidbody rb = m_grabbed.GetComponent<Rigidbody>();
