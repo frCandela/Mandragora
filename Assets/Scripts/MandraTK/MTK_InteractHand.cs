@@ -19,13 +19,7 @@ public class MTK_InteractHand : MonoBehaviour
         set
         {
             if(value != m_closest)
-            {
-                if(m_closest)
-                    m_closest.GetComponent<MeshRenderer>().material.color = Color.white;
-
                 m_closest = value;
-                m_closest.GetComponent<MeshRenderer>().material.color = Color.blue;
-            }
         }
     }
 
@@ -106,10 +100,7 @@ public class MTK_InteractHand : MonoBehaviour
         MTK_Interactable candidate = other.GetComponent<MTK_Interactable>();
         
         if(candidate)
-        {
-            candidate.GetComponent<MeshRenderer>().material.color = Color.white;
             m_objectsInTrigger.Remove(candidate);
-        }
     }
 
     MTK_Interactable GetClosestInteractable()
