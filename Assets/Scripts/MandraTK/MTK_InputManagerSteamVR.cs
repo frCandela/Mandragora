@@ -59,9 +59,4 @@ public class MTK_InputManagerSteamVR : MTK_InputManager
     {
         SteamVR_Controller.Input((int)m_trackedController.controllerIndex).TriggerHapticPulse((ushort)(Time * 1000));
     }
-
-    public override void Haptic(float Time)
-    {
-        SteamVR_Controller.Input((int)m_trackedController.controllerIndex).TriggerHapticPulse((ushort)(Time * 1000));
-    }
 }
