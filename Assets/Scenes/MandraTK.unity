@@ -1279,6 +1279,7 @@ GameObject:
   - component: {fileID: 1691575913}
   - component: {fileID: 1691575916}
   - component: {fileID: 1691575917}
+  - component: {fileID: 1691575918}
   m_Layer: 0
   m_Name: cube3
   m_TagString: Untagged
@@ -1380,7 +1381,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGrabbable: 1
-  jointType: {fileID: 0}
+  jointType: {fileID: 1691575918}
+--- !u!114 &1691575918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1691575911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45d413f923e64664ab44c8ba41224500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onJointBreak:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  breakForce: 1500
 --- !u!1001 &1717510230
 Prefab:
   m_ObjectHideFlags: 0
@@ -1876,11 +1894,11 @@ Prefab:
       objectReference: {fileID: 211339122}
     - target: {fileID: 1591760192689272, guid: 0f644c599f2f48e4e9cf02f814cf3788, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1858845660623346, guid: 0f644c599f2f48e4e9cf02f814cf3788, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f644c599f2f48e4e9cf02f814cf3788, type: 2}

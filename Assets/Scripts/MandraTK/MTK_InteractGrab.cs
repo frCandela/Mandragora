@@ -37,7 +37,6 @@ public class MTK_InteractGrab : MonoBehaviour
 
     private void OnJointBreak(float breakForce)
     {
-        print("OnJointBreak");
         if (objectGrabbed)
         {
             Release();
@@ -49,7 +48,6 @@ public class MTK_InteractGrab : MonoBehaviour
         if( obj.jointType.Used())
         {
             obj.jointType.RemoveJoint();
-            print("remove");
         }
         obj.jointType.onJointBreak.AddListener(Release);
         obj.jointType.JoinWith(gameObject);
@@ -60,7 +58,6 @@ public class MTK_InteractGrab : MonoBehaviour
     {
         if(objectGrabbed)
         {
-            print("Release");
             objectGrabbed.jointType.onJointBreak.RemoveListener(Release);
             objectGrabbed.jointType.RemoveJoint();
             Rigidbody rb = objectGrabbed.GetComponent<Rigidbody>();
