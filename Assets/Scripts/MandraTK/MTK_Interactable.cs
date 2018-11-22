@@ -5,7 +5,7 @@ using UnityEngine;
 public class MTK_Interactable : MonoBehaviour
 {
     [SerializeField] public bool isGrabbable = true;
-    [SerializeField] public MTK_JointType jointType = null;
+    [HideInInspector] public MTK_JointType jointType = null;
 
     // Use this for initialization
     void Awake ()

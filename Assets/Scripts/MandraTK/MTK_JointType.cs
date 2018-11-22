@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public abstract class MTK_JointType : MonoBehaviour
 {
-    public UnityEvent onJointBreak;
+    public UnityEvent onJointBreak = new UnityEvent();
 
     protected Joint m_joint;
 
