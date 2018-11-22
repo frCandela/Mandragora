@@ -450,7 +450,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1580402076942126}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -4.72}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4231844945402864}
@@ -1034,7 +1034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905365873bc33104a9094657f72b0493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectGrabbed: {fileID: 0}
+  m_grabbed: {fileID: 0}
 --- !u!114 &114283973086539500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1047,12 +1047,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axes: 0
+  m_crouch: 99
   sensitivityX: 5
   sensitivityY: 5
   minimumX: -360
   maximumX: 360
   minimumY: -60
   maximumY: 60
+  rotationY: 0
 --- !u!114 &114305267576021196
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1064,16 +1066,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ca91ddadb0b314a9e0220bdcc1e574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onPrimaryInputPressed:
+  onGrabInput:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  onPrimaryInputReleased:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+    m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   m_hand: 0
 --- !u!114 &114317694899919738
 MonoBehaviour:
@@ -1270,16 +1267,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036a8909ed7882f4f909fdfb828af010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onPrimaryInputPressed:
+  onGrabInput:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  onPrimaryInputReleased:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+    m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   primaryInput: 0
 --- !u!114 &114599849015352564
 MonoBehaviour:
@@ -1330,7 +1322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905365873bc33104a9094657f72b0493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectGrabbed: {fileID: 0}
+  m_grabbed: {fileID: 0}
 --- !u!114 &114657150560087156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1342,16 +1334,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ca91ddadb0b314a9e0220bdcc1e574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onPrimaryInputPressed:
+  onGrabInput:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  onPrimaryInputReleased:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+    m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   m_hand: 1
 --- !u!114 &114744507188072190
 MonoBehaviour:
@@ -1376,16 +1363,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036a8909ed7882f4f909fdfb828af010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onPrimaryInputPressed:
+  onGrabInput:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  onPrimaryInputReleased:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+    m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   primaryInput: 0
 --- !u!114 &114795035047358442
 MonoBehaviour:
@@ -1410,7 +1392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905365873bc33104a9094657f72b0493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectGrabbed: {fileID: 0}
+  m_grabbed: {fileID: 0}
 --- !u!114 &114814732575340876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1481,7 +1463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905365873bc33104a9094657f72b0493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectGrabbed: {fileID: 0}
+  m_grabbed: {fileID: 0}
 --- !u!114 &114946821658441534
 MonoBehaviour:
   m_ObjectHideFlags: 1
