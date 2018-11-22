@@ -4,7 +4,7 @@ using UnityEngine;
 using Valve.VR;
 
 [RequireComponent(typeof(MTK_InputManager))]
-public class MTK_InteractGrab : MonoBehaviour
+public class MTK_InteractHand : MonoBehaviour
 {
     public MTK_Interactable m_grabbed = null;
 
