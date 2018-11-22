@@ -28,7 +28,9 @@ public class MTK_InteractHand : MonoBehaviour
         m_setup = FindObjectOfType<MTK_Manager>().activeSetup;
         m_inputManager = GetComponent<MTK_InputManager>();
 
-        m_inputManager.onInput.AddListener(onInput);
+        m_inputManager.m_onTrigger.AddListener(OnTrigger);
+        m_inputManager.m_onGrip.AddListener(OnGrip);
+        m_inputManager.m_onPad.AddListener(OnPad);
     }
 
     private void FixedUpdate()
@@ -36,28 +38,37 @@ public class MTK_InteractHand : MonoBehaviour
         m_closest = GetClosestInteractable();
     }
 
-    void onInput(InputButtons button, bool input)
+    void OnTrigger(bool input)
     {
-        switch (button)
+        if(m_grabbed)
+            m_grabbed.Use(input);
+        else if(m_closest)
+            m_closest.Use(input);
+    }
+
+    void OnGrip(bool input)
+    {
+        if(input)
         {
-            case InputButtons.Grip:
+            if (m_closest)
             {
-                if(input)
-                {
-                    if (m_closest)
-                        Grab(m_closest.GetComponent<MTK_Interactable>());
-                }
-                else
-                {
-                    if(m_grabbed)
-                        Release();
-                }
-            } break;
-            case InputButtons.Trigger:
-                break;
-            case InputButtons.Pad:
-                break;
+                m_closest.Grab(input);
+                Grab(m_closest);
+            }
         }
+        else
+        {
+            if(m_grabbed)
+            {
+                m_grabbed.Grab(input);
+                Release();
+            }
+        }
+    }
+
+    void OnPad(bool input)
+    {
+        // Implement TP
     }
 
     private void OnJointBreak(float breakForce)

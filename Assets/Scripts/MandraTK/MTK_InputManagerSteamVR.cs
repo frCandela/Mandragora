@@ -18,29 +18,29 @@ public class MTK_InputManagerSteamVR : MTK_InputManager
 
     void TriggerPressed(object sender, ClickedEventArgs e)
     {
-        onInput.Invoke(InputButtons.Trigger, true);
+        m_onTrigger.Invoke(true);
     }
     void TriggerReleased(object sender, ClickedEventArgs e)
     {
-        onInput.Invoke(InputButtons.Trigger, false);
+        m_onTrigger.Invoke(false);
     }
 
     void GripPressed(object sender, ClickedEventArgs e)
     {
-        onInput.Invoke(InputButtons.Grip, true);
+        m_onGrip.Invoke(true);
     }
     void GripReleased(object sender, ClickedEventArgs e)
     {
-        onInput.Invoke(InputButtons.Grip, false);
+        m_onGrip.Invoke(false);
     }
 
     void PadPressed(object sender, ClickedEventArgs e)
     {
-        onInput.Invoke(InputButtons.Pad, true);
+        m_onPad.Invoke(true);
     }
     void PadReleased(object sender, ClickedEventArgs e)
     {
-        onInput.Invoke(InputButtons.Pad, false);
+        m_onPad.Invoke(false);
     }
 
     void SetInput()

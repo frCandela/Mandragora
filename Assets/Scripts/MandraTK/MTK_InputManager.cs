@@ -12,7 +12,7 @@ public enum InputButtons
 
 public abstract class MTK_InputManager : MonoBehaviour
 {
-    public UnityEventInputBool onInput;
+    public UnityEventBool m_onTrigger, m_onGrip, m_onPad;
 
     public abstract Vector3 GetAngularVelocity();
     public abstract Vector3 GetVelocity();

@@ -25,19 +25,19 @@ public class MTK_InputManagerSimulator : MTK_InputManager
     {
         // Manage inputs
         if (Input.GetMouseButtonDown(0))
-            onInput.Invoke(InputButtons.Grip, true);
+            m_onGrip.Invoke(true);
         if (Input.GetMouseButtonUp(0))
-            onInput.Invoke(InputButtons.Grip,false);
+            m_onGrip.Invoke(false);
             
         if (Input.GetMouseButtonDown(1))
-            onInput.Invoke(InputButtons.Trigger, true);
+            m_onTrigger.Invoke(true);
         if (Input.GetMouseButtonUp(1))
-            onInput.Invoke(InputButtons.Trigger, false);
+            m_onTrigger.Invoke(false);
 
         if (Input.GetMouseButtonDown(1))
-            onInput.Invoke(InputButtons.Pad, true);
+            m_onPad.Invoke(true);
         if (Input.GetMouseButtonUp(1))
-            onInput.Invoke(InputButtons.Pad, false);
+            m_onPad.Invoke(false);
 
         // Update Angular Velocity
         Quaternion deltaRotation = transform.rotation * Quaternion.Inverse (m_lastRot);
