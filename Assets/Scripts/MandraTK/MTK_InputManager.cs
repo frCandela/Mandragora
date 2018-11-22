@@ -5,8 +5,7 @@ using UnityEngine.Events;
 
 public abstract class MTK_InputManager : MonoBehaviour
 {
-    public UnityEvent onPrimaryInputPressed;
-    public UnityEvent onPrimaryInputReleased;
+    public UnityEventBool onGrabInput;
 
     public abstract Vector3 GetAngularVelocity();
     public abstract Vector3 GetVelocity();

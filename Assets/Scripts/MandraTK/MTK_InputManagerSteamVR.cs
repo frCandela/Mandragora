@@ -21,11 +21,11 @@ public class MTK_InputManagerSteamVR : MTK_InputManager
 
     void PrimaryInputPressed(object sender, ClickedEventArgs e)
     {
-        onPrimaryInputPressed.Invoke();
+        onGrabInput.Invoke(true);
     }
     void PrimaryInputReleased(object sender, ClickedEventArgs e)
     {
-        onPrimaryInputReleased.Invoke();
+        onGrabInput.Invoke(false);
     }
 
     void SetInput()

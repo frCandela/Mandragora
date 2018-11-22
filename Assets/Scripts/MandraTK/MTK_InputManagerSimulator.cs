@@ -16,16 +16,16 @@ public class MTK_InputManagerSimulator : MTK_InputManager
         if (m_hand == Hand.left)
         {
             if (Input.GetMouseButtonDown(0))
-                onPrimaryInputPressed.Invoke();
+                onGrabInput.Invoke(true);
             if (Input.GetMouseButtonUp(0))
-                onPrimaryInputReleased.Invoke();
+                onGrabInput.Invoke(false);
         }
         if (m_hand == Hand.right)
         {
             if (Input.GetMouseButtonDown(1))
-                onPrimaryInputPressed.Invoke();
+                onGrabInput.Invoke(true);
             if (Input.GetMouseButtonUp(1))
-                onPrimaryInputReleased.Invoke();
+                onGrabInput.Invoke(false);
         }
     }
 

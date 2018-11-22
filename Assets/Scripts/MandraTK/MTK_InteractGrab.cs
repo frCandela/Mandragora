@@ -6,39 +6,60 @@ using Valve.VR;
 [RequireComponent(typeof(MTK_InputManager))]
 public class MTK_InteractGrab : MonoBehaviour
 {
-    public MTK_Interactable objectGrabbed = null;
+    public MTK_Interactable m_grabbed = null;
 
-    private MTK_Interactable m_objectInTrigger = null;
+    private List<MTK_Interactable> m_objectsInTrigger = new List<MTK_Interactable>(3);
     private MTK_Setup m_setup;
     private MTK_InputManager m_inputManager;
+
+    private MTK_Interactable m_closest;
+    MTK_Interactable Closest
+    {
+        get {return m_closest;}
+        set
+        {
+            if(value != m_closest)
+            {
+                if(m_closest)
+                    m_closest.GetComponent<MeshRenderer>().material.color = Color.white;
+
+                m_closest = value;
+                m_closest.GetComponent<MeshRenderer>().material.color = Color.blue;
+            }
+        }
+    }
 
     private void Start()
     {
         m_setup = FindObjectOfType<MTK_Manager>().activeSetup;
         m_inputManager = GetComponent<MTK_InputManager>();
 
-        m_inputManager.onPrimaryInputPressed.AddListener(InputPressed);
-        m_inputManager.onPrimaryInputReleased.AddListener(InputReleased);
+        m_inputManager.onGrabInput.AddListener(onGrabPressed);
     }
 
-    void InputPressed()
+    private void FixedUpdate()
     {
-        if (m_objectInTrigger)
+        m_closest = GetClosestInteractable();
+    }
+
+    void onGrabPressed(bool input)
+    {
+        if(input)
         {
-            Grab(m_objectInTrigger);
+            if (m_closest)
+                Grab(m_closest.GetComponent<MTK_Interactable>());
         }
-    }
-
-    void InputReleased()
-    {
-        if(objectGrabbed)       
-            Release();        
+        else
+        {
+            if(m_grabbed)
+                Release();
+        }
     }
 
     private void OnJointBreak(float breakForce)
     {
         print("OnJointBreak");
-        if (objectGrabbed)
+        if (m_grabbed)
         {
             Release();
         }
@@ -53,59 +74,59 @@ public class MTK_InteractGrab : MonoBehaviour
         }
         obj.jointType.onJointBreak.AddListener(Release);
         obj.jointType.JoinWith(gameObject);
-        objectGrabbed = obj;
+        m_grabbed = obj;
     }
 
     void Release()
     {
-        if(objectGrabbed)
+        if(m_grabbed)
         {
             print("Release");
-            objectGrabbed.jointType.onJointBreak.RemoveListener(Release);
-            objectGrabbed.jointType.RemoveJoint();
-            Rigidbody rb = objectGrabbed.GetComponent<Rigidbody>();
-            objectGrabbed.jointType.onJointBreak.RemoveListener(Release);
+            m_grabbed.jointType.onJointBreak.RemoveListener(Release);
+            m_grabbed.jointType.RemoveJoint();
+            Rigidbody rb = m_grabbed.GetComponent<Rigidbody>();
+            m_grabbed.jointType.onJointBreak.RemoveListener(Release);
             rb.velocity = m_inputManager.GetVelocity();
             rb.angularVelocity = m_inputManager.GetAngularVelocity();
 
-            objectGrabbed = null;
-        }
-    }
-
-    void EvaluateTrigger(GameObject obj)
-    {
-        MTK_Interactable interactable = obj.GetComponent<MTK_Interactable>();
-        if (interactable && interactable.isGrabbable && interactable != objectGrabbed)
-        {
-            if (m_objectInTrigger)
-            {
-                if (Vector3.SqrMagnitude(interactable.transform.position - transform.position) < Vector3.SqrMagnitude(m_objectInTrigger.transform.position - transform.position))
-                {
-                    m_objectInTrigger = interactable;
-                }
-            }
-            else
-            {
-                m_objectInTrigger = interactable;
-            }
+            m_grabbed = null;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        EvaluateTrigger(other.gameObject);
-    }
+        MTK_Interactable candidate = other.GetComponent<MTK_Interactable>();
 
-    private void OnTriggerStay(Collider other)
-    {
-        EvaluateTrigger(other.gameObject);
+        if(candidate)
+            m_objectsInTrigger.Add(candidate);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (m_objectInTrigger && other.gameObject == m_objectInTrigger.gameObject)
+        MTK_Interactable candidate = other.GetComponent<MTK_Interactable>();
+        
+        if(candidate)
         {
-            m_objectInTrigger = null;
+            candidate.GetComponent<MeshRenderer>().material.color = Color.white;
+            m_objectsInTrigger.Remove(candidate);
         }
+    }
+
+    MTK_Interactable GetClosestInteractable()
+    {
+        float minDistance = float.MaxValue,
+                tmpDist;
+
+        MTK_Interactable result = null;
+
+        foreach (MTK_Interactable candidate in m_objectsInTrigger)
+        {
+            tmpDist = Vector3.Distance(transform.position, candidate.transform.position);
+
+            if(tmpDist < minDistance)
+                result = candidate;
+        }
+
+        return result;
     }
 }
