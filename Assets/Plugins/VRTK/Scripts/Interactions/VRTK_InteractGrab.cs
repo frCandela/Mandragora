@@ -494,7 +494,7 @@ namespace VRTK
             grabbedObject = null;
         }
 
-        protected virtual GameObject GetGrabbableObject()
+        public virtual GameObject GetGrabbableObject()
         {
             GameObject obj = (interactTouch != null ? interactTouch.GetTouchedObject() : null);
             if (obj != null && interactTouch.IsObjectInteractable(obj))
@@ -547,7 +547,7 @@ namespace VRTK
             }
         }
 
-        protected virtual void PerformGrabAttempt(GameObject objectToGrab)
+        public virtual void PerformGrabAttempt(GameObject objectToGrab)
         {
             IncrementGrabState();
             bool initialGrabAttempt = IsValidGrabAttempt(objectToGrab);
@@ -575,7 +575,7 @@ namespace VRTK
             return initialGrabAttempt;
         }
 
-        protected virtual bool CanRelease()
+        public virtual bool CanRelease()
         {
             if (grabbedObject != null)
             {

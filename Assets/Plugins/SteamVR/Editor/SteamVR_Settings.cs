@@ -113,9 +113,9 @@ public class SteamVR_Settings : EditorWindow
 			// Switch to native OpenVR support.
 			var updated = false;
 
-			if (!PlayerSettings.virtualRealitySupported)
+			if (!PlayerSettings.virtualRealitySupported && false) // Set in MTK_Setups
 			{
-				PlayerSettings.virtualRealitySupported = true;
+                PlayerSettings.virtualRealitySupported = true;
 				updated = true;
 			}
 
