@@ -53,7 +53,9 @@ public class MTK_InteractHand : MonoBehaviour
             if (m_closest)
             {
                 m_closest.Grab(input);
-                Grab(m_closest);
+
+                if(m_closest.isGrabbable)
+                    Grab(m_closest);
             }
         }
         else
@@ -77,7 +79,7 @@ public class MTK_InteractHand : MonoBehaviour
             Release();
     }
 
-    void Grab( MTK_Interactable obj)
+    public void Grab( MTK_Interactable obj)
     {
         if( obj.jointType.Used())
             obj.jointType.RemoveJoint();

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnerPortal : Spawner
 {
-    MTK_InputManager m_inputHand;
+    MTK_InteractHand m_inputHand;
     bool m_correctEntry = false;
     bool m_canSpawn = false;
 
@@ -21,9 +21,9 @@ public class SpawnerPortal : Spawner
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<MTK_InputManager>())
+        if(other.GetComponent<MTK_InteractHand>())
         {
-            m_inputHand = other.GetComponent<MTK_InputManager>();
+            m_inputHand = other.GetComponent<MTK_InteractHand>();
 
             m_correctEntry = GetTriggerNormal(other.transform.position) == Vector3.up;
             m_canSpawn = false;
@@ -32,7 +32,7 @@ public class SpawnerPortal : Spawner
 
     private void OnTriggerExit(Collider other)
     {
-        if(m_inputHand == other.GetComponent<MTK_InputManager>())
+        if(m_inputHand == other.GetComponent<MTK_InteractHand>())
             if(m_correctEntry)
                 if(GetTriggerNormal(other.transform.position) == Vector3.down)
                 {
@@ -41,6 +41,16 @@ public class SpawnerPortal : Spawner
                 }
         // else
         //     print("failure");
+    }
+
+    public void AttemptGrab()
+    {
+        if(m_canSpawn)
+        {
+            Spawn(m_inputHand.transform.position, m_inputHand.transform.rotation, null);
+            m_inputHand.Grab(m_spawned.GetComponent<MTK_Interactable>());
+            m_canSpawn = false;
+        }
     }
 
     public void Cancel()
@@ -52,6 +62,6 @@ public class SpawnerPortal : Spawner
     private void Update()
     {
         if(m_canSpawn)
-            m_inputHand.Haptic(Time.deltaTime);
+            m_inputHand.GetComponent<MTK_InputManagerSimulator>().Haptic(Time.deltaTime);
     }
 }
