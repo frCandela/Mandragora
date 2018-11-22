@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 114494266503143566}
   - component: {fileID: 114116634101284398}
   - component: {fileID: 114042521325743712}
-  - component: {fileID: 114448060655382722}
   m_Layer: 0
   m_Name: levitationLiquid
   m_TagString: Untagged
@@ -115,19 +114,6 @@ MonoBehaviour:
     _collection:
     - {fileID: 1902553106167968}
   _assetGuid: bb4b43d4e6473c04682bc9c98850fcf0
---- !u!114 &114448060655382722
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1902553106167968}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f08307ac462fa646aadd0b9e89419ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 33f4e8d100e5760499863ea077baee00, type: 2}
-  duration: 3
 --- !u!114 &114494266503143566
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,3 +126,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.03
+  effectPrefab: {fileID: 114469177602863068, guid: 0efb350d3af8a5e40bce5d71976c5452,
+    type: 2}
