@@ -12,6 +12,10 @@ public class MTK_Interactable : MonoBehaviour
     {
         if (isGrabbable && !jointType)
             jointType = gameObject.AddComponent<MTK_JointType_Fixed>();
+    }
 
+    public void ReceiveInput(InputButtons button, bool input)
+    {
+        
     }
 }

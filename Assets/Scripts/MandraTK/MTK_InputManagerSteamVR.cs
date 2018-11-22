@@ -5,9 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(SteamVR_TrackedController))]
 public class MTK_InputManagerSteamVR : MTK_InputManager
 {
-    public enum InputButtons { Trigger, Grip, Pad };
-    [SerializeField] private InputButtons primaryInput = InputButtons.Trigger;
-
     private SteamVR_TrackedController m_trackedController = null;
 
     public override Vector3 GetAngularVelocity() { return m_trackedController.GetAngularVelocity(); }
@@ -19,32 +16,43 @@ public class MTK_InputManagerSteamVR : MTK_InputManager
         SetInput();
     }
 
-    void PrimaryInputPressed(object sender, ClickedEventArgs e)
+    void TriggerPressed(object sender, ClickedEventArgs e)
     {
-        onGrabInput.Invoke(true);
+        onInput.Invoke(InputButtons.Trigger, true);
     }
-    void PrimaryInputReleased(object sender, ClickedEventArgs e)
+    void TriggerReleased(object sender, ClickedEventArgs e)
     {
-        onGrabInput.Invoke(false);
+        onInput.Invoke(InputButtons.Trigger, false);
+    }
+
+    void GripPressed(object sender, ClickedEventArgs e)
+    {
+        onInput.Invoke(InputButtons.Grip, true);
+    }
+    void GripReleased(object sender, ClickedEventArgs e)
+    {
+        onInput.Invoke(InputButtons.Grip, false);
+    }
+
+    void PadPressed(object sender, ClickedEventArgs e)
+    {
+        onInput.Invoke(InputButtons.Pad, true);
+    }
+    void PadReleased(object sender, ClickedEventArgs e)
+    {
+        onInput.Invoke(InputButtons.Pad, false);
     }
 
     void SetInput()
     {
-        switch (primaryInput)
-        {
-            case InputButtons.Trigger:
-                m_trackedController.TriggerClicked += PrimaryInputPressed;
-                m_trackedController.TriggerUnclicked += PrimaryInputReleased;
-                break;
-            case InputButtons.Grip:
-                m_trackedController.Gripped += PrimaryInputPressed;
-                m_trackedController.Ungripped += PrimaryInputReleased;
-                break;
-            case InputButtons.Pad:
-                m_trackedController.PadClicked += PrimaryInputPressed;
-                m_trackedController.PadUnclicked += PrimaryInputReleased;
-                break;
-        }
+        m_trackedController.TriggerClicked += TriggerPressed;
+        m_trackedController.TriggerUnclicked += TriggerReleased;
+        
+        m_trackedController.Gripped += GripPressed;
+        m_trackedController.Ungripped += GripReleased;
+
+        m_trackedController.PadClicked += PadPressed;
+        m_trackedController.PadUnclicked += PadReleased;
     }
 
     public override void Haptic(float Time)

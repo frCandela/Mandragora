@@ -4,29 +4,28 @@ using UnityEngine;
 
 public class MTK_InputManagerSimulator : MTK_InputManager
 {
-    public enum Hand {left, right}
-    [SerializeField] private Hand m_hand;
-
+    // public enum Hand {left, right}
+    // [SerializeField] private Hand m_hand;
 
     public override Vector3 GetAngularVelocity() { return Vector3.zero; }
     public override Vector3 GetVelocity() { return Vector3.zero; }
 
-    private void Update()
+    void Update()
     {
-        if (m_hand == Hand.left)
-        {
-            if (Input.GetMouseButtonDown(0))
-                onGrabInput.Invoke(true);
-            if (Input.GetMouseButtonUp(0))
-                onGrabInput.Invoke(false);
-        }
-        if (m_hand == Hand.right)
-        {
-            if (Input.GetMouseButtonDown(1))
-                onGrabInput.Invoke(true);
-            if (Input.GetMouseButtonUp(1))
-                onGrabInput.Invoke(false);
-        }
+        if (Input.GetMouseButtonDown(0))
+            onInput.Invoke(InputButtons.Grip, true);
+        if (Input.GetMouseButtonUp(0))
+            onInput.Invoke(InputButtons.Grip,false);
+            
+        if (Input.GetMouseButtonDown(1))
+            onInput.Invoke(InputButtons.Trigger, true);
+        if (Input.GetMouseButtonUp(1))
+            onInput.Invoke(InputButtons.Trigger, false);
+
+        if (Input.GetMouseButtonDown(1))
+            onInput.Invoke(InputButtons.Pad, true);
+        if (Input.GetMouseButtonUp(1))
+            onInput.Invoke(InputButtons.Pad, false);
     }
 
     public override void Haptic(float Time)

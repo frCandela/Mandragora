@@ -28,7 +28,7 @@ public class MTK_InteractHand : MonoBehaviour
         m_setup = FindObjectOfType<MTK_Manager>().activeSetup;
         m_inputManager = GetComponent<MTK_InputManager>();
 
-        m_inputManager.onGrabInput.AddListener(onGrabPressed);
+        m_inputManager.onInput.AddListener(onInput);
     }
 
     private void FixedUpdate()
@@ -36,17 +36,27 @@ public class MTK_InteractHand : MonoBehaviour
         m_closest = GetClosestInteractable();
     }
 
-    void onGrabPressed(bool input)
+    void onInput(InputButtons button, bool input)
     {
-        if(input)
+        switch (button)
         {
-            if (m_closest)
-                Grab(m_closest.GetComponent<MTK_Interactable>());
-        }
-        else
-        {
-            if(m_grabbed)
-                Release();
+            case InputButtons.Grip:
+            {
+                if(input)
+                {
+                    if (m_closest)
+                        Grab(m_closest.GetComponent<MTK_Interactable>());
+                }
+                else
+                {
+                    if(m_grabbed)
+                        Release();
+                }
+            } break;
+            case InputButtons.Trigger:
+                break;
+            case InputButtons.Pad:
+                break;
         }
     }
 
