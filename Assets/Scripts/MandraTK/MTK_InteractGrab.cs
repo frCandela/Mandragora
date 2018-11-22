@@ -35,31 +35,36 @@ public class MTK_InteractGrab : MonoBehaviour
             Release();        
     }
 
-    void JointFailed(MTK_JointType joint)
+    private void OnJointBreak(float breakForce)
     {
-        objectGrabbed.jointType.onJointBreak.RemoveListener(JointFailed);
-        Release();        
+        print("OnJointBreak");
+        if (objectGrabbed)
+        {
+            Release();
+        }
     }
 
     void Grab( MTK_Interactable obj)
     {
-        if (obj.jointType.Used())
+        if( obj.jointType.Used())
+        {
             obj.jointType.RemoveJoint();
-
+            print("remove");
+        }
+        obj.jointType.onJointBreak.AddListener(Release);
+        obj.jointType.JoinWith(gameObject);
         objectGrabbed = obj;
-        if (!objectGrabbed.jointType.JoinWith(gameObject))
-            print("zob");
-        
-        objectGrabbed.jointType.onJointBreak.AddListener(JointFailed);// null ref exception here
     }
 
     void Release()
     {
         if(objectGrabbed)
         {
-            Rigidbody rb = objectGrabbed.GetComponent<Rigidbody>();
+            print("Release");
+            objectGrabbed.jointType.onJointBreak.RemoveListener(Release);
             objectGrabbed.jointType.RemoveJoint();
-
+            Rigidbody rb = objectGrabbed.GetComponent<Rigidbody>();
+            objectGrabbed.jointType.onJointBreak.RemoveListener(Release);
             rb.velocity = m_inputManager.GetVelocity();
             rb.angularVelocity = m_inputManager.GetAngularVelocity();
 

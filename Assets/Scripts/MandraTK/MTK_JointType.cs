@@ -10,7 +10,8 @@ public class JointBreakEvent : UnityEvent<MTK_JointType>
 
 public abstract class MTK_JointType : MonoBehaviour
 {
-    public JointBreakEvent onJointBreak;
+    public UnityEvent onJointBreak;
+
     protected Joint m_joint;
 
     public abstract bool JoinWith(GameObject other);
@@ -21,14 +22,5 @@ public abstract class MTK_JointType : MonoBehaviour
     {
         return m_joint != null;
     }
-
-    protected virtual void OnJointBreak(float breakForce)
-    {
-        m_joint = null;
-        onJointBreak.Invoke(this);
-    }
-
-
-
 }
 

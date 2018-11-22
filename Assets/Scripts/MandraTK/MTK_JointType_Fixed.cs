@@ -12,8 +12,8 @@ public class MTK_JointType_Fixed : MTK_JointType
     {
         if( ! m_joint )
         {
-            m_joint = gameObject.AddComponent<FixedJoint>();
-            m_joint.connectedBody = other.GetComponent<Rigidbody>();
+            m_joint = other.AddComponent<FixedJoint>();
+            m_joint.connectedBody = GetComponent<Rigidbody>();
             m_joint.breakForce = breakForce;
             return true;
         }
@@ -24,9 +24,9 @@ public class MTK_JointType_Fixed : MTK_JointType
     {
         if(m_joint)
         {
+            onJointBreak.Invoke();
             Destroy(m_joint);
             m_joint = null;
-            onJointBreak.Invoke(this);
             return true;
         }
         return false;
