@@ -299,14 +299,15 @@ namespace Obi{
 			UpdateEmitterDistribution();
 		}
 
+        [Range(0f,1f)]public float speedScale = 1f;
 		public void ResetParticlePosition(int index, float offset){	
 
 			distEnumerator.MoveNext();
 			ObiEmitterShape.DistributionPoint distributionPoint = distEnumerator.Current;
 
 			Vector3 spawnVelocity = Vector3.Lerp(distributionPoint.velocity,UnityEngine.Random.onUnitSphere,randomVelocity);
-
-			Vector3 positionOffset = spawnVelocity * (speed * Time.fixedDeltaTime) * offset;
+            spawnVelocity = speedScale * spawnVelocity;
+            Vector3 positionOffset = spawnVelocity * (speed * Time.fixedDeltaTime) * offset;
 
 			Vector4[] posArray = {distributionPoint.position + positionOffset};
 			Vector4[] velArray = {spawnVelocity * speed};

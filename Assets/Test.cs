@@ -26,7 +26,7 @@ public class Test : MonoBehaviour
         solver.OnCollision -= Solver_OnCollision;
     }
 
-    public int test = 0;
+    bool test = true;
     void Solver_OnCollision(object sender, Obi.ObiSolver.ObiCollisionEventArgs e)
     {
 
@@ -41,10 +41,23 @@ public class Test : MonoBehaviour
                 {
                     ObiSolver.ParticleInActor pa = solver.particleToActor[contact.particle];
                     ObiEmitter emitter = pa.actor as ObiEmitter;
+
                     if (emitter != null)
                     {
-                        emitter.life[pa.indexInActor] = 0;
-                        test++;
+
+
+                        WithLiquid wl = component.gameObject.GetComponent<WithLiquid>();
+                        if (wl)
+                        {
+                            emitter.life[pa.indexInActor] = 0;
+                            wl.Fill(0.01f);
+                        }
+                        else if (test)
+                        {
+                            print(component.gameObject.name);
+                            test = false;
+                        }
+                        // 
                     }
                 }
             }
