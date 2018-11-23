@@ -29,8 +29,6 @@ public class Test : MonoBehaviour
     bool test = true;
     void Solver_OnCollision(object sender, Obi.ObiSolver.ObiCollisionEventArgs e)
     {
-
-
         foreach (Oni.Contact contact in e.contacts)
         {
             // this one is an actual collision:

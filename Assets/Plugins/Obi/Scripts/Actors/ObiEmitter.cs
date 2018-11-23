@@ -306,7 +306,8 @@ namespace Obi{
 			ObiEmitterShape.DistributionPoint distributionPoint = distEnumerator.Current;
 
 			Vector3 spawnVelocity = Vector3.Lerp(distributionPoint.velocity,UnityEngine.Random.onUnitSphere,randomVelocity);
-            spawnVelocity = speedScale * spawnVelocity;
+            spawnVelocity = speedScale * transform.forward;
+            spawnVelocity = Vector3.zero;
             Vector3 positionOffset = spawnVelocity * (speed * Time.fixedDeltaTime) * offset;
 
 			Vector4[] posArray = {distributionPoint.position + positionOffset};

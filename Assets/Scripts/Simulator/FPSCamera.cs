@@ -19,21 +19,11 @@ public class FPSCamera : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    public CursorLockMode test;
     void Update()
     {
-        // Cursor mode swap
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (Cursor.lockState == CursorLockMode.Locked)
-            {
-                Cursor.lockState = CursorLockMode.None;
-            }
-            if (Cursor.lockState == CursorLockMode.None)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-            }
-        }
 
+        test = Cursor.lockState;
         // Move camera
         if (Cursor.lockState == CursorLockMode.Locked)
         {
