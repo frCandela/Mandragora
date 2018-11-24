@@ -13,6 +13,7 @@ public class WithLiquid : MonoBehaviour
     [Header("References")]
     [SerializeField] private Mesh insideMesh = null;
     [SerializeField] private Material material = null;
+    [SerializeField] private Effect effect = null;
 
     [Header("Container properties")]
     [SerializeField,] private float minHeight = 0f;
@@ -26,6 +27,7 @@ public class WithLiquid : MonoBehaviour
     [SerializeField] private float m_currentVolume = 0f;
     [SerializeField] private Obi.ObiEmitter m_emitter = null;
     private float m_liquidHeight = 0f;
+    public const float volumePerParticle = 0.00666f;
 
     [Header("Debug & Performance")]    
     [SerializeField] private float executionDelay = 0f;
@@ -95,6 +97,8 @@ public class WithLiquid : MonoBehaviour
 
         newVertices = new Vector3[m_baseVertices.Length];
         m_baseVertices.CopyTo(newVertices, 0);
+
+        m_emitter.effect = effect;
     }
 
     private void OnDrawGizmos()
@@ -386,12 +390,11 @@ public class WithLiquid : MonoBehaviour
         m_liquidHeight = Mathf.Min(m_liquidHeight + heightDelta, maxHeight);
     }
 
-
-    public float mult = 20f;
     // Creates a liquid leak
     public void Leak( float volumeDelta, Vector3 leakPos)
     {
-        m_emitter.unemittedBursts += mult * volumeDelta;
+        m_emitter.unemittedBursts += volumeDelta / volumePerParticle;
+
     }
 
     void UpdateMesh()

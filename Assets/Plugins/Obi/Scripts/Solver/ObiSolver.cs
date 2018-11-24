@@ -36,6 +36,7 @@ namespace Obi
  * Several kinds of constraint types and their parameters are exposed, and several Obi components can
  * be used to feed particles and constraints to the solver.
  */
+
 [ExecuteInEditMode]
 [AddComponentMenu("Physics/Obi/Obi Solver")]
 [DisallowMultipleComponent]
@@ -64,7 +65,7 @@ public sealed class ObiSolver : MonoBehaviour
 		public ObiActor actor;
 		public int indexInActor;
 
-		public ParticleInActor(ObiActor actor, int indexInActor){
+        public ParticleInActor(ObiActor actor, int indexInActor){
 			this.actor = actor;
 			this.indexInActor = indexInActor;
 		}
@@ -111,7 +112,7 @@ public sealed class ObiSolver : MonoBehaviour
 	[HideInInspector] [NonSerialized] public int[] materialIndices;
 	[HideInInspector] [NonSerialized] public int[] fluidMaterialIndices;
 
-	private int[] activeParticles;
+        private int[] activeParticles;
 	private List<ObiEmitterMaterial> emitterMaterials = new List<ObiEmitterMaterial>();
 
 	[HideInInspector] [NonSerialized] public Vector4[] renderablePositions;	/**< renderable particle positions.*/

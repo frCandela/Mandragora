@@ -95,8 +95,6 @@ namespace Obi.CrossPlatformInput.Inspector
             {
                 BuildTargetGroup.Android,
                 BuildTargetGroup.iOS,
-				BuildTargetGroup.PSM, 
-				BuildTargetGroup.Tizen, 
 				BuildTargetGroup.WSA 
             };
 

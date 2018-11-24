@@ -41,9 +41,10 @@ namespace Obi{
 		private IEnumerator<ObiEmitterShape.DistributionPoint> distEnumerator;
 
 		private int activeParticleCount = 0;			/**< number of currently active particles*/
-		[HideInInspector] public float[] life;			/**< per particle remaining life in seconds.*/
+		[HideInInspector] public float[] life;          /**< per particle remaining life in seconds.*/
 
-		public float unemittedBursts = 0;
+
+        public float unemittedBursts = 0;
 
 		public int NumParticles{
 			set{
@@ -63,16 +64,6 @@ namespace Obi{
 		public override bool SelfCollisions{
 			get{return selfCollisions;}
 		}
-
-		/*public ObiEmitterShape EmitterShape{
-			get{return emitterShape;}
-			set{
-				if (emitterShape != value){
-					emitterShape = value;
-					UpdateEmitterDistribution();
-				}
-			}
-		}*/
 
 		public ObiEmitterMaterial EmitterMaterial{
 			set{
@@ -183,7 +174,6 @@ namespace Obi{
 			this.PushDataToSolver(ParticleData.INV_MASSES);
 		}
 
-
 		/**
 		 * Sets particle solid radii to half of the fluids rest distance.
 		 */
@@ -214,7 +204,7 @@ namespace Obi{
 
 			active = new bool[numParticles];
 			life = new float[numParticles];
-			positions = new Vector3[numParticles];
+            positions = new Vector3[numParticles];
 			velocities = new Vector3[numParticles];
 			invMasses  = new float[numParticles];
 			solidRadii = new float[numParticles];
@@ -322,17 +312,20 @@ namespace Obi{
 		/**
 		 * Asks the emiter to emits a new particle. Returns whether the emission was succesful.
 		 */
-		public bool EmitParticle(float offset){
+		public bool EmitParticle(float offset, Effect effect)
+        {
 
 			if (activeParticleCount == numParticles) return false;
 
 			life[activeParticleCount] = lifespan;
-			
-			// move particle to its spawn position:
-			ResetParticlePosition(activeParticleCount, offset);
+
+            // move particle to its spawn position:
+            ResetParticlePosition(activeParticleCount, offset);
 
 			// now there's one active particle more:
 			active[activeParticleCount] = true;
+
+
 			activeParticleCount++;
 
 			return true;
@@ -364,8 +357,8 @@ namespace Obi{
 			life[activeParticleCount] = life[index];
 			life[index] = tempLife;
 
-			// and swap colors:
-			Color tempColor = colors[activeParticleCount];
+            // and swap colors:
+            Color tempColor = colors[activeParticleCount];
 			colors[activeParticleCount] = colors[index];
 			colors[index] = tempColor;
 
@@ -414,7 +407,7 @@ namespace Obi{
                 {
 					for (int i = 0; i < emissionPoints; ++i)
                     {
-						emitted |= EmitParticle(0);
+						emitted |= EmitParticle(0, effect);
 					}
 					unemittedBursts -= 1;
 				}
