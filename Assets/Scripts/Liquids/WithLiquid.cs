@@ -10,32 +10,32 @@ using UnityEngine;
 
 public class WithLiquid : MonoBehaviour
 {
-    [Header("Parameters")]
+    [Header("References")]
     [SerializeField] private Mesh insideMesh = null;
     [SerializeField] private Material material = null;
+
+    [Header("Container properties")]
     [SerializeField,] private float minHeight = 0f;
     [SerializeField,] private float centerHeight = 0.5f;
     [SerializeField,] private float maxHeight = 2.55f;
-    [SerializeField, Range(0, 3f)] public float liquidHeight = 0.5f;
-    [SerializeField] private bool containerClosed = true;
+    [SerializeField]  private bool containerClosed = true;
 
     [Header("Liquid Simulation")]
-    [SerializeField] private Liquid LiquidGameObject = null;
-    [SerializeField] private float leakDistance = 1f;
-    [SerializeField] public float speed = 0.1f;
-    [SerializeField] public float volume = 1f;
+    [SerializeField] private float m_flowSpeed = 1f;
+    [SerializeField] private float m_totalVolume = 1f;
+    [SerializeField] private float m_currentVolume = 0f;
+    [SerializeField] private Obi.ObiEmitter m_emitter = null;
+    private float m_liquidHeight = 0f;
 
     [Header("Debug & Performance")]    
     [SerializeField] private float executionDelay = 0f;
     [SerializeField] private bool showDebugLines = false;
-    //[SerializeField] float executionTime;   // Raw perf measurement
 
     // Liquid mesh references
     private GameObject m_gameObject = null;
     private MeshRenderer m_meshRenderer = null;
     private MeshFilter m_meshFilter = null;
     private Mesh m_mesh = null;
-    private Liquid m_liquidRef = null;
 
     // Mesh data
     private Vector3[] m_baseVertices;       // Vertices of the mesh to cut 
@@ -129,7 +129,8 @@ public class WithLiquid : MonoBehaviour
         if (m_timeSinceLastCall > executionDelay)
         {
             float t = Time.realtimeSinceStartup;
-            if (liquidHeight > 0)
+            m_currentVolume = HeightToVolume(m_liquidHeight);
+            if (m_liquidHeight > 0)
             {
                 BuildEges();
                 BuildTopFace();
@@ -152,7 +153,7 @@ public class WithLiquid : MonoBehaviour
         Vector3 botPoint = transform.rotation * (centerHeight   * Vector3.up) - centerHeight * Vector3.up;    
         Vector3 meshSpaceBotPoint = Quaternion.Inverse(transform.rotation) * botPoint;
         Vector3 normal = Quaternion.Inverse(transform.rotation) * Vector3.up;
-        Vector3 p = meshSpaceBotPoint + normal * liquidHeight;
+        Vector3 p = meshSpaceBotPoint + normal * m_liquidHeight;
 
         RelativeDebugLine(meshSpaceBotPoint, meshSpaceBotPoint + 2*Vector3.up, Color.red);
         cutPlane.SetNormalAndPosition(normal, p);
@@ -344,7 +345,7 @@ public class WithLiquid : MonoBehaviour
 
         RelativeDebugLine(highestEdge, highestEdge + Vector3.up, Color.blue);
 
-        float delta = 0f;
+        float deltaHeight = 0f;
          if ( !containerClosed)
          {
             if (highestEdge.y > maxHeight)
@@ -352,43 +353,45 @@ public class WithLiquid : MonoBehaviour
                  Vector3 p = Quaternion.Inverse(transform.rotation) * (highestEdge);
                  RelativeDebugLine(p, p + 2*cutPlane.normal, Color.blue);
 
-                 delta = speed * Time.deltaTime;
-                 liquidHeight = Mathf.Max(0f, liquidHeight - delta);
+                deltaHeight = m_flowSpeed * Time.deltaTime;
+                m_liquidHeight = Mathf.Max(0f, m_liquidHeight - deltaHeight);    // Leak delta height
             }
 
             // Liquid overflow
-            float height = maxHeight - minHeight;
-            float ratio = delta / height;
-            float volumeDelta = volume * ratio;
+            float volumeDelta = HeightToVolume(deltaHeight);
             Leak(volumeDelta, transform.position + Vector3.Scale(transform.localScale, transform.rotation * highestEdge));
         }
+    }
+
+    float HeightToVolume( float height )
+    {
+        return height * m_totalVolume / (maxHeight - minHeight);
+    }
+
+    float VolumeToHeight(float volume)
+    {
+        float height = maxHeight - minHeight;
+        float ratio = volume / m_totalVolume;
+        float heightDelta = ratio * height;
+
+        return heightDelta;
     }
 
     // Fills the container with liquid
     public void Fill( float volumeDelta )
     {
         float height = maxHeight - minHeight;
-        float ratio = volumeDelta / volume;
+        float ratio = volumeDelta / m_totalVolume;
         float heightDelta = ratio *  height;
-        liquidHeight = Mathf.Min(liquidHeight + heightDelta, maxHeight);
+        m_liquidHeight = Mathf.Min(m_liquidHeight + heightDelta, maxHeight);
     }
 
+
+    public float mult = 20f;
     // Creates a liquid leak
     public void Leak( float volumeDelta, Vector3 leakPos)
     {
-        if (volumeDelta > 0)
-        {
-            // Reinstanciate the liquid if it's too far or null
-            if ( !m_liquidRef || Vector3.SqrMagnitude(leakPos - m_liquidRef.top) > leakDistance* leakDistance)
-            {
-                m_liquidRef = Instantiate(LiquidGameObject);
-                m_liquidRef.SetTransform(leakPos, leakPos);
-            }
-
-            // Updates the liquid
-            m_liquidRef.SetTransform(leakPos, m_liquidRef.bottom);
-            m_liquidRef.AddLiquid(volumeDelta);
-        }
+        m_emitter.unemittedBursts += mult * volumeDelta;
     }
 
     void UpdateMesh()
@@ -481,6 +484,10 @@ public class WithLiquid : MonoBehaviour
     private void OnValidate()
     {
         if (m_gameObject)
+        {
             m_gameObject.transform.position = transform.position + minHeight * Vector3.up;
+        }
+        m_liquidHeight = VolumeToHeight( Mathf.Min( m_currentVolume, m_totalVolume)  );
+
     }
 }

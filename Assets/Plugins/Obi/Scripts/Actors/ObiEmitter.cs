@@ -43,7 +43,7 @@ namespace Obi{
 		private int activeParticleCount = 0;			/**< number of currently active particles*/
 		[HideInInspector] public float[] life;			/**< per particle remaining life in seconds.*/
 
-		private float unemittedBursts = 0;
+		public float unemittedBursts = 0;
 
 		public int NumParticles{
 			set{
@@ -388,7 +388,7 @@ namespace Obi{
 				size += emitterShapes[i].distribution.Count;
 			return Mathf.Max(1,size);
 		}
-
+        
 		public override void OnSolverStepBegin(){
 
 			base.OnSolverStepBegin();
@@ -400,42 +400,29 @@ namespace Obi{
 			for (int i = activeParticleCount-1; i >= 0; --i){
 				life[i] -= Time.deltaTime;
 
-				if (life[i] <= 0){
+				if (life[i] <= 0)
+                {
 					killed |= KillParticle(i);	
 				}
 			}
 
 			int emissionPoints = GetDistributionPointsCount();
-
 			// stream emission:
 			if (emissionMethod == EmissionMethod.STREAM)
 			{	
-
-				// number of bursts per simulation step:
-				float burstCount = (speed * Time.fixedDeltaTime) / ((emitterMaterial != null) ? emitterMaterial.GetParticleSize(solver.parameters.mode) : 0.1f);
-	
-				// Emit new particles:
-				unemittedBursts += burstCount;
-				int burst = 0;
-				while (unemittedBursts > 0){
-					for (int i = 0; i < emissionPoints; ++i){
-						emitted |= EmitParticle(burst / burstCount);
-					}
-					unemittedBursts -= 1;
-					burst++;
-				}
-
-			}else{ // burst emission:
-
-				if (activeParticleCount == 0){
-					for (int i = 0; i < emissionPoints; ++i){
+				while (unemittedBursts > 1)
+                {
+					for (int i = 0; i < emissionPoints; ++i)
+                    {
 						emitted |= EmitParticle(0);
 					}
+					unemittedBursts -= 1;
 				}
 			}
 
 			// Push active array to solver if any particle has been killed or emitted this frame.
-			if (emitted || killed){
+			if (emitted || killed)
+            {
 				PushDataToSolver(ParticleData.ACTIVE_STATUS);		
 			}	
 
