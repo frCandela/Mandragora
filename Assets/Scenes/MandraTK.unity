@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62359d80fdc0e4315ab6331b78ec5b90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kinematicForParticles: 0
+  kinematicForParticles: 1
 --- !u!114 &391824112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,7 +406,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 562142058}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.383, y: -0.013, z: 1.659}
+  m_LocalPosition: {x: -0.253, y: -0.013, z: 1.901}
   m_LocalScale: {x: 0.4000002, y: 0.39999998, z: 0.4000002}
   m_Children: []
   m_Father: {fileID: 1099497757}
@@ -774,15 +774,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4275570275156816, guid: 699358acccc5b7a46952660f8bf6c511, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.964
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4275570275156816, guid: 699358acccc5b7a46952660f8bf6c511, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.236
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 4275570275156816, guid: 699358acccc5b7a46952660f8bf6c511, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.535
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4275570275156816, guid: 699358acccc5b7a46952660f8bf6c511, type: 2}
       propertyPath: m_LocalRotation.x
@@ -847,15 +847,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4275570275156816, guid: 699358acccc5b7a46952660f8bf6c511, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.024
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4275570275156816, guid: 699358acccc5b7a46952660f8bf6c511, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.67
+      value: 1.428
       objectReference: {fileID: 0}
     - target: {fileID: 4275570275156816, guid: 699358acccc5b7a46952660f8bf6c511, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.804
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4275570275156816, guid: 699358acccc5b7a46952660f8bf6c511, type: 2}
       propertyPath: m_LocalRotation.x
@@ -901,6 +901,14 @@ Prefab:
       propertyPath: material
       value: 
       objectReference: {fileID: 2100000, guid: 151af668eb18f3a4c8bb64b2d68a9f3c, type: 2}
+    - target: {fileID: 4275570275156816, guid: 699358acccc5b7a46952660f8bf6c511, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4275570275156816, guid: 699358acccc5b7a46952660f8bf6c511, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114348491737701742, guid: 699358acccc5b7a46952660f8bf6c511, type: 2}
     - {fileID: 114401820592949166, guid: 699358acccc5b7a46952660f8bf6c511, type: 2}
@@ -1571,6 +1579,45 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1297629871}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1400798956 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1799778092914514, guid: 699358acccc5b7a46952660f8bf6c511,
+    type: 2}
+  m_PrefabInternal: {fileID: 834070796}
+--- !u!114 &1400798957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1400798956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62359d80fdc0e4315ab6331b78ec5b90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kinematicForParticles: 1
+--- !u!114 &1400798958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1400798956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6757b231cedd544c583ef8aeaf773b2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 0}
+  phase: 0
+  thickness: 0
+  unityCollider: {fileID: 1400798963}
+  useDistanceFields: 0
+  distanceField: {fileID: 0}
+--- !u!136 &1400798963 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 136098079820367760, guid: 699358acccc5b7a46952660f8bf6c511,
+    type: 2}
+  m_PrefabInternal: {fileID: 834070796}
 --- !u!1 &1484691648 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1148379129432364, guid: 0f644c599f2f48e4e9cf02f814cf3788,
