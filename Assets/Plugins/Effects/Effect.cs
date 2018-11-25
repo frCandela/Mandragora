@@ -15,7 +15,7 @@ public abstract class Effect : MonoBehaviour
     }
 
     // Called with a prefab so customize particles and stuff
-    public virtual Effect AddEffectTo( GameObject target )
+    public virtual bool AddEffectTo( GameObject target )
     { 
         if( ! target.GetComponent( GetType()))
         {
@@ -29,10 +29,10 @@ public abstract class Effect : MonoBehaviour
                     effect.m_particles.transform.localRotation = Quaternion.identity;
                     effect.m_particles.transform.localPosition = Vector3.zero;
                 }
+                return true;
             }
-            return effect;
         }
-        return null;
+        return false;
     }
 
     public abstract bool ApplyEffect();    

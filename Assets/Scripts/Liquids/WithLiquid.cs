@@ -33,11 +33,12 @@ public class WithLiquid : MonoBehaviour
     [SerializeField] private float executionDelay = 0f;
     [SerializeField] private bool showDebugLines = false;
 
-    // Liquid mesh references
+    // References
     private GameObject m_gameObject = null;
     private MeshRenderer m_meshRenderer = null;
     private MeshFilter m_meshFilter = null;
     private Mesh m_mesh = null;
+    private Rigidbody m_rigidbody = null;
 
     // Mesh data
     private Vector3[] m_baseVertices;       // Vertices of the mesh to cut 
@@ -86,7 +87,7 @@ public class WithLiquid : MonoBehaviour
             m_meshRenderer.material = material;
 
         // Init data 
-        for( int i = 0; i < 30; ++i)
+        for( int i = 0; i < 50; ++i)
         {
             sets.Add( new HashSet<int>());
             edges.Add( new List<Vector3>());
@@ -99,6 +100,8 @@ public class WithLiquid : MonoBehaviour
         m_baseVertices.CopyTo(newVertices, 0);
 
         m_emitter.effect = effect;
+
+        m_rigidbody = GetComponent<Rigidbody>();
     }
 
     private void OnDrawGizmos()
@@ -132,20 +135,25 @@ public class WithLiquid : MonoBehaviour
         m_timeSinceLastCall += Time.deltaTime;
         if (m_timeSinceLastCall > executionDelay)
         {
-            float t = Time.realtimeSinceStartup;
             m_currentVolume = HeightToVolume(m_liquidHeight);
-            if (m_liquidHeight > 0)
+            if (m_liquidHeight < volumePerParticle)
             {
-                BuildEges();
-                BuildTopFace();
-                UpdateMesh();
-                m_meshRenderer.enabled = true;
-            }
-            else
+                m_liquidHeight = 0;
                 m_meshRenderer.enabled = false;
+            }
 
- 
-            //executionTime = 1000f * (Time.realtimeSinceStartup - t);
+            if (!m_rigidbody || !m_rigidbody.IsSleeping())
+            {
+
+                if (m_liquidHeight > 0)
+                {
+                    BuildEges();
+                    BuildTopFace();
+                    UpdateMesh();
+                    m_meshRenderer.enabled = true;
+                }
+            }
+
             m_timeSinceLastCall = 0;
         }
     }
@@ -358,12 +366,9 @@ public class WithLiquid : MonoBehaviour
                  RelativeDebugLine(p, p + 2*cutPlane.normal, Color.blue);
 
                 deltaHeight = m_flowSpeed * Time.deltaTime;
-                m_liquidHeight = Mathf.Max(0f, m_liquidHeight - deltaHeight);    // Leak delta height
             }
-
             // Liquid overflow
-            float volumeDelta = HeightToVolume(deltaHeight);
-            Leak(volumeDelta, transform.position + Vector3.Scale(transform.localScale, transform.rotation * highestEdge));
+            Leak(HeightToVolume(deltaHeight), transform.position + Vector3.Scale(transform.localScale, transform.rotation * highestEdge));
         }
     }
 
@@ -382,19 +387,31 @@ public class WithLiquid : MonoBehaviour
     }
 
     // Fills the container with liquid
-    public void Fill( float volumeDelta )
+    public bool Fill( float volumeDelta )
     {
-        float height = maxHeight - minHeight;
-        float ratio = volumeDelta / m_totalVolume;
-        float heightDelta = ratio *  height;
-        m_liquidHeight = Mathf.Min(m_liquidHeight + heightDelta, maxHeight);
+        float heightDelta = VolumeToHeight(volumeDelta);
+        if(m_liquidHeight + heightDelta < maxHeight)
+        {
+            if (m_rigidbody)
+                m_rigidbody.WakeUp();
+            m_liquidHeight += heightDelta;
+            return true;
+        }
+        return true;
     }
 
     // Creates a liquid leak
-    public void Leak( float volumeDelta, Vector3 leakPos)
+    public bool Leak(float volumeDelta, Vector3 leakPos)
     {
-        m_emitter.unemittedBursts += volumeDelta / volumePerParticle;
-
+        float heightDelta = VolumeToHeight(volumeDelta);
+        if (m_liquidHeight - heightDelta > 0)
+        {
+            m_rigidbody.WakeUp();
+            m_liquidHeight -= heightDelta;
+            m_emitter.unemittedBursts += volumeDelta / volumePerParticle;
+            return true;
+        }
+        return false;
     }
 
     void UpdateMesh()
@@ -491,6 +508,8 @@ public class WithLiquid : MonoBehaviour
             m_gameObject.transform.position = transform.position + minHeight * Vector3.up;
         }
         m_liquidHeight = VolumeToHeight( Mathf.Min( m_currentVolume, m_totalVolume)  );
+        if (m_rigidbody)
+            m_rigidbody.WakeUp();
 
     }
 }

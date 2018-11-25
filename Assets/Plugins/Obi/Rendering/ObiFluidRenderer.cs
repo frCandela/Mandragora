@@ -28,8 +28,13 @@ public class ObiFluidRenderer : MonoBehaviour
 
 	public Material colorMaterial;
 	public Material fluidMaterial;
-		
-	private void Cleanup()
+
+    private void Awake()
+    {
+        particleRenderers = FindObjectsOfType<ObiParticleRenderer>();
+    }
+
+        private void Cleanup()
 	{
 
 		if (renderFluid != null){

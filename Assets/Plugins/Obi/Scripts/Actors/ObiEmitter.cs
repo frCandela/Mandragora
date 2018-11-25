@@ -96,6 +96,7 @@ namespace Obi{
 		public override void Awake()
 		{
 			base.Awake();
+            solver = FindObjectOfType<ObiSolver>();
 			selfCollisions = true;
 			distEnumerator = GetDistributionEnumerator();
 			IEnumerator generation = Initialize();
@@ -254,7 +255,8 @@ namespace Obi{
 			PushDataToSolver(ParticleData.PHASES);
 		}
 
-		private void UpdateEmitterDistribution(){
+		private void UpdateEmitterDistribution()
+        {
 			for (int i = 0; i < emitterShapes.Count;++i){
 				emitterShapes[i].particleSize = (emitterMaterial != null) ? emitterMaterial.GetParticleSize(solver.parameters.mode) : 0.1f;
 				emitterShapes[i].GenerateDistribution();
@@ -312,7 +314,7 @@ namespace Obi{
 		/**
 		 * Asks the emiter to emits a new particle. Returns whether the emission was succesful.
 		 */
-		public bool EmitParticle(float offset, Effect effect)
+		public bool EmitParticle(float offset)
         {
 
 			if (activeParticleCount == numParticles) return false;
@@ -400,18 +402,16 @@ namespace Obi{
 			}
 
 			int emissionPoints = GetDistributionPointsCount();
-			// stream emission:
-			if (emissionMethod == EmissionMethod.STREAM)
-			{	
-				while (unemittedBursts > 1)
+
+            if (unemittedBursts >= emissionPoints)
+            {
+                for (int i = 0; i < emissionPoints && unemittedBursts > 1; ++i)
                 {
-					for (int i = 0; i < emissionPoints; ++i)
-                    {
-						emitted |= EmitParticle(0, effect);
-					}
-					unemittedBursts -= 1;
-				}
-			}
+                    emitted |= EmitParticle(0);
+                    unemittedBursts -= 1;
+                }
+            }
+			
 
 			// Push active array to solver if any particle has been killed or emitted this frame.
 			if (emitted || killed)
