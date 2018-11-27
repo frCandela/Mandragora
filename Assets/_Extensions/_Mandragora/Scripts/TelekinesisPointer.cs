@@ -175,6 +175,7 @@ public class TelekinesisPointer : MonoBehaviour
 				m_inputManager.Haptic(1);
 
 				input.transform.rotation = transform.rotation;
+				input.transform.position = transform.position;
 				m_hand.Grab(Target);
 				UnAttract();
 			}
