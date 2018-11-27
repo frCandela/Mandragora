@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4529031091201176}
-  - component: {fileID: 114852783558966664}
   - component: {fileID: 114901905625659522}
   - component: {fileID: 114366651854968238}
   - component: {fileID: 114055695295756984}
@@ -45,7 +44,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114055695295756984
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1719534855882630}
@@ -57,7 +56,7 @@ MonoBehaviour:
   _guid: 0a97fd13-53d1-4f27-bdf4-0c5903e64141
 --- !u!114 &114366651854968238
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1719534855882630}
@@ -71,33 +70,6 @@ MonoBehaviour:
     _collection:
     - {fileID: 1719534855882630}
   _assetGuid: c5140579be8d11748bed1b9f7d6ff620
---- !u!114 &114852783558966664
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1719534855882630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed310fd9bc34b6f4abbe0bad3c6ae6e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InitializationSettings: {fileID: 11400000, guid: 35c46343553413a4ea22cbd1b6b908a4,
-    type: 2}
-  basePath: 
-  language: 
-  defaultPoolSize: 0
-  lowerPoolSize: 0
-  streamingPoolSize: 0
-  preparePoolSize: 0
-  memoryCutoffThreshold: 0
-  monitorPoolSize: 0
-  monitorQueuePoolSize: 0
-  callbackManagerBufferSize: 0
-  spatialAudioPoolSize: 0
-  maxSoundPropagationDepth: 0
-  diffractionFlags: 0
-  engineLogging: 0
 --- !u!114 &114901905625659522
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -109,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61091bd6bd6dfb54085d7c1300b36a20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerList: ae8d9d44
+  triggerList: f7e1664c
   useOtherObject: 0
   data:
     valueGuid: 
