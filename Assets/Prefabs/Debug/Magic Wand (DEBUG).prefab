@@ -541,6 +541,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGrabbable: 1
   jointType: {fileID: 0}
+  m_wOnUseStart:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 0664068b77770064b8d8f9ae0cb664f8,
+      type: 2}
   m_onUseStart:
     m_PersistentCalls:
       m_Calls:
@@ -557,9 +561,9 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_wOnUseStart:
+  m_wOnUseStop:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: 0664068b77770064b8d8f9ae0cb664f8,
+    WwiseObjectReference: {fileID: 11400000, guid: ccc494aefd1b13c408bd0c1dc512c09a,
       type: 2}
   m_onUseStop:
     m_PersistentCalls:
@@ -577,10 +581,9 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_wOnUseStop:
+  m_wOnGrabStart:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: ccc494aefd1b13c408bd0c1dc512c09a,
-      type: 2}
+    WwiseObjectReference: {fileID: 0}
   m_onGrabStart:
     m_PersistentCalls:
       m_Calls:
@@ -597,7 +600,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_wOnGrabStart:
+  m_wOnGrabStop:
     valueGuid: 
     WwiseObjectReference: {fileID: 0}
   m_onGrabSop:
@@ -616,9 +619,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_wOnGrabStop:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
 --- !u!114 &114635925975549204
 MonoBehaviour:
   m_ObjectHideFlags: 1
