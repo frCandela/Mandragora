@@ -85,8 +85,6 @@ public class MTK_InputManagerSimulator : MTK_InputManager
             
 		velocity /= m_posList.Count;
 
-        print(velocity);
-
         return velocity;
     }
 }

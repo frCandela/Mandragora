@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
-[RequireComponent(typeof(MTK_InputManager))]
 public class MTK_InteractHand : MonoBehaviour
 {
     public MTK_Interactable m_grabbed = null;
@@ -26,7 +25,7 @@ public class MTK_InteractHand : MonoBehaviour
     private void Start()
     {
         m_setup = FindObjectOfType<MTK_Manager>().activeSetup;
-        m_inputManager = GetComponent<MTK_InputManager>();
+        m_inputManager = GetComponentInParent<MTK_InputManager>();
 
         m_inputManager.m_onTrigger.AddListener(OnTrigger);
         m_inputManager.m_onGrip.AddListener(OnGrip);

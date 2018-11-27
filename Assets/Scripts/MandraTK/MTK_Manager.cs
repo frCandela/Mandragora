@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-[ExecuteInEditMode]
+// [ExecuteInEditMode]
 public class MTK_Manager : MonoBehaviour
 {
     public MTK_Setup activeSetup = null;
@@ -15,11 +15,18 @@ public class MTK_Manager : MonoBehaviour
     [SerializeField]
     MTK_Setup setupSimulation;
     [SerializeField]
-    MTK_Setup setupSteamVR; 
+    MTK_Setup setupSteamVR;
+
+    [SerializeField]
+    GameObject m_sharedControllerRight, m_sharedControllerLeft;
 
     private void Awake()
     {
         Util.EditorAssert(activeSetup != null, "Please select a MTK_Setup in the MTK_Manager");
+
+        // Init
+        m_sharedControllerRight.transform.SetParent(activeSetup.rightHand.transform, false);
+        m_sharedControllerLeft.transform.SetParent(activeSetup.leftHand.transform, false);
     }
 
     public void SwitchSetup()
@@ -34,12 +41,9 @@ public class MTK_Manager : MonoBehaviour
             foreach (MTK_Setup setup in FindObjectsOfType<MTK_Setup>())
             {
                 if (setup != activeSetup)
-                {
                     setup.gameObject.SetActive(false);
-                }
             }
         }
         #endif
     }
-    
 }

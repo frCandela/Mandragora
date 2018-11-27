@@ -9,16 +9,10 @@ using UnityEditor;
 
 public class MTK_SetupSteamVR : MTK_Setup
 {
-    public GameObject leftHand = null;
-    public GameObject rightHand = null;
-    public GameObject head = null;
-
     // Use this for initialization
     void Awake()
     {
-        Util.EditorAssert(head != null, "Please select a head gameobject in the MTK_SetupSteamVR");
-        Util.EditorAssert(leftHand != null, "Please select a leftHand gameobject in the MTK_SetupSteamVR");
-        Util.EditorAssert(rightHand != null, "Please select a rightHand gameobject in the MTK_SetupSteamVR");
+        CheckSetup();
     }
 
     public override void UpdateSettings()
