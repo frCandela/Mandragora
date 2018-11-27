@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using VRTK;
-
 public class TelekinesisPointer : MonoBehaviour
 {
 	[SerializeField]
 	ConfigurableJoint m_joint;
 	[SerializeField]
 	Transform m_rayPreview;
+	[SerializeField]
+	Outliner m_outliner;
 
 	[Header("Settings")]
 	[SerializeField, Range(0,10)]
@@ -21,16 +21,17 @@ public class TelekinesisPointer : MonoBehaviour
 	[SerializeField, Range(0,10f)]
 	float m_initForceScale = 1;
 
-	VRTK_InteractGrab m_interactGrab;
+	MTK_InputManager m_inputManager;
+	MTK_InteractHand m_hand;
 
-	VRTK_InteractableObject m_currentInteractable;
+	MTK_Interactable m_currentInteractable;
 	RaycastHit m_currentHit;
 	bool m_attract;
 	float m_initDistanceToTarget;
 	Vector3 m_lastForceApplied;
 	Vector3 m_lastPos;
 
-	VRTK_InteractableObject Target
+	MTK_Interactable Target
 	{
 		get
 		{
@@ -42,7 +43,7 @@ public class TelekinesisPointer : MonoBehaviour
 			{
 				if(m_currentInteractable)
 				{
-					m_currentInteractable.ToggleHighlight(false);
+					m_outliner.OultineOff(m_currentInteractable);
 					m_currentInteractable = value;
 				}
 			}
@@ -51,10 +52,10 @@ public class TelekinesisPointer : MonoBehaviour
 				if(m_currentInteractable != value)
 				{
 					if(m_currentInteractable)
-						m_currentInteractable.ToggleHighlight(false);
+						m_outliner.OultineOff(m_currentInteractable);
 
 					m_currentInteractable = value;
-					m_currentInteractable.ToggleHighlight(true);
+					m_outliner.OultineOn(m_currentInteractable);
 				}
 			}			
 		}
@@ -62,27 +63,36 @@ public class TelekinesisPointer : MonoBehaviour
 
 	void Awake()
 	{
-		m_interactGrab = GetComponentInParent<VRTK_InteractGrab>();
-
-		m_interactGrab.interactTouch.ControllerStartTouchInteractableObject += GrabIfTarget;
-		m_interactGrab.GrabButtonReleased += StopAttract;
-		m_interactGrab.GrabButtonPressed += StartAttract;
+		m_inputManager = GetComponentInParent<MTK_InputManager>();
+		m_inputManager.m_onGrip.AddListener(TriggerAttract);
 
 		m_lastPos = transform.position;
+
+		m_hand = GetComponentInParent<MTK_InteractHand>();
+		m_hand.m_onTouchInteractable.AddListener(GrabIfTarget);
 	}
 
 	void Update()
 	{
-		if(!m_attract && !m_joint.connectedBody && !m_interactGrab.CanRelease())
+		if(!m_attract && !m_joint.connectedBody)
 		{
 			Ray newRay = new Ray(transform.position, transform.forward);
 			// Update Target
 			if (Physics.Raycast(newRay, out m_currentHit, m_maxDistance))
 			{
-				Target = m_currentHit.collider.GetComponent<VRTK_InteractableObject>();
+				Target = m_currentHit.transform.GetComponent<MTK_Interactable>();
 
-				m_rayPreview.localScale = new Vector3(0.003f, 0.003f, m_currentHit.distance);
+				if(!Target)
+					Target = m_currentHit.transform.GetComponentInParent<MTK_Interactable>();
+
+				m_rayPreview.localScale = new Vector3(0.01f, 0.01f, m_currentHit.distance);
 				m_rayPreview.localPosition = new Vector3(0, 0, m_currentHit.distance / 2);
+			}
+			else
+			{
+				Target = null;
+				m_rayPreview.localScale = new Vector3(0.01f, 0.01f, m_maxDistance);
+				m_rayPreview.localPosition = new Vector3(0, 0, m_maxDistance / 2);
 			}
 		}
 
@@ -119,16 +129,18 @@ public class TelekinesisPointer : MonoBehaviour
 		m_lastPos = transform.position;
 	}
 
-	void StartAttract(object sender, ControllerInteractionEventArgs e)
+	void TriggerAttract(bool input)
 	{
-		m_attract = true;
-	}
-
-	void StopAttract(object sender, ControllerInteractionEventArgs e)
-	{
-		m_attract = false;
-		if(m_joint.connectedBody)
-			UnAttract();
+		if(input)
+		{
+			m_attract = true;
+		}
+		else
+		{
+			m_attract = false;
+			if(m_joint.connectedBody)
+				UnAttract();
+		}
 	}
 
 	void Attract(Vector3 force)
@@ -154,16 +166,16 @@ public class TelekinesisPointer : MonoBehaviour
 		Target = null;
 	}
 
-	void GrabIfTarget(object sender, ObjectInteractEventArgs e)
+	void GrabIfTarget(MTK_Interactable input)
 	{
 		if(m_joint.connectedBody)
 		{
-			if(m_joint.connectedBody.gameObject == e.target)
+			if(m_joint.connectedBody.gameObject == input.gameObject)
 			{
-				VRTK_ControllerHaptics.TriggerHapticPulse(VRTK_ControllerReference.GetControllerReference(m_interactGrab.gameObject), 1);
+				m_inputManager.Haptic(1);
 
-				e.target.transform.rotation = transform.rotation;
-				m_interactGrab.PerformGrabAttempt(Target.gameObject);
+				input.transform.rotation = transform.rotation;
+				m_hand.Grab(Target);
 				UnAttract();
 			}
 		}

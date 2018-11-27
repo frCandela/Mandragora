@@ -8,26 +8,22 @@ public class Outliner : MonoBehaviour
     [SerializeField] Color m_color = Color.red;
     [SerializeField] float m_outlineWidth = 10f;
 
-    private void OnTriggerEnter(Collider other)
+    public void OultineOn(MTK_Interactable interractable)
     {
-        if( other.GetComponent<MTK_Interactable>())
-        {           
-            if ( ! other.GetComponent<Outline>())
-            {
-                Outline outline = other.gameObject.AddComponent<Outline>();
-                outline.OutlineMode = m_mode;
-                outline.OutlineColor = m_color;
-                outline.OutlineWidth = m_outlineWidth;
-            }
+        if ( ! interractable.GetComponent<Outline>())
+        {
+            Outline outline = interractable.gameObject.AddComponent<Outline>();
+            outline.OutlineMode = m_mode;
+            outline.OutlineColor = m_color;
+            outline.OutlineWidth = m_outlineWidth;
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    public void OultineOff(MTK_Interactable interractable)
     {
-        Outline outline = other.GetComponent<Outline>();
+        Outline outline = interractable.GetComponent<Outline>();
+
         if (outline)
-        {
             Destroy(outline);
-        }
     }
 }
