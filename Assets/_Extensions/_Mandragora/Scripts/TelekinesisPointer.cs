@@ -20,6 +20,8 @@ public class TelekinesisPointer : MonoBehaviour
 	float m_forceScale = 300;
 	[SerializeField, Range(0,10f)]
 	float m_initForceScale = 1;
+	[SerializeField] AK.Wwise.Event m_wOnAttract;
+	[SerializeField] AK.Wwise.Event m_wOnGrab;
 
 	MTK_InputManager m_inputManager;
 	MTK_InteractHand m_hand;
@@ -145,6 +147,8 @@ public class TelekinesisPointer : MonoBehaviour
 
 	void Attract(Vector3 force)
 	{
+		m_wOnAttract.Post(Target.gameObject);
+
 		m_joint.connectedBody = Target.GetComponent<Rigidbody>();
 		m_joint.connectedBody.AddForce(force.normalized * Mathf.Sqrt(force.magnitude) * m_initForceScale, ForceMode.Impulse);
 
@@ -172,6 +176,8 @@ public class TelekinesisPointer : MonoBehaviour
 		{
 			if(m_joint.connectedBody.gameObject == input.gameObject)
 			{
+				m_wOnGrab.Post(Target.gameObject);
+				
 				m_inputManager.Haptic(1);
 
 				input.transform.rotation = transform.rotation;
