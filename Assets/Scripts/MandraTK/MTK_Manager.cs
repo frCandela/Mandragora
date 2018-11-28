@@ -17,16 +17,9 @@ public class MTK_Manager : MonoBehaviour
     [SerializeField]
     MTK_Setup setupSteamVR;
 
-    [SerializeField]
-    GameObject m_sharedControllerRight, m_sharedControllerLeft;
-
     private void Awake()
     {
         Util.EditorAssert(activeSetup != null, "Please select a MTK_Setup in the MTK_Manager");
-
-        // Init
-        m_sharedControllerRight.transform.SetParent(activeSetup.rightHand.transform, false);
-        m_sharedControllerLeft.transform.SetParent(activeSetup.leftHand.transform, false);
     }
 
     public void SwitchSetup()
