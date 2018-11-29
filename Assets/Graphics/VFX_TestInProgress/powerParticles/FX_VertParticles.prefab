@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 199433216489547726}
   - component: {fileID: 198898323154647480}
   - component: {fileID: 114469971299327686}
+  - component: {fileID: 114379033286667804}
+  - component: {fileID: 114796261894661714}
   m_Layer: 0
   m_Name: FX_VertParticles
   m_TagString: Untagged
@@ -39,7 +41,7 @@ Transform:
   m_GameObject: {fileID: 1648871974088672}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.22414, y: 0.22414, z: 0.22414}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -86,6 +88,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1648871974088672}
   m_Mesh: {fileID: 4300000, guid: 4fe16c174bd734142933617a8022016f, type: 3}
+--- !u!114 &114379033286667804
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1648871974088672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1648871974088672}
+  _assetGuid: 53c5f2b8a38867d44862536233e00be6
 --- !u!114 &114469971299327686
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,6 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sourceMesh: {fileID: 0}
   maxParticlesNumber: 50
+  particleSize: 0.5
   minMaxLerp: {x: 0.05, y: 0.15}
   bVelOffset: 1.44
   bSlowFactor: 0.25
@@ -113,6 +132,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: GoEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+--- !u!114 &114796261894661714
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1648871974088672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: b1234937-f00f-4baf-bffb-8db3b9e6036a
 --- !u!198 &198898323154647480
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -3967,7 +3998,7 @@ ParticleSystem:
     widthOverTrail:
       serializedVersion: 2
       minMaxState: 1
-      scalar: 1
+      scalar: 0.1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4671,8 +4702,8 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 57071608d6754e343a089870b456ec09, type: 2}
-  - {fileID: 2100000, guid: 7e433930951d1e946b6b753a91794acf, type: 2}
+  - {fileID: 2100000, guid: 32aca15512c106146a9c1b3d0cc91d12, type: 2}
+  - {fileID: 2100000, guid: 082208686b7f4f44aa2d30549d02d217, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4693,7 +4724,7 @@ ParticleSystemRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_RenderMode: 0
-  m_SortMode: 0
+  m_SortMode: 1
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
