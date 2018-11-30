@@ -19,6 +19,10 @@ public class MTK_InputManagerSimulator : MTK_InputManager
                 onPrimaryInputPressed.Invoke();
             if (Input.GetMouseButtonUp(0))
                 onPrimaryInputReleased.Invoke();
+            if (Input.GetKey(KeyCode.Alpha1))
+                transform.Rotate(Vector3.forward);
+            if (Input.GetKey(KeyCode.Alpha2))
+                transform.Rotate(-Vector3.forward);
         }
         if (m_hand == Hand.right)
         {
@@ -26,6 +30,10 @@ public class MTK_InputManagerSimulator : MTK_InputManager
                 onPrimaryInputPressed.Invoke();
             if (Input.GetMouseButtonUp(1))
                 onPrimaryInputReleased.Invoke();
+            if (Input.GetKey(KeyCode.Alpha3))
+                transform.Rotate(Vector3.forward);
+            if (Input.GetKey(KeyCode.Alpha4))
+                transform.Rotate(-Vector3.forward);
         }
     }
 

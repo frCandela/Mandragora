@@ -22,6 +22,7 @@ public class WithLiquid : MonoBehaviour
     [SerializeField]  private bool containerClosed = true;
 
     [Header("Liquid Simulation")]
+    [SerializeField] private Rigidbody m_rigidbody = null;
     [SerializeField] private float m_flowSpeed = 1f;
     [SerializeField] private float m_totalVolume = 1f;
     [SerializeField] private float m_currentVolume = 0f;
@@ -38,7 +39,7 @@ public class WithLiquid : MonoBehaviour
     private MeshRenderer m_meshRenderer = null;
     private MeshFilter m_meshFilter = null;
     private Mesh m_mesh = null;
-    private Rigidbody m_rigidbody = null;
+
 
     // Mesh data
     private Vector3[] m_baseVertices;       // Vertices of the mesh to cut 
@@ -101,7 +102,10 @@ public class WithLiquid : MonoBehaviour
 
         m_emitter.effect = effect;
 
-        m_rigidbody = GetComponent<Rigidbody>();
+        if( !m_rigidbody)
+        {
+            m_rigidbody = GetComponent<Rigidbody>();
+        }
     }
 
     private void OnDrawGizmos()
@@ -144,7 +148,6 @@ public class WithLiquid : MonoBehaviour
 
             if (!m_rigidbody || !m_rigidbody.IsSleeping())
             {
-
                 if (m_liquidHeight > 0)
                 {
                     BuildEges();
