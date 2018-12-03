@@ -7,10 +7,10 @@
 		_HighlightOpacity ("Highlight Opacity", Range(0,1)) = 0.5
 		_DistFade ("Distance Fade", float) = 0
 		_MaxInterDist ("Maximum Instersection Distance", float) = 0
-		_IntersectionIn ("IN Limit", Range(0,0.5)) = 0
-		_IntersectionOut ("OUT Limit", Range(0,0.5)) = 0
-		_FadeIn ("IN Fade", Range(0,0.25)) = 0
-		_FadeOut ("OUT Fade", Range(0,0.25)) = 0
+		_IntersectionIn ("IN Limit", Range(0,2)) = 0
+		_IntersectionOut ("OUT Limit", Range(0,2)) = 0
+		_FadeIn ("IN Fade", Range(0,1)) = 0
+		_FadeOut ("OUT Fade", Range(0,1)) = 0
 		_FresnelSensibility ("Fresnel Sensibility", Range(0,1)) = 0.25
 		_IsBackFace ("Is Back Face ?", Range(0,1)) = 1
 		_HighlightColor ("Highlight Color", Color) = (0,0,0,0)

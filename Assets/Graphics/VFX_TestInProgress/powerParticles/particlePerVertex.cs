@@ -10,6 +10,7 @@ public class particlePerVertex : MonoBehaviour {
 
 	public GameObject sourceMesh; // JUST FOR DEMO
 	public int maxParticlesNumber;
+	public float particleSize;
 	public Vector2 minMaxLerp = new Vector2(0.05f, 0.15f);
 	[Range(0.0f, 2.0f)] public float bVelOffset = 1.44f;
 	[Range(0f,0.5f)]public float bSlowFactor = 0.25f;
@@ -45,6 +46,7 @@ public class particlePerVertex : MonoBehaviour {
         main.simulationSpace = ParticleSystemSimulationSpace.World;
 		main.startLifetime = 1.0f;
 		main.startSpeed = 0.0f;
+		main.startSize = particleSize;
 		var emission = PS.emission;
 		emission.enabled = false;
 		var shape = PS.shape;
