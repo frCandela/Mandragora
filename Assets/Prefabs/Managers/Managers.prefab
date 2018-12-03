@@ -535,8 +535,6 @@ GameObject:
   - component: {fileID: 114495895002995916}
   - component: {fileID: 114562084869431224}
   - component: {fileID: 114626636133052160}
-  - component: {fileID: 114452806100103442}
-  - component: {fileID: 114216422561797872}
   m_Layer: 0
   m_Name: WwiseManager
   m_TagString: Untagged
@@ -696,7 +694,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1527154424799454}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4911871899713854}
@@ -1897,14 +1895,14 @@ MonoBehaviour:
   size: 0
   color: {r: 0, g: 1, b: 1, a: 1}
   vertices:
-  - {x: 1.9499992, y: 0.01, z: -1.4499996}
-  - {x: -1.9499992, y: 0.01, z: -1.4499996}
-  - {x: -1.9499992, y: 0.01, z: 1.4499996}
-  - {x: 1.9499992, y: 0.01, z: 1.4499996}
-  - {x: 2.0999992, y: 0.01, z: -1.5999995}
-  - {x: -2.0999992, y: 0.01, z: -1.5999995}
-  - {x: -2.0999992, y: 0.01, z: 1.5999995}
-  - {x: 2.0999992, y: 0.01, z: 1.5999995}
+  - {x: 1.5999998, y: 0.01, z: -1.5499997}
+  - {x: -1.5999998, y: 0.01, z: -1.5499997}
+  - {x: -1.5999998, y: 0.01, z: 1.5499997}
+  - {x: 1.5999998, y: 0.01, z: 1.5499997}
+  - {x: 1.7499998, y: 0.01, z: -1.6999997}
+  - {x: -1.7499998, y: 0.01, z: -1.6999997}
+  - {x: -1.7499998, y: 0.01, z: 1.6999997}
+  - {x: 1.7499998, y: 0.01, z: 1.6999997}
 --- !u!114 &114127422103713196
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1957,34 +1955,6 @@ MonoBehaviour:
     - {fileID: 1920749965255460}
     - {fileID: 1161109234692462}
   _assetGuid: 9f59c4a2a82cc0e46b57a39b2eac9139
---- !u!114 &114216422561797872
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1790062539172600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8d8814bf4ffe5d4eb28f9aad618cb4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerList: f7e1664c
-  useOtherObject: 0
-  actionOnEventType: 0
-  curveInterpolation: 4
-  enableActionOnEvent: 0
-  data:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: ebe3b9afc00e5e346a08363bea727402,
-      type: 2}
-  m_callbackData: {fileID: 0}
-  playingId: 0
-  soundEmitterObject: {fileID: 0}
-  transitionDuration: 0
-  valueGuid: 
-  multiPositionArray: []
-  MultiPositionType: 1
-  multiPositionTypeLabel: 0
 --- !u!114 &114217100738388862
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2316,27 +2286,6 @@ MonoBehaviour:
   m_Script: {fileID: 1491221649, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114452806100103442
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1790062539172600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 223dc2a93f9f2bd46b65c340f1be9fdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_listeners:
-    initialListenerList: []
-    useDefaultListeners: 1
-  isEnvironmentAware: 0
-  isStaticObject: 0
-  m_positionOffsetData:
-    KeepMe: 0
-    positionOffset: {x: 0, y: 0, z: 0}
-  m_posOffsetData: {fileID: 0}
-  listenerMask: 1
 --- !u!114 &114454709274321742
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3405,7 +3354,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.01
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135453365051677804
 SphereCollider:
@@ -3417,7 +3366,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.01
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135610809563882858
 SphereCollider:
@@ -3429,7 +3378,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.01
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135676947687920696
 SphereCollider:
@@ -3441,7 +3390,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.01
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135862686735500372
 SphereCollider:
