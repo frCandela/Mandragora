@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
-[RequireComponent(typeof(MTK_InputManager))]
 public class MTK_InteractHand : MonoBehaviour
 {
     public MTK_Interactable m_grabbed = null;
+    [SerializeField] Outliner m_outliner = null;
+
+    public UnityEventMTK_Interactable m_onTouchInteractable;
+    public UnityEventMTK_Interactable m_onUnTouchInteractable;
 
     private List<MTK_Interactable> m_objectsInTrigger = new List<MTK_Interactable>(3);
     private MTK_Setup m_setup;
@@ -26,11 +29,17 @@ public class MTK_InteractHand : MonoBehaviour
     private void Start()
     {
         m_setup = FindObjectOfType<MTK_Manager>().activeSetup;
-        m_inputManager = GetComponent<MTK_InputManager>();
 
+        m_inputManager = GetComponentInParent<MTK_InputManager>();
         m_inputManager.m_onTrigger.AddListener(OnTrigger);
         m_inputManager.m_onGrip.AddListener(OnGrip);
         m_inputManager.m_onPad.AddListener(OnPad);
+
+        if(m_outliner)
+        {
+            m_onTouchInteractable.AddListener(m_outliner.OultineOn);
+            m_onUnTouchInteractable.AddListener(m_outliner.OultineOff);
+        }
     }
 
     private void FixedUpdate()
@@ -109,7 +118,10 @@ public class MTK_InteractHand : MonoBehaviour
         MTK_Interactable candidate = other.GetComponent<MTK_Interactable>();
 
         if(candidate)
+        {
             m_objectsInTrigger.Add(candidate);
+            m_onTouchInteractable.Invoke(candidate);
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -117,7 +129,10 @@ public class MTK_InteractHand : MonoBehaviour
         MTK_Interactable candidate = other.GetComponent<MTK_Interactable>();
         
         if(candidate)
+        {
             m_objectsInTrigger.Remove(candidate);
+            m_onUnTouchInteractable.Invoke(candidate);
+        }
     }
 
     MTK_Interactable GetClosestInteractable()

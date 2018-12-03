@@ -12,6 +12,7 @@ public class MTK_InputManagerSimulator : MTK_InputManager
 	float m_magnitude;
 	Vector3 m_axis;
 
+    Vector3 m_lastPos;
 	List<Vector3> m_posList;
 
     void Awake()
@@ -19,6 +20,7 @@ public class MTK_InputManagerSimulator : MTK_InputManager
 		m_rotList = new List<Vector3>(5);
 		m_posList = new List<Vector3>(5);
 		m_lastRot = transform.rotation;
+        m_lastPos = transform.position;
 	}
 
     void Update()
@@ -50,10 +52,12 @@ public class MTK_InputManagerSimulator : MTK_InputManager
 		m_lastRot = transform.rotation;
 
         // Update Velocity
-        m_posList.Add(transform.position);
+        m_posList.Add((transform.position - m_lastPos) * 10);
 
         if (m_posList.Count > 4)
 			m_posList.RemoveAt(0);
+
+        m_lastPos = transform.position;
     }
 
     public override void Haptic(float Time)

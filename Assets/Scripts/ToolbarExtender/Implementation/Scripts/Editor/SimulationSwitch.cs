@@ -28,48 +28,42 @@ namespace UnityToolbarExtender
 		{
 			get
 			{
+				if(!m_mtkManager)
+					return false;
+
 				return m_mtkManager.activeSetup.GetType() == typeof(MTK_SetupSimulator);
 			}
 			set
 			{
-				m_mtkManager.SwitchSetup();
-			}
-		}
-
-		static bool Visible
-		{
-			get
-			{
-				return m_mtkManager != null;
+				if(m_mtkManager)
+					m_mtkManager.SwitchSetup();
 			}
 		}
 
 		static SimulationSwitch()
 		{
-			EditorApplication.hierarchyChanged += UpdateDisplay;
+			EditorApplication.update += UpdateDisplay;
 			
 			ToolbarExtender.LeftToolbarGUI.Add(OnToolbarGUI);
 		}
 
 		static void UpdateDisplay()
 		{
-			m_mtkManager = GameObject.FindObjectOfType<MTK_Manager>();
+			if(!m_mtkManager)
+				m_mtkManager = GameObject.FindObjectOfType<MTK_Manager>();
 		}
 		
 		static void OnToolbarGUI()
 		{
-			if(Visible)
+			GUI.changed = false;
+
+			GUILayout.FlexibleSpace();
+
+			GUILayout.Toggle(Enabled, new GUIContent("S", "Simulation Mode"), ToolbarStyles.commandButtonStyle);
+
+			if (GUI.changed)
 			{
-				GUI.changed = false;
-
-				GUILayout.FlexibleSpace();
-
-				GUILayout.Toggle(Enabled, new GUIContent("S", "Simulation Mode"), ToolbarStyles.commandButtonStyle);
-
-				if (GUI.changed)
-				{
-					Enabled = !Enabled;
-				}
+				Enabled = !Enabled;
 			}
 		}
 	}

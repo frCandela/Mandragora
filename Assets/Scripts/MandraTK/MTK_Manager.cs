@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-[ExecuteInEditMode]
+// [ExecuteInEditMode]
 public class MTK_Manager : MonoBehaviour
 {
     public MTK_Setup activeSetup = null;
@@ -15,7 +15,7 @@ public class MTK_Manager : MonoBehaviour
     [SerializeField]
     MTK_Setup setupSimulation;
     [SerializeField]
-    MTK_Setup setupSteamVR; 
+    MTK_Setup setupSteamVR;
 
     private void Awake()
     {
@@ -34,12 +34,9 @@ public class MTK_Manager : MonoBehaviour
             foreach (MTK_Setup setup in FindObjectsOfType<MTK_Setup>())
             {
                 if (setup != activeSetup)
-                {
                     setup.gameObject.SetActive(false);
-                }
             }
         }
         #endif
     }
-    
 }
