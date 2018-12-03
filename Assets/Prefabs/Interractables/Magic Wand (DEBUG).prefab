@@ -106,7 +106,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1946726923913810
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
@@ -146,8 +146,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4622570971985816}
-  m_Father: {fileID: 4648050405498212}
-  m_RootOrder: 0
+  m_Father: {fileID: 4409149994303616}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4409149994303616
 Transform:
@@ -161,8 +161,9 @@ Transform:
   m_Children:
   - {fileID: 4648754972058570}
   - {fileID: 4239693965331396}
+  - {fileID: 4273517127853000}
   m_Father: {fileID: 4648050405498212}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4622570971985816
 Transform:
@@ -187,7 +188,6 @@ Transform:
   m_LocalPosition: {x: -1.75, y: 1.6, z: -0.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4273517127853000}
   - {fileID: 4409149994303616}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -451,7 +451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_tracker: {fileID: 114635925975549204}
   m_rtpc: {fileID: 11400000, guid: 8e29465699025bd459121b96d7ef4e23, type: 2}
-  MAX_TRAIN_COUNT: 1
+  MAX_TRAIN_COUNT: 2
   m_onGestureRecognition:
     m_PersistentCalls:
       m_Calls:
