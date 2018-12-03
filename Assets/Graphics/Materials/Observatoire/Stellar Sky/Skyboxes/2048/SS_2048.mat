@@ -6,20 +6,20 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: scene low poly01
-  m_Shader: {fileID: 4800000, guid: 753c756c0670bf94b81e9f75f2e7d002, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
+  m_Name: SS_2048
+  m_Shader: {fileID: 104, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _EMISSION
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _AlphaMaskTex:
-        m_Texture: {fileID: 2800000, guid: 0d05130af69ad9e4f8a9f0b447d36761, type: 3}
+    - _BackTex:
+        m_Texture: {fileID: 2800000, guid: a7c2d32481230184187ce13bfeb37a8f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -38,16 +38,24 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DownTex:
+        m_Texture: {fileID: 2800000, guid: 8a0ff692cce26a844a5a2b79be9817ee, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _EmissiveTex:
-        m_Texture: {fileID: 2800000, guid: 0d05130af69ad9e4f8a9f0b447d36761, type: 3}
+    - _FrontTex:
+        m_Texture: {fileID: 2800000, guid: 811ad48b91b606b469b801d87551684e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LeftTex:
+        m_Texture: {fileID: 2800000, guid: 96a3c2236a1c6974da595c10642abfce, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 0d05130af69ad9e4f8a9f0b447d36761, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -62,58 +70,34 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _RampTex:
-        m_Texture: {fileID: 2800000, guid: 43532f694e3c7df4b93bb2eec18e988f, type: 3}
+    - _RightTex:
+        m_Texture: {fileID: 2800000, guid: d420344f28725fb4b96b0d0980ba31bc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _ShadowRampTex:
-        m_Texture: {fileID: 2800000, guid: 43532f694e3c7df4b93bb2eec18e988f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
-        m_Texture: {fileID: 0}
+    - _UpTex:
+        m_Texture: {fileID: 2800000, guid: c1c39a7b1ae95054bae7859a0f19393f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AlphaCutoff: 0.19
     - _BumpScale: 1
-    - _Cursor: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DistFade: 0
     - _DstBlend: 0
-    - _EmissionIntensity: 0
-    - _Emissive: 21.1
-    - _FadeIn: 0
-    - _FadeOut: 0
-    - _FresnelSensibility: 0
+    - _Exposure: 2
     - _GlossMapScale: 1
-    - _Glossiness: 0.6
+    - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HighlightOpacity: 0.5
-    - _IntersectionIn: 0
-    - _IntersectionOut: 0
-    - _IsAlphaTex: 1
-    - _IsAlphaUV: 1
-    - _IsBackFace: 1
-    - _MaxInterDist: 12.79
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Opacity: 0.5
     - _Parallax: 0.02
-    - _Slider: 0
+    - _Rotation: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _TextureInfluence: 1
     - _UVSec: 0
-    - _WireframeWidth: 62.7
     - _ZWrite: 1
     m_Colors:
-    - _AlphaMaskPow: {r: 2, g: 2, b: 0, a: 0}
-    - _Color: {r: 0.7877358, g: 1, b: 0.99177307, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissiveColor: {r: 0, g: 0, b: 0, a: 0}
-    - _HighlightColor: {r: 0.7216981, g: 0.9883896, b: 1, a: 0}
-    - _ShadowColor: {r: 0.30980393, g: 0.105882354, b: 0.047058824, a: 1}
+    - _Tint: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0.5}
