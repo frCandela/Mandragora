@@ -11,7 +11,12 @@ public class Spawner : MonoBehaviour
 
 	public void Spawn()
 	{
-		m_spawned = Instantiate(m_object, transform.position, transform.rotation);
+		Spawn(transform.position, transform.rotation, null);
+	}
+
+	protected void Spawn(Vector3 position, Quaternion rotation, Transform parent)
+	{
+		m_spawned = Instantiate(m_object, position, rotation, parent);
 	}
 
 	public virtual void SpawnIntParameter(int parameter){}

@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class FPSCamera : MonoBehaviour
 {
-    public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
-    public RotationAxes axes = RotationAxes.MouseXAndY;
-    public float sensitivityX = 15F;
-    public float sensitivityY = 15F;
-    public float minimumX = -360F;
-    public float maximumX = 360F;
-    public float minimumY = -60F;
-    public float maximumY = 60F;
-    float rotationY = 0F;
+    [SerializeField] enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
+    [SerializeField] RotationAxes axes = RotationAxes.MouseXAndY;
+    [SerializeField] KeyCode m_crouch;
+    [SerializeField] float sensitivityX = 15F;
+    [SerializeField] float sensitivityY = 15F;
+    [SerializeField] float minimumX = -360F;
+    [SerializeField] float maximumX = 360F;
+    [SerializeField] float minimumY = -60F;
+    [SerializeField] float maximumY = 60F;
+    [SerializeField] float rotationY = 0F;
+
+    float m_baseHeight;
 
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        m_baseHeight = transform.position.y;
     }
 
     public CursorLockMode test;
@@ -48,5 +52,8 @@ public class FPSCamera : MonoBehaviour
                 transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, 0);
             }
         }
+
+        // Handle Crouch
+        transform.localPosition = Vector3.up * (Input.GetKey(m_crouch) ? .8f : m_baseHeight);
     }
 }
