@@ -7,6 +7,10 @@ public class Teleporter : MonoBehaviour {
 	[SerializeField] MTK_Manager m_mtkManager;
 	RaycastHit m_rayHit;
 
+	[Header("Fade Time")]
+	[SerializeField, Range(0,1)] float m_fadeStart;
+	[SerializeField, Range(0,1)] float m_fadeEnd;
+
 	Vector3 m_targetPosition;
 	
 	void Update ()
@@ -19,8 +23,15 @@ public class Teleporter : MonoBehaviour {
 		}
 	}
 
-	public void Teleport()
+	public void Teleport(bool inputValue)
+	{
+		if(inputValue)
+			MTK_Fade.Start(Color.black, m_fadeStart, MoveMtkManager);
+	}
+
+	private void MoveMtkManager()
 	{
 		m_mtkManager.transform.position = m_targetPosition;
+		MTK_Fade.Start(Color.clear, m_fadeEnd);
 	}
 }
