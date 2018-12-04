@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 114222725593913876}
   - component: {fileID: 114873051299192930}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Head
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -268,22 +268,6 @@ GameObject:
   - component: {fileID: 114176087158598408}
   m_Layer: 0
   m_Name: hair
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1493086359208778
-GameObject:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4899467331845378}
-  - component: {fileID: 114087969655427890}
-  m_Layer: 0
-  m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -350,7 +334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1650612024430542
 GameObject:
   m_ObjectHideFlags: 1
@@ -466,7 +450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1865334565926640
 GameObject:
   m_ObjectHideFlags: 1
@@ -645,8 +629,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4899467331845378}
-  m_RootOrder: 0
+  m_Father: {fileID: 4646499743375532}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4364626499021418
 Transform:
@@ -703,7 +687,7 @@ Transform:
   - {fileID: 4744059871177564}
   - {fileID: 4893713649718330}
   m_Father: {fileID: 4646499743375532}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4468992653552438
 Transform:
@@ -744,7 +728,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4646499743375532}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4514831296779824
 Transform:
@@ -838,10 +822,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4899467331845378}
   - {fileID: 4871712665668438}
   - {fileID: 4448742806709006}
   - {fileID: 4486410722164180}
+  - {fileID: 4340057253578242}
   m_Father: {fileID: 4805149401743166}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -926,7 +910,7 @@ Transform:
   - {fileID: 4602574554455750}
   - {fileID: 4468992653552438}
   m_Father: {fileID: 4646499743375532}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4875390979818760
 Transform:
@@ -957,20 +941,6 @@ Transform:
   - {fileID: 4159747964247738}
   m_Father: {fileID: 4448742806709006}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4899467331845378
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1493086359208778}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4340057253578242}
-  m_Father: {fileID: 4646499743375532}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4932740940174012
 Transform:
@@ -1691,18 +1661,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 14b4beac-79dc-415c-a56e-d1a70dd89914
---- !u!114 &114087969655427890
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1493086359208778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _guid: d9bbbda7-0324-47de-b9de-5447337529f1
 --- !u!114 &114101100625083820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2286,7 +2244,6 @@ MonoBehaviour:
     - {fileID: 1045637155756862}
     - {fileID: 1827903869289238}
     - {fileID: 1023394983566504}
-    - {fileID: 1493086359208778}
     - {fileID: 1887218026966208}
     - {fileID: 1148379129432364}
     - {fileID: 1446208449898796}
@@ -2346,7 +2303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 583ae33bd15883c4ba76271e3fcb181e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeSetup: {fileID: 114814732575340876}
+  activeSetup: {fileID: 114495364992844328}
   setupSimulation: {fileID: 114814732575340876}
   setupSteamVR: {fileID: 114495364992844328}
 --- !u!114 &114430506520582742
@@ -2512,7 +2469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHand: {fileID: 1170559192017828}
   rightHand: {fileID: 1827903869289238}
-  head: {fileID: 1493086359208778}
+  head: {fileID: 1446208449898796}
 --- !u!114 &114533845968308228
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2594,7 +2551,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 114971454946613602}
         m_MethodName: Teleport
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2810,7 +2767,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 114971454946613602}
         m_MethodName: Teleport
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
