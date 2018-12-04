@@ -157,6 +157,7 @@ GameObject:
   - component: {fileID: 114887437369285636}
   - component: {fileID: 114922903270481872}
   - component: {fileID: 114217100738388862}
+  - component: {fileID: 114995414304761668}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -213,6 +214,7 @@ GameObject:
   - component: {fileID: 114892719006468626}
   - component: {fileID: 114526024746610144}
   - component: {fileID: 114834969708424246}
+  - component: {fileID: 114041262827163132}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -695,7 +697,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1527154424799454}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4911871899713854}
@@ -1797,6 +1799,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_angularTracker: {fileID: 0}
+--- !u!114 &114041262827163132
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1195490673449122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfcf82f73038ddd439067ad898e3005c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114050834630130154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2760,7 +2773,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 114980441265172024}
         m_MethodName: Teleport
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2979,7 +2992,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 114980441265172024}
         m_MethodName: Teleport
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3280,6 +3293,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_mtkManager: {fileID: 114002115068100890}
+  m_fadeStart: 0.2
+  m_fadeEnd: 0.5
 --- !u!114 &114986392785499490
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3402,6 +3417,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 391011c8-1113-4e88-bb07-74652f04e0d0
+--- !u!114 &114995414304761668
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1135964977552508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfcf82f73038ddd439067ad898e3005c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135191067272079660
 SphereCollider:
   m_ObjectHideFlags: 1
