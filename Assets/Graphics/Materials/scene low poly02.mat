@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: scene low poly02
-  m_Shader: {fileID: 47, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 753c756c0670bf94b81e9f75f2e7d002, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -18,6 +18,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AlphaMaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -38,6 +42,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EmissiveTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 7bfaddfc2b9b0e644acec34a6ea76bfb, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -54,27 +62,56 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _RampTex:
+        m_Texture: {fileID: 2800000, guid: 43532f694e3c7df4b93bb2eec18e988f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowRampTex:
+        m_Texture: {fileID: 2800000, guid: 43532f694e3c7df4b93bb2eec18e988f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
+    - _Cursor: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _DistFade: 0
     - _DstBlend: 0
+    - _EmissionIntensity: 9.85
+    - _FadeIn: 0
+    - _FadeOut: 0
+    - _FresnelSensibility: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.6
     - _GlossyReflections: 1
+    - _HighlightOpacity: 0.5
+    - _IntersectionIn: 0
+    - _IntersectionOut: 0
+    - _IsAlphaTex: 1
+    - _IsAlphaUV: 1
+    - _IsBackFace: 1
+    - _MaxInterDist: 0.31
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Opacity: 0.5
     - _Parallax: 0.02
+    - _Slider: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _SpecularIntensity: 1.46
+    - _SpecularOpacity: 0.73
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
+    - _AlphaMaskPow: {r: 2, g: 2, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissiveColor: {r: 0, g: 0, b: 0, a: 0}
+    - _HighlightColor: {r: 1, g: 1, b: 1, a: 0}
+    - _ShadowColor: {r: 0.31132078, g: 0.1073803, b: 0.04552332, a: 1}
