@@ -40,7 +40,6 @@ public class Teleporter : MonoBehaviour {
 	void Update ()
 	{
 		Transform origin =	m_mtkManager.activeSetup.head.transform;
-		Debug.DrawRay(origin.position, origin.forward * 10, Color.green, 1);
 		
 		if(Physics.Raycast(origin.position, origin.forward, out m_rayHit, 100, LayerMask.GetMask("TP")))
 		{

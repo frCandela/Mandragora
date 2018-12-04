@@ -11,6 +11,11 @@ public class MTK_Fade : MonoBehaviour {
 	protected Color targetColor = new Color(0f, 0f, 0f, 0f);
 	protected Color deltaColor = new Color(0f, 0f, 0f, 0f);
 
+	public void Fade(bool black)
+	{
+		StartFade(black ? Color.black : Color.clear, 0.2f);
+	}
+
 	public static void Start(Color newColor, float duration, VoidDelegate action = null)
 	{
 		if (instance)
@@ -31,9 +36,8 @@ public class MTK_Fade : MonoBehaviour {
 		{
 			currentColor = newColor;
 		}
-
-		
 	}
+
 	IEnumerator Fade(VoidDelegate action)
 	{
 		while (currentColor != targetColor)
@@ -63,19 +67,6 @@ public class MTK_Fade : MonoBehaviour {
 
 	protected virtual void OnPostRender()
 	{
-		// if (currentColor != targetColor)
-		// {
-		// 	if (Mathf.Abs(currentColor.a - targetColor.a) < Mathf.Abs(deltaColor.a) * Time.deltaTime)
-		// 	{
-		// 		currentColor = targetColor;
-		// 		deltaColor = new Color(0, 0, 0, 0);
-		// 	}
-		// 	else
-		// 	{
-		// 		currentColor += deltaColor * Time.deltaTime;
-		// 	}
-		// }
-
 		if (currentColor.a > 0 && fadeMaterial)
 		{
 			currentColor.a = (targetColor.a > currentColor.a && currentColor.a > 0.98f ? 1f : currentColor.a);
