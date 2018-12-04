@@ -28,9 +28,6 @@ namespace UnityToolbarExtender
 		{
 			get
 			{
-				if(!m_mtkManager)
-					return false;
-
 				return m_mtkManager.activeSetup.GetType() == typeof(MTK_SetupSimulator);
 			}
 			set
@@ -61,7 +58,8 @@ namespace UnityToolbarExtender
 
 				GUILayout.FlexibleSpace();
 
-				Enabled = GUILayout.Toggle(Enabled, new GUIContent("S", "Simulation Mode"), ToolbarStyles.commandButtonStyle);
+				if(m_mtkManager)
+					Enabled = GUILayout.Toggle(Enabled, new GUIContent("S", "Simulation Mode"), ToolbarStyles.commandButtonStyle);
 
 				// if (GUI.changed)
 				// {

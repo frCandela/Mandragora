@@ -22,8 +22,11 @@ public class TelekinesisPointer : MonoBehaviour
 	float m_forceScale = 300;
 	[SerializeField, Range(0,10f)]
 	float m_initForceScale = 1;
+
+	[Header("Sound")]
+	[SerializeField] RTPC m_rtpc;
 	[SerializeField] AK.Wwise.Event m_wOnAttract;
-	[SerializeField] AK.Wwise.Event m_wOnGrab;
+	[SerializeField] AK.Wwise.Event[] m_wOnGrab;
 
 	MTK_InputManager m_inputManager;
 	MTK_InteractHand m_hand;
@@ -126,6 +129,8 @@ public class TelekinesisPointer : MonoBehaviour
 				m_joint.xDrive = m_joint.yDrive = m_joint.zDrive = drive;
 
 				m_joint.connectedBody.rotation = Quaternion.RotateTowards(m_joint.connectedBody.rotation, transform.rotation, (1 - distanceScale) * 2);
+			
+				m_rtpc.Value = m_joint.connectedBody.velocity.sqrMagnitude;
 			}
 		}
 
@@ -178,7 +183,10 @@ public class TelekinesisPointer : MonoBehaviour
 		{
 			if(m_joint.connectedBody.gameObject == input.gameObject)
 			{
-				m_wOnGrab.Post(Target.gameObject);
+				for (int i = 0; i < m_wOnGrab.Length; i++)
+				{
+					m_wOnGrab[i].Post(Target.gameObject);
+				}
 				
 				m_inputManager.Haptic(1);
 
