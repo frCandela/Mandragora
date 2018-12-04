@@ -13,30 +13,30 @@ public class MTK_Manager : MonoBehaviour
 
     [Header("Available setups")]
     [SerializeField]
-    MTK_Setup setupSimulation;
+    public MTK_Setup setupSimulation;
     [SerializeField]
-    MTK_Setup setupSteamVR;
+    public MTK_Setup setupSteamVR;
 
     private void Awake()
     {
-        Util.EditorAssert(activeSetup != null, "Please select a MTK_Setup in the MTK_Manager");
+        foreach (MTK_Setup setup in FindObjectsOfType<MTK_Setup>())
+        {
+            print(setup);
+            if (setup.enabled)
+                activeSetup = setup;
+        }
     }
 
-    public void SwitchSetup()
+    public void SetSetup(bool sim)
     {
-        #if UNITY_EDITOR
-        if (!EditorApplication.isPlaying)
+        activeSetup = sim ? setupSimulation : setupSteamVR;
+        activeSetup.gameObject.SetActive(true);
+        activeSetup.UpdateSettings();
+        
+        foreach (MTK_Setup setup in FindObjectsOfType<MTK_Setup>())
         {
-            activeSetup = (activeSetup == setupSteamVR) ? setupSimulation : setupSteamVR;
-            activeSetup.gameObject.SetActive(true);
-            activeSetup.UpdateSettings();
-            // Activates the first MTK_Setup in the child hierarchy
-            foreach (MTK_Setup setup in FindObjectsOfType<MTK_Setup>())
-            {
-                if (setup != activeSetup)
-                    setup.gameObject.SetActive(false);
-            }
+            if (setup != activeSetup)
+                setup.gameObject.SetActive(false);
         }
-        #endif
     }
 }

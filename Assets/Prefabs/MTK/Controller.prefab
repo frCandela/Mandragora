@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33129778591173198}
   - component: {fileID: 23903482983770034}
   - component: {fileID: 114325392827286760}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RayPreview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 114585129397589856}
   - component: {fileID: 114867369557546540}
   - component: {fileID: 114303183035530456}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 54420130755778526}
   - component: {fileID: 153000362147648458}
   - component: {fileID: 114176033370745618}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Joint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,17 +208,22 @@ MonoBehaviour:
   m_joint: {fileID: 153000362147648458}
   m_rayPreview: {fileID: 4491784709764274}
   m_outliner: {fileID: 0}
+  m_minDistance: 0.4
   m_maxDistance: 10
   m_minMagnitudeToAttract: 0.1
   m_forceScale: 1000
   m_initForceScale: 5
+  m_rtpc: {fileID: 11400000, guid: 87f2a4ce3dd599b4f87fa2a89c364215, type: 2}
   m_wOnAttract:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: 36e1dc8938c25ac4ba90d8ddd46153f0,
+    WwiseObjectReference: {fileID: 11400000, guid: cf1dfd60c3665ee47b58390d728c1267,
       type: 2}
   m_wOnGrab:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: 331b83910c10fc54aa063fcf36861a45,
+  - valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 36e1dc8938c25ac4ba90d8ddd46153f0,
+      type: 2}
+  - valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 30b59d45047f1af49a9055f4bb8e8f4d,
       type: 2}
 --- !u!114 &114325392827286760
 MonoBehaviour:
