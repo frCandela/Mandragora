@@ -11,22 +11,26 @@ public class Teleporter : MonoBehaviour {
 	[SerializeField, Range(0,1)] float m_fadeStart;
 	[SerializeField, Range(0,1)] float m_fadeEnd;
 
+	bool m_hasDestination = false;
 	Vector3 m_targetPosition;
 	
 	void Update ()
 	{
 		Transform origin =	m_mtkManager.activeSetup.head.transform;
 
-		if(Physics.Raycast(origin.position, origin.forward, out m_rayHit, 100, LayerMask.GetMask("TP")))
-		{
+		m_hasDestination = Physics.Raycast(origin.position, origin.forward, out m_rayHit, 100, LayerMask.GetMask("TP"));
+		
+		if(m_hasDestination)
 			m_targetPosition = m_rayHit.collider.transform.position;
-		}
 	}
 
 	public void Teleport(bool inputValue)
 	{
 		if(inputValue)
-			MTK_Fade.Start(Color.black, m_fadeStart, MoveMtkManager);
+		{
+			if(m_hasDestination)
+				MTK_Fade.Start(Color.black, m_fadeStart, MoveMtkManager);
+		}
 	}
 
 	private void MoveMtkManager()
