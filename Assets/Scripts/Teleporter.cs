@@ -36,6 +36,8 @@ public class Teleporter : MonoBehaviour {
 			}
 		}
 	}
+
+	bool m_available = true;
 	
 	void Update ()
 	{
@@ -53,16 +55,19 @@ public class Teleporter : MonoBehaviour {
 
 	public void Teleport(bool inputValue)
 	{
-		if(inputValue)
+		if(m_available && inputValue)
 		{
 			if(TargetZone)
+			{
 				MTK_Fade.Start(Color.black, m_fadeStart, MoveMtkManager);
+				m_available = false;
+			}
 		}
 	}
 
 	private void MoveMtkManager()
 	{
 		m_mtkManager.transform.position = m_targetPos;
-		MTK_Fade.Start(Color.clear, m_fadeEnd);
+		MTK_Fade.Start(Color.clear, m_fadeEnd, () => m_available = true);
 	}
 }
