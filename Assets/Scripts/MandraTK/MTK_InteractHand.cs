@@ -31,9 +31,9 @@ public class MTK_InteractHand : MonoBehaviour
         m_setup = FindObjectOfType<MTK_Manager>().activeSetup;
 
         m_inputManager = GetComponentInParent<MTK_InputManager>();
-        m_inputManager.m_onTrigger.AddListener(OnTrigger);
-        m_inputManager.m_onGrip.AddListener(OnGrip);
-        m_inputManager.m_onPad.AddListener(OnPad);
+        m_inputManager.m_onTrigger.AddListener(TryGrab);
+        // m_inputManager.m_onGrip.AddListener(OnGrip);
+        m_inputManager.m_onPad.AddListener(TryUse);
 
         if(m_outliner)
         {
@@ -47,14 +47,12 @@ public class MTK_InteractHand : MonoBehaviour
         m_closest = GetClosestInteractable();
     }
 
-    void OnTrigger(bool input)
+    void TryGrab(bool input)
     {
         if(input)
         {
             if (m_closest)
             {
-                m_closest.Grab(input);
-
                 if(m_closest.isGrabbable)
                     Grab(m_closest);
             }
@@ -62,19 +60,11 @@ public class MTK_InteractHand : MonoBehaviour
         else
         {
             if(m_grabbed)
-            {
-                m_grabbed.Grab(input);
                 Release();
-            }
         }
     }
 
-    void OnGrip(bool input)
-    {
-        
-    }
-
-    void OnPad(bool input)
+    void TryUse(bool input)
     {
         if(m_grabbed)
             m_grabbed.Use(input);
@@ -82,14 +72,16 @@ public class MTK_InteractHand : MonoBehaviour
             m_closest.Use(input);
     }
 
-    private void OnJointBreak(float breakForce)
+    void OnJointBreak(float breakForce)
     {
         if (m_grabbed)
             Release();
     }
 
-    public void Grab( MTK_Interactable obj)
+    public void Grab(MTK_Interactable obj)
     {
+        obj.Grab(true);
+
         if( obj.jointType.Used())
             obj.jointType.RemoveJoint();
 
@@ -102,6 +94,8 @@ public class MTK_InteractHand : MonoBehaviour
     {
         if(m_grabbed)
         {
+            m_grabbed.Grab(false);
+
             m_grabbed.jointType.onJointBreak.RemoveListener(Release);
             m_grabbed.jointType.RemoveJoint();
             Rigidbody rb = m_grabbed.GetComponent<Rigidbody>();
