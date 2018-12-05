@@ -49,14 +49,6 @@ public class MTK_InteractHand : MonoBehaviour
 
     void OnTrigger(bool input)
     {
-        if(m_grabbed)
-            m_grabbed.Use(input);
-        else if(m_closest)
-            m_closest.Use(input);
-    }
-
-    void OnGrip(bool input)
-    {
         if(input)
         {
             if (m_closest)
@@ -77,9 +69,17 @@ public class MTK_InteractHand : MonoBehaviour
         }
     }
 
+    void OnGrip(bool input)
+    {
+        
+    }
+
     void OnPad(bool input)
     {
-        // Implement TP
+        if(m_grabbed)
+            m_grabbed.Use(input);
+        else if(m_closest)
+            m_closest.Use(input);
     }
 
     private void OnJointBreak(float breakForce)
