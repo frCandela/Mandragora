@@ -5,12 +5,16 @@ using UnityEngine;
 public class Teleporter : MonoBehaviour {
 
 	[SerializeField] MTK_Manager m_mtkManager;
-	RaycastHit m_rayHit;
+
+	[Header("Settings")]
+	[SerializeField, Range(0,1)]
+	float m_tolerance = 0.1f;
 
 	[Header("Fade Time")]
 	[SerializeField, Range(0,1)] float m_fadeStart;
 	[SerializeField, Range(0,1)] float m_fadeEnd;
 
+	RaycastHit m_rayHit;
 	MTK_TPZone m_targetZone;
 	Vector3 m_targetPos;
 	MTK_TPZone TargetZone
@@ -39,6 +43,7 @@ public class Teleporter : MonoBehaviour {
 
 	bool m_available = true;
 	int m_triggerCounter = 0;
+	float m_cancelTime;
 	public bool Active 
 	{
 		set
@@ -53,6 +58,9 @@ public class Teleporter : MonoBehaviour {
 					m_available = false;
 				}
 			}
+
+			if(!value)
+				m_cancelTime = Time.time + m_tolerance;
 		}
 	}
 	
@@ -71,10 +79,9 @@ public class Teleporter : MonoBehaviour {
 				TargetZone = null;
 			}
 		}
-		else
-		{
+
+		if(m_triggerCounter < 2 && TargetZone && Time.time > m_cancelTime)
 			TargetZone = null;
-		}
 	}
 
 	private void MoveMtkManager()

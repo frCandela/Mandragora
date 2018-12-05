@@ -346,7 +346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1527154424799454
 GameObject:
   m_ObjectHideFlags: 1
@@ -365,7 +365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1545703153405962
 GameObject:
   m_ObjectHideFlags: 1
@@ -1473,7 +1473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 583ae33bd15883c4ba76271e3fcb181e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeSetup: {fileID: 114627048374823106}
+  activeSetup: {fileID: 114589116309680354}
   setupSimulation: {fileID: 114627048374823106}
   setupSteamVR: {fileID: 114589116309680354}
 --- !u!114 &114008813904365156
@@ -1768,14 +1768,14 @@ MonoBehaviour:
   size: 0
   color: {r: 0, g: 1, b: 1, a: 1}
   vertices:
-  - {x: 1.5999998, y: 0.01, z: -1.5499997}
-  - {x: -1.5999998, y: 0.01, z: -1.5499997}
-  - {x: -1.5999998, y: 0.01, z: 1.5499997}
-  - {x: 1.5999998, y: 0.01, z: 1.5499997}
-  - {x: 1.7499998, y: 0.01, z: -1.6999997}
-  - {x: -1.7499998, y: 0.01, z: -1.6999997}
-  - {x: -1.7499998, y: 0.01, z: 1.6999997}
-  - {x: 1.7499998, y: 0.01, z: 1.6999997}
+  - {x: 1.6499997, y: 0.01, z: -1.3499999}
+  - {x: -1.6499997, y: 0.01, z: -1.3499999}
+  - {x: -1.6499997, y: 0.01, z: 1.3499999}
+  - {x: 1.6499997, y: 0.01, z: 1.3499999}
+  - {x: 1.7999997, y: 0.01, z: -1.4999999}
+  - {x: -1.7999997, y: 0.01, z: -1.4999999}
+  - {x: -1.7999997, y: 0.01, z: 1.4999999}
+  - {x: 1.7999997, y: 0.01, z: 1.4999999}
 --- !u!114 &114127422103713196
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3483,6 +3483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_mtkManager: {fileID: 114002115068100890}
+  m_tolerance: 0.1
   m_fadeStart: 0.2
   m_fadeEnd: 0.5
 --- !u!114 &114986392785499490
