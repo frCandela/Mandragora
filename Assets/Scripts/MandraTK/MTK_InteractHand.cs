@@ -5,9 +5,15 @@ using Valve.VR;
 
 public class MTK_InteractHand : MonoBehaviour
 {
-    public MTK_Interactable m_grabbed = null;
+    [Header("References")]
     [SerializeField] Outliner m_outliner = null;
 
+    [Header("Status")]
+    [SerializeField] public MTK_Interactable m_grabbed = null;
+    [SerializeField] public bool triggerPressed = false;
+    [SerializeField] public bool gripPressed = false;
+
+    [Header("Events")]
     public UnityEventMTK_Interactable m_onTouchInteractable;
     public UnityEventMTK_Interactable m_onUnTouchInteractable;
 
@@ -49,22 +55,24 @@ public class MTK_InteractHand : MonoBehaviour
 
     void OnTrigger(bool input)
     {
+        triggerPressed = input;
         if(m_grabbed)
             m_grabbed.Use(input);
         else if(m_closest)
             m_closest.Use(input);
     }
-
     void OnGrip(bool input)
     {
-        if(input)
+        gripPressed = input;
+        if (input)
         {
             if (m_closest)
-            {
-                m_closest.Grab(input);
-
+            { 
                 if(m_closest.isGrabbable)
+                {
+                    m_closest.Grab(input);
                     Grab(m_closest);
+                }
             }
         }
         else

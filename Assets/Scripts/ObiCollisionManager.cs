@@ -48,13 +48,13 @@ public class ObiCollisionManager : MonoBehaviour
                                 emitter.life[pa.indexInActor] = 0;
                             }
                         } 
-                        else if(pa.actor.effect)
+                        /*else if( effect)
                         {
                             if( pa.actor.effect.AddEffectTo(component.gameObject) )
                             {
                                 emitter.life[pa.indexInActor] = 0;
                             }
-                        }
+                        }*/
                     }
                 }
             }
