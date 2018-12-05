@@ -13,6 +13,9 @@
 		_FadeSpeed ("[F] Fade Speed", float) = 1
 		_FadePow ("[F] Fade Power", float) = 1
 		_FadeRoundFactor ("[F] Fade Round Factor", float) = 1
+		_MaxLocalDist ("Max Local Distance", float) = 5.68
+		_MinLocalDist ("Min Local Distance", float) = 1.4
+		_Scale ("[PAS TOUCHER] Scale", float) = 1
 	}
 
 	CGINCLUDE
@@ -58,12 +61,13 @@
 
 			// Properties
 			float4 _Color;
+			float _Scale;
 
 			vertexOutput vert(vertexInput input)
 			{
 				vertexOutput output;
 				float4 newVertex = input.vertex;
-				newVertex *= 1 + cos(_Time.z + newVertex.x + newVertex.y + newVertex.z)*0.2;
+				newVertex *= 1 + cos(_Time.z + newVertex.x*1/_Scale + newVertex.y*1/_Scale + newVertex.z*1/_Scale)*0.2;
 				output.pos = UnityObjectToClipPos(newVertex);
 				output.color = _Color;
 
@@ -162,7 +166,7 @@
 			
 			// Properties
 			float4 _OutlineColor;
-			float _OutlineExtrusion, _MaxLocalDist, _MinLocalDist, _PowDist, _PowFraction, _Speed;
+			float _OutlineExtrusion, _MaxLocalDist, _MinLocalDist, _PowDist, _PowFraction, _Speed, _Scale;
 
 			struct appdata
 			{
@@ -187,16 +191,16 @@
 				float time = _Time.y * _Speed; // set time speed
 
 
-				_MinLocalDist = 1.4; // Hard coded for a specific mesh
-				_MaxLocalDist = 5.68; // ""
+				_MinLocalDist *= _Scale; // Hard coded for a specific mesh
+				_MaxLocalDist *= _Scale; // ""
 				float dist = length(localPos.xyz); // take distance vertex/pivot
-				dist = (dist - _MinLocalDist) * (_MaxLocalDist - _MinLocalDist); // make it between 0 - 1
+				dist = (dist - _MinLocalDist) / (_MaxLocalDist - _MinLocalDist); // make it between 0 - 1
 				output.distFromCenter = saturate(dist);
 
 
 				// normal extrusion technique
 				float4 normal = normalize(float4(input.normal, 1));
-				float noise = frac(time + localPos.x + localPos.y + localPos.z); // desynchronize vertices
+				float noise = frac(time + localPos.x*(1/_Scale) + localPos.y*(1/_Scale) + localPos.z*(1/_Scale)); // desynchronize vertices
 				float fractionNoise = 1 - (abs(0.5 - noise) * 2); // make frac between 0-1 and inverted
 
 				output.fraction = pow(fractionNoise, _PowFraction); // give it more intensity
