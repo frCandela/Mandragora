@@ -28,15 +28,12 @@ namespace UnityToolbarExtender
 		{
 			get
 			{
-				if(!m_mtkManager)
-					return false;
-
 				return m_mtkManager.activeSetup.GetType() == typeof(MTK_SetupSimulator);
 			}
 			set
 			{
 				if(m_mtkManager)
-					m_mtkManager.SwitchSetup();
+					m_mtkManager.SetSetup(value);
 			}
 		}
 
@@ -55,15 +52,19 @@ namespace UnityToolbarExtender
 		
 		static void OnToolbarGUI()
 		{
-			GUI.changed = false;
-
-			GUILayout.FlexibleSpace();
-
-			GUILayout.Toggle(Enabled, new GUIContent("S", "Simulation Mode"), ToolbarStyles.commandButtonStyle);
-
-			if (GUI.changed)
+			if(!EditorApplication.isPlaying)
 			{
-				Enabled = !Enabled;
+				GUI.changed = false;
+
+				GUILayout.FlexibleSpace();
+
+				if(m_mtkManager)
+					Enabled = GUILayout.Toggle(Enabled, new GUIContent("S", "Simulation Mode"), ToolbarStyles.commandButtonStyle);
+
+				// if (GUI.changed)
+				// {
+				// 	Enabled = !Enabled;
+				// }
 			}
 		}
 	}
