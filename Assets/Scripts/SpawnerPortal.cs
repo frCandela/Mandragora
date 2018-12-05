@@ -78,7 +78,7 @@ public class SpawnerPortal : Spawner
 
     private void Update()
     {
-        if(m_canSpawn && m_inputHand)
-            m_inputHand.GetComponent<MTK_InputManagerSimulator>().Haptic(Time.deltaTime);
+        if(m_canSpawn)
+            m_inputHand.GetComponentInParent<MTK_InputManager>().Haptic(Time.deltaTime);
     }
 }
