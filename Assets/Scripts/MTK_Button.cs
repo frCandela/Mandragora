@@ -17,7 +17,6 @@ public class MTK_Button : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print(other.name);
         if( other.gameObject == buttonGameObject)
         {
             if( m_state )

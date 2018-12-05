@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlanetEffect : Effect
 {
     public Rigidbody m_rb;
-
     public Rigidbody sunRigidbody;
 
-    /*[SerializeField]*/ private float GravitationalConstant = 0.005f;
+    float radiusScale = 10f;    //10 20000
+
+    /*[SerializeField]*/ private float GravitationalConstant = 0.005f;  
 
 
     public override bool ApplyEffect()
@@ -18,7 +19,6 @@ public class PlanetEffect : Effect
         {
             ManageEffectsCollisions();
             m_rb.useGravity = false;
-            print("ApplyEffect");
             return true;
         }
         else
@@ -39,22 +39,37 @@ public class PlanetEffect : Effect
     {
         if (m_rb)
         {
-            print("RemoveEffect");
             m_rb.useGravity = true;
         }
     }
-
 
     private void FixedUpdate()
     {
         m_rb.useGravity = false;
         Vector3 dir = (sunRigidbody.transform.position - transform.position);
-        float distance = dir.magnitude;
+        float distance = radiusScale * dir.magnitude;
         float force = sunRigidbody.mass * m_rb.mass * GravitationalConstant;
         Vector3 forceVec = dir.normalized * force / (distance* distance);
         m_rb.AddForce(forceVec);
 
         Debug.DrawLine(transform.position, transform.position + forceVec, Color.red);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        /*if(collision.gameObject.GetComponent<SolarSystem>() )
+        {
+            Destroy(gameObject);
+        }
+
+        PlanetEffect planetEffect = gameObject.GetComponent<PlanetEffect>();
+        if(planetEffect)
+        {
+            Destroy(planetEffect.gameObject);
+        }*/
+
+
+
     }
 
 }
