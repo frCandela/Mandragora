@@ -38,30 +38,42 @@ public class Teleporter : MonoBehaviour {
 	}
 
 	bool m_available = true;
+	int m_triggerCounter = 0;
+	public bool Active 
+	{
+		set
+		{
+			m_triggerCounter += value ? 1 : -1;
+
+			if(m_available && m_triggerCounter == 0)
+			{
+				if(TargetZone)
+				{
+					MTK_Fade.Start(Color.black, m_fadeStart, MoveMtkManager);
+					m_available = false;
+				}
+			}
+		}
+	}
 	
 	void Update ()
 	{
-		Transform origin =	m_mtkManager.activeSetup.head.transform;
-		
-		if(Physics.Raycast(origin.position, origin.forward, out m_rayHit, 100, LayerMask.GetMask("TP")))
+		if(m_triggerCounter == 2)
 		{
-			TargetZone = m_rayHit.collider.GetComponent<MTK_TPZone>();
+			Transform origin =	m_mtkManager.activeSetup.head.transform;
+		
+			if(Physics.Raycast(origin.position, origin.forward, out m_rayHit, 100, LayerMask.GetMask("TP")))
+			{
+				TargetZone = m_rayHit.collider.GetComponent<MTK_TPZone>();
+			}
+			else
+			{
+				TargetZone = null;
+			}
 		}
 		else
 		{
 			TargetZone = null;
-		}
-	}
-
-	public void Teleport(bool inputValue)
-	{
-		if(m_available && inputValue)
-		{
-			if(TargetZone)
-			{
-				MTK_Fade.Start(Color.black, m_fadeStart, MoveMtkManager);
-				m_available = false;
-			}
 		}
 	}
 

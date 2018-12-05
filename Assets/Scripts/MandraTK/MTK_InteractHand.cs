@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Valve.VR;
 
 public class MTK_InteractHand : MonoBehaviour
@@ -10,6 +11,7 @@ public class MTK_InteractHand : MonoBehaviour
 
     public UnityEventMTK_Interactable m_onTouchInteractable;
     public UnityEventMTK_Interactable m_onUnTouchInteractable;
+    public UnityEventBool m_onUseFail;
 
     private List<MTK_Interactable> m_objectsInTrigger = new List<MTK_Interactable>(3);
     private MTK_Setup m_setup;
@@ -31,9 +33,6 @@ public class MTK_InteractHand : MonoBehaviour
         m_setup = FindObjectOfType<MTK_Manager>().activeSetup;
 
         m_inputManager = GetComponentInParent<MTK_InputManager>();
-        m_inputManager.m_onTrigger.AddListener(TryGrab);
-        // m_inputManager.m_onGrip.AddListener(OnGrip);
-        m_inputManager.m_onPad.AddListener(TryUse);
 
         if(m_outliner)
         {
@@ -47,7 +46,7 @@ public class MTK_InteractHand : MonoBehaviour
         m_closest = GetClosestInteractable();
     }
 
-    void TryGrab(bool input)
+    public void TryGrab(bool input)
     {
         if(input)
         {
@@ -64,12 +63,14 @@ public class MTK_InteractHand : MonoBehaviour
         }
     }
 
-    void TryUse(bool input)
+    public void TryUse(bool input)
     {
         if(m_grabbed)
             m_grabbed.Use(input);
         else if(m_closest)
             m_closest.Use(input);
+        else
+            m_onUseFail.Invoke(input);
     }
 
     void OnJointBreak(float breakForce)

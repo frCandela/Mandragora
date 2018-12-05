@@ -169,15 +169,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4932740940174012}
+  - component: {fileID: 114124444881442070}
+  - component: {fileID: 114266112062121484}
   - component: {fileID: 135734106023079602}
   - component: {fileID: 54732214514702560}
   - component: {fileID: 114222850113798352}
   - component: {fileID: 114570231741699228}
   - component: {fileID: 114963951414965594}
-  - component: {fileID: 114124444881442070}
-  - component: {fileID: 114345580102199984}
   - component: {fileID: 114200415979509864}
-  - component: {fileID: 114266112062121484}
   m_Layer: 10
   m_Name: Controller
   m_TagString: Untagged
@@ -274,7 +273,6 @@ GameObject:
   - component: {fileID: 114712634209390374}
   - component: {fileID: 114872966561319138}
   - component: {fileID: 114467341267854632}
-  - component: {fileID: 114197729531661700}
   - component: {fileID: 114883948833837290}
   m_Layer: 10
   m_Name: Controller
@@ -383,15 +381,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4893713649718330}
+  - component: {fileID: 114101100625083820}
+  - component: {fileID: 114129478622512598}
   - component: {fileID: 135585492232160142}
   - component: {fileID: 54096914755571600}
   - component: {fileID: 114027338159601920}
   - component: {fileID: 114727699566705042}
   - component: {fileID: 114156196325305964}
-  - component: {fileID: 114101100625083820}
-  - component: {fileID: 114065930463573526}
   - component: {fileID: 114456103079472074}
-  - component: {fileID: 114129478622512598}
   m_Layer: 10
   m_Name: Controller
   m_TagString: Untagged
@@ -463,15 +460,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4468992653552438}
+  - component: {fileID: 114430506520582742}
+  - component: {fileID: 114815969657364740}
   - component: {fileID: 135526638509078742}
   - component: {fileID: 54703372588351632}
   - component: {fileID: 114457056242842294}
   - component: {fileID: 114275631346249208}
   - component: {fileID: 114883954237585014}
-  - component: {fileID: 114430506520582742}
-  - component: {fileID: 114641694012226990}
   - component: {fileID: 114786668092839292}
-  - component: {fileID: 114815969657364740}
   m_Layer: 10
   m_Name: Controller
   m_TagString: Untagged
@@ -1415,6 +1411,22 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEventMTK_Interactable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  m_onUseFail:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114971454946613602}
+        m_MethodName: set_Active
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114036087265582496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1432,17 +1444,6 @@ MonoBehaviour:
   verbose: 0
   createComponents: 1
   updateDynamically: 1
---- !u!114 &114065930463573526
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1845748230327748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0218f8a3a632f66499377f4c0ce5f49a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114069029377352200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1625,6 +1626,34 @@ MonoBehaviour:
         _vector2Value: {x: 0, y: 0}
         _vector3Value: {x: 0, y: 0, z: 0}
         _vector4Value: {x: 0, y: 0, z: 0, w: 0}
+      - _path: m_onUseFail.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+        _animationCurveValue:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        _booleanValue: 0
+        _boundsValue:
+          m_Center: {x: 0, y: 0, z: 0}
+          m_Extent: {x: 0, y: 0, z: 0}
+        _colorValue: {r: 0, g: 0, b: 0, a: 0}
+        _doubleValue: 0
+        _floatValue: 0
+        _intValue: 0
+        _longValue: 0
+        _objectReferenceValue: {fileID: 114971454946613602}
+        _quaternionValue: {x: 0, y: 0, z: 0, w: 0}
+        _rectValue:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        _stringValue: 
+        _vector2Value: {x: 0, y: 0}
+        _vector3Value: {x: 0, y: 0, z: 0}
+        _vector4Value: {x: 0, y: 0, z: 0, w: 0}
   _overrideObjects: []
 --- !u!114 &114150503178363970
 MonoBehaviour:
@@ -1747,17 +1776,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: a1c0c160-9ce7-437b-9c2a-6895d1a11047
---- !u!114 &114197729531661700
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1585529722866088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0218f8a3a632f66499377f4c0ce5f49a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114200415979509864
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1770,7 +1788,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_joint: {fileID: 153971409797560804, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
-  m_rayPreview: {fileID: 0}
   m_outliner: {fileID: 114287807942026008}
   m_minDistance: 0.4
   m_maxDistance: 10
@@ -1837,6 +1854,22 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEventMTK_Interactable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  m_onUseFail:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114971454946613602}
+        m_MethodName: set_Active
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!114 &114251199261614796
 MonoBehaviour:
@@ -1926,6 +1959,34 @@ MonoBehaviour:
       _index: 0
       _isOverridden: 0
       _properties:
+      - _path: m_onUseFail.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+        _animationCurveValue:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        _booleanValue: 0
+        _boundsValue:
+          m_Center: {x: 0, y: 0, z: 0}
+          m_Extent: {x: 0, y: 0, z: 0}
+        _colorValue: {r: 0, g: 0, b: 0, a: 0}
+        _doubleValue: 0
+        _floatValue: 0
+        _intValue: 0
+        _longValue: 0
+        _objectReferenceValue: {fileID: 114971454946613602}
+        _quaternionValue: {x: 0, y: 0, z: 0, w: 0}
+        _rectValue:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        _stringValue: 
+        _vector2Value: {x: 0, y: 0}
+        _vector3Value: {x: 0, y: 0, z: 0}
+        _vector4Value: {x: 0, y: 0, z: 0, w: 0}
       - _path: m_outliner
         _animationCurveValue:
           serializedVersion: 2
@@ -2097,6 +2158,34 @@ MonoBehaviour:
         _vector2Value: {x: 0, y: 0}
         _vector3Value: {x: 0, y: 0, z: 0}
         _vector4Value: {x: 0, y: 0, z: 0, w: 0}
+      - _path: m_onUseFail.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+        _animationCurveValue:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        _booleanValue: 0
+        _boundsValue:
+          m_Center: {x: 0, y: 0, z: 0}
+          m_Extent: {x: 0, y: 0, z: 0}
+        _colorValue: {r: 0, g: 0, b: 0, a: 0}
+        _doubleValue: 0
+        _floatValue: 0
+        _intValue: 0
+        _longValue: 0
+        _objectReferenceValue: {fileID: 114971454946613602}
+        _quaternionValue: {x: 0, y: 0, z: 0, w: 0}
+        _rectValue:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        _stringValue: 
+        _vector2Value: {x: 0, y: 0}
+        _vector3Value: {x: 0, y: 0, z: 0}
+        _vector4Value: {x: 0, y: 0, z: 0, w: 0}
   _overrideObjects: []
 --- !u!114 &114305267576021196
 MonoBehaviour:
@@ -2111,7 +2200,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_onTrigger:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114222850113798352}
+        m_MethodName: TryGrab
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   m_onGrip:
@@ -2122,8 +2222,8 @@ MonoBehaviour:
   m_onPad:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114971454946613602}
-        m_MethodName: Teleport
+      - m_Target: {fileID: 114222850113798352}
+        m_MethodName: TryUse
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2264,17 +2364,6 @@ MonoBehaviour:
         _vector3Value: {x: 0, y: 0, z: 0}
         _vector4Value: {x: 0, y: 0, z: 0, w: 0}
   _overrideObjects: []
---- !u!114 &114345580102199984
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1392186436137776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0218f8a3a632f66499377f4c0ce5f49a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114356488154001648
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2369,7 +2458,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_joint: {fileID: 153581300082899034, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
-  m_rayPreview: {fileID: 0}
   m_outliner: {fileID: 114287807942026008}
   m_minDistance: 0.4
   m_maxDistance: 10
@@ -2410,6 +2498,22 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEventMTK_Interactable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  m_onUseFail:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114971454946613602}
+        m_MethodName: set_Active
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!114 &114467086146382066
 MonoBehaviour:
@@ -2535,7 +2639,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_onTrigger:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114457056242842294}
+        m_MethodName: TryGrab
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   m_onGrip:
@@ -2546,8 +2661,8 @@ MonoBehaviour:
   m_onPad:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114971454946613602}
-        m_MethodName: Teleport
+      - m_Target: {fileID: 114457056242842294}
+        m_MethodName: TryUse
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2571,17 +2686,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: d1fdad97-c840-4c11-af99-6f82f668d4c7
---- !u!114 &114641694012226990
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1902733417447874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0218f8a3a632f66499377f4c0ce5f49a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114643907349016262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2642,7 +2746,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_onTrigger:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114712634209390374}
+        m_MethodName: TryGrab
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   m_onGrip:
@@ -2653,8 +2768,8 @@ MonoBehaviour:
   m_onPad:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114971454946613602}
-        m_MethodName: Teleport
+      - m_Target: {fileID: 114712634209390374}
+        m_MethodName: TryUse
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2726,6 +2841,22 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEventMTK_Interactable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  m_onUseFail:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114971454946613602}
+        m_MethodName: set_Active
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114727699566705042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2780,7 +2911,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_onTrigger:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114027338159601920}
+        m_MethodName: TryGrab
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   m_onGrip:
@@ -2791,8 +2933,8 @@ MonoBehaviour:
   m_onPad:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114971454946613602}
-        m_MethodName: Teleport
+      - m_Target: {fileID: 114027338159601920}
+        m_MethodName: TryUse
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2888,7 +3030,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_joint: {fileID: 153482181550665662, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
-  m_rayPreview: {fileID: 0}
   m_outliner: {fileID: 114287807942026008}
   m_minDistance: 0.4
   m_maxDistance: 10
@@ -3016,6 +3157,34 @@ MonoBehaviour:
         _vector2Value: {x: 0, y: 0}
         _vector3Value: {x: 0, y: 0, z: 0}
         _vector4Value: {x: 0, y: 0, z: 0, w: 0}
+      - _path: m_onUseFail.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+        _animationCurveValue:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        _booleanValue: 0
+        _boundsValue:
+          m_Center: {x: 0, y: 0, z: 0}
+          m_Extent: {x: 0, y: 0, z: 0}
+        _colorValue: {r: 0, g: 0, b: 0, a: 0}
+        _doubleValue: 0
+        _floatValue: 0
+        _intValue: 0
+        _longValue: 0
+        _objectReferenceValue: {fileID: 114971454946613602}
+        _quaternionValue: {x: 0, y: 0, z: 0, w: 0}
+        _rectValue:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        _stringValue: 
+        _vector2Value: {x: 0, y: 0}
+        _vector3Value: {x: 0, y: 0, z: 0}
+        _vector4Value: {x: 0, y: 0, z: 0, w: 0}
   _overrideObjects: []
 --- !u!114 &114831630365548928
 MonoBehaviour:
@@ -3105,7 +3274,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_joint: {fileID: 153422111175143976}
-  m_rayPreview: {fileID: 0}
   m_outliner: {fileID: 114287807942026008}
   m_minDistance: 0.4
   m_maxDistance: 10
