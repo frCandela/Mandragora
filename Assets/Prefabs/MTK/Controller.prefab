@@ -19,12 +19,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4879903790830654}
+  - component: {fileID: 114636885437999498}
+  - component: {fileID: 114769920529812136}
   - component: {fileID: 135391040645987562}
   - component: {fileID: 54937298977883550}
   - component: {fileID: 114336963033943124}
   - component: {fileID: 114506710069531766}
   - component: {fileID: 114585129397589856}
   - component: {fileID: 114303183035530456}
+  - component: {fileID: 114328087922544780}
   m_Layer: 10
   m_Name: Controller
   m_TagString: Untagged
@@ -149,6 +152,18 @@ MonoBehaviour:
   - valueGuid: 
     WwiseObjectReference: {fileID: 11400000, guid: 36e1dc8938c25ac4ba90d8ddd46153f0,
       type: 2}
+--- !u!114 &114328087922544780
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1413948672007442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d63dad360a448fb46a1f8922ea12fbfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  test: 0
 --- !u!114 &114336963033943124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,8 +175,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905365873bc33104a9094657f72b0493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_grabbed: {fileID: 0}
   m_outliner: {fileID: 0}
+  m_grabbed: {fileID: 0}
+  triggerPressed: 0
+  gripPressed: 0
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -217,6 +234,30 @@ MonoBehaviour:
     - {fileID: 1413948672007442}
     - {fileID: 1914502479540176}
   _assetGuid: 9f59c4a2a82cc0e46b57a39b2eac9139
+--- !u!114 &114636885437999498
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1413948672007442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d63dad360a448fb46a1f8922ea12fbfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  test: 0
+--- !u!114 &114769920529812136
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1413948672007442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d63dad360a448fb46a1f8922ea12fbfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  test: 0
 --- !u!135 &135391040645987562
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -281,18 +322,18 @@ ConfigurableJoint:
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
     serializedVersion: 3
-    positionSpring: 10.180197
-    positionDamper: 19.968494
+    positionSpring: 0
+    positionDamper: 0
     maximumForce: 3.4028233e+38
   m_YDrive:
     serializedVersion: 3
-    positionSpring: 10.180197
-    positionDamper: 19.968494
+    positionSpring: 0
+    positionDamper: 0
     maximumForce: 3.4028233e+38
   m_ZDrive:
     serializedVersion: 3
-    positionSpring: 10.180197
-    positionDamper: 19.968494
+    positionSpring: 0
+    positionDamper: 0
     maximumForce: 3.4028233e+38
   m_TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   m_TargetAngularVelocity: {x: 0, y: 0, z: 0}

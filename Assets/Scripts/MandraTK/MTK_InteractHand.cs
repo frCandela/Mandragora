@@ -11,8 +11,7 @@ public class MTK_InteractHand : MonoBehaviour
 
     [Header("Status")]
     [SerializeField] public MTK_Interactable m_grabbed = null;
-    [SerializeField] public bool triggerPressed = false;
-    [SerializeField] public bool gripPressed = false;
+    [SerializeField] public bool m_grabPressed = false;
 
     [Header("Events")]
     public UnityEventMTK_Interactable m_onTouchInteractable;
@@ -54,31 +53,12 @@ public class MTK_InteractHand : MonoBehaviour
 
     public void TryGrab(bool input)
     {
-        triggerPressed = input;
         if(m_grabbed)
             m_grabbed.Use(input);
         else if(m_closest)
             m_closest.Use(input);
-    }
-    void OnGrip(bool input)
-    {
-        gripPressed = input;
-        if (input)
-        {
-            if (m_closest)
-            { 
-                if(m_closest.isGrabbable)
-                {
-                    m_closest.Grab(input);
-                    Grab(m_closest);
-                }
-            }
-        }
-        else
-        {
-            if(m_grabbed)
-                Release();
-        }
+
+        m_grabPressed = input;
     }
 
     public void TryUse(bool input)
