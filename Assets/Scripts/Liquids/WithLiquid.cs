@@ -100,8 +100,6 @@ public class WithLiquid : MonoBehaviour
         newVertices = new Vector3[m_baseVertices.Length];
         m_baseVertices.CopyTo(newVertices, 0);
 
-        m_emitter.effect = effect;
-
         if( !m_rigidbody)
         {
             m_rigidbody = GetComponent<Rigidbody>();

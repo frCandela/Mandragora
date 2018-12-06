@@ -61,8 +61,8 @@ public abstract class ObiActor : MonoBehaviour, IObiSolverClient
 	[HideInInspector] public float[] solidRadii;			/**< Particle solid radii (physical radius of each particle)*/
 	[HideInInspector] public int[] phases;					/**< Particle phases.*/
 	[HideInInspector] public Color[] colors = null;             /**< Particle colors (not used by all actors, can be null)*/
-        [HideInInspector] public Effect effect;
-        [HideInInspector] public int[] deformableTriangles = new int[0];	/**< Indices of deformable triangles (3 per triangle)*/
+   // [HideInInspector] public Effect effect;
+    [HideInInspector] public int[] deformableTriangles = new int[0];	/**< Indices of deformable triangles (3 per triangle)*/
 	[NonSerialized] protected int trianglesOffset = 0;					/**< Offset of deformable trtiangles in curent solver*/
 
 	private bool inSolver = false;
