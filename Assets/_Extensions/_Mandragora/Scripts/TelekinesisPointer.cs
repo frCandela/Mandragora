@@ -22,9 +22,11 @@ public class TelekinesisPointer : MonoBehaviour
 	float m_initForceScale = 1;
 
 	[Header("Sound")]
-	[SerializeField] RTPC m_rtpc;
-	[SerializeField] AK.Wwise.Event m_wOnAttract;
-	[SerializeField] AK.Wwise.Event[] m_wOnGrab;
+	[SerializeField] AK.Wwise.Event m_wObjectGrabbed;
+	[SerializeField] AK.Wwise.Event m_wObjectPlay;
+	[SerializeField] AK.Wwise.Event m_wObjectStop; 
+	[SerializeField] AK.Wwise.Event m_wHandPlay;
+	[SerializeField] AK.Wwise.Event m_wHandStop;
 
 	MTK_InputManager m_inputManager;
 	MTK_InteractHand m_hand;
@@ -117,8 +119,6 @@ public class TelekinesisPointer : MonoBehaviour
 				m_joint.xDrive = m_joint.yDrive = m_joint.zDrive = drive;
 
 				m_joint.connectedBody.rotation = Quaternion.RotateTowards(m_joint.connectedBody.rotation, transform.rotation, (1 - distanceScale) * 2);
-			
-				m_rtpc.Value = m_joint.connectedBody.velocity.sqrMagnitude;
 			}
 		}
 
@@ -130,10 +130,17 @@ public class TelekinesisPointer : MonoBehaviour
 	{
 		if(input)
 		{
-			m_attract = true;
+			if(Target)
+			{
+				m_wHandPlay.Post(gameObject);
+
+				m_attract = true;
+			}
 		}
 		else
 		{
+			m_wHandStop.Post(gameObject);
+
 			m_attract = false;
 			if(m_joint.connectedBody)
 				UnAttract();
@@ -142,8 +149,6 @@ public class TelekinesisPointer : MonoBehaviour
 
 	void Attract(Vector3 force)
 	{
-		m_wOnAttract.Post(Target.gameObject);
-
 		m_joint.connectedBody = Target.GetComponent<Rigidbody>();
 		m_joint.connectedBody.AddForce(force.normalized * Mathf.Sqrt(force.magnitude) * m_initForceScale, ForceMode.Impulse);
 
@@ -152,10 +157,14 @@ public class TelekinesisPointer : MonoBehaviour
 
 		m_initDistanceToTarget = GetDistanceToTarget();
 		m_lastForceApplied = force;
+
+		m_wObjectPlay.Post(Target.gameObject);
 	}
 
 	void UnAttract()
 	{
+		m_wObjectStop.Post(Target.gameObject);
+
 		m_joint.connectedBody.useGravity = true;
 		m_joint.connectedBody.drag = 0;
 
@@ -170,13 +179,10 @@ public class TelekinesisPointer : MonoBehaviour
 		if(m_joint.connectedBody)
 		{
 			if(m_joint.connectedBody.gameObject == input.gameObject)
-			{
-				for (int i = 0; i < m_wOnGrab.Length; i++)
-				{
-					m_wOnGrab[i].Post(Target.gameObject);
-				}
-				
+			{				
 				m_inputManager.Haptic(1);
+
+				m_wObjectGrabbed.Post(m_joint.gameObject);
 
 				input.transform.rotation = transform.rotation;
 				input.transform.position = transform.position;
