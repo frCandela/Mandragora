@@ -29,8 +29,8 @@ public abstract class Effect : MonoBehaviour
                     effect.m_particles.transform.localRotation = Quaternion.identity;
                     effect.m_particles.transform.localPosition = Vector3.zero;
                 }
+                return effect;
             }
-            return effect;
         }
         return null;
     }

@@ -23,48 +23,37 @@ namespace UnityToolbarExtender
 	static class SimulationSwitch
 	{		
 		static MTK_Manager m_mtkManager;
+		static string m_keyPrefName = "SimulationMode";
 
 		static bool Enabled
 		{
 			get
 			{
-				if(!m_mtkManager)
-					return false;
-
-				return m_mtkManager.activeSetup.GetType() == typeof(MTK_SetupSimulator);
+				return EditorPrefs.GetBool(m_keyPrefName, false);
 			}
 			set
 			{
+				if(!m_mtkManager)
+					m_mtkManager = GameObject.FindObjectOfType<MTK_Manager>();
+
 				if(m_mtkManager)
-					m_mtkManager.SwitchSetup();
+				{
+					m_mtkManager.SetSetup(value);
+					EditorPrefs.SetBool(m_keyPrefName, value);
+				}
 			}
 		}
 
 		static SimulationSwitch()
 		{
-			EditorApplication.update += UpdateDisplay;
-			
 			ToolbarExtender.LeftToolbarGUI.Add(OnToolbarGUI);
-		}
-
-		static void UpdateDisplay()
-		{
-			if(!m_mtkManager)
-				m_mtkManager = GameObject.FindObjectOfType<MTK_Manager>();
 		}
 		
 		static void OnToolbarGUI()
 		{
-			GUI.changed = false;
-
 			GUILayout.FlexibleSpace();
 
-			GUILayout.Toggle(Enabled, new GUIContent("S", "Simulation Mode"), ToolbarStyles.commandButtonStyle);
-
-			if (GUI.changed)
-			{
-				Enabled = !Enabled;
-			}
+			Enabled = GUILayout.Toggle(Enabled, new GUIContent("S", "Simulation Mode"), ToolbarStyles.commandButtonStyle);
 		}
 	}
 }

@@ -8,6 +8,23 @@ public class SpawnerPortal : Spawner
     bool m_correctEntry = false;
     bool m_canSpawn = false;
 
+    [SerializeField]
+    Animator m_animator;
+
+    bool CorrectEntry{
+        set{
+            m_correctEntry = value;
+            m_animator.SetBool("CorrectEntry", value);
+        }
+    }
+
+    bool CanSpawn{
+        set{
+            m_canSpawn = value;
+            m_animator.SetBool("CanSpawn", value);
+        }
+    }
+
     Vector3 GetTriggerNormal(Vector3 origin)
     {
         Vector3 normal = default(Vector3);
@@ -25,8 +42,8 @@ public class SpawnerPortal : Spawner
         {
             m_inputHand = other.GetComponent<MTK_InteractHand>();
 
-            m_correctEntry = GetTriggerNormal(other.transform.position) == Vector3.up;
-            m_canSpawn = false;
+            CorrectEntry = GetTriggerNormal(other.transform.position) == Vector3.up;
+            CanSpawn = false;
         }
     }
 
@@ -37,10 +54,10 @@ public class SpawnerPortal : Spawner
                 if(GetTriggerNormal(other.transform.position) == Vector3.down)
                 {
                     // vibration
-                    m_canSpawn = true;
+                    CanSpawn = true;
                 }
-        // else
-        //     print("failure");
+        else
+            Cancel();
     }
 
     public void AttemptGrab()
@@ -49,19 +66,19 @@ public class SpawnerPortal : Spawner
         {
             Spawn(m_inputHand.transform.position, m_inputHand.transform.rotation, null);
             m_inputHand.Grab(m_spawned.GetComponent<MTK_Interactable>());
-            m_canSpawn = false;
+            CanSpawn = false;
         }
     }
 
     public void Cancel()
     {
-        m_correctEntry = false;
-        m_canSpawn = false;
+        CorrectEntry = false;
+        CanSpawn = false;
     }
 
     private void Update()
     {
         if(m_canSpawn)
-            m_inputHand.GetComponent<MTK_InputManagerSimulator>().Haptic(Time.deltaTime);
+            m_inputHand.GetComponentInParent<MTK_InputManager>().Haptic(Time.deltaTime);
     }
 }

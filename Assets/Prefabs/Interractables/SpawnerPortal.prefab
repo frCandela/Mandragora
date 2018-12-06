@@ -20,9 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4036487471212520}
   - component: {fileID: 114664486525352500}
-  - component: {fileID: 135110225526790094}
   - component: {fileID: 114133039402679056}
-  m_Layer: 0
+  - component: {fileID: 64810246091223074}
+  - component: {fileID: 114968576369224884}
+  m_Layer: 9
   m_Name: GrabZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +40,8 @@ GameObject:
   - component: {fileID: 4452697100242554}
   - component: {fileID: 114798250180750070}
   - component: {fileID: 114281111397393098}
-  m_Layer: 0
+  - component: {fileID: 95720869782684718}
+  m_Layer: 9
   m_Name: SpawnerPortal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +60,7 @@ GameObject:
   - component: {fileID: 64873558536849872}
   - component: {fileID: 114345310089802028}
   - component: {fileID: 54255523183850722}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +78,7 @@ GameObject:
   - component: {fileID: 33409093663603176}
   - component: {fileID: 23116640950952838}
   - component: {fileID: 114605225415900064}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4231664361870034}
   - component: {fileID: 114139884457993790}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Render
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,13 +107,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1056602378062212}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.4}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0.3}
+  m_LocalScale: {x: 0.8, y: -0.2, z: 0.8}
   m_Children: []
   m_Father: {fileID: 4452697100242554}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &4082763575020180
 Transform:
   m_ObjectHideFlags: 1
@@ -120,7 +122,7 @@ Transform:
   m_GameObject: {fileID: 1490958317715750}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 1, z: 0.1}
+  m_LocalScale: {x: 0.08, y: 1, z: 0.08}
   m_Children: []
   m_Father: {fileID: 4231664361870034}
   m_RootOrder: 0
@@ -145,8 +147,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1211211073648796}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.32, y: 1.215, z: 1.172}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.75, y: 1.195, z: -0.2}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 4231664361870034}
@@ -154,7 +156,7 @@ Transform:
   - {fileID: 4036487471212520}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!4 &4903738867611998
 Transform:
   m_ObjectHideFlags: 1
@@ -162,8 +164,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1291532729282026}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0, z: 0.2}
-  m_LocalScale: {x: 0.8, y: 0.2, z: 0.8}
+  m_LocalPosition: {x: 0, y: -0, z: 0.05}
+  m_LocalScale: {x: 0.8, y: 0.05, z: 0.8}
   m_Children: []
   m_Father: {fileID: 4452697100242554}
   m_RootOrder: 1
@@ -183,7 +185,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: b4353df3a2ba6af429d00cce2deb1275, type: 2}
+  - {fileID: 2100000, guid: 9fff76eb68ad4c44b87be9e2ca168a80, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -225,6 +227,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!64 &64810246091223074
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1056602378062212}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &64873558536849872
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -239,6 +255,24 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!95 &95720869782684718
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1211211073648796}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fa66089e481f6d4488820e958ed41375, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114133039402679056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -265,7 +299,7 @@ MonoBehaviour:
   _guid: b6fbabc2-bb37-430d-bafd-23128678f671
 --- !u!114 &114281111397393098
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1211211073648796}
@@ -299,6 +333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_object: {fileID: 1282632434735556, guid: a9f316a571f516d4ca96ef2fda41e6ff, type: 2}
+  m_animator: {fileID: 95720869782684718}
 --- !u!114 &114605225415900064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -324,16 +359,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGrabbable: 0
   jointType: {fileID: 0}
+  m_wOnUseStart:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
   m_onUseStart:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_onUseSop:
+  m_wOnUseStop:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
+  m_onUseStop:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  m_wOnGrabStart:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
   m_onGrabStart:
     m_PersistentCalls:
       m_Calls:
@@ -350,6 +394,9 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  m_wOnGrabStop:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
   m_onGrabSop:
     m_PersistentCalls:
       m_Calls: []
@@ -357,7 +404,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114798250180750070
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1211211073648796}
@@ -375,15 +422,35 @@ MonoBehaviour:
     - {fileID: 1291532729282026}
     - {fileID: 1056602378062212}
   _assetGuid: cc23160e4776b86479d7ce5fe3d7dd0f
---- !u!135 &135110225526790094
-SphereCollider:
+--- !u!114 &114968576369224884
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1056602378062212}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 365dd2b016416524d9bf003588e4990e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_onEnter:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_onExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114446122124763578}
+        m_MethodName: Cancel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

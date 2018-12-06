@@ -7,11 +7,11 @@ public class TelekinesisPointer : MonoBehaviour
 	[SerializeField]
 	ConfigurableJoint m_joint;
 	[SerializeField]
-	Transform m_rayPreview;
-	[SerializeField]
 	Outliner m_outliner;
 
 	[Header("Settings")]
+	[SerializeField, Range(0,10)]
+	float m_minDistance = 1;
 	[SerializeField, Range(0,10)]
 	float m_maxDistance = 5;
 	[SerializeField, Range(0,1)]
@@ -20,14 +20,20 @@ public class TelekinesisPointer : MonoBehaviour
 	float m_forceScale = 300;
 	[SerializeField, Range(0,10f)]
 	float m_initForceScale = 1;
+
+	[Header("Sound")]
+	[SerializeField] RTPC m_rtpc;
 	[SerializeField] AK.Wwise.Event m_wOnAttract;
-	[SerializeField] AK.Wwise.Event m_wOnGrab;
+	[SerializeField] AK.Wwise.Event[] m_wOnGrab;
 
 	MTK_InputManager m_inputManager;
 	MTK_InteractHand m_hand;
+	MTK_InteractiblesManager m_interactiblesManager;
 
 	MTK_Interactable m_currentInteractable;
 	RaycastHit m_currentHit;
+
+    public bool isAttracting { get { return m_joint.connectedBody || Target; } private set{} }
 	bool m_attract;
 	float m_initDistanceToTarget;
 	Vector3 m_lastForceApplied;
@@ -58,6 +64,8 @@ public class TelekinesisPointer : MonoBehaviour
 
 					m_currentInteractable = value;
 					m_outliner.OultineOn(m_currentInteractable);
+
+					m_inputManager.Haptic(1);
 				}
 			}			
 		}
@@ -66,36 +74,21 @@ public class TelekinesisPointer : MonoBehaviour
 	void Awake()
 	{
 		m_inputManager = GetComponentInParent<MTK_InputManager>();
-		m_inputManager.m_onGrip.AddListener(TriggerAttract);
+		m_inputManager.m_onTrigger.AddListener(TriggerAttract);
 
 		m_lastPos = transform.position;
 
 		m_hand = GetComponentInParent<MTK_InteractHand>();
 		m_hand.m_onTouchInteractable.AddListener(GrabIfTarget);
+
+		m_interactiblesManager = MTK_InteractiblesManager.Instance;
 	}
 
 	void Update()
 	{
 		if(!m_attract && !m_joint.connectedBody)
 		{
-			Ray newRay = new Ray(transform.position, transform.forward);
-			// Update Target
-			if (Physics.Raycast(newRay, out m_currentHit, m_maxDistance))
-			{
-				Target = m_currentHit.transform.GetComponent<MTK_Interactable>();
-
-				if(!Target)
-					Target = m_currentHit.transform.GetComponentInParent<MTK_Interactable>();
-
-				m_rayPreview.localScale = new Vector3(0.01f, 0.01f, m_currentHit.distance);
-				m_rayPreview.localPosition = new Vector3(0, 0, m_currentHit.distance / 2);
-			}
-			else
-			{
-				Target = null;
-				m_rayPreview.localScale = new Vector3(0.01f, 0.01f, m_maxDistance);
-				m_rayPreview.localPosition = new Vector3(0, 0, m_maxDistance / 2);
-			}
+			Target = m_interactiblesManager.GetClosestToView(transform, 10);
 		}
 
 		if(Target)
@@ -124,6 +117,8 @@ public class TelekinesisPointer : MonoBehaviour
 				m_joint.xDrive = m_joint.yDrive = m_joint.zDrive = drive;
 
 				m_joint.connectedBody.rotation = Quaternion.RotateTowards(m_joint.connectedBody.rotation, transform.rotation, (1 - distanceScale) * 2);
+			
+				m_rtpc.Value = m_joint.connectedBody.velocity.sqrMagnitude;
 			}
 		}
 
@@ -176,7 +171,10 @@ public class TelekinesisPointer : MonoBehaviour
 		{
 			if(m_joint.connectedBody.gameObject == input.gameObject)
 			{
-				m_wOnGrab.Post(Target.gameObject);
+				for (int i = 0; i < m_wOnGrab.Length; i++)
+				{
+					m_wOnGrab[i].Post(Target.gameObject);
+				}
 				
 				m_inputManager.Haptic(1);
 

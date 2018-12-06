@@ -10,6 +10,7 @@ public class GestureHandler : MonoBehaviour
 {
 	AirSigManager m_airsigManager;
 	[SerializeField] AngularVelocityTracker m_tracker;
+	[SerializeField] RTPC m_rtpc;
 
 	[SerializeField] int MAX_TRAIN_COUNT = 5;
 	int m_currentGestureID = 100;
@@ -21,7 +22,9 @@ public class GestureHandler : MonoBehaviour
 	[SerializeField] UnityEventBool m_onCollecting;
 
 	int m_lastMatch = 0;
+	Vector3 m_lastPos;
 
+	bool m_isCollecting;
 	public bool Collecting
 	{
 		set
@@ -31,6 +34,7 @@ public class GestureHandler : MonoBehaviour
 			else
 				m_airsigManager.stopCollecting();
 
+			m_isCollecting = value;
 			m_onCollecting.Invoke(value);
 		}
 	}
@@ -75,6 +79,11 @@ public class GestureHandler : MonoBehaviour
 			m_onGestureRecognition.Invoke(m_lastMatch);
 			m_lastMatch = 0;
 		}
+
+		if(m_isCollecting)
+			m_rtpc.Value = (transform.position - m_lastPos).sqrMagnitude * 1000;
+
+		m_lastPos = transform.position;
 	}
 
 	[ContextMenu("AddGesture")]
