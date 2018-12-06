@@ -13,6 +13,8 @@ public class TelekinesisPointer : MonoBehaviour
 
 	[Header("Settings")]
 	[SerializeField, Range(0,10)]
+	float m_minDistance = 1;
+	[SerializeField, Range(0,10)]
 	float m_maxDistance = 5;
 	[SerializeField, Range(0,1)]
 	float m_minMagnitudeToAttract = .2f;
@@ -20,8 +22,11 @@ public class TelekinesisPointer : MonoBehaviour
 	float m_forceScale = 300;
 	[SerializeField, Range(0,10f)]
 	float m_initForceScale = 1;
+
+	[Header("Sound")]
+	[SerializeField] RTPC m_rtpc;
 	[SerializeField] AK.Wwise.Event m_wOnAttract;
-	[SerializeField] AK.Wwise.Event m_wOnGrab;
+	[SerializeField] AK.Wwise.Event[] m_wOnGrab;
 
 	MTK_InputManager m_inputManager;
 	MTK_InteractHand m_hand;
@@ -80,23 +85,23 @@ public class TelekinesisPointer : MonoBehaviour
 	{
 		if(!m_attract && !m_joint.connectedBody)
 		{
-			Ray newRay = new Ray(transform.position, transform.forward);
+			Ray newRay = new Ray(transform.position + transform.forward * m_minDistance, transform.forward);
 			// Update Target
-			if (Physics.Raycast(newRay, out m_currentHit, m_maxDistance))
+			if (Physics.Raycast(newRay, out m_currentHit, m_maxDistance- m_minDistance, LayerMask.GetMask("Interactibles")))
 			{
 				Target = m_currentHit.transform.GetComponent<MTK_Interactable>();
 
 				if(!Target)
 					Target = m_currentHit.transform.GetComponentInParent<MTK_Interactable>();
 
-				m_rayPreview.localScale = new Vector3(0.01f, 0.01f, m_currentHit.distance);
-				m_rayPreview.localPosition = new Vector3(0, 0, m_currentHit.distance / 2);
+				m_rayPreview.localScale = new Vector3(0.01f, 0.01f, m_maxDistance - m_minDistance);
+				m_rayPreview.localPosition = new Vector3(0, 0, m_minDistance + m_rayPreview.localScale.z / 2);
 			}
 			else
 			{
 				Target = null;
-				m_rayPreview.localScale = new Vector3(0.01f, 0.01f, m_maxDistance);
-				m_rayPreview.localPosition = new Vector3(0, 0, m_maxDistance / 2);
+				m_rayPreview.localScale = new Vector3(0.01f, 0.01f, m_maxDistance - m_minDistance);
+				m_rayPreview.localPosition = new Vector3(0, 0, m_minDistance + m_rayPreview.localScale.z / 2);
 			}
 		}
 
@@ -126,6 +131,8 @@ public class TelekinesisPointer : MonoBehaviour
 				m_joint.xDrive = m_joint.yDrive = m_joint.zDrive = drive;
 
 				m_joint.connectedBody.rotation = Quaternion.RotateTowards(m_joint.connectedBody.rotation, transform.rotation, (1 - distanceScale) * 2);
+			
+				m_rtpc.Value = m_joint.connectedBody.velocity.sqrMagnitude;
 			}
 		}
 
@@ -178,7 +185,10 @@ public class TelekinesisPointer : MonoBehaviour
 		{
 			if(m_joint.connectedBody.gameObject == input.gameObject)
 			{
-				m_wOnGrab.Post(Target.gameObject);
+				for (int i = 0; i < m_wOnGrab.Length; i++)
+				{
+					m_wOnGrab[i].Post(Target.gameObject);
+				}
 				
 				m_inputManager.Haptic(1);
 

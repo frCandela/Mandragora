@@ -36,9 +36,9 @@ public class MTK_InputManagerSimulator : MTK_InputManager
         if (Input.GetMouseButtonUp(1))
             m_onTrigger.Invoke(false);
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(2))
             m_onPad.Invoke(true);
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(2))
             m_onPad.Invoke(false);
 
         // Update Angular Velocity

@@ -119,15 +119,15 @@ MonoBehaviour:
   maxParticlesNumber: 50
   particleSize: 0.5
   minMaxLerp: {x: 0.05, y: 0.15}
-  bVelOffset: 1.44
-  bSlowFactor: 0.25
-  bMaxVelocity: 1000
-  bMaxDistFromTarget: 10
+  bVelOffset: 0.091
+  bSlowFactor: 0.095
+  bMaxVelocity: 5
+  bMaxDistFromTarget: 1
   bToTargetFactor: 6
-  bNoiseStrength: 1
-  bMinMaxDistNoiseThreshold: {x: 5, y: 30}
-  bMinMaxNoiseAmp: {x: 1, y: 3}
-  bMinMaxNoiseFreq: {x: 1, y: 3}
+  bNoiseStrength: 0.3
+  bMinMaxDistNoiseThreshold: {x: 0.5, y: 3}
+  bMinMaxNoiseAmp: {x: 0.5, y: 3}
+  bMinMaxNoiseFreq: {x: 0.5, y: 3}
   initEvent:
     m_PersistentCalls:
       m_Calls: []

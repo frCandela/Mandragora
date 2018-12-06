@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33129778591173198}
   - component: {fileID: 23903482983770034}
   - component: {fileID: 114325392827286760}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RayPreview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,9 +44,7 @@ GameObject:
   - component: {fileID: 114585129397589856}
   - component: {fileID: 114867369557546540}
   - component: {fileID: 114303183035530456}
-  - component: {fileID: 114631997678088882}
-  - component: {fileID: 114904728863159166}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +62,7 @@ GameObject:
   - component: {fileID: 54420130755778526}
   - component: {fileID: 153000362147648458}
   - component: {fileID: 114176033370745618}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Joint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,8 +76,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1243609169946608}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 10}
   m_Children: []
   m_Father: {fileID: 4879903790830654}
   m_RootOrder: 1
@@ -210,17 +208,22 @@ MonoBehaviour:
   m_joint: {fileID: 153000362147648458}
   m_rayPreview: {fileID: 4491784709764274}
   m_outliner: {fileID: 0}
+  m_minDistance: 0.4
   m_maxDistance: 10
   m_minMagnitudeToAttract: 0.1
   m_forceScale: 1000
   m_initForceScale: 5
+  m_rtpc: {fileID: 11400000, guid: 87f2a4ce3dd599b4f87fa2a89c364215, type: 2}
   m_wOnAttract:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: 36e1dc8938c25ac4ba90d8ddd46153f0,
+    WwiseObjectReference: {fileID: 11400000, guid: be2508c1e2a9d1a499bd35a9aec53346,
       type: 2}
   m_wOnGrab:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: 331b83910c10fc54aa063fcf36861a45,
+  - valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 6ca2166fc013d224ebd198a5ced0f77f,
+      type: 2}
+  - valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 36e1dc8938c25ac4ba90d8ddd46153f0,
       type: 2}
 --- !u!114 &114325392827286760
 MonoBehaviour:
@@ -245,10 +248,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905365873bc33104a9094657f72b0493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_outliner: {fileID: 0}
   m_grabbed: {fileID: 0}
-  triggerPressed: 0
-  gripPressed: 0
+  m_outliner: {fileID: 0}
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -289,18 +290,6 @@ MonoBehaviour:
     - {fileID: 1914502479540176}
     - {fileID: 1243609169946608}
   _assetGuid: 9f59c4a2a82cc0e46b57a39b2eac9139
---- !u!114 &114631997678088882
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1413948672007442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d63dad360a448fb46a1f8922ea12fbfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  test: 0
 --- !u!114 &114867369557546540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -312,18 +301,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0218f8a3a632f66499377f4c0ce5f49a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114904728863159166
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1413948672007442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d63dad360a448fb46a1f8922ea12fbfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  test: 0
 --- !u!135 &135391040645987562
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -388,18 +365,18 @@ ConfigurableJoint:
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
     serializedVersion: 3
-    positionSpring: 0
-    positionDamper: 0
+    positionSpring: 10.180197
+    positionDamper: 19.968494
     maximumForce: 3.4028233e+38
   m_YDrive:
     serializedVersion: 3
-    positionSpring: 0
-    positionDamper: 0
+    positionSpring: 10.180197
+    positionDamper: 19.968494
     maximumForce: 3.4028233e+38
   m_ZDrive:
     serializedVersion: 3
-    positionSpring: 0
-    positionDamper: 0
+    positionSpring: 10.180197
+    positionDamper: 19.968494
     maximumForce: 3.4028233e+38
   m_TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   m_TargetAngularVelocity: {x: 0, y: 0, z: 0}

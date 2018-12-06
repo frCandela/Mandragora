@@ -57,7 +57,7 @@ public class particlePerVertex : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if(Input.GetKeyDown(KeyCode.Space)) initEvent.Invoke(sourceMesh); // JUST FOR DEMO
+		//initEvent.Invoke(sourceMesh); // JUST FOR DEMO
 		
 		
 		int particleCount = PS.particleCount;
