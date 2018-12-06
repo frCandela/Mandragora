@@ -1,13 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Outline))]
+[RequireComponent(typeof(Rigidbody))]
 public class DropZone : MonoBehaviour
 {    
     [SerializeField] private bool m_snapToCenter = true;
 
-    private MTK_Interactable m_catchedObject;
+    public UnityEventBool onObjectCatched;
+
+    public MTK_Interactable catchedObject { get; private set; }
+
     private Outline m_outline;
     private int m_nbObjectsInTrigger = 0;
     MeshRenderer m_meshRenderer ;
@@ -23,7 +28,7 @@ public class DropZone : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if(m_nbObjectsInTrigger > 0 && !m_catchedObject)
+        if(m_nbObjectsInTrigger > 0 && !catchedObject)
         {
             m_outline.enabled = true;
         }
@@ -35,10 +40,11 @@ public class DropZone : MonoBehaviour
 
     void Release()
     {
-        m_catchedObject = null;
+        catchedObject = null;
         if (m_meshRenderer)
         {
             m_meshRenderer.enabled = true;
+            onObjectCatched.Invoke(false);
         }
     }
 
@@ -52,9 +58,10 @@ public class DropZone : MonoBehaviour
             }
 
             interactable.jointType.JoinWith(gameObject);
-            m_catchedObject = interactable;
+            catchedObject = interactable;
             interactable.jointType.onJointBreak.AddListener(Release);
 
+            onObjectCatched.Invoke(true);
 
             if (m_meshRenderer)
             {
@@ -62,7 +69,6 @@ public class DropZone : MonoBehaviour
             }
         }
     }
-
 
     private void OnTriggerEnter(Collider other)
     {
