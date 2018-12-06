@@ -107,6 +107,8 @@ public class TelekinesisPointer : MonoBehaviour
 				
 				if(force.magnitude > m_minMagnitudeToAttract && force.sqrMagnitude > m_lastForceApplied.sqrMagnitude)
 					Attract(force);
+
+				m_inputManager.Haptic(.1f);
 			}
 
 			// Apply various forces
@@ -155,7 +157,7 @@ public class TelekinesisPointer : MonoBehaviour
 	void Attract(Vector3 force)
 	{
 		Target.Levitate = false;
-		
+
 		m_joint.connectedBody = Target.GetComponent<Rigidbody>();
 		m_joint.connectedBody.AddForce(force.normalized * Mathf.Sqrt(force.magnitude) * m_initForceScale, ForceMode.Impulse);
 
