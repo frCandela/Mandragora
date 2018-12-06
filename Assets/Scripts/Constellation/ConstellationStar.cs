@@ -1,13 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ConstellationStar : MonoBehaviour
 {
-	[Header("Settings")]
-	[SerializeField] Color m_colorIdle;
-	[SerializeField] Color m_colorOk;
-
+	[SerializeField] UnityEvent m_onValidated;
 	Constellation m_constellation;
 
 	Renderer m_renderer;
@@ -23,14 +21,10 @@ public class ConstellationStar : MonoBehaviour
 		{
 			m_validated = value;
 			m_constellation.Check();
-			
-			m_renderer.material.color = m_validated ? m_colorOk : m_colorIdle;
-		}
-	}
 
-	void Start()
-	{
-		m_renderer = GetComponent<Renderer>();
+			if(Validated)
+				m_onValidated.Invoke();
+		}
 	}
 
 	public void RegisterConstellation(Constellation c)
