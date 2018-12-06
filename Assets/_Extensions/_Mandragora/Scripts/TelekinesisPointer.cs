@@ -33,7 +33,7 @@ public class TelekinesisPointer : MonoBehaviour
 	MTK_Interactable m_currentInteractable;
 	RaycastHit m_currentHit;
 
-    public bool isAttracting { get { return m_joint.connectedBody; } private set{} }
+    public bool isAttracting { get { return m_joint.connectedBody || Target; } private set{} }
 	bool m_attract;
 	float m_initDistanceToTarget;
 	Vector3 m_lastForceApplied;
