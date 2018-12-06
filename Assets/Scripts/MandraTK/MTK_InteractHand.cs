@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Valve.VR;
 
 public class MTK_InteractHand : MonoBehaviour
@@ -16,6 +17,7 @@ public class MTK_InteractHand : MonoBehaviour
     [Header("Events")]
     public UnityEventMTK_Interactable m_onTouchInteractable;
     public UnityEventMTK_Interactable m_onUnTouchInteractable;
+    public UnityEventBool m_onUseFail;
 
     private List<MTK_Interactable> m_objectsInTrigger = new List<MTK_Interactable>(3);
     private MTK_Setup m_setup;
@@ -37,9 +39,6 @@ public class MTK_InteractHand : MonoBehaviour
         m_setup = FindObjectOfType<MTK_Manager>().activeSetup;
 
         m_inputManager = GetComponentInParent<MTK_InputManager>();
-        m_inputManager.m_onTrigger.AddListener(OnTrigger);
-        m_inputManager.m_onGrip.AddListener(OnGrip);
-        m_inputManager.m_onPad.AddListener(OnPad);
 
         if(m_outliner)
         {
@@ -53,7 +52,7 @@ public class MTK_InteractHand : MonoBehaviour
         m_closest = GetClosestInteractable();
     }
 
-    void OnTrigger(bool input)
+    public void TryGrab(bool input)
     {
         triggerPressed = input;
         if(m_grabbed)
@@ -78,26 +77,30 @@ public class MTK_InteractHand : MonoBehaviour
         else
         {
             if(m_grabbed)
-            {
-                m_grabbed.Grab(input);
                 Release();
-            }
         }
     }
 
-    void OnPad(bool input)
+    public void TryUse(bool input)
     {
-        // Implement TP
+        if(m_grabbed)
+            m_grabbed.Use(input);
+        else if(m_closest)
+            m_closest.Use(input);
+        else
+            m_onUseFail.Invoke(input);
     }
 
-    private void OnJointBreak(float breakForce)
+    void OnJointBreak(float breakForce)
     {
         if (m_grabbed)
             Release();
     }
 
-    public void Grab( MTK_Interactable obj)
+    public void Grab(MTK_Interactable obj)
     {
+        obj.Grab(true);
+
         if( obj.jointType.Used())
             obj.jointType.RemoveJoint();
 
@@ -110,6 +113,8 @@ public class MTK_InteractHand : MonoBehaviour
     {
         if(m_grabbed)
         {
+            m_grabbed.Grab(false);
+
             m_grabbed.jointType.onJointBreak.RemoveListener(Release);
             m_grabbed.jointType.RemoveJoint();
             Rigidbody rb = m_grabbed.GetComponent<Rigidbody>();
