@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: volumletricMaterial
-  m_Shader: {fileID: 4800000, guid: 753c756c0670bf94b81e9f75f2e7d002, type: 3}
+  m_Name: M_starConstellation_FadePass
+  m_Shader: {fileID: 4800000, guid: c733d6d39b5260442a81a438522c38f1, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -18,19 +18,7 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _AlphaMask:
-        m_Texture: {fileID: 2800000, guid: 6b1db71ae08ebc241baf7cf8c6ecfef7, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _AlphaMaskTex:
-        m_Texture: {fileID: 2800000, guid: 6b1db71ae08ebc241baf7cf8c6ecfef7, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Detail:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -50,16 +38,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _IntersectionRampTex:
-        m_Texture: {fileID: 2800000, guid: f6d20581a3f6b074aba60cfa148fd7da, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: d6a7b66370df9844a93228ee588472c4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -70,51 +58,59 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _intersectionRampTex:
-        m_Texture: {fileID: 2800000, guid: f6d20581a3f6b074aba60cfa148fd7da, type: 3}
+    - _Ramp:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RampTex:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _Brightness: 1.56
     - _BumpScale: 1
-    - _Cursor: 0.15
-    - _CursorOne: 0
+    - _Cursor: 3.5
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DistFade: 4.7
+    - _DistStep: 0
     - _DstBlend: 0
-    - _FadeIn: 0.076
-    - _FadeOut: 0.061
-    - _FresnelSensibility: 0.446
+    - _Edge: 2.21
+    - _FadePow: 1
+    - _FadeRoundFactor: 1.67
+    - _FadeSize: 0.3
+    - _FadeSpeed: 0.1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HighlightOpacity: 0.462
-    - _IntersectionDamper: 0.18
-    - _IntersectionIn: 0.03
-    - _IntersectionMax: 0.52
-    - _IntersectionMin: 0.033
-    - _IntersectionOut: 0.18
-    - _IsAlphaTex: 0
-    - _IsAlphaUV: 0
-    - _IsBackFace: 0
-    - _MaxInterDist: 0.15
+    - _MaxLocalDist: 20.88
+    - _MaxNoise: -5.38
     - _Metallic: 0
+    - _MinLocalDist: 14.29
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Opacity: 0
+    - _Opacity: 5.25
+    - _Outline: 2.88
+    - _OutlineDot: 0.25
+    - _OutlineExtrusion: 0.1
+    - _OutlineZ: -0.06
     - _Parallax: 0.02
+    - _PowDist: 2.55
+    - _PowFraction: 0.77
+    - _RimPower: 0.01
+    - _Scale: 0.01
+    - _Slider: 0.01
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _Speed: 0.5
+    - _SpeedX: 1.5
+    - _SpeedY: 10
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
-    - _distFade: 18.9
-    - _maxDepth: 0.41
-    - _maxDistFade: 1.06
-    - _minDistFade: 0
     m_Colors:
-    - _AlphaMaskPow: {r: 25.04, g: 2, b: 0, a: 0}
-    - _Color: {r: 0.9811321, g: 0.9697724, b: 0.23602703, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color2: {r: 0, g: 0, b: 1, a: 1}
+    - _ColorR: {r: 0, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HighlightColor: {r: 1, g: 0.96498877, b: 0.0141509175, a: 1}
-    - _IntersectionColor: {r: 0.9743724, g: 1, b: 0, a: 1}
+    - _FadeColor: {r: 1, g: 1, b: 1, a: 0.3764706}
+    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
