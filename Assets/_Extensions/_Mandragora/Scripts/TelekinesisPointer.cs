@@ -135,6 +135,7 @@ public class TelekinesisPointer : MonoBehaviour
 				m_wHandPlay.Post(gameObject);
 
 				m_attract = true;
+				Target.Levitate = true;
 			}
 		}
 		else
@@ -142,6 +143,10 @@ public class TelekinesisPointer : MonoBehaviour
 			m_wHandStop.Post(gameObject);
 
 			m_attract = false;
+			
+			if(Target)
+				Target.Levitate = false;
+
 			if(m_joint.connectedBody)
 				UnAttract();
 		}
@@ -149,6 +154,8 @@ public class TelekinesisPointer : MonoBehaviour
 
 	void Attract(Vector3 force)
 	{
+		Target.Levitate = false;
+		
 		m_joint.connectedBody = Target.GetComponent<Rigidbody>();
 		m_joint.connectedBody.AddForce(force.normalized * Mathf.Sqrt(force.magnitude) * m_initForceScale, ForceMode.Impulse);
 

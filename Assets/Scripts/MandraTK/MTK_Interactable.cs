@@ -17,6 +17,24 @@ public class MTK_Interactable : MonoBehaviour
     [SerializeField] AK.Wwise.Event m_wOnGrabStop;
     [SerializeField] UnityEvent m_onGrabSop;
 
+    Rigidbody m_rgbd;
+    public bool Levitate
+    {
+        set
+        {
+            if(value)
+            {
+                m_rgbd.useGravity = false;
+                m_rgbd.velocity = Vector3.up / 10;
+                m_rgbd.angularVelocity = Random.onUnitSphere;
+            }
+            else
+            {
+                m_rgbd.useGravity = true;
+            }
+        }
+    }
+
     // Use this for initialization
     void Awake ()
     {
@@ -25,6 +43,8 @@ public class MTK_Interactable : MonoBehaviour
 
         if(isGrabbable)
             MTK_InteractiblesManager.Instance.Subscribe(this);
+
+        m_rgbd = GetComponent<Rigidbody>();
     }
 
     public void Grab(bool input)
