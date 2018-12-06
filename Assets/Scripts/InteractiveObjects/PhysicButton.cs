@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class MTK_Button : MonoBehaviour
+public class PhysicButton : MonoBehaviour
 {
 
     [SerializeField] private GameObject buttonGameObject;

@@ -20,6 +20,7 @@ public class MTK_Interactable : MonoBehaviour
     // Use this for initialization
     void Awake ()
     {
+        jointType = GetComponent<MTK_JointType>();
         if (isGrabbable && !jointType)
             jointType = gameObject.AddComponent<MTK_JointType_Fixed>();
 
