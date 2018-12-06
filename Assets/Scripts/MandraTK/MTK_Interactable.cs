@@ -22,11 +22,14 @@ public class MTK_Interactable : MonoBehaviour
     {
         if (isGrabbable && !jointType)
             jointType = gameObject.AddComponent<MTK_JointType_Fixed>();
+
+        if(isGrabbable)
+            MTK_InteractiblesManager.Instance.Subscribe(this);
     }
 
     public void Grab(bool input)
     {
-        if(input)
+        if (input)
         {
             m_onGrabStart.Invoke();
             m_wOnGrabStart.Post(gameObject);

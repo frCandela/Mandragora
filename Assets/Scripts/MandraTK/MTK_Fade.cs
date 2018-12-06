@@ -42,7 +42,7 @@ public class MTK_Fade : MonoBehaviour {
 	{
 		while (currentColor != targetColor)
 		{
-			if (Mathf.Abs(currentColor.a - targetColor.a) < Mathf.Abs(deltaColor.a) * Time.deltaTime)
+			if (Mathf.Abs(currentColor.a - targetColor.a) < Mathf.Abs(deltaColor.a) * Time.fixedDeltaTime)
 			{
 				currentColor = targetColor;
 				deltaColor = new Color(0, 0, 0, 0);
@@ -54,7 +54,7 @@ public class MTK_Fade : MonoBehaviour {
 
 			yield return new WaitForFixedUpdate();
 		}
-
+		
 		if(action != null)
 			action();
 	}
