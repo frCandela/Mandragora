@@ -53,10 +53,14 @@ public class MTK_InteractHand : MonoBehaviour
 
     public void TryGrab(bool input)
     {
-        if(m_grabbed)
-            m_grabbed.Use(input);
+        if (m_grabbed)
+        {
+            Release();
+        }
         else if(m_closest)
-            m_closest.Use(input);
+        {
+            Grab(m_closest);
+        }
 
         m_grabPressed = input;
     }

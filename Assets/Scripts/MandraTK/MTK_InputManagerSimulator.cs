@@ -26,14 +26,14 @@ public class MTK_InputManagerSimulator : MTK_InputManager
     void Update()
     {
         // Manage inputs
-        if (Input.GetMouseButtonDown(0))
-            m_onGrip.Invoke(true);
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonDown(1))        
+            m_onGrip.Invoke(true);        
+        if (Input.GetMouseButtonUp(1))
             m_onGrip.Invoke(false);
             
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0))
             m_onTrigger.Invoke(true);
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(0))
             m_onTrigger.Invoke(false);
 
         if (Input.GetMouseButtonDown(2))

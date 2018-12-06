@@ -15,11 +15,14 @@ public class MTK_SolidHand : MonoBehaviour
         m_telekinesisPointer = GetComponent<TelekinesisPointer>();
     }
 
-    private void Update()
+    public void MakeSolid(bool input)
     {
-        if ( ! m_telekinesisPointer.isAttracting && m_interactHand.m_grabPressed && ! m_interactHand.m_grabbed)
+        if( input )
         {
-            m_collider.isTrigger = false;
+            if (!m_telekinesisPointer.isAttracting && !m_interactHand.m_grabbed)
+            {
+                m_collider.isTrigger = false;
+            }
         }
         else
         {

@@ -29,7 +29,7 @@ public class MTK_Interactable : MonoBehaviour
 
     public void Grab(bool input)
     {
-        if(input)
+        if (input)
         {
             m_onGrabStart.Invoke();
             m_wOnGrabStart.Post(gameObject);
