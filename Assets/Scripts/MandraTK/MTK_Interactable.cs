@@ -25,7 +25,7 @@ public class MTK_Interactable : MonoBehaviour
             if(value)
             {
                 m_rgbd.useGravity = false;
-                m_rgbd.velocity = Vector3.up / 10;
+                m_rgbd.velocity = Vector3.up / 20;
                 m_rgbd.angularVelocity = Random.onUnitSphere;
             }
             else
