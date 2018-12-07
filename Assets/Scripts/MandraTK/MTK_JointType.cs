@@ -8,6 +8,7 @@ public abstract class MTK_JointType : MonoBehaviour
     public UnityEvent onJointBreak = new UnityEvent();
 
     [SerializeField] protected Joint m_joint;
+    public Joint joint { get { return m_joint; } }
 
     public abstract bool JoinWith(GameObject other);
 
