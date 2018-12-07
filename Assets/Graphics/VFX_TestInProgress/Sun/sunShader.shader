@@ -2,7 +2,9 @@
 {
 	Properties
 	{
-		_Color ("Color", Color) = (1,1,1,1)
+		_Color1 ("Color 1", Color) = (1,1,1,1)
+		_Color2 ("Color 2", Color) = (1,1,1,1)
+		_Color3 ("Color 3", Color) = (1,1,1,1)
 		_MainTex ("Main Texture", 2D) = "white" {}
 		_FresnelIntensity ("Fresnel Intensity", Range(0,1)) = 0
 		_SFresnelPow ("Smooth Fresnel Power", float) = 1
@@ -13,6 +15,8 @@
 		_FlowMap ("Flow Map", 2D) = "white" {}
 		_FlowFreq ("Flow Frequency", float) = 1
 		_FlowFactor ("Flow Factor", float) = 1
+		_FlowTimeOffset ("Flow Time Offset", float) = 1
+		_DistortionStrength ("Distortion Strength", float) = 0
 	}
 	SubShader
 	{
@@ -22,6 +26,12 @@
 		Blend SrcAlpha OneMinusSrcAlpha
 		//Zwrite Off
 		//Cull off
+
+		// Grab the screen behind the object into _BackgroundTexture
+        GrabPass
+        {
+            "_BackgroundTexture"
+        }
 
 		Pass
 		{
@@ -35,6 +45,7 @@
 			struct appdata
 			{
 				float4 vertex : POSITION;
+				float4 grabPos : TEXCOORD4;
 				float3 normal : NORMAL;
 				float3 wVertex : TEXCOORD1;
 				fixed4 color : COLOR;
@@ -43,6 +54,7 @@
 			struct v2g {
 				float3 normal : NORMAL;
 				float4 vertex : SV_POSITION;
+				float4 grabPos : TEXCOORD4;
 				float3 wVertex : TEXCOORD1;
 				fixed4 color : COLOR;
 				float3 flatNormal : TEXCOORD2;
@@ -54,13 +66,14 @@
 				float2 barycentricCoordinates : TEXCOORD3;
 			};
 
-			sampler2D _MainTex, _FlowMap;
+			sampler2D _MainTex, _FlowMap, _BackgroundTexture;
 			float4 _MainTex_ST;
-			float4 _Color;
+			float4 _Color1, _Color2, _Color3;
 			float _FresnelIntensity, _SFresnelPow, _FFresnelPow;
 			float2 _TriplanarOffset;
 			float _TriplanarScale, _TriplanarPow;
-			float _FlowFreq, _FlowFactor;
+			float _FlowFreq, _FlowFactor, _FlowTimeOffset;
+			float _DistortionStrength;
 			
 			v2g vert (appdata v)
 			{
@@ -68,6 +81,7 @@
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.normal = UnityObjectToWorldNormal(v.normal);
 				o.wVertex = mul (unity_ObjectToWorld, v.vertex);
+				o.grabPos = ComputeGrabScreenPos(o.vertex);
 				o.color = v.color;
 				o.flatNormal = 0;
 				return o;
@@ -100,10 +114,11 @@
 				stream.Append(g2);
 			}
 
-			float2 flowProcess(float2 flow, float freq) {
+			float2 flowProcess(float2 flow, float freq, float timeOffset) {
 				flow = flow * 2 - 1; // Get flow between -1 / 1
-				float fracEven = frac(_Time.y * _FlowFreq);
-				float fracOdd = frac(_Time.y * _FlowFreq + 0.5);
+				float time = _Time.y * _FlowFreq;
+				float fracEven = frac(time + timeOffset);
+				float fracOdd = frac(time + 0.5 + timeOffset);
 				float2 newFlow = flow * fracEven * _FlowFactor;
 				float2 newFlowOffseted = flow * fracOdd * _FlowFactor;
 
@@ -148,25 +163,25 @@
 				float2 triplanarUVz = float2(
 										(i.data.wVertex.x * _TriplanarScale) + _TriplanarOffset.x, 
 										(i.data.wVertex.y * _TriplanarScale) + _TriplanarOffset.y);
-				float2 flowZ = tex2D(_FlowMap, triplanarUVz).rg; // flowMap
-				flowZ = flowProcess(flowZ, _FlowFreq);
-				float3 triplanarTexZ = tex2D(_MainTex, triplanarUVz + flowZ).rgb; // MainTex
+				float3 flowZ = tex2D(_FlowMap, triplanarUVz).rga; // flowMap
+				flowZ.rg = flowProcess(flowZ.rg, _FlowFreq, flowZ.b * _FlowTimeOffset);
+				float3 triplanarTexZ = tex2D(_MainTex, triplanarUVz + flowZ.xy).rgb; // MainTex
 
 				//Triplanar Y
 				float2 triplanarUVy = float2(
 										(i.data.wVertex.z * _TriplanarScale) + _TriplanarOffset.x, 
 										(i.data.wVertex.x * _TriplanarScale) + _TriplanarOffset.y);
-				float2 flowY = tex2D(_FlowMap, triplanarUVy).rg; // flowMap
-				flowZ = flowProcess(flowY, _FlowFreq);
-				float3 triplanarTexY = tex2D(_MainTex, triplanarUVy + flowY).rgb; // MainTex
+				float3 flowY = tex2D(_FlowMap, triplanarUVy).rga; // flowMap
+				flowY.xy = flowProcess(flowY.xy, _FlowFreq, flowY.z * _FlowTimeOffset);
+				float3 triplanarTexY = tex2D(_MainTex, triplanarUVy + flowY.xy).rgb; // MainTex
 
 				//Triplanar X
 				float2 triplanarUVx = float2(
 										(i.data.wVertex.z * _TriplanarScale) + _TriplanarOffset.x, 
 										(i.data.wVertex.y * _TriplanarScale) + _TriplanarOffset.y);
-				float2 flowX = tex2D(_FlowMap, triplanarUVx).rg; // flowMap
-				flowZ = flowProcess(flowX, _FlowFreq);
-				float3 triplanarTexX = tex2D(_MainTex, triplanarUVx + flowX).rgb; // MainTex
+				float3 flowX = tex2D(_FlowMap, triplanarUVx).rga; // flowMap
+				flowX.xy = flowProcess(flowX.xy, _FlowFreq, flowX.z * _FlowTimeOffset);
+				float3 triplanarTexX = tex2D(_MainTex, triplanarUVx + flowX.xy).rgb; // MainTex
 
 				// triplanar MERGE
 				float3 facingAxis;
@@ -179,23 +194,43 @@
 				// normalize
 				facingAxis = normalize(facingAxis);
 
+
+				
+
 				
 				// Sample FlowMap w/ Triplanar UVs
 				//float2 flowUvTex = (facingAxis.x * flowTexX) + (facingAxis.y * flowTexY) + (facingAxis.z * flowTexZ);
 
 				// Sample Texture w/ Triplanar UVs and FlowMap offset
-				//float3 triplanarTexZ = tex2D(_MainTex, triplanarUVz).rgb; // MainTex
-				//float3 triplanarTexY = tex2D(_MainTex, triplanarUVy).rgb; // MainTex
-				//float3 triplanarTexX = tex2D(_MainTex, triplanarUVx).rgb; // MainTex
 				float3 triplanarTexture = (facingAxis.x * triplanarTexX) + (facingAxis.y * triplanarTexY) + (facingAxis.z * triplanarTexZ);
+				//float3 triplanarTexture = (facingAxis.x * flowX.rgb) + (facingAxis.y * flowY.rgb) + (facingAxis.z * flowZ.rgb);
+
+
+				// From Grab Pass
+				float4 distortion = float4(0,0,0,0);
+				distortion.x += _DistortionStrength * (1 - smoothFresnel) * triplanarTexture.r;
+				distortion.y += _DistortionStrength * (1 - smoothFresnel) * triplanarTexture.g;
+				//distortion *= (1 - smoothFresnel);
+				float3 grabTex = tex2Dproj(_BackgroundTexture, i.data.grabPos + distortion).rgb;
 
 
 
-				fixed4 col = _Color;
-				col.rgb *= triplanarTexture;
-				col.rgb *= i.data.color.rgb;
-				col = fixed4(col.rgb * fresnel, col.a * fresnel);
-				//col = fixed4(triplanarTexture,1);
+				//fixed4 col = (_Color1 * (1 - flatFresnel) + _Color1 * triplanarTexture.r + _Color2 * (1 - triplanarTexture.r) * smoothFresnel)
+				//			+ (_Color3 * (1 - smoothFresnel));
+				fixed4 col = _Color1 * (smoothFresnel + (triplanarTexture.r * 0.5 - 0.5));
+				col += _Color1 * triplanarTexture.r * smoothFresnel;
+				col += _Color2 * (1 - triplanarTexture.r) * smoothFresnel;
+				col += _Color3 * flatFresnel;
+				col = max(_Color2 * 0.2 * (1 - smoothFresnel) * (1 - triplanarTexture.r), col);
+				
+				//col.rgb += triplanarTexture;
+				//col.rgb *= i.data.color.rgb;
+				//float3 color = (col.rgb * fresnel) + ((1 - fresnel) * grabTex);
+				float3 color = (col.rgb * col.a) + ((1 - col.a) * grabTex);
+				color.rgb = max(_Color1.rgb * 0.1, color.rgb);
+				float alpha = 1;
+				col = fixed4(color, alpha);
+				//col.rgb = 1 - grabTex;
 				return col;
 			}
 			ENDCG
