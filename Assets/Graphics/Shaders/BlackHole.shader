@@ -5,8 +5,9 @@ Shader "Mandragora/FX/BlackHole"
 	Properties
 	{
 		_Color ("Texture", Color) = (0,0,0,0)
-		_Distortion ("Distortion", Range(-2.5, 0)) = 0
-		_DistortionIntensity ("Intensity", Range(0, 1000)) = 0
+		_Distortion ("Distortion", Range(-10, 0)) = 0
+		_DistortionIntensity ("Intensity", Range(0, .01)) = 0
+        _HoleSize ("HoleSize", Range(0, 1)) = 0
 	}
 	SubShader
 	{
@@ -34,7 +35,7 @@ Shader "Mandragora/FX/BlackHole"
             };
  
             sampler2D _GrabTexture;
-            float _Distortion, _DistortionIntensity;
+            float _Distortion, _DistortionIntensity, _HoleSize;
  
             v2f vert(appdata v)
 			{
@@ -47,22 +48,15 @@ Shader "Mandragora/FX/BlackHole"
  
             half4 frag(v2f i) : COLOR
 			{
-                float2 uv = i.uv;
-                float2 center = float2(.5,.5) * _ScreenParams.xy;
-                float2 uvpixel = uv * _ScreenParams.xy;
-                
-                float dist = distance(center, uvpixel);
-
-                float2 warp = normalize(float2(.5,.5) - uv) * pow(dist, _Distortion) * _DistortionIntensity;
+                float dist = distance(float2(.5,.5), i.uv);
+                float2 warp = normalize(float2(.5,.5) - i.uv) * pow(dist, _Distortion) * _DistortionIntensity;
                 warp.y = -warp.y;
 
                 i.grabPos.x += warp.x;
                 i.grabPos.y += warp.y;
 
                 fixed4 color = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.grabPos));
-                color *= saturate(50/_DistortionIntensity * dist - 1.5);
-
-                // color = float4(dist,0,0,0);
+                color *= saturate(4/_HoleSize * dist - 1);
 
                 return color;
             }
