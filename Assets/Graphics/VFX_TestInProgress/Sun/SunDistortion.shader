@@ -4,12 +4,16 @@
 	{
 		_MainTex ("Texture", 2D) = "white" {}
 		_Scale ("Scale", float) = 1
+		_Distortion ("Distortion", Range(-10, 0)) = 0
+		_DistortionIntensity ("Intensity", Range(0, .01)) = 0
+        _HoleSize ("HoleSize", Range(0, 1)) = 0
+		_MaxDist ("Max Distortion Size", float) = 1
 	}
 	SubShader
 	{
-		Tags { "RenderQueue"="Transparent" "DisableBatching" = "True" }
+		Tags { "Queue"="Transparent" }
 
-		ZTest Always
+		//ZTest Always
 
 		GrabPass {
 			"_BackgroundTex"
@@ -38,6 +42,7 @@
 
 			sampler2D _MainTex, _BackgroundTex;
 			float _Scale;
+			float _HoleSize, _DistortionIntensity, _Distortion, _MaxDist;
 			
 			v2f vert (appdata v)
 			{
@@ -57,11 +62,19 @@
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
+				float2 fromCenter = (float2(.5,.5) - i.uv)*2;
+				float dist = length(fromCenter);
+				dist = saturate(dist / _MaxDist);
+                float2 warp = normalize(fromCenter) * pow(dist, _Distortion) * _DistortionIntensity;
+                warp.y = -warp.y;
 
-				fixed4 backCol = tex2Dproj(_BackgroundTex, i.grabPos);
+                i.grabPos.x += warp.x;
+                i.grabPos.y += warp.y;
 
-				fixed4 col = float4(1,1,1,1);
-				return backCol;
+                fixed4 col = tex2Dproj(_BackgroundTex, UNITY_PROJ_COORD(i.grabPos));
+                col *= saturate(4/_HoleSize * dist - 1);
+
+				return col;
 			}
 			ENDCG
 		}
