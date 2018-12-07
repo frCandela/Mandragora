@@ -6,7 +6,8 @@
 		_Color2 ("Color 2", Color) = (1,1,1,1)
 		_Color3 ("Color 3", Color) = (1,1,1,1)
 		_MainTex ("Main Texture", 2D) = "white" {}
-		_FresnelIntensity ("Fresnel Intensity", Range(0,1)) = 0
+		_SmoothFresnelIntensity ("Smooth Fresnel Intensity", Range(0,1)) = 0
+		_FlatFresnelIntensity ("Flat Fresnel Intensity", Range(0,1)) = 0
 		_SFresnelPow ("Smooth Fresnel Power", float) = 1
 		_FFresnelPow ("Flat Fresnel Power", float) = 1
 		_TriplanarOffset ("Triplanar Offset (XY)", Vector) = (1,1,1,1)
@@ -69,7 +70,7 @@
 			sampler2D _MainTex, _FlowMap, _BackgroundTexture;
 			float4 _MainTex_ST;
 			float4 _Color1, _Color2, _Color3;
-			float _FresnelIntensity, _SFresnelPow, _FFresnelPow;
+			float _SmoothFresnelIntensity, _FlatFresnelIntensity, _SFresnelPow, _FFresnelPow;
 			float2 _TriplanarOffset;
 			float _TriplanarScale, _TriplanarPow;
 			float _FlowFreq, _FlowFactor, _FlowTimeOffset;
@@ -145,14 +146,14 @@
 
 				// Flat Fresnel
 				float flatFresnel = dot(toCam, i.data.flatNormal);
-				flatFresnel = (flatFresnel - _FresnelIntensity) / (1 - _FresnelIntensity);
+				flatFresnel = (flatFresnel - _FlatFresnelIntensity) / (1 - _FlatFresnelIntensity);
 				flatFresnel = 1 - flatFresnel;
 				flatFresnel = pow(flatFresnel, _FFresnelPow);
 				flatFresnel = saturate(flatFresnel);
 
 				// Smooth Fresnel
 				float smoothFresnel = dot(toCam, i.data.normal);
-				smoothFresnel = (smoothFresnel - _FresnelIntensity) / (1 - _FresnelIntensity);
+				smoothFresnel = (smoothFresnel - _SmoothFresnelIntensity) / (1 - _SmoothFresnelIntensity);
 				smoothFresnel = pow(smoothFresnel, _SFresnelPow);
 				smoothFresnel = saturate(smoothFresnel);
 
