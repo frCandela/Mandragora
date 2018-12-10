@@ -11,7 +11,7 @@
 		Tags { "RenderQueue"="Transparent-10" "IgnoreProjector"="True" }
 		LOD 100
 
-		Blend SrcAlpha One
+		Blend SrcAlpha OneMinusSrcAlpha
 		Cull Off
 
 		Pass
@@ -50,10 +50,10 @@
 			{
 				// Apply
 				fixed4 col = fixed4(1,1,1,1);
-				col.rgb *= i.color * _Color.rgb;
+				col.rgb *= i.color.rgb * _Color.rgb;
 				col.rgb = saturate(col.rgb);
 				col.rgb *= _Luminosity;
-				col.a = saturate(col.a * _Opacity);
+				col.a = saturate(i.color.a * _Opacity);
 
 				return col;
 			}
