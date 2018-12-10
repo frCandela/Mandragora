@@ -12,9 +12,9 @@ public class PlanetScalerPro : MonoBehaviour
     [SerializeField] private DropZone m_dropZone;
     [SerializeField] private GameObject scaleSphere;
 
-    private ConfigurableJoint m_confJoint;    
-    public ScaleEffect m_scaleEffect;
-
+    private ConfigurableJoint m_confJoint;
+    private ScaleEffect m_scaleEffect;
+    private MTK_JointType m_scaleSphereJoint;
     private float m_baseDist;
 
     // Use this for initialization
@@ -26,10 +26,10 @@ public class PlanetScalerPro : MonoBehaviour
         m_baseDist = Vector3.Distance(scaleSphere.transform.position, transform.position);
     }
 
-    public MTK_JointType scaleSphereJoint;
+
     private void Start()
     {
-        scaleSphereJoint = scaleSphere.GetComponent<MTK_JointType>();
+        m_scaleSphereJoint = scaleSphere.GetComponent<MTK_JointType>();
     }
 
     // Update is called once per frame
@@ -42,9 +42,9 @@ public class PlanetScalerPro : MonoBehaviour
 
 
 
-        if (scaleSphereJoint.joint && Mathf.Abs(distance - m_baseDist) > m_confJoint.linearLimit.limit)
+        if (m_scaleSphereJoint.joint && Mathf.Abs(distance - m_baseDist) > m_confJoint.linearLimit.limit)
         {
-            MTK_InputManager inputManager = scaleSphereJoint.joint.GetComponent<MTK_InteractHand>().inputManager;
+            MTK_InputManager inputManager = m_scaleSphereJoint.joint.GetComponent<MTK_InteractHand>().inputManager;
             inputManager.Haptic(1f);
         }
         if (m_scaleEffect)
