@@ -14,6 +14,9 @@ public class Teleporter : MonoBehaviour {
 	[SerializeField, Range(0,1)] float m_fadeStart;
 	[SerializeField, Range(0,1)] float m_fadeEnd;
 
+	[Header("Sound")]
+	[SerializeField] AK.Wwise.Event m_sound;
+
 	RaycastHit m_rayHit;
 	MTK_TPZone m_targetZone;
 	Vector3 m_targetPos;
@@ -86,6 +89,7 @@ public class Teleporter : MonoBehaviour {
 
 	private void MoveMtkManager()
 	{
+		m_sound.Post(gameObject);
 		m_mtkManager.transform.position = m_targetPos;
 		MTK_Fade.Start(Color.clear, m_fadeEnd, () => m_available = true);
 	}
