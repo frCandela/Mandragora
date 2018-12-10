@@ -36,7 +36,7 @@ namespace UnityToolbarExtender
 				if(!m_mtkManager)
 					m_mtkManager = GameObject.FindObjectOfType<MTK_Manager>();
 
-				if(m_mtkManager)
+				if(m_mtkManager && ! EditorApplication.isPlaying)
 				{
 					m_mtkManager.SetSetup(value);
 					EditorPrefs.SetBool(m_keyPrefName, value);

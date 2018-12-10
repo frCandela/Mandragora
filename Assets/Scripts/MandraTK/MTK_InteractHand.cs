@@ -22,6 +22,8 @@ public class MTK_InteractHand : MonoBehaviour
     private MTK_Setup m_setup;
     private MTK_InputManager m_inputManager;
 
+
+    public MTK_InputManager inputManager { get { return m_inputManager; } }
     private MTK_Interactable m_closest;
     MTK_Interactable Closest
     {
@@ -32,6 +34,7 @@ public class MTK_InteractHand : MonoBehaviour
                 m_closest = value;
         }
     }
+
 
     private void Start()
     {
