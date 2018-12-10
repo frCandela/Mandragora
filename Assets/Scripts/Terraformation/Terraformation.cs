@@ -47,20 +47,24 @@ public class Terraformation : MonoBehaviour
     {
         Vector3[] vertices = m_mesh.vertices;
 
+        float scaledMinDia = transform.localScale.x * m_minDiameter;
+        float scaledMaxDia = transform.localScale.x * m_maxDiameter;
+
         for (int i = 0; i < vertices.Length; i++)
         {
-            float magnitude = vertices[i].magnitude;
+            Vector3 scaledVertice = transform.localScale.x * vertices[i];
 
+            float magnitude = scaledVertice.magnitude;
 
             RaycastHit hit;
             m_ray.direction = m_normals[i];
             m_ray.origin = Vector3.zero;
             if(sphereCol.Raycast(m_ray, out hit, magnitude))
             {
-                if(hit.point.sqrMagnitude < vertices[i].sqrMagnitude)
+                if(hit.point.sqrMagnitude < scaledVertice.sqrMagnitude)
                 {
                     float scaleFactor = (hit.point - sphereCol.transform.position).sqrMagnitude;
-                    vertices[i] = Mathf.Max(m_minDiameter, magnitude - m_speed * scaleFactor) * m_normals[i];
+                    vertices[i] = (Mathf.Max(scaledMinDia, magnitude - m_speed * scaleFactor) * m_normals[i]) / transform.localScale.x;
                 }
             }
         }
