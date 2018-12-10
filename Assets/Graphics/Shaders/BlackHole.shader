@@ -8,6 +8,7 @@ Shader "Mandragora/FX/BlackHole"
 		_Distortion ("Distortion", Range(-10, 0)) = 0
 		_DistortionIntensity ("Intensity", Range(0, .01)) = 0
         _HoleSize ("HoleSize", Range(0, 1)) = 0
+        _Scale ("Scale", Range(0, 10)) = 1
 	}
 	SubShader
 	{
@@ -35,11 +36,19 @@ Shader "Mandragora/FX/BlackHole"
             };
  
             sampler2D _GrabTexture;
-            float _Distortion, _DistortionIntensity, _HoleSize;
+            float _Distortion, _DistortionIntensity, _HoleSize, _Scale;
  
             v2f vert(appdata v)
 			{
                 v2f o;
+
+                // float4 pos = v.vertex;
+                // pos *= _Scale;
+                // pos = mul(UNITY_MATRIX_P,
+                //         float4(UnityObjectToViewPos(float3(0, 0, 0)), 1)
+                //         + float4(pos.x, pos.z, 0, 0));
+                // o.pos = pos;
+
                 o.pos = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
                 o.grabPos = ComputeGrabScreenPos(o.pos);

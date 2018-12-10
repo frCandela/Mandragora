@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33408247504119226}
   - component: {fileID: 23926788818302714}
   - component: {fileID: 64661082364821880}
+  - component: {fileID: 114938023111714860}
+  - component: {fileID: 114155702855338044}
   m_Layer: 0
   m_Name: Black Hole
   m_TagString: Untagged
@@ -98,3 +100,31 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114155702855338044
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1667811082824308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: bcc5da75-a1c6-42ff-9485-b5b9ce46f3fa
+--- !u!114 &114938023111714860
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1667811082824308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1667811082824308}
+  _assetGuid: 5cf494b87cdfc57418fc8b2413e4221a
