@@ -15,12 +15,12 @@ MonoBehaviour:
   - PhysicalPath: Virtual Acoustics\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 30564cb3b3d431419eb2bf7017fd0e6a
-    m_lastTime: -8586582829640460363
+    m_lastTime: -8586581101478104878
     List: []
   - PhysicalPath: Virtual Acoustics\Factory Reflect Acoustic Textures.wwu
     ParentPhysicalPath: 
     guid: 6b663d46a83ca54f8b4a5fef12b883f6
-    m_lastTime: -8586582829640430328
+    m_lastTime: -8586581101478094853
     List:
     - name: Acoustic_Banner
       guid: f2532d2fccda8e408b8898b1b52a26d6
@@ -180,13 +180,13 @@ MonoBehaviour:
   - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 0995f2392612e04c91c38c7b63f5e42c
-    m_lastTime: -8586582739834774344
+    m_lastTime: -8586571582332813615
     List: []
   BankWwu:
   - PhysicalPath: SoundBanks\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: a97016e8726c1f408dafc159e6c344b5
-    m_lastTime: -8586582829640620455
+    m_lastTime: -8586581101478175070
     List:
     - name: Soundbank
       guid: 9916953bbad2944d9b906b3cd5a8867d
@@ -201,7 +201,7 @@ MonoBehaviour:
   - PhysicalPath: Events\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 6030b6aee3d39d4c9d884b8f3ae2474c
-    m_lastTime: -8586582809910926393
+    m_lastTime: -8586571582334603377
     List:
     - name: Draw_Play
       guid: 552b66c1c4768b4db65ac0d2485d5962
@@ -227,51 +227,147 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
-    - name: Grab_End_Play
-      guid: f7b7fec45075e94fb9a16c1291fa34ce
-      id: 3088931226
+    - name: Planet_Orbit_Play
+      guid: bdb9866a04adb845bc4d8fe54875e522
+      id: 3908603903
       PathAndIcons:
       - ElementName: Default Work Unit
         ObjectType: 12
-      - ElementName: Grab_End_Play
+      - ElementName: Planet_Orbit_Play
         ObjectType: 3
-      Path: Default Work Unit\Grab_End_Play
+      Path: Default Work Unit\Planet_Orbit_Play
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
-    - name: Grab_Start_Play
-      guid: 6d4b3096b5b4714fbca127a7a3be3093
-      id: 3761856123
+    - name: Planet_Orbit_Stop
+      guid: be28c035cf87ec48b133eda9f26dde4a
+      id: 3441388573
       PathAndIcons:
       - ElementName: Default Work Unit
         ObjectType: 12
-      - ElementName: Grab_Start_Play
+      - ElementName: Planet_Orbit_Stop
         ObjectType: 3
-      Path: Default Work Unit\Grab_Start_Play
+      Path: Default Work Unit\Planet_Orbit_Stop
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
-    - name: Void_Play
+    - name: Portal_Play
       guid: 29aa23d5bcb8f74180114b90848e3a99
-      id: 1160624332
+      id: 1394292256
       PathAndIcons:
       - ElementName: Default Work Unit
         ObjectType: 12
-      - ElementName: Void_Play
+      - ElementName: Portal_Play
         ObjectType: 3
-      Path: Default Work Unit\Void_Play
+      Path: Default Work Unit\Portal_Play
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
-    - name: Void_Stop
+    - name: Portal_Stop
       guid: 4ee6ee10f5d7b847ba70d5024d61aa91
-      id: 3130408918
+      id: 4032518562
       PathAndIcons:
       - ElementName: Default Work Unit
         ObjectType: 12
-      - ElementName: Void_Stop
+      - ElementName: Portal_Stop
         ObjectType: 3
-      Path: Default Work Unit\Void_Stop
+      Path: Default Work Unit\Portal_Stop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Sun_Play
+      guid: 1cce73302cf16949919af41a0ed7405b
+      id: 3578106302
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Sun_Play
+        ObjectType: 3
+      Path: Default Work Unit\Sun_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Sun_Stop
+      guid: a10480fac368ee4f8a2b0284f77331a0
+      id: 279455104
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Sun_Stop
+        ObjectType: 3
+      Path: Default Work Unit\Sun_Stop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Telekinesis_Grab_Play
+      guid: dafbf7bc36191e459fe4956dea3fe184
+      id: 350557399
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Telekinesis_Grab_Play
+        ObjectType: 3
+      Path: Default Work Unit\Telekinesis_Grab_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Telekinesis_Hand_Play
+      guid: 66019525a731fe41a1c00c3dfe377ad7
+      id: 3425656180
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Telekinesis_Hand_Play
+        ObjectType: 3
+      Path: Default Work Unit\Telekinesis_Hand_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Telekinesis_Hand_Stop
+      guid: b915f83e1609de4185ee10a150800583
+      id: 834591310
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Telekinesis_Hand_Stop
+        ObjectType: 3
+      Path: Default Work Unit\Telekinesis_Hand_Stop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Telekinesis_Object_Play
+      guid: b1635d0811622c44977fb52b40fd862b
+      id: 2323001974
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Telekinesis_Object_Play
+        ObjectType: 3
+      Path: Default Work Unit\Telekinesis_Object_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Telekinesis_Object_Stop
+      guid: 65ad7b0d81ae2141a291df6aa1a84ad6
+      id: 3095115784
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Telekinesis_Object_Stop
+        ObjectType: 3
+      Path: Default Work Unit\Telekinesis_Object_Stop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Teleportation_Play
+      guid: 6ae4be3fc6f9df4aaadb5f5700fba194
+      id: 567745568
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Teleportation_Play
+        ObjectType: 3
+      Path: Default Work Unit\Teleportation_Play
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
@@ -279,7 +375,7 @@ MonoBehaviour:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 7023720d000eef46b000ec471e7f4b00
-    m_lastTime: -8586582829713443697
+    m_lastTime: -8586571631179536296
     List:
     - name: Draw
       guid: 1652ce17ef1c654fa49782f1ed12b213
@@ -290,10 +386,19 @@ MonoBehaviour:
       - ElementName: Draw
         ObjectType: 13
       Path: Default Work Unit\Draw
+    - name: Telekinesis_Speed
+      guid: b6f980ad7f0ba94981ef42c0d1150491
+      id: 2497914097
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Telekinesis_Speed
+        ObjectType: 13
+      Path: Default Work Unit\Telekinesis_Speed
   - PhysicalPath: Game Parameters\Factory Motion.wwu
     ParentPhysicalPath: 
     guid: 225213d7dbd1d042adc0930743567776
-    m_lastTime: -8586582829713423694
+    m_lastTime: -8586581101482685715
     List:
     - name: Playback_Rate
       guid: e37e38283ac11643b9c3db5c521624af
@@ -316,7 +421,7 @@ MonoBehaviour:
   - PhysicalPath: Game Parameters\Factory SoundSeed Air Game Syncs.wwu
     ParentPhysicalPath: 
     guid: 5577163b42fb8b4598bf96f557afb3b9
-    m_lastTime: -8586582829713383652
+    m_lastTime: -8586581101482655641
     List:
     - name: SS_Air_Fear
       guid: 59062ef746431c4ea1b1dab46a05101e
@@ -412,25 +517,66 @@ MonoBehaviour:
   - PhysicalPath: States\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 2a2dcb6277527b41a4f7231df81719a5
-    m_lastTime: -8586582829640560415
-    List: []
+    m_lastTime: -8586571582328331688
+    List:
+    - name: Planets_Orbit
+      guid: e9e90d1730e18349a45a418c785c0b86
+      id: 2061498879
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Planets_Orbit
+        ObjectType: 9
+      Path: Default Work Unit\Planets_Orbit
+      values:
+      - name: Four
+        guid: 116b5416b6c9904cb7d4776b4efeff3a
+        id: 2863728729
+        PathAndIcons:
+        - ElementName: Four
+          ObjectType: 8
+      - name: None
+        guid: e7bb4b172b16a84497caf05ac47dbd95
+        id: 748895195
+        PathAndIcons:
+        - ElementName: None
+          ObjectType: 8
+      - name: One
+        guid: 89cc4a6beefae0468106ba93989fbd7f
+        id: 1064933119
+        PathAndIcons:
+        - ElementName: One
+          ObjectType: 8
+      - name: Three
+        guid: de1cf2ff0fc55e4390a7f1934be24666
+        id: 912956111
+        PathAndIcons:
+        - ElementName: Three
+          ObjectType: 8
+      - name: Two
+        guid: 9ede7b2aab1a4b4bb207c6999322a12b
+        id: 678209053
+        PathAndIcons:
+        - ElementName: Two
+          ObjectType: 8
   SwitchWwu:
   - PhysicalPath: Switches\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 263ffd4ab6313748971495623bcd18e9
-    m_lastTime: -8586582829640540406
+    m_lastTime: -8586581101478155010
     List: []
   TriggerWwu:
   - PhysicalPath: Triggers\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 2554b2ca9d30ef4eb109e9edcabd22c4
-    m_lastTime: -8586582829640490368
+    m_lastTime: -8586581101478104878
     List: []
   ExpandedItems:
   - /MandragoWwise
   - /MandragoWwise/Events
   - /MandragoWwise/Events/Default Work Unit
-  - /MandragoWwise/SoundBanks
-  - /MandragoWwise/SoundBanks/Default Work Unit
+  - /MandragoWwise/States
+  - /MandragoWwise/States/Default Work Unit
+  - /MandragoWwise/States/Default Work Unit/Planets_Orbit
   autoPopulateEnabled: 1
   CurrentPluginConfig: 
