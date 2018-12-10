@@ -17,6 +17,7 @@ public class MTK_JointType_Fixed : MTK_JointType
     }
     public override bool JoinWith(GameObject other)
     {
+        base.JoinWith(other);
         if( ! m_joint )
         {
             m_joint = other.AddComponent<FixedJoint>();
@@ -29,7 +30,8 @@ public class MTK_JointType_Fixed : MTK_JointType
 
     public override bool RemoveJoint()
     {
-        if(m_joint)
+        base.RemoveJoint();
+        if (m_joint)
         {
             onJointBreak.Invoke();
             Destroy(m_joint);

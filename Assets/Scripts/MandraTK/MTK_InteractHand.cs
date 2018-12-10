@@ -56,13 +56,13 @@ public class MTK_InteractHand : MonoBehaviour
 
     public void TryGrab(bool input)
     {
-        if (m_grabbed)
+        if( input)
+        {
+            Grab(m_closest);            
+        }
+        else
         {
             Release();
-        }
-        else if(m_closest)
-        {
-            Grab(m_closest);
         }
 
         m_grabPressed = input;
@@ -86,14 +86,17 @@ public class MTK_InteractHand : MonoBehaviour
 
     public void Grab(MTK_Interactable obj)
     {
-        obj.Grab(true);
+        if(m_closest)
+        {
+            obj.Grab(true);
 
-        if( obj.jointType.Used())
-            obj.jointType.RemoveJoint();
+            if (obj.jointType.Used())
+                obj.jointType.RemoveJoint();
 
-        obj.jointType.onJointBreak.AddListener(Release);
-        obj.jointType.JoinWith(gameObject);
-        m_grabbed = obj;
+            obj.jointType.onJointBreak.AddListener(Release);
+            obj.jointType.JoinWith(gameObject);
+            m_grabbed = obj;
+        }
     }
 
     void Release()

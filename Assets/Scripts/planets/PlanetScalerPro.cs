@@ -15,7 +15,8 @@ public class PlanetScalerPro : MonoBehaviour
     private ConfigurableJoint m_confJoint;
     private ScaleEffect m_scaleEffect;
     private MTK_JointType m_scaleSphereJoint;
-    private float m_baseDist;
+    [SerializeField] private float m_baseDist = -1f;
+    [SerializeField] private float m_baseScale = -1f;
 
     // Use this for initialization
     void Awake ()
@@ -23,7 +24,6 @@ public class PlanetScalerPro : MonoBehaviour
         m_confJoint = scaleSphere.GetComponent<ConfigurableJoint>();
 
         m_dropZone.onObjectCatched.AddListener(EnableScaling);
-        m_baseDist = Vector3.Distance(scaleSphere.transform.position, transform.position);
     }
 
 
@@ -32,15 +32,34 @@ public class PlanetScalerPro : MonoBehaviour
         m_scaleSphereJoint = scaleSphere.GetComponent<MTK_JointType>();
     }
 
-    // Update is called once per frame
+    public float test;
     void Update ()
     {
-        float distance = Vector3.Distance(scaleSphere.transform.position, transform.position);
+        if(m_scaleSphereJoint.Used())
+        {
+            if (m_baseDist == -1f)
+            {
+                m_baseDist = Vector3.Distance(m_scaleSphereJoint.joint.transform.position, transform.position);
+                m_baseScale = scaleSphere.transform.localScale.x;
+            }
+
+            float distance = Vector3.Distance(m_scaleSphereJoint.joint.transform.position, transform.position);
+            test = distance / m_baseDist;
+
+            scaleSphere.transform.localScale = new Vector3(test * m_baseScale, test * m_baseScale, test * m_baseScale);
+
+            Debug.DrawLine(m_scaleSphereJoint.joint.transform.position, m_scaleSphereJoint.joint.connectedBody.transform.position + m_scaleSphereJoint.joint.connectedAnchor);
+        }
+        else
+        {
+            m_baseDist = -1f;
+        }
+
+
+        /*float distance = Vector3.Distance(scaleSphere.transform.position, transform.position);
 
         float ratio = (Mathf.Clamp((distance - m_baseDist) / m_confJoint.linearLimit.limit, -1, 1) + 1 ) / 2; // between 0 and 1
         float targetRatio= (m_maxScaleRatio - m_minScaleRatio) * ratio + m_minScaleRatio;
-
-
 
         if (m_scaleSphereJoint.joint && Mathf.Abs(distance - m_baseDist) > m_confJoint.linearLimit.limit)
         {
@@ -52,9 +71,9 @@ public class PlanetScalerPro : MonoBehaviour
             m_scaleEffect.transform.localScale = targetRatio * m_scaleEffect.originalScale;
 
 
-        }
+        }*/
     }
-
+    
     void EnableScaling(bool state)
     {
         if (state)

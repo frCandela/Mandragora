@@ -50,6 +50,10 @@ public class Terraformation : MonoBehaviour
         float scaledMinDia = transform.localScale.x * m_minDiameter;
         float scaledMaxDia = transform.localScale.x * m_maxDiameter;
 
+        Vector3 prevPos = sphereCol.transform.position;
+        sphereCol.transform.position = sphereCol.transform.position - transform.position;
+        sphereCol.transform.position = Quaternion.Inverse( transform.rotation) * sphereCol.transform.position;
+
         for (int i = 0; i < vertices.Length; i++)
         {
             Vector3 scaledVertice = transform.localScale.x * vertices[i];
@@ -72,6 +76,8 @@ public class Terraformation : MonoBehaviour
         m_mesh.vertices = vertices;
 
         m_mesh.RecalculateNormals();
+
+        sphereCol.transform.position = prevPos;
     }
 
 
