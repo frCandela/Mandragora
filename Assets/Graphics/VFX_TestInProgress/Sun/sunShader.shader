@@ -18,10 +18,12 @@
 		_FlowFactor ("Flow Factor", float) = 1
 		_FlowTimeOffset ("Flow Time Offset", float) = 1
 		_DistortionStrength ("Distortion Strength", float) = 0
+		_NoiseFreq ("Noise Frequency (XYZ)", Vector) = (1,1,1,0)
+		_NoiseAmplitude ("Noise Amplitude (XYZ)", Vector) = (1,1,1,0)
 	}
 	SubShader
 	{
-		Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True" }
+		Tags { "Queue"="Transparent+1" "RenderType"="Transparent" "IgnoreProjector"="True" }
 		LOD 100
 
 		Blend SrcAlpha OneMinusSrcAlpha
@@ -75,10 +77,19 @@
 			float _TriplanarScale, _TriplanarPow;
 			float _FlowFreq, _FlowFactor, _FlowTimeOffset;
 			float _DistortionStrength;
+			float3 _NoiseFreq, _NoiseAmplitude;
 			
 			v2g vert (appdata v)
 			{
 				v2g o;
+
+				// Noise
+				float3 noise = float3(0,0,0);
+				noise.x = (cos((v.vertex.y + _Time.y) * _NoiseFreq.x) + sin((v.vertex.x + _Time.y) * _NoiseFreq.z)) * _NoiseAmplitude.x;
+				noise.y = (cos((v.vertex.z + _Time.y) * _NoiseFreq.y) + sin((v.vertex.y + _Time.y) * _NoiseFreq.x)) * _NoiseAmplitude.y;
+				noise.z = (cos((v.vertex.x + _Time.y) * _NoiseFreq.z) + sin((v.vertex.z + _Time.y) * _NoiseFreq.y)) * _NoiseAmplitude.z;
+				v.vertex.xyz += noise; // Apply
+
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.normal = UnityObjectToWorldNormal(v.normal);
 				o.wVertex = mul (unity_ObjectToWorld, v.vertex);
@@ -196,15 +207,9 @@
 				facingAxis = normalize(facingAxis);
 
 
-				
-
-				
-				// Sample FlowMap w/ Triplanar UVs
-				//float2 flowUvTex = (facingAxis.x * flowTexX) + (facingAxis.y * flowTexY) + (facingAxis.z * flowTexZ);
 
 				// Sample Texture w/ Triplanar UVs and FlowMap offset
 				float3 triplanarTexture = (facingAxis.x * triplanarTexX) + (facingAxis.y * triplanarTexY) + (facingAxis.z * triplanarTexZ);
-				//float3 triplanarTexture = (facingAxis.x * flowX.rgb) + (facingAxis.y * flowY.rgb) + (facingAxis.z * flowZ.rgb);
 
 
 				// From Grab Pass
@@ -216,17 +221,14 @@
 
 
 
-				//fixed4 col = (_Color1 * (1 - flatFresnel) + _Color1 * triplanarTexture.r + _Color2 * (1 - triplanarTexture.r) * smoothFresnel)
-				//			+ (_Color3 * (1 - smoothFresnel));
 				fixed4 col = _Color1 * (smoothFresnel + (triplanarTexture.r * 0.5 - 0.5));
 				col += _Color1 * triplanarTexture.r * smoothFresnel;
 				col += _Color2 * (1 - triplanarTexture.r) * smoothFresnel;
 				col += _Color3 * flatFresnel;
 				col = max(_Color2 * 0.2 * (1 - smoothFresnel) * (1 - triplanarTexture.r), col);
 				
-				//col.rgb += triplanarTexture;
-				//col.rgb *= i.data.color.rgb;
-				//float3 color = (col.rgb * fresnel) + ((1 - fresnel) * grabTex);
+
+
 				float3 color = (col.rgb * col.a) + ((1 - col.a) * grabTex);
 				color.rgb = max(_Color1.rgb * 0.1, color.rgb);
 				float alpha = 1;
