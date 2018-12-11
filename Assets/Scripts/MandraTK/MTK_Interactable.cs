@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class MTK_Interactable : MonoBehaviour
 {
     [SerializeField] public bool isGrabbable = true;
+    [SerializeField] public bool isDistanceGrabbable = true;
     [SerializeField] public bool isDroppable = true;
     [HideInInspector] public MTK_JointType jointType = null;
 
@@ -43,7 +44,7 @@ public class MTK_Interactable : MonoBehaviour
         if (isGrabbable && !jointType)
             jointType = gameObject.AddComponent<MTK_JointType_Fixed>();
 
-        if(isGrabbable)
+        if(isGrabbable && isDistanceGrabbable)
             MTK_InteractiblesManager.Instance.Subscribe(this);
 
         m_rgbd = GetComponent<Rigidbody>();

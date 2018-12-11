@@ -16,6 +16,8 @@ public class TelekinesisPointer : MonoBehaviour
 	float m_maxDistance = 5;
 	[SerializeField, Range(0,1)]
 	float m_minMagnitudeToAttract = .2f;
+	[SerializeField, Range(0,1)]
+	float m_maxForce = 1;
 	[SerializeField, Range(0,1000)]
 	float m_forceScale = 300;
 	[SerializeField, Range(0,10f)]
@@ -38,7 +40,7 @@ public class TelekinesisPointer : MonoBehaviour
     public bool isAttracting { get { return m_joint.connectedBody || Target; } private set{} }
 	bool m_attract;
 	float m_initDistanceToTarget;
-	Vector3 m_lastForceApplied;
+	float m_lastForceApplied;
 	Vector3 m_lastPos;
 
 	MTK_Interactable Target
@@ -90,7 +92,7 @@ public class TelekinesisPointer : MonoBehaviour
 	{
 		if(!m_attract && !m_joint.connectedBody)
 		{
-			Target = m_interactiblesManager.GetClosestToView(transform, 10);
+			Target = m_interactiblesManager.GetClosestToView(transform, 15);
 		}
 
 		if(Target)
@@ -100,23 +102,23 @@ public class TelekinesisPointer : MonoBehaviour
 			// Detect movement to trigger attraction
 			if(m_attract)
 			{
-				Vector3 force = (transform.position - m_lastPos) * 20 * distanceScale; // Scale from 0 to 1
+				Vector3 force = (transform.position - m_lastPos) * 10 * distanceScale;
 
-				if(force.sqrMagnitude > 1)
-					force.Normalize();
+				if(force.magnitude > m_maxForce)
+					force = force.normalized * m_maxForce;
 				
-				if(force.magnitude > m_minMagnitudeToAttract && force.sqrMagnitude > m_lastForceApplied.sqrMagnitude)
+				if(force.magnitude > Mathf.Max(m_minMagnitudeToAttract, m_lastForceApplied))
 					Attract(force);
 
-				m_inputManager.Haptic(.1f);
+				m_inputManager.Haptic(.01f);
 			}
 
 			// Apply various forces
 			if(m_joint.connectedBody)
 			{
 				JointDrive drive = m_joint.xDrive;
-				drive.positionSpring = 10 + (1 - distanceScale) * m_forceScale * (m_lastForceApplied.sqrMagnitude - m_minMagnitudeToAttract * m_minMagnitudeToAttract);
-				drive.positionDamper = 15 * distanceScale + 5;
+				drive.positionSpring = 10 + (1 - distanceScale) * m_forceScale * (m_lastForceApplied - m_minMagnitudeToAttract * m_minMagnitudeToAttract);
+				drive.positionDamper = 15 * distanceScale + 10;
 
 				m_joint.xDrive = m_joint.yDrive = m_joint.zDrive = drive;
 
@@ -165,7 +167,7 @@ public class TelekinesisPointer : MonoBehaviour
 		m_joint.connectedBody.drag = 0;
 
 		m_initDistanceToTarget = GetDistanceToTarget();
-		m_lastForceApplied = force;
+		m_lastForceApplied = force.magnitude;
 
 		m_wObjectPlay.Post(Target.gameObject);
 	}
@@ -178,7 +180,7 @@ public class TelekinesisPointer : MonoBehaviour
 		m_joint.connectedBody.drag = 0;
 
 		m_joint.connectedBody = null;
-		m_lastForceApplied = Vector3.zero;
+		m_lastForceApplied = 0;
 
 		Target = null;
 	}
@@ -192,6 +194,8 @@ public class TelekinesisPointer : MonoBehaviour
 				m_inputManager.Haptic(1);
 
 				m_wObjectGrabbed.Post(m_joint.gameObject);
+				m_wObjectStop.Post(m_joint.gameObject);
+				m_wHandStop.Post(gameObject);
 
 				input.transform.rotation = transform.rotation;
 				input.transform.position = transform.position;
