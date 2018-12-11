@@ -5,6 +5,9 @@ using UnityEngine;
 public class SolarSystem : MonoBehaviour
 {
     [SerializeField] public Effect effectPrefab = null;
+    [SerializeField] public List<AK.Wwise.State> m_states = new List<AK.Wwise.State>();
+    List<PlanetEffect> m_planetEffectsList = new List<PlanetEffect>();
+
 
     private Rigidbody m_rb;
 
@@ -15,20 +18,37 @@ public class SolarSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        PlanetEffect eff = (PlanetEffect)effectPrefab.AddEffectTo(other.gameObject);
-        if (eff)
+        MTK_Interactable interactable = other.GetComponent<MTK_Interactable>();
+        if(interactable && interactable.isGrabbable)
         {
-            eff.sunRigidbody = m_rb;
+            PlanetEffect eff = (PlanetEffect)effectPrefab.AddEffectTo(other.gameObject);
+            if (eff)
+            {
+                eff.sunRigidbody = m_rb;
+                m_planetEffectsList.Add(eff);
+
+                UpdateState(m_planetEffectsList.Count);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Effect effect = (Effect)other.GetComponent(effectPrefab.GetType());
+        PlanetEffect effect = other.GetComponent<PlanetEffect>();
         if (effect)
         {
+            m_planetEffectsList.Remove(effect);
             Destroy(effect);
+
+            UpdateState(m_planetEffectsList.Count);
         }
     }
 
+    void UpdateState(int count)
+    {
+        if(count >= 0 && count < m_states.Count)
+        {
+            AkSoundEngine.SetState(m_states[count].GroupId, m_states[count].Id);
+        }
+    }
 }
