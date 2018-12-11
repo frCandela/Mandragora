@@ -7,6 +7,7 @@ public class MTK_Interactable : MonoBehaviour
 {
     [SerializeField] public bool isGrabbable = true;
     [SerializeField] public bool isDistanceGrabbable = true;
+    [SerializeField] public bool isDroppable = true;
     [HideInInspector] public MTK_JointType jointType = null;
 
     [SerializeField] AK.Wwise.Event m_wOnUseStart;

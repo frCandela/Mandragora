@@ -10,6 +10,7 @@ public class MTK_JointType_Track : MTK_JointType
 
     public override bool JoinWith(GameObject other)
     {
+        base.JoinWith(other);
         if (!m_joint)
         {
             ConfigurableJoint joint = other.gameObject.AddComponent<ConfigurableJoint>();
@@ -27,6 +28,7 @@ public class MTK_JointType_Track : MTK_JointType
 
     public override bool RemoveJoint()
     {
+        base.RemoveJoint();
         if (m_joint)
         {
             onJointBreak.Invoke();
