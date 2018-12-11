@@ -1921,7 +1921,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90d1945bbd58b4cf98eb19621dd83cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleRenderers: []
+  particleRenderers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   blurRadius: 0.02
   thicknessCutoff: 0.42
   colorMaterial: {fileID: 2100000, guid: d16ca3f3b0ff44edb8bc98af8c286687, type: 2}
@@ -2272,23 +2275,23 @@ MonoBehaviour:
   m_initForceScale: 5
   m_wObjectGrabbed:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: facd677e2ebb1ea4ab061e2a293ff77e,
+    WwiseObjectReference: {fileID: 11400000, guid: d75a302d41a939744826bf8ea427d9ac,
       type: 2}
   m_wObjectPlay:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: 04f1da87af5a09749b2ad95c888917e2,
+    WwiseObjectReference: {fileID: 11400000, guid: bb24bf049f57e244dab171e952d70e66,
       type: 2}
   m_wObjectStop:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: e5593a971593ab84aba1786d2a74bd2a,
+    WwiseObjectReference: {fileID: 11400000, guid: 2e7271a5f76f23244a3961bd65121c19,
       type: 2}
   m_wHandPlay:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: bb8d9956779be3d49bcc6aacf178b3c3,
+    WwiseObjectReference: {fileID: 11400000, guid: b02a22dd44a37374e91159c007b1e688,
       type: 2}
   m_wHandStop:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: b902bacb4f142904e933a7bd7d856944,
+    WwiseObjectReference: {fileID: 11400000, guid: 2e7271a5f76f23244a3961bd65121c19,
       type: 2}
 --- !u!114 &114432783115439776
 MonoBehaviour:
@@ -2311,23 +2314,23 @@ MonoBehaviour:
   m_initForceScale: 5
   m_wObjectGrabbed:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: facd677e2ebb1ea4ab061e2a293ff77e,
+    WwiseObjectReference: {fileID: 11400000, guid: d75a302d41a939744826bf8ea427d9ac,
       type: 2}
   m_wObjectPlay:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: 04f1da87af5a09749b2ad95c888917e2,
+    WwiseObjectReference: {fileID: 11400000, guid: bb24bf049f57e244dab171e952d70e66,
       type: 2}
   m_wObjectStop:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: e5593a971593ab84aba1786d2a74bd2a,
+    WwiseObjectReference: {fileID: 11400000, guid: 2e7271a5f76f23244a3961bd65121c19,
       type: 2}
   m_wHandPlay:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: bb8d9956779be3d49bcc6aacf178b3c3,
+    WwiseObjectReference: {fileID: 11400000, guid: b02a22dd44a37374e91159c007b1e688,
       type: 2}
   m_wHandStop:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: b902bacb4f142904e933a7bd7d856944,
+    WwiseObjectReference: {fileID: 11400000, guid: 2e7271a5f76f23244a3961bd65121c19,
       type: 2}
 --- !u!114 &114441235977918062
 MonoBehaviour:
@@ -2385,23 +2388,23 @@ MonoBehaviour:
   m_initForceScale: 5
   m_wObjectGrabbed:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: facd677e2ebb1ea4ab061e2a293ff77e,
+    WwiseObjectReference: {fileID: 11400000, guid: d75a302d41a939744826bf8ea427d9ac,
       type: 2}
   m_wObjectPlay:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: 04f1da87af5a09749b2ad95c888917e2,
+    WwiseObjectReference: {fileID: 11400000, guid: bb24bf049f57e244dab171e952d70e66,
       type: 2}
   m_wObjectStop:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: e5593a971593ab84aba1786d2a74bd2a,
+    WwiseObjectReference: {fileID: 11400000, guid: 2e7271a5f76f23244a3961bd65121c19,
       type: 2}
   m_wHandPlay:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: bb8d9956779be3d49bcc6aacf178b3c3,
+    WwiseObjectReference: {fileID: 11400000, guid: b02a22dd44a37374e91159c007b1e688,
       type: 2}
   m_wHandStop:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: b902bacb4f142904e933a7bd7d856944,
+    WwiseObjectReference: {fileID: 11400000, guid: 2e7271a5f76f23244a3961bd65121c19,
       type: 2}
 --- !u!114 &114463041579162412
 MonoBehaviour:
@@ -2442,8 +2445,7 @@ MonoBehaviour:
   useOtherObject: 0
   data:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: fd5b47e49463cc142b687977c7b4ed67,
-      type: 2}
+    WwiseObjectReference: {fileID: 0}
   decodeBank: 0
   loadAsynchronous: 0
   saveDecodedBank: 0
@@ -3719,8 +3721,7 @@ MonoBehaviour:
   m_fadeEnd: 0.5
   m_sound:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: 3498a682e8290ac4fbc144f3a28de78e,
-      type: 2}
+    WwiseObjectReference: {fileID: 0}
 --- !u!114 &114986392785499490
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3854,23 +3855,23 @@ MonoBehaviour:
   m_initForceScale: 5
   m_wObjectGrabbed:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: facd677e2ebb1ea4ab061e2a293ff77e,
+    WwiseObjectReference: {fileID: 11400000, guid: d75a302d41a939744826bf8ea427d9ac,
       type: 2}
   m_wObjectPlay:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: 04f1da87af5a09749b2ad95c888917e2,
+    WwiseObjectReference: {fileID: 11400000, guid: bb24bf049f57e244dab171e952d70e66,
       type: 2}
   m_wObjectStop:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: e5593a971593ab84aba1786d2a74bd2a,
+    WwiseObjectReference: {fileID: 11400000, guid: 2e7271a5f76f23244a3961bd65121c19,
       type: 2}
   m_wHandPlay:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: bb8d9956779be3d49bcc6aacf178b3c3,
+    WwiseObjectReference: {fileID: 11400000, guid: b02a22dd44a37374e91159c007b1e688,
       type: 2}
   m_wHandStop:
     valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: b902bacb4f142904e933a7bd7d856944,
+    WwiseObjectReference: {fileID: 11400000, guid: 2e7271a5f76f23244a3961bd65121c19,
       type: 2}
 --- !u!114 &114991781148224654
 MonoBehaviour:
