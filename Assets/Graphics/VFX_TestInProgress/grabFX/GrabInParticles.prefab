@@ -45,7 +45,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 44.023003, y: 10.946, z: 32.858}
 --- !u!114 &114599973477131292
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1023062603655586}
@@ -57,7 +57,7 @@ MonoBehaviour:
   _guid: 0edadcaa-0797-4f90-be7c-55b7b5104fbf
 --- !u!114 &114876675066777250
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1023062603655586}
@@ -83,7 +83,7 @@ ParticleSystem:
   stopAction: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1

@@ -8,6 +8,8 @@ public class TelekinesisPointer : MonoBehaviour
 	ConfigurableJoint m_joint;
 	[SerializeField]
 	Outliner m_outliner;
+	[SerializeField]
+	FXManager m_fxManager;
 
 	[Header("Settings")]
 	[SerializeField, Range(0,10)]
@@ -140,6 +142,8 @@ public class TelekinesisPointer : MonoBehaviour
 
 				m_attract = true;
 				Target.Levitate = true;
+				m_fxManager.Activate("Grab", Target.transform);
+				m_fxManager.Activate("Grab_In", Target.transform);
 			}
 		}
 		else
@@ -147,9 +151,15 @@ public class TelekinesisPointer : MonoBehaviour
 			m_wHandStop.Post(gameObject);
 
 			m_attract = false;
-			
+			m_fxManager.DeActivate("Grab");
+
 			if(Target)
+			{
+				if(Target.Levitate)
+					m_fxManager.Activate("Grab_Out", Target.transform);
+
 				Target.Levitate = false;
+			}
 
 			if(m_joint.connectedBody)
 				UnAttract();
@@ -159,6 +169,7 @@ public class TelekinesisPointer : MonoBehaviour
 	void Attract(Vector3 force)
 	{
 		Target.Levitate = false;
+		m_fxManager.DeActivate("Grab");
 
 		m_joint.connectedBody = Target.GetComponent<Rigidbody>();
 		m_joint.connectedBody.AddForce(force.normalized * Mathf.Sqrt(force.magnitude) * m_initForceScale, ForceMode.Impulse);

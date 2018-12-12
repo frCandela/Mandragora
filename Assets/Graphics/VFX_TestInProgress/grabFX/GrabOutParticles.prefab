@@ -45,7 +45,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 44.023003, y: 10.946, z: 32.858}
 --- !u!114 &114195437621646878
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1238938521395038}
@@ -57,7 +57,7 @@ MonoBehaviour:
   _guid: 20dbe648-61b6-4bfe-9e46-3bef92a7ed6c
 --- !u!114 &114861607205116870
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1238938521395038}
@@ -83,7 +83,7 @@ ParticleSystem:
   stopAction: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -4686,8 +4686,8 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 1fb9c7a1c2a32e04d96ef2f9c5826174, type: 2}
-  - {fileID: 2100000, guid: 1fb9c7a1c2a32e04d96ef2f9c5826174, type: 2}
+  - {fileID: 2100000, guid: e277960c0a165764ca24051be9bce42e, type: 2}
+  - {fileID: 2100000, guid: e277960c0a165764ca24051be9bce42e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

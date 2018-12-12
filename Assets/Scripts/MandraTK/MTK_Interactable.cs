@@ -22,6 +22,10 @@ public class MTK_Interactable : MonoBehaviour
     Rigidbody m_rgbd;
     public bool Levitate
     {
+        get
+        {
+            return !m_rgbd.useGravity;
+        }
         set
         {
             if(value)
