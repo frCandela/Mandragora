@@ -25,7 +25,7 @@ public class ObiCollisionManager : MonoBehaviour
     {
         solver.OnCollision -= Solver_OnCollision;
     }
-    
+
     void Solver_OnCollision(object sender, Obi.ObiSolver.ObiCollisionEventArgs e)
     {
         foreach (Oni.Contact contact in e.contacts)
@@ -38,23 +38,25 @@ public class ObiCollisionManager : MonoBehaviour
                 {
                     ObiSolver.ParticleInActor pa = solver.particleToActor[contact.particle];
                     ObiEmitter emitter = pa.actor as ObiEmitter;
+
                     if (emitter != null && emitter.life[pa.indexInActor] > 0f)
                     {
                         WithLiquid wl = component.gameObject.GetComponent<WithLiquid>();
                         if (wl)
                         {
-                            if( wl.Fill(WithLiquid.volumePerParticle))
+                            if (wl.Fill(WithLiquid.volumePerParticle))
                             {
                                 emitter.life[pa.indexInActor] = 0;
                             }
-                        } 
-                        /*else if( effect)
+                        }
+                        else
                         {
-                            if( pa.actor.effect.AddEffectTo(component.gameObject) )
+                            Effect effect = pa.actor.GetComponent<Effect>();
+                            if (effect && effect.AddEffectTo(component.gameObject))
                             {
                                 emitter.life[pa.indexInActor] = 0;
                             }
-                        }*/
+                        }
                     }
                 }
             }

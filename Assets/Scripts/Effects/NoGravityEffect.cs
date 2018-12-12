@@ -13,6 +13,10 @@ public class NoGravityEffect : Effect
         {
             ManageEffectsCollisions();
             m_rb.useGravity = false;
+
+            m_rb.AddForce(0.3f * Vector3.up, ForceMode.Impulse);
+            m_rb.AddTorque(new Vector3(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f)).normalized);
+
             return true;
         }
         else
