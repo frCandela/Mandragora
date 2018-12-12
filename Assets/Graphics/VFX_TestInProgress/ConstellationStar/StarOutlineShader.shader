@@ -3,7 +3,7 @@
 	Properties
 	{
 		_Color("Color", Color) = (1, 1, 1, 1)
-		
+		_Luminosity ("Luminosity", float) = 1
 		_OutlineExtrusion("[S] Spikes Extrusion", float) = 0
 		_OutlineColor("[S] Spikes Color", Color) = (0, 0, 0, 1)
 		_Speed ("[S] Speed", float) = 1
@@ -55,7 +55,7 @@
 
 			// Properties
 			float4 _Color;
-			float _Scale;
+			float _Scale, _Luminosity;
 
 			vertexOutput vert(vertexInput input)
 			{
@@ -70,7 +70,7 @@
 
 			float4 frag(vertexOutput input) : COLOR
 			{
-				return input.color;
+				return input.color * _Luminosity;
 			}
 
 			ENDCG
@@ -156,7 +156,8 @@
 				float frac = input.fraction;
 				dist = pow(dist, _PowDist);
 				dist *= frac;
-				return float4(_OutlineColor.rgb, _OutlineColor.a * dist * frac);
+				dist = saturate(dist);
+				return float4(_OutlineColor.rgb, _OutlineColor.a * dist);
 				//return float4(dist, dist, dist, dist);
 			}
 

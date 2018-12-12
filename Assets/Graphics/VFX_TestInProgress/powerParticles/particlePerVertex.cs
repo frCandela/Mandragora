@@ -12,17 +12,17 @@ public class particlePerVertex : MonoBehaviour {
 	public int maxParticlesNumber;
 	public float particleSize;
 	public Vector2 minMaxLerp = new Vector2(0.05f, 0.15f);
-	[Range(0.0f, 2.0f)] public float bVelOffset = 1.44f;
-	[Range(0f,0.5f)]public float bSlowFactor = 0.25f;
-	public float bMaxVelocity = 1000.0f;
-	public float bMaxDistFromTarget = 10.0f;
-	public float bToTargetFactor = 6.0f;
-	public float bNoiseStrength = 1.0f;
-	public Vector2 bMinMaxDistNoiseThreshold = new Vector2(5.0f, 30.0f);
-	public Vector2 bMinMaxNoiseAmp = new Vector2(2.0f, 3.0f);
-	public Vector2 bMinMaxNoiseFreq = new Vector2(1.0f, 3.0f);
+	[Range(0.0f, 2.0f)] public float bVelOffset = 0.091f;
+	[Range(0f,0.5f)]public float bSlowFactor = 0.05f;
+	public float bMaxVelocity = 5.0f;
+	public float bMaxDistFromTarget = 6.0f;
+	public float bToTargetFactor = 2.0f;
+	public float bNoiseStrength = 0.1f;
+	public Vector2 bMinMaxDistNoiseThreshold = new Vector2(0.0f, 1.0f);
+	public Vector2 bMinMaxNoiseAmp = new Vector2(0.01f, 1.0f);
+	public Vector2 bMinMaxNoiseFreq = new Vector2(0.1f, 10.0f);
 
-	public GoEvent initEvent;
+	// public GoEvent initEvent;
 	private ParticleSystem PS;
 	private ParticleSystem.Particle[] particles;
 	private Mesh mesh;
@@ -37,7 +37,7 @@ public class particlePerVertex : MonoBehaviour {
 	void Start () {
 
 		// Setup Event
-		initEvent.AddListener(InitializePS);
+		// initEvent.AddListener(InitializePS);
 
 		// Setup Particle System
 		PS = this.GetComponent<ParticleSystem>();
@@ -51,6 +51,8 @@ public class particlePerVertex : MonoBehaviour {
 		emission.enabled = false;
 		var shape = PS.shape;
 		shape.enabled = false;
+
+		// initEvent.Invoke(sourceMesh); // JUST FOR DEMO
 
 	}
 	

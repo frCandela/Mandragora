@@ -1,29 +1,64 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Outliner : MonoBehaviour
 {
-    [SerializeField] Outline.Mode m_mode = Outline.Mode.OutlineAll;
-    [SerializeField] Color m_color = Color.red;
-    [SerializeField] float m_outlineWidth = 10f;
+    MTK_Interactable m_outlinedObject;
+    MTK_Interactable OutlinedObject
+    {
+        set
+        {
+            if(m_outlinedObject != value)
+            {
+                // Off old
+                if(m_outlinedObject)
+                {
+                    foreach (var renderer in m_outlinedObject.GetComponentsInChildren<Renderer>())
+                    {
+                        //weird bug here
+                        if (!renderer)
+                            continue;
+
+                        // Remove outline shaders
+                        var materials = renderer.sharedMaterials.ToList();
+
+                        materials.Remove(m_material);
+
+                        renderer.materials = materials.ToArray();
+                    }
+                }  
+                
+                // On New
+                if(value)
+                {
+                    foreach (var renderer in value.GetComponentsInChildren<Renderer>())
+                    {
+                        // Append outline shaders
+                        var materials = renderer.sharedMaterials.ToList();
+
+                        materials.Add(m_material);
+
+                        renderer.materials = materials.ToArray();
+                    }
+                }
+
+                m_outlinedObject = value;
+            }
+            
+        }
+    }
+
+    [SerializeField] Material m_material;
 
     public void OultineOn(MTK_Interactable interractable)
     {
-        if ( ! interractable.GetComponent<Outline>())
-        {
-            Outline outline = interractable.gameObject.AddComponent<Outline>();
-            outline.OutlineMode = m_mode;
-            outline.OutlineColor = m_color;
-            outline.OutlineWidth = m_outlineWidth;
-        }
+        OutlinedObject = interractable;
     }
 
     public void OultineOff(MTK_Interactable interractable)
     {
-        Outline outline = interractable.GetComponent<Outline>();
-
-        if (outline)
-            Destroy(outline);
+        OutlinedObject = null;
     }
 }
