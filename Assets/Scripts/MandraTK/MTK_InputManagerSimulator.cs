@@ -26,14 +26,14 @@ public class MTK_InputManagerSimulator : MTK_InputManager
     void Update()
     {
         // Manage inputs
-        if (Input.GetMouseButtonDown(0))
-            m_onGrip.Invoke(true);
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonDown(1))        
+            m_onGrip.Invoke(true);        
+        if (Input.GetMouseButtonUp(1))
             m_onGrip.Invoke(false);
             
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0))
             m_onTrigger.Invoke(true);
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(0))
             m_onTrigger.Invoke(false);
 
         if (Input.GetMouseButtonDown(2))
@@ -62,7 +62,7 @@ public class MTK_InputManagerSimulator : MTK_InputManager
 
     public override void Haptic(float Time)
     {
-        print("bzz bzz");
+        //print("bzz bzz");
     }
 
     public override Vector3 GetAngularVelocity()

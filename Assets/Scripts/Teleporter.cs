@@ -5,12 +5,19 @@ using UnityEngine;
 public class Teleporter : MonoBehaviour {
 
 	[SerializeField] MTK_Manager m_mtkManager;
-	RaycastHit m_rayHit;
+
+	[Header("Settings")]
+	[SerializeField, Range(0,1)]
+	float m_tolerance = 0.1f;
 
 	[Header("Fade Time")]
 	[SerializeField, Range(0,1)] float m_fadeStart;
 	[SerializeField, Range(0,1)] float m_fadeEnd;
 
+	[Header("Sound")]
+	[SerializeField] AK.Wwise.Event m_sound;
+
+	RaycastHit m_rayHit;
 	MTK_TPZone m_targetZone;
 	Vector3 m_targetPos;
 	MTK_TPZone TargetZone
@@ -38,35 +45,51 @@ public class Teleporter : MonoBehaviour {
 	}
 
 	bool m_available = true;
+	int m_triggerCounter = 0;
+	float m_cancelTime;
+	public bool Active 
+	{
+		set
+		{
+			m_triggerCounter += value ? 1 : -1;
+
+			if(m_available && m_triggerCounter == 0)
+			{
+				if(TargetZone)
+				{
+					MTK_Fade.Start(Color.black, m_fadeStart, MoveMtkManager);
+					m_available = false;
+				}
+			}
+
+			if(!value)
+				m_cancelTime = Time.time + m_tolerance;
+		}
+	}
 	
 	void Update ()
 	{
-		Transform origin =	m_mtkManager.activeSetup.head.transform;
+		if(m_triggerCounter == 2)
+		{
+			Transform origin =	m_mtkManager.activeSetup.head.transform;
 		
-		if(Physics.Raycast(origin.position, origin.forward, out m_rayHit, 100, LayerMask.GetMask("TP")))
-		{
-			TargetZone = m_rayHit.collider.GetComponent<MTK_TPZone>();
-		}
-		else
-		{
-			TargetZone = null;
-		}
-	}
-
-	public void Teleport(bool inputValue)
-	{
-		if(m_available && inputValue)
-		{
-			if(TargetZone)
+			if(Physics.Raycast(origin.position, origin.forward, out m_rayHit, 100, LayerMask.GetMask("TP")))
 			{
-				MTK_Fade.Start(Color.black, m_fadeStart, MoveMtkManager);
-				m_available = false;
+				TargetZone = m_rayHit.collider.GetComponent<MTK_TPZone>();
+			}
+			else
+			{
+				TargetZone = null;
 			}
 		}
+
+		if(m_triggerCounter < 2 && TargetZone && Time.time > m_cancelTime)
+			TargetZone = null;
 	}
 
 	private void MoveMtkManager()
 	{
+		m_sound.Post(gameObject);
 		m_mtkManager.transform.position = m_targetPos;
 		MTK_Fade.Start(Color.clear, m_fadeEnd, () => m_available = true);
 	}

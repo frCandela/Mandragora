@@ -7,8 +7,6 @@ public class TelekinesisPointer : MonoBehaviour
 	[SerializeField]
 	ConfigurableJoint m_joint;
 	[SerializeField]
-	Transform m_rayPreview;
-	[SerializeField]
 	Outliner m_outliner;
 
 	[Header("Settings")]
@@ -18,26 +16,31 @@ public class TelekinesisPointer : MonoBehaviour
 	float m_maxDistance = 5;
 	[SerializeField, Range(0,1)]
 	float m_minMagnitudeToAttract = .2f;
+	[SerializeField, Range(0,1)]
+	float m_maxForce = 1;
 	[SerializeField, Range(0,1000)]
 	float m_forceScale = 300;
 	[SerializeField, Range(0,10f)]
 	float m_initForceScale = 1;
 
 	[Header("Sound")]
-	[SerializeField] RTPC m_rtpc;
-	[SerializeField] AK.Wwise.Event m_wOnAttract;
-	[SerializeField] AK.Wwise.Event[] m_wOnGrab;
+	[SerializeField] AK.Wwise.Event m_wObjectGrabbed;
+	[SerializeField] AK.Wwise.Event m_wObjectPlay;
+	[SerializeField] AK.Wwise.Event m_wObjectStop; 
+	[SerializeField] AK.Wwise.Event m_wHandPlay;
+	[SerializeField] AK.Wwise.Event m_wHandStop;
 
 	MTK_InputManager m_inputManager;
 	MTK_InteractHand m_hand;
+	MTK_InteractiblesManager m_interactiblesManager;
 
 	MTK_Interactable m_currentInteractable;
 	RaycastHit m_currentHit;
 
-    public bool isAttracting { get { return m_joint.connectedBody; } private set{} }
+    public bool isAttracting { get { return m_joint.connectedBody || Target; } private set{} }
 	bool m_attract;
 	float m_initDistanceToTarget;
-	Vector3 m_lastForceApplied;
+	float m_lastForceApplied;
 	Vector3 m_lastPos;
 
 	MTK_Interactable Target
@@ -65,6 +68,8 @@ public class TelekinesisPointer : MonoBehaviour
 
 					m_currentInteractable = value;
 					m_outliner.OultineOn(m_currentInteractable);
+
+					m_inputManager.Haptic(1);
 				}
 			}			
 		}
@@ -73,36 +78,21 @@ public class TelekinesisPointer : MonoBehaviour
 	void Awake()
 	{
 		m_inputManager = GetComponentInParent<MTK_InputManager>();
-		m_inputManager.m_onGrip.AddListener(TriggerAttract);
+		m_inputManager.m_onTrigger.AddListener(TriggerAttract);
 
 		m_lastPos = transform.position;
 
 		m_hand = GetComponentInParent<MTK_InteractHand>();
 		m_hand.m_onTouchInteractable.AddListener(GrabIfTarget);
+
+		m_interactiblesManager = MTK_InteractiblesManager.Instance;
 	}
 
 	void Update()
 	{
 		if(!m_attract && !m_joint.connectedBody)
 		{
-			Ray newRay = new Ray(transform.position + transform.forward * m_minDistance, transform.forward);
-			// Update Target
-			if (Physics.Raycast(newRay, out m_currentHit, m_maxDistance- m_minDistance, LayerMask.GetMask("Interactibles")))
-			{
-				Target = m_currentHit.transform.GetComponent<MTK_Interactable>();
-
-				if(!Target)
-					Target = m_currentHit.transform.GetComponentInParent<MTK_Interactable>();
-
-				m_rayPreview.localScale = new Vector3(0.01f, 0.01f, m_maxDistance - m_minDistance);
-				m_rayPreview.localPosition = new Vector3(0, 0, m_minDistance + m_rayPreview.localScale.z / 2);
-			}
-			else
-			{
-				Target = null;
-				m_rayPreview.localScale = new Vector3(0.01f, 0.01f, m_maxDistance - m_minDistance);
-				m_rayPreview.localPosition = new Vector3(0, 0, m_minDistance + m_rayPreview.localScale.z / 2);
-			}
+			Target = m_interactiblesManager.GetClosestToView(transform, 15);
 		}
 
 		if(Target)
@@ -112,27 +102,27 @@ public class TelekinesisPointer : MonoBehaviour
 			// Detect movement to trigger attraction
 			if(m_attract)
 			{
-				Vector3 force = (transform.position - m_lastPos) * 20 * distanceScale; // Scale from 0 to 1
+				Vector3 force = (transform.position - m_lastPos) * 10 * distanceScale;
 
-				if(force.sqrMagnitude > 1)
-					force.Normalize();
+				if(force.magnitude > m_maxForce)
+					force = force.normalized * m_maxForce;
 				
-				if(force.magnitude > m_minMagnitudeToAttract && force.sqrMagnitude > m_lastForceApplied.sqrMagnitude)
+				if(force.magnitude > Mathf.Max(m_minMagnitudeToAttract, m_lastForceApplied))
 					Attract(force);
+
+				m_inputManager.Haptic(.01f);
 			}
 
 			// Apply various forces
 			if(m_joint.connectedBody)
 			{
 				JointDrive drive = m_joint.xDrive;
-				drive.positionSpring = 10 + (1 - distanceScale) * m_forceScale * (m_lastForceApplied.sqrMagnitude - m_minMagnitudeToAttract * m_minMagnitudeToAttract);
-				drive.positionDamper = 15 * distanceScale + 5;
+				drive.positionSpring = 10 + (1 - distanceScale) * m_forceScale * (m_lastForceApplied - m_minMagnitudeToAttract * m_minMagnitudeToAttract);
+				drive.positionDamper = 15 * distanceScale + 10;
 
 				m_joint.xDrive = m_joint.yDrive = m_joint.zDrive = drive;
 
 				m_joint.connectedBody.rotation = Quaternion.RotateTowards(m_joint.connectedBody.rotation, transform.rotation, (1 - distanceScale) * 2);
-			
-				m_rtpc.Value = m_joint.connectedBody.velocity.sqrMagnitude;
 			}
 		}
 
@@ -144,11 +134,23 @@ public class TelekinesisPointer : MonoBehaviour
 	{
 		if(input)
 		{
-			m_attract = true;
+			if(Target)
+			{
+				m_wHandPlay.Post(gameObject);
+
+				m_attract = true;
+				Target.Levitate = true;
+			}
 		}
 		else
 		{
+			m_wHandStop.Post(gameObject);
+
 			m_attract = false;
+			
+			if(Target)
+				Target.Levitate = false;
+
 			if(m_joint.connectedBody)
 				UnAttract();
 		}
@@ -156,7 +158,7 @@ public class TelekinesisPointer : MonoBehaviour
 
 	void Attract(Vector3 force)
 	{
-		m_wOnAttract.Post(Target.gameObject);
+		Target.Levitate = false;
 
 		m_joint.connectedBody = Target.GetComponent<Rigidbody>();
 		m_joint.connectedBody.AddForce(force.normalized * Mathf.Sqrt(force.magnitude) * m_initForceScale, ForceMode.Impulse);
@@ -165,16 +167,20 @@ public class TelekinesisPointer : MonoBehaviour
 		m_joint.connectedBody.drag = 0;
 
 		m_initDistanceToTarget = GetDistanceToTarget();
-		m_lastForceApplied = force;
+		m_lastForceApplied = force.magnitude;
+
+		m_wObjectPlay.Post(Target.gameObject);
 	}
 
 	void UnAttract()
 	{
+		m_wObjectStop.Post(Target.gameObject);
+
 		m_joint.connectedBody.useGravity = true;
 		m_joint.connectedBody.drag = 0;
 
 		m_joint.connectedBody = null;
-		m_lastForceApplied = Vector3.zero;
+		m_lastForceApplied = 0;
 
 		Target = null;
 	}
@@ -184,13 +190,12 @@ public class TelekinesisPointer : MonoBehaviour
 		if(m_joint.connectedBody)
 		{
 			if(m_joint.connectedBody.gameObject == input.gameObject)
-			{
-				for (int i = 0; i < m_wOnGrab.Length; i++)
-				{
-					m_wOnGrab[i].Post(Target.gameObject);
-				}
-				
+			{				
 				m_inputManager.Haptic(1);
+
+				m_wObjectGrabbed.Post(m_joint.gameObject);
+				m_wObjectStop.Post(m_joint.gameObject);
+				m_wHandStop.Post(gameObject);
 
 				input.transform.rotation = transform.rotation;
 				input.transform.position = transform.position;

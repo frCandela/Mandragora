@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Valve.VR;
 
 public class MTK_InteractHand : MonoBehaviour
@@ -10,17 +11,19 @@ public class MTK_InteractHand : MonoBehaviour
 
     [Header("Status")]
     [SerializeField] public MTK_Interactable m_grabbed = null;
-    [SerializeField] public bool triggerPressed = false;
-    [SerializeField] public bool gripPressed = false;
+    [SerializeField] public bool m_grabPressed = false;
 
     [Header("Events")]
     public UnityEventMTK_Interactable m_onTouchInteractable;
     public UnityEventMTK_Interactable m_onUnTouchInteractable;
+    public UnityEventBool m_onUseFail;
 
     private List<MTK_Interactable> m_objectsInTrigger = new List<MTK_Interactable>(3);
     private MTK_Setup m_setup;
     private MTK_InputManager m_inputManager;
 
+
+    public MTK_InputManager inputManager { get { return m_inputManager; } }
     private MTK_Interactable m_closest;
     MTK_Interactable Closest
     {
@@ -32,14 +35,12 @@ public class MTK_InteractHand : MonoBehaviour
         }
     }
 
+
     private void Start()
     {
         m_setup = FindObjectOfType<MTK_Manager>().activeSetup;
 
         m_inputManager = GetComponentInParent<MTK_InputManager>();
-        m_inputManager.m_onTrigger.AddListener(OnTrigger);
-        m_inputManager.m_onGrip.AddListener(OnGrip);
-        m_inputManager.m_onPad.AddListener(OnPad);
 
         if(m_outliner)
         {
@@ -53,63 +54,57 @@ public class MTK_InteractHand : MonoBehaviour
         m_closest = GetClosestInteractable();
     }
 
-    void OnTrigger(bool input)
+    public void TryGrab(bool input)
     {
-        triggerPressed = input;
+        if( input)
+        {
+            Grab(m_closest);            
+        }
+        else
+        {
+            Release();
+        }
+
+        m_grabPressed = input;
+    }
+
+    public void TryUse(bool input)
+    {
         if(m_grabbed)
             m_grabbed.Use(input);
         else if(m_closest)
             m_closest.Use(input);
-    }
-    void OnGrip(bool input)
-    {
-        gripPressed = input;
-        if (input)
-        {
-            if (m_closest)
-            { 
-                if(m_closest.isGrabbable)
-                {
-                    m_closest.Grab(input);
-                    Grab(m_closest);
-                }
-            }
-        }
         else
-        {
-            if(m_grabbed)
-            {
-                m_grabbed.Grab(input);
-                Release();
-            }
-        }
+            m_onUseFail.Invoke(input);
     }
 
-    void OnPad(bool input)
-    {
-        // Implement TP
-    }
-
-    private void OnJointBreak(float breakForce)
+    void OnJointBreak(float breakForce)
     {
         if (m_grabbed)
             Release();
     }
 
-    public void Grab( MTK_Interactable obj)
+    public void Grab(MTK_Interactable obj)
     {
-        if( obj.jointType.Used())
-            obj.jointType.RemoveJoint();
+        if(m_closest)
+        {
+            obj.Grab(true);
 
-        obj.jointType.onJointBreak.AddListener(Release);
-        obj.jointType.JoinWith(gameObject);
-        m_grabbed = obj;
+            if (obj.jointType.Used())
+                obj.jointType.RemoveJoint();
+
+            obj.jointType.onJointBreak.AddListener(Release);
+            obj.jointType.JoinWith(gameObject);
+            m_grabbed = obj;
+        }
     }
 
     void Release()
     {
         if(m_grabbed)
         {
+            m_grabbed.Grab(false);
+
             m_grabbed.jointType.onJointBreak.RemoveListener(Release);
             m_grabbed.jointType.RemoveJoint();
             Rigidbody rb = m_grabbed.GetComponent<Rigidbody>();
