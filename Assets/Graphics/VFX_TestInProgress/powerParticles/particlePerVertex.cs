@@ -22,7 +22,7 @@ public class particlePerVertex : MonoBehaviour {
 	public Vector2 bMinMaxNoiseAmp = new Vector2(0.01f, 1.0f);
 	public Vector2 bMinMaxNoiseFreq = new Vector2(0.1f, 10.0f);
 
-	public GoEvent initEvent;
+	// public GoEvent initEvent;
 	private ParticleSystem PS;
 	private ParticleSystem.Particle[] particles;
 	private Mesh mesh;
@@ -37,7 +37,7 @@ public class particlePerVertex : MonoBehaviour {
 	void Start () {
 
 		// Setup Event
-		initEvent.AddListener(InitializePS);
+		// initEvent.AddListener(InitializePS);
 
 		// Setup Particle System
 		PS = this.GetComponent<ParticleSystem>();
@@ -52,7 +52,7 @@ public class particlePerVertex : MonoBehaviour {
 		var shape = PS.shape;
 		shape.enabled = false;
 
-		initEvent.Invoke(sourceMesh); // JUST FOR DEMO
+		// initEvent.Invoke(sourceMesh); // JUST FOR DEMO
 
 	}
 	

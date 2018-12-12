@@ -568,16 +568,31 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 33139759368360112, guid: 4c7f9cfbce7c40047944962a6635d609,
-        type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 1330264050}
     - target: {fileID: 23166210055090068, guid: 4c7f9cfbce7c40047944962a6635d609,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2115126473}
+    - target: {fileID: 33139759368360112, guid: 4c7f9cfbce7c40047944962a6635d609,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1330264050}
+    - target: {fileID: 114892719006468626, guid: 4c7f9cfbce7c40047944962a6635d609,
+        type: 2}
+      propertyPath: sensitivityY
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114892719006468626, guid: 4c7f9cfbce7c40047944962a6635d609,
+        type: 2}
+      propertyPath: sensitivityX
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114361208692257778, guid: 4c7f9cfbce7c40047944962a6635d609,
+        type: 2}
+      propertyPath: forwardForce
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
   m_IsPrefabAsset: 0
@@ -590,7 +605,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4404121820861072, guid: 883036da11103fe4db84971637b3d36d, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1
+      value: -0.69
       objectReference: {fileID: 0}
     - target: {fileID: 4404121820861072, guid: 883036da11103fe4db84971637b3d36d, type: 2}
       propertyPath: m_LocalPosition.y

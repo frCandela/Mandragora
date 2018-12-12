@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 23095353788109778}
   - component: {fileID: 114860931992194082}
   - component: {fileID: 114813179257727342}
-  - component: {fileID: 114890217064951216}
   m_Layer: 0
   m_Name: constellationStar
   m_TagString: Untagged
@@ -114,15 +113,3 @@ MonoBehaviour:
     _collection:
     - {fileID: 1831166273825440}
   _assetGuid: f5b28966941390743a2bc5555d97e5b7
---- !u!114 &114890217064951216
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1831166273825440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ffaff4008903a240a5bfca4fa621c23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationVector: {x: 0, y: 0, z: 0}
