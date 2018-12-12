@@ -1,15 +1,17 @@
-﻿Shader "Custom/grabbableOutlineShader"
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Custom/grabbableOutlineShader"
 {
 	Properties
 	{
 		_Color("Color", Color) = (1, 1, 1, 1)
 		_Luminosity ("Luminosity", float) = 1
-		_OutlineExtrusion("Outline Extrusion", float) = 0
-		_OutlineColor("Outline Color", Color) = (0, 0, 0, 1)
+		_OutlineExtrusion ("Outline Extrusion", float) = 0.07
+		_MaxFadeDist ("Maximum Fade Distance", float) = 1
 		_Speed ("Outline Speed", float) = 1
-		_NoiseIntensity ("Outline Noise Intensity", float) = 1
-		_NoisePow ("Noise Power", float) = 1
-		_NoiseFreq ("Noise Frequency", float) = 1
+		_NoiseIntensity ("Outline Noise Intensity", float) = 1008
+		_NoisePow ("Noise Power", float) = 0.5
+		_NoiseFreq ("Noise Frequency", float) = 0.03
 	}
 
 	CGINCLUDE
@@ -26,6 +28,7 @@
 			{
 				float4 pos : SV_POSITION;
 				float4 color : COLOR;
+				float fadeDist : TEXCOORD0;
 			};
 
 		ENDCG
@@ -106,30 +109,44 @@
 			// Properties
 			float4 _Color;
 			float _OutlineExtrusion, _Speed, _NoiseIntensity;
-			float _Luminosity, _NoiseFreq, _NoisePow;
+			float _Luminosity, _NoiseFreq, _NoisePow, _MaxFadeDist;
 
 
 			vertexOutput vert(vertexInput input)
 			{
 				vertexOutput output;
 
-				float4 localPos = input.vertex;
-				float moyennePos = (localPos.x + localPos.y + localPos.z);
+				// store different positions
+				float4 worldPivot = mul(unity_ObjectToWorld, float4(0,0,0,1));
+				float4 worldPos = mul(unity_ObjectToWorld, input.vertex);
+				float4 worldLocalPos = worldPos - worldPivot;
+				float3 worldNormal = UnityObjectToWorldNormal(input.normal).xyz;
+
+				// Compute noise
+				float moyennePos = (worldLocalPos.x + worldLocalPos.y + worldLocalPos.z);
 				float fraction = frac(_Time.y * _Speed + cos(moyennePos * _NoiseFreq) * _NoiseIntensity);
 				fraction = abs(fraction - 0.5) * 2;
 				fraction = pow(fraction, _NoisePow);
-				float3 offset = (input.normal * _OutlineExtrusion * fraction);
-				localPos.xyz += offset;
-				
+				// apply noise
+				float3 offset = (worldNormal * _OutlineExtrusion * fraction);
+				float offsetDist = length(offset);
+				worldLocalPos.xyz += offset;
+
+				// Set final position
+				float4 localPos = mul(unity_WorldToObject, worldLocalPos + worldPivot);
 				output.pos = UnityObjectToClipPos(localPos);
+
 				output.color = _Color * _Luminosity;
+				output.fadeDist = 1 - saturate(offsetDist / _OutlineExtrusion * _MaxFadeDist);
 
 				return output;
 			}
 
 			float4 frag(vertexOutput input) : COLOR
 			{
-				return input.color;
+				fixed4 col = input.color;
+				col.a = input.fadeDist;
+				return col;
 			}
 
 			ENDCG
