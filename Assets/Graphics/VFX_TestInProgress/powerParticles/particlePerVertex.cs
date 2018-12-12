@@ -52,6 +52,8 @@ public class particlePerVertex : MonoBehaviour {
 		var shape = PS.shape;
 		shape.enabled = false;
 
+		initEvent.Invoke(sourceMesh); // JUST FOR DEMO
+
 	}
 	
 	// Update is called once per frame

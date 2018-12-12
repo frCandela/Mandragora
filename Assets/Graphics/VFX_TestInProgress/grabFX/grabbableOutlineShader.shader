@@ -8,6 +8,8 @@
 		_OutlineColor("Outline Color", Color) = (0, 0, 0, 1)
 		_Speed ("Outline Speed", float) = 1
 		_NoiseIntensity ("Outline Noise Intensity", float) = 1
+		_NoisePow ("Noise Power", float) = 1
+		_NoiseFreq ("Noise Frequency", float) = 1
 	}
 
 	CGINCLUDE
@@ -104,7 +106,7 @@
 			// Properties
 			float4 _Color;
 			float _OutlineExtrusion, _Speed, _NoiseIntensity;
-			float _Luminosity;
+			float _Luminosity, _NoiseFreq, _NoisePow;
 
 
 			vertexOutput vert(vertexInput input)
@@ -113,8 +115,9 @@
 
 				float4 localPos = input.vertex;
 				float moyennePos = (localPos.x + localPos.y + localPos.z);
-				float fraction = frac(_Time.y * _Speed + cos(moyennePos) * _NoiseIntensity);
+				float fraction = frac(_Time.y * _Speed + cos(moyennePos * _NoiseFreq) * _NoiseIntensity);
 				fraction = abs(fraction - 0.5) * 2;
+				fraction = pow(fraction, _NoisePow);
 				float3 offset = (input.normal * _OutlineExtrusion * fraction);
 				localPos.xyz += offset;
 				
