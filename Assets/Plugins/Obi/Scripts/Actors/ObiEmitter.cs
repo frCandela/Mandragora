@@ -122,6 +122,11 @@ namespace Obi
             selfCollisions = true;
             distEnumerator = GetDistributionEnumerator();
             IEnumerator generation = Initialize();
+
+            if(!solver)
+            {
+                solver = FindObjectOfType<Obi.ObiSolver>();
+            }
             while (generation.MoveNext()) ;
         }
 

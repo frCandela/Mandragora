@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: 114222725593913876}
   - component: {fileID: 114873051299192930}
   - component: {fileID: 114866170328464232}
+  - component: {fileID: 114005540878918588}
   m_Layer: 10
   m_Name: Head
   m_TagString: MainCamera
@@ -478,7 +479,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1601149866171894
 GameObject:
   m_ObjectHideFlags: 1
@@ -711,7 +712,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1865334565926640
 GameObject:
   m_ObjectHideFlags: 1
@@ -790,7 +791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1922021750317462
 GameObject:
   m_ObjectHideFlags: 1
@@ -1905,6 +1906,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &114005540878918588
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1446208449898796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: 8b78b54c8e128764c87eca99f1211a85, type: 2}
 --- !u!114 &114007200460532456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2366,19 +2379,24 @@ MonoBehaviour:
   m_initForceScale: 5
   m_wObjectGrabbed:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: fc4e0550a83d1354880f0cf55a017700,
+      type: 2}
   m_wObjectPlay:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: dbe79cecd57351344ac7ee093040be27,
+      type: 2}
   m_wObjectStop:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 1657a674c4599e7499f7ec113cfcc76e,
+      type: 2}
   m_wHandPlay:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: c3d2d2373d382874480ef91b5752dad1,
+      type: 2}
   m_wHandStop:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: f82e34ab3521088409e4f7db84b7c0a6,
+      type: 2}
 --- !u!114 &114201195990583514
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3234,7 +3252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 583ae33bd15883c4ba76271e3fcb181e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeSetup: {fileID: 114814732575340876}
+  activeSetup: {fileID: 114495364992844328}
   setupSimulation: {fileID: 114814732575340876}
   setupSteamVR: {fileID: 114495364992844328}
 --- !u!114 &114409993023865810
@@ -3337,19 +3355,24 @@ MonoBehaviour:
   m_initForceScale: 5
   m_wObjectGrabbed:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: fc4e0550a83d1354880f0cf55a017700,
+      type: 2}
   m_wObjectPlay:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: dbe79cecd57351344ac7ee093040be27,
+      type: 2}
   m_wObjectStop:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 1657a674c4599e7499f7ec113cfcc76e,
+      type: 2}
   m_wHandPlay:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: c3d2d2373d382874480ef91b5752dad1,
+      type: 2}
   m_wHandStop:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: f82e34ab3521088409e4f7db84b7c0a6,
+      type: 2}
 --- !u!114 &114457056242842294
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3908,7 +3931,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90d1945bbd58b4cf98eb19621dd83cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleRenderers: []
+  particleRenderers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   blurRadius: 0.02
   thicknessCutoff: 0.4
   colorMaterial: {fileID: 2100000, guid: d16ca3f3b0ff44edb8bc98af8c286687, type: 2}
@@ -4203,19 +4229,24 @@ MonoBehaviour:
   m_initForceScale: 5
   m_wObjectGrabbed:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: fc4e0550a83d1354880f0cf55a017700,
+      type: 2}
   m_wObjectPlay:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: dbe79cecd57351344ac7ee093040be27,
+      type: 2}
   m_wObjectStop:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 1657a674c4599e7499f7ec113cfcc76e,
+      type: 2}
   m_wHandPlay:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: c3d2d2373d382874480ef91b5752dad1,
+      type: 2}
   m_wHandStop:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: f82e34ab3521088409e4f7db84b7c0a6,
+      type: 2}
 --- !u!114 &114793709611176148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4532,19 +4563,24 @@ MonoBehaviour:
   m_initForceScale: 5
   m_wObjectGrabbed:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: fc4e0550a83d1354880f0cf55a017700,
+      type: 2}
   m_wObjectPlay:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: dbe79cecd57351344ac7ee093040be27,
+      type: 2}
   m_wObjectStop:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 1657a674c4599e7499f7ec113cfcc76e,
+      type: 2}
   m_wHandPlay:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: c3d2d2373d382874480ef91b5752dad1,
+      type: 2}
   m_wHandStop:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: f82e34ab3521088409e4f7db84b7c0a6,
+      type: 2}
 --- !u!114 &114883954237585014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4653,7 +4689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 314ece4650f937f41a33079775124a93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardForce: 1
+  forwardForce: 0.3
 --- !u!114 &114960557867806074
 MonoBehaviour:
   m_ObjectHideFlags: 1

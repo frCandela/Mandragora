@@ -37,7 +37,7 @@ public abstract class ObiActor : MonoBehaviour, IObiSolverClient
 	public event System.EventHandler OnInitialized;
 
 	[SerializeProperty("Solver")]
-	[SerializeField] protected ObiSolver solver;
+	protected ObiSolver solver;
 
 	//[Range(0,1)]
 	[VisibleIf("SimulatingInLocalSpace")]
