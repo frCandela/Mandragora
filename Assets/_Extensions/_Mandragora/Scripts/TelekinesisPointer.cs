@@ -198,10 +198,11 @@ public class TelekinesisPointer : MonoBehaviour
 
 	void GrabIfTarget(MTK_Interactable input)
 	{
+		
 		if(m_joint.connectedBody)
 		{
 			if(m_joint.connectedBody.gameObject == input.gameObject)
-			{				
+			{
 				m_inputManager.Haptic(1);
 
 				m_wObjectGrabbed.Post(m_joint.gameObject);

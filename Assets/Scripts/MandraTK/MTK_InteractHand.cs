@@ -44,8 +44,8 @@ public class MTK_InteractHand : MonoBehaviour
 
         if(m_outliner)
         {
-            m_onTouchInteractable.AddListener(m_outliner.OultineOn);
-            m_onUnTouchInteractable.AddListener(m_outliner.OultineOff);
+            // m_onTouchInteractable.AddListener(m_outliner.OultineOn);
+            // m_onUnTouchInteractable.AddListener(m_outliner.OultineOff);
         }
     }
 
@@ -86,7 +86,7 @@ public class MTK_InteractHand : MonoBehaviour
 
     public void Grab(MTK_Interactable obj)
     {
-        if(m_closest)
+        if(obj)
         {
             obj.Grab(true);
 
@@ -96,6 +96,8 @@ public class MTK_InteractHand : MonoBehaviour
             obj.jointType.onJointBreak.AddListener(Release);
             obj.jointType.JoinWith(gameObject);
             m_grabbed = obj;
+
+            m_outliner.OultineOff(m_grabbed);
         }
     }
 
