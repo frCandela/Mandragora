@@ -190,16 +190,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   insideMesh: {fileID: 4300000, guid: a261d6d7772b06244a1e2445f747d5f2, type: 3}
   material: {fileID: 2100000, guid: 151af668eb18f3a4c8bb64b2d68a9f3c, type: 2}
+  effect: {fileID: 0}
   minHeight: 0
   centerHeight: 0.681
   maxHeight: 2.54
-  liquidHeight: 1.32
   containerClosed: 0
-  LiquidGameObject: {fileID: 114494266503143566, guid: 6babcb4eefb3a7e4a860730913bd17f6,
-    type: 2}
-  leakDistance: 0.05
-  speed: 1
-  volume: 1
+  m_rigidbody: {fileID: 0}
+  m_flowSpeed: 1
+  m_totalVolume: 1
+  m_currentVolume: 0
+  m_emitter: {fileID: 0}
   executionDelay: 0
   showDebugLines: 0
 --- !u!114 &114833636051069274

@@ -160,16 +160,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   insideMesh: {fileID: 4300000, guid: a261d6d7772b06244a1e2445f747d5f2, type: 3}
   material: {fileID: 2100000, guid: 33f4e8d100e5760499863ea077baee00, type: 2}
+  effect: {fileID: 0}
   minHeight: 0
   centerHeight: 0.681
   maxHeight: 2.54
-  liquidHeight: 1.32
   containerClosed: 0
-  LiquidGameObject: {fileID: 114494266503143566, guid: bb4b43d4e6473c04682bc9c98850fcf0,
-    type: 2}
-  leakDistance: 0.03
-  speed: 1
-  volume: 1
+  m_rigidbody: {fileID: 0}
+  m_flowSpeed: 1
+  m_totalVolume: 1
+  m_currentVolume: 0
+  m_emitter: {fileID: 0}
   executionDelay: 0
   showDebugLines: 0
 --- !u!114 &114433079688964336
@@ -188,6 +188,14 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onJointCreated:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  m_joint: {fileID: 0}
+  m_connectedGameobject: {fileID: 0}
+  m_rigidbody: {fileID: 0}
   breakForce: 1500
 --- !u!114 &114749696383725896
 MonoBehaviour:
@@ -201,22 +209,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGrabbable: 1
+  isDistanceGrabbable: 1
+  isDroppable: 1
   jointType: {fileID: 114433079688964336}
+  m_wOnUseStart:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
   m_onUseStart:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_onUseSop:
+  m_wOnUseStop:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
+  m_onUseStop:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  m_wOnGrabStart:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
   m_onGrabStart:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  m_wOnGrabStop:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
   m_onGrabSop:
     m_PersistentCalls:
       m_Calls: []

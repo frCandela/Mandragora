@@ -144,16 +144,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   insideMesh: {fileID: 4300000, guid: 4e08bb7018700f64c8947e4c118337c0, type: 3}
   material: {fileID: 2100000, guid: 151af668eb18f3a4c8bb64b2d68a9f3c, type: 2}
+  effect: {fileID: 0}
   minHeight: 0
   centerHeight: 0.5
   maxHeight: 1.57
-  liquidHeight: 1.57
   containerClosed: 0
-  LiquidGameObject: {fileID: 114494266503143566, guid: 6babcb4eefb3a7e4a860730913bd17f6,
-    type: 2}
-  leakDistance: 0.05
-  speed: 0.3
-  volume: 1
+  m_rigidbody: {fileID: 0}
+  m_flowSpeed: 1
+  m_totalVolume: 1
+  m_currentVolume: 0
+  m_emitter: {fileID: 0}
   executionDelay: 0
   showDebugLines: 1
 --- !u!114 &114141181528376726
@@ -190,7 +190,7 @@ MonoBehaviour:
   _referenceCollection:
     _collection:
     - {fileID: 1972552287025020}
-  _assetGuid: 03644209f3c7247458c546dcaaab05fe
+  _assetGuid: c01cfbc9299ebff439408bba999bd492
 --- !u!114 &114624777878226448
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _guid: 29ac1690-e25c-4480-a404-ee58a3fa8709
+  _guid: daf3b139-d31b-48ae-9af7-8b818fd38564
 --- !u!114 &114979876013139684
 MonoBehaviour:
   m_ObjectHideFlags: 1
