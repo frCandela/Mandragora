@@ -40,7 +40,9 @@ public class TelekinesisPointer : MonoBehaviour
 	RaycastHit m_currentHit;
 
     public bool isAttracting { get { return m_joint.connectedBody || Target; } private set{} }
-	bool m_attract;
+    public Rigidbody connectedBody { get { return m_joint.connectedBody; } }
+
+    bool m_attract;
 	float m_initDistanceToTarget;
 	float m_lastForceApplied;
 	Vector3 m_lastPos;
