@@ -117,17 +117,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sourceMesh: {fileID: 0}
   maxParticlesNumber: 50
-  particleSize: 0.5
+  particleSize: 0.1
   minMaxLerp: {x: 0.05, y: 0.15}
   bVelOffset: 0.091
-  bSlowFactor: 0.095
+  bSlowFactor: 0.05
   bMaxVelocity: 5
-  bMaxDistFromTarget: 1
-  bToTargetFactor: 6
-  bNoiseStrength: 0.3
-  bMinMaxDistNoiseThreshold: {x: 0.5, y: 3}
-  bMinMaxNoiseAmp: {x: 0.5, y: 3}
-  bMinMaxNoiseFreq: {x: 0.5, y: 3}
+  bMaxDistFromTarget: 6
+  bToTargetFactor: 2
+  bNoiseStrength: 0.1
+  bMinMaxDistNoiseThreshold: {x: 0, y: 1}
+  bMinMaxNoiseAmp: {x: 0.01, y: 1}
+  bMinMaxNoiseFreq: {x: 0.1, y: 10}
 --- !u!114 &114796261894661714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3918,12 +3918,12 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    minVertexDistance: 0.2
+    minVertexDistance: 0.01
     textureMode: 0
     ribbonCount: 10
     worldSpace: 1
     dieWithParticles: 0
-    sizeAffectsWidth: 0
+    sizeAffectsWidth: 1
     sizeAffectsLifetime: 0
     inheritParticleColor: 1
     generateLightingData: 0

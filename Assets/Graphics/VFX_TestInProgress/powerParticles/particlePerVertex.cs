@@ -4,13 +4,12 @@ using UnityEngine.Events;
 using UnityEngine;
 
 [System.Serializable]
-public class GoEvent : UnityEvent<GameObject> {}
 
 public class particlePerVertex : MonoBehaviour {
 
-	public GameObject sourceMesh; // JUST FOR DEMO
+	public GameObject sourceMesh;
 	public int maxParticlesNumber;
-	public float particleSize;
+	public float particleSize = 0.1f;
 	public Vector2 minMaxLerp = new Vector2(0.05f, 0.15f);
 	[Range(0.0f, 2.0f)] public float bVelOffset = 0.091f;
 	[Range(0f,0.5f)]public float bSlowFactor = 0.05f;
@@ -22,7 +21,6 @@ public class particlePerVertex : MonoBehaviour {
 	public Vector2 bMinMaxNoiseAmp = new Vector2(0.01f, 1.0f);
 	public Vector2 bMinMaxNoiseFreq = new Vector2(0.1f, 10.0f);
 
-	// public GoEvent initEvent;
 	private ParticleSystem PS;
 	private ParticleSystem.Particle[] particles;
 	private Mesh mesh;
@@ -35,9 +33,6 @@ public class particlePerVertex : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-		// Setup Event
-		// initEvent.AddListener(InitializePS);
 
 		// Setup Particle System
 		PS = this.GetComponent<ParticleSystem>();
@@ -87,15 +82,15 @@ public class particlePerVertex : MonoBehaviour {
 		
 	}
 
-	public void InitializePS (GameObject source) {
+	public void InitializePS () {
 		// Parent the effect to the target GameObject
 		this.transform.parent = sourceMesh.transform;
 		this.transform.localPosition = Vector3.zero;
 		this.transform.localRotation = Quaternion.identity;
 
 		// Setup mesh and wVertices[]
-		mesh = source.GetComponent<MeshFilter>().mesh;
-		source.GetComponent<MeshRenderer>().enabled = false;
+		mesh = sourceMesh.GetComponent<MeshFilter>().mesh;
+		//sourceMesh.GetComponent<MeshRenderer>().enabled = false;
 
 		int nbParticles = mesh.vertices.Length; // variables different for each particle
 
@@ -108,8 +103,8 @@ public class particlePerVertex : MonoBehaviour {
 		noiseAmp = new float[nbParticles];
 
 		// Creates particles
-		if(nbParticles >= 50) Debug.LogError(nbParticles + " verts for new " + source.name + ". CPU said  :'(");
-		else print(nbParticles + " verts for new " + source.name);
+		if(nbParticles >= 50) Debug.LogError(nbParticles + " verts for new " + sourceMesh.name + ". CPU said  :'(");
+		else print(nbParticles + " verts for new " + sourceMesh.name);
 
 		PS.Emit(nbParticles);
 
@@ -130,6 +125,10 @@ public class particlePerVertex : MonoBehaviour {
 		PS.SetParticles(particles, nbParticles);
 		
 		
+	}
+
+	public void ClearPS() {
+		PS.Clear();
 	}
 
 	public Vector3 ApplyNoise (Vector3 position, float distFromT, float noiseFactor,  int i) {
