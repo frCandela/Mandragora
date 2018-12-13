@@ -7,18 +7,26 @@ public abstract class MTK_JointType : MonoBehaviour
 {
     public UnityEvent onJointBreak = new UnityEvent();
 
+    public UnityEventBool onJointCreated = new UnityEventBool();
+
     [SerializeField] protected Joint m_joint;
     [SerializeField] protected GameObject m_connectedGameobject;
 
     public Joint joint { get { return m_joint; } }
     public GameObject connectedGameobject { get { return m_connectedGameobject; } }
 
-    public virtual bool JoinWith(GameObject other)
+    public bool JoinWith(GameObject other)
     {
-        m_connectedGameobject = other;
-        return true;
+        if(JointWithOverride(other))
+        {
+            onJointCreated.Invoke(true);
+            m_connectedGameobject = other;
+            return true;
+        }
+        return false;
     }
 
+    protected abstract bool JointWithOverride(GameObject other);
 
     public virtual bool RemoveJoint()
     {

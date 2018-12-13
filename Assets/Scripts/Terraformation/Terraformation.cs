@@ -42,10 +42,13 @@ public class Terraformation : MonoBehaviour
         }
     }
 
+    public Color m_color;
+
     Ray m_ray = new Ray();
     void Update()
     {
         Vector3[] vertices = m_mesh.vertices;
+        Color[] colors = new Color[vertices.Length];
 
         float scaledMinDia = transform.localScale.x * m_minDiameter;
         float scaledMaxDia = transform.localScale.x * m_maxDiameter;
@@ -71,10 +74,11 @@ public class Terraformation : MonoBehaviour
                     vertices[i] = (Mathf.Max(scaledMinDia, magnitude - m_speed * scaleFactor) * m_normals[i]) / transform.localScale.x;
                 }
             }
+            colors[i] = m_color;
         }
 
         m_mesh.vertices = vertices;
-
+        m_mesh.colors = colors;
         m_mesh.RecalculateNormals();
 
         sphereCol.transform.position = prevPos;

@@ -22,7 +22,8 @@
 		struct Input {
 			float3 localPos;
 			float2 uv_MainTex;
-			float3 worldPos;
+			float3 worldPos; 
+			fixed4 color : COLOR;
 		};
 
 		fixed4 _CoreColor;
@@ -53,6 +54,7 @@
 			// Albedo comes from a texture tinted by color/ _MaxDiameter
 			float radius = length(IN.localPos);
 			o.Albedo = mix(_CoreColor, _SurfaceColor, (radius - _MinDiameter) / (_MaxDiameter - _MinDiameter));
+			o.Albedo = IN.color;
 		}
 		ENDCG
 	}
