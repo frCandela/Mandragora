@@ -1593,8 +1593,8 @@ Camera:
   m_GameObject: {fileID: 1195490673449122}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -1633,8 +1633,8 @@ Camera:
   m_GameObject: {fileID: 1135964977552508}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -2897,7 +2897,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_outliner: {fileID: 114952102814798264}
   m_grabbed: {fileID: 0}
-  m_grabPressed: 0
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -3137,7 +3136,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_outliner: {fileID: 114952102814798264}
   m_grabbed: {fileID: 0}
-  m_grabPressed: 0
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -3283,6 +3281,7 @@ MonoBehaviour:
   m_joint: {fileID: 153552141990123824}
   m_outliner: {fileID: 114952102814798264}
   m_fxManager: {fileID: 114703303675938484}
+  m_interactHand: {fileID: 114270107805446332}
   m_minDistance: 0.4
   m_maxDistance: 10
   m_minMagnitudeToAttract: 0.1
@@ -3334,6 +3333,7 @@ MonoBehaviour:
   m_joint: {fileID: 153971409797560804}
   m_outliner: {fileID: 114952102814798264}
   m_fxManager: {fileID: 114008033222498460}
+  m_interactHand: {fileID: 114354881725845558}
   m_minDistance: 0.4
   m_maxDistance: 10
   m_minMagnitudeToAttract: 0.1
@@ -3409,6 +3409,7 @@ MonoBehaviour:
   m_joint: {fileID: 153581300082899034}
   m_outliner: {fileID: 114952102814798264}
   m_fxManager: {fileID: 114327023916085962}
+  m_interactHand: {fileID: 114528052225663008}
   m_minDistance: 0.4
   m_maxDistance: 10
   m_minMagnitudeToAttract: 0.1
@@ -3611,7 +3612,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_outliner: {fileID: 114952102814798264}
   m_grabbed: {fileID: 0}
-  m_grabPressed: 0
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -4300,7 +4300,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_outliner: {fileID: 114952102814798264}
   m_grabbed: {fileID: 0}
-  m_grabPressed: 0
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -5175,6 +5174,7 @@ MonoBehaviour:
   m_joint: {fileID: 153482181550665662}
   m_outliner: {fileID: 114952102814798264}
   m_fxManager: {fileID: 114630018895291766}
+  m_interactHand: {fileID: 114794586071720708}
   m_minDistance: 0.4
   m_maxDistance: 10
   m_minMagnitudeToAttract: 0.1

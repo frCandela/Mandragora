@@ -1459,8 +1459,8 @@ Camera:
   m_GameObject: {fileID: 1446208449898796}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -1499,8 +1499,8 @@ Camera:
   m_GameObject: {fileID: 1148379129432364}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -1955,7 +1955,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_outliner: {fileID: 114287807942026008}
   m_grabbed: {fileID: 0}
-  m_grabPressed: 0
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -2382,6 +2381,7 @@ MonoBehaviour:
   m_joint: {fileID: 153971409797560804, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
   m_outliner: {fileID: 114287807942026008}
   m_fxManager: {fileID: 114793709611176148}
+  m_interactHand: {fileID: 114222850113798352}
   m_minDistance: 0.4
   m_maxDistance: 10
   m_minMagnitudeToAttract: 0.1
@@ -2482,7 +2482,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_outliner: {fileID: 114287807942026008}
   m_grabbed: {fileID: 0}
-  m_grabPressed: 0
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -3369,6 +3368,7 @@ MonoBehaviour:
   m_joint: {fileID: 153581300082899034, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
   m_outliner: {fileID: 114287807942026008}
   m_fxManager: {fileID: 114307681263772548}
+  m_interactHand: {fileID: 114027338159601920}
   m_minDistance: 0.4
   m_maxDistance: 10
   m_minMagnitudeToAttract: 0.1
@@ -3408,7 +3408,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_outliner: {fileID: 114287807942026008}
   m_grabbed: {fileID: 0}
-  m_grabPressed: 0
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -3985,7 +3984,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_outliner: {fileID: 114287807942026008}
   m_grabbed: {fileID: 0}
-  m_grabPressed: 0
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -4265,6 +4263,7 @@ MonoBehaviour:
   m_joint: {fileID: 153482181550665662, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
   m_outliner: {fileID: 114287807942026008}
   m_fxManager: {fileID: 114849768293538468}
+  m_interactHand: {fileID: 114457056242842294}
   m_minDistance: 0.4
   m_maxDistance: 10
   m_minMagnitudeToAttract: 0.1
@@ -4554,7 +4553,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90d1945bbd58b4cf98eb19621dd83cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleRenderers: []
+  particleRenderers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   blurRadius: 0.02
   thicknessCutoff: 0.42
   colorMaterial: {fileID: 2100000, guid: d16ca3f3b0ff44edb8bc98af8c286687, type: 2}
@@ -4596,6 +4598,7 @@ MonoBehaviour:
   m_joint: {fileID: 153422111175143976}
   m_outliner: {fileID: 114287807942026008}
   m_fxManager: {fileID: 114109227029410238}
+  m_interactHand: {fileID: 114712634209390374}
   m_minDistance: 0.4
   m_maxDistance: 10
   m_minMagnitudeToAttract: 0.1
