@@ -49,6 +49,7 @@ public class Constellation : MonoBehaviour
 		return false;
 	}
 
+	[ContextMenu("Complete")]
 	void Complete()
 	{
 		foreach (var star in m_stars)

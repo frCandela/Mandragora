@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33747171681404946}
   - component: {fileID: 23629241118572136}
   - component: {fileID: 135197294571713464}
-  - component: {fileID: 114512036136398856}
   - component: {fileID: 54864943974952028}
   - component: {fileID: 114805647303274252}
   - component: {fileID: 114807444500058554}
@@ -88,7 +87,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1864014691922950}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 4300000, guid: ae1ae8238e76b6c4a9aa30ea9975564c, type: 3}
 --- !u!54 &54864943974952028
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -104,22 +103,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114512036136398856
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1864014691922950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e7dd36b66d1d11468a0b641a11900ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sphereCol: {fileID: 0}
-  m_speed: 0.1
-  m_minDiameter: 0.6
-  m_maxDiameter: 1
-  m_color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114805647303274252
 MonoBehaviour:
   m_ObjectHideFlags: 1
