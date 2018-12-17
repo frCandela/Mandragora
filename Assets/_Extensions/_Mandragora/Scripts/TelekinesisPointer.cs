@@ -100,7 +100,12 @@ public class TelekinesisPointer : MonoBehaviour
 			}
 			else if(!m_joint.connectedBody)
 			{
-				Target = m_interactiblesManager.GetClosestToView(transform, 15);
+				MTK_Interactable potentialTarget = m_interactiblesManager.GetClosestToView(transform, 15);
+
+				if(potentialTarget && potentialTarget.m_grabbed)
+					potentialTarget = null;
+				
+				Target = potentialTarget;
 			}
 		}
 		
