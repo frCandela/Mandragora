@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Constellation : MonoBehaviour
 {
 	[SerializeField] float m_timeToMove;
+	[SerializeField] float m_animationAmplitude = 5;
 	[SerializeField] UnityEvent m_onCompleted;
 	
 	ConstellationStar[] m_stars;
@@ -60,10 +61,15 @@ public class Constellation : MonoBehaviour
 
 	IEnumerator goToCenter()
 	{
+		float lenght = m_starsTransform.Length/10f;
+
 		for (float t = 0; t < 1; t += Time.fixedDeltaTime / m_timeToMove)
 		{
 			for (int i = 0; i < m_starsTransform.Length; i++)
-				m_starsTransform[i].localPosition = Vector3.Lerp(m_starsInitPosition[i], Vector3.zero, t);
+			{
+				m_starsTransform[i].localPosition = Vector3.Lerp(m_starsInitPosition[i], Vector3.zero, t)
+				+ (new Vector3(Mathf.PerlinNoise(t, i/lenght), Mathf.PerlinNoise(t, i/lenght + 1f/3), Mathf.PerlinNoise(t, i/lenght + 2f/3)) - Vector3.one/2) * m_animationAmplitude * Mathf.Sin(t * Mathf.PI);
+			}
 
 			yield return new WaitForEndOfFrame();
 		}
