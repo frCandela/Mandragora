@@ -6,7 +6,6 @@
 		_RampTex ("Ramp Texture", 2D) = "white" {}
 		_ShadowRampTex ("Shadow Ramp Texture", 2D) = "white" {}
 		_Slider ("slider", float) = 0
-		_EmissiveTex ("Emissive Texture", 2D) = "black" {}
 		_EmissiveColor ("Emissive Color", Color) = (0,0,0,0)
 		_EmissionIntensity ("Emission Intensity", float) = 1
 	}
@@ -88,7 +87,6 @@
 			float2 uv_MainTex;
 		};
 
-		sampler2D _EmissiveTex;
 		fixed4 _Color;
 		float4 _EmissiveColor;
 		float _EmissionIntensity;
@@ -103,11 +101,13 @@
 		void surf (Input IN, inout MandragoraSurfaceOutput o) {
 			// Albedo comes from a texture tinted by color
 			fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
-			o.Albedo = c.rgb;
+			//o.Albedo = c.rgb;
 
 			//Emissive
-			float3 emissive = tex2D(_EmissiveTex, IN.uv_MainTex).rgb * _EmissiveColor;
-			o.Emission = emissive * _EmissionIntensity;
+			float3 emissive = _EmissiveColor * _EmissionIntensity;
+			o.Albedo = emissive + c.rgb;
+
+			o.Emission = emissive;
 
 			// Metallic and smoothness come from slider variables
 			o.Alpha = c.a;
