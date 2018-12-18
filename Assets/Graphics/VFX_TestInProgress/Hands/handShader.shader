@@ -1,9 +1,9 @@
-﻿Shader "Unlit/handShader"
+﻿Shader "Mandragora/handShader"
 {
 	Properties
 	{
 		_LimitBloom ("Limitation Bloom", Range(0,1)) = 0
-		_StarsTex ("Stars Texture", 2D) = "white" {}
+		_StarsCubeMap ("Stars CubeMap", Cube) = "" {}
 		_FlowTex ("Flow Textures", 2D) = "white" {}
 		_Tiling ("Textures Tiling", float) = 1
 		_FlowIntensity ("Flow Intensity", float) = 1
@@ -14,6 +14,7 @@
 		_VertexColorPower ("Vertex Color Power", float) = 1
 		_FadeColor ("FadeColor", Color) = (1,1,1,1)
 		_FadeOpacity ("Fade Opacity", Range(0,1)) = 1
+		_FresnelPow ("Fresnel Power", float) = 1
 		_FresnelFlowIntensity ("Fresnel Flow Intensity", float) = 1
 		_ReflexionIntensity ("Reflexion Intensity", Range(0,1)) = 0.1
 		_ReflexionPower ("Reflexion Power", float) = 2
@@ -42,15 +43,18 @@
 			{
 				float4 vertex : POSITION;
 				float3 color : COLOR;
+				//float3 normal: NORMAL;
 			};
 
 			struct v2g
 			{
 				float4 vertex : SV_POSITION;
+				//float3 normal : NORMAL;
 				float3 flatNormal : TEXCOORD3;
 				float3 color : COLOR;
 				float3 worldVertex : TEXCOORD2;
 				float4 screenPos : TEXCOORD1;
+				//float3 worldReflection : TEXCOORD4;
 			};
 
 			struct g2f
@@ -59,7 +63,9 @@
 			};
 
 			sampler2D _StarsTex, _FlowTex;
-			float _Tiling, _FlowIntensity, _VertexColorMultiply, _VertexColorPower, _FresnelFlowIntensity, _FadeOpacity;
+			samplerCUBE _StarsCubeMap;
+			float _Tiling, _FlowIntensity, _VertexColorMultiply, _VertexColorPower;
+			float _FresnelFlowIntensity, _FresnelPow, _FadeOpacity;
 			float _ReflexionIntensity, _ReflexionPower;
 			float _LimitBloom;
 			fixed4 _StarsColor1, _StarsColor2, _StarsColor3, _FadeColor;
@@ -72,6 +78,9 @@
 				o.screenPos = ComputeScreenPos(o.vertex);
 				o.color = v.color;
 				o.flatNormal = float3(0,0,0);
+				//o.normal = UnityObjectToWorldNormal(v.normal);
+				//float3 worldViewDir = normalize(UnityWorldSpaceViewDir(o.worldVertex));
+				//o.worldReflection = reflect(-worldViewDir, o.normal);
 				return o;
 			}
 
@@ -97,6 +106,37 @@
 				stream.Append(g0);
 				stream.Append(g1);
 				stream.Append(g2);
+			}
+
+
+			float3 rotate4x4(float3 source, float3 angles) {
+				float radX = radians(angles.x);
+				float radY = radians(angles.y);
+				float radZ = radians(angles.z);
+				float sinX = sin(radX);
+				float cosX = cos(radX);
+				float sinY = sin(radY);
+				float cosY = cos(radY);
+				float sinZ = sin(radZ);
+				float cosZ = cos(radZ);
+
+				float3 xAxis = float3(
+					cosY * cosZ,
+					cosX * sinZ + sinX * sinY * cosZ,
+					sinX * sinZ - cosX * sinY * cosZ
+				);
+				float3 yAxis = float3(
+					-cosY * sinZ,
+					cosX * cosZ - sinX * sinY * sinZ,
+					sinX * cosZ + cosX * sinY * sinZ
+				);
+				float3 zAxis = float3(
+					sinY,
+					-sinX * cosY,
+					cosX * cosY
+				);
+
+				return xAxis * source.x + yAxis * source.y + zAxis * source.z;
 			}
 			
 
@@ -125,21 +165,25 @@
 				float3 lightReflexion = NdotH * _LightColor0.rgb * _ReflexionIntensity * redVertexColor;
 				lightReflexion *= facing;
 
+				
+
 
 				// Calculate Fresnel that multiplw with Flow Texture
 				float fresnel = dot(toCam, flatNormals);
-				fresnel = saturate(1 - fresnel);
+				fresnel = pow(saturate(1 - fresnel), _FresnelPow);
 				fresnel *= _FresnelFlowIntensity;
 
 				// Get Screen UVs
 				float2 screenUv = (i.data.screenPos.xy/i.data.screenPos.w) * _Tiling;
 
 				// Get FlowTex with fresnel Multiply
-				float3 flowTex = tex2D(_FlowTex, screenUv * (1 + fresnel)).rgb;
+				float3 flowTex = tex2D(_FlowTex, screenUv * fresnel).rgb;
+				flowTex *= _FlowIntensity;
 
-				// Get Stars Texture with flow Offset
-				float2 starsUvOffset = flowTex.rg * _FlowIntensity;
-				float3 starsTex = tex2D(_StarsTex, screenUv + starsUvOffset).rgb;
+				// Apply rotation offset
+				float3 cubeSampleVector = rotate4x4(toCam, flowTex);
+				// Sample Cubemap
+				float3 starsTex = texCUBE(_StarsCubeMap, cubeSampleVector).rgb;
 
 				// Process FadeColor
 				float3 fadeColor = float3(_FadeColor.r * flowTex.b,
@@ -149,12 +193,17 @@
 
 				// Noise 3D
 				float3 Noise = float3(0,0,0);
+				Noise.x = sin(worldPosition.y*10 + _Time.z) * cos(worldPosition.z*2 + _Time.y);
+				Noise.y = sin(worldPosition.z*5 + _Time.z) * cos(worldPosition.x + _Time.y);
+				Noise.z = sin(worldPosition.x*20 + _Time.z) * cos(worldPosition.y*1.5 + _Time.y);
+				Noise = Noise*0.5 + 0.5;
+				Noise = pow(Noise, 3);
 
 				// Apply All colors
 				float3 starsCol = float3(0,0,0);
-				starsCol += _StarsColor1.rgb * starsTex.r;
-				starsCol += _StarsColor2.rgb * starsTex.g;
-				starsCol += _StarsColor3.rgb * starsTex.b;
+				starsCol += _StarsColor1.rgb * starsTex.r * Noise.x;
+				starsCol += _StarsColor2.rgb * starsTex.g * Noise.y;
+				starsCol += _StarsColor3.rgb * starsTex.b * Noise.z;
 				// saturate and add the fade color that will glow
 				starsCol = saturate(starsCol);
 				starsCol += finalFade * _FadeOpacity;
@@ -166,6 +215,8 @@
 				col.rgb = starsCol;
 				col.rgb += lightReflexion;
 				col.rgb = lerp(saturate(col.rgb), col.rgb, _LimitBloom);
+
+				//col.rgb = fresnel;
 
 				col.a = redVertexColor;
 				
