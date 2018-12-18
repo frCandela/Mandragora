@@ -19,7 +19,7 @@ public class Teleporter : MonoBehaviour {
 
 	RaycastHit m_rayHit;
 	MTK_TPZone m_targetZone;
-	Vector3 m_targetPos;
+	Transform m_targetTransform;
 	MTK_TPZone TargetZone
 	{
 		get
@@ -37,7 +37,7 @@ public class Teleporter : MonoBehaviour {
 
 				if(m_targetZone)
 				{
-					m_targetPos = m_targetZone.GetDestinationPos();
+					m_targetTransform = m_targetZone.transform;
 					m_targetZone.DisplayZone = true;
 				}
 			}
@@ -90,7 +90,8 @@ public class Teleporter : MonoBehaviour {
 	private void MoveMtkManager()
 	{
 		m_sound.Post(gameObject);
-		m_mtkManager.transform.position = m_targetPos;
+		m_mtkManager.transform.position = m_targetTransform.position;
+		m_mtkManager.transform.rotation = m_targetTransform.rotation;
 		MTK_Fade.Start(Color.clear, m_fadeEnd, () => m_available = true);
 	}
 }

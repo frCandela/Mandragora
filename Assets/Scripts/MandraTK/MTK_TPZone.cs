@@ -18,9 +18,4 @@ public class MTK_TPZone : MonoBehaviour
 	{
 		m_animator = GetComponent<Animator>();
 	}
-
-	public Vector3 GetDestinationPos()
-	{
-		return transform.position;
-	}
 }
