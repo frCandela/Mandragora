@@ -49,14 +49,15 @@ Shader "Custom/Outline Fill" {
 
       struct v2f {
         float4 position : SV_POSITION;
-        fixed4 color : COLOR;
+        fixed4 offset : COLOR0;
         UNITY_VERTEX_OUTPUT_STEREO
       };
 
       uniform fixed4 _OutlineColor;
       uniform float _OutlineWidth;
 
-      v2f vert(appdata input) {
+      v2f vert(appdata input)
+      {
         v2f output;
 
         UNITY_SETUP_INSTANCE_ID(input);
@@ -66,14 +67,20 @@ Shader "Custom/Outline Fill" {
         float3 viewPosition = UnityObjectToViewPos(input.vertex);
         float3 viewNormal = normalize(mul((float3x3)UNITY_MATRIX_IT_MV, normal));
 
-        output.position = UnityViewToClipPos(viewPosition + viewNormal * -viewPosition.z * _OutlineWidth / 1000.0);
-        output.color = _OutlineColor;
+        float T = (sin(_Time.w * 4) + 1) / 2; // 0-> 1
+        // float T = 2; // 0-> 1
+
+        _OutlineWidth = _OutlineWidth * T;
+
+        output.offset = UnityViewToClipPos(viewNormal * -viewPosition.z * _OutlineWidth / 1000.0);
+        output.position = UnityViewToClipPos(viewPosition) + output.offset;
 
         return output;
       }
 
-      fixed4 frag(v2f input) : SV_Target {
-        return input.color;
+      fixed4 frag(v2f input) : SV_Target
+      {
+        return _OutlineColor;
       }
       ENDCG
     }

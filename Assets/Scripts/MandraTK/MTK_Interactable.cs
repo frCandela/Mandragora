@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class MTK_Interactable : MonoBehaviour
 {
+    [HideInInspector] public bool m_grabbed = false;
+
     [SerializeField] public bool isGrabbable = true;
     [SerializeField] public bool isDistanceGrabbable = true;
     [SerializeField] public bool isDroppable = true;
@@ -69,6 +71,8 @@ public class MTK_Interactable : MonoBehaviour
             m_onUseStop.Invoke();
             m_wOnUseStop.Post(gameObject);
         }
+
+        m_grabbed = input;
     }
 
     public void Use(bool input)

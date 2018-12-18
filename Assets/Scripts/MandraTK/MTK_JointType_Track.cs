@@ -8,9 +8,8 @@ public class MTK_JointType_Track : MTK_JointType
 {
     public float breakForce = 10000f;
 
-    public override bool JoinWith(GameObject other)
+    protected override bool JointWithOverride(GameObject other)
     {
-        base.JoinWith(other);
         if (!m_joint)
         {
             ConfigurableJoint joint = other.gameObject.AddComponent<ConfigurableJoint>();

@@ -11,7 +11,6 @@ public class MTK_InteractHand : MonoBehaviour
 
     [Header("Status")]
     [SerializeField] public MTK_Interactable m_grabbed = null;
-    [SerializeField] public bool m_grabPressed = false;
 
     [Header("Events")]
     public UnityEventMTK_Interactable m_onTouchInteractable;
@@ -25,7 +24,7 @@ public class MTK_InteractHand : MonoBehaviour
 
     public MTK_InputManager inputManager { get { return m_inputManager; } }
     private MTK_Interactable m_closest;
-    MTK_Interactable Closest
+    public MTK_Interactable Closest
     {
         get {return m_closest;}
         set
@@ -44,8 +43,8 @@ public class MTK_InteractHand : MonoBehaviour
 
         if(m_outliner)
         {
-            m_onTouchInteractable.AddListener(m_outliner.OultineOn);
-            m_onUnTouchInteractable.AddListener(m_outliner.OultineOff);
+            // m_onTouchInteractable.AddListener(m_outliner.OultineOn);
+            // m_onUnTouchInteractable.AddListener(m_outliner.OultineOff);
         }
     }
 
@@ -64,8 +63,6 @@ public class MTK_InteractHand : MonoBehaviour
         {
             Release();
         }
-
-        m_grabPressed = input;
     }
 
     public void TryUse(bool input)
@@ -86,7 +83,7 @@ public class MTK_InteractHand : MonoBehaviour
 
     public void Grab(MTK_Interactable obj)
     {
-        if(m_closest)
+        if(obj)
         {
             obj.Grab(true);
 
@@ -96,6 +93,8 @@ public class MTK_InteractHand : MonoBehaviour
             obj.jointType.onJointBreak.AddListener(Release);
             obj.jointType.JoinWith(gameObject);
             m_grabbed = obj;
+
+            m_outliner.OultineOff(m_grabbed);
         }
     }
 

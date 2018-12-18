@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class TelekinesisPointer : MonoBehaviour
 {
-	[SerializeField]
-	ConfigurableJoint m_joint;
-	[SerializeField]
-	Outliner m_outliner;
-	[SerializeField]
-	FXManager m_fxManager;
+	[SerializeField] ConfigurableJoint m_joint;
+	[SerializeField] Outliner m_outliner;
+	[SerializeField] FXManager m_fxManager;
+	[SerializeField] MTK_InteractHand m_interactHand;
 
 	[Header("Settings")]
 	[SerializeField, Range(0,10)]
@@ -40,7 +38,9 @@ public class TelekinesisPointer : MonoBehaviour
 	RaycastHit m_currentHit;
 
     public bool isAttracting { get { return m_joint.connectedBody || Target; } private set{} }
-	bool m_attract;
+    public Rigidbody connectedBody { get { return m_joint.connectedBody; } }
+
+    bool m_attract;
 	float m_initDistanceToTarget;
 	float m_lastForceApplied;
 	Vector3 m_lastPos;
@@ -92,11 +92,23 @@ public class TelekinesisPointer : MonoBehaviour
 
 	void Update()
 	{
-		if(!m_attract && !m_joint.connectedBody)
+		if(!m_attract)
 		{
-			Target = m_interactiblesManager.GetClosestToView(transform, 15);
-		}
+			if(m_interactHand.Closest)
+			{
+				Target = null;
+			}
+			else if(!m_joint.connectedBody)
+			{
+				MTK_Interactable potentialTarget = m_interactiblesManager.GetClosestToView(transform, 15);
 
+				if(potentialTarget && potentialTarget.m_grabbed)
+					potentialTarget = null;
+				
+				Target = potentialTarget;
+			}
+		}
+		
 		if(Target)
 		{
 			float distanceScale = Mathf.Min(GetDistanceToTarget() / m_initDistanceToTarget, 1); // 1 -> 0
@@ -198,10 +210,11 @@ public class TelekinesisPointer : MonoBehaviour
 
 	void GrabIfTarget(MTK_Interactable input)
 	{
+		
 		if(m_joint.connectedBody)
 		{
 			if(m_joint.connectedBody.gameObject == input.gameObject)
-			{				
+			{
 				m_inputManager.Haptic(1);
 
 				m_wObjectGrabbed.Post(m_joint.gameObject);
