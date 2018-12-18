@@ -1459,8 +1459,8 @@ Camera:
   m_GameObject: {fileID: 1446208449898796}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -1499,8 +1499,8 @@ Camera:
   m_GameObject: {fileID: 1148379129432364}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -1955,7 +1955,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_outliner: {fileID: 114287807942026008}
   m_grabbed: {fileID: 0}
-  m_grabPressed: 0
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -1968,7 +1967,18 @@ MonoBehaviour:
       PublicKeyToken=null
   m_onUseFail:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114971454946613602}
+        m_MethodName: set_Active
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!114 &114036087265582496
@@ -2371,6 +2381,7 @@ MonoBehaviour:
   m_joint: {fileID: 153971409797560804, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
   m_outliner: {fileID: 114287807942026008}
   m_fxManager: {fileID: 114793709611176148}
+  m_interactHand: {fileID: 114222850113798352}
   m_minDistance: 0.4
   m_maxDistance: 10
   m_minMagnitudeToAttract: 0.1
@@ -2471,7 +2482,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_outliner: {fileID: 114287807942026008}
   m_grabbed: {fileID: 0}
-  m_grabPressed: 0
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -2484,7 +2494,18 @@ MonoBehaviour:
       PublicKeyToken=null
   m_onUseFail:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114971454946613602}
+        m_MethodName: set_Active
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!114 &114225256644585296
@@ -2810,7 +2831,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86375bf3b22b2eb43b3f5417d30484a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_material: {fileID: 2100000, guid: 1fb9c7a1c2a32e04d96ef2f9c5826174, type: 2}
+  m_mode: 0
+  m_color: {r: 1, g: 0, b: 0, a: 1}
+  m_outlineWidth: 10
 --- !u!114 &114298525269061956
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3347,6 +3370,7 @@ MonoBehaviour:
   m_joint: {fileID: 153581300082899034, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
   m_outliner: {fileID: 114287807942026008}
   m_fxManager: {fileID: 114307681263772548}
+  m_interactHand: {fileID: 114027338159601920}
   m_minDistance: 0.4
   m_maxDistance: 10
   m_minMagnitudeToAttract: 0.1
@@ -3386,7 +3410,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_outliner: {fileID: 114287807942026008}
   m_grabbed: {fileID: 0}
-  m_grabPressed: 0
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -3399,7 +3422,18 @@ MonoBehaviour:
       PublicKeyToken=null
   m_onUseFail:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114971454946613602}
+        m_MethodName: set_Active
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!114 &114467086146382066
@@ -3787,14 +3821,14 @@ MonoBehaviour:
   size: 0
   color: {r: 0, g: 1, b: 1, a: 1}
   vertices:
-  - {x: 1.5499997, y: 0.01, z: -1.4499996}
-  - {x: -1.5499997, y: 0.01, z: -1.4499996}
-  - {x: -1.5499997, y: 0.01, z: 1.4499996}
-  - {x: 1.5499997, y: 0.01, z: 1.4499996}
-  - {x: 1.6999997, y: 0.01, z: -1.5999995}
-  - {x: -1.6999997, y: 0.01, z: -1.5999995}
-  - {x: -1.6999997, y: 0.01, z: 1.5999995}
-  - {x: 1.6999997, y: 0.01, z: 1.5999995}
+  - {x: 1.8999994, y: 0.01, z: -1.1000001}
+  - {x: -1.8999994, y: 0.01, z: -1.1000001}
+  - {x: -1.8999994, y: 0.01, z: 1.1000001}
+  - {x: 1.8999994, y: 0.01, z: 1.1000001}
+  - {x: 2.0499995, y: 0.01, z: -1.2500001}
+  - {x: -2.0499995, y: 0.01, z: -1.2500001}
+  - {x: -2.0499995, y: 0.01, z: 1.2500001}
+  - {x: 2.0499995, y: 0.01, z: 1.2500001}
 --- !u!114 &114657150560087156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3952,7 +3986,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_outliner: {fileID: 114287807942026008}
   m_grabbed: {fileID: 0}
-  m_grabPressed: 0
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -3965,7 +3998,18 @@ MonoBehaviour:
       PublicKeyToken=null
   m_onUseFail:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114971454946613602}
+        m_MethodName: set_Active
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!114 &114716993655206234
@@ -4221,6 +4265,7 @@ MonoBehaviour:
   m_joint: {fileID: 153482181550665662, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
   m_outliner: {fileID: 114287807942026008}
   m_fxManager: {fileID: 114849768293538468}
+  m_interactHand: {fileID: 114457056242842294}
   m_minDistance: 0.4
   m_maxDistance: 10
   m_minMagnitudeToAttract: 0.1
@@ -4555,6 +4600,7 @@ MonoBehaviour:
   m_joint: {fileID: 153422111175143976}
   m_outliner: {fileID: 114287807942026008}
   m_fxManager: {fileID: 114109227029410238}
+  m_interactHand: {fileID: 114712634209390374}
   m_minDistance: 0.4
   m_maxDistance: 10
   m_minMagnitudeToAttract: 0.1
@@ -4754,7 +4800,8 @@ MonoBehaviour:
   m_fadeEnd: 0.5
   m_sound:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 6a15dc77fb6af8b47b35c575a07ca4a5,
+      type: 2}
 --- !u!135 &135056688857513370
 SphereCollider:
   m_ObjectHideFlags: 1

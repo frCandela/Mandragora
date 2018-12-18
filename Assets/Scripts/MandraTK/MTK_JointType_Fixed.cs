@@ -15,9 +15,9 @@ public class MTK_JointType_Fixed : MTK_JointType
         if( !m_rigidbody )
             m_rigidbody = GetComponent<Rigidbody>();
     }
-    public override bool JoinWith(GameObject other)
+
+    protected override bool JointWithOverride(GameObject other)
     {
-        base.JoinWith(other);
         if( ! m_joint )
         {
             m_joint = other.AddComponent<FixedJoint>();
