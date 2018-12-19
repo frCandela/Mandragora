@@ -100,12 +100,7 @@ public class TelekinesisPointer : MonoBehaviour
 			}
 			else if(!m_joint.connectedBody)
 			{
-				MTK_Interactable potentialTarget = m_interactiblesManager.GetClosestToView(transform, 15);
-
-				if(potentialTarget && potentialTarget.m_grabbed)
-					potentialTarget = null;
-				
-				Target = potentialTarget;
+				Target = m_interactiblesManager.GetClosestToView(transform, 15);
 			}
 		}
 		
@@ -153,6 +148,7 @@ public class TelekinesisPointer : MonoBehaviour
 				m_wHandPlay.Post(gameObject);
 
 				m_attract = true;
+				Target.UseEffects = false;
 				Target.Levitate = true;
 				m_fxManager.Activate("Grab", Target.transform);
 				m_fxManager.Activate("Grab_In", Target.transform);
@@ -171,6 +167,8 @@ public class TelekinesisPointer : MonoBehaviour
 					m_fxManager.Activate("Grab_Out", Target.transform);
 
 				Target.Levitate = false;
+
+				Target.UseEffects = true;
 			}
 
 			if(m_joint.connectedBody)
