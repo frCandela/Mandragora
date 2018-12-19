@@ -14,21 +14,22 @@ public class PlanetEffect : Effect
     /*[SerializeField]*/ private float GravitationalConstant = 0.005f;
 
 
-    public float m_maxRadius = float.MaxValue;
+    public float m_maxRadius;
     public bool m_radiusDecided = false;
-
-    TelekinesisPointer[] m_pointers;
 
     public override bool ApplyEffect()
     {
         m_rb = GetComponent<Rigidbody>();
+
+        m_maxRadius = float.MaxValue;
+        
+        m_rb.velocity = m_lastVel;
+
         if (m_rb && !m_rb.isKinematic)
         {
             ManageEffectsCollisions();
             m_rb.useGravity = false;
             m_joint = GetComponent<MTK_JointType>();
-
-            m_pointers = FindObjectsOfType<TelekinesisPointer>();
 
             return true;
         }
@@ -50,29 +51,21 @@ public class PlanetEffect : Effect
     {
         if (m_rb)
         {
+            m_lastVel = m_rb.velocity;
             m_rb.useGravity = true;
         }
     }
 
     Vector3 axis;
     float baseVel;
+    Vector3 m_lastVel;
     private void FixedUpdate()
     {
-        bool pointedAt = false;
-        foreach( TelekinesisPointer pointer in m_pointers)
-        {
-            if(pointer.connectedBody == m_rb)
-            {
-                pointedAt = true;
-            }
-        }
-
         Vector3 dir = transform.position - sunRigidbody.transform.position;
         float radius = dir.magnitude;
         dir.Normalize();
-        if (!m_joint.Used() && !pointedAt)
+        if (!m_joint.Used())
         {
-            m_rb.useGravity = false;
             if (radius < m_maxRadius)
             {
                 m_maxRadius = radius;
@@ -83,7 +76,6 @@ public class PlanetEffect : Effect
             {
                 transform.position = sunRigidbody.transform.position +  m_maxRadius * (transform.position - sunRigidbody.transform.position).normalized;
                 Vector3 dir2 = (transform.position - sunRigidbody.transform.position).normalized;
-                float vel = m_rb.velocity.magnitude;
                 m_rb.velocity = baseVel * Vector3.Cross(dir2, axis);
             }
         }

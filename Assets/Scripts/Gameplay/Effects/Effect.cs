@@ -17,7 +17,7 @@ public abstract class Effect : MonoBehaviour
     // Called with a prefab so customize particles and stuff
     public virtual Effect AddEffectTo( GameObject target )
     { 
-        if( ! target.GetComponent( GetType()))
+        if( ! target.GetComponent(GetType()))
         {
             Effect effect = (Effect)target.AddComponent(GetType());
             if (effect.ApplyEffect())
@@ -33,6 +33,16 @@ public abstract class Effect : MonoBehaviour
             }
         }
         return null;
+    }
+
+    private void OnEnable()
+    {
+        ApplyEffect();
+    }
+
+    private void OnDisable()
+    {
+        RemoveEffect();
     }
 
     public abstract bool ApplyEffect();    

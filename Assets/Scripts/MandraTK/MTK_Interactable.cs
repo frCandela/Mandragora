@@ -30,14 +30,22 @@ public class MTK_Interactable : MonoBehaviour
         {
             if(value)
             {
-                m_rgbd.useGravity = false;
+                UseEffects = false;
+
                 m_rgbd.velocity = Vector3.up / 20;
                 m_rgbd.angularVelocity = Random.onUnitSphere;
             }
-            else
-            {
-                m_rgbd.useGravity = true;
-            }
+
+            m_rgbd.useGravity = !value; // !gravity = levitate
+        }
+    }
+
+    public bool UseEffects
+    {
+        set
+        {
+            foreach (var effect in GetComponents<Effect>())
+                effect.enabled = value;
         }
     }
 
@@ -68,6 +76,8 @@ public class MTK_Interactable : MonoBehaviour
 
             m_onUseStop.Invoke();
             m_wOnUseStop.Post(gameObject);
+
+            UseEffects = true;
         }
     }
 

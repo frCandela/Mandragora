@@ -22,11 +22,13 @@ public class MTK_SolidHand : MonoBehaviour
             if (!m_telekinesisPointer.isAttracting && !m_interactHand.m_grabbed)
             {
                 m_collider.isTrigger = false;
+                m_telekinesisPointer.enabled = false;
             }
         }
         else
         {
             m_collider.isTrigger = true;
+            m_telekinesisPointer.enabled = true;
         }
     }
 }
