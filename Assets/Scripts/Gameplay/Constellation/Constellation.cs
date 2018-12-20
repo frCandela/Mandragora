@@ -16,7 +16,7 @@ public class Constellation : MonoBehaviour
 	int m_nextStarID = 0;
 
 	// Use this for initialization
-	void Start ()
+	void Awake ()
 	{
 		m_stars = GetComponentsInChildren<ConstellationStar>();
 		m_starsTransform = new Transform[m_stars.Length];
@@ -53,17 +53,25 @@ public class Constellation : MonoBehaviour
 	[ContextMenu("Complete")]
 	void Complete()
 	{
-		foreach (var star in m_stars)
-			Destroy(star);
+		// foreach (var star in m_stars)
+		// 	Destroy(star);
 
-		StartCoroutine(goToCenter());
+		StartCoroutine(goFromTo(0, 1, m_onCompleted.Invoke));
 	}
 
-	IEnumerator goToCenter()
+	public void Init()
+	{
+		for (int i = 0; i < m_stars.Length; i++)
+		{
+			m_starsTransform[i].localPosition = m_starsInitPosition[i];
+		}
+	}
+
+	IEnumerator goFromTo(float start, float end, VoidDelegate endAction = null)
 	{
 		float lenght = m_starsTransform.Length/10f;
 
-		for (float t = 0; t < 1; t += Time.fixedDeltaTime / m_timeToMove)
+		for (float t = start; t < end; t += Time.fixedDeltaTime / m_timeToMove)
 		{
 			for (int i = 0; i < m_starsTransform.Length; i++)
 			{
@@ -77,6 +85,7 @@ public class Constellation : MonoBehaviour
 		foreach (var tr in m_starsTransform)
 			Destroy(tr.gameObject);
 
-		m_onCompleted.Invoke();
+		if(endAction != null)
+			endAction.Invoke();
 	}
 }
