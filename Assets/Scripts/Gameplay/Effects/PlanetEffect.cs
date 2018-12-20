@@ -17,9 +17,14 @@ public class PlanetEffect : Effect
     public float m_maxRadius;
     public bool m_radiusDecided = false;
 
+    // [Header("Wwise events")]
+	// [SerializeField] AK.Wwise.Event m_enter;
+	// [SerializeField] AK.Wwise.Event m_exit;
+
     public override bool ApplyEffect()
     {
         m_rb = GetComponent<Rigidbody>();
+        // m_enter.Post(gameObject);
 
         m_maxRadius = float.MaxValue;
         
@@ -55,6 +60,8 @@ public class PlanetEffect : Effect
             m_lastVel = m_rb.velocity;
             m_rb.useGravity = true;
         }
+
+        // m_exit.Post(gameObject);
     }
 
     Vector3 axis;
