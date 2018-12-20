@@ -21,6 +21,10 @@ public class FXManager : MonoBehaviour
 		currentEffect.SetParent(target, false);
 		currentEffect.localPosition = Vector3.zero;
 		currentEffect.GetComponent<ParticleSystem>().Play();
+
+		AkEvent wwiseEvent = currentEffect.GetComponent<AkEvent>();
+		if(wwiseEvent)
+			wwiseEvent.HandleEvent(currentEffect.gameObject);
 	}
 
 	public void DeActivate(string effectName)

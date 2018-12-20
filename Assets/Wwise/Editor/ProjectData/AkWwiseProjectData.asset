@@ -15,12 +15,12 @@ MonoBehaviour:
   - PhysicalPath: Virtual Acoustics\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 30564cb3b3d431419eb2bf7017fd0e6a
-    m_lastTime: -8586570711752660691
+    m_lastTime: -8586564674733289372
     List: []
   - PhysicalPath: Virtual Acoustics\Factory Reflect Acoustic Textures.wwu
     ParentPhysicalPath: 
     guid: 6b663d46a83ca54f8b4a5fef12b883f6
-    m_lastTime: -8586570711752640640
+    m_lastTime: -8586564674733279358
     List:
     - name: Acoustic_Banner
       guid: f2532d2fccda8e408b8898b1b52a26d6
@@ -180,7 +180,7 @@ MonoBehaviour:
   - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 0995f2392612e04c91c38c7b63f5e42c
-    m_lastTime: -8586570711763810332
+    m_lastTime: -8586562920986453143
     List: []
   BankWwu:
   - PhysicalPath: SoundBanks\Default Work Unit.wwu
@@ -201,8 +201,68 @@ MonoBehaviour:
   - PhysicalPath: Events\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 6030b6aee3d39d4c9d884b8f3ae2474c
-    m_lastTime: -8586570711763880512
+    m_lastTime: -8586562920986478209
     List:
+    - name: Ambisonic_Play
+      guid: 97676feb048fc24093608d801bbd8d32
+      id: 1117135425
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Ambisonic_Play
+        ObjectType: 3
+      Path: Default Work Unit\Ambisonic_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Ambisonic_Stop
+      guid: 3a62be6df4f249478b1f2395458a9e9f
+      id: 3437095191
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Ambisonic_Stop
+        ObjectType: 3
+      Path: Default Work Unit\Ambisonic_Stop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Bubbles_Play
+      guid: 06a67f35ed42bc45923f62a7d6982e40
+      id: 332086775
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Bubbles_Play
+        ObjectType: 3
+      Path: Default Work Unit\Bubbles_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Constellation_Hit_Play
+      guid: dcc54328e1fb5f49a52e5e05de78c5e5
+      id: 1428477509
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Constellation_Hit_Play
+        ObjectType: 3
+      Path: Default Work Unit\Constellation_Hit_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Constellations_Successful_Play
+      guid: 4d0eb2b29c17a8429b9dc14d8600d4ff
+      id: 1522423771
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Constellations_Successful_Play
+        ObjectType: 3
+      Path: Default Work Unit\Constellations_Successful_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Draw_Play
       guid: 552b66c1c4768b4db65ac0d2485d5962
       id: 2083537832
@@ -224,6 +284,18 @@ MonoBehaviour:
       - ElementName: Draw_Stop
         ObjectType: 3
       Path: Default Work Unit\Draw_Stop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Drip_Play
+      guid: eafc2dd006ae3e4f92042dd6a7033be5
+      id: 942707065
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Drip_Play
+        ObjectType: 3
+      Path: Default Work Unit\Drip_Play
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
@@ -251,6 +323,42 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: Planet_Rotation_Play
+      guid: 92d8195cce6ba64bbc5567dcb6941292
+      id: 974947161
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Planet_Rotation_Play
+        ObjectType: 3
+      Path: Default Work Unit\Planet_Rotation_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Planet_Rotation_Stop
+      guid: 86c582af45054f44be9abd3d14323c35
+      id: 3607485343
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Planet_Rotation_Stop
+        ObjectType: 3
+      Path: Default Work Unit\Planet_Rotation_Stop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Play_Clap
+      guid: 8f9804bc1aaf49408f8a021ea8c6f977
+      id: 3785725400
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Clap
+        ObjectType: 3
+      Path: Default Work Unit\Play_Clap
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Portal_Play
       guid: 29aa23d5bcb8f74180114b90848e3a99
       id: 1394292256
@@ -275,6 +383,30 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: Rumbling_Sun_Play
+      guid: 079bfebbc186a4439d483aa5e394a948
+      id: 798963037
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Rumbling_Sun_Play
+        ObjectType: 3
+      Path: Default Work Unit\Rumbling_Sun_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Rumbling_Sun_Stop
+      guid: f9ea26a61665774eaefea71d33a44814
+      id: 2984701899
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Rumbling_Sun_Stop
+        ObjectType: 3
+      Path: Default Work Unit\Rumbling_Sun_Stop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Sun_Play
       guid: 1cce73302cf16949919af41a0ed7405b
       id: 3578106302
@@ -296,6 +428,18 @@ MonoBehaviour:
       - ElementName: Sun_Stop
         ObjectType: 3
       Path: Default Work Unit\Sun_Stop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Telekinesis_Feedback_Play
+      guid: 2e9832bb169ca645a4d9eeb3afa021b5
+      id: 4190383174
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Telekinesis_Feedback_Play
+        ObjectType: 3
+      Path: Default Work Unit\Telekinesis_Feedback_Play
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
@@ -371,12 +515,45 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: Wind_Drone_Loop_Play
+      guid: 28637a85f881db41baab2083cf7e3132
+      id: 2560579910
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Wind_Drone_Loop_Play
+        ObjectType: 3
+      Path: Default Work Unit\Wind_Drone_Loop_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Wind_Drone_Loop_Stop
+      guid: b413d63e35a072448f2d74628e1f519a
+      id: 75037240
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Wind_Drone_Loop_Stop
+        ObjectType: 3
+      Path: Default Work Unit\Wind_Drone_Loop_Stop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 7023720d000eef46b000ec471e7f4b00
-    m_lastTime: -8586570711763955717
+    m_lastTime: -8586562920986528339
     List:
+    - name: Constellation
+      guid: be300520a9c24940a2a12910d9cb833c
+      id: 2699072562
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Constellation
+        ObjectType: 13
+      Path: Default Work Unit\Constellation
     - name: Draw
       guid: 1652ce17ef1c654fa49782f1ed12b213
       id: 1912241455

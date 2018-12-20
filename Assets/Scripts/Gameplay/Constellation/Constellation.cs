@@ -8,6 +8,9 @@ public class Constellation : MonoBehaviour
 	[SerializeField] float m_timeToMove;
 	[SerializeField] float m_animationAmplitude = 5;
 	[SerializeField] UnityEvent m_onCompleted;
+
+	[Header("Wwise events")]
+	[SerializeField] AK.Wwise.Event m_validated;
 	
 	ConstellationStar[] m_stars;
 	Transform[] m_starsTransform;
@@ -55,6 +58,8 @@ public class Constellation : MonoBehaviour
 	{
 		foreach (var star in m_stars)
 			Destroy(star);
+
+		m_validated.Post(gameObject);
 
 		StartCoroutine(goToCenter());
 	}

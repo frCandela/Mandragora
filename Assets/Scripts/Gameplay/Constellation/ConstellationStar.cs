@@ -5,13 +5,16 @@ using UnityEngine.Events;
 
 public class ConstellationStar : MonoBehaviour
 {
+	public bool m_validated = false;
 	[SerializeField] UnityEvent m_onValidated;
 	[SerializeField] UnityEvent m_onFail;
+
+	[Header("Wwise events")]
+	[SerializeField] AK.Wwise.Event m_hit;
+
+
 	Constellation m_constellation;
-
 	Renderer m_renderer;
-
-	public bool m_validated = false;
 
 	public void RegisterConstellation(Constellation c)
 	{
@@ -26,7 +29,10 @@ public class ConstellationStar : MonoBehaviour
 			m_validated = false;
 
 		if(m_validated)
+		{
 			m_onValidated.Invoke();
+			m_hit.Post(gameObject);
+		}
 		else
 			m_onFail.Invoke();
 	}

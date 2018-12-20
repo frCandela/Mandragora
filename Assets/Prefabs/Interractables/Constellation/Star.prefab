@@ -175,7 +175,7 @@ MonoBehaviour:
   _guid: 6a8c807a-11c3-44ad-9d6a-90fcc804e681
   _referenceCollection:
     _collection:
-    - {fileID: 1670302065509742, guid: 947c48b8a72e387428bcc9215cfcd8e2, type: 2}
+    - {fileID: 0}
     - {fileID: 1139105602128226}
   _assetGuid: f5b28966941390743a2bc5555d97e5b7
 --- !u!114 &114837645839868992
@@ -201,6 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4dc0174f21e8dd4cbc37a6c2127ec26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_validated: 0
   m_onValidated:
     m_PersistentCalls:
       m_Calls:
@@ -233,7 +234,10 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_validated: 0
+  m_hit:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 5185c7090382b0c448077183776d320e,
+      type: 2}
 --- !u!114 &114923497616167190
 MonoBehaviour:
   m_ObjectHideFlags: 1
