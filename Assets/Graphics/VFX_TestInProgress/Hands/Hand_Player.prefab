@@ -455,8 +455,6 @@ GameObject:
   - component: {fileID: 95521819120935564}
   - component: {fileID: 114345818187147112}
   - component: {fileID: 114607308174278646}
-  - component: {fileID: 33868522386205272}
-  - component: {fileID: 23620450661214240}
   m_Layer: 0
   m_Name: Hand_Player
   m_TagString: Untagged
@@ -750,15 +748,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1945538749456838}
-  m_LocalRotation: {x: -0, y: -0, z: -0.529161, w: 0.84852153}
-  m_LocalPosition: {x: -0.70109475, y: 0.895, z: 1.0641695}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.19716306, y: 0.61523294, z: 0.114654794, w: 0.754632}
+  m_LocalPosition: {x: 0.057, y: -0.006, z: -0.163}
+  m_LocalScale: {x: 0.24, y: 0.24, z: 0.24}
   m_Children:
   - {fileID: 4688468443881786}
   - {fileID: 4467745955256336}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -63.898003}
+  m_LocalEulerAnglesHint: {x: -26.018002, y: 79.40501, z: -4.439}
 --- !u!4 &4772409703068388
 Transform:
   m_ObjectHideFlags: 1
@@ -1043,7 +1041,7 @@ MonoBehaviour:
   _guid: a700f392-d9bb-48a1-baa3-6345895d2b90
 --- !u!114 &114345818187147112
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1945538749456838}
@@ -1160,7 +1158,7 @@ MonoBehaviour:
   _guid: 4055dc9e-7584-440c-a6af-0eb2eb0fae43
 --- !u!114 &114607308174278646
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1945538749456838}
