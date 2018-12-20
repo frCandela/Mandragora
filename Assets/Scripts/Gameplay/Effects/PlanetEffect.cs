@@ -23,7 +23,8 @@ public class PlanetEffect : Effect
 
         m_maxRadius = float.MaxValue;
         
-        m_rb.velocity = m_lastVel;
+        if(m_lastVel != Vector3.zero)
+            m_rb.velocity = m_lastVel;
 
         if (m_rb && !m_rb.isKinematic)
         {
