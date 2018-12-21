@@ -12,13 +12,39 @@ public class ConstellationStar : MonoBehaviour
 	[HideInInspector] public Vector3 m_initPosition;
 	Renderer m_renderer;
 	Animator m_animator;
+	Collider m_collider;
 
-	public bool m_validated = false;
+	bool m_validated = false;
+	public bool Validated
+	{
+		get
+		{
+			return m_validated;
+		}
+		set
+		{
+			m_validated = value;
+
+			if(m_validated)
+			{
+				m_onValidated.Invoke();
+				m_animator.SetTrigger("Validated");
+			}
+			else
+			{
+				m_onFail.Invoke();
+				m_animator.SetTrigger("Failed");
+			}
+
+			m_collider.enabled = !m_validated;
+		}
+	}
 
 	void Start()
 	{
 		transform.position = m_initPosition;
 		m_animator = GetComponent<Animator>();
+		m_collider = GetComponent<Collider>();
 	}
 
 	public void RegisterConstellation(Constellation c)
@@ -26,29 +52,15 @@ public class ConstellationStar : MonoBehaviour
 		m_constellation = c;
 	}
 
-	public void TryValidate(bool input)
+	public void TryValidate()
 	{
-		if(transform.position == m_initPosition)
+		if(transform.position == m_initPosition) // Init phase
 		{
 			m_constellation.Init();
 		}
-		else
+		else // Completion phase
 		{
-			if(input)
-			{
-				m_validated = m_constellation.Check(this);
-				m_animator.SetTrigger("Validated");
-			}
-			else
-			{
-				m_validated = false;
-				m_animator.SetTrigger("Failed");
-			}
-
-			if(m_validated)
-				m_onValidated.Invoke();
-			else
-				m_onFail.Invoke();
+			Validated = m_constellation.Check(this);
 		}
 	}
 }
