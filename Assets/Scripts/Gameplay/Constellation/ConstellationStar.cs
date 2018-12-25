@@ -5,8 +5,6 @@ using UnityEngine.Events;
 
 public class ConstellationStar : MonoBehaviour
 {
-	[SerializeField] UnityEvent m_onValidated;
-	[SerializeField] UnityEvent m_onFail;
 	Constellation m_constellation;
 
 	[HideInInspector] public Vector3 m_initPosition;
@@ -26,15 +24,9 @@ public class ConstellationStar : MonoBehaviour
 			m_validated = value;
 
 			if(m_validated)
-			{
-				m_onValidated.Invoke();
 				m_animator.SetTrigger("Validated");
-			}
 			else
-			{
-				m_onFail.Invoke();
 				m_animator.SetTrigger("Failed");
-			}
 
 			m_collider.enabled = !m_validated;
 		}
