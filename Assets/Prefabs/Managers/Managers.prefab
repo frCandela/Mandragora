@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 114990829895619550}
   - component: {fileID: 114765124447791876}
   - component: {fileID: 114760122097112854}
+  - component: {fileID: 114109666308975488}
   m_Layer: 10
   m_Name: Controller
   m_TagString: Untagged
@@ -348,6 +349,7 @@ GameObject:
   - component: {fileID: 114457853179317948}
   - component: {fileID: 114934610312336982}
   - component: {fileID: 114942179892418796}
+  - component: {fileID: 114658787627347884}
   m_Layer: 10
   m_Name: Controller
   m_TagString: Untagged
@@ -449,6 +451,7 @@ GameObject:
   - component: {fileID: 114432783115439776}
   - component: {fileID: 114718623902877342}
   - component: {fileID: 114005299508126058}
+  - component: {fileID: 114699485711249382}
   m_Layer: 10
   m_Name: Controller
   m_TagString: Untagged
@@ -492,7 +495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1527154424799454
 GameObject:
   m_ObjectHideFlags: 1
@@ -511,7 +514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1533587465282532
 GameObject:
   m_ObjectHideFlags: 1
@@ -886,6 +889,7 @@ GameObject:
   - component: {fileID: 114412763014324120}
   - component: {fileID: 114128801446374184}
   - component: {fileID: 114125864185681144}
+  - component: {fileID: 114303118116790824}
   m_Layer: 10
   m_Name: Controller
   m_TagString: Untagged
@@ -2203,7 +2207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 583ae33bd15883c4ba76271e3fcb181e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeSetup: {fileID: 114589116309680354}
+  activeSetup: {fileID: 114627048374823106}
   setupSimulation: {fileID: 114627048374823106}
   setupSteamVR: {fileID: 114589116309680354}
 --- !u!114 &114005299508126058
@@ -2611,6 +2615,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 0edadcaa-0797-4f90-be7c-55b7b5104fbf
+--- !u!114 &114109666308975488
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1013220729651978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba0946c66174a54097ceb9b130ff6e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114118645379926820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3225,6 +3240,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: a6047272-af38-4cd5-a0f2-c88f7d4d414e
+--- !u!114 &114303118116790824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1894039423502858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba0946c66174a54097ceb9b130ff6e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114310781338825330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4140,6 +4166,17 @@ MonoBehaviour:
     _collection:
     - {fileID: 1983245838203288}
   _assetGuid: 48868a6ad97a3164ca3366a1c2dfed7f
+--- !u!114 &114658787627347884
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1279467955768296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba0946c66174a54097ceb9b130ff6e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114662444749940974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4184,6 +4221,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1491221649, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114699485711249382
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1422354402737432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba0946c66174a54097ceb9b130ff6e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114703303675938484
