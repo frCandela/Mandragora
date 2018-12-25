@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class ConstellationStar : MonoBehaviour
 {
 	Constellation m_constellation;
+	int m_ID;
 
 	[HideInInspector] public Vector3 m_initPosition;
 	Renderer m_renderer;
@@ -39,9 +40,10 @@ public class ConstellationStar : MonoBehaviour
 		m_collider = GetComponent<Collider>();
 	}
 
-	public void RegisterConstellation(Constellation c)
+	public void RegisterConstellation(Constellation c, int ID)
 	{
 		m_constellation = c;
+		m_ID = ID;
 	}
 
 	public void TryValidate()
@@ -52,7 +54,7 @@ public class ConstellationStar : MonoBehaviour
 		}
 		else // Completion phase
 		{
-			Validated = m_constellation.Check(this);
+			Validated = m_constellation.Check(m_ID);
 		}
 	}
 }

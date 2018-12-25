@@ -14,7 +14,7 @@ public class Constellation : MonoBehaviour
 	Vector3[] m_starsInitPosition;
 	LineRenderer m_lineRenderer;
 
-	int m_nextStarID = 0;
+	int m_currentStarID = -1;
 
 	// Use this for initialization
 	void Awake ()
@@ -26,35 +26,67 @@ public class Constellation : MonoBehaviour
 
 		for (int i = 0; i < m_stars.Length; i++)
 		{
-			m_stars[i].RegisterConstellation(this);
+			m_stars[i].RegisterConstellation(this, i);
 			m_starsTransform[i] = m_stars[i].transform;
 			m_starsInitPosition[i] = m_starsTransform[i].localPosition;
 		}
 	}
 	
-	public bool Check(ConstellationStar input)
+	public bool Check(int m_ID)
 	{
-		if (input == m_stars[m_nextStarID])
+		if(m_currentStarID == -1) // set first star
 		{
-			m_lineRenderer.SetPosition(m_nextStarID, m_starsInitPosition[m_nextStarID]);
+			// First of last Only
+			if(m_ID == 0 || m_ID == m_stars.Length-1)
+			{
+				m_currentStarID = m_ID;
 
-			m_nextStarID++;
-			if(m_nextStarID == m_stars.Length)
-				Complete();
+				for (int i = 0; i < m_stars.Length; i++)
+					m_lineRenderer.SetPosition(i, m_starsInitPosition[m_currentStarID]);
+				
+				return true;
+			}
+			
+			return false;
+		}
+		else // check if neighbor
+		{
+			if(Mathf.Abs(m_currentStarID - m_ID) == 1)
+			{
+				m_currentStarID = m_ID;
+				m_lineRenderer.SetPosition(m_currentStarID, m_starsInitPosition[m_currentStarID]);
 
-			return true;
+				if(m_currentStarID == 0 || m_currentStarID == m_stars.Length-1) // Check constellation is complete
+				{
+					for (int i = 0; i < m_stars.Length; i++)
+					{
+						if(m_currentStarID != i && m_stars[i].Validated == false)
+						{
+							Fail();
+							return false;
+						}
+					}
+
+					Complete();
+				}
+
+				return true;
+			}
 		}
 
-		// if fail
+		Fail();
+		return false;
+	}
+
+	void Fail()
+	{
 		for (int i = 0; i < m_stars.Length; i++)
 		{
 			m_stars[i].Validated = false;
 			m_lineRenderer.SetPosition(i, m_starsInitPosition[0]);
 		}
 
-		m_nextStarID = 0;
-
-		return false;
+		m_currentStarID = -1;
 	}
 
 	[ContextMenu("Complete")]
