@@ -68,6 +68,7 @@ public class MTK_Interactable : MonoBehaviour
     {
         if (input)
         {
+            m_rgbd.velocity = Vector3.zero; // Prevent joint break
             m_onGrabStart.Invoke();
             m_wOnGrabStart.Post(gameObject);
         }
