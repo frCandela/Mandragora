@@ -15,65 +15,116 @@ public class Constellation : MonoBehaviour
 	ConstellationStar[] m_stars;
 	Transform[] m_starsTransform;
 	Vector3[] m_starsInitPosition;
+	LineRenderer m_lineRenderer;
 
-	int m_nextStarID = 0;
+	int m_currentStarID = -1;
 
 	// Use this for initialization
-	void Start ()
+	void Awake ()
 	{
+		m_lineRenderer = GetComponent<LineRenderer>();
 		m_stars = GetComponentsInChildren<ConstellationStar>();
 		m_starsTransform = new Transform[m_stars.Length];
 		m_starsInitPosition = new Vector3[m_stars.Length];
 
 		for (int i = 0; i < m_stars.Length; i++)
 		{
-			m_stars[i].RegisterConstellation(this);
+			m_stars[i].RegisterConstellation(this, i);
 			m_starsTransform[i] = m_stars[i].transform;
 			m_starsInitPosition[i] = m_starsTransform[i].localPosition;
 		}
 	}
 	
-	public bool Check(ConstellationStar input)
+	public bool Check(int m_ID)
 	{
-		if (input == m_stars[m_nextStarID])
+		if(m_currentStarID == -1) // set first star
 		{
-			m_nextStarID++;
-			if(m_nextStarID == m_stars.Length)
-				Complete();
+			// First of last Only
+			if(m_ID == 0 || m_ID == m_stars.Length-1)
+			{
+				m_currentStarID = m_ID;
 
-			return true;
+				for (int i = 0; i < m_stars.Length; i++)
+					m_lineRenderer.SetPosition(i, m_starsInitPosition[m_currentStarID]);
+				
+				return true;
+			}
+			
+			return false;
+		}
+		else // check if neighbor
+		{
+			if(Mathf.Abs(m_currentStarID - m_ID) == 1)
+			{
+				m_currentStarID = m_ID;
+				m_lineRenderer.SetPosition(m_currentStarID, m_starsInitPosition[m_currentStarID]);
+
+				if(m_currentStarID == 0 || m_currentStarID == m_stars.Length-1) // Check constellation is complete
+				{
+					for (int i = 0; i < m_stars.Length; i++)
+					{
+						if(m_currentStarID != i && m_stars[i].Validated == false)
+						{
+							Fail();
+							return false;
+						}
+					}
+
+					Complete();
+				}
+
+				return true;
+			}
 		}
 
-		// if fail
-		foreach (var star in m_stars)
-			star.TryValidate(false);
-
-		m_nextStarID = 0;
-
+		Fail();
 		return false;
+	}
+
+	void Fail()
+	{
+		for (int i = 0; i < m_stars.Length; i++)
+		{
+			m_stars[i].Validated = false;
+			m_lineRenderer.SetPosition(i, m_starsInitPosition[0]);
+		}
+
+		m_currentStarID = -1;
 	}
 
 	[ContextMenu("Complete")]
 	void Complete()
 	{
-		foreach (var star in m_stars)
-			Destroy(star);
+		// foreach (var star in m_stars)
+		// 	Destroy(star);
 
 		m_validated.Post(gameObject);
-
-		StartCoroutine(goToCenter());
+		StartCoroutine(goFromTo(0, 1, m_onCompleted.Invoke));
 	}
 
-	IEnumerator goToCenter()
+	public void Init()
+	{
+		m_lineRenderer.positionCount = m_stars.Length;
+
+		for (int i = 0; i < m_stars.Length; i++)
+		{
+			m_starsTransform[i].localPosition = m_starsInitPosition[i];
+			m_lineRenderer.SetPosition(i, m_starsInitPosition[0]);
+		}
+	}
+
+	IEnumerator goFromTo(float start, float end, VoidDelegate endAction = null)
 	{
 		float lenght = m_starsTransform.Length/10f;
 
-		for (float t = 0; t < 1; t += Time.fixedDeltaTime / m_timeToMove)
+		for (float t = start; t < end; t += Time.fixedDeltaTime / m_timeToMove)
 		{
 			for (int i = 0; i < m_starsTransform.Length; i++)
 			{
 				m_starsTransform[i].localPosition = Vector3.Lerp(m_starsInitPosition[i], Vector3.zero, t)
 				+ (new Vector3(Mathf.PerlinNoise(t, i/lenght), Mathf.PerlinNoise(t, i/lenght + 1f/3), Mathf.PerlinNoise(t, i/lenght + 2f/3)) - Vector3.one/2) * m_animationAmplitude * Mathf.Sin(t * Mathf.PI);
+
+				m_lineRenderer.SetPosition(i, m_starsTransform[i].localPosition);
 			}
 
 			yield return new WaitForEndOfFrame();
@@ -82,6 +133,7 @@ public class Constellation : MonoBehaviour
 		foreach (var tr in m_starsTransform)
 			Destroy(tr.gameObject);
 
-		m_onCompleted.Invoke();
+		if(endAction != null)
+			endAction.Invoke();
 	}
 }

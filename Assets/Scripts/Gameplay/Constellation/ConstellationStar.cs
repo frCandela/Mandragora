@@ -5,35 +5,62 @@ using UnityEngine.Events;
 
 public class ConstellationStar : MonoBehaviour
 {
-	public bool m_validated = false;
-	[SerializeField] UnityEvent m_onValidated;
-	[SerializeField] UnityEvent m_onFail;
+	Constellation m_constellation;
+	int m_ID;
 
+	[HideInInspector] public Vector3 m_initPosition;
+	Renderer m_renderer;
+	Animator m_animator;
+	Collider m_collider;
+	
 	[Header("Wwise events")]
 	[SerializeField] AK.Wwise.Event m_hit;
 
-
-	Constellation m_constellation;
-	Renderer m_renderer;
-
-	public void RegisterConstellation(Constellation c)
+	bool m_validated = false;
+	public bool Validated
 	{
-		m_constellation = c;
+		get
+		{
+			return m_validated;
+		}
+		set
+		{
+			m_validated = value;
+
+			if(m_validated)
+			{
+			    m_hit.Post(gameObject);
+				m_animator.SetTrigger("Validated");
+			}
+			else
+				m_animator.SetTrigger("Failed");
+
+			m_collider.enabled = !m_validated;
+		}
 	}
 
-	public void TryValidate(bool input)
+	void Start()
 	{
-		if(input)
-			m_validated = m_constellation.Check(this);
-		else
-			m_validated = false;
+		transform.position = m_initPosition;
+		m_animator = GetComponent<Animator>();
+		m_collider = GetComponent<Collider>();
+	}
 
-		if(m_validated)
+	public void RegisterConstellation(Constellation c, int ID)
+	{
+		m_constellation = c;
+		m_ID = ID;
+	}
+
+	public void TryValidate()
+	{
+		if(transform.position == m_initPosition) // Init phase
 		{
-			m_onValidated.Invoke();
-			m_hit.Post(gameObject);
+			m_constellation.Init();
 		}
-		else
-			m_onFail.Invoke();
+		else // Completion phase
+		{
+			Validated = m_constellation.Check(m_ID);
+		}
 	}
 }

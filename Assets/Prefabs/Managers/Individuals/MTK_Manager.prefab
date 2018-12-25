@@ -617,6 +617,7 @@ GameObject:
   - component: {fileID: 114200415979509864}
   - component: {fileID: 114893642882657968}
   - component: {fileID: 114272159337317770}
+  - component: {fileID: 114206287218723220}
   m_Layer: 10
   m_Name: Controller
   m_TagString: Untagged
@@ -1016,6 +1017,7 @@ GameObject:
   - component: {fileID: 114883948833837290}
   - component: {fileID: 114759474021770864}
   - component: {fileID: 114116399037334702}
+  - component: {fileID: 114105458455859200}
   m_Layer: 10
   m_Name: Controller
   m_TagString: Untagged
@@ -1536,6 +1538,7 @@ GameObject:
   - component: {fileID: 114456103079472074}
   - component: {fileID: 114147970209533052}
   - component: {fileID: 114355826521571506}
+  - component: {fileID: 114054657969472682}
   m_Layer: 10
   m_Name: Controller
   m_TagString: Untagged
@@ -1649,6 +1652,7 @@ GameObject:
   - component: {fileID: 114786668092839292}
   - component: {fileID: 114602658455677190}
   - component: {fileID: 114720465811594664}
+  - component: {fileID: 114010913074918726}
   m_Layer: 10
   m_Name: Controller
   m_TagString: Untagged
@@ -4043,6 +4047,17 @@ MonoBehaviour:
   m_Script: {fileID: 1491221649, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114105458455859200
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1585529722866088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba0946c66174a54097ceb9b130ff6e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114109227029410238
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4464,6 +4479,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 554c9817-24c1-4729-8ff6-24acf3b7a64e
+--- !u!114 &114206287218723220
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1392186436137776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba0946c66174a54097ceb9b130ff6e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114210783163742644
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5573,7 +5599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 583ae33bd15883c4ba76271e3fcb181e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeSetup: {fileID: 114495364992844328}
+  activeSetup: {fileID: 114814732575340876}
   setupSimulation: {fileID: 114814732575340876}
   setupSteamVR: {fileID: 114495364992844328}
 --- !u!114 &114370731089742138

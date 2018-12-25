@@ -9,6 +9,6 @@ public class ConstellationValidator : MonoBehaviour
 		ConstellationStar star = other.GetComponent<ConstellationStar>();
 
 		if(star)
-			star.TryValidate(true);
+			star.TryValidate();
 	}
 }
