@@ -2,6 +2,8 @@
 {
 	Properties
 	{
+		_Visibility ("Visibility", Range(0,1)) = 1
+
 		_LimitBloom ("Limitation Bloom", Range(0,1)) = 0
 		_StarsCubeMap ("Stars CubeMap", Cube) = "" {}
 		_FlowTex ("Flow Textures", 2D) = "white" {}
@@ -69,6 +71,8 @@
 			float _ReflexionIntensity, _ReflexionPower;
 			float _LimitBloom;
 			fixed4 _StarsColor1, _StarsColor2, _StarsColor3, _FadeColor;
+
+			float _Visibility;
 			
 			v2g vert (appdata v)
 			{
@@ -218,7 +222,7 @@
 
 				//col.rgb = fresnel;
 
-				col.a = redVertexColor;
+				col.a = redVertexColor * _Visibility;
 				
 				return col;
 			}

@@ -8,6 +8,7 @@ public class MTK_InteractHand : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] Outliner m_outliner = null;
+    [SerializeField] Animator m_handAnimator = null;
 
     [Header("Status")]
     [SerializeField] public MTK_Interactable m_grabbed = null;
@@ -95,6 +96,10 @@ public class MTK_InteractHand : MonoBehaviour
             m_grabbed = obj;
 
             m_outliner.OultineOff(m_grabbed);
+
+            m_handAnimator.SetBool("Visible", false);
+
+            m_handAnimator.SetBool("Grab", true);
         }
     }
 
@@ -112,6 +117,10 @@ public class MTK_InteractHand : MonoBehaviour
             rb.angularVelocity = m_inputManager.GetAngularVelocity();
 
             m_grabbed = null;
+
+            m_handAnimator.SetBool("Visible", true);
+
+            m_handAnimator.SetBool("Grab", false);
         }
     }
 

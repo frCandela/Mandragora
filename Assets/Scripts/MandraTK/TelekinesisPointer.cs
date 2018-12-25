@@ -8,6 +8,7 @@ public class TelekinesisPointer : MonoBehaviour
 	[SerializeField] Outliner m_outliner;
 	[SerializeField] FXManager m_fxManager;
 	[SerializeField] MTK_InteractHand m_interactHand;
+	[SerializeField] Animator m_handAnimator;
 
 	[Header("Settings")]
 	[SerializeField, Range(0,10)]
@@ -174,6 +175,8 @@ public class TelekinesisPointer : MonoBehaviour
 			if(m_joint.connectedBody)
 				UnAttract();
 		}
+
+		m_handAnimator.SetBool("Attract", m_attract);
 	}
 
 	void Attract(Vector3 force)
