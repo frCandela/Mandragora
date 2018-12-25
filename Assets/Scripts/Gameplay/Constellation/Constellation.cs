@@ -95,9 +95,6 @@ public class Constellation : MonoBehaviour
 	[ContextMenu("Complete")]
 	void Complete()
 	{
-		// foreach (var star in m_stars)
-		// 	Destroy(star);
-
 		m_validated.Post(gameObject);
 		StartCoroutine(goFromTo(0, 1, m_onCompleted.Invoke));
 	}
@@ -117,6 +114,9 @@ public class Constellation : MonoBehaviour
 	{
 		float lenght = m_starsTransform.Length/10f;
 
+		if(endAction != null)
+			endAction.Invoke();
+
 		for (float t = start; t < end; t += Time.fixedDeltaTime / m_timeToMove)
 		{
 			for (int i = 0; i < m_starsTransform.Length; i++)
@@ -132,8 +132,5 @@ public class Constellation : MonoBehaviour
 
 		foreach (var tr in m_starsTransform)
 			Destroy(tr.gameObject);
-
-		if(endAction != null)
-			endAction.Invoke();
 	}
 }
