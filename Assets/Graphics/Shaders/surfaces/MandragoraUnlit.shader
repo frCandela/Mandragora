@@ -1,4 +1,4 @@
-﻿Shader "Unlit/mandragoraUnlit"
+﻿Shader "Mandragora/MandragoraUnlit"
 {
 	Properties
 	{
