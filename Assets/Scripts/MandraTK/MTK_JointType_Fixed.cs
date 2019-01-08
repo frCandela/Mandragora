@@ -10,7 +10,7 @@ public class MTK_JointType_Fixed : MTK_JointType
 
     public float breakForce = 1500f;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         if( !m_rigidbody )
             m_rigidbody = GetComponent<Rigidbody>();
@@ -20,6 +20,7 @@ public class MTK_JointType_Fixed : MTK_JointType
     {
         if( ! m_joint )
         {
+            m_rigidbody.velocity = Vector3.zero; // Prevent joint break
             m_joint = other.AddComponent<FixedJoint>();
             m_joint.connectedBody = m_rigidbody;
             m_joint.breakForce = breakForce;

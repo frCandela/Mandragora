@@ -8,7 +8,6 @@ public class SolarSystem : MonoBehaviour
     [SerializeField] public List<AK.Wwise.State> m_states = new List<AK.Wwise.State>();
     List<PlanetEffect> m_planetEffectsList = new List<PlanetEffect>();
 
-
     private Rigidbody m_rb;
 
     private void Awake()
@@ -19,7 +18,7 @@ public class SolarSystem : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         MTK_Interactable interactable = other.GetComponent<MTK_Interactable>();
-        if(interactable && interactable.isGrabbable)
+        if(interactable && interactable.isGrabbable && !interactable.isDistanceGrabbed)
         {
             PlanetEffect eff = (PlanetEffect)effectPrefab.AddEffectTo(other.gameObject);
             if (eff)

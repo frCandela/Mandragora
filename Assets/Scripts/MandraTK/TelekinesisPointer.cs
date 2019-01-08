@@ -38,9 +38,10 @@ public class TelekinesisPointer : MonoBehaviour
 	MTK_Interactable m_currentInteractable;
 	RaycastHit m_currentHit;
 
+
     public bool isAttracting { get { return m_joint.connectedBody || Target; } private set{} }
     public Rigidbody connectedBody { get { return m_joint.connectedBody; } }
-
+    
     bool m_attract;
 	float m_initDistanceToTarget;
 	float m_lastForceApplied;
@@ -140,7 +141,32 @@ public class TelekinesisPointer : MonoBehaviour
 		m_lastPos = transform.position;
 	}
 
-	void TriggerAttract(bool input)
+    void SetLevitation(MTK_Interactable interactable, bool value)
+    {
+        Rigidbody rb = interactable.GetComponent<Rigidbody>();
+        if(rb )
+        {
+            if (value)
+            {
+                interactable.UseEffects = false;
+                rb.velocity = Vector3.up / 20;
+                rb.angularVelocity = Random.onUnitSphere;
+            }
+            rb.useGravity = !value; // !gravity = levitate     
+        }         
+    }
+
+    bool IsLevitating(MTK_Interactable interactable)
+    {
+        Rigidbody rb = interactable.GetComponent<Rigidbody>();
+        if (rb)
+        {
+            return !rb.useGravity;
+        }
+        return false;
+    }
+
+    void TriggerAttract(bool input)
 	{
 		if(input)
 		{
@@ -150,7 +176,9 @@ public class TelekinesisPointer : MonoBehaviour
 
 				m_attract = true;
 				Target.UseEffects = false;
-				Target.Levitate = true;
+                Target.isDistanceGrabbed = true;
+
+                SetLevitation(Target, true);
 				m_fxManager.Activate("Grab", Target.transform);
 				m_fxManager.Activate("Grab_In", Target.transform);
 			}
@@ -164,13 +192,14 @@ public class TelekinesisPointer : MonoBehaviour
 
 			if(Target)
 			{
-				if(Target.Levitate)
+				if(IsLevitating(Target))
 					m_fxManager.Activate("Grab_Out", Target.transform);
 
-				Target.Levitate = false;
+                SetLevitation(Target, false);
 
 				Target.UseEffects = true;
-			}
+                Target.isDistanceGrabbed = false;
+            }
 
 			if(m_joint.connectedBody)
 				UnAttract();
@@ -181,8 +210,8 @@ public class TelekinesisPointer : MonoBehaviour
 
 	void Attract(Vector3 force)
 	{
-		Target.Levitate = false;
-		m_fxManager.DeActivate("Grab");
+        SetLevitation(Target, false);
+        m_fxManager.DeActivate("Grab");
 
 		m_joint.connectedBody = Target.GetComponent<Rigidbody>();
 		m_joint.connectedBody.AddForce(force.normalized * Mathf.Sqrt(force.magnitude) * m_initForceScale, ForceMode.Impulse);
@@ -206,7 +235,9 @@ public class TelekinesisPointer : MonoBehaviour
 		m_joint.connectedBody = null;
 		m_lastForceApplied = 0;
 
-		Target = null;
+        Target.isDistanceGrabbed = false;
+
+        Target = null;
 	}
 
 	void GrabIfTarget(MTK_Interactable input)
