@@ -9,6 +9,8 @@ public class Teleporter : MonoBehaviour {
 	[Header("Settings")]
 	[SerializeField, Range(0,1)]
 	float m_tolerance = 0.1f;
+	[SerializeField]
+	int m_countNeeded = 1;
 
 	[Header("Fade Time")]
 	[SerializeField, Range(0,1)] float m_fadeStart;
@@ -45,15 +47,16 @@ public class Teleporter : MonoBehaviour {
 	}
 
 	bool m_available = true;
-	int m_triggerCounter = 0;
 	float m_cancelTime;
+
+	bool m_active;
 	public bool Active 
 	{
 		set
 		{
-			m_triggerCounter += value ? 1 : -1;
+			m_active = value;
 
-			if(m_available && m_triggerCounter == 0)
+			if(m_available && !m_active)
 			{
 				if(TargetZone)
 				{
@@ -69,7 +72,7 @@ public class Teleporter : MonoBehaviour {
 	
 	void Update ()
 	{
-		if(m_triggerCounter == 2)
+		if(m_active)
 		{
 			Transform origin =	m_mtkManager.activeSetup.head.transform;
 		
@@ -83,7 +86,7 @@ public class Teleporter : MonoBehaviour {
 			}
 		}
 
-		if(m_triggerCounter < 2 && TargetZone && Time.time > m_cancelTime)
+		if(!m_active && TargetZone && Time.time > m_cancelTime)
 			TargetZone = null;
 	}
 
