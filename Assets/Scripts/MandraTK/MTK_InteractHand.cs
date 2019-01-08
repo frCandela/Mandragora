@@ -111,15 +111,17 @@ public class MTK_InteractHand : MonoBehaviour
 
             m_grabbed.jointType.onJointBreak.RemoveListener(Release);
             m_grabbed.jointType.RemoveJoint();
+
             Rigidbody rb = m_grabbed.GetComponent<Rigidbody>();
+            if(rb)
+            {
+                rb.velocity = m_inputManager.GetVelocity();
+                rb.angularVelocity = m_inputManager.GetAngularVelocity();
+            }
+
             m_grabbed.jointType.onJointBreak.RemoveListener(Release);
-            rb.velocity = m_inputManager.GetVelocity();
-            rb.angularVelocity = m_inputManager.GetAngularVelocity();
-
             m_grabbed = null;
-
             m_handAnimator.SetBool("Visible", true);
-
             m_handAnimator.SetBool("Grab", false);
         }
     }

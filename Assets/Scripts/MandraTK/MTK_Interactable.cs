@@ -21,26 +21,7 @@ public class MTK_Interactable : MonoBehaviour
     [SerializeField] AK.Wwise.Event m_wOnGrabStop;
     [SerializeField] UnityEvent m_onGrabSop;
 
-    Rigidbody m_rgbd;
-    public bool Levitate
-    {
-        get
-        {
-            return !m_rgbd.useGravity;
-        }
-        set
-        {
-            if(value)
-            {
-                UseEffects = false;
-
-                m_rgbd.velocity = Vector3.up / 20;
-                m_rgbd.angularVelocity = Random.onUnitSphere;
-            }
-
-            m_rgbd.useGravity = !value; // !gravity = levitate
-        }
-    }
+    public bool isDistanceGrabbed = false;
 
     public bool UseEffects
     {
@@ -59,8 +40,6 @@ public class MTK_Interactable : MonoBehaviour
             jointType = gameObject.AddComponent<MTK_JointType_Fixed>();
 
         MTK_InteractiblesManager.Instance.Subscribe(this);
-
-        m_rgbd = GetComponent<Rigidbody>();
     }
 
     private void OnDestroy()
@@ -73,7 +52,6 @@ public class MTK_Interactable : MonoBehaviour
     {
         if (input)
         {
-            m_rgbd.velocity = Vector3.zero; // Prevent joint break
             m_onGrabStart.Invoke();
             m_wOnGrabStart.Post(gameObject);
         }
