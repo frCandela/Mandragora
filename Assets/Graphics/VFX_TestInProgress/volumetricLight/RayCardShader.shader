@@ -1,4 +1,4 @@
-﻿Shader "Mandragora/PostalCardShader"
+﻿Shader "Mandragora/RayCardShader"
 {
 	Properties
 	{
@@ -7,6 +7,10 @@
 		_HighlightOpacity ("Highlight Opacity", Range(0,1)) = 0.5
 		_DistFade ("Distance Fade", float) = 0
 		_MaxInterDist ("Maximum Instersection Distance", float) = 0
+		_IntersectionIn ("IN Limit", Range(0,2)) = 0
+		_IntersectionOut ("OUT Limit", Range(0,2)) = 0
+		_FadeIn ("IN Fade", Range(0,1)) = 0
+		_FadeOut ("OUT Fade", Range(0,1)) = 0
 		_FresnelSensibility ("Fresnel Sensibility", Range(0,1)) = 0.25
 		_IsBackFace ("Is Back Face ?", Range(0,1)) = 1
 		_HighlightColor ("Highlight Color", Color) = (0,0,0,0)
@@ -15,6 +19,7 @@
 		_IsAlphaUV ("Is Alpha UV ?", Range(0,1)) = 1
 		_AlphaMaskPow ("Alpha Power (powX, powY, minX, minY)", Vector) = (2,2,0,0)
 		_Cursor ("Cursor", float) = 0
+
 	}
 	SubShader
 	{
@@ -53,7 +58,8 @@
 
 			fixed4 _Color, _HighlightColor;
 			float _Opacity, _HighlightOpacity, _DistFade;
-			float _MaxInterDist;
+			float _IntersectionOut, _IntersectionIn, _MaxInterDist;
+			float _FadeIn, _FadeOut;
 			float _Cursor, _FresnelSensibility, _IsAlphaTex, _IsAlphaUV, _IsBackFace;
 			float4 _AlphaMaskPow;
 			sampler2D _CameraDepthTexture, _AlphaMaskTex;
@@ -76,7 +82,7 @@
 				i.worldNormal = (facing * i.worldNormal) + ((1 - facing) * -i.worldNormal);
 
 				float3 toCam = _WorldSpaceCameraPos - i.worldPos; // Vector from vertex to camera
-				float dist = length(toCam);						  // distance vertex/camera
+				float dist = length(toCam);						// distance vertex/camera
 
 				// Distance Fade
 				float distFade = (dist - _ProjectionParams.y) / _DistFade;
@@ -92,13 +98,15 @@
 				float depthBuffer = Linear01Depth( tex2D(_CameraDepthTexture, screenUV).r);
 
 				// Vertex Depth
-				// with near/far distances
+					// with near/far distances
 				float vertexDepth = (i.screenPos.w - _ProjectionParams.y) / (_ProjectionParams.z - _ProjectionParams.y);
 
 
 				// Intersection
-				float intersectionValue = 1 - (depthBuffer - vertexDepth); // get base intersection
-				float highLight = saturate(intersectionValue / _MaxInterDist);
+				float intersectionValue = depthBuffer - vertexDepth; // get base intersection
+				intersectionValue = clamp(abs(intersectionValue / _MaxInterDist), 0, 1); // min 0 / max 1
+				//intersectionValue = 
+				float highLight = intersectionValue; // combine fadeIn and fadeOut
 
 
 				// Alpha Mask
@@ -126,13 +134,17 @@
 				// Apply
 				fixed4 col = _Color;
 
-				// Color
-				col.rgb = _HighlightColor.rgb; // with classic highlight
+					// Color
+				col.rgb = lerp(col.rgb, _HighlightColor.rgb, highLight); // with classic highlight
 
-				// Alpha
+					// Alpha
 				col.a = fresnel * distFade;
-				col.a *= _HighlightOpacity * highLight;
+				col.a *= _Opacity + _HighlightOpacity * highLight;
+				//col.a *= inValue;
 				col.a *= alphaMask;
+
+				// DEBUG
+				//col = fixed4(alphaMaskX, alphaMaskX, alphaMaskX, 1);
 
 				return col;
 			}
