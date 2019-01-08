@@ -11,6 +11,11 @@ public class MTK_InteractiblesManager : Singleton<MTK_InteractiblesManager>
 		m_grabbableesList.Add(input);
 	}
 
+	public void UnSubscribe(MTK_Interactable input)
+	{
+		m_grabbableesList.Remove(input);
+	}
+
 	public MTK_Interactable GetClosestToView(Transform pointer, float maxAngle)
 	{
 		float minAngle = maxAngle;
@@ -22,12 +27,15 @@ public class MTK_InteractiblesManager : Singleton<MTK_InteractiblesManager>
 
 		foreach (MTK_Interactable item in m_grabbableesList)
 		{
-			angle = Vector3.Angle(item.transform.position - pointerPos, pointerForward);
-
-			if(angle < minAngle)
+			if(item.isDistanceGrabbable)
 			{
-				closest = item;
-				minAngle = angle;
+				angle = Vector3.Angle(item.transform.position - pointerPos, pointerForward);
+
+				if(angle < minAngle)
+				{
+					closest = item;
+					minAngle = angle;
+				}
 			}
 		}
 
