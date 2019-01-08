@@ -13,10 +13,8 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
 
     private float m_baseDistance = 0f;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
-
         m_icoPlanet = transform.parent.GetComponent<IcoPlanet>();
         m_icoSegment = GetComponent<IcoSegment>();
     }
@@ -30,7 +28,7 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
     {
         if (m_editMode)
         {
-            return base.JointWithOverride(other);
+
         }
         else
         {
