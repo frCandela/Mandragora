@@ -6,6 +6,9 @@
 		_ShadowColor ("Shadow Color", Color) = (0,0,0,0)
 		_SpecPow ("Specular Power", float) = 48.0
 		_SpecularIntensity ("Specular Intensity", float) = 3
+		//_DepthDistance ("Depth Distance", float) = 1
+		//_DepthOpacity ("Depth Opacity", Range(0,1)) = 1
+		//_DepthColor ("Depth Color", Color) = (0,0,0,1)
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
@@ -21,13 +24,14 @@
 		sampler2D _MainTex;
 		fixed4 _Color, _EmissionColor, _ShadowColor;
 		float _Luminosity, _SpecPow, _SpecularIntensity;
+		//float _DepthOpacity, _DepthDistance;
+		//float4 _DepthColor;
 
 		struct MandragoraSurfaceFlatLitOutput
 		{
 			fixed3 Albedo;  // diffuse color
 			fixed3 Normal;  // tangent space normal, if written
 			fixed3 Emission;
-			//fixed Smoothness;
 			fixed Alpha;    // alpha for transparencies
 		};
 
@@ -54,14 +58,21 @@
 			float3x3 rotation = float3x3( IN.tangent.xyz, binormal, IN.normal );
 			
 			// get world space normal from position derivatives, and transform it to tangent space:
-			half3 flatNormal = - normalize(cross(ddx(IN.worldPos), ddy(IN.worldPos)));
+			half3 flatNormal = - normalize(cross(ddx(IN.worldPos), ddy(IN.worldPos))).xyz;
 			o.Normal = mul(rotation, flatNormal);
+
+			// Depth
+			//float distFromCam = length(_WorldSpaceCameraPos.xyz - IN.worldPos);
+			//float depth = saturate(distFromCam / _DepthDistance);
 
 			// Apply
 			fixed4 c = _Color;
 			o.Albedo = c.rgb + (c.rgb * _Luminosity);
 			o.Emission = _EmissionColor.rgb;
 			o.Alpha = c.a;
+
+			// shadow Color
+			o.Albedo.rgb = float3(max(o.Albedo.r, _ShadowColor.r), max(o.Albedo.g, _ShadowColor.g), max(o.Albedo.b, _ShadowColor.b));
 		}
 
 		half4 LightingMandragoraSurfaceFlatLit (MandragoraSurfaceFlatLitOutput s, half3 lightDir, half3 viewDir, float atten) {
@@ -102,15 +113,16 @@
 
 		void shadowColor (Input IN, MandragoraSurfaceFlatLitOutput o, inout fixed4 color) {
 
+			#if LIGHTPROBE_SH // Apply only on first pass
+			
 			fixed3 newColor;
-			fixed baseValue = max(max(color.r, color.g), color.b);
-			newColor = _ShadowColor * (1 - baseValue);
 
-			newColor.r = max(color.r, newColor.r);
-			newColor.g = max(color.g, newColor.g);
-			newColor.b = max(color.b, newColor.b);
+			newColor = float3(max(color.r, _ShadowColor.r), max(color.g, _ShadowColor.g), max(color.b, _ShadowColor.b));
 
 			color.rgb = newColor;
+
+			#endif
+
 		}
 
 		

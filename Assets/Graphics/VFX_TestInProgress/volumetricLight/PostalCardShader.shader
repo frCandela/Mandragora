@@ -15,6 +15,7 @@
 		_IsAlphaUV ("Is Alpha UV ?", Range(0,1)) = 1
 		_AlphaMaskPow ("Alpha Power (powX, powY, minX, minY)", Vector) = (2,2,0,0)
 		_Cursor ("Cursor", float) = 0
+		_PositiveNegativeDepth ("Positive(1) or negative(0) depth", Range(0,1)) = 1
 	}
 	SubShader
 	{
@@ -57,6 +58,7 @@
 			float _Cursor, _FresnelSensibility, _IsAlphaTex, _IsAlphaUV, _IsBackFace;
 			float4 _AlphaMaskPow;
 			sampler2D _CameraDepthTexture, _AlphaMaskTex;
+			float _PositiveNegativeDepth;
 			
 			v2f vert (appdata v)
 			{
@@ -97,8 +99,10 @@
 
 
 				// Intersection
-				float intersectionValue = 1 - (depthBuffer - vertexDepth); // get base intersection
-				float highLight = saturate(intersectionValue / _MaxInterDist);
+				float intersectionValue = (depthBuffer - vertexDepth); // get base intersection
+				float positiveHighLight = saturate(intersectionValue / _MaxInterDist);
+				float negativeHighLight = 1 - saturate(intersectionValue / _MaxInterDist);
+				float highLight = lerp(negativeHighLight, positiveHighLight, _PositiveNegativeDepth);
 
 
 				// Alpha Mask
