@@ -111,12 +111,11 @@ public class MTK_InteractHand : MonoBehaviour
 
             m_grabbed.jointType.onJointBreak.RemoveListener(Release);
             m_grabbed.jointType.RemoveJoint();
-
-            Rigidbody rb = m_grabbed.GetComponent<Rigidbody>();
-            if(rb)
+            
+            if(m_grabbed.jointType.rigidbody)
             {
-                rb.velocity = m_inputManager.GetVelocity();
-                rb.angularVelocity = m_inputManager.GetAngularVelocity();
+                m_grabbed.jointType.rigidbody.velocity = m_inputManager.GetVelocity();
+                m_grabbed.jointType.rigidbody.angularVelocity = m_inputManager.GetAngularVelocity();
             }
 
             m_grabbed.jointType.onJointBreak.RemoveListener(Release);

@@ -21,7 +21,7 @@ public class MTK_Interactable : MonoBehaviour
     [SerializeField] AK.Wwise.Event m_wOnGrabStop;
     [SerializeField] UnityEvent m_onGrabSop;
 
-    public bool isDistanceGrabbed = false;
+    [HideInInspector] public bool isDistanceGrabbed = false;
 
     public bool UseEffects
     {
