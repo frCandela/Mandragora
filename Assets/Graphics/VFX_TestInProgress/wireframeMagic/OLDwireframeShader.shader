@@ -1,4 +1,4 @@
-﻿Shader "Mandragora/OLDwireframeShader"
+﻿Shader "Custom/OLDwireframeShader"
 {
 	Properties
 	{

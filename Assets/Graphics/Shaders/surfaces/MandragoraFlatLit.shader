@@ -1,4 +1,4 @@
-﻿Shader "Custom/MandragoraFlatLit" {
+﻿Shader "Mandragora/MandragoraFlatLit" {
 	Properties {
 		_Color ("Color", Color) = (1,1,1,1)
 		_Luminosity ("Luminosity", float) = 0
@@ -27,7 +27,7 @@
 			fixed3 Albedo;  // diffuse color
 			fixed3 Normal;  // tangent space normal, if written
 			fixed3 Emission;
-			fixed Smoothness;
+			//fixed Smoothness;
 			fixed Alpha;    // alpha for transparencies
 		};
 
@@ -54,8 +54,7 @@
 			float3x3 rotation = float3x3( IN.tangent.xyz, binormal, IN.normal );
 			
 			// get world space normal from position derivatives, and transform it to tangent space:
-			half3 flatNormal = -normalize(cross(ddx(IN.worldPos), ddy(IN.worldPos)));
-			//o.FlatNormal = mul(rotation, flatNormal);
+			half3 flatNormal = - normalize(cross(ddx(IN.worldPos), ddy(IN.worldPos)));
 			o.Normal = mul(rotation, flatNormal);
 
 			// Apply
@@ -69,7 +68,6 @@
 
 			// Light Process
             float NdotL = dot (s.Normal, lightDir);
-			//float diff = NdotL * 0.5 + 0.5;
 			float lighting = saturate(atten * NdotL);
 
 			// Specular
@@ -83,28 +81,10 @@
 			spec *= _SpecularIntensity;
 			float3 specColor = (s.Albedo + _LightColor0.rgb)/2;
 
-			// Shadow Color
-			//float3 shadowCol = (1 - lighting) * _ShadowColor.rgb;
 			
 			// Apply
 			float4 c;
-    		c.rgb = (s.Albedo * _LightColor0.rgb * lighting) + ((spec * _LightColor0 + spec * s.Albedo) * atten);
-
-			// baseShadow
-			/*#if LIGHTPROBE_SH
-			c.rgb += shadowCol;
-			#else
-			#endif*/
-
-			// DEBUG
-			//c.rgb = half3(shadowCol.rgb);
-			/*
-			#if LIGHTPROBE_SH  // first pass
-			#else
-			c.rgb = half3(shadowCol.rgb);
-			#endif
-			*/
-			
+    		c.rgb = (s.Albedo * _LightColor0.rgb * lighting) + ((spec * _LightColor0 + spec * s.Albedo) * atten);	
 			
             c.a = 1.0;
             return c;

@@ -37,6 +37,7 @@
 				float4 screenPos : TEXCOORD2;
              };
 
+			// Uses Geometry Shader
 			struct InterpolatorsGeometry {
 				InterpolatorsVertex data;
 				float2 barycentricCoordinates : TEXCOORD3;
@@ -53,6 +54,7 @@
 				return o;
 			}
 
+			//////////// GEOMETRY SHADER /////////////////////
 			[maxvertexcount(3)]
 			void geo (triangle InterpolatorsVertex i[3], inout TriangleStream<InterpolatorsGeometry> stream)
 			{
@@ -62,6 +64,7 @@
 				g1.data = i[1];
 				g2.data = i[2];
 
+				// Stores barycentric coordinates used to make wireframe
 				g0.barycentricCoordinates = float2(1, 0);
 				g1.barycentricCoordinates = float2(0, 1);
 				g2.barycentricCoordinates = float2(0, 0);
