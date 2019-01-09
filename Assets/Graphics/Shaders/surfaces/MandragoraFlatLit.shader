@@ -6,9 +6,7 @@
 		_ShadowColor ("Shadow Color", Color) = (0,0,0,0)
 		_SpecPow ("Specular Power", float) = 48.0
 		_SpecularIntensity ("Specular Intensity", float) = 3
-		//_DepthDistance ("Depth Distance", float) = 1
-		//_DepthOpacity ("Depth Opacity", Range(0,1)) = 1
-		//_DepthColor ("Depth Color", Color) = (0,0,0,1)
+		_DepthDistance ("Depth Distance", float) = 40
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
@@ -24,8 +22,7 @@
 		sampler2D _MainTex;
 		fixed4 _Color, _EmissionColor, _ShadowColor;
 		float _Luminosity, _SpecPow, _SpecularIntensity;
-		//float _DepthOpacity, _DepthDistance;
-		//float4 _DepthColor;
+		float _DepthDistance;
 
 		struct MandragoraSurfaceFlatLitOutput
 		{
@@ -61,9 +58,6 @@
 			half3 flatNormal = - normalize(cross(ddx(IN.worldPos), ddy(IN.worldPos))).xyz;
 			o.Normal = mul(rotation, flatNormal);
 
-			// Depth
-			//float distFromCam = length(_WorldSpaceCameraPos.xyz - IN.worldPos);
-			//float depth = saturate(distFromCam / _DepthDistance);
 
 			// Apply
 			fixed4 c = _Color;
@@ -71,8 +65,11 @@
 			o.Emission = _EmissionColor.rgb;
 			o.Alpha = c.a;
 
+
 			// shadow Color
 			o.Albedo.rgb = float3(max(o.Albedo.r, _ShadowColor.r), max(o.Albedo.g, _ShadowColor.g), max(o.Albedo.b, _ShadowColor.b));
+			//depth
+
 		}
 
 		half4 LightingMandragoraSurfaceFlatLit (MandragoraSurfaceFlatLitOutput s, half3 lightDir, half3 viewDir, float atten) {
@@ -85,6 +82,7 @@
 			float3 h = normalize(viewDir + lightDir);
 			float nh = max(0, dot(s.Normal, h));
 			float spec = pow(nh, _SpecPow);
+
 			// Fresnel to atten specular
 			float fresnel = max(0, dot(viewDir, s.Normal));
 			float specAtten = pow(1 - fresnel, 2);
@@ -96,7 +94,6 @@
 			// Apply
 			float4 c;
     		c.rgb = (s.Albedo * _LightColor0.rgb * lighting) + ((spec * _LightColor0 + spec * s.Albedo) * atten);	
-			
             c.a = 1.0;
             return c;
         }
@@ -122,6 +119,14 @@
 			color.rgb = newColor;
 
 			#endif
+
+			// Depth
+			float distFromCam = length(_WorldSpaceCameraPos.xyz - IN.worldPos);
+			float depth = 1 - saturate(distFromCam / _DepthDistance);
+
+			float moyAlbedo = (color.r + color.g + color.b)/3;
+			float3 depthColor = float3(moyAlbedo, moyAlbedo, moyAlbedo);
+			color.rgb = lerp(depthColor, color.rgb, depth);
 
 		}
 

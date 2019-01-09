@@ -2,10 +2,11 @@
 {
 	Properties
 	{
-		_Color ("Color", Color) = (1,1,1,1)
-		_FresnelIntensity ("Fresnel Intensity", Range(0,1)) = 0
-		_LightDistFactor ("Light Distance Attenuation", float) = 1
-		_DepthAttenFactor ("Depth Attenuation Factor", float) = 1
+		_Color ("Color", Color) = (0.3, 0.3, 0.3, 1)
+		_FresnelIntensity ("Fresnel Intensity", Range(0,1)) = 0.21
+		_LightDistFactor ("Light Distance Attenuation", float) = 6.42
+		_DepthAttenFactor ("Depth Attenuation Factor", float) = 3.5
+		_DepthColor ("Depth Color", Color) = (0,0,0,0)
 	}
 	SubShader
 	{
@@ -43,7 +44,7 @@
 				float3 lighting : TEXCOORD1;
 			};
 
-			float4 _Color;
+			float4 _Color, _DepthColor;
 			float _FresnelIntensity, _LightDistFactor, _DepthAttenFactor;
 			
 			v2f vert (appdata v)
@@ -89,13 +90,11 @@
 				fresnel = saturate(fresnel);
 
 				// Lighting
-				float3 lightColor = i.lighting;
+				float3 lightColor = clamp(i.lighting, 0, 2);
 
 				// Apply
 				fixed4 col = fixed4(i.color.rgb * lightColor * fresnel, i.color.a * fresnel);
-				float3 depthColor = (col.r + col.g + col.b)/3;
-				col.rgb = lerp(depthColor, col.rgb, depthAtten);
-				col.a *= depthAtten;
+				col = lerp(_DepthColor, col, depthAtten);
 				return col;
 			}
 			ENDCG
