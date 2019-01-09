@@ -10,7 +10,12 @@ public class MTK_Interactable : MonoBehaviour
     [SerializeField] public bool isGrabbable = true;
     [SerializeField] public bool isDistanceGrabbable = true;
     [SerializeField] public bool isDroppable = true;
-    [HideInInspector] public MTK_JointType jointType = null;
+
+    public MTK_JointType jointType { get { return m_joints[m_indexJointUsed]; } }
+    private MTK_JointType[] m_joints;
+
+    public int m_indexJointUsed = 0;
+    public int IndexJointUsed { get { return m_indexJointUsed; } set { m_indexJointUsed = Mathf.Clamp(value, 0, m_joints.Length - 1); } }
 
     [SerializeField] AK.Wwise.Event m_wOnUseStart;
     [SerializeField] UnityEvent m_onUseStart;
@@ -35,9 +40,9 @@ public class MTK_Interactable : MonoBehaviour
     // Use this for initialization
     void Awake ()
     {
-        jointType = GetComponent<MTK_JointType>();
-        if (!jointType)
-            jointType = gameObject.AddComponent<MTK_JointType_Fixed>();
+        m_joints = GetComponents<MTK_JointType>();
+        if (m_joints.Length == 0)
+            m_joints = new[]{ gameObject.AddComponent<MTK_JointType_Fixed>()};
 
         MTK_InteractiblesManager.Instance.Subscribe(this);
     }

@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(DropZone))]
 public class PlanetScalerPro : MonoBehaviour
 {
     [Header("Scaling parameters")]
     [SerializeField, Range(0, 10f)] private float m_maxScaleRatio = 2f;
     [SerializeField, Range(0, 10f)] private float m_minScaleRatio = 0.5f;
 
-    [Header("References")]
-    [SerializeField] private DropZone m_dropZone;
-    [SerializeField] private GameObject m_scaleSphere;
+    private DropZone m_dropzone;
+    private IcoPlanet m_icoPlanet;
 
     private ConfigurableJoint m_confJoint;
     private ScaleEffect m_scaleEffect;
     private MTK_JointType m_scaleSphereJoint;
+
+
     [SerializeField] private float m_baseDist = -1f;
     [SerializeField] private float m_baseScale = -1f;
     [SerializeField] private float m_intermediateScale = -1f;
@@ -23,22 +25,25 @@ public class PlanetScalerPro : MonoBehaviour
     // Use this for initialization
     void Awake ()
     {
-        m_confJoint = m_scaleSphere.GetComponent<ConfigurableJoint>();
-        m_dropZone.onObjectCatched.AddListener(EnableScaling);
-        m_baseScale = m_scaleSphere.transform.localScale.x;
-        m_scaleSphere.SetActive(false);
+        m_dropzone = GetComponent<DropZone>();
+        m_dropzone.onObjectCatched.AddListener(EnableScaling);
+
+        //m_confJoint = m_scaleSphere.GetComponent<ConfigurableJoint>();
+        //m_dropZone.onObjectCatched.AddListener(EnableScaling);
+        //m_baseScale = m_scaleSphere.transform.localScale.x;
+        // m_scaleSphere.SetActive(false);
     }
 
 
     private void Start()
     {
-        m_scaleSphereJoint = m_scaleSphere.GetComponent<MTK_JointType>();
+        //m_scaleSphereJoint = m_scaleSphere.GetComponent<MTK_JointType>();
     }
     
     void Update ()
     {
         // If the scale sphere is grabbed
-        if(m_scaleSphereJoint.Used())
+       /* if(m_scaleSphereJoint.Used())
         {
             // Set reference values if not set
             if (m_baseDist == -1f)
@@ -69,26 +74,39 @@ public class PlanetScalerPro : MonoBehaviour
         else
         {
             m_baseDist = -1f;
-        }
+        }*/
     }
     
     void EnableScaling(bool state)
     {
         if (state)
         {
-            m_scaleSphere.SetActive(true);
+            m_icoPlanet = m_dropzone.catchedObject.GetComponent<IcoPlanet>();
+            if (m_icoPlanet)
+            {
+                MTK_Interactable interactable = m_icoPlanet.GetComponent<MTK_Interactable>();
+                interactable.isDistanceGrabbable = false;
+                interactable.IndexJointUsed = 1;
+
+               /* foreach( IcoSegment segment in m_icoPlanet.Segments )
+                {
+                    segment.GetComponent<MTK_Interactable>().isGrabbable = true;
+                }*/
+            }
+
+            /*m_scaleSphere.SetActive(true);
             m_scaleEffect = m_dropZone.catchedObject.GetComponent<ScaleEffect>();
             if (!m_scaleEffect)
             {
                 m_scaleEffect = m_dropZone.catchedObject.gameObject.AddComponent<ScaleEffect>();
                 m_scaleEffect.ApplyEffect();
-            }
+            }*/
 
         }
         else
         {
-            m_scaleSphere.SetActive(false);
-            m_scaleEffect = null;
+           /* m_scaleSphere.SetActive(false);
+            m_scaleEffect = null;*/
         }
     }
 }

@@ -86,7 +86,6 @@ public class MTK_InteractHand : MonoBehaviour
     {
         if(obj)
         {
-            print(obj.name);
             obj.Grab(true);
 
             if (obj.jointType.Used())

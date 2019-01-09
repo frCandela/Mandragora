@@ -16,8 +16,9 @@ public class IcoPlanet : MonoBehaviour
     [Header("Data")]
     [SerializeField]  private int trianglesCount;
 
-    [SerializeField, HideInInspector] private List<Vector3> m_vertices;
-    [SerializeField, HideInInspector] private List<IcoSegment> m_segments;
+    [SerializeField] private List<Vector3> m_vertices;
+    [SerializeField] private List<IcoSegment> m_segments;
+    public List<IcoSegment> Segments { get { return m_segments; } }
 
     // Use this for initialization
     void Start()
