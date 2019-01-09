@@ -39,11 +39,16 @@ public class MTK_Interactable : MonoBehaviour
         if (!jointType)
             jointType = gameObject.AddComponent<MTK_JointType_Fixed>();
 
-        if(isDistanceGrabbable)
-            MTK_InteractiblesManager.Instance.Subscribe(this);
+        MTK_InteractiblesManager.Instance.Subscribe(this);
     }
 
-    public void Grab(bool input)
+    private void OnDestroy()
+    {
+        if(MTK_InteractiblesManager.Instance)
+            MTK_InteractiblesManager.Instance.UnSubscribe(this);
+    }
+
+    public virtual void Grab(bool input)
     {
         if (input)
         {

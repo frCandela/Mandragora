@@ -148,6 +148,7 @@ public class TelekinesisPointer : MonoBehaviour
         {
             if (value)
             {
+				interactable.GetComponent<Rigidbody>().isKinematic = false;
                 interactable.UseEffects = false;
                 rb.velocity = Vector3.up / 20;
                 rb.angularVelocity = Random.onUnitSphere;

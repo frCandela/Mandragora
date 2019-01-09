@@ -1,16 +1,17 @@
-﻿Shader "Custom/StarOutlineShader"
+﻿Shader "Mandragora/StarOutlineShader"
 {
 	Properties
 	{
 		_Color("Color", Color) = (1, 1, 1, 1)
 		_Luminosity ("Luminosity", float) = 1
-		_OutlineExtrusion("[S] Spikes Extrusion", float) = 0
-		_OutlineColor("[S] Spikes Color", Color) = (0, 0, 0, 1)
-		_Speed ("[S] Speed", float) = 1
-		_PowDist ("[S] Length Visibility", float) = 2
-		_PowFraction ("[S] Opacity smooth", float) = 2
-		_MaxLocalDist ("Max Local Distance", float) = 5.68
-		_MinLocalDist ("Min Local Distance", float) = 1.4
+		_OutlineExtrusion("[S] Spikes Extrusion", float) = 0.19
+		_OutlineColor("[S] Spikes Color", Color) = (1, 1, 1, 1)
+		_Speed ("[S] Speed", float) = 0.73
+		_PowDist ("[S] Length Visibility", float) = 18.6
+		_PowFraction ("[S] Opacity smooth", float) = 4
+		_MaxLocalDist ("Max Local Distance", float) = 20.88
+		_MinLocalDist ("Min Local Distance", float) = 7.3
+		// Scale depending on the mesh local vertices, SETUP IT FIRST
 		_Scale ("[PAS TOUCHER] Scale", float) = 1
 	}
 
@@ -157,8 +158,8 @@
 				dist = pow(dist, _PowDist);
 				dist *= frac;
 				dist = saturate(dist);
+				
 				return float4(_OutlineColor.rgb, _OutlineColor.a * dist);
-				//return float4(dist, dist, dist, dist);
 			}
 
 			ENDCG
