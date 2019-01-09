@@ -97,10 +97,13 @@ public class DropZone : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        MTK_Interactable interactable = other.GetComponent<MTK_Interactable>();
-        if(interactable && interactable.isDroppable)
+        if (other.attachedRigidbody)
         {
-            Catch(interactable);            
+            MTK_Interactable interactable = other.attachedRigidbody.GetComponent<MTK_Interactable>();
+            if (interactable && interactable.isDroppable)
+            {
+                Catch(interactable);
+            }
         }
     }
 
