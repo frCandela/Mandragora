@@ -21,7 +21,7 @@ public class MTK_Interactable : MonoBehaviour
     [SerializeField] AK.Wwise.Event m_wOnGrabStop;
     [SerializeField] UnityEvent m_onGrabSop;
 
-    public bool isDistanceGrabbed = false;
+    [HideInInspector] public bool isDistanceGrabbed = false;
 
     public bool UseEffects
     {
@@ -36,7 +36,7 @@ public class MTK_Interactable : MonoBehaviour
     void Awake ()
     {
         jointType = GetComponent<MTK_JointType>();
-        if (isGrabbable && !jointType)
+        if (!jointType)
             jointType = gameObject.AddComponent<MTK_JointType_Fixed>();
 
         MTK_InteractiblesManager.Instance.Subscribe(this);

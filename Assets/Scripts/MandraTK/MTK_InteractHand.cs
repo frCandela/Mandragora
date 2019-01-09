@@ -86,6 +86,7 @@ public class MTK_InteractHand : MonoBehaviour
     {
         if(obj)
         {
+            print(obj.name);
             obj.Grab(true);
 
             if (obj.jointType.Used())
@@ -111,12 +112,11 @@ public class MTK_InteractHand : MonoBehaviour
 
             m_grabbed.jointType.onJointBreak.RemoveListener(Release);
             m_grabbed.jointType.RemoveJoint();
-
-            Rigidbody rb = m_grabbed.GetComponent<Rigidbody>();
-            if(rb)
+            
+            if(m_grabbed.jointType.rigidbody)
             {
-                rb.velocity = m_inputManager.GetVelocity();
-                rb.angularVelocity = m_inputManager.GetAngularVelocity();
+                m_grabbed.jointType.rigidbody.velocity = m_inputManager.GetVelocity();
+                m_grabbed.jointType.rigidbody.angularVelocity = m_inputManager.GetAngularVelocity();
             }
 
             m_grabbed.jointType.onJointBreak.RemoveListener(Release);
@@ -129,8 +129,10 @@ public class MTK_InteractHand : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         MTK_Interactable candidate = other.GetComponent<MTK_Interactable>();
+        if (  (!candidate || !candidate.isGrabbable) && other.attachedRigidbody)
+            candidate = other.attachedRigidbody.GetComponent<MTK_Interactable>();
 
-        if(candidate)
+        if (candidate && candidate.isGrabbable)
         {
             m_objectsInTrigger.Add(candidate);
             m_onTouchInteractable.Invoke(candidate);
@@ -140,12 +142,14 @@ public class MTK_InteractHand : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         MTK_Interactable candidate = other.GetComponent<MTK_Interactable>();
-        
-        if(candidate)
+        if ((!candidate || !candidate.isGrabbable) && other.attachedRigidbody)
+            candidate = other.attachedRigidbody.GetComponent<MTK_Interactable>();
+
+        if (candidate && candidate.isGrabbable)
         {
             m_objectsInTrigger.Remove(candidate);
             m_onUnTouchInteractable.Invoke(candidate);
-        }
+        }        
     }
 
     MTK_Interactable GetClosestInteractable()
@@ -159,7 +163,7 @@ public class MTK_InteractHand : MonoBehaviour
         {
             tmpDist = Vector3.Distance(transform.position, candidate.transform.position);
 
-            if(tmpDist < minDistance)
+            if(tmpDist < minDistance && candidate.isGrabbable)
                 result = candidate;
         }
 
