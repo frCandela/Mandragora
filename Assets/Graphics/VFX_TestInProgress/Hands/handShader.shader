@@ -1,4 +1,7 @@
-﻿Shader "Mandragora/handShader"
+﻿//// This Shader is using VERTEX COLOR RED CHANNEL to display
+
+
+Shader "Mandragora/handShader"
 {
 	Properties
 	{
@@ -45,18 +48,15 @@
 			{
 				float4 vertex : POSITION;
 				float3 color : COLOR;
-				//float3 normal: NORMAL;
 			};
 
 			struct v2g
 			{
 				float4 vertex : SV_POSITION;
-				//float3 normal : NORMAL;
 				float3 flatNormal : TEXCOORD3;
 				float3 color : COLOR;
 				float3 worldVertex : TEXCOORD2;
 				float4 screenPos : TEXCOORD1;
-				//float3 worldReflection : TEXCOORD4;
 			};
 
 			struct g2f
@@ -82,13 +82,11 @@
 				o.screenPos = ComputeScreenPos(o.vertex);
 				o.color = v.color;
 				o.flatNormal = float3(0,0,0);
-				//o.normal = UnityObjectToWorldNormal(v.normal);
-				//float3 worldViewDir = normalize(UnityWorldSpaceViewDir(o.worldVertex));
-				//o.worldReflection = reflect(-worldViewDir, o.normal);
 				return o;
 			}
 
 
+			///////////// GEOMETRY SHADER //////////////////
 			[maxvertexcount(3)]
 			void geo (triangle v2g i[3], inout TriangleStream<g2f> stream)
 			{
@@ -96,23 +94,25 @@
 				float3 p1 = i[1].worldVertex.xyz;
 				float3 p2 = i[2].worldVertex.xyz;
 
-				float3 triangleNormal = normalize(cross(p1 - p0, p2 - p0));
-
+				float3 triangleNormal = normalize(cross(p1 - p0, p2 - p0)); // get the normal of the face
+				// store it in flatNormal
 				i[0].flatNormal = triangleNormal;
 				i[1].flatNormal = triangleNormal;
 				i[2].flatNormal = triangleNormal;
 
+				// new vertices
 				g2f g0, g1, g2;
 				g0.data = i[0];
 				g1.data = i[1];
 				g2.data = i[2];
 
+				// Apply
 				stream.Append(g0);
 				stream.Append(g1);
 				stream.Append(g2);
 			}
 
-
+			// 3D rotation matrix
 			float3 rotate4x4(float3 source, float3 angles) {
 				float radX = radians(angles.x);
 				float radY = radians(angles.y);
@@ -162,19 +162,19 @@
 				float3 directionalLightDir = normalize(_WorldSpaceLightPos0.xyz);
 				float3 pointLightDir = normalize(worldPosition - _WorldSpaceLightPos0.xyz);
 				float3 lightDir = lerp(directionalLightDir, pointLightDir, lightID);
-				// Process Reflection with this particular Light
+
+				// Process Reflection with this Light
 				float3 H = normalize(lightDir + toCam);
 				float NdotH = 1 - saturate(dot(flatNormals, H));
 				NdotH = pow(NdotH, _ReflexionPower);
 				float3 lightReflexion = NdotH * _LightColor0.rgb * _ReflexionIntensity * redVertexColor;
 				lightReflexion *= facing;
 
-				
 
-
-				// Calculate Fresnel that multiplw with Flow Texture
+				// Calculate Fresnel that multiply with Flow Texture
 				float fresnel = dot(toCam, flatNormals);
-				fresnel = pow(saturate(1 - fresnel), _FresnelPow);
+				fresnel = 1 - fresnel;
+				fresnel = pow(saturate(fresnel), _FresnelPow);
 				fresnel *= _FresnelFlowIntensity;
 
 				// Get Screen UVs
@@ -215,6 +215,7 @@
 				starsCol *= _VertexColorMultiply * redVertexColor;
 
 
+				// Apply
 				fixed4 col = fixed4(0,0,0,1);
 				col.rgb = starsCol;
 				col.rgb += lightReflexion;

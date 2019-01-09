@@ -4,7 +4,6 @@
 	{
 		_Color ("Color", Color) = (1,1,1,1)
 		_FresnelIntensity ("Fresnel Intensity", Range(0,1)) = 0
-		//_GlitterFrequency ("GlitterFrequency", float) = 0
 	}
 	SubShader
 	{
@@ -41,7 +40,6 @@
 
 			float4 _Color;
 			float _FresnelIntensity;
-			//float _GlitterFrequency;
 			
 			v2f vert (appdata v)
 			{
@@ -56,6 +54,9 @@
 			fixed4 frag (v2f i, fixed facing : VFACE) : SV_Target
 			{
 
+				//facing = sign(facing) * 0.5 + 0.5;
+				//i.normal = (facing * i.normal) + ((1 - facing) * -i.normal);
+
 				float3 invertedNormal = - i.normal;
 				facing = step(1, facing);
 				i.normal = lerp(invertedNormal, i.normal, facing);
@@ -66,9 +67,6 @@
 				float fresnel = dot(toCam, i.normal);
 				fresnel = (fresnel - _FresnelIntensity) / (1 - _FresnelIntensity);
 				fresnel = saturate(fresnel);
-
-				//float cosTime = cos(_Time.y * _GlitterFrequency) * 0.5 + 0.5;
-				//fresnel = fresnel * cosTime;
 
 				fixed4 col = _Color;
 				col = fixed4(i.color.rgb * fresnel, i.color.a * fresnel);

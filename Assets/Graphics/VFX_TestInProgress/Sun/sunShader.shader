@@ -1,4 +1,4 @@
-﻿Shader "Unlit/sunShader"
+﻿Shader "Unlit/SunShaderV1"
 {
 	Properties
 	{

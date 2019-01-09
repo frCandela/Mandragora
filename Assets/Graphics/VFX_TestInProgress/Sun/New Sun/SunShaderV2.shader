@@ -1,4 +1,4 @@
-﻿Shader "Unlit/NewSunShader"
+﻿Shader "Unlit/SunShaderV2"
 {
 	Properties
 	{
@@ -32,8 +32,6 @@
 		LOD 100
 
 		Blend SrcAlpha OneMinusSrcAlpha
-		//Zwrite Off
-		//Cull off
 
 		// Grab the screen behind the object into _BackgroundTexture
         GrabPass
@@ -71,7 +69,6 @@
 			struct g2f
 			{
 				v2g data;
-				float2 barycentricCoordinates : TEXCOORD3;
 			};
 
 			sampler2D _MainTex, _FlowMap, _BackgroundTexture;
@@ -124,15 +121,12 @@
 				g1.data = i[1];
 				g2.data = i[2];
 
-				g0.barycentricCoordinates = float2(1, 0);
-				g1.barycentricCoordinates = float2(0, 1);
-				g2.barycentricCoordinates = float2(0, 0);
-
 				stream.Append(g0);
 				stream.Append(g1);
 				stream.Append(g2);
 			}
 
+			///////// FLOW PROCESS ////////////////
 			float2 flowProcess(float2 flow, float freq, float timeOffset) {
 				flow = flow * 2 - 1; // Get flow between -1 / 1
 				float time = _Time.y * _FlowFreq;
@@ -162,7 +156,7 @@
 
 
 
-				// Flat Fresnel
+				// Flat Fresnel + lastFresnel
 				float flatFresnel = dot(toCam, i.data.flatNormal);
 				float lastFresnel = flatFresnel;
 				flatFresnel = (flatFresnel - _FlatFresnelIntensity) / (1 - _FlatFresnelIntensity);
@@ -181,8 +175,6 @@
 				smoothFresnel = pow(smoothFresnel, _SFresnelPow);
 				smoothFresnel = saturate(smoothFresnel);
 
-				// Combine Fresnels
-				float fresnel = saturate(smoothFresnel + flatFresnel);
 
 				//Triplanar Z
 				float2 triplanarUVz = float2(
@@ -233,27 +225,26 @@
 				float3 grabTex = tex2Dproj(_BackgroundTexture, i.data.grabPos + distortion).rgb;
 
 
-
+				// Apply Smooth and Flat Fresnel
 				fixed4 col = _Color1 * (smoothFresnel + (triplanarTexture.r * 0.5 - 0.5));
 				col += _Color1 * triplanarTexture.r * smoothFresnel;
 				col += _Color2 * (1 - triplanarTexture.r) * smoothFresnel;
 				col += _Color3 * flatFresnel;
 				
 				col = max(_Color2 * 0.2 * (1 - smoothFresnel) * (1 - triplanarTexture.r), col);
-				
-
-
+		
+				// Apply distortion to the mesh INSIDE the sphere
 				float3 color = (col.rgb * col.a) + ((1 - col.a) * grabTex);
 				color.rgb = max(_Color1.rgb * 0.1, color.rgb);
 				color.rgb = max(_Color4.rgb * lastFresnel * _Color4.a * _LastFresnelLuminosity, color.rgb);
 				float alpha = 1;
 
-				//Applay General Luminosity
+				//Apply General Luminosity
 				float3 saturateCol = saturate(color);
 				color = lerp(saturateCol, color, _GeneralLuminosity);
 
 				col = fixed4(color, alpha);
-				//col.rgb = 1 - grabTex;
+
 				return col;
 			}
 			ENDCG
