@@ -11,7 +11,7 @@ public abstract class MTK_JointType : MonoBehaviour
     [SerializeField] protected Joint m_joint;
     [SerializeField] protected GameObject m_connectedGameobject;
 
-    public Rigidbody rigidbody;
+    public new Rigidbody rigidbody;
     public Joint joint { get { return m_joint; } }
     public GameObject connectedGameobject { get { return m_connectedGameobject; } }
 

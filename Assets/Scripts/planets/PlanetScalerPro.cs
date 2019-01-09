@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(DropZone))]
+[RequireComponent(typeof(ConfigurableJoint))]
 public class PlanetScalerPro : MonoBehaviour
 {
     [Header("Scaling parameters")]
@@ -11,11 +12,9 @@ public class PlanetScalerPro : MonoBehaviour
 
     private DropZone m_dropzone;
     private IcoPlanet m_icoPlanet;
-
     private ConfigurableJoint m_confJoint;
     private ScaleEffect m_scaleEffect;
-    private MTK_JointType m_scaleSphereJoint;
-
+    private MTK_JointType m_catchedObjectJoint;
 
     [SerializeField] private float m_baseDist = -1f;
     [SerializeField] private float m_baseScale = -1f;
@@ -27,54 +26,62 @@ public class PlanetScalerPro : MonoBehaviour
     {
         m_dropzone = GetComponent<DropZone>();
         m_dropzone.onObjectCatched.AddListener(EnableScaling);
-
-        //m_confJoint = m_scaleSphere.GetComponent<ConfigurableJoint>();
-        //m_dropZone.onObjectCatched.AddListener(EnableScaling);
-        //m_baseScale = m_scaleSphere.transform.localScale.x;
-        // m_scaleSphere.SetActive(false);
-    }
-
-
-    private void Start()
-    {
-        //m_scaleSphereJoint = m_scaleSphere.GetComponent<MTK_JointType>();
+        m_confJoint = GetComponent<ConfigurableJoint>();
     }
     
+
+    public float ratioTest;
     void Update ()
     {
         // If the scale sphere is grabbed
-       /* if(m_scaleSphereJoint.Used())
+        if(m_dropzone.catchedObject.jointType && m_dropzone.catchedObject.jointType.Used())
         {
-            // Set reference values if not set
+            print(m_dropzone.catchedObject.jointType.name);
+            Debug.DrawLine(transform.position, m_catchedObjectJoint.connectedGameobject.transform.position, Color.red);
+
             if (m_baseDist == -1f)
             {
-                m_baseDist = Vector3.Distance(m_scaleSphereJoint.joint.transform.position, transform.position);
-                m_intermediateScale = m_scaleSphere.transform.localScale.x;
-                m_baseRotation = m_dropZone.transform.rotation;
+                m_baseDist = Vector3.Distance(transform.position, m_catchedObjectJoint.connectedGameobject.transform.position);
+                m_baseRotation = m_dropzone.transform.rotation;
             }
 
-            float distance = Vector3.Distance(m_scaleSphereJoint.joint.transform.position, transform.position);
+            float distance = Vector3.Distance(transform.position, m_catchedObjectJoint.connectedGameobject.transform.position);
             float ratio = distance / m_baseDist;
             float scale = Mathf.Clamp(ratio * m_intermediateScale, m_minScaleRatio * m_baseScale, m_maxScaleRatio * m_baseScale);
             float realRatio = scale / m_baseScale;
 
-            // Scale sphere & planet
-            m_scaleSphere.transform.localScale = new Vector3(scale , scale , scale );
-            if (m_scaleEffect)
-            {
-                m_scaleEffect.transform.localScale = realRatio * m_scaleEffect.originalScale;
-            }
+            ratioTest = m_baseDist;
 
-            //Set anchor point
-            m_scaleSphereJoint.joint.connectedAnchor = m_scaleSphereJoint.joint.connectedBody.transform.InverseTransformPoint(m_scaleSphereJoint.joint.transform.position);
+            // Set reference values if not set
+            /* if (m_baseDist == -1f)
+             {
+                 m_baseDist = Vector3.Distance(m_catchedObjectJoint.joint.transform.position, transform.position);
+                 m_intermediateScale = m_scaleSphere.transform.localScale.x;
+                 m_baseRotation = m_dropZone.transform.rotation;
+             }
+             
+             float distance = Vector3.Distance(m_scaleSphereJoint.joint.transform.position, transform.position);
+             float ratio = distance / m_baseDist;
+             float scale = Mathf.Clamp(ratio * m_intermediateScale, m_minScaleRatio * m_baseScale, m_maxScaleRatio * m_baseScale);
+             float realRatio = scale / m_baseScale;
 
-            // Set rotation
-            m_dropZone.transform.rotation = m_scaleSphere.transform.rotation;
+             // Scale sphere & planet
+             m_scaleSphere.transform.localScale = new Vector3(scale , scale , scale );
+             if (m_scaleEffect)
+             {
+                 m_scaleEffect.transform.localScale = realRatio * m_scaleEffect.originalScale;
+             }
+
+             //Set anchor point
+             m_scaleSphereJoint.joint.connectedAnchor = m_scaleSphereJoint.joint.connectedBody.transform.InverseTransformPoint(m_scaleSphereJoint.joint.transform.position);
+
+             // Set rotation
+             m_dropZone.transform.rotation = m_scaleSphere.transform.rotation;*/
         }
         else
         {
             m_baseDist = -1f;
-        }*/
+        }
     }
     
     void EnableScaling(bool state)
@@ -84,29 +91,27 @@ public class PlanetScalerPro : MonoBehaviour
             m_icoPlanet = m_dropzone.catchedObject.GetComponent<IcoPlanet>();
             if (m_icoPlanet)
             {
+                print("ICOOOOOOO");
                 MTK_Interactable interactable = m_icoPlanet.GetComponent<MTK_Interactable>();
                 interactable.isDistanceGrabbable = false;
                 interactable.IndexJointUsed = 1;
 
-               /* foreach( IcoSegment segment in m_icoPlanet.Segments )
+
+                m_catchedObjectJoint = interactable.jointType;
+
+                m_scaleEffect = m_dropzone.catchedObject.GetComponent<ScaleEffect>();
+
+                if (!m_scaleEffect)
                 {
-                    segment.GetComponent<MTK_Interactable>().isGrabbable = true;
-                }*/
-            }
-
-            /*m_scaleSphere.SetActive(true);
-            m_scaleEffect = m_dropZone.catchedObject.GetComponent<ScaleEffect>();
-            if (!m_scaleEffect)
-            {
-                m_scaleEffect = m_dropZone.catchedObject.gameObject.AddComponent<ScaleEffect>();
-                m_scaleEffect.ApplyEffect();
-            }*/
-
+                    m_scaleEffect = m_dropzone.catchedObject.gameObject.AddComponent<ScaleEffect>();
+                    m_scaleEffect.ApplyEffect();
+                }
+            } 
         }
         else
         {
-           /* m_scaleSphere.SetActive(false);
-            m_scaleEffect = null;*/
+            m_catchedObjectJoint = null;
+            m_scaleEffect = null;
         }
     }
 }

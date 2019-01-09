@@ -14,9 +14,9 @@ public class MTK_InertJoint : MTK_JointType
         return !Used();
     }
 
-    private void Update()
+   /* private void Update()
     {
         if (m_connectedGameobject)
             Debug.DrawLine(transform.position, m_connectedGameobject.transform.position, Color.red);
-    }
+    }*/
 }

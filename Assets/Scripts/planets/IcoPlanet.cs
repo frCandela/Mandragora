@@ -25,7 +25,6 @@ public class IcoPlanet : MonoBehaviour
     {
         m_vertices = Icosphere.GenerateIcosphere(1f, m_nbSubdivisions);
 
-
         if(m_initialize)
         {
             m_segments = new List<IcoSegment>();
