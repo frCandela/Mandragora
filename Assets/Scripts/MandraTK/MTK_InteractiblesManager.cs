@@ -24,7 +24,7 @@ public class MTK_InteractiblesManager : Singleton<MTK_InteractiblesManager>
 		{
 			angle = Vector3.Angle(item.transform.position - pointerPos, pointerForward);
 
-			if(angle < minAngle)
+			if(angle < minAngle && item.isDistanceGrabbable)
 			{
 				closest = item;
 				minAngle = angle;

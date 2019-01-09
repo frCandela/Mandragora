@@ -52,7 +52,6 @@ public class DropZone : MonoBehaviour
     {
         if (!interactable.jointType.Used())
         {
-            print("Catch" + interactable.name);
             if (m_snapToCenter)
             {
                 interactable.transform.position = transform.position;

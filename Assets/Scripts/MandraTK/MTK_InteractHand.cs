@@ -86,6 +86,7 @@ public class MTK_InteractHand : MonoBehaviour
     {
         if(obj)
         {
+            print(obj.name);
             obj.Grab(true);
 
             if (obj.jointType.Used())
@@ -127,28 +128,28 @@ public class MTK_InteractHand : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.attachedRigidbody)
+        MTK_Interactable candidate = other.GetComponent<MTK_Interactable>();
+        if (  (!candidate || !candidate.isGrabbable) && other.attachedRigidbody)
+            candidate = other.attachedRigidbody.GetComponent<MTK_Interactable>();
+
+        if (candidate && candidate.isGrabbable)
         {
-            MTK_Interactable candidate = other.attachedRigidbody.GetComponent<MTK_Interactable>();
-            if (candidate)
-            {
-                m_objectsInTrigger.Add(candidate);
-                m_onTouchInteractable.Invoke(candidate);
-            }
+            m_objectsInTrigger.Add(candidate);
+            m_onTouchInteractable.Invoke(candidate);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.attachedRigidbody)
+        MTK_Interactable candidate = other.GetComponent<MTK_Interactable>();
+        if ((!candidate || !candidate.isGrabbable) && other.attachedRigidbody)
+            candidate = other.attachedRigidbody.GetComponent<MTK_Interactable>();
+
+        if (candidate && candidate.isGrabbable)
         {
-            MTK_Interactable candidate = other.attachedRigidbody.GetComponent<MTK_Interactable>();
-            if (candidate)
-            {
-                m_objectsInTrigger.Remove(candidate);
-                m_onUnTouchInteractable.Invoke(candidate);
-            }
-        }
+            m_objectsInTrigger.Remove(candidate);
+            m_onUnTouchInteractable.Invoke(candidate);
+        }        
     }
 
     MTK_Interactable GetClosestInteractable()
@@ -162,7 +163,7 @@ public class MTK_InteractHand : MonoBehaviour
         {
             tmpDist = Vector3.Distance(transform.position, candidate.transform.position);
 
-            if(tmpDist < minDistance)
+            if(tmpDist < minDistance && candidate.isGrabbable)
                 result = candidate;
         }
 
