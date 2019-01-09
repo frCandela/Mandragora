@@ -90,7 +90,7 @@
 				fresnel = saturate(fresnel);
 
 				// Lighting
-				float3 lightColor = clamp(i.lighting, 0, 2);
+				float3 lightColor = clamp(i.lighting, 0, 10);
 
 				// Apply
 				fixed4 col = fixed4(i.color.rgb * lightColor * fresnel, i.color.a * fresnel);
