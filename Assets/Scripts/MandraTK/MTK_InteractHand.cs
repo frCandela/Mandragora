@@ -127,23 +127,27 @@ public class MTK_InteractHand : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        MTK_Interactable candidate = other.GetComponent<MTK_Interactable>();
-
-        if(candidate)
+        if(other.attachedRigidbody)
         {
-            m_objectsInTrigger.Add(candidate);
-            m_onTouchInteractable.Invoke(candidate);
+            MTK_Interactable candidate = other.attachedRigidbody.GetComponent<MTK_Interactable>();
+            if (candidate)
+            {
+                m_objectsInTrigger.Add(candidate);
+                m_onTouchInteractable.Invoke(candidate);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        MTK_Interactable candidate = other.GetComponent<MTK_Interactable>();
-        
-        if(candidate)
+        if (other.attachedRigidbody)
         {
-            m_objectsInTrigger.Remove(candidate);
-            m_onUnTouchInteractable.Invoke(candidate);
+            MTK_Interactable candidate = other.attachedRigidbody.GetComponent<MTK_Interactable>();
+            if (candidate)
+            {
+                m_objectsInTrigger.Remove(candidate);
+                m_onUnTouchInteractable.Invoke(candidate);
+            }
         }
     }
 

@@ -52,7 +52,8 @@ public class DropZone : MonoBehaviour
     {
         if (!interactable.jointType.Used())
         {
-            if(m_snapToCenter)
+            print("Catch" + interactable.name);
+            if (m_snapToCenter)
             {
                 interactable.transform.position = transform.position;
             }
@@ -72,19 +73,25 @@ public class DropZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        MTK_Interactable interact = other.GetComponent<MTK_Interactable>();
-        if (interact && interact.isDroppable)
+        if (other.attachedRigidbody)
         {
-            m_nbObjectsInTrigger++;
+            MTK_Interactable interact = other.attachedRigidbody.GetComponent<MTK_Interactable>();
+            if (interact && interact.isDroppable)
+            {
+                m_nbObjectsInTrigger++;
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        MTK_Interactable interact = other.GetComponent<MTK_Interactable>();
-        if (interact && interact.isDroppable)
+        if (other.attachedRigidbody)
         {
-            m_nbObjectsInTrigger--;
+            MTK_Interactable interact = other.attachedRigidbody.GetComponent<MTK_Interactable>();
+            if (interact && interact.isDroppable)
+            {
+                m_nbObjectsInTrigger--;
+            }
         }
     }
 
