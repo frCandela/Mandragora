@@ -169,6 +169,8 @@ public class TelekinesisPointer : MonoBehaviour
 
     void TriggerAttract(bool input)
 	{
+		m_lastForceApplied = 0;
+
 		if(input)
 		{
 			if(Target)
@@ -234,7 +236,6 @@ public class TelekinesisPointer : MonoBehaviour
 		m_joint.connectedBody.drag = 0;
 
 		m_joint.connectedBody = null;
-		m_lastForceApplied = 0;
 
         Target.isDistanceGrabbed = false;
 
