@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: planScene02
-  m_Shader: {fileID: 4800000, guid: cfc82a044ed4eb649bf6447684a81d25, type: 3}
+  m_Name: MTL_sunShinePlane
+  m_Shader: {fileID: 4800000, guid: df55568f824e3ed418c286e296af4ba6, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -80,15 +80,15 @@ Material:
     - _CursorOne: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DistFade: 3
+    - _DistFade: 1
     - _DstBlend: 0
     - _FadeIn: 0
-    - _FadeOut: 0
-    - _FresnelSensibility: 0.452
+    - _FadeOut: 1
+    - _FresnelSensibility: 0.153
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HighlightOpacity: 1
+    - _HighlightOpacity: 0.378
     - _IntersectionDamper: 0.18
     - _IntersectionIn: 0
     - _IntersectionMax: 0.52
@@ -97,11 +97,11 @@ Material:
     - _IsAlphaTex: 0
     - _IsAlphaUV: 1
     - _IsBackFace: 1
-    - _MaxInterDist: 1
+    - _MaxInterDist: 0.002
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Opacity: 0
+    - _Opacity: 0.051
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -113,8 +113,8 @@ Material:
     - _maxDistFade: 1.06
     - _minDistFade: 0
     m_Colors:
-    - _AlphaMaskPow: {r: 20.5, g: 1, b: 0, a: 0.21}
-    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _AlphaMaskPow: {r: 20.67, g: 1.16, b: 0.23, a: 0.46}
+    - _Color: {r: 1, g: 0.19551288, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HighlightColor: {r: 1, g: 0.5537272, b: 0, a: 1}
+    - _HighlightColor: {r: 1, g: 0.7828549, b: 0.495283, a: 1}
     - _IntersectionColor: {r: 0.9743724, g: 1, b: 0, a: 1}
