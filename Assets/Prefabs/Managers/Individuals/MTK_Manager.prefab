@@ -333,13 +333,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4998903717214970}
-  - component: {fileID: 114757813158162280}
+  - component: {fileID: 114085235363751710}
+  - component: {fileID: 114326328048961160}
   - component: {fileID: 135628335484569736}
   - component: {fileID: 114757846188006200}
   - component: {fileID: 114660439608847664}
-  - component: {fileID: 114085235363751710}
-  - component: {fileID: 114326328048961160}
   - component: {fileID: 54302236589616816}
+  - component: {fileID: 114185841605616758}
   m_Layer: 10
   m_Name: Fade
   m_TagString: Untagged
@@ -1173,7 +1173,6 @@ GameObject:
   - component: {fileID: 114873051299192930}
   - component: {fileID: 114866170328464232}
   - component: {fileID: 114005540878918588}
-  - component: {fileID: 114851307294616534}
   m_Layer: 10
   m_Name: Head
   m_TagString: MainCamera
@@ -1725,7 +1724,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1601149866171894
 GameObject:
   m_ObjectHideFlags: 1
@@ -2384,7 +2383,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1870162413560138
 GameObject:
   m_ObjectHideFlags: 1
@@ -6415,6 +6414,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: a1c0c160-9ce7-437b-9c2a-6895d1a11047
+--- !u!114 &114185841605616758
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1117329160227058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 365dd2b016416524d9bf003588e4990e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_onEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114995414304761668, guid: 4c7f9cfbce7c40047944962a6635d609,
+          type: 2}
+        m_MethodName: Fade
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_onExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114995414304761668, guid: 4c7f9cfbce7c40047944962a6635d609,
+          type: 2}
+        m_MethodName: Fade
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114192632141303246
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7319,68 +7363,7 @@ MonoBehaviour:
     _path: /0
     _guidPath: ed7fdb44-7d17-437d-8ee3-f6a598a9d807
     _isOverridden: 0
-    _components:
-    - _target: {fileID: 114757813158162280}
-      _type: CollisionEvent
-      _index: 0
-      _isOverridden: 0
-      _properties:
-      - _path: m_onExit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-        _animationCurveValue:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        _booleanValue: 0
-        _boundsValue:
-          m_Center: {x: 0, y: 0, z: 0}
-          m_Extent: {x: 0, y: 0, z: 0}
-        _colorValue: {r: 0, g: 0, b: 0, a: 0}
-        _doubleValue: 0
-        _floatValue: 0
-        _intValue: 0
-        _longValue: 0
-        _objectReferenceValue: {fileID: 114840868241350072}
-        _quaternionValue: {x: 0, y: 0, z: 0, w: 0}
-        _rectValue:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        _stringValue: 
-        _vector2Value: {x: 0, y: 0}
-        _vector3Value: {x: 0, y: 0, z: 0}
-        _vector4Value: {x: 0, y: 0, z: 0, w: 0}
-      - _path: m_onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-        _animationCurveValue:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        _booleanValue: 0
-        _boundsValue:
-          m_Center: {x: 0, y: 0, z: 0}
-          m_Extent: {x: 0, y: 0, z: 0}
-        _colorValue: {r: 0, g: 0, b: 0, a: 0}
-        _doubleValue: 0
-        _floatValue: 0
-        _intValue: 0
-        _longValue: 0
-        _objectReferenceValue: {fileID: 114840868241350072}
-        _quaternionValue: {x: 0, y: 0, z: 0, w: 0}
-        _rectValue:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        _stringValue: 
-        _vector2Value: {x: 0, y: 0}
-        _vector3Value: {x: 0, y: 0, z: 0}
-        _vector4Value: {x: 0, y: 0, z: 0, w: 0}
+    _components: []
   _overrideObjects: []
 --- !u!114 &114327163630751864
 MonoBehaviour:
@@ -7573,7 +7556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 583ae33bd15883c4ba76271e3fcb181e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeSetup: {fileID: 114814732575340876}
+  activeSetup: {fileID: 114495364992844328}
   setupSimulation: {fileID: 114814732575340876}
   setupSteamVR: {fileID: 114495364992844328}
 --- !u!114 &114381881013422114
@@ -9189,49 +9172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 1e15f177-78b3-45a3-bcb4-73b0c8cee375
---- !u!114 &114757813158162280
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1117329160227058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 365dd2b016416524d9bf003588e4990e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_onEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114840868241350072}
-        m_MethodName: Fade
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 1
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_onExit:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114840868241350072}
-        m_MethodName: Fade
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 1
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114757846188006200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9814,33 +9754,6 @@ MonoBehaviour:
   m_Script: {fileID: 1491221649, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114851307294616534
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1446208449898796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8d8814bf4ffe5d4eb28f9aad618cb4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerList: f7e1664c
-  useOtherObject: 0
-  actionOnEventType: 0
-  curveInterpolation: 4
-  enableActionOnEvent: 0
-  data:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_callbackData: {fileID: 0}
-  playingId: 0
-  soundEmitterObject: {fileID: 0}
-  transitionDuration: 0
-  valueGuid: 
-  multiPositionArray: []
-  MultiPositionType: 1
-  multiPositionTypeLabel: 0
 --- !u!114 &114857675814632582
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9876,10 +9789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90d1945bbd58b4cf98eb19621dd83cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleRenderers:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  particleRenderers: []
   blurRadius: 0.02
   thicknessCutoff: 0.42
   colorMaterial: {fileID: 2100000, guid: d16ca3f3b0ff44edb8bc98af8c286687, type: 2}
@@ -10325,6 +10235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_mtkManager: {fileID: 114367410335974114}
   m_tolerance: 0.1
+  m_countNeeded: 1
   m_fadeStart: 0.2
   m_fadeEnd: 0.5
   m_sound:
