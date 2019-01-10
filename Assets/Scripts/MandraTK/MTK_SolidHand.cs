@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MTK_SolidHand : MonoBehaviour
 {
+    [SerializeField] Animator m_handAnimator;
+
     private MTK_InteractHand m_interactHand;
     private TelekinesisPointer m_telekinesisPointer;
     private Collider m_collider;
@@ -23,12 +25,16 @@ public class MTK_SolidHand : MonoBehaviour
             {
                 m_collider.isTrigger = false;
                 m_telekinesisPointer.enabled = false;
+
+                m_handAnimator.SetBool("Grab", input);
             }
         }
         else
         {
             m_collider.isTrigger = true;
             m_telekinesisPointer.enabled = true;
+
+            m_handAnimator.SetBool("Grab", input);
         }
     }
 }
