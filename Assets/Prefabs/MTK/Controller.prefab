@@ -957,7 +957,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1378642878011714}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.3, y: -1.404, z: -0.70000005}
+  m_LocalPosition: {x: 0.29999992, y: -1.404, z: -0.7000005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4986682795317344}
@@ -1014,7 +1014,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1914502479540176}
-  m_LocalRotation: {x: 0.25881913, y: -0, z: -0, w: 0.9659258}
+  m_LocalRotation: {x: 0.25881913, y: 0.000000016761488, z: 0.000000006942834, w: 0.9659258}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1449,10 +1449,10 @@ MonoBehaviour:
   m_handAnimator: {fileID: 95046965360773406}
   m_minDistance: 0.4
   m_maxDistance: 10
-  m_minMagnitudeToAttract: 0.1
-  m_maxForce: 0.3
-  m_forceScale: 1000
-  m_initForceScale: 5
+  m_minMagnitudeToAttract: 0.05
+  m_maxForce: 0.1
+  m_forceScale: 4
+  m_initForceScale: 3
   m_wObjectGrabbed:
     valueGuid: 
     WwiseObjectReference: {fileID: 11400000, guid: fc4e0550a83d1354880f0cf55a017700,
@@ -2107,17 +2107,17 @@ ConfigurableJoint:
     serializedVersion: 3
     positionSpring: 0
     positionDamper: 0
-    maximumForce: 3.4028233e+38
+    maximumForce: 4
   m_YDrive:
     serializedVersion: 3
     positionSpring: 0
     positionDamper: 0
-    maximumForce: 3.4028233e+38
+    maximumForce: 4
   m_ZDrive:
     serializedVersion: 3
     positionSpring: 0
     positionDamper: 0
-    maximumForce: 3.4028233e+38
+    maximumForce: 4
   m_TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   m_TargetAngularVelocity: {x: 0, y: 0, z: 0}
   m_RotationDriveMode: 1
