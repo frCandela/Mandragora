@@ -104,6 +104,8 @@ GameObject:
   - component: {fileID: 114008382652828018}
   - component: {fileID: 114963421846953402}
   - component: {fileID: 114312563661781816}
+  - component: {fileID: 114713646295789878}
+  - component: {fileID: 114876300364610142}
   m_Layer: 0
   m_Name: Grab_Out
   m_TagString: Untagged
@@ -1442,17 +1444,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9042904a85a62f04b99e3ce191cdf701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_joint: {fileID: 153000362147648458}
   m_outliner: {fileID: 0}
   m_fxManager: {fileID: 114437179141275090}
   m_interactHand: {fileID: 114336963033943124}
   m_handAnimator: {fileID: 95046965360773406}
-  m_minDistance: 0.4
-  m_maxDistance: 10
   m_minMagnitudeToAttract: 0.05
   m_maxForce: 0.1
   m_forceScale: 4
-  m_initForceScale: 3
   m_wObjectGrabbed:
     valueGuid: 
     WwiseObjectReference: {fileID: 11400000, guid: fc4e0550a83d1354880f0cf55a017700,
@@ -1473,6 +1471,7 @@ MonoBehaviour:
     valueGuid: 
     WwiseObjectReference: {fileID: 11400000, guid: f82e34ab3521088409e4f7db84b7c0a6,
       type: 2}
+  m_connectedBody: {fileID: 0}
 --- !u!114 &114312563661781816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1737,6 +1736,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 1e15f177-78b3-45a3-bcb4-73b0c8cee375
+--- !u!114 &114713646295789878
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1162957253566356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 223dc2a93f9f2bd46b65c340f1be9fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 0
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!114 &114719957360202140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1902,6 +1922,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: c9d38b4e-748e-4247-a84a-216488d1f35e
+--- !u!114 &114876300364610142
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1162957253566356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a0af2356caeb3d4394835ae7b710269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: 
+  useOtherObject: 0
+  actionOnEventType: 0
+  curveInterpolation: 4
+  enableActionOnEvent: 0
+  data:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 2281eb1669db4554390948e7962f93ad,
+      type: 2}
+  m_callbackData: {fileID: 0}
+  playingId: 0
+  soundEmitterObject: {fileID: 0}
+  transitionDuration: 0
+  valueGuid: 
 --- !u!114 &114878156431779770
 MonoBehaviour:
   m_ObjectHideFlags: 1
