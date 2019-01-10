@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 199489011426010960}
   - component: {fileID: 114861607205116870}
   - component: {fileID: 114195437621646878}
+  - component: {fileID: 114858775625997946}
+  - component: {fileID: 114684707056797026}
   m_Layer: 0
   m_Name: GrabOutParticles
   m_TagString: Untagged
@@ -55,6 +57,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 20dbe648-61b6-4bfe-9e46-3bef92a7ed6c
+--- !u!114 &114684707056797026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1238938521395038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a0af2356caeb3d4394835ae7b710269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: 
+  useOtherObject: 0
+  actionOnEventType: 0
+  curveInterpolation: 4
+  enableActionOnEvent: 0
+  data:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 2281eb1669db4554390948e7962f93ad,
+      type: 2}
+  m_callbackData: {fileID: 0}
+  playingId: 0
+  soundEmitterObject: {fileID: 0}
+  transitionDuration: 0
+  valueGuid: 
+--- !u!114 &114858775625997946
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1238938521395038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 223dc2a93f9f2bd46b65c340f1be9fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 0
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!114 &114861607205116870
 MonoBehaviour:
   m_ObjectHideFlags: 1

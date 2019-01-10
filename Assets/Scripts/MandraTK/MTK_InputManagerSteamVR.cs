@@ -7,8 +7,8 @@ public class MTK_InputManagerSteamVR : MTK_InputManager
 {
     private SteamVR_TrackedController m_trackedController = null;
 
-    public override Vector3 GetAngularVelocity() { return m_trackedController.GetAngularVelocity(); }
-    public override Vector3 GetVelocity() { return m_trackedController.GetVelocity(); }
+    public override Vector3 GetAngularVelocity() { return transform.parent.rotation * m_trackedController.GetAngularVelocity(); }
+    public override Vector3 GetVelocity() { return transform.parent.rotation * m_trackedController.GetVelocity(); }
 
     private void Awake()
     {
