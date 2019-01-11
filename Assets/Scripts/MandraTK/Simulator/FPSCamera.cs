@@ -18,14 +18,11 @@ public class FPSCamera : MonoBehaviour
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        m_baseHeight = transform.position.y;
+        m_baseHeight = transform.localPosition.y;
     }
 
-    public CursorLockMode test;
     void Update()
     {
-
-        test = Cursor.lockState;
         // Move camera
         if (Cursor.lockState == CursorLockMode.Locked)
         {

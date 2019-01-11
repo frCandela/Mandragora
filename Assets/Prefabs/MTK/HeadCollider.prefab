@@ -19,11 +19,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4113567379199066}
-  - component: {fileID: 114827337147718816}
   - component: {fileID: 135585156227187866}
   - component: {fileID: 114419276061721750}
   - component: {fileID: 114759693146008996}
   - component: {fileID: 54500986293542078}
+  - component: {fileID: 114955262417923816}
   m_Layer: 10
   m_Name: HeadCollider
   m_TagString: Untagged
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: ed7fdb44-7d17-437d-8ee3-f6a598a9d807
---- !u!114 &114827337147718816
+--- !u!114 &114955262417923816
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,14 +101,15 @@ MonoBehaviour:
   m_onEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114995414304761668, guid: 4c7f9cfbce7c40047944962a6635d609,
+          type: 2}
         m_MethodName: Fade
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 1
+          m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
@@ -117,14 +118,15 @@ MonoBehaviour:
   m_onExit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114995414304761668, guid: 4c7f9cfbce7c40047944962a6635d609,
+          type: 2}
         m_MethodName: Fade
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 1
+          m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2

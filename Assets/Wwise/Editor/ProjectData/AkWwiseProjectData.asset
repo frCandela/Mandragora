@@ -180,13 +180,13 @@ MonoBehaviour:
   - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 0995f2392612e04c91c38c7b63f5e42c
-    m_lastTime: -8586562920986453143
+    m_lastTime: -8586544735826608881
     List: []
   BankWwu:
   - PhysicalPath: SoundBanks\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: a97016e8726c1f408dafc159e6c344b5
-    m_lastTime: -8586570711752730871
+    m_lastTime: -8586562067502456882
     List:
     - name: Soundbank
       guid: 9916953bbad2944d9b906b3cd5a8867d
@@ -201,32 +201,8 @@ MonoBehaviour:
   - PhysicalPath: Events\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 6030b6aee3d39d4c9d884b8f3ae2474c
-    m_lastTime: -8586562920986478209
+    m_lastTime: -8586544743992993529
     List:
-    - name: Ambisonic_Play
-      guid: 97676feb048fc24093608d801bbd8d32
-      id: 1117135425
-      PathAndIcons:
-      - ElementName: Default Work Unit
-        ObjectType: 12
-      - ElementName: Ambisonic_Play
-        ObjectType: 3
-      Path: Default Work Unit\Ambisonic_Play
-      maxAttenuation: 0
-      maxDuration: 0
-      minDuration: 0
-    - name: Ambisonic_Stop
-      guid: 3a62be6df4f249478b1f2395458a9e9f
-      id: 3437095191
-      PathAndIcons:
-      - ElementName: Default Work Unit
-        ObjectType: 12
-      - ElementName: Ambisonic_Stop
-        ObjectType: 3
-      Path: Default Work Unit\Ambisonic_Stop
-      maxAttenuation: 0
-      maxDuration: 0
-      minDuration: 0
     - name: Bubbles_Play
       guid: 06a67f35ed42bc45923f62a7d6982e40
       id: 332086775
@@ -299,6 +275,30 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: Music_Play
+      guid: 2c2dff5d2e89104f880e39a4f9c7ede9
+      id: 202194903
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Music_Play
+        ObjectType: 3
+      Path: Default Work Unit\Music_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Music_Stop
+      guid: 64627f5ffaa3eb458e624887c63905aa
+      id: 3227181061
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Music_Stop
+        ObjectType: 3
+      Path: Default Work Unit\Music_Stop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Planet_Orbit_Play
       guid: bdb9866a04adb845bc4d8fe54875e522
       id: 3908603903
@@ -347,15 +347,15 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
-    - name: Play_Clap
-      guid: 8f9804bc1aaf49408f8a021ea8c6f977
-      id: 3785725400
+    - name: Play_Short_Ambisonic
+      guid: cf8fc948f31e904e9ce89afb20ad5ddf
+      id: 2531213658
       PathAndIcons:
       - ElementName: Default Work Unit
         ObjectType: 12
-      - ElementName: Play_Clap
+      - ElementName: Play_Short_Ambisonic
         ObjectType: 3
-      Path: Default Work Unit\Play_Clap
+      Path: Default Work Unit\Play_Short_Ambisonic
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
@@ -428,6 +428,18 @@ MonoBehaviour:
       - ElementName: Sun_Stop
         ObjectType: 3
       Path: Default Work Unit\Sun_Stop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Telekinesis_Feedback_Off_Play
+      guid: 6d9d021aa7653347bcda69daf52505db
+      id: 700358672
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Telekinesis_Feedback_Off_Play
+        ObjectType: 3
+      Path: Default Work Unit\Telekinesis_Feedback_Off_Play
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
@@ -543,7 +555,7 @@ MonoBehaviour:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 7023720d000eef46b000ec471e7f4b00
-    m_lastTime: -8586562920986528339
+    m_lastTime: -8586544743993053689
     List:
     - name: Constellation
       guid: be300520a9c24940a2a12910d9cb833c
@@ -563,6 +575,15 @@ MonoBehaviour:
       - ElementName: Draw
         ObjectType: 13
       Path: Default Work Unit\Draw
+    - name: Star_Hand
+      guid: 26a5fea9b742be4b80bd43e1a5497657
+      id: 1202612439
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Star_Hand
+        ObjectType: 13
+      Path: Default Work Unit\Star_Hand
     - name: Telekinesis_Speed
       guid: b6f980ad7f0ba94981ef42c0d1150491
       id: 2497914097
@@ -752,6 +773,5 @@ MonoBehaviour:
   - /MandragoWwise
   - /MandragoWwise/Events
   - /MandragoWwise/Events/Default Work Unit
-  - /MandragoWwise/States
   autoPopulateEnabled: 1
   CurrentPluginConfig: 
