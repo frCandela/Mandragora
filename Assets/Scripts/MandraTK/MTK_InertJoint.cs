@@ -16,10 +16,10 @@ public class MTK_InertJoint : MTK_JointType
 
     public override bool RemoveJoint()
     {
-        base.RemoveJoint();
         if (Used())
         {
             onJointBreak.Invoke();
+            base.RemoveJoint();
             return true;
         }
         return false;

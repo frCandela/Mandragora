@@ -47,7 +47,6 @@ public class DropZone : MonoBehaviour
         if (catchedObject)
         {
             m_lastActivationTime = Time.time;
-            print("Release");
             m_meshRenderer.enabled = true;
             onObjectCatched.Invoke(false);
 
@@ -75,6 +74,7 @@ public class DropZone : MonoBehaviour
                 }
 
                 interactable.jointType.JoinWith(gameObject);
+                GetComponent<Joint>().breakForce = float.MaxValue;
                 catchedObject = interactable;
                 interactable.jointType.onJointBreak.AddListener(Release);
 

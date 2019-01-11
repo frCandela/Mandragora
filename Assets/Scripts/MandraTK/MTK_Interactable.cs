@@ -32,7 +32,12 @@ public class MTK_Interactable : MonoBehaviour
         set
         {
             foreach (var effect in GetComponents<Effect>())
-                effect.enabled = value;
+            {
+                if( effect.affectsRigidbody)
+                {
+                    effect.enabled = value;
+                }
+            }
         }
     }
 

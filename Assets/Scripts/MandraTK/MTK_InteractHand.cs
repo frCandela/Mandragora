@@ -20,6 +20,7 @@ public class MTK_InteractHand : MonoBehaviour
 
     private List<MTK_Interactable> m_objectsInTrigger = new List<MTK_Interactable>(3);
     private MTK_InputManager m_inputManager;
+    private MTK_JointType grabbedJoint;
 
     public MTK_InputManager inputManager { get { return m_inputManager; } }
     private MTK_Interactable m_closest;
@@ -90,6 +91,7 @@ public class MTK_InteractHand : MonoBehaviour
             obj.jointType.onJointBreak.AddListener(Release);
             obj.jointType.JoinWith(gameObject);
             m_grabbed = obj;
+            grabbedJoint = obj.jointType;
 
             m_outliner.OultineOff(m_grabbed);
 
@@ -105,16 +107,16 @@ public class MTK_InteractHand : MonoBehaviour
         {
             m_grabbed.Grab(false);
 
-            m_grabbed.jointType.onJointBreak.RemoveListener(Release);
-            m_grabbed.jointType.RemoveJoint();
+            grabbedJoint.onJointBreak.RemoveListener(Release);
+            grabbedJoint.RemoveJoint();
             
-            if(m_grabbed.jointType.rigidbody)
+            if(grabbedJoint.rigidbody)
             {
-                m_grabbed.jointType.rigidbody.velocity = m_inputManager.GetVelocity();
-                m_grabbed.jointType.rigidbody.angularVelocity = m_inputManager.GetAngularVelocity();
+                grabbedJoint.rigidbody.velocity = m_inputManager.GetVelocity();
+                grabbedJoint.rigidbody.angularVelocity = m_inputManager.GetAngularVelocity();
             }
 
-            m_grabbed.jointType.onJointBreak.RemoveListener(Release);
+            grabbedJoint.onJointBreak.RemoveListener(Release);
             m_grabbed = null;
             m_handAnimator.SetBool("Visible", true);
             m_handAnimator.SetBool("Grab", false);
