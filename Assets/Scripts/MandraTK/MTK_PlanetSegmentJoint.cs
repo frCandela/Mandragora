@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class MTK_PlanetSegmentJoint : MTK_JointType
 {
-    [SerializeField] private float breakForce = 1500f;
-
     public bool m_editMode = false;
 
     private IcoPlanet m_icoPlanet;
     private IcoSegment m_icoSegment;
-    private MTK_PlanetMasterJoint m_masterJoint;
 
     private float m_baseDistance = 0f;
 
@@ -19,7 +16,6 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
         rigidbody = transform.parent.GetComponent<Rigidbody>();
         m_icoPlanet = transform.parent.GetComponent<IcoPlanet>();
         m_icoSegment = GetComponent<IcoSegment>();
-        m_masterJoint = transform.parent.GetComponent<MTK_PlanetMasterJoint>();
     }
 
     public override bool Used()

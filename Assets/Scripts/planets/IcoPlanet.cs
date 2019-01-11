@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class IcoPlanet : MonoBehaviour
 {
+    [Header("Parameters")]
     [SerializeField] private bool m_initialize = true;
     [SerializeField, Range(0, 3)] private int m_nbSubdivisions = 0;
     [SerializeField] private Material m_segmentMaterial;
@@ -13,17 +14,17 @@ public class IcoPlanet : MonoBehaviour
     [SerializeField] public Color[] levelColors = new Color[10];
     [SerializeField] public bool updatePlanet = false;
 
-    [Header("Data")]
+    [Header("Read only data")]
     [SerializeField]  private int trianglesCount;
 
     [SerializeField, HideInInspector] private List<Vector3> m_vertices;
     [SerializeField, HideInInspector] private List<IcoSegment> m_segments;
+    public List<IcoSegment> Segments { get { return m_segments; } }
 
     // Use this for initialization
     void Start()
     {
         m_vertices = Icosphere.GenerateIcosphere(1f, m_nbSubdivisions);
-
 
         if(m_initialize)
         {

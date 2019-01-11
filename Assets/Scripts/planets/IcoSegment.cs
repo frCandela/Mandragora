@@ -717,7 +717,7 @@ public class IcoSegment : MonoBehaviour
         int ia = indexFirstVertice + 4;
         int i01Bis = indexFirstVertice + 5;
         int i02Bis = indexFirstVertice + 6;
-        int i0Bis = indexFirstVertice + 7;
+        //int i0Bis = indexFirstVertice + 7;   problem ?
         int i1Bis = indexFirstVertice + 8; 
         int i2Bis = indexFirstVertice + 9;
 

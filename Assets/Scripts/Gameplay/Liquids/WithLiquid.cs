@@ -13,7 +13,6 @@ public class WithLiquid : MonoBehaviour
     [Header("References")]
     [SerializeField] private Mesh insideMesh = null;
     [SerializeField] private Material material = null;
-    [SerializeField] private Effect effect = null;
 
     [Header("Container properties")]
     [SerializeField,] private float minHeight = 0f;

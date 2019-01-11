@@ -9,8 +9,6 @@ public class Teleporter : MonoBehaviour {
 	[Header("Settings")]
 	[SerializeField, Range(0,1)]
 	float m_tolerance = 0.1f;
-	[SerializeField]
-	int m_countNeeded = 1;
 
 	[Header("Fade Time")]
 	[SerializeField, Range(0,5)] float m_fadeStart;
