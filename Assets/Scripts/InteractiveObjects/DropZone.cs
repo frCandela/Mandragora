@@ -9,6 +9,7 @@ public class DropZone : MonoBehaviour
 {    
     [SerializeField] private bool m_snapToCenter = true;
     [SerializeField] private float m_activationCooldown = 2f;
+    [SerializeField] private float m_ejectForce = 1f;
 
     public UnityEventBool onObjectCatched;
     public MTK_Interactable catchedObject { get; private set; }
@@ -52,7 +53,9 @@ public class DropZone : MonoBehaviour
 
             MTK_Interactable tmp = catchedObject;
             catchedObject = null;
+
             tmp.jointType.RemoveJoint();
+            tmp.GetComponent<Rigidbody>().AddForce(m_ejectForce * Vector3.up, ForceMode.Impulse);
         }
     }
 
