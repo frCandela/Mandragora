@@ -18,7 +18,7 @@ public class MTK_InteractHand : MonoBehaviour
     public UnityEventMTK_Interactable m_onUnTouchInteractable;
     public UnityEventBool m_onUseFail;
 
-    private List<MTK_Interactable> m_objectsInTrigger = new List<MTK_Interactable>(3);
+    public List<MTK_Interactable> m_objectsInTrigger = new List<MTK_Interactable>(3);
     private MTK_InputManager m_inputManager;
     private MTK_JointType grabbedJoint;
 
@@ -129,7 +129,7 @@ public class MTK_InteractHand : MonoBehaviour
         if (  (!candidate || !candidate.isGrabbable) && other.attachedRigidbody)
             candidate = other.attachedRigidbody.GetComponent<MTK_Interactable>();
 
-        if (candidate && candidate.isGrabbable)
+        if (candidate && candidate.isGrabbable && ! m_objectsInTrigger.Find( x => x == candidate))
         {
             m_objectsInTrigger.Add(candidate);
             m_onTouchInteractable.Invoke(candidate);
@@ -139,14 +139,23 @@ public class MTK_InteractHand : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         MTK_Interactable candidate = other.GetComponent<MTK_Interactable>();
-        if ((!candidate || !candidate.isGrabbable) && other.attachedRigidbody)
-            candidate = other.attachedRigidbody.GetComponent<MTK_Interactable>();
-
-        if (candidate && candidate.isGrabbable)
+        MTK_Interactable otherCandidate = null;
+        if (other.attachedRigidbody)
         {
-            m_objectsInTrigger.Remove(candidate);
-            m_onUnTouchInteractable.Invoke(candidate);
-        }        
+            otherCandidate = other.attachedRigidbody.GetComponent<MTK_Interactable>();
+        }
+
+        if (candidate &&  )
+        {           
+            if(m_objectsInTrigger.Remove(candidate))
+            {
+                m_onUnTouchInteractable.Invoke(candidate);
+            }
+            else if (otherCandidate && otherCandidate != candidate && m_objectsInTrigger.Remove(otherCandidate))
+            {
+                m_onUnTouchInteractable.Invoke(otherCandidate);
+            }
+        }
     }
 
     MTK_Interactable GetClosestInteractable()
