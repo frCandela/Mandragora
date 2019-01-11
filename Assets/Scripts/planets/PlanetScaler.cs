@@ -24,9 +24,7 @@ public class PlanetScaler : MonoBehaviour
         m_dropzone = GetComponent<DropZone>();
         m_dropzone.onObjectCatched.AddListener(EnableScaling);
     }
-
-    public bool test = false;
-
+    
     void FixedUpdate ()
     {
         // If the scale sphere is grabbed
@@ -45,7 +43,6 @@ public class PlanetScaler : MonoBehaviour
                 m_confJoint.xMotion = ConfigurableJointMotion.Locked;
                 m_confJoint.yMotion = ConfigurableJointMotion.Locked;
                 m_confJoint.zMotion = ConfigurableJointMotion.Locked;
-
             }
 
             float distance = Vector3.Distance(transform.position, m_catchedObjectJoint.connectedGameobject.transform.position);
@@ -62,9 +59,14 @@ public class PlanetScaler : MonoBehaviour
         }
         else
         {
-            m_baseDist = -1f;
-            Destroy(m_confJoint);
+            ResetHand();
         }
+    }
+
+    void ResetHand()
+    {
+        m_baseDist = -1f;
+        Destroy(m_confJoint);
     }
     
     void EnableScaling(bool state)
@@ -79,6 +81,7 @@ public class PlanetScaler : MonoBehaviour
                 interactable.IndexJointUsed = 1;
 
                 m_catchedObjectJoint = interactable.jointType;
+                interactable.jointType.onJointBreak.AddListener(ResetHand);
 
                 m_scaleEffect = m_dropzone.catchedObject.GetComponent<ScaleEffect>();
 

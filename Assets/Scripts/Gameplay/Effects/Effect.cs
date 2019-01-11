@@ -5,6 +5,8 @@ using UnityEngine;
 public abstract class Effect : MonoBehaviour
 {
     [SerializeField] private GameObject m_particlesPrefab = null;
+    public bool affectsRigidbody = true;
+
     private GameObject m_particles = null;
 
     private void OnDestroy()
