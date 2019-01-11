@@ -5,15 +5,11 @@ using System.Linq;
 
 public class Outliner : MonoBehaviour
 {
-    [SerializeField] Outline.Mode m_mode = Outline.Mode.OutlineAll;
-    [SerializeField] Color m_color = Color.red;
-    [SerializeField] float m_outlineWidth = 10f;
-
     public void OultineOn(MTK_Interactable interractable)
     {
         if ( ! interractable.GetComponent<Outline>())
         {
-            Outline outline = interractable.gameObject.AddComponent<Outline>();
+            interractable.gameObject.AddComponent<Outline>();
         }
     }
 

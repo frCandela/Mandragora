@@ -9,11 +9,6 @@ public class PlanetEffect : Effect
 
     private MTK_JointType m_joint;
 
-    float radiusScale = 10f;    //10 20000
-
-    /*[SerializeField]*/ private float GravitationalConstant = 0.005f;
-
-
     public float m_maxRadius;
     public bool m_radiusDecided = false;
 

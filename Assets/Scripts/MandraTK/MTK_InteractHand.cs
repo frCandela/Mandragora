@@ -19,9 +19,7 @@ public class MTK_InteractHand : MonoBehaviour
     public UnityEventBool m_onUseFail;
 
     private List<MTK_Interactable> m_objectsInTrigger = new List<MTK_Interactable>(3);
-    private MTK_Setup m_setup;
     private MTK_InputManager m_inputManager;
-
 
     public MTK_InputManager inputManager { get { return m_inputManager; } }
     private MTK_Interactable m_closest;
@@ -38,8 +36,6 @@ public class MTK_InteractHand : MonoBehaviour
 
     private void Start()
     {
-        m_setup = FindObjectOfType<MTK_Manager>().activeSetup;
-
         m_inputManager = GetComponentInParent<MTK_InputManager>();
 
         if(m_outliner)

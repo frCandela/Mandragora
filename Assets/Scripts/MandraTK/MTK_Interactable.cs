@@ -13,8 +13,7 @@ public class MTK_Interactable : MonoBehaviour
 
     public MTK_JointType jointType { get { return m_joints[m_indexJointUsed]; } }
     private MTK_JointType[] m_joints;
-
-    public int m_indexJointUsed = 0;
+    private int m_indexJointUsed = 0;
     public int IndexJointUsed { get { return m_indexJointUsed; } set { m_indexJointUsed = Mathf.Clamp(value, 0, m_joints.Length - 1); } }
 
     [SerializeField] AK.Wwise.Event m_wOnUseStart;

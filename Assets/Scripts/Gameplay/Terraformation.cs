@@ -51,7 +51,6 @@ public class Terraformation : MonoBehaviour
         Color[] colors = new Color[vertices.Length];
 
         float scaledMinDia = transform.localScale.x * m_minDiameter;
-        float scaledMaxDia = transform.localScale.x * m_maxDiameter;
 
         Vector3 prevPos = sphereCol.transform.position;
         sphereCol.transform.position = sphereCol.transform.position - transform.position;

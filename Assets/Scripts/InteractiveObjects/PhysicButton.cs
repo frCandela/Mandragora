@@ -21,7 +21,7 @@ public class PhysicButton : MonoBehaviour
         {
             if( m_state )
             {
-                onButtonReleased.Invoke();
+                onButtonReleased.Invoke();                
             }
 
             m_state = false;
@@ -40,6 +40,10 @@ public class PhysicButton : MonoBehaviour
             if ( ! m_state)
             {
                 onButtonPressed.Invoke();
+                if (debugColor)
+                {
+                    GetComponent<MeshRenderer>().material.color = Color.red;
+                }
             }
 
             m_state = true;

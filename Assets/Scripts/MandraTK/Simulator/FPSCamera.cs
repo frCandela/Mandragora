@@ -9,8 +9,6 @@ public class FPSCamera : MonoBehaviour
     [SerializeField] KeyCode m_crouch;
     [SerializeField] float sensitivityX = 15F;
     [SerializeField] float sensitivityY = 15F;
-    [SerializeField] float minimumX = -360F;
-    [SerializeField] float maximumX = 360F;
     [SerializeField] float minimumY = -60F;
     [SerializeField] float maximumY = 60F;
     [SerializeField] float rotationY = 0F;

@@ -11,10 +11,6 @@ public class TelekinesisPointer : MonoBehaviour
 	[SerializeField] Animator m_handAnimator;
 
 	[Header("Settings")]
-	[SerializeField, Range(0,10)]
-	float m_minDistance = 1;
-	[SerializeField, Range(0,10)]
-	float m_maxDistance = 5;
 	[SerializeField, Range(0,1)]
 	float m_minMagnitudeToAttract = .2f;
 	[SerializeField, Range(0,1)]

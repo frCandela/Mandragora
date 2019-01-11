@@ -8,10 +8,10 @@ public abstract class MTK_JointType : MonoBehaviour
     public UnityEvent onJointBreak = new UnityEvent();
     public UnityEventBool onJointCreated = new UnityEventBool();
 
-    [SerializeField] protected Joint m_joint;
-    [SerializeField] protected GameObject m_connectedGameobject;
+    [SerializeField, HideInInspector] protected Joint m_joint;
+    [SerializeField, HideInInspector] protected GameObject m_connectedGameobject;
+    [SerializeField, HideInInspector] public new Rigidbody rigidbody;
 
-    public new Rigidbody rigidbody;
     public Joint joint { get { return m_joint; } }
     public GameObject connectedGameobject { get { return m_connectedGameobject; } }
 

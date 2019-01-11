@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MTK_PlanetSegmentJoint : MTK_JointType
 {
-    [SerializeField] private float breakForce = 1500f;
-
     public bool m_editMode = false;
 
     private IcoPlanet m_icoPlanet;

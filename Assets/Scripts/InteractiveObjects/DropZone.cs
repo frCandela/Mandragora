@@ -8,14 +8,16 @@ using UnityEngine.Events;
 public class DropZone : MonoBehaviour
 {    
     [SerializeField] private bool m_snapToCenter = true;
+    [SerializeField] private float m_activationCooldown = 2f;
 
     public UnityEventBool onObjectCatched;
-
     public MTK_Interactable catchedObject { get; private set; }
 
     private Outline m_outline;
+    MeshRenderer m_meshRenderer;
+
     private int m_nbObjectsInTrigger = 0;
-    MeshRenderer m_meshRenderer ;
+    private float m_lastActivationTime;
 
     // Use this for initialization
     void Awake ()
@@ -23,6 +25,8 @@ public class DropZone : MonoBehaviour
         m_meshRenderer = GetComponent<MeshRenderer>();
         m_outline = GetComponent<Outline>();
         m_outline.enabled = false;
+
+        m_lastActivationTime = Time.time;
     }
 	
 	// Update is called once per frame
@@ -38,34 +42,48 @@ public class DropZone : MonoBehaviour
         }        
     }
 
-    void Release()
-    {
-        catchedObject = null;
-        if (m_meshRenderer)
+    public void Release()
+    {        
+        if (catchedObject)
         {
+            m_lastActivationTime = Time.time;
+            print("Release");
             m_meshRenderer.enabled = true;
             onObjectCatched.Invoke(false);
+
+            MTK_Interactable tmp = catchedObject;
+            catchedObject = null;
+            tmp.jointType.RemoveJoint();
         }
+    }
+
+    private void OnJointBreak(float breakForce)
+    {
+        Release();
     }
 
     void Catch(MTK_Interactable interactable)
     {
-        if (!interactable.jointType.Used())
+        if(Time.time > m_lastActivationTime + m_activationCooldown)
         {
-            if (m_snapToCenter)
+            if (!interactable.jointType.Used() && !catchedObject && !interactable.isDistanceGrabbed)
             {
-                interactable.transform.position = transform.position;
-            }
+                m_lastActivationTime = Time.time;
+                if (m_snapToCenter)
+                {
+                    interactable.transform.position = transform.position;
+                }
 
-            interactable.jointType.JoinWith(gameObject);
-            catchedObject = interactable;
-            interactable.jointType.onJointBreak.AddListener(Release);
+                interactable.jointType.JoinWith(gameObject);
+                catchedObject = interactable;
+                interactable.jointType.onJointBreak.AddListener(Release);
 
-            onObjectCatched.Invoke(true);
+                onObjectCatched.Invoke(true);
 
-            if (m_meshRenderer)
-            {
-                m_meshRenderer.enabled = false;
+                if (m_meshRenderer)
+                {
+                    m_meshRenderer.enabled = false;
+                }
             }
         }
     }
