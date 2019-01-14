@@ -38,13 +38,13 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0010860051, g: 0.0011236441, b: 0.0010860051, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -1218,13 +1218,13 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 786098458}
-  m_LocalRotation: {x: -0.4541101, y: -0.5805822, z: 0.4938388, w: 0.4613368}
-  m_LocalPosition: {x: 40.338734, y: 106.03877, z: 16.087496}
+  m_LocalRotation: {x: -0.12464164, y: -0.7073118, z: 0.68280536, w: 0.13398243}
+  m_LocalPosition: {x: 1.45, y: 28.72, z: 1.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1824014524}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 8.884001, y: -95.02801, z: 84.202}
+  m_LocalEulerAnglesHint: {x: 68.83, y: -95.02801, z: 84.202}
 --- !u!114 &786098460
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1248,7 +1248,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 0.07725169, g: 0.5283019, b: 0.5190968, a: 1}
+  m_Color: {r: 0.12522249, g: 0.22573413, b: 0.3962264, a: 1}
   m_Intensity: 0.84
   m_Range: 10
   m_SpotAngle: 30
@@ -1846,8 +1846,8 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 1, g: 0.49877626, b: 0.051886797, a: 1}
-  m_Intensity: 1
-  m_Range: 5
+  m_Intensity: 2.7
+  m_Range: 8.95
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -1859,7 +1859,7 @@ Light:
     m_NormalBias: 0.4
     m_NearPlane: 0.2
   m_Cookie: {fileID: 0}
-  m_DrawHalo: 1
+  m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
   m_CullingMask:
@@ -2288,7 +2288,7 @@ Transform:
   - {fileID: 1498950805}
   - {fileID: 1089087997}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1868619306 stripped
 GameObject:
