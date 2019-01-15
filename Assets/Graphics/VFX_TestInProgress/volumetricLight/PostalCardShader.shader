@@ -6,7 +6,7 @@
 		_Opacity ("General Opacity", Range(0,1)) = 0.5
 		_HighlightOpacity ("Highlight Opacity", Range(0,1)) = 0.5
 		_DistFade ("Distance Fade", float) = 0
-		_MaxInterDist ("Maximum Instersection Distance", float) = 0
+		_MaxInterDist ("Maximum Instersection Distance", Range(0,0.1)) = 0
 		_FresnelSensibility ("Fresnel Sensibility", Range(0,1)) = 0.25
 		_IsBackFace ("Is Back Face ?", Range(0,1)) = 1
 		_HighlightColor ("Highlight Color", Color) = (0,0,0,0)

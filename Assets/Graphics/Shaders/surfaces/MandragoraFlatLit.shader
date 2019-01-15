@@ -2,6 +2,7 @@
 	Properties {
 		_Color ("Color", Color) = (1,1,1,1)
 		_Luminosity ("Luminosity", float) = 0
+		_LightDiffuse ("Light Diffuse (POW)", float) = 1
 		_EmissionColor ("Emission Color", Color) = (1,1,1,1)
 		_ShadowColor ("Shadow Color", Color) = (0,0,0,0)
 		_SpecPow ("Specular Power", float) = 48.0
@@ -22,7 +23,7 @@
 		sampler2D _MainTex;
 		fixed4 _Color, _EmissionColor, _ShadowColor;
 		float _Luminosity, _SpecPow, _SpecularIntensity;
-		float _DepthDistance;
+		float _DepthDistance, _LightDiffuse;
 
 		struct MandragoraSurfaceFlatLitOutput
 		{
@@ -76,7 +77,9 @@
 
 			// Light Process
             float NdotL = dot (s.Normal, lightDir);
-			float lighting = saturate(atten * NdotL);
+			//float powAtten = pow(atten, _LightDiffuse);
+			float powAtten = pow(atten, 1.5);
+			float lighting = saturate(powAtten * NdotL);
 
 			// Specular
 			float3 h = normalize(viewDir + lightDir);
