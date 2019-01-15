@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TelekinesisPointer : MonoBehaviour
 {
-	[SerializeField] Outliner m_outliner;
 	[SerializeField] FXManager m_fxManager;
 	[SerializeField] MTK_InteractHand m_interactHand;
 	[SerializeField] Animator m_handAnimator;
@@ -31,7 +30,7 @@ public class TelekinesisPointer : MonoBehaviour
 	MTK_Interactable m_currentInteractable;
 
     public bool isAttracting { get { return m_connectedBody || Target; } private set{} }
-    public Rigidbody m_connectedBody;
+    Rigidbody m_connectedBody;
     
     bool m_attract;
 	float m_initDistanceToTarget;
@@ -50,7 +49,7 @@ public class TelekinesisPointer : MonoBehaviour
 			{
 				if(m_currentInteractable)
 				{
-					m_outliner.OultineOff(m_currentInteractable);
+					Outliner.OultineOff(m_currentInteractable);
 					m_currentInteractable = value;
 				}
 			}
@@ -59,10 +58,10 @@ public class TelekinesisPointer : MonoBehaviour
 				if(m_currentInteractable != value)
 				{
 					if(m_currentInteractable)
-						m_outliner.OultineOff(m_currentInteractable);
+						Outliner.OultineOff(m_currentInteractable);
 
 					m_currentInteractable = value;
-					m_outliner.OultineOn(m_currentInteractable);
+					Outliner.OultineOn(m_currentInteractable);
 
 					m_inputManager.Haptic(1);
 				}

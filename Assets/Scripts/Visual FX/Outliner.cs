@@ -5,7 +5,7 @@ using System.Linq;
 
 public class Outliner : MonoBehaviour
 {
-    public void OultineOn(MTK_Interactable interractable)
+    public static void OultineOn(MTK_Interactable interractable)
     {
         if ( ! interractable.GetComponent<Outline>())
         {
@@ -13,7 +13,7 @@ public class Outliner : MonoBehaviour
         }
     }
 
-    public void OultineOff(MTK_Interactable interractable)
+    public static void OultineOff(MTK_Interactable interractable)
     {
         Outline outline = interractable.GetComponent<Outline>();
 

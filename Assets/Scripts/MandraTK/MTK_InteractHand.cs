@@ -7,11 +7,7 @@ using Valve.VR;
 public class MTK_InteractHand : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] Outliner m_outliner = null;
     [SerializeField] Animator m_handAnimator = null;
-
-    [Header("Status")]
-    [SerializeField] public MTK_Interactable m_grabbed = null;
 
     [Header("Events")]
     public UnityEventMTK_Interactable m_onTouchInteractable;
@@ -21,6 +17,8 @@ public class MTK_InteractHand : MonoBehaviour
     public List<MTK_Interactable> m_objectsInTrigger = new List<MTK_Interactable>(3);
     private MTK_InputManager m_inputManager;
     private MTK_JointType grabbedJoint;
+
+    [HideInInspector] public MTK_Interactable m_grabbed = null;
 
     public MTK_InputManager inputManager { get { return m_inputManager; } }
     private MTK_Interactable m_closest;
@@ -54,11 +52,8 @@ public class MTK_InteractHand : MonoBehaviour
     {
         m_inputManager = GetComponentInParent<MTK_InputManager>();
 
-        if(m_outliner)
-        {
-            // m_onTouchInteractable.AddListener(m_outliner.OultineOn);
-            // m_onUnTouchInteractable.AddListener(m_outliner.OultineOff);
-        }
+        m_onTouchInteractable.AddListener(Outliner.OultineOn);
+        m_onUnTouchInteractable.AddListener(Outliner.OultineOff);
     }
 
     private void FixedUpdate()
@@ -108,7 +103,7 @@ public class MTK_InteractHand : MonoBehaviour
             m_grabbed = obj;
             grabbedJoint = obj.jointType;
 
-            m_outliner.OultineOff(m_grabbed);
+            Outliner.OultineOff(m_grabbed);
 
             m_handAnimator.SetBool("Visible", false);
 
