@@ -57,7 +57,7 @@
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.screenPos = ComputeScreenPos(o.vertex);
 				o.color = v.color;
-				o.vertexGrabPass = tex2Dlod(_GrabPass, float4(o.screenPos.xy/o.screenPos.w, 0, 0));
+				o.vertexGrabPass = tex2Dlod(_GrabPass, float4(o.screenPos.xy/o.screenPos.w, 0, 0), 10).rgb;
 				return o;
 			}
 
