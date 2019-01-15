@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: arc
-  m_Shader: {fileID: 4800000, guid: 2da0089da6324ed4abd8da04795831be, type: 3}
+  m_Name: rayonsol_int
+  m_Shader: {fileID: 4800000, guid: 182c5c9a9cfa89f41ae43a455d5b00fd, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -57,29 +57,27 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
+    - _DepthDistance: 40
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FPOW: 1.93
-    - _FresnelIntensity: 19.27
-    - _FresnelOpacity: 0
-    - _FresnelPow: 33.6
+    - _FPOW: 5.15
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Luminosity: 0
+    - _Luminosity: 2.13
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Opacity: 0.42
     - _Parallax: 0.02
-    - _R0: -0.29
-    - _ReflexionIntensity: 0.93
-    - _ReflexionPower: 20
+    - _R0: -0.05
     - _SmoothnessTextureChannel: 0
+    - _SpecPow: 100
     - _SpecularHighlights: 1
+    - _SpecularIntensity: 0.83
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.8679245, g: 0.52315265, b: 0.33161268, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ShadowColor: {r: 0, g: 0, b: 0, a: 0}
