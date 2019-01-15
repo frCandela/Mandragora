@@ -90,7 +90,7 @@
 				NdotH = pow(NdotH, _ReflexionPower);
 				float3 lightReflexion = NdotH * _LightColor0.rgb * _ReflexionIntensity;
 				float alphaLightReflexion = (lightReflexion.r + lightReflexion.g + lightReflexion.b)/3;
-				lightReflexion *= facing;
+			//	lightReflexion *= facing;
 
 
 				// Calculate Fresnel that multiply with Flow Texture
@@ -103,7 +103,7 @@
 
 				// Apply
 				fixed4 col = fixed4(0,0,0,0);
-				col.rgb = _Color.rgb;
+				col.rgb = _Color.rgb * fresnel;
 				col.rgb += lightReflexion;
 				col.rgb *= _Luminosity;
 
