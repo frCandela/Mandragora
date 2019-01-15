@@ -6,10 +6,23 @@ using UnityEngine.Events;
 public class MTK_Interactable : MonoBehaviour
 {
     [HideInInspector] public bool m_grabbed = false;
-
-    [SerializeField] public bool isGrabbable = true;
     [SerializeField] public bool isDistanceGrabbable = true;
     [SerializeField] public bool isDroppable = true;
+
+    [SerializeField] private bool m_isGrabbable = true;
+    public bool isGrabbable
+    {
+        get { return m_isGrabbable; }
+        set
+        {
+            if (value != m_isGrabbable)
+            {
+                m_isGrabbable = value;
+                onIsGrabbableChange.Invoke(this);
+            }
+        }
+    }
+    public UnityEventMTK_Interactable onIsGrabbableChange = new UnityEventMTK_Interactable();
 
     public MTK_JointType jointType { get { return m_joints[m_indexJointUsed]; } }
     private MTK_JointType[] m_joints;

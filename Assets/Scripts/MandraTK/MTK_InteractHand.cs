@@ -34,6 +34,21 @@ public class MTK_InteractHand : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        foreach(MTK_Interactable interactable in FindObjectsOfType<MTK_Interactable>())
+        {
+            interactable.onIsGrabbableChange.AddListener(onIsGrabbableChange);
+        }
+    }
+
+    void onIsGrabbableChange( MTK_Interactable interactable)
+    {
+        if( interactable.isGrabbable)
+        {
+            m_objectsInTrigger.RemoveAll(x => x == interactable);
+        }
+    }
 
     private void Start()
     {
@@ -129,7 +144,7 @@ public class MTK_InteractHand : MonoBehaviour
         if (  (!candidate || !candidate.isGrabbable) && other.attachedRigidbody)
             candidate = other.attachedRigidbody.GetComponent<MTK_Interactable>();
 
-        if (candidate && candidate.isGrabbable && ! m_objectsInTrigger.Find( x => x == candidate))
+        if (candidate && candidate.isGrabbable)
         {
             m_objectsInTrigger.Add(candidate);
             m_onTouchInteractable.Invoke(candidate);
@@ -139,22 +154,12 @@ public class MTK_InteractHand : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         MTK_Interactable candidate = other.GetComponent<MTK_Interactable>();
-        MTK_Interactable otherCandidate = null;
-        if (other.attachedRigidbody)
-        {
-            otherCandidate = other.attachedRigidbody.GetComponent<MTK_Interactable>();
-        }
+        if ((!candidate || !candidate.isGrabbable) && other.attachedRigidbody)
+            candidate = other.attachedRigidbody.GetComponent<MTK_Interactable>();
 
-        if (candidate &&  )
-        {           
-            if(m_objectsInTrigger.Remove(candidate))
-            {
-                m_onUnTouchInteractable.Invoke(candidate);
-            }
-            else if (otherCandidate && otherCandidate != candidate && m_objectsInTrigger.Remove(otherCandidate))
-            {
-                m_onUnTouchInteractable.Invoke(otherCandidate);
-            }
+        if (candidate && m_objectsInTrigger.Remove(candidate))
+        {
+            m_onUnTouchInteractable.Invoke(candidate);
         }
     }
 
