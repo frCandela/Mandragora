@@ -11,6 +11,7 @@
 		Tags { "RenderQueue"="Transparent" "RenderType"="TransparentCutout" "IgnoreProjector"="True" }
 		LOD 100
 
+		ZTest Off
 		Cull Off
 		Blend SrcAlpha OneMinusSrcAlpha
 
@@ -57,7 +58,8 @@
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.screenPos = ComputeScreenPos(o.vertex);
 				o.color = v.color;
-				o.vertexGrabPass = tex2Dlod(_GrabPass, float4(o.screenPos.xy/o.screenPos.w, 0, 0), 10).rgb;
+				int lod = 0;
+				o.vertexGrabPass = tex2Dlod(_GrabPass, float4(o.screenPos.xy/o.screenPos.w, 0, lod)).rgb;
 				return o;
 			}
 
@@ -92,10 +94,11 @@
 				//float2 screenWPos = i.screenPos.xy / i.screenPos.w;
 
 				fixed4 col = float4(0,0,0,0);
-				col.rgb = i.mergedColor.rgb * i.data.color.rgb * _Color.rgb;
+				col.rgb = i.mergedColor.rgb * i.data.color.rgb * _Color.rgb + i.data.color.rgb;
 				col.a = i.data.color.a;
 
 				col = lerp(col, _ColorOverride, _OverrideFactor);
+				col = saturate(col);
 
 				return col;
 
