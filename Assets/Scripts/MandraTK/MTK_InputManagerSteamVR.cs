@@ -18,10 +18,12 @@ public class MTK_InputManagerSteamVR : MTK_InputManager
 
     void TriggerPressed(object sender, ClickedEventArgs e)
     {
+        m_interractHand.TryGrab(true);
         m_onTrigger.Invoke(true);
     }
     void TriggerReleased(object sender, ClickedEventArgs e)
     {
+        m_interractHand.TryGrab(false);
         m_onTrigger.Invoke(false);
     }
 
