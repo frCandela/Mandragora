@@ -30,6 +30,7 @@
 
 			float4 _Color;
 			float _Luminosity;
+			float _ManagerUnlitFactor;
 			
 			v2f vert (appdata v)
 			{
@@ -41,6 +42,7 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 				fixed4 col = _Color * _Luminosity;
+				col *= _ManagerUnlitFactor;
 				return col;
 			}
 			ENDCG
