@@ -12,14 +12,10 @@ public class PlanetEffect : Effect
     public float m_maxRadius;
     public bool m_radiusDecided = false;
 
-    // [Header("Wwise events")]
-	// [SerializeField] AK.Wwise.Event m_enter;
-	// [SerializeField] AK.Wwise.Event m_exit;
-
     public override bool ApplyEffect()
     {
         m_rb = GetComponent<Rigidbody>();
-        // m_enter.Post(gameObject);
+        AkSoundEngine.PostEvent("Planet_Rotation_Play", gameObject);
 
         m_maxRadius = float.MaxValue;
         
@@ -56,7 +52,7 @@ public class PlanetEffect : Effect
             m_rb.useGravity = true;
         }
 
-        // m_exit.Post(gameObject);
+        AkSoundEngine.PostEvent("Planet_Rotation_Stop", gameObject);
     }
 
     Vector3 axis;
