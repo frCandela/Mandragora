@@ -86,7 +86,7 @@ public class Constellation : MonoBehaviour
 
 	void UpdateLine()
 	{
-		for (int i = m_currentStarID; i != m_endStarID +1; i += m_direction)
+		for (int i = m_currentStarID; i != m_endStarID + m_direction; i += m_direction)
 			m_lineRenderer.SetPosition(i, m_starsInitPosition[m_currentStarID]);
 	}
 
@@ -95,7 +95,6 @@ public class Constellation : MonoBehaviour
 		for (int i = 0; i < m_stars.Length; i++)
 		{
 			m_stars[i].Validated = false;
-			m_lineRenderer.loop = true;
 			m_lineRenderer.SetPosition(i, m_starsInitPosition[0]);
 		}
 
@@ -105,6 +104,7 @@ public class Constellation : MonoBehaviour
 	[ContextMenu("Complete")]
 	void Complete()
 	{
+		m_lineRenderer.loop = true;
 		m_validated.Post(gameObject);
 		StartCoroutine(goFromTo(0, 1, m_onCompleted.Invoke));
 	}
