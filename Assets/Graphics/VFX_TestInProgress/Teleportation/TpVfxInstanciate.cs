@@ -31,13 +31,13 @@ public class TpVfxInstanciate : MonoBehaviour {
         
 	}
 
-	void LaunchInTpVfx () {
+	public void LaunchInTpVfx () {
 		launchTimer = Time.time;
 		isLaunch = true;
 		psIn.Emit(3500);
 	}
 
-	void LaunchOutTpVfx () {
+	public void LaunchOutTpVfx () {
 		// /////////////////////////////////////////// TP NOW
 		psOut.Emit(3500);
 	}
