@@ -6,6 +6,7 @@ public class TpVfxInstanciate : MonoBehaviour {
 
 	public ParticleSystem psIn;
 	public ParticleSystem psOut;
+	[Range(0.0f, 0.05f)] public float psInDepopDelay;
 	public float TpChargeDuration;
 	private float launchTimer;
 	private bool isLaunch;
@@ -13,7 +14,7 @@ public class TpVfxInstanciate : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		var mainIn = psIn.main;
-		mainIn.startLifetime = TpChargeDuration + 0.02f; // Add 0.02 to prevent blank frame between 2 PS
+		mainIn.startLifetime = TpChargeDuration + psInDepopDelay; // Add 0.02 to prevent blank frame between 2 PS
 	}
 	
 	// Update is called once per frame
