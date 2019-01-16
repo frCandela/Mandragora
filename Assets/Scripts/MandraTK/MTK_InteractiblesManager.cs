@@ -23,7 +23,7 @@ public class MTK_InteractiblesManager : Singleton<MTK_InteractiblesManager>
 		float angle;
 
 		Vector3 pointerPos = pointer.position,
-				pointerForward = pointer.forward;;
+				pointerForward = pointer.forward;
 
 		foreach (MTK_Interactable item in m_grabbableesList)
 		{

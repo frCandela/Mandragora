@@ -32,9 +32,15 @@ public class MTK_InputManagerSimulator : MTK_InputManager
             m_onGrip.Invoke(false);
             
         if (Input.GetMouseButtonDown(0))
+        {
+            m_interractHand.TryGrab(true);
             m_onTrigger.Invoke(true);
+        }
         if (Input.GetMouseButtonUp(0))
+        {
+            m_interractHand.TryGrab(false);
             m_onTrigger.Invoke(false);
+        }
 
         if (Input.GetMouseButtonDown(2))
             m_onPad.Invoke(true);

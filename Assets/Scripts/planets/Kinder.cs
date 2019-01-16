@@ -6,12 +6,19 @@ public class Kinder : MTK_Interactable
 {
 	[SerializeField] GameObject m_planet;
 
+	[SerializeField] AK.Wwise.Event m_kinderCreation;
+
 	bool m_enabled;
 
 	void Activate()
 	{
 		isDistanceGrabbable = true;
 		m_enabled = true;
+	}
+
+	public void TriggerKinderSound()
+	{
+		m_kinderCreation.Post(gameObject);
 	}
 
 	void Break()

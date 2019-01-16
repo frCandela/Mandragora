@@ -103,7 +103,7 @@
 
 				// Apply
 				fixed4 col = fixed4(0,0,0,0);
-				col.rgb = _Color.rgb * fresnel;
+				col.rgb = _Color.rgb;
 				col.rgb += lightReflexion;
 				col.rgb *= _Luminosity;
 
