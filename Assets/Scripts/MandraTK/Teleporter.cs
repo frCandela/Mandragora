@@ -17,6 +17,7 @@ public class Teleporter : MonoBehaviour {
 	[Header("Sound")]
 	[SerializeField] AK.Wwise.Event m_sound;
 
+	TpVfxInstanciate m_tpVFX;
 	RaycastHit m_rayHit;
 	MTK_TPZone m_targetZone;
 	Transform m_targetTransform;
@@ -59,14 +60,21 @@ public class Teleporter : MonoBehaviour {
 				if(TargetZone)
 				{
 					m_sound.Post(gameObject);
-					MTK_Fade.Start(Color.black, m_fadeStart, MoveMtkManager);
+					MTK_Fade.Start(new Color(1,0,1,0), m_fadeStart, MoveMtkManager);
 					m_available = false;
+
+					m_tpVFX.LaunchInTpVfx();
 				}
 			}
 
 			if(!value)
 				m_cancelTime = Time.time + m_tolerance;
 		}
+	}
+
+	private void OnEnable()
+	{
+		m_tpVFX = GetComponentInChildren<TpVfxInstanciate>();
 	}
 	
 	void Update ()

@@ -18,20 +18,27 @@ public class TpVfxInstanciate : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
+		// if(Input.GetKeyDown(KeyCode.Space))
+		// 	LaunchInTpVfx();
 
-		if(Input.GetKeyDown(KeyCode.Space)) LaunchInTpVfx();
-
-
-		if(isLaunch && launchTimer + TpChargeDuration <= Time.time)
+		if(isLaunch)
 		{
-			LaunchOutTpVfx();
-			isLaunch = false;
+			//transform.position = Vector3.MoveTowards(transform.position, Camera.main.transform.position, Time.deltaTime / 5);			
+
+			if(launchTimer + TpChargeDuration <= Time.time)
+			{
+				LaunchOutTpVfx();
+				isLaunch = false;
+			}
 		}
-        
 	}
 
-	public void LaunchInTpVfx () {
+	public void LaunchInTpVfx ()
+	{
+		transform.position = Camera.main.transform.position;
+
 		launchTimer = Time.time;
 		isLaunch = true;
 		psIn.Emit(3500);
