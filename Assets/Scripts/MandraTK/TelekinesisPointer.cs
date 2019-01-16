@@ -9,12 +9,14 @@ public class TelekinesisPointer : MonoBehaviour
 	[SerializeField] Animator m_handAnimator;
 
 	[Header("Settings")]
-	[SerializeField, Range(0,1)]
+	[SerializeField, Range(0,0.1f)]
 	float m_minMagnitudeToAttract = .2f;
 	[SerializeField, Range(0,1)]
 	float m_maxForce = 1;
-	[SerializeField, Range(0,1000)]
-	float m_forceScale = 300;
+	[SerializeField, Range(0,10)]
+	float m_forceScale = 4;
+	[SerializeField, Range(0,10)]
+	float m_distanceSpeedScale = 4;
 
 	[Header("Sound")]
 	[SerializeField] AK.Wwise.Event m_wObjectGrabbed;
@@ -29,7 +31,7 @@ public class TelekinesisPointer : MonoBehaviour
 
 	MTK_Interactable m_currentInteractable;
 
-    public bool isAttracting { get { return m_connectedBody || Target; } private set{} }
+    public bool isAttracting { get { return m_connectedBody || Target; } }
     Rigidbody m_connectedBody;
     
     bool m_attract;
@@ -119,7 +121,7 @@ public class TelekinesisPointer : MonoBehaviour
 				targetVel += distanceScale * m_lastForceApplied * GetDistanceToTarget();
 
 				m_connectedBody.rotation = Quaternion.RotateTowards(m_connectedBody.rotation, transform.rotation, (1 - distanceScale) * 2);
-				m_connectedBody.velocity = Vector3.MoveTowards(m_connectedBody.velocity, targetVel, Time.deltaTime * 20);
+				m_connectedBody.velocity = Vector3.MoveTowards(m_connectedBody.velocity, targetVel * (Mathf.Sqrt(GetDistanceToTarget()) * m_distanceSpeedScale), Time.deltaTime * 20);
 
 				m_inputManager.Haptic((1- distanceScale) / 10);
 			}
