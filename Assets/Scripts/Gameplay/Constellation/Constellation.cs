@@ -18,6 +18,8 @@ public class Constellation : MonoBehaviour
 	LineRenderer m_lineRenderer;
 
 	int m_currentStarID = -1;
+	int m_endStarID = -1;
+	int m_direction = -1;
 
 	// Use this for initialization
 	void Awake ()
@@ -43,9 +45,10 @@ public class Constellation : MonoBehaviour
 			if(m_ID == 0 || m_ID == m_stars.Length-1)
 			{
 				m_currentStarID = m_ID;
+				m_direction = m_ID == 0 ? 1 : -1;
+				m_endStarID = m_ID == 0 ? m_stars.Length-1 : 0;
 
-				for (int i = 0; i < m_stars.Length; i++)
-					m_lineRenderer.SetPosition(i, m_starsInitPosition[m_currentStarID]);
+				UpdateLine();
 				
 				return true;
 			}
@@ -57,9 +60,9 @@ public class Constellation : MonoBehaviour
 			if(Mathf.Abs(m_currentStarID - m_ID) == 1)
 			{
 				m_currentStarID = m_ID;
-				m_lineRenderer.SetPosition(m_currentStarID, m_starsInitPosition[m_currentStarID]);
+				UpdateLine();
 
-				if(m_currentStarID == 0 || m_currentStarID == m_stars.Length-1) // Check constellation is complete
+				if(m_currentStarID == m_endStarID) // Check constellation is complete
 				{
 					for (int i = 0; i < m_stars.Length; i++)
 					{
@@ -81,11 +84,18 @@ public class Constellation : MonoBehaviour
 		return false;
 	}
 
+	void UpdateLine()
+	{
+		for (int i = m_currentStarID; i != m_endStarID +1; i += m_direction)
+			m_lineRenderer.SetPosition(i, m_starsInitPosition[m_currentStarID]);
+	}
+
 	void Fail()
 	{
 		for (int i = 0; i < m_stars.Length; i++)
 		{
 			m_stars[i].Validated = false;
+			m_lineRenderer.loop = true;
 			m_lineRenderer.SetPosition(i, m_starsInitPosition[0]);
 		}
 

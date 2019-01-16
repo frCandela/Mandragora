@@ -11,7 +11,6 @@ public class ConstellationStar : MonoBehaviour
 	[HideInInspector] public Vector3 m_initPosition;
 	Renderer m_renderer;
 	Animator m_animator;
-	Collider m_collider;
 	
 	[Header("Wwise events")]
 	[SerializeField] AK.Wwise.Event m_hit;
@@ -34,8 +33,6 @@ public class ConstellationStar : MonoBehaviour
 			}
 			else
 				m_animator.SetTrigger("Failed");
-
-			m_collider.enabled = !m_validated;
 		}
 	}
 
@@ -43,7 +40,6 @@ public class ConstellationStar : MonoBehaviour
 	{
 		transform.position = m_initPosition;
 		m_animator = GetComponent<Animator>();
-		m_collider = GetComponent<Collider>();
 	}
 
 	public void RegisterConstellation(Constellation c, int ID)
