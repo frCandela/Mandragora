@@ -7,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(MeshCollider))]
 public class IcoSegment : MonoBehaviour
 {
-    [Range(-1, 5)] public int heightLevel = 0;
+    public int heightLevel = 0;
 
     public IcoSegment[] neighbours { get { return m_neighbours; } private set { } }
 
@@ -48,22 +48,28 @@ public class IcoSegment : MonoBehaviour
         if (test)
         {
             test = false;
-            //UpdateSegment();
+            UpdateSegment();
+            UpdateNeighbours();
         }
 
-       /* if (heightLevel == 2)
-        {
-            Vector3 v0 = (1f + heightLevel * icoPlanet.heightDelta) * m_baseVertices[0];
-            Debug.DrawLine(Center(), v0, Color.red);
-            m_neighbours[0].GetComponent<MeshRenderer>().material.color = Color.red;
+        /* if (heightLevel == 2)
+         {
+             Vector3 v0 = (1f + heightLevel * icoPlanet.heightDelta) * m_baseVertices[0];
+             Debug.DrawLine(Center(), v0, Color.red);
+             m_neighbours[0].GetComponent<MeshRenderer>().material.color = Color.red;
 
-            int index = m_neighbours[0].IndexCorrespondingleftVertice(this);
-            Vector3 v0b = (1f + heightLevel * icoPlanet.heightDelta) * m_neighbours[0].m_baseVertices[index];
-            Debug.DrawLine(m_neighbours[0].Center(), v0b, Color.red);
-        }*/
+             int index = m_neighbours[0].IndexCorrespondingleftVertice(this);
+             Vector3 v0b = (1f + heightLevel * icoPlanet.heightDelta) * m_neighbours[0].m_baseVertices[index];
+             Debug.DrawLine(m_neighbours[0].Center(), v0b, Color.red);
+         }*/
+
+        normal = transform.TransformPoint(Center());
     }
 
-    private Vector3 Center()
+    public Vector3 normal;
+
+
+    public Vector3 Center()
     {
         Vector3 v0 = (1f + heightLevel * icoPlanet.heightDelta) * m_baseVertices[0];
         Vector3 v1 = (1f + heightLevel * icoPlanet.heightDelta) * m_baseVertices[1];
@@ -71,6 +77,12 @@ public class IcoSegment : MonoBehaviour
         
         return (v0 + v1 + v2) / 3f;
     }
+
+    public Vector3 Normal()
+    {
+        return Vector3.Cross(m_baseVertices[1] - m_baseVertices[0], m_baseVertices[2] - m_baseVertices[0]).normalized;
+    }
+
 
     public IcoSegment LeftFrom( IcoSegment segment )
     {
