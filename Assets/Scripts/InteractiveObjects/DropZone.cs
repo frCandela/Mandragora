@@ -82,6 +82,7 @@ public class DropZone : MonoBehaviour
                 interactable.jointType.onJointBreak.AddListener(Release);
 
                 onObjectCatched.Invoke(true);
+                SetRtpc(2);
 
                 if (m_meshRenderer)
                 {
@@ -127,4 +128,19 @@ public class DropZone : MonoBehaviour
         }
     }
 
+    [ContextMenu("TestRTPC")]
+    void TestRTPC()
+    {
+        StartCoroutine(SetRtpc(5));
+    }
+
+    IEnumerator SetRtpc(float T)
+    {
+        for (float i = 1; i > 0; i -= Time.deltaTime / T)
+        {
+            print(i);
+            AkSoundEngine.SetRTPCValue("Diegetic", i * 100);
+            yield return new WaitForEndOfFrame();
+        }
+    }
 }

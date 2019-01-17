@@ -603,7 +603,7 @@ MonoBehaviour:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 7023720d000eef46b000ec471e7f4b00
-    m_lastTime: -8586544743993053689
+    m_lastTime: -8586538719143801266
     List:
     - name: Constellation
       guid: be300520a9c24940a2a12910d9cb833c
@@ -614,6 +614,15 @@ MonoBehaviour:
       - ElementName: Constellation
         ObjectType: 13
       Path: Default Work Unit\Constellation
+    - name: Diegetic
+      guid: 691347749821f847b4c39eac3b3dfed8
+      id: 1316532907
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Diegetic
+        ObjectType: 13
+      Path: Default Work Unit\Diegetic
     - name: Draw
       guid: 1652ce17ef1c654fa49782f1ed12b213
       id: 1912241455
@@ -819,5 +828,7 @@ MonoBehaviour:
     List: []
   ExpandedItems:
   - /MandragoWwise
+  - /MandragoWwise/Events
+  - /MandragoWwise/Events/Default Work Unit
   autoPopulateEnabled: 1
   CurrentPluginConfig: 
