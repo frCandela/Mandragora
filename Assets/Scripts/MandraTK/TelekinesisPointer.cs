@@ -209,13 +209,15 @@ public class TelekinesisPointer : MonoBehaviour
         m_fxManager.DeActivate("Grab");
 
 		if(!m_connectedBody) // = first call
+		{
 			m_wObjectPlay.Post(Target.gameObject);
+			m_initDistanceToTarget = GetDistanceToTarget();
+		}
 
 		m_connectedBody = Target.GetComponent<Rigidbody>();
-		m_connectedBody.AddForce(force * GetDistanceToTarget() * 100);
+		m_connectedBody.AddForce((force - m_lastForceApplied) * Mathf.Sqrt(GetDistanceToTarget() * 10000));
 		m_connectedBody.useGravity = false;
-
-		m_initDistanceToTarget = GetDistanceToTarget();
+		
 		m_lastForceApplied = force;
 	}
 

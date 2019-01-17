@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114807444500058554}
   - component: {fileID: 114969400044211188}
   - component: {fileID: 114405766379592406}
-  m_Layer: 12
+  m_Layer: 9
   m_Name: Planet Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,10 +115,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_grabbed: 0
-  isGrabbable: 1
   isDistanceGrabbable: 0
   isDroppable: 1
-  jointType: {fileID: 0}
+  m_isGrabbable: 1
+  onIsGrabbableChange:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEventMTK_Interactable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   m_wOnUseStart:
     valueGuid: 
     WwiseObjectReference: {fileID: 0}
@@ -151,6 +155,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  isDistanceGrabbed: 0
 --- !u!114 &114807444500058554
 MonoBehaviour:
   m_ObjectHideFlags: 1

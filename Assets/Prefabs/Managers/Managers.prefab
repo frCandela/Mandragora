@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 33072214723577936}
   - component: {fileID: 23659145451609264}
   - component: {fileID: 114411097013679486}
+  - component: {fileID: 64356007869326144}
   m_Layer: 10
   m_Name: hair
   m_TagString: Untagged
@@ -918,6 +919,7 @@ GameObject:
   - component: {fileID: 33139759368360112}
   - component: {fileID: 114118645379926820}
   - component: {fileID: 114463041579162412}
+  - component: {fileID: 64321318160244486}
   m_Layer: 10
   m_Name: playArea
   m_TagString: Untagged
@@ -1979,6 +1981,7 @@ GameObject:
   - component: {fileID: 33473472495131884}
   - component: {fileID: 23669852754237624}
   - component: {fileID: 114159022257520548}
+  - component: {fileID: 64539567268323560}
   m_Layer: 10
   m_Name: Head
   m_TagString: Untagged
@@ -3704,7 +3707,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1976509550616232}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
@@ -3712,7 +3715,7 @@ Transform:
   - {fileID: 4723420090802470}
   m_Father: {fileID: 4579702410437468}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
 --- !u!4 &4150637679745100
 Transform:
   m_ObjectHideFlags: 1
@@ -4165,7 +4168,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1630661033885042}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4173,7 +4176,7 @@ Transform:
   - {fileID: 4675516490167596}
   m_Father: {fileID: 4921810008832042}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
 --- !u!4 &4351193298495520
 Transform:
   m_ObjectHideFlags: 1
@@ -4225,7 +4228,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1334488140907614}
   m_LocalRotation: {x: 0, y: 0.9659258, z: 0, w: 0.2588191}
-  m_LocalPosition: {x: -3.384, y: -0.892, z: 6.075}
+  m_LocalPosition: {x: -3.384, y: 0.17, z: 6.075}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4966620373529566}
@@ -6099,6 +6102,48 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!64 &64321318160244486
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1315932006345406}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}
+--- !u!64 &64356007869326144
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1005086067521302}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 8c0fbd56181ea0843b1596b4cb0e5498, type: 3}
+--- !u!64 &64539567268323560
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1646292613033836}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!95 &95080757080377698
 Animator:
   serializedVersion: 3
@@ -6593,7 +6638,7 @@ MonoBehaviour:
   m_fxManager: {fileID: 114367027632369460}
   m_interactHand: {fileID: 114559772678013402}
   m_handAnimator: {fileID: 95835154658372670}
-  m_minMagnitudeToAttract: 0.05
+  m_minMagnitudeToAttract: 0.03
   m_maxForce: 0.1
   m_forceScale: 4
   m_distanceSpeedScale: 1
@@ -8602,7 +8647,7 @@ MonoBehaviour:
   m_fxManager: {fileID: 114127335451098848}
   m_interactHand: {fileID: 114463993876246468}
   m_handAnimator: {fileID: 95262933344856130}
-  m_minMagnitudeToAttract: 0.05
+  m_minMagnitudeToAttract: 0.03
   m_maxForce: 0.1
   m_forceScale: 4
   m_distanceSpeedScale: 1
@@ -9142,7 +9187,7 @@ MonoBehaviour:
   m_fxManager: {fileID: 114502074226379006}
   m_interactHand: {fileID: 114501069999823046}
   m_handAnimator: {fileID: 95080757080377698}
-  m_minMagnitudeToAttract: 0.05
+  m_minMagnitudeToAttract: 0.03
   m_maxForce: 0.1
   m_forceScale: 4
   m_distanceSpeedScale: 1
@@ -10094,7 +10139,7 @@ MonoBehaviour:
   m_fxManager: {fileID: 114005520641924722}
   m_interactHand: {fileID: 114378297663567318}
   m_handAnimator: {fileID: 95301166536679700}
-  m_minMagnitudeToAttract: 0.05
+  m_minMagnitudeToAttract: 0.03
   m_maxForce: 0.1
   m_forceScale: 4
   m_distanceSpeedScale: 1
