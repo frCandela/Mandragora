@@ -3254,23 +3254,6 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300016, guid: baaaa813ec64a1641b9f493c566dbdb7, type: 3}
---- !u!1 &932314972 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1995946656152926, guid: 6d8f8ea9f9b59f64881405b2685ea712,
-    type: 2}
-  m_PrefabInternal: {fileID: 2063612437}
---- !u!135 &932314980
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 932314972}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.99999994
-  m_Center: {x: -0.000000059604645, y: 0, z: 1.7763568e-15}
 --- !u!1 &955086665 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 79bf1011379508944838e0d0a8aab505,
@@ -6953,27 +6936,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114166224962232516, guid: 6d8f8ea9f9b59f64881405b2685ea712,
-        type: 2}
-      propertyPath: m_positionOffsetData.positionOffset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114166224962232516, guid: 6d8f8ea9f9b59f64881405b2685ea712,
-        type: 2}
-      propertyPath: m_positionOffsetData.positionOffset.y
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 64041644512857098, guid: 6d8f8ea9f9b59f64881405b2685ea712, type: 2}
-    - {fileID: 64283330339690532, guid: 6d8f8ea9f9b59f64881405b2685ea712, type: 2}
-    - {fileID: 64151579083403480, guid: 6d8f8ea9f9b59f64881405b2685ea712, type: 2}
-    - {fileID: 64094983271661502, guid: 6d8f8ea9f9b59f64881405b2685ea712, type: 2}
-    - {fileID: 64821332641330176, guid: 6d8f8ea9f9b59f64881405b2685ea712, type: 2}
-    - {fileID: 64775769002196800, guid: 6d8f8ea9f9b59f64881405b2685ea712, type: 2}
-    - {fileID: 64891578342843910, guid: 6d8f8ea9f9b59f64881405b2685ea712, type: 2}
-    - {fileID: 64510609136888392, guid: 6d8f8ea9f9b59f64881405b2685ea712, type: 2}
-    - {fileID: 64646560703273778, guid: 6d8f8ea9f9b59f64881405b2685ea712, type: 2}
-    - {fileID: 64342959455422414, guid: 6d8f8ea9f9b59f64881405b2685ea712, type: 2}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d8f8ea9f9b59f64881405b2685ea712, type: 2}
   m_IsPrefabAsset: 0
 --- !u!4 &2063612438 stripped
