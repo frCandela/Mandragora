@@ -201,7 +201,7 @@ MonoBehaviour:
   - PhysicalPath: Events\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 6030b6aee3d39d4c9d884b8f3ae2474c
-    m_lastTime: -8586544743992993529
+    m_lastTime: -8586538901112000056
     List:
     - name: Bubbles_Play
       guid: 06a67f35ed42bc45923f62a7d6982e40
@@ -272,6 +272,30 @@ MonoBehaviour:
       - ElementName: Drip_Play
         ObjectType: 3
       Path: Default Work Unit\Drip_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Kinder_Creation_Play
+      guid: 029a079115c3fe42b43c884c0a81dccc
+      id: 67973247
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Kinder_Creation_Play
+        ObjectType: 3
+      Path: Default Work Unit\Kinder_Creation_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Kinder_Socle_Play
+      guid: e18dddd20fd00f479b0da65b4915e242
+      id: 412540456
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Kinder_Socle_Play
+        ObjectType: 3
+      Path: Default Work Unit\Kinder_Socle_Play
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
@@ -404,6 +428,30 @@ MonoBehaviour:
       - ElementName: Rumbling_Sun_Stop
         ObjectType: 3
       Path: Default Work Unit\Rumbling_Sun_Stop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Socle_Loop_Play
+      guid: f092843e48282b4eb721ff316d584ae5
+      id: 737281937
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Socle_Loop_Play
+        ObjectType: 3
+      Path: Default Work Unit\Socle_Loop_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Socle_Loop_Stop
+      guid: 2c9c83190012c94fa4855d480174f945
+      id: 1988697159
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Socle_Loop_Stop
+        ObjectType: 3
+      Path: Default Work Unit\Socle_Loop_Stop
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
@@ -771,7 +819,5 @@ MonoBehaviour:
     List: []
   ExpandedItems:
   - /MandragoWwise
-  - /MandragoWwise/Events
-  - /MandragoWwise/Events/Default Work Unit
   autoPopulateEnabled: 1
   CurrentPluginConfig: 

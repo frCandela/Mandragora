@@ -134,7 +134,7 @@ public class TelekinesisPointer : MonoBehaviour
     void SetLevitation(MTK_Interactable interactable, bool value)
     {
         Rigidbody rb = interactable.GetComponent<Rigidbody>();
-        if(rb )
+        if(rb)
         {
             if (value)
             {
@@ -208,14 +208,15 @@ public class TelekinesisPointer : MonoBehaviour
         SetLevitation(Target, false);
         m_fxManager.DeActivate("Grab");
 
+		if(!m_connectedBody) // = first call
+			m_wObjectPlay.Post(Target.gameObject);
+
 		m_connectedBody = Target.GetComponent<Rigidbody>();
 		m_connectedBody.AddForce(force * GetDistanceToTarget() * 100);
 		m_connectedBody.useGravity = false;
 
 		m_initDistanceToTarget = GetDistanceToTarget();
 		m_lastForceApplied = force;
-
-		m_wObjectPlay.Post(Target.gameObject);
 	}
 
 	void UnAttract()
