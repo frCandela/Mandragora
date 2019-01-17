@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4389963408317602}
   - component: {fileID: 33610775488989514}
   - component: {fileID: 23542035127505290}
-  - component: {fileID: 64163606150981914}
   - component: {fileID: 114472206963390854}
   m_Layer: 0
   m_Name: sunLightPlane
@@ -40,7 +39,6 @@ GameObject:
   - component: {fileID: 4247472211955650}
   - component: {fileID: 33140744092787020}
   - component: {fileID: 23816107641087888}
-  - component: {fileID: 64435640449269478}
   - component: {fileID: 114951245373931458}
   m_Layer: 0
   m_Name: sunLightPlane (1)
@@ -59,7 +57,6 @@ GameObject:
   - component: {fileID: 4770823039340896}
   - component: {fileID: 33036891667416190}
   - component: {fileID: 23517433545381326}
-  - component: {fileID: 64050152896068632}
   - component: {fileID: 114216366848951578}
   m_Layer: 0
   m_Name: sunRayPlane
@@ -78,7 +75,6 @@ GameObject:
   - component: {fileID: 4330599806859406}
   - component: {fileID: 33968407169967142}
   - component: {fileID: 23398513944422618}
-  - component: {fileID: 64929533656760136}
   - component: {fileID: 114159994983118650}
   m_Layer: 0
   m_Name: sunRayPlane_02
@@ -340,62 +336,6 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1330668357175764}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &64050152896068632
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1132459327778956}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &64163606150981914
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1015923353738328}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &64435640449269478
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1055562038147366}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &64929533656760136
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1330668357175764}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &114159994983118650
 MonoBehaviour:
