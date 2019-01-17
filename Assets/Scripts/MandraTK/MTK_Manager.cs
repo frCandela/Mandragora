@@ -21,7 +21,6 @@ public class MTK_Manager : MonoBehaviour
     {
         foreach (MTK_Setup setup in FindObjectsOfType<MTK_Setup>())
         {
-            print(setup);
             if (setup.enabled)
                 activeSetup = setup;
         }
