@@ -51,8 +51,8 @@ public class TelekinesisPointer : MonoBehaviour
 			{
 				if(m_currentInteractable)
 				{
-					Outliner.OultineOff(m_currentInteractable);
-					m_currentInteractable = value;
+					m_currentInteractable.Outline = false;
+					m_currentInteractable = null;
 				}
 			}
 			else
@@ -60,10 +60,10 @@ public class TelekinesisPointer : MonoBehaviour
 				if(m_currentInteractable != value)
 				{
 					if(m_currentInteractable)
-						Outliner.OultineOff(m_currentInteractable);
+						m_currentInteractable.Outline = false;
 
 					m_currentInteractable = value;
-					Outliner.OultineOn(m_currentInteractable);
+					m_currentInteractable.Outline = true;
 
 					m_inputManager.Haptic(1);
 				}

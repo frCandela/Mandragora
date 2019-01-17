@@ -29,6 +29,7 @@ GameObject:
   - component: {fileID: 114101818365062366}
   - component: {fileID: 114793107957730794}
   - component: {fileID: 114946589977076696}
+  - component: {fileID: 114041133275154224}
   m_Layer: 9
   m_Name: Kinder
   m_TagString: Untagged
@@ -70,6 +71,7 @@ GameObject:
   - component: {fileID: 114492711724277748}
   - component: {fileID: 114418950887910580}
   - component: {fileID: 114545457088832716}
+  - component: {fileID: 114057640816411258}
   m_Layer: 9
   m_Name: Planet Core
   m_TagString: Untagged
@@ -113,7 +115,7 @@ Transform:
   m_GameObject: {fileID: 1806734307280454}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4063190716382618}
   m_RootOrder: 0
@@ -250,6 +252,34 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114041133275154224
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1324544748248932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &114057640816411258
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1806734307280454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!114 &114101818365062366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -310,7 +340,7 @@ MonoBehaviour:
       type: 2}
 --- !u!114 &114242125735623180
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1324544748248932}
@@ -322,7 +352,7 @@ MonoBehaviour:
   _guid: b545e7ee-ea3c-45f9-b0c7-612101218547
 --- !u!114 &114311276223798518
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1719111271159640}
@@ -387,7 +417,7 @@ MonoBehaviour:
   isDistanceGrabbed: 0
 --- !u!114 &114471663936139034
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1806734307280454}
@@ -403,7 +433,7 @@ MonoBehaviour:
   _assetGuid: 3c3bbe75c246e464eaf850673dab29a5
 --- !u!114 &114492711724277748
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1806734307280454}
@@ -415,7 +445,7 @@ MonoBehaviour:
   _guid: da1ca55c-f27b-4323-9ada-0ea8afbf16de
 --- !u!114 &114545457088832716
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1806734307280454}
@@ -426,7 +456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &114715253378511594
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1324544748248932}
