@@ -39,4 +39,15 @@ public class RigidbodyEffector : MonoBehaviour
 	{
 		m_rgbdList.Remove(other.attachedRigidbody);
 	}
+
+	private void OnCollisionEnter(Collision other)
+	{
+		print("other.collider.attachedRigidbody");
+		m_rgbdList.Add(other.collider.attachedRigidbody);
+	}
+
+	private void OnCollisionExit(Collision other)
+	{
+		m_rgbdList.Remove(other.collider.attachedRigidbody);
+	}
 }

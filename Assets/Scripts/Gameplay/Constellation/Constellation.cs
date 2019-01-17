@@ -5,9 +5,8 @@ using UnityEngine.Events;
 
 public class Constellation : MonoBehaviour
 {
-	[SerializeField] float m_timeToMove;
-	[SerializeField] float m_animationAmplitude = 5;
-	[SerializeField] UnityEvent m_onCompleted;
+	[SerializeField] AnimationCurve m_moveLerpCurve;
+	[SerializeField] AnimationCurve m_noiseAmountCurve;
 
 	[Header("Wwise events")]
 	[SerializeField] AK.Wwise.Event m_validated;
@@ -16,6 +15,7 @@ public class Constellation : MonoBehaviour
 	Transform[] m_starsTransform;
 	Vector3[] m_starsInitPosition;
 	LineRenderer m_lineRenderer;
+	Spawner m_spawner;
 
 	int m_currentStarID = -1;
 	int m_endStarID = -1;
@@ -24,10 +24,15 @@ public class Constellation : MonoBehaviour
 	// Use this for initialization
 	void Awake ()
 	{
-		m_lineRenderer = GetComponent<LineRenderer>();
+		m_spawner = GetComponent<Spawner>();
+
 		m_stars = GetComponentsInChildren<ConstellationStar>();
 		m_starsTransform = new Transform[m_stars.Length];
 		m_starsInitPosition = new Vector3[m_stars.Length];
+
+		m_lineRenderer = GetComponent<LineRenderer>();
+		m_lineRenderer.positionCount = m_stars.Length;
+		m_lineRenderer.enabled = false;
 
 		for (int i = 0; i < m_stars.Length; i++)
 		{
@@ -106,33 +111,42 @@ public class Constellation : MonoBehaviour
 	{
 		m_lineRenderer.loop = true;
 		m_validated.Post(gameObject);
-		StartCoroutine(goFromTo(0, 1, m_onCompleted.Invoke));
+		m_spawner.Spawn();
+		StartCoroutine(
+			MoveTo(new Vector3[m_stars.Length], 5, 5, () =>
+			{
+				foreach (var tr in m_starsTransform)
+					Destroy(tr.gameObject);
+			}));
 	}
 
 	public void Init()
 	{
-		m_lineRenderer.positionCount = m_stars.Length;
-
-		for (int i = 0; i < m_stars.Length; i++)
+		StartCoroutine(MoveTo(m_starsInitPosition, 3, 20, () =>
 		{
-			m_starsTransform[i].localPosition = m_starsInitPosition[i];
-			m_lineRenderer.SetPosition(i, m_starsInitPosition[0]);
-		}
+			m_lineRenderer.enabled = true;
+
+			for (int i = 0; i < m_stars.Length; i++)
+				m_lineRenderer.SetPosition(i, m_starsInitPosition[0]);
+		}));
 	}
 
-	IEnumerator goFromTo(float start, float end, VoidDelegate endAction = null)
+	IEnumerator MoveTo(Vector3[] destinations, float timeToMove, float noiseScale, VoidDelegate endAction = null)
 	{
 		float lenght = m_starsTransform.Length/10f;
 
-		if(endAction != null)
-			endAction.Invoke();
+		Vector3[] startPositions = new Vector3[m_stars.Length];
 
-		for (float t = start; t < end; t += Time.fixedDeltaTime / m_timeToMove)
+		for (int i = 0; i < m_stars.Length; i++)
+			startPositions[i] = m_starsTransform[i].localPosition;
+
+		for (float t = 0; t < 1; t += Time.fixedDeltaTime / timeToMove)
 		{
 			for (int i = 0; i < m_starsTransform.Length; i++)
 			{
-				m_starsTransform[i].localPosition = Vector3.Lerp(m_starsInitPosition[i], Vector3.zero, t)
-				+ (new Vector3(Mathf.PerlinNoise(t, i/lenght), Mathf.PerlinNoise(t, i/lenght + 1f/3), Mathf.PerlinNoise(t, i/lenght + 2f/3)) - Vector3.one/2) * m_animationAmplitude * Mathf.Sin(t * Mathf.PI);
+				m_starsTransform[i].localPosition = Vector3.Lerp(startPositions[i], destinations[i], m_moveLerpCurve.Evaluate(t))
+				+ (new Vector3(Mathf.PerlinNoise(t, i), Mathf.PerlinNoise(t, i + 1), Mathf.PerlinNoise(t, i + 2)) - Vector3.one/2)
+					* noiseScale * m_noiseAmountCurve.Evaluate(t);
 
 				m_lineRenderer.SetPosition(i, m_starsTransform[i].localPosition);
 			}
@@ -140,7 +154,7 @@ public class Constellation : MonoBehaviour
 			yield return new WaitForEndOfFrame();
 		}
 
-		foreach (var tr in m_starsTransform)
-			Destroy(tr.gameObject);
+		if(endAction != null)
+			endAction.Invoke();
 	}
 }
