@@ -15,8 +15,8 @@ public class PlanetScaler : MonoBehaviour
     private ScaleEffect m_scaleEffect;
     private MTK_JointType m_catchedObjectJoint;
 
-    [SerializeField] private float m_baseDist = -1f;
-    [SerializeField] private float m_intermediateScale = -1f;
+    private float m_baseDist = -1f;
+    private float m_intermediateScale = -1f;
 
     // Use this for initialization
     void Awake ()

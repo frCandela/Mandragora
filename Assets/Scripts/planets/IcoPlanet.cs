@@ -6,10 +6,11 @@ public class IcoPlanet : MonoBehaviour
 {
     [Header("Parameters")]
     [SerializeField] private bool m_initialize = true;
-    [SerializeField, Range(0, 3)] private int m_nbSubdivisions = 0;
+    [SerializeField, Range(0, 3)] public int m_nbSubdivisions = 0;
     [SerializeField] private Material m_segmentMaterial;
     [SerializeField] public float heightDelta = 0.2f;
     [SerializeField] public float borderRatio = 0.2f;
+    [SerializeField] public float m_baseScale = 0.3f;
     [SerializeField] public int nbLevels = 5;
     [SerializeField] public Color[] levelColors = new Color[10];
     [SerializeField] public bool updatePlanet = false;
@@ -21,49 +22,130 @@ public class IcoPlanet : MonoBehaviour
     [SerializeField, HideInInspector] private List<IcoSegment> m_segments;
     public List<IcoSegment> Segments { get { return m_segments; } }
 
-    // Use this for initialization
+
     void Start()
     {
-        m_vertices = Icosphere.GenerateIcosphere(1f, m_nbSubdivisions);
-
-        if(m_initialize)
-        {
-            m_segments = new List<IcoSegment>();
-
-            for (int i = 0; i < m_vertices.Count / 3; ++i)
-            {
-                Vector3 v0 = m_vertices[3 * i + 0];
-                Vector3 v1 = m_vertices[3 * i + 1];
-                Vector3 v2 = m_vertices[3 * i + 2];
-
-                GameObject segment = new GameObject();
-                segment.name = "segment" + i;
-                segment.transform.parent = transform;
-                segment.AddComponent<MeshRenderer>();
-                segment.GetComponent<MeshRenderer>().material = m_segmentMaterial;
-                segment.layer = LayerMask.NameToLayer("Planet");
-
-                IcoSegment icoSeg = segment.AddComponent<IcoSegment>();
-                m_segments.Add(icoSeg);
-                icoSeg.heightLevel = 1;
-                icoSeg.icoPlanet = this;
-                icoSeg.SetBaseVertices(v0, v1, v2);
-                icoSeg.GenerateCollider();
-            }
-
-            foreach (IcoSegment segment in m_segments)
-            {
-                segment.FindNeighbours();
-            }
-        }        
+        if (m_initialize)
+            Initialize();
 
         foreach (IcoSegment segment in m_segments)
-        {
+            segment.GenerateCollider();
+
+        foreach (IcoSegment segment in m_segments)
+            segment.FindNeighbours();
+
+        foreach (IcoSegment segment in m_segments)
             segment.UpdateSegment();
-        }
+
+        transform.localScale = new Vector3(m_baseScale, m_baseScale, m_baseScale);
 
     }
 
+    // Use this for initialization
+    void Initialize()
+    {
+        m_vertices = Icosphere.GenerateIcosphere(1f, m_nbSubdivisions);
+
+        m_segments = new List<IcoSegment>();
+
+        for (int i = 0; i < m_vertices.Count / 3; ++i)
+        {
+            Vector3 v0 = m_vertices[3 * i + 0];
+            Vector3 v1 = m_vertices[3 * i + 1];
+            Vector3 v2 = m_vertices[3 * i + 2];
+
+            GameObject segment = new GameObject();
+            segment.transform.position = transform.position;
+            segment.name = "segment" + i;
+            segment.transform.parent = transform;
+            segment.AddComponent<MeshRenderer>();
+            segment.GetComponent<MeshRenderer>().material = m_segmentMaterial;
+            segment.layer = LayerMask.NameToLayer("Planet");
+
+            IcoSegment icoSeg = segment.AddComponent<IcoSegment>();
+            m_segments.Add(icoSeg);
+            icoSeg.heightLevel = 1;
+            icoSeg.icoPlanet = this;
+            icoSeg.SetBaseVertices(v0, v1, v2);
+
+            segment.AddComponent<MTK_PlanetSegmentJoint>();
+            MTK_Interactable interactable = segment.AddComponent<MTK_Interactable>();
+            interactable.isDistanceGrabbable = false;
+            interactable.isGrabbable = false;
+            interactable.isDroppable = false;
+
+
+
+
+        }
+    }
+
+    public void UpdateTesselationLevel()
+    {
+        GameObject tmp = new GameObject("tmp");
+        tmp.transform.parent = transform;
+        int count = transform.childCount;
+        for (int i = 0; i < count; ++i)
+        {
+            transform.GetChild(0).parent = tmp.transform;
+        }
+
+        GameObject sapins = new GameObject("sapins");
+        sapins.transform.parent = transform;
+        foreach (Transform child in tmp.transform)
+        {
+            foreach (Transform sapin in child)
+            {
+                sapin.SetParent(sapins.transform, true);
+            }
+        }
+
+        sapins.SetActive(false);
+        transform.position = 1000 * Vector3.up;
+
+
+
+
+        Initialize();
+
+        foreach (IcoSegment segment in m_segments)
+        {
+            Vector3 center = 1.5f * segment.Center();
+            Vector3 dir = -0.5f * center;
+
+            Ray ray = new Ray(transform.position + center, dir);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, LayerMask.GetMask("Planet")))
+            {
+                IcoSegment seg = hit.collider.GetComponent<IcoSegment>();
+                if (seg)
+                    segment.heightLevel = seg.heightLevel;
+                else
+                    print(hit.collider.name);
+            }
+
+        }
+
+        tmp.SetActive(false);
+        Destroy(tmp);
+
+        foreach (IcoSegment segment in m_segments)
+            segment.GenerateCollider();
+
+        foreach (IcoSegment segment in m_segments)
+            segment.FindNeighbours();
+
+        foreach (IcoSegment segment in m_segments)
+            segment.UpdateSegment();
+
+        Destroy(tmp);
+
+        transform.position = Vector3.zero;
+
+        sapins.SetActive(true);
+    }
+
+    public bool updateTesselationLevel = false;
     private void Update()
     {
         if(updatePlanet)
@@ -76,6 +158,12 @@ public class IcoPlanet : MonoBehaviour
                 trianglesCount += icoSeg.triangleCount;
                 icoSeg.UpdateSegment();
             }
+        }
+
+        if(updateTesselationLevel)
+        {
+            updateTesselationLevel = false;
+            UpdateTesselationLevel();
         }
     }
 

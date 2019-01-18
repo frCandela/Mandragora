@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114062112745521208}
   - component: {fileID: 114385774812151516}
   m_Layer: 0
-  m_Name: planet scaler pro
+  m_Name: planet scaler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 114892355245138414}
   - component: {fileID: 65298131036632210}
   - component: {fileID: 114433871753091062}
+  - component: {fileID: 65592387731256124}
   m_Layer: 0
   m_Name: buttonFrame
   m_TagString: Untagged
@@ -600,12 +601,24 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1662599935983432}
   m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000002, y: 0.99999994, z: 0.81242675}
+  m_Center: {x: -0.00000024835268, y: 0, z: -1.7674615}
+--- !u!65 &65475137379637020
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1662599935983432}
+  m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 0.99999994, z: 0.54267955}
   m_Center: {x: 0, y: 0, z: -1.2509218}
---- !u!65 &65475137379637020
+--- !u!65 &65592387731256124
 BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -630,6 +643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_snapToCenter: 1
   m_activationCooldown: 2
+  m_ejectForce: 1
   onObjectCatched:
     m_PersistentCalls:
       m_Calls: []
@@ -929,9 +943,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxScaleRatio: 2
   m_minScaleRatio: 0.5
-  m_baseDist: -1
-  m_intermediateScale: 0.2
-  test: 0
 --- !u!114 &114892355245138414
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -949,7 +960,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: Spawn
+        m_MethodName: Release
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -5,26 +5,33 @@ using UnityEngine.Events;
 
 public class CollisionEvent : MonoBehaviour
 {
-	[SerializeField]
-	UnityEvent m_onEnter, m_onExit;
+    [SerializeField] public enum CollisionType { Collision, Trigger, All }
+    [SerializeField] private CollisionType m_collisionType = CollisionType.All;
+
+    [SerializeField] UnityEvent m_onEnter, m_onExit;
+
 
 	private void OnCollisionEnter(Collision other)
 	{
-		m_onEnter.Invoke();
+        if(m_collisionType == CollisionType.All || m_collisionType == CollisionType.Collision)
+		    m_onEnter.Invoke();
 	}
 
 	private void OnTriggerEnter(Collider other)
 	{
-		m_onEnter.Invoke();
+        if (m_collisionType == CollisionType.All || m_collisionType == CollisionType.Trigger)
+            m_onEnter.Invoke();
 	}
 
 	private void OnCollisionExit(Collision other)
 	{
-		m_onExit.Invoke();
+        if (m_collisionType == CollisionType.All || m_collisionType == CollisionType.Collision)
+            m_onExit.Invoke();
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
-		m_onExit.Invoke();
+        if (m_collisionType == CollisionType.All || m_collisionType == CollisionType.Trigger)
+            m_onExit.Invoke();
 	}
 }

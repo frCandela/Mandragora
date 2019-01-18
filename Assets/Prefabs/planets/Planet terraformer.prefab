@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 114806875305920612}
   - component: {fileID: 65310027398698628}
   - component: {fileID: 114245848474496254}
+  - component: {fileID: 65798354452590582}
   m_Layer: 0
   m_Name: buttonFrame
   m_TagString: Untagged
@@ -523,11 +524,11 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1952977202787824}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.99999994, z: 0.54267955}
-  m_Center: {x: 0, y: 0, z: -1.2509218}
+  m_Size: {x: 1.0000002, y: 0.99999994, z: 0.81242675}
+  m_Center: {x: -0.00000024835268, y: 0, z: -1.7674615}
 --- !u!65 &65386805913102182
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -535,11 +536,11 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1952977202787824}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.4966049}
-  m_Center: {x: 0, y: 0, z: 0.25169802}
+  m_Size: {x: 1, y: 0.99999994, z: 0.54267955}
+  m_Center: {x: 0, y: 0, z: -1.2509218}
 --- !u!65 &65794770339079726
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -552,6 +553,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65798354452590582
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1952977202787824}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.4966049}
+  m_Center: {x: 0, y: 0, z: 0.25169802}
 --- !u!114 &114056211530565086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -629,6 +642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_snapToCenter: 1
   m_activationCooldown: 1
+  m_ejectForce: 1
   onObjectCatched:
     m_PersistentCalls:
       m_Calls: []
