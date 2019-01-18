@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class MTK_Interactable : MonoBehaviour
 {
-    [HideInInspector] public bool m_grabbed = false;
     [SerializeField] public bool isDistanceGrabbable = true;
     [SerializeField] public bool isDroppable = true;
 
@@ -57,6 +56,15 @@ public class MTK_Interactable : MonoBehaviour
     // Use this for initialization
     void Awake ()
     {
+        m_onUseStart = new UnityEvent();
+        m_onUseStop = new UnityEvent();
+        m_onGrabStart = new UnityEvent();
+        m_onGrabSop = new UnityEvent();
+        m_wOnUseStart = new AK.Wwise.Event();
+        m_wOnUseStop = new AK.Wwise.Event();
+        m_wOnGrabStart = new AK.Wwise.Event();
+        m_wOnGrabStop = new AK.Wwise.Event();
+
         m_joints = GetComponents<MTK_JointType>();
         if (m_joints.Length == 0)
             m_joints = new[]{ gameObject.AddComponent<MTK_JointType_Fixed>()};
@@ -87,8 +95,6 @@ public class MTK_Interactable : MonoBehaviour
 
             UseEffects = true;
         }
-
-        m_grabbed = input;
     }
 
     public void Use(bool input)

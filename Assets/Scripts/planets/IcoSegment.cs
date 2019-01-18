@@ -179,9 +179,9 @@ public class IcoSegment : MonoBehaviour
         for (int i = 0; i < 3; ++i)
         {
             Vector3 edge = 0.9f * (m_baseVertices[i] + m_baseVertices[(i + 1) % 3]) / 2;
-            Ray ray = new Ray(center, edge - center);
+            Ray ray = new Ray(transform.position + center, edge - center);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, LayerMask.NameToLayer("Planet")))
+            if (Physics.Raycast(ray, out hit, LayerMask.GetMask("Planet")))
             {
                 m_neighbours[i] = hit.collider.GetComponent<IcoSegment>();
             }

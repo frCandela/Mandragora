@@ -16,6 +16,7 @@ public class MTK_InteractHand : MonoBehaviour
     [Header("Events")]
     public UnityEventMTK_Interactable m_onTouchInteractable;
     public UnityEventMTK_Interactable m_onUnTouchInteractable;
+    public UnityEventMTK_Interactable m_onReleaseInteractable;
     public UnityEventBool m_onUseFail;
 
     public List<MTK_Interactable> m_objectsInTrigger = new List<MTK_Interactable>(3);
@@ -132,9 +133,12 @@ public class MTK_InteractHand : MonoBehaviour
             }
 
             grabbedJoint.onJointBreak.RemoveListener(Release);
-            m_grabbed = null;
+           
             m_handAnimator.SetBool("Visible", true);
             m_handAnimator.SetBool("Grab", false);
+
+            m_onReleaseInteractable.Invoke(m_grabbed);
+            m_grabbed = null;
         }
     }
 
