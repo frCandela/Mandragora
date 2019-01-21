@@ -40,6 +40,8 @@ public class ConstellationStar : MonoBehaviour
 	{
 		transform.position = m_initPosition;
 		m_animator = GetComponent<Animator>();
+
+		m_animator.SetFloat("FloatingSpeed", Random.Range(.5f, 1.5f));
 	}
 
 	public void RegisterConstellation(Constellation c, int ID)
