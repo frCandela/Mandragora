@@ -7,6 +7,7 @@ public class Constellation : MonoBehaviour
 {
 	[SerializeField] AnimationCurve m_moveLerpCurve;
 	[SerializeField] AnimationCurve m_noiseAmountCurve;
+	[SerializeField] float m_trailSpeed = 1;
 
 	[Header("Wwise events")]
 	[SerializeField] AK.Wwise.Event m_validated;
@@ -16,15 +17,18 @@ public class Constellation : MonoBehaviour
 	Vector3[] m_starsInitPosition;
 	LineRenderer m_lineRenderer;
 	Spawner m_spawner;
+	TrailRenderer m_trail;
 
 	int m_currentStarID = -1;
 	int m_endStarID = -1;
 	int m_direction = -1;
+	int m_trailDestination = 0;
 
 	// Use this for initialization
 	void Awake ()
 	{
 		m_spawner = GetComponent<Spawner>();
+		m_trail = GetComponentInChildren<TrailRenderer>();
 
 		m_stars = GetComponentsInChildren<ConstellationStar>();
 		m_starsTransform = new Transform[m_stars.Length];
@@ -41,9 +45,23 @@ public class Constellation : MonoBehaviour
 			m_starsInitPosition[i] = m_starsTransform[i].localPosition;
 		}
 	}
+
+	private void Update()
+	{
+		if(m_trail.emitting)
+		{
+			int currentDestination = (int)Mathf.PingPong(m_trailDestination, m_starsInitPosition.Length - 1);
+			m_trail.transform.localPosition = Vector3.MoveTowards(m_trail.transform.localPosition, m_starsInitPosition[currentDestination], m_trailSpeed * Time.deltaTime);
+
+			if(m_trail.transform.localPosition == m_starsInitPosition[currentDestination])
+				m_trailDestination++;
+		}
+	}
 	
 	public bool Check(int m_ID)
 	{
+		m_trail.emitting = false;
+
 		if(m_currentStarID == -1) // set first star
 		{
 			// First of last Only
@@ -104,6 +122,7 @@ public class Constellation : MonoBehaviour
 		}
 
 		m_currentStarID = -1;
+		m_trail.emitting = true;
 	}
 
 	[ContextMenu("Complete")]
@@ -122,12 +141,17 @@ public class Constellation : MonoBehaviour
 
 	public void Init()
 	{
+		m_trail.transform.localPosition = m_starsInitPosition[0];
+
 		StartCoroutine(MoveTo(m_starsInitPosition, 3, 20, () =>
 		{
 			m_lineRenderer.enabled = true;
 
 			for (int i = 0; i < m_stars.Length; i++)
 				m_lineRenderer.SetPosition(i, m_starsInitPosition[0]);
+
+			m_trailDestination = 0;
+			m_trail.emitting = true;
 		}));
 	}
 
