@@ -222,8 +222,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1662599935983432}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0030000806, y: -0.004999995, z: -0.049999952}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.10135501}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 0.1}
   m_Children: []
   m_Father: {fileID: 4382475904527714}
   m_RootOrder: 0
@@ -235,8 +235,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1995061253193660}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0030000806, y: -0.004999995, z: -0.14391312}
-  m_LocalScale: {x: 0.23756997, y: 0.23756997, z: 0.089145765}
+  m_LocalPosition: {x: 0, y: 0, z: -0.08}
+  m_LocalScale: {x: 1, y: 1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 4382475904527714}
   m_RootOrder: 1
@@ -630,6 +630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_snapToCenter: 1
   m_activationCooldown: 2
+  m_ejectForce: 1
   onObjectCatched:
     m_PersistentCalls:
       m_Calls: []
@@ -931,7 +932,6 @@ MonoBehaviour:
   m_minScaleRatio: 0.5
   m_baseDist: -1
   m_intermediateScale: 0.2
-  test: 0
 --- !u!114 &114892355245138414
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -949,7 +949,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: Spawn
+        m_MethodName: Release
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1039,7 +1039,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0.49999946, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.64161456, y: 0.5227849, z: -0.66008687}
+  m_ConnectedAnchor: {x: 0.6386145, y: 0.90899944, z: -0.724}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
