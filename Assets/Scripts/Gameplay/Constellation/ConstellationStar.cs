@@ -11,6 +11,7 @@ public class ConstellationStar : MonoBehaviour
 	[HideInInspector] public Vector3 m_initPosition;
 	Renderer m_renderer;
 	Animator m_animator;
+	Collider m_collider;
 	
 	[Header("Wwise events")]
 	[SerializeField] AK.Wwise.Event m_hit;
@@ -25,6 +26,7 @@ public class ConstellationStar : MonoBehaviour
 		set
 		{
 			m_validated = value;
+			m_collider.enabled = !value;
 
 			if(m_validated)
 			{
@@ -39,8 +41,10 @@ public class ConstellationStar : MonoBehaviour
 	void Start()
 	{
 		transform.position = m_initPosition;
-		m_animator = GetComponent<Animator>();
 
+		m_collider = GetComponent<Collider>();
+
+		m_animator = GetComponent<Animator>();
 		m_animator.SetFloat("FloatingSpeed", Random.Range(.5f, 1.5f));
 	}
 
