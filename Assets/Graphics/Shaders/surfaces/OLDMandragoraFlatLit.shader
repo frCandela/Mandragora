@@ -1,4 +1,4 @@
-﻿Shader "Mandragora/MandragoraFlatLitV2" {
+﻿Shader "Mandragora/OLDMandragoraFlatLit" {
 	Properties {
 		_Color ("Color", Color) = (1,1,1,1)
 		_Luminosity ("Luminosity", float) = 0
@@ -99,7 +99,7 @@
 			
 			// Apply
 			float4 c;
-    		c.rgb = (s.Albedo.rgb * _LightColor0.rgb * lighting) + ((spec * _LightColor0/* + spec * moyAlbedo*/) * atten);	
+    		c.rgb = (/*moyAlbedo * */_LightColor0.rgb * lighting) + ((spec * _LightColor0/* + spec * moyAlbedo*/) * atten);	
             c.a = 1.0;
             return c;
         }

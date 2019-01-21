@@ -1,4 +1,4 @@
-﻿Shader "Mandragora/MandragoraFlatLit" {
+﻿Shader "Mandragora/WorkshopBody" {
 	Properties {
 		_Color ("Color", Color) = (1,1,1,1)
 		_Luminosity ("Luminosity", float) = 0
@@ -12,6 +12,9 @@
 	SubShader {
 		Tags { "RenderType"="Opaque" }
 		LOD 200
+
+		Cull Off
+
 
 		CGPROGRAM
 		// Physically based Standard lighting model, and enable shadows on all light types
@@ -51,6 +54,7 @@
 
 		void surf (Input IN, inout MandragoraSurfaceFlatLitOutput o) {
 
+
 			// build tangent rotation matrix here (saves one interpolator):
 			float3 binormal = cross( IN.normal, IN.tangent.xyz) * IN.tangent.w; 
 			float3x3 rotation = float3x3( IN.tangent.xyz, binormal, IN.normal );
@@ -58,6 +62,7 @@
 			// get world space normal from position derivatives, and transform it to tangent space:
 			half3 flatNormal = - normalize(cross(ddx(IN.worldPos), ddy(IN.worldPos))).xyz;
 			o.Normal = mul(rotation, flatNormal);
+			
 
 
 			// Apply
@@ -87,14 +92,11 @@
 			float spec = pow(nh, _SpecPow);
 
 			// Fresnel to atten specular
-			float fresnel = max(0, dot(viewDir, s.Normal));
-			float specAtten = pow(1 - fresnel, 2);
+			float fresnel = dot(viewDir, s.Normal);
+			float specAtten = pow(1 - max(0,fresnel), 2);
 			spec *= specAtten;
 			spec *= _SpecularIntensity;
 			float3 specColor = (s.Albedo + _LightColor0.rgb)/2;
-
-			// Albedo Moyenne
-			//float moyAlbedo = (s.Albedo.r + s.Albedo.g + s.Albedo.b)/3;
 
 			
 			// Apply
@@ -126,12 +128,19 @@
 
 			#endif
 
+
+			// Special Effect workshop
+
+
 			// Depth
 			float distFromCam = length(_WorldSpaceCameraPos.xyz - IN.worldPos);
 			float depth = 1 - saturate(distFromCam / _DepthDistance);
 
 			float moyAlbedo = (color.r + color.g + color.b)/3;
 			float3 depthColor = float3(moyAlbedo, moyAlbedo, moyAlbedo);
+
+
+			// Apply
 			color.rgb = lerp(depthColor, color.rgb, depth);
 
 		}
