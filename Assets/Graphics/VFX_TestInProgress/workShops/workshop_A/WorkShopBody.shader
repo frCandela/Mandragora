@@ -40,6 +40,7 @@
 			float3 worldPos;
 			float4 tangent;
 			float3 normal;
+			float3 flatNormal;
 		};
 		
 		void vert (inout appdata_full v, out Input o) {
@@ -129,11 +130,14 @@
 			#endif
 
 
-			// Special Effect workshop
-
+			// Special Effect workshop //////////////////////////////////////////////
+			float3 toCam = IN.worldPos - _WorldSpaceCameraPos.xyz;
+			float3 toCamNorm = normalize(toCam);
+			float fresnel = dot(toCam, o.Normal) * 0.5 + 0.5;
+			fresnel = pow(fresnel, 1);
 
 			// Depth
-			float distFromCam = length(_WorldSpaceCameraPos.xyz - IN.worldPos);
+			float distFromCam = length(toCam);
 			float depth = 1 - saturate(distFromCam / _DepthDistance);
 
 			float moyAlbedo = (color.r + color.g + color.b)/3;
