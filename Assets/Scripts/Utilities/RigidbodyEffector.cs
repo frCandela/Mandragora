@@ -6,7 +6,7 @@ public class RigidbodyEffector : MonoBehaviour
 {
 	[SerializeField] Vector3 m_force;
 	[SerializeField] float m_accel;
-	List<Rigidbody> m_rgbdList = new List<Rigidbody>();
+    [SerializeField] List<Rigidbody> m_rgbdList = new List<Rigidbody>();
 	BoxCollider m_collider;
 
 	private void Start()
@@ -29,7 +29,7 @@ public class RigidbodyEffector : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if(!m_rgbdList.Contains(other.attachedRigidbody))
+		if(!m_rgbdList.Contains(other.attachedRigidbody) && other.attachedRigidbody)
 			m_rgbdList.Add(other.attachedRigidbody);
 	}
 

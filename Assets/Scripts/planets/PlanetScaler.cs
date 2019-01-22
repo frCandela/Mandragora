@@ -16,13 +16,6 @@ public class PlanetScaler : Workshop
     private float m_baseDist = -1f;
     private float m_intermediateScale = -1f;
 
-    // Use this for initialization
-    void Awake ()
-    {
-        m_dropzone = GetComponent<DropZone>();
-        m_dropzone.onObjectCatched.AddListener(EnableScaling);
-    }
-    
     void FixedUpdate ()
     {
         // If the scale sphere is grabbed
