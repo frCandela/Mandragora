@@ -5,6 +5,7 @@ using UnityEngine;
 public class Kinder : MTK_Interactable
 {
 	[SerializeField] GameObject m_planet;
+	[SerializeField] Transform m_shell;
 	[SerializeField] AK.Wwise.Event m_kinderCreation;
 	[SerializeField] float m_minBreakMagnitude;
 
@@ -27,18 +28,6 @@ public class Kinder : MTK_Interactable
 		m_kinderCreation.Post(gameObject);
 	}
 
-	void Break()
-	{
-		m_planet.GetComponent<Rigidbody>().isKinematic = false;
-		m_planet.GetComponent<Collider>().enabled = true;
-		m_planet.GetComponent<MTK_Interactable>().isDistanceGrabbable = true;
-
-		foreach (Transform child in transform)
-			child.transform.SetParent(transform.parent,true);
-
-		Destroy(gameObject);
-	}
-
 	public override void Grab(bool input)
 	{
 		m_rgbd.isKinematic = false;
@@ -52,7 +41,11 @@ public class Kinder : MTK_Interactable
 			m_rgbd.isKinematic = false;
 
 		if(other.relativeVelocity.sqrMagnitude > m_minBreakMagnitude)
-			Destroy(other.contacts[0].thisCollider.gameObject);
-		// Break();
+		{
+			other.contacts[0].thisCollider.gameObject.SetActive(false);
+
+			if(m_shell.childCount == 0)
+				Destroy(m_shell.gameObject);
+		}
 	}
 }
