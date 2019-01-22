@@ -5,8 +5,8 @@ using UnityEngine;
 public class Kinder : MTK_Interactable
 {
 	[SerializeField] GameObject m_planet;
-
 	[SerializeField] AK.Wwise.Event m_kinderCreation;
+	[SerializeField] float m_minBreakMagnitude;
 
 	bool m_enabled;
 	Rigidbody m_rgbd;
@@ -51,7 +51,8 @@ public class Kinder : MTK_Interactable
 		if(m_enabled)
 			m_rgbd.isKinematic = false;
 
-		if(other.gameObject.CompareTag("KinderBreaker"))
-			Break();
+		if(other.relativeVelocity.sqrMagnitude > m_minBreakMagnitude)
+			Destroy(other.contacts[0].thisCollider.gameObject);
+		// Break();
 	}
 }
