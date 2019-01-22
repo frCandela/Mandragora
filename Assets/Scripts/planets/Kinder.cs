@@ -5,10 +5,16 @@ using UnityEngine;
 public class Kinder : MTK_Interactable
 {
 	[SerializeField] GameObject m_planet;
-
 	[SerializeField] AK.Wwise.Event m_kinderCreation;
+	[SerializeField] float m_minBreakMagnitude;
 
 	bool m_enabled;
+	Rigidbody m_rgbd;
+
+	private void OnEnable()
+	{
+		m_rgbd = GetComponent<Rigidbody>();
+	}
 
 	void Activate()
 	{
@@ -35,7 +41,7 @@ public class Kinder : MTK_Interactable
 
 	public override void Grab(bool input)
 	{
-		GetComponent<Rigidbody>().isKinematic = false;
+		m_rgbd.isKinematic = false;
 
 		base.Grab(input);
 	}
@@ -43,9 +49,10 @@ public class Kinder : MTK_Interactable
 	private void OnCollisionEnter(Collision other)
 	{
 		if(m_enabled)
-			GetComponent<Rigidbody>().isKinematic = false;
+			m_rgbd.isKinematic = false;
 
-		if(other.gameObject.CompareTag("KinderBreaker"))
-			Break();
+		if(other.relativeVelocity.sqrMagnitude > m_minBreakMagnitude)
+			Destroy(other.contacts[0].thisCollider.gameObject);
+		// Break();
 	}
 }

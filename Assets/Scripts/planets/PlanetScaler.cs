@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(DropZone))]
-public class PlanetScaler : MonoBehaviour
+public class PlanetScaler : Workshop
 {
     [Header("Scaling parameters")]
     [SerializeField, Range(0, 10f)] private float m_maxScaleRatio = 2f;
     [SerializeField, Range(0, 10f)] private float m_minScaleRatio = 0.5f;
 
-    private DropZone m_dropzone;
-    private IcoPlanet m_icoPlanet;
     private ConfigurableJoint m_confJoint;
     private ScaleEffect m_scaleEffect;
     private MTK_JointType m_catchedObjectJoint;
@@ -69,35 +67,26 @@ public class PlanetScaler : MonoBehaviour
         Destroy(m_confJoint);
     }
     
-    void EnableScaling(bool state)
+    protected override void OnWorkshopUpdateState(bool state, MTK_Interactable current)
     {
         if (state)
         {
-            m_icoPlanet = m_dropzone.catchedObject.GetComponent<IcoPlanet>();
-            if (m_icoPlanet)
+            if (current.GetComponent<IcoPlanet>())
             {
-                MTK_Interactable interactable = m_icoPlanet.GetComponent<MTK_Interactable>();
-                interactable.isDistanceGrabbable = false;
-                interactable.IndexJointUsed = 1;
+                m_catchedObjectJoint = current.jointType;
+                current.jointType.onJointBreak.AddListener(ResetHand);
 
-                m_catchedObjectJoint = interactable.jointType;
-                interactable.jointType.onJointBreak.AddListener(ResetHand);
-
-                m_scaleEffect = m_dropzone.catchedObject.GetComponent<ScaleEffect>();
+                m_scaleEffect = current.GetComponent<ScaleEffect>();
 
                 if (!m_scaleEffect)
                 {
-                    m_scaleEffect = m_dropzone.catchedObject.gameObject.AddComponent<ScaleEffect>();
+                    m_scaleEffect = current.gameObject.AddComponent<ScaleEffect>();
                     m_scaleEffect.ApplyEffect();
                 }
-            } 
+            }
         }
         else
         {
-            MTK_Interactable interactable = m_icoPlanet.GetComponent<MTK_Interactable>();
-            interactable.IndexJointUsed = 0;
-            interactable.isDistanceGrabbable = true;
-
             m_catchedObjectJoint = null;
             m_scaleEffect = null;
         }

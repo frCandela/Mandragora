@@ -11,6 +11,7 @@ public class ConstellationStar : MonoBehaviour
 	[HideInInspector] public Vector3 m_initPosition;
 	Renderer m_renderer;
 	Animator m_animator;
+	Rigidbody m_rgbd;
 	
 	[Header("Wwise events")]
 	[SerializeField] AK.Wwise.Event m_hit;
@@ -39,7 +40,11 @@ public class ConstellationStar : MonoBehaviour
 	void Start()
 	{
 		transform.position = m_initPosition;
+
+		m_rgbd = GetComponent<Rigidbody>();
+
 		m_animator = GetComponent<Animator>();
+		m_animator.SetFloat("FloatingSpeed", Random.Range(.5f, 1.5f));
 	}
 
 	public void RegisterConstellation(Constellation c, int ID)
@@ -48,16 +53,22 @@ public class ConstellationStar : MonoBehaviour
 		m_ID = ID;
 	}
 
-	public void TryValidate()
+	public void TryValidate(Vector3 inputVel)
 	{
-		if(transform.position == m_initPosition) // Init phase
+		inputVel *= 1000;
+		m_rgbd.AddTorque(inputVel.z, inputVel.x, inputVel.y);
+
+		if(!Validated)
 		{
-			m_hit.Post(gameObject);
-			m_constellation.Init();
-		}
-		else // Completion phase
-		{
-			Validated = m_constellation.Check(m_ID);
+			if(transform.position == m_initPosition) // Init phase
+			{
+				m_hit.Post(gameObject);
+				m_constellation.Init();
+			}
+			else // Completion phase
+			{
+				Validated = m_constellation.Check(m_ID);
+			}
 		}
 	}
 }

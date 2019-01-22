@@ -23,6 +23,8 @@ public class MTK_Interactable : MonoBehaviour
     }
     public UnityEventMTK_Interactable onIsGrabbableChange = new UnityEventMTK_Interactable();
 
+    Outline m_outline;
+
     public MTK_JointType jointType { get { return m_joints[m_indexJointUsed]; } }
     private MTK_JointType[] m_joints;
     private int m_indexJointUsed = 0;
@@ -53,9 +55,23 @@ public class MTK_Interactable : MonoBehaviour
         }
     }
 
+    public bool Outline
+    {
+        set
+        {
+            m_outline.enabled = value;
+        }
+    }
+
     // Use this for initialization
     void Awake ()
     {
+        m_outline = GetComponent<Outline>();
+        if(m_outline == null)
+            m_outline = gameObject.AddComponent<Outline>();
+
+        Outline = false;
+
         m_onUseStart = new UnityEvent();
         m_onUseStop = new UnityEvent();
         m_onGrabStart = new UnityEvent();

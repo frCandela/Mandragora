@@ -51,8 +51,8 @@ public class TelekinesisPointer : MonoBehaviour
 			{
 				if(m_currentInteractable)
 				{
-					Outliner.OultineOff(m_currentInteractable);
-					m_currentInteractable = value;
+					m_currentInteractable.Outline = false;
+					m_currentInteractable = null;
 				}
 			}
 			else
@@ -60,10 +60,10 @@ public class TelekinesisPointer : MonoBehaviour
 				if(m_currentInteractable != value)
 				{
 					if(m_currentInteractable)
-						Outliner.OultineOff(m_currentInteractable);
+						m_currentInteractable.Outline = false;
 
 					m_currentInteractable = value;
-					Outliner.OultineOn(m_currentInteractable);
+					m_currentInteractable.Outline = true;
 
 					m_inputManager.Haptic(1);
 				}
@@ -122,7 +122,7 @@ public class TelekinesisPointer : MonoBehaviour
 				Vector3 targetVel = (transform.position - Target.transform.position).normalized * m_forceScale;
 				targetVel += distanceScale * m_lastForceApplied * GetDistanceToTarget();
 
-				m_connectedBody.rotation = Quaternion.RotateTowards(m_connectedBody.rotation, transform.rotation, Time.deltaTime * (1 - distanceScale) * 500);
+				// m_connectedBody.rotation = Quaternion.RotateTowards(m_connectedBody.rotation, transform.rotation, Time.deltaTime * (1 - distanceScale) * 500);
 				m_connectedBody.velocity = Vector3.MoveTowards(m_connectedBody.velocity, targetVel * (Mathf.Sqrt(GetDistanceToTarget()) * m_distanceSpeedScale), Time.deltaTime * (20 + (1-distanceScale) * 10));
 
 				m_inputManager.Haptic((1- distanceScale) / 10);
@@ -218,6 +218,7 @@ public class TelekinesisPointer : MonoBehaviour
 
 		m_connectedBody = Target.GetComponent<Rigidbody>();
 		m_connectedBody.AddForce((force - m_lastForceApplied) * Mathf.Sqrt(GetDistanceToTarget() * 10000));
+		m_connectedBody.AddTorque(force.z, force.x, force.y);
 		m_connectedBody.useGravity = false;
 		
 		m_lastForceApplied = force;
@@ -248,7 +249,6 @@ public class TelekinesisPointer : MonoBehaviour
 				m_wObjectStop.Post(m_connectedBody.gameObject);
 				m_wHandStop.Post(gameObject);
 
-				input.transform.rotation = transform.rotation;
 				input.transform.position = transform.position;
 				m_hand.Grab(Target);
 				UnAttract();
