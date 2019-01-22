@@ -98,7 +98,7 @@ public class TelekinesisPointer : MonoBehaviour
 			}
 		}
 
-		Debug.DrawRay(transform.position, transform.forward * 10, Color.red, Time.deltaTime);
+		//Debug.DrawRay(transform.position, transform.forward * 10, Color.red, Time.deltaTime);
 		
 		if(Target)
 		{
