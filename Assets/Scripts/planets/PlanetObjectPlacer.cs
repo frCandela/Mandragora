@@ -36,7 +36,7 @@ public class PlanetObjectPlacer : MonoBehaviour
 
     private void Update()
     {
-        if(m_placingEnabled)
+        if(m_placingEnabled && m_dropZone.catchedObject.GetComponent<IcoPlanet>())
         {
             foreach (MTK_InteractHand hand in m_handsInTrigger)
             {
