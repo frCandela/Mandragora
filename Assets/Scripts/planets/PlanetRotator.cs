@@ -5,16 +5,17 @@ using UnityEngine;
 public class PlanetRotator : MonoBehaviour
 {
     private DropZone m_dropzone;
-    private IcoPlanet m_icoPlanet;
     private ConfigurableJoint m_confJoint;
-    private MTK_JointType m_catchedObjectJoint;
+    private MTK_Interactable m_interactable;
+
+    [SerializeField] private MTK_JointType m_catchedObjectJoint;
 
     private float m_baseDist = -1f;
 
     void Awake ()
     {
         m_dropzone = GetComponent<DropZone>();
-        m_dropzone.onObjectCatched.AddListener(EnableScaling);
+        m_dropzone.onObjectCatched.AddListener(EnableRotation);
     }
 
     void ResetHand()
@@ -56,27 +57,26 @@ public class PlanetRotator : MonoBehaviour
         }
     }
 
-    void EnableScaling(bool state)
+    void EnableRotation(bool state)
     {
         if (state)
         {
-            m_icoPlanet = m_dropzone.catchedObject.GetComponent<IcoPlanet>();
-            if (m_icoPlanet)
+            m_interactable = m_dropzone.catchedObject.GetComponent<MTK_Interactable>();
+            if (m_interactable)
             {
-                MTK_Interactable interactable = m_icoPlanet.GetComponent<MTK_Interactable>();
-                interactable.isDistanceGrabbable = false;
-                interactable.IndexJointUsed = 1;
-                m_catchedObjectJoint = interactable.jointType;
-                interactable.jointType.onJointBreak.AddListener(ResetHand);              
-
+                m_interactable.isDistanceGrabbable = false;
+                m_interactable.IndexJointUsed = 1;
+                m_catchedObjectJoint = m_interactable.jointType;
+                m_interactable.jointType.onJointBreak.AddListener(ResetHand);
             }
         }
         else
         {
-            MTK_Interactable interactable = m_icoPlanet.GetComponent<MTK_Interactable>();
-            interactable.IndexJointUsed = 0;
-            interactable.isDistanceGrabbable = true;
+            m_interactable.jointType.onJointBreak.RemoveListener(ResetHand);
+            m_interactable.IndexJointUsed = 0;
+            m_interactable.isDistanceGrabbable = true;
 
+            m_interactable = null;
             m_catchedObjectJoint = null;
         }
     }

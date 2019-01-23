@@ -73,7 +73,7 @@ public class PlanetEffect : Effect
             }
             else
             {
-                transform.position = sunRigidbody.transform.position +  m_maxRadius * (transform.position - sunRigidbody.transform.position).normalized;
+                m_rb.position = sunRigidbody.transform.position + m_maxRadius * (transform.position - sunRigidbody.position).normalized;
                 Vector3 dir2 = (transform.position - sunRigidbody.transform.position).normalized;
                 m_rb.velocity = baseVel * Vector3.Cross(dir2, axis);
             }

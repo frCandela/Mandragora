@@ -94,12 +94,12 @@
 			float3 specColor = (s.Albedo + _LightColor0.rgb)/2;
 
 			// Albedo Moyenne
-			float moyAlbedo = (s.Albedo.r + s.Albedo.g + s.Albedo.b)/3;
+			//float moyAlbedo = (s.Albedo.r + s.Albedo.g + s.Albedo.b)/3;
 
 			
 			// Apply
 			float4 c;
-    		c.rgb = (/*moyAlbedo * */_LightColor0.rgb * lighting) + ((spec * _LightColor0/* + spec * moyAlbedo*/) * atten);	
+    		c.rgb = (s.Albedo.rgb * _LightColor0.rgb * lighting) + ((spec * _LightColor0) * atten);	
             c.a = 1.0;
             return c;
         }

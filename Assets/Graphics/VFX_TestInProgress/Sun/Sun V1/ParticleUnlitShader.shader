@@ -1,4 +1,4 @@
-﻿Shader "Mandragora/TrailAddCullOff"
+﻿Shader "Mandragora/ParticleUnlitShader"
 {
 	Properties
 	{
@@ -8,10 +8,11 @@
 	}
 	SubShader
 	{
-		Tags { "RenderQueue"="Transparent-10" "IgnoreProjector"="True" }
+		Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True" }
 		LOD 100
 
-		Blend SrcAlpha OneMinusSrcAlpha
+		//Blend SrcAlpha OneMinusSrcAlpha
+		Blend One SrcAlpha
 		Cull Off
 
 		Pass

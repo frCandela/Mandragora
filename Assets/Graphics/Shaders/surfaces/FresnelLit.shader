@@ -16,6 +16,7 @@
 		Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True" }
 		LOD 100
 		Cull Off
+		ZWrite On
 
 		Blend SrcAlpha OneMinusSrcAlpha
 
@@ -93,21 +94,22 @@
 			//	lightReflexion *= facing;
 
 
-				// Calculate Fresnel that multiply with Flow Texture
-				float fresnel = dot(toCam, i.normal);
+				// Calculate Fresnel
+				float3 viewDir = normalize(ObjSpaceViewDir(i.vertex));
+				float fresnel = dot(viewDir, i.normal) * 0.5 + 0.5;
 				fresnel = 1 - fresnel;
 				fresnel = pow(saturate(fresnel), _FresnelPow);
 				fresnel *= _FresnelIntensity;
-				fresnel = saturate(fresnel) * _FresnelOpacity;
+				fresnel = fresnel * _FresnelOpacity;
 
 
 				// Apply
 				fixed4 col = fixed4(0,0,0,0);
-				col.rgb = _Color.rgb;
+				col.rgb = _Color.rgb * fresnel;
 				col.rgb += lightReflexion;
 				col.rgb *= _Luminosity;
 
-				col.a = saturate(fresnel + _Color.a + alphaLightReflexion) * _Opacity;
+				col.a = saturate(fresnel * _Color.a + alphaLightReflexion) * _Opacity;
 				
 				return col;
 			}

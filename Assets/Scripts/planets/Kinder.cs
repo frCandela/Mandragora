@@ -8,17 +8,24 @@ public class Kinder : MTK_Interactable
 	[SerializeField] Transform m_shell;
 	[SerializeField] AK.Wwise.Event m_kinderCreation;
 	[SerializeField] float m_minBreakMagnitude;
+	[SerializeField, Range(0,1f)] float m_breakThreshold = .4f;
 
 	bool m_enabled;
 	Rigidbody m_rgbd;
+	ParticleSystem m_ps;
+	int m_piecesCount;
 
-	private void OnEnable()
+	protected override void OnEnable()
 	{
 		m_rgbd = GetComponent<Rigidbody>();
+		m_ps = GetComponentInChildren<ParticleSystem>();
+
+		m_piecesCount = (int) (m_shell.childCount * m_breakThreshold);
 	}
 
 	void Activate()
 	{
+		base.OnEnable();
 		isDistanceGrabbable = true;
 		m_enabled = true;
 	}
@@ -43,9 +50,20 @@ public class Kinder : MTK_Interactable
 		if(other.relativeVelocity.sqrMagnitude > m_minBreakMagnitude)
 		{
 			other.contacts[0].thisCollider.gameObject.SetActive(false);
+			m_ps.transform.position = other.contacts[0].point;
+			m_ps.transform.LookAt(other.contacts[0].point + other.contacts[0].normal);
+			m_ps.Emit(Random.Range(1,3));
 
-			if(m_shell.childCount == 0)
-				Destroy(m_shell.gameObject);
+			m_piecesCount--;
+
+			if(m_piecesCount == 0)
+			{
+				Destroy(gameObject);
+
+				m_planet.transform.SetParent(null, true);
+				m_planet.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+				m_planet.GetComponent<MTK_Interactable>().enabled = true;
+			}
 		}
 	}
 }
