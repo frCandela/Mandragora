@@ -11,10 +11,12 @@ public class Kinder : MTK_Interactable
 
 	bool m_enabled;
 	Rigidbody m_rgbd;
+	ParticleSystem m_ps;
 
 	private void OnEnable()
 	{
 		m_rgbd = GetComponent<Rigidbody>();
+		m_ps = GetComponentInChildren<ParticleSystem>();
 	}
 
 	void Activate()
@@ -43,6 +45,9 @@ public class Kinder : MTK_Interactable
 		if(other.relativeVelocity.sqrMagnitude > m_minBreakMagnitude)
 		{
 			other.contacts[0].thisCollider.gameObject.SetActive(false);
+			m_ps.transform.position = other.contacts[0].point;
+			m_ps.transform.LookAt(other.contacts[0].point + other.contacts[0].normal);
+			m_ps.Emit(Random.Range(1,3));
 
 			if(m_shell.childCount == 0)
 				Destroy(m_shell.gameObject);
