@@ -5,7 +5,8 @@ using UnityEngine.Events;
 
 public class Constellation : MonoBehaviour
 {
-	[SerializeField] AnimationCurve m_moveLerpCurve;
+	[SerializeField] AnimationCurve m_moveLerpCurve_Init;
+	[SerializeField] AnimationCurve m_moveLerpCurve_Complete;
 	[SerializeField] AnimationCurve m_noiseAmountCurve;
 	[SerializeField] float m_trailSpeed = 1;
 
@@ -132,7 +133,7 @@ public class Constellation : MonoBehaviour
 		m_validated.Post(gameObject);
 		m_spawner.Spawn();
 		StartCoroutine(
-			MoveTo(new Vector3[m_stars.Length], 5, 5, () =>
+			MoveTo(new Vector3[m_stars.Length], 1.5f, 5, m_moveLerpCurve_Complete, () =>
 			{
 				foreach (var tr in m_starsTransform)
 					Destroy(tr.gameObject);
@@ -143,7 +144,7 @@ public class Constellation : MonoBehaviour
 	{
 		m_trail.transform.localPosition = m_starsInitPosition[0];
 
-		StartCoroutine(MoveTo(m_starsInitPosition, 3, 20, () =>
+		StartCoroutine(MoveTo(m_starsInitPosition, 3, 20, m_moveLerpCurve_Init, () =>
 		{
 			m_lineRenderer.enabled = true;
 
@@ -155,7 +156,7 @@ public class Constellation : MonoBehaviour
 		}));
 	}
 
-	IEnumerator MoveTo(Vector3[] destinations, float timeToMove, float noiseScale, VoidDelegate endAction = null)
+	IEnumerator MoveTo(Vector3[] destinations, float timeToMove, float noiseScale, AnimationCurve curve, VoidDelegate endAction = null)
 	{
 		float lenght = m_starsTransform.Length/10f;
 
@@ -168,7 +169,7 @@ public class Constellation : MonoBehaviour
 		{
 			for (int i = 0; i < m_starsTransform.Length; i++)
 			{
-				m_starsTransform[i].localPosition = Vector3.Lerp(startPositions[i], destinations[i], m_moveLerpCurve.Evaluate(t))
+				m_starsTransform[i].localPosition = Vector3.Lerp(startPositions[i], destinations[i], curve.Evaluate(t))
 				+ (new Vector3(Mathf.PerlinNoise(t, i), Mathf.PerlinNoise(t, i + 1), Mathf.PerlinNoise(t, i + 2)) - Vector3.one/2)
 					* noiseScale * m_noiseAmountCurve.Evaluate(t);
 
