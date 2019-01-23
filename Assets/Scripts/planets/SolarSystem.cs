@@ -17,23 +17,30 @@ public class SolarSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        MTK_Interactable interactable = other.GetComponent<MTK_Interactable>();
-        if(interactable && interactable.isGrabbable && !interactable.isDistanceGrabbed)
+        
+        if(other.attachedRigidbody)
         {
-            PlanetEffect eff = (PlanetEffect)effectPrefab.AddEffectTo(other.gameObject);
-            if (eff)
+            
+            MTK_Interactable interactable = other.attachedRigidbody.GetComponent<MTK_Interactable>();
+            if (interactable && interactable.isGrabbable && !interactable.isDistanceGrabbed)
             {
-                eff.sunRigidbody = m_rb;
-                m_planetEffectsList.Add(eff);
+                
+                PlanetEffect eff = (PlanetEffect)effectPrefab.AddEffectTo(other.attachedRigidbody.gameObject);
+                if (eff)
+                {
+                    eff.sunRigidbody = m_rb;
+                    m_planetEffectsList.Add(eff);
 
-                UpdateState(m_planetEffectsList.Count);
+                    UpdateState(m_planetEffectsList.Count);
+                }
             }
         }
+
     }
 
     private void OnTriggerExit(Collider other)
     {
-        PlanetEffect effect = other.GetComponent<PlanetEffect>();
+        PlanetEffect effect = other.attachedRigidbody.GetComponent<PlanetEffect>();
         if (effect)
         {
             m_planetEffectsList.Remove(effect);
