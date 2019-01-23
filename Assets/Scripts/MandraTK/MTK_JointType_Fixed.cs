@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent( typeof(Rigidbody))]
 public class MTK_JointType_Fixed : MTK_JointType
 {
     public float breakForce = 1500f;
@@ -11,12 +10,24 @@ public class MTK_JointType_Fixed : MTK_JointType
     protected virtual void Awake()
     {
         if( !rigidbody)
+        {
             rigidbody = GetComponent<Rigidbody>();
+            if( ! rigidbody)
+                rigidbody = gameObject.AddComponent<Rigidbody>();
+        }
     }
 
     protected override bool JointWithOverride(GameObject other)
     {
-        if( ! m_joint )
+        if (!rigidbody)
+        {
+            ObjectOnPlanet oop = GetComponent<ObjectOnPlanet>();
+            if( oop )
+                oop.Dissociate();
+            return false;
+        }
+
+        if ( ! m_joint )
         {
             rigidbody.velocity = Vector3.zero; // Prevent joint break
             m_joint = other.AddComponent<FixedJoint>();

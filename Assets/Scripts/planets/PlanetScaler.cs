@@ -64,18 +64,15 @@ public class PlanetScaler : Workshop
     {
         if (state)
         {
-            if (current.GetComponent<IcoPlanet>())
+            m_catchedObjectJoint = current.jointType;
+            current.jointType.onJointBreak.AddListener(ResetHand);
+
+            m_scaleEffect = current.GetComponent<ScaleEffect>();
+
+            if (!m_scaleEffect)
             {
-                m_catchedObjectJoint = current.jointType;
-                current.jointType.onJointBreak.AddListener(ResetHand);
-
-                m_scaleEffect = current.GetComponent<ScaleEffect>();
-
-                if (!m_scaleEffect)
-                {
-                    m_scaleEffect = current.gameObject.AddComponent<ScaleEffect>();
-                    m_scaleEffect.ApplyEffect();
-                }
+                m_scaleEffect = current.gameObject.AddComponent<ScaleEffect>();
+                m_scaleEffect.ApplyEffect();
             }
         }
         else

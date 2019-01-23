@@ -27,16 +27,44 @@ public class PlanetObjectPlacer : MonoBehaviour
         if( state )
         {
             m_placingEnabled = true;
+
+            if(m_dropZone.catchedObject.GetComponent<IcoPlanet>())
+            {
+                foreach (Transform segment in m_dropZone.catchedObject.transform)
+                {
+                    if(segment.GetComponent<IcoSegment>())
+                    {
+                        foreach (Transform decoration in segment)
+                        {
+                            decoration.GetComponent<MTK_Interactable>().isGrabbable = true;
+                        }
+                    }
+                }
+            }
         }
         else
         {
             m_placingEnabled = false;
+
+            if (m_dropZone.catchedObject.GetComponent<IcoPlanet>())
+            {
+                foreach (Transform segment in m_dropZone.catchedObject.transform)
+                {
+                    if (segment.GetComponent<IcoSegment>())
+                    {
+                        foreach (Transform decoration in segment)
+                        {
+                            decoration.GetComponent<MTK_Interactable>().isGrabbable = false;
+                        }
+                    }
+                }
+            }
         }
     }
 
     private void Update()
     {
-        if(m_placingEnabled)
+        if(m_placingEnabled && m_dropZone.catchedObject.GetComponent<IcoPlanet>())
         {
             foreach (MTK_InteractHand hand in m_handsInTrigger)
             {
@@ -106,13 +134,16 @@ public class PlanetObjectPlacer : MonoBehaviour
                     copy.transform.parent = holo.projectedSegment.transform;
                     copy.layer = LayerMask.NameToLayer("Planet");
 
-                    Destroy(copy.GetComponent<MTK_Interactable>());
-                    Destroy(copy.GetComponent<MTK_JointType>());
+                    MTK_Interactable interact = copy.GetComponent<MTK_Interactable>();
+                    interact.isDroppable = false;
+                    interact.isDistanceGrabbable = false;
+
+                    copy.AddComponent<ObjectOnPlanet>().referenceObject = holo.referenceObject;
+
                     Destroy(copy.GetComponent<Rigidbody>());
-                    //Destroy(copy.GetComponent<Outline>());
 
-                    holo.referenceObject.transform.position = -1000 * Vector3.up;
-
+                    holo.referenceObject.transform.position = - 1000f * Vector3.up;
+                    holo.referenceObject.GetComponent<Rigidbody>().isKinematic = true;
 
                     Destroy(holo.gameObject);
                     m_objectsHolograms.Remove(hand);

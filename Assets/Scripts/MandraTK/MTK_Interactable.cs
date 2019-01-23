@@ -83,7 +83,7 @@ public class MTK_Interactable : MonoBehaviour
 
         m_joints = GetComponents<MTK_JointType>();
         if (m_joints.Length == 0)
-            m_joints = new[]{ gameObject.AddComponent<MTK_JointType_Fixed>()};
+            m_joints = new MTK_JointType[]{ gameObject.AddComponent<MTK_JointType_Fixed>(), gameObject.AddComponent<MTK_InertJoint>() };
 
         MTK_InteractiblesManager.Instance.Subscribe(this);        
     }

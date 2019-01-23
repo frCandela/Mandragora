@@ -91,13 +91,20 @@ public class MTK_InteractHand : MonoBehaviour
     {
         if(obj)
         {
-            obj.Grab(true);
-
             if (obj.jointType.Used())
                 obj.jointType.RemoveJoint();
 
             obj.jointType.onJointBreak.AddListener(Release);
-            obj.jointType.JoinWith(gameObject);
+
+            if( !obj.jointType.JoinWith(gameObject))
+            {
+                obj.jointType.onJointBreak.RemoveListener(Release);
+                return;
+            }
+
+            obj.Grab(true);
+
+
             m_grabbed = obj;
             grabbedJoint = obj.jointType;
 
@@ -165,6 +172,8 @@ public class MTK_InteractHand : MonoBehaviour
 
     MTK_Interactable GetClosestInteractable()
     {
+        m_objectsInTrigger.RemoveAll(x => x == null);
+
         float minDistance = float.MaxValue,
                 tmpDist;
 

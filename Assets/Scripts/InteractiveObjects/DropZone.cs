@@ -50,12 +50,13 @@ public class DropZone : MonoBehaviour
             m_lastActivationTime = Time.time;
             m_meshRenderer.enabled = true;
             onObjectCatched.Invoke(false);
+            catchedObject.jointType.onJointBreak.RemoveListener(Release);
 
             MTK_Interactable tmp = catchedObject;
             catchedObject = null;
 
             tmp.jointType.RemoveJoint();
-            tmp.GetComponent<Rigidbody>().AddForce(m_ejectForce * Vector3.up, ForceMode.Impulse);
+            tmp.GetComponent<Rigidbody>().AddForce(m_ejectForce * Vector3.up, ForceMode.Impulse);            
         }
     }
 
