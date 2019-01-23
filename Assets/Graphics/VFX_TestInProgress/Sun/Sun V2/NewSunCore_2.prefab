@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23225495250759178}
   - component: {fileID: 114098167968265464}
   - component: {fileID: 114119519053578476}
+  - component: {fileID: 64655483230971826}
   m_Layer: 0
   m_Name: NewSunCore_2
   m_TagString: Untagged
@@ -85,9 +86,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1417849836489886}
   m_Mesh: {fileID: 4300000, guid: 608997eb8a8ec784fb6940f954ab3009, type: 3}
+--- !u!64 &64655483230971826
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1417849836489886}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 608997eb8a8ec784fb6940f954ab3009, type: 3}
 --- !u!114 &114098167968265464
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1417849836489886}
@@ -103,7 +118,7 @@ MonoBehaviour:
   _assetGuid: f810d99b65f91f440b2d0b849bdb2e75
 --- !u!114 &114119519053578476
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1417849836489886}

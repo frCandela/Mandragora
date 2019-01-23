@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class MTK_Interactable : MonoBehaviour
 {
-    [HideInInspector] public bool m_grabbed = false;
     [SerializeField] public bool isDistanceGrabbable = true;
     [SerializeField] public bool isDroppable = true;
 
@@ -23,6 +22,8 @@ public class MTK_Interactable : MonoBehaviour
         }
     }
     public UnityEventMTK_Interactable onIsGrabbableChange = new UnityEventMTK_Interactable();
+
+    Outline m_outline;
 
     public MTK_JointType jointType { get { return m_joints[m_indexJointUsed]; } }
     private MTK_JointType[] m_joints;
@@ -54,14 +55,37 @@ public class MTK_Interactable : MonoBehaviour
         }
     }
 
+    public bool Outline
+    {
+        set
+        {
+            m_outline.enabled = value;
+        }
+    }
+
     // Use this for initialization
     void Awake ()
     {
+        m_outline = GetComponent<Outline>();
+        if(m_outline == null)
+            m_outline = gameObject.AddComponent<Outline>();
+
+        Outline = false;
+
+        m_onUseStart = new UnityEvent();
+        m_onUseStop = new UnityEvent();
+        m_onGrabStart = new UnityEvent();
+        m_onGrabSop = new UnityEvent();
+        m_wOnUseStart = new AK.Wwise.Event();
+        m_wOnUseStop = new AK.Wwise.Event();
+        m_wOnGrabStart = new AK.Wwise.Event();
+        m_wOnGrabStop = new AK.Wwise.Event();
+
         m_joints = GetComponents<MTK_JointType>();
         if (m_joints.Length == 0)
             m_joints = new[]{ gameObject.AddComponent<MTK_JointType_Fixed>()};
 
-        MTK_InteractiblesManager.Instance.Subscribe(this);
+        MTK_InteractiblesManager.Instance.Subscribe(this);        
     }
 
     private void OnDestroy()
@@ -87,8 +111,6 @@ public class MTK_Interactable : MonoBehaviour
 
             UseEffects = true;
         }
-
-        m_grabbed = input;
     }
 
     public void Use(bool input)

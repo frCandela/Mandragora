@@ -14,7 +14,6 @@ public class PhysicButton : MonoBehaviour
 
     private bool m_state = false;
 
-
     private void OnTriggerEnter(Collider other)
     {
         if( other.gameObject == buttonGameObject)

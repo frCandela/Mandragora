@@ -42,8 +42,7 @@ public class SegmentTypeSelector : MonoBehaviour
 
         for (int i = 0; i < 3; ++i)
         {
-            if (segment.neighbours[i].heightLevel < 
-                segment.heightLevel)
+            if (segment.neighbours[i].heightLevel < segment.heightLevel)
             {
                 ms_sides[i] = true;
             }

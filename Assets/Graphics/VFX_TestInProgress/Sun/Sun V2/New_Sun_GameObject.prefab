@@ -40,12 +40,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4297243572221612}
+  - component: {fileID: 114871438708688176}
   - component: {fileID: 33154309589800926}
   - component: {fileID: 23735955225633194}
   - component: {fileID: 64502300562046036}
   - component: {fileID: 114906176316855572}
   - component: {fileID: 114794762295036758}
-  - component: {fileID: 114871438708688176}
+  - component: {fileID: 64538891230756330}
   m_Layer: 0
   m_Name: NewSunDistortion
   m_TagString: Untagged
@@ -106,6 +107,7 @@ GameObject:
   - component: {fileID: 114168113625023278}
   - component: {fileID: 114653131141423518}
   - component: {fileID: 114444694679721682}
+  - component: {fileID: 135505839653382096}
   m_Layer: 0
   m_Name: New_Sun_GameObject
   m_TagString: Untagged
@@ -126,6 +128,7 @@ GameObject:
   - component: {fileID: 114627197062877494}
   - component: {fileID: 114129767527405016}
   - component: {fileID: 114160711387475754}
+  - component: {fileID: 64204604656837008}
   m_Layer: 0
   m_Name: NewSunCore_2
   m_TagString: Untagged
@@ -419,7 +422,35 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1415027329275232}
   m_Mesh: {fileID: 4300000, guid: 608997eb8a8ec784fb6940f954ab3009, type: 3}
+--- !u!64 &64204604656837008
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1818460021223088}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 608997eb8a8ec784fb6940f954ab3009, type: 3}
 --- !u!64 &64502300562046036
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1392226701715082}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!64 &64538891230756330
 MeshCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -737,6 +768,18 @@ MonoBehaviour:
     _collection:
     - {fileID: 1415027329275232}
   _assetGuid: 02461528e4cf3694e8530c1048285f72
+--- !u!135 &135505839653382096
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1455816792923634}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.99999994
+  m_Center: {x: -0.000000059604645, y: 0, z: 1.7763568e-15}
 --- !u!198 &198217599548843910
 ParticleSystem:
   m_ObjectHideFlags: 1

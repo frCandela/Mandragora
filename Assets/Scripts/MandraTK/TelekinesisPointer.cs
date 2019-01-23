@@ -9,12 +9,14 @@ public class TelekinesisPointer : MonoBehaviour
 	[SerializeField] Animator m_handAnimator;
 
 	[Header("Settings")]
-	[SerializeField, Range(0,1)]
+	[SerializeField, Range(0,0.1f)]
 	float m_minMagnitudeToAttract = .2f;
 	[SerializeField, Range(0,1)]
 	float m_maxForce = 1;
-	[SerializeField, Range(0,1000)]
-	float m_forceScale = 300;
+	[SerializeField, Range(0,10)]
+	float m_forceScale = 4;
+	[SerializeField, Range(0,10)]
+	float m_distanceSpeedScale = 4;
 
 	[Header("Sound")]
 	[SerializeField] AK.Wwise.Event m_wObjectGrabbed;
@@ -29,7 +31,7 @@ public class TelekinesisPointer : MonoBehaviour
 
 	MTK_Interactable m_currentInteractable;
 
-    public bool isAttracting { get { return m_connectedBody || Target; } private set{} }
+    public bool isAttracting { get { return m_connectedBody || Target; } }
     Rigidbody m_connectedBody;
     
     bool m_attract;
@@ -49,8 +51,8 @@ public class TelekinesisPointer : MonoBehaviour
 			{
 				if(m_currentInteractable)
 				{
-					Outliner.OultineOff(m_currentInteractable);
-					m_currentInteractable = value;
+					m_currentInteractable.Outline = false;
+					m_currentInteractable = null;
 				}
 			}
 			else
@@ -58,10 +60,10 @@ public class TelekinesisPointer : MonoBehaviour
 				if(m_currentInteractable != value)
 				{
 					if(m_currentInteractable)
-						Outliner.OultineOff(m_currentInteractable);
+						m_currentInteractable.Outline = false;
 
 					m_currentInteractable = value;
-					Outliner.OultineOn(m_currentInteractable);
+					m_currentInteractable.Outline = true;
 
 					m_inputManager.Haptic(1);
 				}
@@ -95,6 +97,8 @@ public class TelekinesisPointer : MonoBehaviour
 				Target = m_interactiblesManager.GetClosestToView(transform, 15);
 			}
 		}
+
+		//Debug.DrawRay(transform.position, transform.forward * 10, Color.red, Time.deltaTime);
 		
 		if(Target)
 		{
@@ -118,8 +122,8 @@ public class TelekinesisPointer : MonoBehaviour
 				Vector3 targetVel = (transform.position - Target.transform.position).normalized * m_forceScale;
 				targetVel += distanceScale * m_lastForceApplied * GetDistanceToTarget();
 
-				m_connectedBody.rotation = Quaternion.RotateTowards(m_connectedBody.rotation, transform.rotation, (1 - distanceScale) * 2);
-				m_connectedBody.velocity = Vector3.MoveTowards(m_connectedBody.velocity, targetVel, Time.deltaTime * 20);
+				// m_connectedBody.rotation = Quaternion.RotateTowards(m_connectedBody.rotation, transform.rotation, Time.deltaTime * (1 - distanceScale) * 500);
+				m_connectedBody.velocity = Vector3.MoveTowards(m_connectedBody.velocity, targetVel * (Mathf.Sqrt(GetDistanceToTarget()) * m_distanceSpeedScale), Time.deltaTime * (20 + (1-distanceScale) * 10));
 
 				m_inputManager.Haptic((1- distanceScale) / 10);
 			}
@@ -132,7 +136,7 @@ public class TelekinesisPointer : MonoBehaviour
     void SetLevitation(MTK_Interactable interactable, bool value)
     {
         Rigidbody rb = interactable.GetComponent<Rigidbody>();
-        if(rb )
+        if(rb)
         {
             if (value)
             {
@@ -206,14 +210,18 @@ public class TelekinesisPointer : MonoBehaviour
         SetLevitation(Target, false);
         m_fxManager.DeActivate("Grab");
 
+		if(!m_connectedBody) // = first call
+		{
+			m_wObjectPlay.Post(Target.gameObject);
+			m_initDistanceToTarget = GetDistanceToTarget();
+		}
+
 		m_connectedBody = Target.GetComponent<Rigidbody>();
-		m_connectedBody.AddForce(force * GetDistanceToTarget() * 100);
+		m_connectedBody.AddForce((force - m_lastForceApplied) * Mathf.Sqrt(GetDistanceToTarget() * 10000));
+		m_connectedBody.AddTorque(force.z, force.x, force.y);
 		m_connectedBody.useGravity = false;
-
-		m_initDistanceToTarget = GetDistanceToTarget();
+		
 		m_lastForceApplied = force;
-
-		m_wObjectPlay.Post(Target.gameObject);
 	}
 
 	void UnAttract()
@@ -241,7 +249,6 @@ public class TelekinesisPointer : MonoBehaviour
 				m_wObjectStop.Post(m_connectedBody.gameObject);
 				m_wHandStop.Post(gameObject);
 
-				input.transform.rotation = transform.rotation;
 				input.transform.position = transform.position;
 				m_hand.Grab(Target);
 				UnAttract();

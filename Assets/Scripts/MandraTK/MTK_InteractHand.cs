@@ -12,6 +12,7 @@ public class MTK_InteractHand : MonoBehaviour
     [Header("Events")]
     public UnityEventMTK_Interactable m_onTouchInteractable;
     public UnityEventMTK_Interactable m_onUnTouchInteractable;
+    public UnityEventMTK_Interactable m_onReleaseInteractable;
     public UnityEventBool m_onUseFail;
 
     public List<MTK_Interactable> m_objectsInTrigger = new List<MTK_Interactable>(3);
@@ -51,9 +52,6 @@ public class MTK_InteractHand : MonoBehaviour
     private void Start()
     {
         m_inputManager = GetComponentInParent<MTK_InputManager>();
-
-        m_onTouchInteractable.AddListener(Outliner.OultineOn);
-        m_onUnTouchInteractable.AddListener(Outliner.OultineOff);
     }
 
     private void FixedUpdate()
@@ -103,7 +101,7 @@ public class MTK_InteractHand : MonoBehaviour
             m_grabbed = obj;
             grabbedJoint = obj.jointType;
 
-            Outliner.OultineOff(m_grabbed);
+            m_grabbed.Outline = true;
 
             m_handAnimator.SetBool("Visible", false);
 
@@ -127,9 +125,12 @@ public class MTK_InteractHand : MonoBehaviour
             }
 
             grabbedJoint.onJointBreak.RemoveListener(Release);
-            m_grabbed = null;
+           
             m_handAnimator.SetBool("Visible", true);
             m_handAnimator.SetBool("Grab", false);
+
+            m_onReleaseInteractable.Invoke(m_grabbed);
+            m_grabbed = null;
         }
     }
 
@@ -143,6 +144,8 @@ public class MTK_InteractHand : MonoBehaviour
         {
             m_objectsInTrigger.Add(candidate);
             m_onTouchInteractable.Invoke(candidate);
+
+            candidate.Outline = true;
         }
     }
 
@@ -155,6 +158,8 @@ public class MTK_InteractHand : MonoBehaviour
         if (candidate && m_objectsInTrigger.Remove(candidate))
         {
             m_onUnTouchInteractable.Invoke(candidate);
+
+            candidate.Outline = false;
         }
     }
 
