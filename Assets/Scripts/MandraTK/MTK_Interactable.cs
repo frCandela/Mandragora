@@ -63,6 +63,12 @@ public class MTK_Interactable : MonoBehaviour
         }
     }
 
+    protected virtual void OnEnable()
+    {
+        if(MTK_InteractiblesManager.Instance)
+            MTK_InteractiblesManager.Instance.Subscribe(this);
+    }
+
     // Use this for initialization
     void Awake ()
     {
@@ -83,12 +89,10 @@ public class MTK_Interactable : MonoBehaviour
 
         m_joints = GetComponents<MTK_JointType>();
         if (m_joints.Length == 0)
-            m_joints = new[]{ gameObject.AddComponent<MTK_JointType_Fixed>()};
-
-        MTK_InteractiblesManager.Instance.Subscribe(this);        
+            m_joints = new[]{ gameObject.AddComponent<MTK_JointType_Fixed>()};  
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         if(MTK_InteractiblesManager.Instance)
             MTK_InteractiblesManager.Instance.UnSubscribe(this);

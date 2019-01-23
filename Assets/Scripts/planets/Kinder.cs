@@ -15,7 +15,7 @@ public class Kinder : MTK_Interactable
 	ParticleSystem m_ps;
 	int m_piecesCount;
 
-	private void OnEnable()
+	protected override void OnEnable()
 	{
 		m_rgbd = GetComponent<Rigidbody>();
 		m_ps = GetComponentInChildren<ParticleSystem>();
@@ -25,6 +25,7 @@ public class Kinder : MTK_Interactable
 
 	void Activate()
 	{
+		base.OnEnable();
 		isDistanceGrabbable = true;
 		m_enabled = true;
 	}
@@ -56,7 +57,13 @@ public class Kinder : MTK_Interactable
 			m_piecesCount--;
 
 			if(m_piecesCount == 0)
-				Destroy(m_shell.gameObject);
+			{
+				Destroy(gameObject);
+
+				m_planet.transform.SetParent(null, true);
+				m_planet.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+				m_planet.GetComponent<MTK_Interactable>().enabled = true;
+			}
 		}
 	}
 }

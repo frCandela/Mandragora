@@ -9,6 +9,7 @@ public class Constellation : MonoBehaviour
 	[SerializeField] AnimationCurve m_moveLerpCurve_Complete;
 	[SerializeField] AnimationCurve m_noiseAmountCurve;
 	[SerializeField] float m_trailSpeed = 1;
+	[SerializeField] GameObject m_kinder;
 
 	[Header("Wwise events")]
 	[SerializeField] AK.Wwise.Event m_validated;
@@ -17,7 +18,6 @@ public class Constellation : MonoBehaviour
 	Transform[] m_starsTransform;
 	Vector3[] m_starsInitPosition;
 	LineRenderer m_lineRenderer;
-	Spawner m_spawner;
 	TrailRenderer m_trail;
 
 	int m_currentStarID = -1;
@@ -28,7 +28,6 @@ public class Constellation : MonoBehaviour
 	// Use this for initialization
 	void Awake ()
 	{
-		m_spawner = GetComponent<Spawner>();
 		m_trail = GetComponentInChildren<TrailRenderer>();
 
 		m_stars = GetComponentsInChildren<ConstellationStar>();
@@ -131,12 +130,13 @@ public class Constellation : MonoBehaviour
 	{
 		m_lineRenderer.loop = true;
 		m_validated.Post(gameObject);
-		m_spawner.Spawn();
+		m_kinder.SetActive(true);
+		
 		StartCoroutine(
 			MoveTo(new Vector3[m_stars.Length], 1.5f, 5, m_moveLerpCurve_Complete, () =>
 			{
 				foreach (var tr in m_starsTransform)
-					Destroy(tr.gameObject);
+					Destroy(tr.gameObject, 1);
 			}));
 	}
 
