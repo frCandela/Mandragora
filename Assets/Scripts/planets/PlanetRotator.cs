@@ -15,7 +15,7 @@ public class PlanetRotator : MonoBehaviour
     void Awake ()
     {
         m_dropzone = GetComponent<DropZone>();
-        m_dropzone.onObjectCatched.AddListener(EnableScaling);
+        m_dropzone.onObjectCatched.AddListener(EnableRotation);
     }
 
     void ResetHand()
@@ -57,7 +57,7 @@ public class PlanetRotator : MonoBehaviour
         }
     }
 
-    void EnableScaling(bool state)
+    void EnableRotation(bool state)
     {
         if (state)
         {
