@@ -51,7 +51,7 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
                 m_icoSegment.UpdateNeighbours();
             }
 
-            Debug.DrawLine(transform.position, m_connectedGameobject.transform.position, Color.red);
+            //Debug.DrawLine(transform.position, m_connectedGameobject.transform.position, Color.red);
         }
     }
 }

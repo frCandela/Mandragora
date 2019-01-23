@@ -81,13 +81,4 @@ public class HandTerraformer : MonoBehaviour
         }
     }
 
-
-
-    // Update is called once per frame
-    void Update ()
-    {
-        Debug.DrawLine(transform.position, transform.position + transform.forward, Color.red);
-
-
-    }
 }
