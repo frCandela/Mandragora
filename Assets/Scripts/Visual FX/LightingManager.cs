@@ -6,9 +6,8 @@ public class LightingManager : MonoBehaviour {
 
 	[Range(0.0f, 1.0f)] public float sceneUnlitFactor;
 	public GameObject sunGO;
-	public bool isSunVisible = true;
+	public bool isLit = true;
 	public List<Light> lights;
-	public bool lightsOn = true;
 	private MeshRenderer sunRenderer;
 
 	// Use this for initialization
@@ -20,7 +19,7 @@ public class LightingManager : MonoBehaviour {
 	void Update () {
 		Shader.SetGlobalFloat("_ManagerUnlitFactor", sceneUnlitFactor);
 
-		if(!lightsOn) {
+		if(!isLit) {
 			foreach(Light item in lights)
 			{
 				item.enabled = false;
@@ -33,6 +32,6 @@ public class LightingManager : MonoBehaviour {
 		}
 
 		//sunRenderer.material.SetFloat("_Visibility", sunVisibility);
-		sunGO.SetActive(isSunVisible);
+		sunGO.SetActive(isLit);
 	}
 }
