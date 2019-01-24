@@ -12,7 +12,7 @@
 		LOD 100
 
 		//Blend SrcAlpha OneMinusSrcAlpha
-		Blend One SrcAlpha
+		Blend One One
 		Cull Off
 
 		Pass
