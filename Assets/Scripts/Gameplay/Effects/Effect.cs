@@ -16,7 +16,7 @@ public abstract class Effect : MonoBehaviour
             Destroy(m_particles.gameObject);
     }
 
-    // Called with a prefab so customize particles and stuff
+    // Called with a prefab so customize particles
     public virtual Effect AddEffectTo( GameObject target )
     { 
         if( ! target.GetComponent(GetType())) // no duplication
