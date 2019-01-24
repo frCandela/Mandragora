@@ -3,7 +3,9 @@
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
-		_TilingScale ("Tiling (XY), Scale (ZW)", Vector) = (1,1,1,1)
+		_TilingScale ("First Texture Tiling (XY), Scale (ZW)", Vector) = (1,1,1,1)
+		_TilingScaleTwo ("Second Texture Tiling (XY), Scale (ZW)", Vector) = (1,1,1,1)
+		_Pan ("Panner (X,Y)", Vector) = (1,1,0,0)
 		_Speed ("Speed", float) = 1
 		_Frequency ("Frequency", float) = 1
 		_Color ("Color", Color) = (1,1,1,1)
@@ -42,7 +44,7 @@
 			};
 
 			sampler2D _MainTex;
-			float4 _Color, _TilingScale;
+			float4 _Color, _TilingScale, _TilingScaleTwo, _Pan;
 			float _Frequency, _Speed, _Luminosity;
 			
 			v2f vert (appdata v)
@@ -57,16 +59,15 @@
 
 			fixed4 frag (v2f i, fixed facing : VFACE) : SV_Target
 			{
-
-				// Inverse Normal for VFACE
-				/*float3 invertedNormal = -flatNormals;
-				facing = step(1, facing);
-				flatNormals = lerp(invertedNormal, flatNormals, facing);*/
 				i.uv = clamp(i.uv, 0.01, 0.99);
-				float2 UVs = (i.uv * _TilingScale.zw) + _TilingScale.xy;
-				//UVs = clamp(UVs, 0.01, 0.99);
-				float3 tex = tex2D(_MainTex, UVs).rgb;
-				float fractions = (1 - tex.g) * 1;
+				float2 gUvs = (i.uv * _TilingScale.zw) + _TilingScale.xy;
+				float2 bUvs = (i.uv * _TilingScaleTwo.zw) + _TilingScaleTwo.xy;
+				bUvs += _Pan.xy * -_Time.y;
+				float gChannel = tex2D(_MainTex, gUvs).g;
+				float bChannel = tex2D(_MainTex, bUvs).b;
+				bChannel = sqrt(bChannel);
+				float tex = gChannel * bChannel;
+				float fractions = (1 - tex) * 1;
 				fractions = abs(frac(fractions * _Frequency + _Time.y * _Speed) - 0.5) * 2;
 
 				float factor = fractions * (1 - i.uv.y);
