@@ -2299,7 +2299,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1729875630228662}
   m_LocalRotation: {x: -0, y: -0.32909802, z: -0, w: 0.9442958}
-  m_LocalPosition: {x: -2.713, y: 0.992, z: 5.247}
+  m_LocalPosition: {x: -4.33, y: 0.992, z: 8.19}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 4727491887860666}
@@ -2455,7 +2455,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4727491887860666}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4329253207793054
 Transform:
@@ -2627,7 +2627,7 @@ Transform:
   - {fileID: 4610279753710714}
   - {fileID: 4710155126588752}
   m_Father: {fileID: 4727491887860666}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4360839338251452
 Transform:
@@ -2784,7 +2784,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4727491887860666}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4484706407221468
 Transform:
@@ -2889,7 +2889,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4727491887860666}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4520228292301962
 Transform:
@@ -3047,7 +3047,7 @@ Transform:
   m_Children:
   - {fileID: 4762815900567944}
   m_Father: {fileID: 4727491887860666}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4632467483633200
 Transform:
@@ -3164,12 +3164,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
+  - {fileID: 4358446504223674}
+  - {fileID: 4325862277284724}
   - {fileID: 4451556714943012}
+  - {fileID: 4616432335774268}
   - {fileID: 4935429287176014}
   - {fileID: 4516068917484662}
-  - {fileID: 4325862277284724}
-  - {fileID: 4358446504223674}
-  - {fileID: 4616432335774268}
   m_Father: {fileID: 4225199785587186}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3446,7 +3446,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4727491887860666}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4938767278674764
 Transform:
@@ -11558,14 +11558,14 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   isDistanceGrabbed: 0
-  m_planet: {fileID: 1768078228054106}
+  m_planet: {fileID: 1914191385887540}
   m_shell: {fileID: 4358446504223674}
   m_kinderCreation:
     valueGuid: 
     WwiseObjectReference: {fileID: 11400000, guid: 293e397f47ecd844b94d8b785dc4c28f,
       type: 2}
   m_minBreakMagnitude: 5
-  m_breakThreshold: 1
+  m_breakThreshold: 0.5
   m_hitPs: {fileID: 198523453130595230}
   m_breakPs: {fileID: 198237006138487668}
 --- !u!114 &114908573774820230
@@ -11754,7 +11754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4dc0174f21e8dd4cbc37a6c2127ec26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_initPosition: {x: -3.0165503, y: 1.0762713, z: 5.8277693}
+  m_initPosition: {x: -5.536646, y: 1.0762713, z: 7.6207347}
   m_hit:
     valueGuid: 
     WwiseObjectReference: {fileID: 11400000, guid: 5185c7090382b0c448077183776d320e,
@@ -12031,7 +12031,7 @@ SphereCollider:
   m_GameObject: {fileID: 1927058912854112}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.8
   m_Center: {x: 0, y: 0, z: 0}
