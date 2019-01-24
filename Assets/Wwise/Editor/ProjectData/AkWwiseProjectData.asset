@@ -180,13 +180,13 @@ MonoBehaviour:
   - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 0995f2392612e04c91c38c7b63f5e42c
-    m_lastTime: -8586544735826608881
+    m_lastTime: -8586532671507995807
     List: []
   BankWwu:
   - PhysicalPath: SoundBanks\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: a97016e8726c1f408dafc159e6c344b5
-    m_lastTime: -8586562067502456882
+    m_lastTime: -8586546650012591908
     List:
     - name: Soundbank
       guid: 9916953bbad2944d9b906b3cd5a8867d
@@ -201,7 +201,7 @@ MonoBehaviour:
   - PhysicalPath: Events\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 6030b6aee3d39d4c9d884b8f3ae2474c
-    m_lastTime: -8586538901112000056
+    m_lastTime: -8586532671508050954
     List:
     - name: Bubbles_Play
       guid: 06a67f35ed42bc45923f62a7d6982e40
@@ -215,6 +215,18 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: Button_Play
+      guid: 3d569efa3a1218419ce2d7bcc00b901a
+      id: 1394085446
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Button_Play
+        ObjectType: 3
+      Path: Default Work Unit\Button_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Constellation_Hit_Play
       guid: dcc54328e1fb5f49a52e5e05de78c5e5
       id: 1428477509
@@ -224,6 +236,30 @@ MonoBehaviour:
       - ElementName: Constellation_Hit_Play
         ObjectType: 3
       Path: Default Work Unit\Constellation_Hit_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Constellation_Hits_Stop
+      guid: 4faca6fe7c7f5e41bf2b6dbef1c01546
+      id: 1566573290
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Constellation_Hits_Stop
+        ObjectType: 3
+      Path: Default Work Unit\Constellation_Hits_Stop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Constellation_Wrong_Play
+      guid: c8032c13ef292e408eb1e8626037b798
+      id: 1383463661
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Constellation_Wrong_Play
+        ObjectType: 3
+      Path: Default Work Unit\Constellation_Wrong_Play
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
@@ -431,6 +467,18 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: Socle_Activated_Play
+      guid: 522260cc1c5cf84dac23d384f17ee12f
+      id: 3725619432
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Socle_Activated_Play
+        ObjectType: 3
+      Path: Default Work Unit\Socle_Activated_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Socle_Loop_Play
       guid: f092843e48282b4eb721ff316d584ae5
       id: 737281937
@@ -603,7 +651,7 @@ MonoBehaviour:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 7023720d000eef46b000ec471e7f4b00
-    m_lastTime: -8586538719143801266
+    m_lastTime: -8586532671508065994
     List:
     - name: Constellation
       guid: be300520a9c24940a2a12910d9cb833c
@@ -632,6 +680,15 @@ MonoBehaviour:
       - ElementName: Draw
         ObjectType: 13
       Path: Default Work Unit\Draw
+    - name: Scale
+      guid: f766b51003974f4397b28bf8bc747849
+      id: 1894020421
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Scale
+        ObjectType: 13
+      Path: Default Work Unit\Scale
     - name: Star_Hand
       guid: 26a5fea9b742be4b80bd43e1a5497657
       id: 1202612439
@@ -653,7 +710,7 @@ MonoBehaviour:
   - PhysicalPath: Game Parameters\Factory Motion.wwu
     ParentPhysicalPath: 
     guid: 225213d7dbd1d042adc0930743567776
-    m_lastTime: -8586570711763920626
+    m_lastTime: -8586569787220930288
     List:
     - name: Playback_Rate
       guid: e37e38283ac11643b9c3db5c521624af
@@ -676,7 +733,7 @@ MonoBehaviour:
   - PhysicalPath: Game Parameters\Factory SoundSeed Air Game Syncs.wwu
     ParentPhysicalPath: 
     guid: 5577163b42fb8b4598bf96f557afb3b9
-    m_lastTime: -8586570711763850436
+    m_lastTime: -8586569787220920220
     List:
     - name: SS_Air_Fear
       guid: 59062ef746431c4ea1b1dab46a05101e
@@ -772,7 +829,7 @@ MonoBehaviour:
   - PhysicalPath: States\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 2a2dcb6277527b41a4f7231df81719a5
-    m_lastTime: -8586570711752775998
+    m_lastTime: -8586569787212268831
     List:
     - name: Planets_Orbit
       guid: e9e90d1730e18349a45a418c785c0b86
@@ -818,13 +875,13 @@ MonoBehaviour:
   - PhysicalPath: Switches\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 263ffd4ab6313748971495623bcd18e9
-    m_lastTime: -8586570711752700795
+    m_lastTime: -8586569787212228580
     List: []
   TriggerWwu:
   - PhysicalPath: Triggers\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 2554b2ca9d30ef4eb109e9edcabd22c4
-    m_lastTime: -8586570711752720851
+    m_lastTime: -8586569787212172372
     List: []
   ExpandedItems:
   - /MandragoWwise

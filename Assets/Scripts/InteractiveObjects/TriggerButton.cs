@@ -5,12 +5,40 @@ using UnityEngine.Events;
 
 public class TriggerButton : MonoBehaviour
 {
-    public UnityEvent onButtonPressed;
-    public UnityEvent onButtonReleased;
+    [SerializeField] private Color m_colorOn = Color.green;
+    [SerializeField] private Color m_colorOff = Color.red;
 
-    [SerializeField] private bool m_changeColor = false;
+    [SerializeField] public UnityEvent onButtonPressed;
+    [SerializeField] public UnityEvent onButtonReleased;
+    [SerializeField] public AK.Wwise.Event wOnButtonPressed;
+    [SerializeField] public AK.Wwise.Event wOnButtonReleased;
 
     private bool m_state = false;
+
+    private void Awake()
+    {
+        SetColorOn(false);
+    }
+
+    public void SetColorOn( bool state )
+    {
+        MeshRenderer mr = GetComponent<MeshRenderer>();
+        if (mr)
+        {
+            if ( state )
+            {
+
+                mr.material.color = m_colorOn;
+                wOnButtonPressed.Post(gameObject);
+            }
+            else
+            {
+
+                mr.material.color = m_colorOff;
+                wOnButtonReleased.Post(gameObject);
+            }
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,16 +46,6 @@ public class TriggerButton : MonoBehaviour
         {
             onButtonPressed.Invoke();
             m_state = true;
-
-
-            if(m_changeColor)
-            {
-                MeshRenderer mr = GetComponent<MeshRenderer>();
-                if (mr)
-                {
-                    mr.material.color = Color.red;
-                }
-            }
         }
     }
 
@@ -35,18 +53,9 @@ public class TriggerButton : MonoBehaviour
     {
         if (m_state)
         {
-            onButtonReleased.Invoke();
+
+            //onButtonReleased.Invoke();
             m_state = false;
-
-
-            if (m_changeColor)
-            {
-                MeshRenderer mr = GetComponent<MeshRenderer>();
-                if (mr)
-                {
-                    mr.material.color = Color.white;
-                }
-            }
         }
     }
 }
