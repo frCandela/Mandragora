@@ -20,10 +20,17 @@ public class RigidbodyEffector : MonoBehaviour
 
 		foreach (Rigidbody rgbd in m_rgbdList)
 		{
-			distance = Mathf.Sqrt(1 - Mathf.Abs((rgbd.position.y - transform.position.y) / (m_collider.size.y / 2))) * 2;
+			if(rgbd)
+			{
+				distance = Mathf.Sqrt(1 - Mathf.Abs((rgbd.position.y - transform.position.y) / (m_collider.size.y / 2))) * 2;
 
-			if(distance > 0)
-				rgbd.velocity = Vector3.Lerp(rgbd.velocity, m_force, Time.fixedDeltaTime * distance * m_accel);
+				if(distance > 0)
+					rgbd.velocity = Vector3.Lerp(rgbd.velocity, m_force, Time.fixedDeltaTime * distance * m_accel);
+			}
+			else
+			{
+				m_rgbdList.Remove(rgbd);
+			}
 		}
 	}
 

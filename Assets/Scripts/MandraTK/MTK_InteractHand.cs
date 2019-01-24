@@ -104,7 +104,6 @@ public class MTK_InteractHand : MonoBehaviour
 
             obj.Grab(true);
 
-
             m_grabbed = obj;
             grabbedJoint = obj.jointType;
 
