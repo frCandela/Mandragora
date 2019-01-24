@@ -31,6 +31,9 @@ public class Kinder : MTK_Interactable
 
 	public void TriggerKinderSound()
 	{
+		foreach (MeshCollider c in m_planet.GetComponentsInChildren<MeshCollider>())
+			c.enabled = false;
+
 		m_kinderCreation.Post(gameObject);
 	}
 
@@ -64,12 +67,16 @@ public class Kinder : MTK_Interactable
 	void Break()
 	{
 		Destroy(m_rgbd);
+		Destroy(GetComponent<Collider>());
 		m_shell.gameObject.SetActive(false);
-
 		m_breakPs.gameObject.SetActive(true);
 
-		// m_planet.transform.SetParent(null, true);
-		m_planet.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-		m_planet.GetComponent<MTK_Interactable>().enabled = true;
+		m_planet.GetComponentInChildren<Rigidbody>().constraints = RigidbodyConstraints.None;
+		m_planet.GetComponentInChildren<MTK_Interactable>().enabled = true;
+
+		foreach (MeshCollider c in m_planet.GetComponentsInChildren<MeshCollider>())
+			c.enabled = true;
+		
+		Destroy(this);
 	}
 }
