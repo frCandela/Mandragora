@@ -10,7 +10,8 @@ public class PlanetRotator : MonoBehaviour
 
     [SerializeField] private MTK_JointType m_catchedObjectJoint;
 
-    private float m_baseDist = -1f;
+    private bool m_grabbing = false;
+
 
     void Awake ()
     {
@@ -20,7 +21,7 @@ public class PlanetRotator : MonoBehaviour
 
     void ResetHand()
     {
-        m_baseDist = -1f;
+        m_grabbing = false;
         Destroy(m_confJoint);
     }
 
@@ -30,9 +31,9 @@ public class PlanetRotator : MonoBehaviour
         if (m_dropzone.catchedObject && m_dropzone.catchedObject.jointType &&
             m_dropzone.catchedObject.jointType.Used())
         {
-            if (m_baseDist == -1f)
+            if ( !m_grabbing)
             {
-                m_baseDist = Vector3.Distance(transform.position, m_catchedObjectJoint.connectedGameobject.transform.position);
+                m_grabbing = true;
 
                 m_confJoint = m_catchedObjectJoint.connectedGameobject.gameObject.AddComponent<ConfigurableJoint>();
                 m_confJoint.connectedBody = m_catchedObjectJoint.GetComponent<Rigidbody>();
