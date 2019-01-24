@@ -64,7 +64,7 @@ public class Kinder : MTK_Interactable
 	void Break()
 	{
 		Destroy(m_rgbd);
-		Destroy(m_shell.gameObject);
+		m_shell.gameObject.SetActive(false);
 
 		m_breakPs.gameObject.SetActive(true);
 

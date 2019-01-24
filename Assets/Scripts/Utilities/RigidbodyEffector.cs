@@ -30,6 +30,7 @@ public class RigidbodyEffector : MonoBehaviour
 			else
 			{
 				m_rgbdList.Remove(rgbd);
+				break;
 			}
 		}
 	}
