@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 135916195493987214}
   - component: {fileID: 114029238059270712}
   - component: {fileID: 114483484693776738}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,8 +143,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1473085793080480}
-  m_LocalRotation: {x: -0, y: -0.87813485, z: -0, w: 0.47841316}
-  m_LocalPosition: {x: -1.03, y: 0, z: 5.3}
+  m_LocalRotation: {x: -0, y: -0.99959385, z: -0, w: 0.02849944}
+  m_LocalPosition: {x: -2.08, y: 0, z: 5.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4336024506315806}
@@ -152,7 +152,7 @@ Transform:
   - {fileID: 4720666266117416}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -122.836006, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -176.73401, z: 0}
 --- !u!4 &4720666266117416
 Transform:
   m_ObjectHideFlags: 1
@@ -402,6 +402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f07755d854b3fde45944b231788f959a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_colorOn: {r: 0, g: 1, b: 0, a: 1}
+  m_colorOff: {r: 1, g: 0, b: 0, a: 1}
   onButtonPressed:
     m_PersistentCalls:
       m_Calls:
@@ -423,7 +425,14 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_changeColor: 0
+  wOnButtonPressed:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 1b0ed9084c17da746940c70da8fa1248,
+      type: 2}
+  wOnButtonReleased:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 5fb6128ddf55bf54995d8bf7d8be3738,
+      type: 2}
 --- !u!114 &114101983039150802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -452,7 +461,18 @@ MonoBehaviour:
   m_ejectForce: 1
   onObjectCatched:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114029238059270712}
+        m_MethodName: SetColorOn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!114 &114293333203664004

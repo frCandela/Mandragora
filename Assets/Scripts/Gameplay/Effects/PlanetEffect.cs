@@ -10,6 +10,10 @@ public class PlanetEffect : Effect
     private MTK_JointType m_joint;
 
     public float m_maxRadius;
+
+    public float maxSpeed = float.PositiveInfinity;
+    public float accelerationForce = 1;
+
     public bool m_radiusDecided = false;
 
     public override bool ApplyEffect()
@@ -65,6 +69,12 @@ public class PlanetEffect : Effect
         dir.Normalize();
         if (!m_joint.Used())
         {
+            if (baseVel > maxSpeed)
+            {
+               // float delta = (baseVel - maxSpeed) * Time.fixedDeltaTime / accelerationDuration;
+                baseVel -= accelerationForce * Time.fixedDeltaTime;
+            }
+
             if (radius < m_maxRadius)
             {
                 m_maxRadius = radius;

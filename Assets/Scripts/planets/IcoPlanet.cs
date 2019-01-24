@@ -39,6 +39,7 @@ public class IcoPlanet : MonoBehaviour
 
         transform.localScale = new Vector3(m_baseScale, m_baseScale, m_baseScale);
 
+        transform.localPosition = Vector3.zero;
     }
 
     // Use this for initialization
@@ -73,10 +74,6 @@ public class IcoPlanet : MonoBehaviour
             interactable.isDistanceGrabbable = false;
             interactable.isGrabbable = false;
             interactable.isDroppable = false;
-
-
-
-
         }
     }
 

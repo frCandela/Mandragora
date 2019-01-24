@@ -10,6 +10,11 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
     private IcoSegment m_icoSegment;
 
     private float m_baseDistance = 0f;
+    private Vector3 m_basePosition;
+
+    // Planet rotation
+    private bool m_grabbing = false;
+    private ConfigurableJoint m_confJoint;
 
     protected void Awake()
     {
@@ -23,11 +28,30 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
         return m_connectedGameobject;
     }
 
+    public override bool RemoveJoint()
+    {
+        m_grabbing = false;
+        Destroy(m_confJoint);
+
+        return base.RemoveJoint();
+    }
+
     protected override bool JointWithOverride(GameObject other)
     {
         if( !Used())
         {
             m_baseDistance = Vector3.Distance(transform.position, other.transform.position);
+            m_basePosition = transform.parent.position;
+            m_confJoint = other.AddComponent<ConfigurableJoint>();
+            m_confJoint.connectedBody = transform.parent.GetComponent<Rigidbody>();
+
+            m_confJoint.autoConfigureConnectedAnchor = false;
+            m_confJoint.xMotion = ConfigurableJointMotion.Locked;
+            m_confJoint.yMotion = ConfigurableJointMotion.Locked;
+            m_confJoint.zMotion = ConfigurableJointMotion.Locked;
+
+            m_confJoint.enableCollision = true;
+
             return true;
         }
         else
@@ -40,6 +64,7 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
     {
         if (Used())
         {
+            // Set height segment
             float delta = Vector3.Distance(transform.position, m_connectedGameobject.transform.position) - m_baseDistance;
             int heightSteps = (int)(delta / (m_icoPlanet.heightDelta * m_icoPlanet.transform.localScale.x));
 
@@ -51,6 +76,23 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
                 m_icoSegment.UpdateNeighbours();
             }
 
+            // Set configurable joint
+            
+            float distance = Vector3.Distance(m_basePosition, m_confJoint.transform.position);
+            Vector3 anchorPoint = m_confJoint.connectedBody.transform.TransformPoint(m_confJoint.connectedAnchor);
+            Vector3 dir = anchorPoint - m_confJoint.connectedBody.transform.position;
+
+            dir = distance * dir.normalized;
+            m_confJoint.connectedAnchor = m_confJoint.connectedBody.transform.InverseTransformPoint(m_confJoint.connectedBody.transform.position + dir);
+
+            Debug.DrawLine(m_basePosition, m_basePosition + dir, Color.red);
+            Debug.DrawLine(m_basePosition, m_basePosition + dir, Color.red);
+
+            /* Vector3 dir = anchorPoint - m_confJoint.connectedBody.transform.position;
+
+             dir = distance * dir.normalized;
+             m_confJoint.connectedAnchor = m_confJoint.connectedBody.transform.InverseTransformPoint(m_confJoint.connectedBody.transform.position + dir);
+           */
             //Debug.DrawLine(transform.position, m_connectedGameobject.transform.position, Color.red);
         }
     }

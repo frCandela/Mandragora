@@ -120,7 +120,7 @@ public class IcoSegment : MonoBehaviour
 
             heightLevel = Mathf.Clamp(heightLevel, 0, icoPlanet.nbLevels);
             Color color = icoPlanet.levelColors[Mathf.Clamp(heightLevel, 0, icoPlanet.levelColors.Length - 1)];
-            GetComponent<MeshRenderer>().material.color = color;
+            GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", color);
 
             GenerateBaseGeometry(ref m_vertices, ref m_triangles);
             //SetCollider(m_vertices, m_triangles);
