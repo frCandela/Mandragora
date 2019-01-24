@@ -9,16 +9,15 @@ public class Kinder : MTK_Interactable
 	[SerializeField] AK.Wwise.Event m_kinderCreation;
 	[SerializeField] float m_minBreakMagnitude;
 	[SerializeField, Range(0,1f)] float m_breakThreshold = .4f;
+	[SerializeField] ParticleSystem m_hitPs, m_breakPs;
 
 	bool m_enabled;
 	Rigidbody m_rgbd;
-	ParticleSystem m_ps;
 	int m_piecesCount;
 
 	protected override void OnEnable()
 	{
 		m_rgbd = GetComponent<Rigidbody>();
-		m_ps = GetComponentInChildren<ParticleSystem>();
 
 		m_piecesCount = (int) (m_shell.childCount * m_breakThreshold);
 	}
@@ -32,6 +31,9 @@ public class Kinder : MTK_Interactable
 
 	public void TriggerKinderSound()
 	{
+		foreach (MeshCollider c in m_planet.GetComponentsInChildren<MeshCollider>())
+			c.enabled = false;
+
 		m_kinderCreation.Post(gameObject);
 	}
 
@@ -50,20 +52,31 @@ public class Kinder : MTK_Interactable
 		if(other.relativeVelocity.sqrMagnitude > m_minBreakMagnitude)
 		{
 			other.contacts[0].thisCollider.gameObject.SetActive(false);
-			m_ps.transform.position = other.contacts[0].point;
-			m_ps.transform.LookAt(other.contacts[0].point + other.contacts[0].normal);
-			m_ps.Emit(Random.Range(1,3));
+			m_hitPs.transform.position = other.contacts[0].point;
+			m_hitPs.transform.LookAt(other.contacts[0].point + other.contacts[0].normal);
+			m_hitPs.Emit(Random.Range(1,3));
 
 			m_piecesCount--;
 
 			if(m_piecesCount == 0)
-			{
-				Destroy(gameObject);
-
-				m_planet.transform.SetParent(null, true);
-				m_planet.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-				m_planet.GetComponent<MTK_Interactable>().enabled = true;
-			}
+				Break();
 		}
+	}
+
+	[ContextMenu("Break")]
+	void Break()
+	{
+		Destroy(m_rgbd);
+		Destroy(GetComponent<Collider>());
+		m_shell.gameObject.SetActive(false);
+		m_breakPs.gameObject.SetActive(true);
+
+		m_planet.GetComponentInChildren<Rigidbody>().constraints = RigidbodyConstraints.None;
+		m_planet.GetComponentInChildren<MTK_Interactable>().enabled = true;
+
+		foreach (MeshCollider c in m_planet.GetComponentsInChildren<MeshCollider>())
+			c.enabled = true;
+		
+		Destroy(this);
 	}
 }
