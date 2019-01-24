@@ -1,12 +1,18 @@
-﻿Shader "Unlit/SunShaderV1"
+﻿Shader "Unlit/SunShader"
 {
 	Properties
 	{
+		_Visibility ("Visibility", Range(0,1)) = 1
 		_Color1 ("Color 1", Color) = (1,1,1,1)
 		_Color2 ("Color 2", Color) = (1,1,1,1)
 		_Color3 ("Color 3", Color) = (1,1,1,1)
+		_Color4 ("Last Fresnel", Color) = (1,1,1,1)
+		_LastFresnelPow ("Last Fresnel Power", float) = 1
+		_LastFresnelLuminosity ("Last Fresnel Luminosity", float) = 1
 		_MainTex ("Main Texture", 2D) = "white" {}
+		_GeneralLuminosity ("General Luminosity", Range(0,1)) = 1
 		_SmoothFresnelIntensity ("Smooth Fresnel Intensity", Range(0,1)) = 0
+		_SmoothFresnelCoreLuminosity ("Smooth Fresnel Core Luminosity", float) = 1
 		_FlatFresnelIntensity ("Flat Fresnel Intensity", Range(0,1)) = 0
 		_SFresnelPow ("Smooth Fresnel Power", float) = 1
 		_FFresnelPow ("Flat Fresnel Power", float) = 1
@@ -27,8 +33,6 @@
 		LOD 100
 
 		Blend SrcAlpha OneMinusSrcAlpha
-		//Zwrite Off
-		//Cull off
 
 		// Grab the screen behind the object into _BackgroundTexture
         GrabPass
@@ -66,18 +70,20 @@
 			struct g2f
 			{
 				v2g data;
-				float2 barycentricCoordinates : TEXCOORD3;
 			};
 
 			sampler2D _MainTex, _FlowMap, _BackgroundTexture;
 			float4 _MainTex_ST;
-			float4 _Color1, _Color2, _Color3;
-			float _SmoothFresnelIntensity, _FlatFresnelIntensity, _SFresnelPow, _FFresnelPow;
+			float4 _Color1, _Color2, _Color3, _Color4;
+			float _SmoothFresnelIntensity, _FlatFresnelIntensity, _SFresnelPow, _FFresnelPow, _LastFresnelPow;
 			float2 _TriplanarOffset;
 			float _TriplanarScale, _TriplanarPow;
 			float _FlowFreq, _FlowFactor, _FlowTimeOffset;
 			float _DistortionStrength;
 			float3 _NoiseFreq, _NoiseAmplitude;
+			float _SmoothFresnelCoreLuminosity;
+			float _GeneralLuminosity, _LastFresnelLuminosity;
+			float _Visibility;
 			
 			v2g vert (appdata v)
 			{
@@ -117,15 +123,12 @@
 				g1.data = i[1];
 				g2.data = i[2];
 
-				g0.barycentricCoordinates = float2(1, 0);
-				g1.barycentricCoordinates = float2(0, 1);
-				g2.barycentricCoordinates = float2(0, 0);
-
 				stream.Append(g0);
 				stream.Append(g1);
 				stream.Append(g2);
 			}
 
+			///////// FLOW PROCESS ////////////////
 			float2 flowProcess(float2 flow, float freq, float timeOffset) {
 				flow = flow * 2 - 1; // Get flow between -1 / 1
 				float time = _Time.y * _FlowFreq;
@@ -155,27 +158,31 @@
 
 
 
-				// Flat Fresnel
+				// Flat Fresnel + lastFresnel
 				float flatFresnel = dot(toCam, i.data.flatNormal);
+				float lastFresnel = flatFresnel;
 				flatFresnel = (flatFresnel - _FlatFresnelIntensity) / (1 - _FlatFresnelIntensity);
 				flatFresnel = 1 - flatFresnel;
 				flatFresnel = pow(flatFresnel, _FFresnelPow);
 				flatFresnel = saturate(flatFresnel);
 
+				lastFresnel = pow(lastFresnel, _LastFresnelPow);
+				lastFresnel = 1 - saturate(lastFresnel);
+
+				
+
 				// Smooth Fresnel
 				float smoothFresnel = dot(toCam, i.data.normal);
-				smoothFresnel = (smoothFresnel - _SmoothFresnelIntensity) / (1 - _SmoothFresnelIntensity);
+				smoothFresnel = (smoothFresnel - _SmoothFresnelIntensity) * _SmoothFresnelCoreLuminosity / (1 - _SmoothFresnelIntensity);
 				smoothFresnel = pow(smoothFresnel, _SFresnelPow);
 				smoothFresnel = saturate(smoothFresnel);
 
-				// Combine Fresnels
-				float fresnel = saturate(smoothFresnel + flatFresnel);
 
 				//Triplanar Z
 				float2 triplanarUVz = float2(
 										(i.data.wVertex.x * _TriplanarScale) + _TriplanarOffset.x, 
 										(i.data.wVertex.y * _TriplanarScale) + _TriplanarOffset.y);
-				float3 flowZ = tex2D(_FlowMap, triplanarUVz).rga; // flowMap
+				float3 flowZ = tex2D(_FlowMap, triplanarUVz).rgb; // flowMap
 				flowZ.rg = flowProcess(flowZ.rg, _FlowFreq, flowZ.b * _FlowTimeOffset);
 				float3 triplanarTexZ = tex2D(_MainTex, triplanarUVz + flowZ.xy).rgb; // MainTex
 
@@ -183,7 +190,7 @@
 				float2 triplanarUVy = float2(
 										(i.data.wVertex.z * _TriplanarScale) + _TriplanarOffset.x, 
 										(i.data.wVertex.x * _TriplanarScale) + _TriplanarOffset.y);
-				float3 flowY = tex2D(_FlowMap, triplanarUVy).rga; // flowMap
+				float3 flowY = tex2D(_FlowMap, triplanarUVy).rgb; // flowMap
 				flowY.xy = flowProcess(flowY.xy, _FlowFreq, flowY.z * _FlowTimeOffset);
 				float3 triplanarTexY = tex2D(_MainTex, triplanarUVy + flowY.xy).rgb; // MainTex
 
@@ -191,7 +198,7 @@
 				float2 triplanarUVx = float2(
 										(i.data.wVertex.z * _TriplanarScale) + _TriplanarOffset.x, 
 										(i.data.wVertex.y * _TriplanarScale) + _TriplanarOffset.y);
-				float3 flowX = tex2D(_FlowMap, triplanarUVx).rga; // flowMap
+				float3 flowX = tex2D(_FlowMap, triplanarUVx).rgb; // flowMap
 				flowX.xy = flowProcess(flowX.xy, _FlowFreq, flowX.z * _FlowTimeOffset);
 				float3 triplanarTexX = tex2D(_MainTex, triplanarUVx + flowX.xy).rgb; // MainTex
 
@@ -220,20 +227,28 @@
 				float3 grabTex = tex2Dproj(_BackgroundTexture, i.data.grabPos + distortion).rgb;
 
 
-
+				// Apply Smooth and Flat Fresnel
 				fixed4 col = _Color1 * (smoothFresnel + (triplanarTexture.r * 0.5 - 0.5));
 				col += _Color1 * triplanarTexture.r * smoothFresnel;
 				col += _Color2 * (1 - triplanarTexture.r) * smoothFresnel;
 				col += _Color3 * flatFresnel;
-				col = max(_Color2 * 0.2 * (1 - smoothFresnel) * (1 - triplanarTexture.r), col);
 				
-
-
+				col = max(_Color2 * 0.2 * (1 - smoothFresnel) * (1 - triplanarTexture.r), col);
+		
+				// Apply distortion to the mesh INSIDE the sphere
 				float3 color = (col.rgb * col.a) + ((1 - col.a) * grabTex);
 				color.rgb = max(_Color1.rgb * 0.1, color.rgb);
+				color.rgb = max(_Color4.rgb * lastFresnel * _Color4.a * _LastFresnelLuminosity, color.rgb);
 				float alpha = 1;
+
+				//Apply General Luminosity
+				float3 saturateCol = saturate(color);
+				color = lerp(saturateCol, color, _GeneralLuminosity);
+
 				col = fixed4(color, alpha);
-				//col.rgb = 1 - grabTex;
+
+				col = lerp(float4(0,0,0,0), col, _Visibility);
+
 				return col;
 			}
 			ENDCG
