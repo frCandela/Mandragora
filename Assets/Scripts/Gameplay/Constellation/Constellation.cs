@@ -131,6 +131,7 @@ public class Constellation : MonoBehaviour
 		m_lineRenderer.loop = true;
 		m_validated.Post(gameObject);
 		m_kinder.SetActive(true);
+		m_trail.emitting = false;
 		
 		StartCoroutine(
 			MoveTo(new Vector3[m_stars.Length], 1.5f, 5, m_moveLerpCurve_Complete, () =>
