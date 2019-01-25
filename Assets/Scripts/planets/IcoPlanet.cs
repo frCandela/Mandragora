@@ -8,12 +8,15 @@ public class IcoPlanet : MonoBehaviour
     [SerializeField] private bool m_initialize = true;
     [SerializeField, Range(0, 3)] public int m_nbSubdivisions = 0;
     [SerializeField] private Material m_segmentMaterial;
+
     [SerializeField] public float heightDelta = 0.2f;
     [SerializeField] public float borderRatio = 0.2f;
     [SerializeField] public float m_baseScale = 0.3f;
     [SerializeField] public int nbLevels = 5;
+    [SerializeField] public int m_defaultHeightLevel = 0;
     [SerializeField] public Color[] levelColors = new Color[10];
     [SerializeField] public bool updatePlanet = false;
+
 
     [Header("Read only data")]
     [SerializeField]  private int trianglesCount;
@@ -65,7 +68,7 @@ public class IcoPlanet : MonoBehaviour
 
             IcoSegment icoSeg = segment.AddComponent<IcoSegment>();
             m_segments.Add(icoSeg);
-            icoSeg.heightLevel = 1;
+            icoSeg.heightLevel = m_defaultHeightLevel;
             icoSeg.icoPlanet = this;
             icoSeg.SetBaseVertices(v0, v1, v2);
 
