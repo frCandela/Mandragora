@@ -48,6 +48,11 @@ public class Outline : MonoBehaviour
     private Material outlineMaskMaterial;
     private Material outlineFillMaterial;
 
+    private void Awake()
+    {
+        renderers = new Renderer[0];
+    }
+
     void Start()
     {
         // Cache renderers
