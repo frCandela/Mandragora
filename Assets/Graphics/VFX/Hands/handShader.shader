@@ -27,7 +27,7 @@ Shader "Mandragora/handShader"
 	}
 	SubShader
 	{
-		Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True" }
+		Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True"  "LightMode" = "ForwardAdd" }
 		LOD 100
 
 		ZWrite Off

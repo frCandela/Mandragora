@@ -13,10 +13,9 @@
 	}
 	SubShader
 	{
-		Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True" }
+		Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True" "LightMode" = "ForwardAdd" }
+		//Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True" }
 		LOD 100
-
-
 		Blend SrcAlpha OneMinusSrcAlpha
 
 		Pass
@@ -84,7 +83,7 @@
 				float3 lightDir = lerp(directionalLightDir, pointLightDir, lightID);
 
 				// Process Reflection with this Light
-				float3 H = normalize(-lightDir + ObjSpaceViewDir(i.vertex));
+				float3 H = normalize(-lightDir + toCam);
 				float NdotH = dot(i.normal, H);
 				NdotH = saturate(NdotH);
 				NdotH = pow(NdotH, _ReflexionPower);
@@ -109,6 +108,10 @@
 				col.rgb *= _Luminosity;
 
 				col.a = saturate(fresnel * _Color.a + alphaLightReflexion) * _Opacity;
+
+				// DEBUG
+				//col.rgb = _LightColor0.rgb;
+				//col.a = 1;
 				
 				return col;
 			}
