@@ -122,7 +122,7 @@ public class TelekinesisPointer : MonoBehaviour
 				Vector3 targetVel = (transform.position - Target.transform.position).normalized * m_forceScale;
 				targetVel += distanceScale * m_lastForceApplied * GetDistanceToTarget();
 
-				// m_connectedBody.rotation = Quaternion.RotateTowards(m_connectedBody.rotation, transform.rotation, Time.deltaTime * (1 - distanceScale) * 500);
+				m_connectedBody.rotation = Quaternion.RotateTowards(m_connectedBody.rotation, transform.rotation * Quaternion.Euler(Target.m_upwardRotation), Time.deltaTime * (1 - distanceScale) * 500);
 				m_connectedBody.velocity = Vector3.MoveTowards(m_connectedBody.velocity, targetVel * (Mathf.Sqrt(GetDistanceToTarget()) * m_distanceSpeedScale), Time.deltaTime * (20 + (1-distanceScale) * 10));
 
 				m_inputManager.Haptic((1- distanceScale) / 10);

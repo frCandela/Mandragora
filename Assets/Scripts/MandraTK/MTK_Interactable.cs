@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class MTK_Interactable : MonoBehaviour
 {
+    [SerializeField] public Vector3 m_upwardRotation;
+
     [SerializeField] public bool isDistanceGrabbable = true;
     [SerializeField] public bool isDroppable = true;
 
