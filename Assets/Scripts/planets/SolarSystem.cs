@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class SolarSystem : MonoBehaviour
 {
     [SerializeField] private float m_maxSpeed = float.PositiveInfinity;
@@ -26,18 +27,21 @@ public class SolarSystem : MonoBehaviour
             MTK_Interactable interactable = other.attachedRigidbody.GetComponent<MTK_Interactable>();
             if (interactable && interactable.isGrabbable && !interactable.isDistanceGrabbed)
             {
-                
-                PlanetEffect eff = other.attachedRigidbody.gameObject.AddComponent<PlanetEffect>();
-                if (eff)
+                if( !other.attachedRigidbody.gameObject.GetComponent< PlanetEffect>())
                 {
-                    eff.maxSpeed = m_maxSpeed;
-                    eff.accelerationForce = m_accelerationForce;
+                    PlanetEffect eff = other.attachedRigidbody.gameObject.AddComponent<PlanetEffect>();
+                    if (eff)
+                    {
+                        eff.maxSpeed = m_maxSpeed;
+                        eff.accelerationForce = m_accelerationForce;
 
-                    eff.sunRigidbody = m_rb;
-                    m_planetEffectsList.Add(eff);
+                        eff.sunRigidbody = m_rb;
+                        m_planetEffectsList.Add(eff);
 
-                    UpdateState(m_planetEffectsList.Count);
+                        UpdateState(m_planetEffectsList.Count);
+                    }
                 }
+
             }
         }
 

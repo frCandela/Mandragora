@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class PlanetEffect : Effect
 {
     public Rigidbody m_rb;
