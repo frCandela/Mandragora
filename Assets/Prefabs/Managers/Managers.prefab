@@ -432,7 +432,7 @@ GameObject:
   - component: {fileID: 114995414304761668}
   - component: {fileID: 114174160266441974}
   - component: {fileID: 114118832345337136}
-  - component: {fileID: 124487617319576664}
+  - component: {fileID: 124415409201066220}
   m_Layer: 10
   m_Name: Head
   m_TagString: MainCamera
@@ -577,7 +577,7 @@ GameObject:
   - component: {fileID: 114041262827163132}
   - component: {fileID: 114166302585107880}
   - component: {fileID: 114176174481495594}
-  - component: {fileID: 124113053613152464}
+  - component: {fileID: 124133135370141880}
   m_Layer: 10
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1412,7 +1412,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1511412060437866
 GameObject:
   m_ObjectHideFlags: 1
@@ -1521,7 +1521,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1528487513605634
 GameObject:
   m_ObjectHideFlags: 1
@@ -4127,7 +4127,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1334488140907614}
   m_LocalRotation: {x: 0, y: 0.9659258, z: 0, w: 0.2588191}
-  m_LocalPosition: {x: -3.384, y: 0, z: 6.075}
+  m_LocalPosition: {x: -4.85, y: 0.22, z: 8.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4966620373529566}
@@ -5948,7 +5948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 583ae33bd15883c4ba76271e3fcb181e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeSetup: {fileID: 114589116309680354}
+  activeSetup: {fileID: 114627048374823106}
   setupSimulation: {fileID: 114627048374823106}
   setupSteamVR: {fileID: 114589116309680354}
 --- !u!114 &114005520641924722
@@ -10943,14 +10943,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 6a713767-3ffd-4f30-a734-816fe0a02c8d
---- !u!124 &124113053613152464
+--- !u!124 &124133135370141880
 Behaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1195490673449122}
   m_Enabled: 1
---- !u!124 &124487617319576664
+--- !u!124 &124415409201066220
 Behaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -16021,7 +16021,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -20620,7 +20620,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -29866,7 +29866,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -34465,7 +34465,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -43711,7 +43711,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -52909,7 +52909,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -66802,7 +66802,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -71401,7 +71401,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
