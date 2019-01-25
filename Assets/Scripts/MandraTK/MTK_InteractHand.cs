@@ -15,23 +15,13 @@ public class MTK_InteractHand : MonoBehaviour
     public UnityEventMTK_Interactable m_onReleaseInteractable;
     public UnityEventBool m_onUseFail;
 
-    public List<MTK_Interactable> m_objectsInTrigger = new List<MTK_Interactable>(3);
+    public MTK_Interactable m_objectInTrigger;
     private MTK_InputManager m_inputManager;
     private MTK_JointType grabbedJoint;
 
     [HideInInspector] public MTK_Interactable m_grabbed = null;
 
     public MTK_InputManager inputManager { get { return m_inputManager; } }
-    private MTK_Interactable m_closest;
-    public MTK_Interactable Closest
-    {
-        get {return m_closest;}
-        set
-        {
-            if(value != m_closest)
-                m_closest = value;
-        }
-    }
 
     private void Awake()
     {
@@ -45,7 +35,7 @@ public class MTK_InteractHand : MonoBehaviour
     {
         if( interactable.isGrabbable)
         {
-            m_objectsInTrigger.RemoveAll(x => x == interactable);
+            //m_objectsInTrigger.RemoveAll(x => x == interactable);
         }
     }
 
@@ -54,16 +44,11 @@ public class MTK_InteractHand : MonoBehaviour
         m_inputManager = GetComponentInParent<MTK_InputManager>();
     }
 
-    private void FixedUpdate()
-    {
-        m_closest = GetClosestInteractable();
-    }
-
     public void TryGrab(bool input)
     {
         if( input)
         {
-            Grab(m_closest);            
+            Grab(m_objectInTrigger);            
         }
         else
         {
@@ -75,8 +60,8 @@ public class MTK_InteractHand : MonoBehaviour
     {
         if(m_grabbed)
             m_grabbed.Use(input);
-        else if(m_closest)
-            m_closest.Use(input);
+        else if(m_objectInTrigger)
+            m_objectInTrigger.Use(input);
         else
             m_onUseFail.Invoke(input);
     }
@@ -137,6 +122,7 @@ public class MTK_InteractHand : MonoBehaviour
 
             m_onReleaseInteractable.Invoke(m_grabbed);
             m_grabbed = null;
+            m_objectInTrigger = null;
         }
     }
 
@@ -148,7 +134,7 @@ public class MTK_InteractHand : MonoBehaviour
 
         if (candidate && candidate.isGrabbable)
         {
-            m_objectsInTrigger.Add(candidate);
+            m_objectInTrigger = candidate;
             m_onTouchInteractable.Invoke(candidate);
 
             candidate.Outline = true;
@@ -161,31 +147,15 @@ public class MTK_InteractHand : MonoBehaviour
         if ((!candidate || !candidate.isGrabbable) && other.attachedRigidbody)
             candidate = other.attachedRigidbody.GetComponent<MTK_Interactable>();
 
-        if (candidate && m_objectsInTrigger.Remove(candidate))
+        if (candidate )
         {
-            m_onUnTouchInteractable.Invoke(candidate);
-
             candidate.Outline = false;
+            m_onUnTouchInteractable.Invoke(candidate);
+            if(candidate == m_objectInTrigger)
+            {
+                m_objectInTrigger = null;
+                
+            }
         }
-    }
-
-    MTK_Interactable GetClosestInteractable()
-    {
-        m_objectsInTrigger.RemoveAll(x => x == null);
-
-        float minDistance = float.MaxValue,
-                tmpDist;
-
-        MTK_Interactable result = null;
-
-        foreach (MTK_Interactable candidate in m_objectsInTrigger)
-        {
-            tmpDist = Vector3.Distance(transform.position, candidate.transform.position);
-
-            if(tmpDist < minDistance && candidate.isGrabbable)
-                result = candidate;
-        }
-
-        return result;
-    }
+    }    
 }

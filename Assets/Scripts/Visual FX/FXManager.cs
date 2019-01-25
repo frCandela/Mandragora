@@ -18,8 +18,8 @@ public class FXManager : MonoBehaviour
 	{
 		Transform currentEffect = m_effectsList[effectName];
 
-		currentEffect.SetParent(target, true);
-		currentEffect.localPosition = Vector3.zero;
+		// currentEffect.SetParent(target, true);
+		currentEffect.position = target.position;
 		currentEffect.GetComponent<ParticleSystem>().Play();
 
 		AkEvent wwiseEvent = currentEffect.GetComponent<AkEvent>();
