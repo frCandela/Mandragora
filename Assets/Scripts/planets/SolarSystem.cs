@@ -49,13 +49,16 @@ public class SolarSystem : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        PlanetEffect effect = other.attachedRigidbody.GetComponent<PlanetEffect>();
-        if (effect)
+        if(other.attachedRigidbody)
         {
-            m_planetEffectsList.Remove(effect);
-            Destroy(effect);
+            PlanetEffect effect = other.attachedRigidbody.GetComponent<PlanetEffect>();
+            if (effect)
+            {
+                m_planetEffectsList.Remove(effect);
+                Destroy(effect);
 
-            UpdateState(m_planetEffectsList.Count);
+                UpdateState(m_planetEffectsList.Count);
+            }
         }
     }
 
