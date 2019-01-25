@@ -15,8 +15,7 @@
 	{
 		Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True" }
 		LOD 100
-		Cull Off
-		ZWrite On
+
 
 		Blend SrcAlpha OneMinusSrcAlpha
 
@@ -65,7 +64,7 @@
 			}
 			
 
-			fixed4 frag (v2f i, fixed facing : VFACE) : SV_Target
+			fixed4 frag (v2f i) : SV_Target
 			{
 				// Flatten Normals
 				InitializeFragmentNormal(i);
@@ -74,9 +73,9 @@
 				float3 toCam = normalize(_WorldSpaceCameraPos.xyz - i.worldVertex);
 
 				// Inverse Normal for VFACE
-				float3 invertedNormal = -i.normal;
-				facing = step(1, facing);
-				i.normal = lerp(invertedNormal, i.normal, facing);
+				//float3 invertedNormal = -i.normal;
+				//facing = step(1, facing);
+				//i.normal = lerp(invertedNormal, i.normal, facing);
 
 				// Process light direction
 				int lightID = _WorldSpaceLightPos0.w;
@@ -85,7 +84,7 @@
 				float3 lightDir = lerp(directionalLightDir, pointLightDir, lightID);
 
 				// Process Reflection with this Light
-				float3 H = normalize(-lightDir + toCam);
+				float3 H = normalize(-lightDir + ObjSpaceViewDir(i.vertex));
 				float NdotH = dot(i.normal, H);
 				NdotH = saturate(NdotH);
 				NdotH = pow(NdotH, _ReflexionPower);
