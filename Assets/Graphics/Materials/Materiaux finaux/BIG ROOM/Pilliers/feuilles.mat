@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: plane_sun
-  m_Shader: {fileID: 4800000, guid: cfc82a044ed4eb649bf6447684a81d25, type: 3}
+  m_Name: feuilles
+  m_Shader: {fileID: 4800000, guid: 709cdf9991082284cb89239435b311f1, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -18,10 +18,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _AlphaMaskTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -60,33 +56,33 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
-    - _Cursor: 0
     - _Cutoff: 0.5
+    - _DepthDistance: 40
     - _DetailNormalMapScale: 1
-    - _DistFade: 0.8
     - _DstBlend: 0
-    - _FresnelSensibility: 0.1
+    - _FresnelIntensity: 1
+    - _FresnelOpacity: 0.5
+    - _FresnelPow: 2
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HighlightOpacity: 0.7
-    - _IsAlphaTex: 1
-    - _IsAlphaUV: 1
-    - _IsBackFace: 1
-    - _MaxInterDist: 0.001
+    - _LightDiffuse: 1
+    - _Luminosity: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Opacity: 1
+    - _Opacity: 0.8
     - _Parallax: 0.02
-    - _PositiveNegativeDepth: 1
+    - _ReflexionIntensity: 0.04
+    - _ReflexionPower: 20
     - _SmoothnessTextureChannel: 0
+    - _SpecPow: 48
     - _SpecularHighlights: 1
+    - _SpecularIntensity: 3
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _AlphaMaskPow: {r: 14.69, g: 0.45, b: 0, a: 0}
-    - _Color: {r: 1, g: 0.5058824, b: 0.7938579, a: 1}
+    - _Color: {r: 0.090196095, g: 0.83137256, b: 0.7104109, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HighlightColor: {r: 0.83137256, g: 0.37254903, b: 0.6156801, a: 0}
+    - _ShadowColor: {r: 0, g: 0, b: 0, a: 0}
