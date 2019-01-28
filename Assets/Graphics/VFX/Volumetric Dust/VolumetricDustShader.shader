@@ -7,6 +7,8 @@
 		_LightDistFactor ("Light Distance Attenuation", float) = 6.42
 		_DepthAttenFactor ("Depth Attenuation Factor", float) = 3.5
 		_DepthColor ("Depth Color", Color) = (0,0,0,0)
+		_MaxDepthFadeDistance ("Max Fade Distance", float) = 0
+		_MinDepthFadeDistance ("Min Fade Distance", float) = 0
 	}
 	SubShader
 	{
@@ -46,6 +48,7 @@
 
 			float4 _Color, _DepthColor;
 			float _FresnelIntensity, _LightDistFactor, _DepthAttenFactor;
+			float _MaxDepthFadeDistance, _MinDepthFadeDistance;
 			
 			v2f vert (appdata v)
 			{
@@ -80,9 +83,13 @@
 				float3 toCamNorm = normalize(toCam);
 
 				// Depth Attenuation
-				float depthAtten = 1 / length(toCam);
+				float distFromCam = length(toCam);
+				float depthAtten = 1 / distFromCam;
 				depthAtten *= _DepthAttenFactor;
 				depthAtten = saturate(depthAtten);
+
+				// Depth Fade
+				float depthFade = saturate(distFromCam - _MinDepthFadeDistance / _MaxDepthFadeDistance - _MinDepthFadeDistance);
 
 				// Fresnel
 				float fresnel = dot(toCamNorm, i.normal);
@@ -93,8 +100,10 @@
 				float3 lightColor = clamp(i.lighting, 0, 10);
 
 				// Apply
-				fixed4 col = fixed4(i.color.rgb * lightColor * fresnel, i.color.a * fresnel);
+				fixed4 col = fixed4(i.color.rgb * lightColor * fresnel, 1);
 				col = lerp(_DepthColor, col, depthAtten);
+				col.a = i.color.a * fresnel;
+				col.a *= depthFade;
 				return col;
 			}
 			ENDCG
