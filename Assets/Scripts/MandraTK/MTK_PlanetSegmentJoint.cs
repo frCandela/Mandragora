@@ -74,6 +74,13 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
                 m_baseDistance += heightSteps * (m_icoPlanet.heightDelta * m_icoPlanet.transform.localScale.x);
                 m_icoSegment.UpdateSegment();
                 m_icoSegment.UpdateNeighbours();
+
+                if(heightSteps == 0)
+                    AkSoundEngine.PostEvent("Water_Play", gameObject);
+                else if (heightSteps > 0)
+                    AkSoundEngine.PostEvent("Stone_Up_Play", gameObject);
+                else
+                    AkSoundEngine.PostEvent("Stone_Down_Play", gameObject);
             }
 
             // Set configurable joint

@@ -25,6 +25,7 @@ public class PlanetRotator : MonoBehaviour
         Destroy(m_confJoint);
     }
 
+    Quaternion m_oldRotation;
     void FixedUpdate()
     {
         // If the scale sphere is grabbed
@@ -56,6 +57,10 @@ public class PlanetRotator : MonoBehaviour
         {
             ResetHand();
         }
+
+        AkSoundEngine.SetRTPCValue("Wind", Quaternion.Angle(transform.rotation, m_oldRotation) * 50);
+
+        m_oldRotation = transform.rotation;
     }
 
     void EnableRotation(bool state)
@@ -69,6 +74,7 @@ public class PlanetRotator : MonoBehaviour
                 m_interactable.IndexJointUsed = 1;
                 m_catchedObjectJoint = m_interactable.jointType;
                 m_interactable.jointType.onJointBreak.AddListener(ResetHand);
+                AkSoundEngine.PostEvent("Soundseed_Play", gameObject);
             }
         }
         else
@@ -79,6 +85,8 @@ public class PlanetRotator : MonoBehaviour
 
             m_interactable = null;
             m_catchedObjectJoint = null;
+
+            AkSoundEngine.PostEvent("Soundseed_Stop", gameObject);
         }
     }
 }
