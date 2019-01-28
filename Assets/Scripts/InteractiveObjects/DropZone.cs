@@ -79,11 +79,12 @@ public class DropZone : MonoBehaviour
 
                 interactable.jointType.JoinWith(gameObject);
                 GetComponent<Joint>().breakForce = float.MaxValue;
+                AkSoundEngine.PostEvent("Socle_Activated_Play", gameObject);
                 catchedObject = interactable;
                 interactable.jointType.onJointBreak.AddListener(Release);
 
                 onObjectCatched.Invoke(true);
-                SetRtpc(2);
+                // SetRtpc(2);
 
                 if (m_meshRenderer)
                 {
@@ -129,19 +130,19 @@ public class DropZone : MonoBehaviour
         }
     }
 
-    [ContextMenu("TestRTPC")]
-    void TestRTPC()
-    {
-        StartCoroutine(SetRtpc(5));
-    }
+    // [ContextMenu("TestRTPC")]
+    // void TestRTPC()
+    // {
+    //     StartCoroutine(SetRtpc(5));
+    // }
 
-    IEnumerator SetRtpc(float T)
-    {
-        for (float i = 1; i > 0; i -= Time.deltaTime / T)
-        {
-            print(i);
-            AkSoundEngine.SetRTPCValue("Diegetic", i * 100);
-            yield return new WaitForEndOfFrame();
-        }
-    }
+    // IEnumerator SetRtpc(float T)
+    // {
+    //     for (float i = 1; i > 0; i -= Time.deltaTime / T)
+    //     {
+    //         print(i);
+    //         AkSoundEngine.SetRTPCValue("Diegetic", i * 100);
+    //         yield return new WaitForEndOfFrame();
+    //     }
+    // }
 }
