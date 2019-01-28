@@ -10,10 +10,12 @@ public class ClipboardOrient : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		foreach(Transform item in clipPlanes)
-		{
-			item.LookAt(Camera.main.transform, Vector3.up);
-		}
+			foreach(Transform item in clipPlanes)
+			{
+				if(item != null) {
+					item.LookAt(Camera.main.transform, Vector3.up);
+				}
+			}
 		
 	}
 }
