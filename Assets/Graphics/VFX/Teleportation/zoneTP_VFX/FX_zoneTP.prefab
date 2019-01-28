@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 114780554596669076}
   - component: {fileID: 114649002102868382}
   m_Layer: 0
-  m_Name: VFX_zoneTP_V2
+  m_Name: VFX_zoneTP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,7 +160,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4249263046686690}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &4249263046686690
 Transform:
@@ -172,9 +172,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4320020081334936}
   - {fileID: 4965992160001444}
   - {fileID: 4150349478467982}
-  - {fileID: 4320020081334936}
   - {fileID: 4443009660072222}
   - {fileID: 4046297363522214}
   m_Father: {fileID: 4428072721050860}
@@ -191,7 +191,7 @@ Transform:
   m_LocalScale: {x: 1.165233, y: 1.1652324, z: 1.165233}
   m_Children: []
   m_Father: {fileID: 4249263046686690}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4428072721050860
 Transform:
@@ -231,7 +231,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4249263046686690}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23284773741292590
 MeshRenderer:
@@ -396,7 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _guid: 1570787606
+  _guid: 1352567017
 --- !u!114 &114906343736119900
 MonoBehaviour:
   m_ObjectHideFlags: 1

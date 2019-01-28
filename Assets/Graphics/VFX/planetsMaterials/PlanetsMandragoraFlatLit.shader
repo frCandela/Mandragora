@@ -1,8 +1,10 @@
-﻿Shader "Mandragora/PlanetTesselationShader" {
+﻿// The Color depends on Vertex Color
+// 	R channel = Ground Level (0 = Min, 1 = Max)
+// 	G channel = UnderWater value (0 = out of Water, 1 = deepest in Water)
+// 	B channel = Snow Value (0 = not in snow, 1 = in nSnow)
+
+Shader "Mandragora/PlanetsMandragoraFlatLit" {
 	Properties {
-		_EdgeLength ("Edge length", Range(2,50)) = 5
-        _Phong ("Phong Strengh", Range(0,1)) = 0.5
-		_Color ("Color", Color) = (1,1,1,1)
 		_Luminosity ("Luminosity", float) = 0
 		_LightDiffuse ("Light Diffuse (POW)", float) = 1
 		_EmissionColor ("Emission Color", Color) = (1,1,1,1)
@@ -10,25 +12,30 @@
 		_SpecPow ("Specular Power", float) = 48.0
 		_SpecularIntensity ("Specular Intensity", float) = 3
 		_DepthDistance ("Depth Distance", float) = 40
+
+		_RampTexture ("Ground Layers Ramp Texture", 2D) = "white" {}
+		_SnowColor ("Snow Color(RGB), Step(A)", Color) = (1,1,1,0.5)
+		_UwaterColor ("Under Water Color (RGB)", Color) = (0,0,0,1)
+		_PlanetColorShadowAmount ("Amount of PlanetColor in Shadow", Range(0,1)) = 0.2
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
 		LOD 200
+		Cull Off
 
 		CGPROGRAM
 		// Physically based Standard lighting model, and enable shadows on all light types
-		#pragma surface surf MandragoraSurfaceFlatLit vertex:vert tessellate:tessEdge tessphong:_Phong finalcolor:shadowColor fullforwardshadows
-		#include "Tessellation.cginc"
+		#pragma surface surf MandragoraSurfaceFlatLit vertex:vert finalcolor:shadowColor fullforwardshadows
 
 		// Use shader model 3.0 target, to get nicer looking lighting
 		#pragma target 3.0
 
-
-		sampler2D _MainTex;
-		fixed4 _Color, _EmissionColor, _ShadowColor;
+		sampler2D _RampTexture;
+		float4 _SnowColor, _UwaterColor;
+		fixed4 _EmissionColor, _ShadowColor;
 		float _Luminosity, _SpecPow, _SpecularIntensity;
 		float _DepthDistance, _LightDiffuse;
-		float _Phong, _EdgeLength;
+		float _PlanetColorShadowAmount;
 
 		struct MandragoraSurfaceFlatLitOutput
 		{
@@ -42,30 +49,19 @@
 			float3 worldPos;
 			float4 tangent;
 			float3 normal;
+			float4 color : COLOR;
 		};
-
-		/*struct appdata {
-            float4 vertex : POSITION;
-			float4 tangent : TEXCOORD1;
-            float3 normal : NORMAL;
-            float2 texcoord : TEXCOORD0;
-        };*/
-
+		
 		void vert (inout appdata_full v, out Input o) {
            	UNITY_INITIALIZE_OUTPUT(Input,o);
+
 			o.normal = normalize(UnityObjectToWorldNormal(v.normal));
   			o.tangent.xyz = normalize(UnityObjectToWorldDir(v.tangent.xyz));
   			o.tangent.w = v.tangent.w * unity_WorldTransformParams.w;
 
      	}
 
-		void dispNone (inout appdata_full v) { }
 
-		float4 tessEdge (appdata_full v0, appdata_full v1, appdata_full v2) {
-            return UnityEdgeLengthBasedTess (v0.vertex, v1.vertex, v2.vertex, _EdgeLength);
-        }
-
-		
 		void surf (Input IN, inout MandragoraSurfaceFlatLitOutput o) {
 
 			// build tangent rotation matrix here (saves one interpolator):
@@ -77,8 +73,15 @@
 			o.Normal = mul(rotation, flatNormal);
 
 
+			// Colors with Ground Levels
+			float3 groundWaterSnowA = IN.color.rgb;
+			float3 finalColor = tex2D(_RampTexture, groundWaterSnowA.r).rgb; // Set Ground Color
+			finalColor = lerp(finalColor, _UwaterColor, groundWaterSnowA.g); // Set UnderWater Amount
+			finalColor = lerp(finalColor, _SnowColor, step(_SnowColor.a, groundWaterSnowA.b)); // Set Snow Amount
+
+
 			// Apply
-			fixed4 c = _Color;
+			fixed4 c = float4(finalColor, 1);
 			o.Albedo = c.rgb + (c.rgb * _Luminosity);
 			o.Emission = _EmissionColor.rgb;
 			o.Alpha = c.a;
@@ -142,6 +145,9 @@
 			color.rgb = newColor;
 
 			#endif
+
+			// Planets Color
+			color.rgb = lerp(color.rgb, o.Albedo, _PlanetColorShadowAmount);
 
 			// Depth
 			float distFromCam = length(_WorldSpaceCameraPos.xyz - IN.worldPos);
