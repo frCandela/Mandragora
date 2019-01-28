@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class IcoPlanet : MonoBehaviour
 {
+    public bool Joined
+    {
+        set
+        {
+            if(value)
+                AkSoundEngine.PostEvent("Soundseed_Play", gameObject);
+            else
+                AkSoundEngine.PostEvent("Soundseed_Stop", gameObject);
+        }
+    }
+
     [Header("Parameters")]
     [SerializeField] private bool m_initialize = true;
     [SerializeField, Range(0, 3)] public int m_nbSubdivisions = 0;
@@ -146,6 +157,7 @@ public class IcoPlanet : MonoBehaviour
     }
 
     public bool updateTesselationLevel = false;
+    Quaternion m_oldRotation;
     private void Update()
     {
         if(updatePlanet)
@@ -165,7 +177,8 @@ public class IcoPlanet : MonoBehaviour
             updateTesselationLevel = false;
             UpdateTesselationLevel();
         }
+
+        AkSoundEngine.SetRTPCValue("Wind", Quaternion.Angle(transform.rotation, m_oldRotation) * 50);
+        m_oldRotation = transform.rotation;
     }
-
-
 }
