@@ -2455,7 +2455,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4727491887860666}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4329253207793054
 Transform:
@@ -2627,7 +2627,7 @@ Transform:
   - {fileID: 4610279753710714}
   - {fileID: 4710155126588752}
   m_Father: {fileID: 4727491887860666}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4360839338251452
 Transform:
@@ -2784,7 +2784,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4727491887860666}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4484706407221468
 Transform:
@@ -2889,7 +2889,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4727491887860666}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4520228292301962
 Transform:
@@ -3047,7 +3047,7 @@ Transform:
   m_Children:
   - {fileID: 4762815900567944}
   m_Father: {fileID: 4727491887860666}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4632467483633200
 Transform:
@@ -3164,12 +3164,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
+  - {fileID: 4616432335774268}
   - {fileID: 4516068917484662}
+  - {fileID: 4935429287176014}
   - {fileID: 4358446504223674}
   - {fileID: 4325862277284724}
   - {fileID: 4451556714943012}
-  - {fileID: 4616432335774268}
-  - {fileID: 4935429287176014}
   m_Father: {fileID: 4225199785587186}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3446,7 +3446,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4727491887860666}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4938767278674764
 Transform:
@@ -9329,6 +9329,7 @@ MonoBehaviour:
   borderRatio: 0.2
   m_baseScale: 0.1
   nbLevels: 50
+  m_defaultHeightLevel: 0
   levelColors:
   - {r: 0.5254902, g: 0.87843144, b: 0.854902, a: 0}
   - {r: 0.58431375, g: 0.7803922, b: 0.39607847, a: 0}
@@ -10722,12 +10723,14 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_trailSpeed: 2
+  m_trailSpeed: 0.1
+  m_maxDistance: 2
   m_kinder: {fileID: 1927058912854112}
   m_validated:
     valueGuid: 
     WwiseObjectReference: {fileID: 11400000, guid: bccf3e36d82aede48933236a997bcb0c,
       type: 2}
+  m_transformFollow: {fileID: 0}
 --- !u!114 &114515902965503478
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11932,7 +11935,7 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -11947,7 +11950,7 @@ LineRenderer:
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 0
+      atime0: 58982
       atime1: 65535
       atime2: 0
       atime3: 0
@@ -11963,7 +11966,7 @@ LineRenderer:
     alignment: 0
     textureMode: 0
     generateLightingData: 0
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1
   m_Loop: 0
 --- !u!135 &135220454974565310
 SphereCollider:

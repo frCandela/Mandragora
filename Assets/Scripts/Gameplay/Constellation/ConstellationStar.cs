@@ -56,7 +56,7 @@ public class ConstellationStar : MonoBehaviour
 		m_ID = ID;
 	}
 
-	public void TryValidate(Vector3 inputVel)
+	public void TryValidate(Vector3 inputVel, Transform tr)
 	{
 		inputVel *= 1000;
 		m_rgbd.AddTorque(inputVel.z, inputVel.x, inputVel.y);
@@ -70,7 +70,7 @@ public class ConstellationStar : MonoBehaviour
 			}
 			else // Completion phase
 			{
-				Validated = m_constellation.Check(m_ID);
+				Validated = m_constellation.Check(m_ID, tr);
 			}
 		}
 	}
