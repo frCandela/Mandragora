@@ -3,7 +3,6 @@
 	Properties
 	{
 		_Color ("Color", Color) = (1,1,1,1)
-		_Opacity ("Opacity", Range(0,1)) = 1
 		_Luminosity ("Luminosity", float) = 1
 	}
 	SubShader
@@ -37,7 +36,7 @@
 			};
 
 			float4 _Color;
-			float _Opacity, _Luminosity;
+			float _Luminosity;
 			
 			v2f vert (appdata v)
 			{
@@ -54,7 +53,6 @@
 				col.rgb *= i.color.rgb * _Color.rgb;
 				col.rgb = saturate(col.rgb);
 				col.rgb *= _Luminosity;
-				col.a = saturate(i.color.a * _Opacity);
 
 				return col;
 			}
