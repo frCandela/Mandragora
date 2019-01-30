@@ -13,6 +13,8 @@ public class SolarSystem : MonoBehaviour
 
     private Rigidbody m_rb;
 
+    [SerializeField] GameObject m_explosionEffect;
+
     private void Awake()
     {
         m_rb = GetComponent<Rigidbody>();
@@ -37,6 +39,8 @@ public class SolarSystem : MonoBehaviour
 
                         eff.sunRigidbody = m_rb;
                         m_planetEffectsList.Add(eff);
+
+                        eff.explosionEffect = m_explosionEffect;
 
                         UpdateState(m_planetEffectsList.Count);
                     }
