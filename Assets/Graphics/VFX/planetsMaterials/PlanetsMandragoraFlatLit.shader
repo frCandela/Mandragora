@@ -17,6 +17,8 @@ Shader "Mandragora/PlanetsMandragoraFlatLit" {
 		_SnowColor ("Snow Color(RGB), Step(A)", Color) = (1,1,1,0.5)
 		_UwaterColor ("Under Water Color (RGB)", Color) = (0,0,0,1)
 		_PlanetColorShadowAmount ("Amount of PlanetColor in Shadow", Range(0,1)) = 0.2
+
+		_NoiseSettings ("Noise Amp1(X) Freq1(Y) Amp2(Z) Freq2(W)", Vector) = (0,0,0,0)
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
@@ -36,6 +38,7 @@ Shader "Mandragora/PlanetsMandragoraFlatLit" {
 		float _Luminosity, _SpecPow, _SpecularIntensity;
 		float _DepthDistance, _LightDiffuse;
 		float _PlanetColorShadowAmount;
+		float4 _NoiseSettings;
 
 		struct MandragoraSurfaceFlatLitOutput
 		{
@@ -46,6 +49,7 @@ Shader "Mandragora/PlanetsMandragoraFlatLit" {
 		};
 
 		struct Input {
+			float3 localPos;
 			float3 worldPos;
 			float4 tangent;
 			float3 normal;
@@ -58,8 +62,25 @@ Shader "Mandragora/PlanetsMandragoraFlatLit" {
 			o.normal = normalize(UnityObjectToWorldNormal(v.normal));
   			o.tangent.xyz = normalize(UnityObjectToWorldDir(v.tangent.xyz));
   			o.tangent.w = v.tangent.w * unity_WorldTransformParams.w;
+			o.localPos = v.vertex.xyz;
 
      	}
+
+		
+		float Noise (float3 pos, float amplitude1, float frequency1, float amplitude2, float frequency2) {
+			float3 offsetedPos = pos + float3(10,10,10);
+
+			float noise1;
+			noise1 = cos(pos.x*frequency1) + sin(pos.y*frequency1);
+			noise1 *= amplitude1;
+
+			float noise2;
+			noise2 = sin(pos.x*frequency2) + cos(pos.y*frequency2);
+			noise2 *= amplitude2;
+
+			float noise = noise1 * noise2;
+			return noise;
+		}
 
 
 		void surf (Input IN, inout MandragoraSurfaceFlatLitOutput o) {
@@ -77,7 +98,8 @@ Shader "Mandragora/PlanetsMandragoraFlatLit" {
 			float3 groundWaterSnowA = IN.color.rgb;
 			float3 finalColor = tex2D(_RampTexture, groundWaterSnowA.r).rgb; // Set Ground Color
 			finalColor = lerp(finalColor, _UwaterColor, groundWaterSnowA.g); // Set UnderWater Amount
-			finalColor = lerp(finalColor, _SnowColor, step(_SnowColor.a, groundWaterSnowA.b)); // Set Snow Amount
+			float offsetedAlpha = _SnowColor.a + Noise(IN.localPos, _NoiseSettings.x, _NoiseSettings.y, _NoiseSettings.z, _NoiseSettings.w);
+			finalColor = lerp(finalColor, _SnowColor, step(offsetedAlpha, groundWaterSnowA.b)); // Set Snow Amount
 
 
 			// Apply
