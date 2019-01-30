@@ -40,6 +40,7 @@ public class Kinder : MTK_Interactable
 	public override void Grab(bool input)
 	{
 		m_rgbd.isKinematic = false;
+		AkSoundEngine.PostEvent("Pick_Up_Kinder_Play", gameObject);
 
 		base.Grab(input);
 	}
@@ -55,6 +56,9 @@ public class Kinder : MTK_Interactable
 			m_hitPs.transform.position = other.contacts[0].point;
 			m_hitPs.transform.LookAt(other.contacts[0].point + other.contacts[0].normal);
 			m_hitPs.Emit(Random.Range(1,3));
+
+			AkSoundEngine.SetRTPCValue("Force", other.relativeVelocity.sqrMagnitude);
+			AkSoundEngine.PostEvent("Kinder_Break_Play", gameObject);
 
 			m_piecesCount--;
 
@@ -73,6 +77,8 @@ public class Kinder : MTK_Interactable
 
 		m_planet.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 		m_planet.GetComponent<MTK_Interactable>().enabled = true;
+
+		AkSoundEngine.PostEvent("Kinder_Break_Play", gameObject);
 
 		foreach (MeshCollider c in m_planet.GetComponents<MeshCollider>())
 			c.enabled = true;

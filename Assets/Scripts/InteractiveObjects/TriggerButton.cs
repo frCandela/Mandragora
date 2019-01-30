@@ -10,12 +10,11 @@ public class TriggerButton : MonoBehaviour
 
     [SerializeField] public UnityEvent onButtonPressed;
     [SerializeField] public UnityEvent onButtonReleased;
-    [SerializeField] public AK.Wwise.Event wOnButtonPressed;
     [SerializeField] public AK.Wwise.Event wOnButtonReleased;
 
     private bool m_state = false;
 
-    private void Awake()
+    private void Start()
     {
         SetColorOn(false);
     }
@@ -27,9 +26,7 @@ public class TriggerButton : MonoBehaviour
         {
             if ( state )
             {
-
                 mr.material.color = m_colorOn;
-                wOnButtonPressed.Post(gameObject);
             }
             else
             {
