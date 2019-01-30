@@ -33,9 +33,11 @@ public class PlanetTerraformer : MonoBehaviour
                 }
             }
         }
-        else
-        {           
+        else if(m_icoPlanet)
+        {       
+            
             MTK_Interactable interactable = m_icoPlanet.GetComponent<MTK_Interactable>();
+
             interactable.isDistanceGrabbable = true;
             interactable.isGrabbable = true;
             foreach (IcoSegment segment in m_icoPlanet.Segments)

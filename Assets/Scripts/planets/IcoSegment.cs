@@ -51,22 +51,8 @@ public class IcoSegment : MonoBehaviour
             UpdateSegment();
             UpdateNeighbours();
         }
-
-        /* if (heightLevel == 2)
-         {
-             Vector3 v0 = (1f + heightLevel * icoPlanet.heightDelta) * m_baseVertices[0];
-             Debug.DrawLine(Center(), v0, Color.red);
-             m_neighbours[0].GetComponent<MeshRenderer>().material.color = Color.red;
-
-             int index = m_neighbours[0].IndexCorrespondingleftVertice(this);
-             Vector3 v0b = (1f + heightLevel * icoPlanet.heightDelta) * m_neighbours[0].m_baseVertices[index];
-             Debug.DrawLine(m_neighbours[0].Center(), v0b, Color.red);
-         }*/
-
-        normal = transform.TransformPoint(Center());
     }
-
-    public Vector3 normal;
+    
 
 
     public Vector3 Center()
@@ -112,6 +98,23 @@ public class IcoSegment : MonoBehaviour
         BakeNormals();
     }
 
+    public bool IsInside(Vector3 point, Collider col)
+    {
+        Vector3 pos1 = point;
+        Vector3 pos2 = transform.TransformPoint(0.5f * Center());
+
+        Ray ray = new Ray(pos1, pos2 - pos1);
+        RaycastHit hit;
+        if (col.Raycast(ray, out hit, 1f))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     public void UpdateSegment(bool canUpdateNeighbours = false)
     {
         if(m_lastUpdateTime != Time.time)
@@ -120,7 +123,9 @@ public class IcoSegment : MonoBehaviour
 
             heightLevel = Mathf.Clamp(heightLevel, 0, icoPlanet.nbLevels);
             Color color = icoPlanet.levelColors[Mathf.Clamp(heightLevel, 0, icoPlanet.levelColors.Length - 1)];
-            GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", color);
+
+            GetComponent<MeshRenderer>().material.color = color;
+            //GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", color);
 
             GenerateBaseGeometry(ref m_vertices, ref m_triangles);
             //SetCollider(m_vertices, m_triangles);

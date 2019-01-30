@@ -88,7 +88,7 @@ public class TelekinesisPointer : MonoBehaviour
 	{
 		if(!m_attract)
 		{
-			if(m_interactHand.m_objectInTrigger)
+			if(m_interactHand.objectInTrigger)
 			{
 				Target = null;
 			}

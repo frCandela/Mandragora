@@ -48,14 +48,8 @@ public class Outline : MonoBehaviour
     private Material outlineMaskMaterial;
     private Material outlineFillMaterial;
 
-    private void Awake()
+    void Initialize()
     {
-        renderers = new Renderer[0];
-    }
-
-    void Start()
-    {
-        // Cache renderers
         renderers = GetComponentsInChildren<MeshRenderer>();
 
         // Instantiate outline materials
@@ -71,9 +65,13 @@ public class Outline : MonoBehaviour
 
     void OnEnable()
     {
-        foreach (var renderer in renderers)
+        if( renderers == null )
         {
+            Initialize();
+        }            
 
+        foreach (var renderer in renderers)
+        {            
             // Append outline shaders
             var materials = renderer.sharedMaterials.ToList();
 
