@@ -10,7 +10,10 @@ public class Constellation : MonoBehaviour
 	[SerializeField] AnimationCurve m_noiseAmountCurve;
 	[SerializeField] float m_trailSpeed = 1;
 	[SerializeField] float m_maxDistance = 1;
+	[SerializeField] float m_formationDistance = 1;
+	[SerializeField] float m_recycleTime = 10;
 	[SerializeField] GameObject m_kinder;
+	[SerializeField] GameObject m_next;
 
 	[Header("Wwise events")]
 	[SerializeField] AK.Wwise.Event m_validated;
@@ -44,24 +47,27 @@ public class Constellation : MonoBehaviour
 		{
 			m_stars[i].RegisterConstellation(this, i);
 			m_starsTransform[i] = m_stars[i].transform;
-			m_starsInitPosition[i] = m_starsTransform[i].position;
+			m_starsInitPosition[i] = m_starsTransform[i].localPosition;
 		}
 	}
 
 	private void Update()
 	{
+		Vector3 trailDestination;
+
 		if(m_trail.emitting)
 		{
-			int currentDestination = (int)Mathf.PingPong(m_trailDestination, m_starsInitPosition.Length - 1);
-			m_trail.transform.position = Vector3.MoveTowards(m_trail.transform.position, m_starsInitPosition[currentDestination], m_trailSpeed * Time.deltaTime);
+			int currentDestination = (int)Mathf.PingPong(m_trailDestination, m_starsTransform.Length - 1);
+			trailDestination = m_starsTransform[currentDestination].localPosition + m_starsTransform[currentDestination].GetChild(0).localPosition;
+			m_trail.transform.localPosition = Vector3.MoveTowards(m_trail.transform.localPosition, trailDestination, m_trailSpeed * Time.deltaTime);
 
-			if(m_trail.transform.position == m_starsInitPosition[currentDestination])
+			if(Vector3.Distance(m_trail.transform.localPosition, trailDestination) < 0.1f)
 				m_trailDestination++;
 		}
 
 		if(m_transformFollow && m_currentStarID != m_endStarID && m_currentStarID != -1)
 		{
-			m_lineRenderer.SetPosition(m_endStarID, m_transformFollow.position);
+			m_lineRenderer.SetPosition(m_endStarID, transform.InverseTransformPoint(m_transformFollow.position));
 			
 			if(m_maxDistance < Vector3.Distance(m_transformFollow.position, transform.position))
 				Fail();
@@ -76,11 +82,11 @@ public class Constellation : MonoBehaviour
 		if(m_currentStarID == -1) // set first star
 		{
 			// First of last Only
-			if(m_ID == 0 || m_ID == m_stars.Length-1)
+			if(m_ID == 0 || m_ID == m_starsTransform.Length-1)
 			{
 				m_currentStarID = m_ID;
 				m_direction = m_ID == 0 ? 1 : -1;
-				m_endStarID = m_ID == 0 ? m_stars.Length-1 : 0;
+				m_endStarID = m_ID == 0 ? m_starsTransform.Length-1 : 0;
 
 				UpdateLine();
 				
@@ -98,7 +104,7 @@ public class Constellation : MonoBehaviour
 
 				if(m_currentStarID == m_endStarID) // Check constellation is complete
 				{
-					for (int i = 0; i < m_stars.Length; i++)
+					for (int i = 0; i < m_starsTransform.Length; i++)
 					{
 						if(m_currentStarID != i && m_stars[i].Validated == false)
 						{
@@ -121,12 +127,12 @@ public class Constellation : MonoBehaviour
 	void UpdateLine()
 	{
 		for (int i = m_currentStarID; i != m_endStarID + m_direction; i += m_direction)
-			m_lineRenderer.SetPosition(i, m_starsInitPosition[m_currentStarID]);
+			m_lineRenderer.SetPosition(i, m_starsTransform[m_currentStarID].localPosition + m_starsTransform[m_currentStarID].GetChild(0).localPosition);
 	}
 
 	void Fail()
 	{
-		for (int i = 0; i < m_stars.Length; i++)
+		for (int i = 0; i < m_starsTransform.Length; i++)
 		{
 			m_stars[i].Validated = false;
 			m_lineRenderer.SetPosition(i, m_starsInitPosition[0]);
@@ -144,52 +150,72 @@ public class Constellation : MonoBehaviour
 		m_kinder.SetActive(true);
 		m_trail.enabled = false;
 
-		Vector3[] destination = new Vector3[m_stars.Length];
+		Vector3[] destination = new Vector3[m_starsTransform.Length];
 		for (int i = 0; i < destination.Length; i++)
-			destination[i] = transform.position;
+			destination[i] = m_kinder.transform.localPosition;
 		
 		StartCoroutine(
 			MoveTo(destination, 1.5f, 5, m_moveLerpCurve_Complete, () =>
 			{
 				foreach (var tr in m_starsTransform)
 					Destroy(tr.gameObject, 1);
+				
+				m_kinder.transform.SetParent(transform.parent, true);
+
+				Invoke("Recycle", m_recycleTime);
 			}));
 	}
 
-	public void Init()
+	void Recycle()
 	{
-		m_trail.transform.position = m_starsInitPosition[0];
+		Instantiate(m_next, transform.parent.position, transform.rotation, transform.parent);
+
+		Destroy(gameObject);
+	}
+
+	public void Init(Transform tr)
+	{
+		Vector3 initPos = m_starsTransform[0].localPosition + m_starsTransform[0].GetChild(0).localPosition;
+		m_trail.transform.localPosition = initPos;
 
 		StartCoroutine(MoveTo(m_starsInitPosition, 3, 20, m_moveLerpCurve_Init, () =>
 		{
 			m_lineRenderer.enabled = true;
 
-			for (int i = 0; i < m_stars.Length; i++)
-				m_lineRenderer.SetPosition(i, m_starsInitPosition[0]);
+			for (int i = 0; i < m_starsTransform.Length; i++)
+				m_lineRenderer.SetPosition(i, initPos);
 
 			m_trailDestination = 0;
 			m_trail.emitting = true;
 		}));
+
+		Vector3 playerPos = Camera.main.transform.position;
+		playerPos.Scale(new Vector3(1,0,1));
+
+		Vector3 thisPos = transform.position;
+		thisPos.Scale(new Vector3(1,0,1));
+
+		StartCoroutine(Place(1.5f, transform.position + (thisPos - playerPos).normalized * m_formationDistance, tr.rotation));
 	}
 
 	IEnumerator MoveTo(Vector3[] destinations, float timeToMove, float noiseScale, AnimationCurve curve, VoidDelegate endAction = null)
 	{
 		float lenght = m_starsTransform.Length/10f;
 
-		Vector3[] startPositions = new Vector3[m_stars.Length];
+		Vector3[] startPositions = new Vector3[m_starsTransform.Length];
 
-		for (int i = 0; i < m_stars.Length; i++)
-			startPositions[i] = m_starsTransform[i].position;
+		for (int i = 0; i < m_starsTransform.Length; i++)
+			startPositions[i] = m_starsTransform[i].localPosition;
 
 		for (float t = 0; t < 1; t += Time.fixedDeltaTime / timeToMove)
 		{
 			for (int i = 0; i < m_starsTransform.Length; i++)
 			{
-				m_starsTransform[i].position = Vector3.Lerp(startPositions[i], destinations[i], curve.Evaluate(t))
+				m_starsTransform[i].localPosition = Vector3.Lerp(startPositions[i], destinations[i] + transform.rotation * transform.localPosition, curve.Evaluate(t))
 				+ (new Vector3(Mathf.PerlinNoise(t, i), Mathf.PerlinNoise(t, i + 1), Mathf.PerlinNoise(t, i + 2)) - Vector3.one/2)
 					* noiseScale * m_noiseAmountCurve.Evaluate(t);
 
-				m_lineRenderer.SetPosition(i, m_starsTransform[i].position);
+				m_lineRenderer.SetPosition(i, m_starsTransform[i].localPosition);
 			}
 
 			yield return new WaitForEndOfFrame();
@@ -197,5 +223,16 @@ public class Constellation : MonoBehaviour
 
 		if(endAction != null)
 			endAction.Invoke();
+	}
+
+	IEnumerator Place(float timeToMove, Vector3 targetPos, Quaternion rotation)
+	{
+		for (float t = 0; t < 1; t += Time.fixedDeltaTime / timeToMove)
+		{
+			transform.position = Vector3.Lerp(transform.position, targetPos, t);
+			// transform.rotation = Quaternion.Lerp(transform.rotation, rotation, t);
+
+			yield return new WaitForEndOfFrame();
+		}
 	}
 }
