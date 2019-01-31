@@ -16,6 +16,7 @@ public class LightingManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
+	[ContextMenu("Update")]
 	void Update () {
 		Shader.SetGlobalFloat("_ManagerUnlitFactor", sceneUnlitFactor);
 
