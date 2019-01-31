@@ -37,6 +37,9 @@ public class IcoPlanet : MonoBehaviour
     public List<IcoSegment> Segments { get { return m_segments; } }
 
 
+    Mesh m_mesh;
+    MeshCollider m_meshCollider;
+
     void Start()
     {
         if (m_initialize)
@@ -54,6 +57,43 @@ public class IcoPlanet : MonoBehaviour
         transform.localScale = new Vector3(m_baseScale, m_baseScale, m_baseScale);
 
         transform.localPosition = Vector3.zero;
+
+        m_mesh = new Mesh();
+        m_meshCollider = GetComponent<MeshCollider>();
+        if( ! m_meshCollider)
+        {
+            m_meshCollider = gameObject.AddComponent<MeshCollider>();
+        }
+        m_meshCollider.convex = true;
+        m_meshCollider.sharedMesh = m_mesh;
+
+        GenerateMeshCollider();
+        foreach (IcoSegment segment in m_segments)
+            segment.GetComponent<MeshCollider>().enabled = true;
+
+
+    }
+    
+    public void GenerateMeshCollider()
+    {
+        List<Vector3> m_vertices = new List<Vector3>();
+        List<int> m_indices = new List<int>();
+
+        foreach (IcoSegment segment in m_segments)
+        {
+            int offset = m_vertices.Count;
+            m_vertices.AddRange(segment.mesh.vertices);
+            foreach (int index in segment.mesh.triangles)
+            {
+                m_indices.Add(index + offset);
+            }
+        }
+
+        m_mesh.Clear();
+        m_mesh.vertices = m_vertices.ToArray();
+        m_mesh.triangles = m_indices.ToArray();
+        
+        m_meshCollider.sharedMesh = m_mesh;
     }
 
     // Use this for initialization

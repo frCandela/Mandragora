@@ -15,6 +15,18 @@ public class PlanetScaler : Workshop
 
     private float m_baseDist = -1f;
     private float m_intermediateScale = -1f;
+    private float m_newScale = -1f;
+
+    private void Update()
+    {
+        if(m_newScale > 0f)
+        {
+            m_scaleEffect.transform.localScale = new Vector3(m_newScale, m_newScale, m_newScale);
+            m_newScale = -1f;
+        }
+    }
+
+
 
     void FixedUpdate ()
     {
@@ -38,9 +50,9 @@ public class PlanetScaler : Workshop
 
             float distance = Vector3.Distance(transform.position, m_catchedObjectJoint.connectedGameobject.transform.position);
             float ratio = distance / m_baseDist;
-            float scale = Mathf.Clamp(ratio * m_intermediateScale, m_minScaleRatio * m_scaleEffect.originalScale.x, m_maxScaleRatio * m_scaleEffect.originalScale.x);
+            m_newScale = Mathf.Clamp(ratio * m_intermediateScale, m_minScaleRatio * m_scaleEffect.originalScale.x, m_maxScaleRatio * m_scaleEffect.originalScale.x);
             
-            m_scaleEffect.transform.localScale = new Vector3(scale, scale, scale);
+            
 
             Vector3 anchorPoint = m_confJoint.connectedBody.transform.TransformPoint(m_confJoint.connectedAnchor);
             Vector3 dir = anchorPoint - m_confJoint.connectedBody.transform.position;

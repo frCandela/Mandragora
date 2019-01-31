@@ -8,7 +8,7 @@ public class MTK_InteractHand : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] Animator m_handAnimator = null;
-    [SerializeField] Transform m_fingerCollider = null;
+    [SerializeField] public Transform fingerCollider = null;
 
     [Header("Events")]
     public UnityEventMTK_Interactable m_onTouchInteractable;
@@ -160,7 +160,7 @@ public class MTK_InteractHand : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         IcoSegment seg = other.gameObject.GetComponent<IcoSegment>();
-        if (seg && seg.IsInside(m_fingerCollider.position, other))
+        if (seg && seg.IsInside(fingerCollider.position, other))
         {
             return;
         }
@@ -197,7 +197,7 @@ public class MTK_InteractHand : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         IcoSegment seg = other.gameObject.GetComponent<IcoSegment>();
-        if (seg && seg.IsInside(m_fingerCollider.position, other))
+        if (seg && seg.IsInside(fingerCollider.position, other))
         {
             return;
         }

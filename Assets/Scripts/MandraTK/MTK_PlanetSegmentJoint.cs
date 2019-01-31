@@ -44,7 +44,12 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
         if( !Used())
         {
             m_baseDistance = Vector3.Distance(transform.position, other.transform.position);
-            m_basePosition = transform.parent.position;
+
+            // joint
+            m_anchor = transform.InverseTransformPoint(other.transform.position);
+            m_connectedAnchor = other.transform.InverseTransformPoint(other.transform.position);
+            
+
             m_confJoint = other.AddComponent<ConfigurableJoint>();
             m_confJoint.connectedBody = transform.parent.GetComponent<Rigidbody>();
 
@@ -63,8 +68,21 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
         }
     }
 
-    private void Update()
+    Vector3 m_anchor;
+    Vector3 m_connectedAnchor;
+
+    private void FixedUpdate()
     {
+        if(m_confJoint)
+        {
+            Vector3 localJointPos = transform.InverseTransformPoint(m_confJoint.transform.TransformPoint(m_confJoint.anchor));
+            Vector3 targetAnchor = localJointPos.magnitude * m_anchor.normalized;
+            m_confJoint.connectedAnchor = targetAnchor;
+        }
+    }
+
+    private void Update()
+    { 
         if (Used())
         {
             // Set height segment
@@ -90,25 +108,6 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
                 
                 m_oldHeight = m_icoSegment.heightLevel;
             }
-
-            // Set configurable joint
-            
-            float distance = Vector3.Distance(m_basePosition, m_confJoint.transform.position);
-            Vector3 anchorPoint = m_confJoint.connectedBody.transform.TransformPoint(m_confJoint.connectedAnchor);
-            Vector3 dir = anchorPoint - m_confJoint.connectedBody.transform.position;
-
-            dir = distance * dir.normalized;
-            m_confJoint.connectedAnchor = m_confJoint.connectedBody.transform.InverseTransformPoint(m_confJoint.connectedBody.transform.position + dir);
-
-            Debug.DrawLine(m_basePosition, m_basePosition + dir, Color.red);
-            Debug.DrawLine(m_basePosition, m_basePosition + dir, Color.red);
-
-            /* Vector3 dir = anchorPoint - m_confJoint.connectedBody.transform.position;
-
-             dir = distance * dir.normalized;
-             m_confJoint.connectedAnchor = m_confJoint.connectedBody.transform.InverseTransformPoint(m_confJoint.connectedBody.transform.position + dir);
-           */
-            //Debug.DrawLine(transform.position, m_connectedGameobject.transform.position, Color.red);
         }
     }
 }

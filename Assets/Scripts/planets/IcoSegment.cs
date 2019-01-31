@@ -20,6 +20,8 @@ public class IcoSegment : MonoBehaviour
     [SerializeField] private Vector3[] m_baseVertices = new Vector3[3];
     [SerializeField] private IcoSegment[] m_neighbours = new IcoSegment[3];
 
+
+    public Mesh mesh { get { return m_mesh; } }
     private Mesh m_mesh;
     private Mesh m_sharedMeshCollider;
     private MeshCollider m_meshCollider;

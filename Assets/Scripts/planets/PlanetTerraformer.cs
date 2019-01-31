@@ -27,9 +27,12 @@ public class PlanetTerraformer : MonoBehaviour
                 interactable.isDistanceGrabbable = false;
                 interactable.isGrabbable = false;
 
-                foreach( IcoSegment segment in m_icoPlanet.Segments)
+                m_icoPlanet.GetComponent<Collider>().enabled = false;
+
+                foreach ( IcoSegment segment in m_icoPlanet.Segments)
                 {
                     segment.GetComponent<MTK_Interactable>().isGrabbable = true;
+                    segment.GetComponent<Collider>().enabled = true;
                 }
             }
         }
@@ -37,13 +40,16 @@ public class PlanetTerraformer : MonoBehaviour
         {       
             
             MTK_Interactable interactable = m_icoPlanet.GetComponent<MTK_Interactable>();
-
             interactable.isDistanceGrabbable = true;
             interactable.isGrabbable = true;
+
+            m_icoPlanet.GetComponent<Collider>().enabled = true;
             foreach (IcoSegment segment in m_icoPlanet.Segments)
             {
                 segment.GetComponent<MTK_Interactable>().isGrabbable = false;
+                segment.GetComponent<Collider>().enabled = false;
             }
+            m_icoPlanet.GenerateMeshCollider();
 
             m_icoPlanet = null;
         }

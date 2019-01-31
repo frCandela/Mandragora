@@ -14,6 +14,7 @@ public class DropZone : MonoBehaviour
     public UnityEventBool onObjectCatched;
     public MTK_Interactable catchedObject { get; private set; }
 
+
     private Outline m_outline;
     MeshRenderer m_meshRenderer;
 
