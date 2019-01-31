@@ -15,6 +15,7 @@ public class PlanetScaler : Workshop
 
     private float m_baseDist = -1f;
     private float m_intermediateScale = -1f;
+    private float m_newScale = -1f;
 
     private void Update()
     {
@@ -25,7 +26,7 @@ public class PlanetScaler : Workshop
         }
     }
 
-    float m_newScale = -1f;
+
 
     void FixedUpdate ()
     {
