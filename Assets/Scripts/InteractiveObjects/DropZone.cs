@@ -14,6 +14,7 @@ public class DropZone : MonoBehaviour
     public UnityEventBool onObjectCatched;
     public MTK_Interactable catchedObject { get; private set; }
 
+
     private Outline m_outline;
     MeshRenderer m_meshRenderer;
 
@@ -140,20 +141,4 @@ public class DropZone : MonoBehaviour
             }
         }
     }
-
-    // [ContextMenu("TestRTPC")]
-    // void TestRTPC()
-    // {
-    //     StartCoroutine(SetRtpc(5));
-    // }
-
-    // IEnumerator SetRtpc(float T)
-    // {
-    //     for (float i = 1; i > 0; i -= Time.deltaTime / T)
-    //     {
-    //         print(i);
-    //         AkSoundEngine.SetRTPCValue("Diegetic", i * 100);
-    //         yield return new WaitForEndOfFrame();
-    //     }
-    // }
 }

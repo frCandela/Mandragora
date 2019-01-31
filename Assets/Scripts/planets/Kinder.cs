@@ -76,7 +76,9 @@ public class Kinder : MTK_Interactable
 		m_breakPs.gameObject.SetActive(true);
 
 		m_planet.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-		m_planet.GetComponent<MTK_Interactable>().enabled = true;
+        m_planet.GetComponent<Rigidbody>().isKinematic = false;
+        m_planet.GetComponent<MTK_Interactable>().enabled = true;
+
 
 		AkSoundEngine.PostEvent("Kinder_Break_Play", gameObject);
 
@@ -84,5 +86,7 @@ public class Kinder : MTK_Interactable
 			c.enabled = true;
 		
 		Destroy(this);
+
+
 	}
 }
