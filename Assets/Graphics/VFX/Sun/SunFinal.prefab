@@ -108,7 +108,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1319860126320382
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,7 +365,7 @@ Transform:
   m_GameObject: {fileID: 1036297416199490}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0.044, y: 0, z: 0.023}
-  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
+  m_LocalScale: {x: 2.1, y: 2.1, z: 2.1}
   m_Children: []
   m_Father: {fileID: 4218477229713718}
   m_RootOrder: 1
@@ -428,7 +428,7 @@ Transform:
   m_GameObject: {fileID: 1212680336418912}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: -0.32000002}
-  m_LocalScale: {x: 1.1874802, y: 1.1874808, z: 0.6607073}
+  m_LocalScale: {x: 1.0583175, y: 1.058318, z: 0.58884186}
   m_Children: []
   m_Father: {fileID: 4219753155867200}
   m_RootOrder: 4
@@ -505,8 +505,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1104615863379388}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.55, z: 0}
-  m_LocalScale: {x: 0.35028002, y: 0.35028002, z: 0.35028002}
+  m_LocalPosition: {x: -7.6299996, y: 1.85, z: 0}
+  m_LocalScale: {x: 0.4020367, y: 0.4020367, z: 0.4020367}
   m_Children:
   - {fileID: 4218477229713718}
   - {fileID: 4219753155867200}
@@ -599,7 +599,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: fb70bf17ade338143962d3c773dc5f8c, type: 2}
+  - {fileID: 2100000, guid: 9f0f0257901692640be30be24ef759dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1379,8 +1379,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcb094e241aaa954a8a61471230d4366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectPrefab: {fileID: 114735128488080656, guid: d0bebc206878d8f48b719a43ae8cd47d,
-    type: 2}
+  m_maxSpeed: Infinity
+  m_accelerationForce: 1
   m_states:
   - valueGuid: 
     groupGuid: 
@@ -1398,6 +1398,8 @@ MonoBehaviour:
     groupGuid: 
     WwiseObjectReference: {fileID: 11400000, guid: 75e2da13e575c144491b259c8529435c,
       type: 2}
+  m_explosionEffect: {fileID: 1164661607641472, guid: 5ac12fa3f8ca53940add52e7f35b04b9,
+    type: 2}
 --- !u!114 &114841443795986506
 MonoBehaviour:
   m_ObjectHideFlags: 1

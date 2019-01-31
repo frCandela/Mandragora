@@ -7,6 +7,7 @@ public class PlanetEffect : Effect
 {
     public Rigidbody m_rb;
     public Rigidbody sunRigidbody;
+    public GameObject explosionEffect;
 
     private MTK_JointType m_joint;
 
@@ -93,5 +94,10 @@ public class PlanetEffect : Effect
         {
             m_maxRadius = float.MaxValue;
         }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        Destroy(Instantiate(explosionEffect, transform.position, transform.rotation), 10);
     }
 }

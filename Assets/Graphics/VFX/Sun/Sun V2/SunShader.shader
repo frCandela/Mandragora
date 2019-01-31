@@ -2,6 +2,7 @@
 {
 	Properties
 	{
+		_Luminosity ("Luminosity", float) = 1
 		_Visibility ("Visibility", Range(0,1)) = 1
 		_Color1 ("Color 1", Color) = (1,1,1,1)
 		_Color2 ("Color 2", Color) = (1,1,1,1)
@@ -83,7 +84,7 @@
 			float3 _NoiseFreq, _NoiseAmplitude;
 			float _SmoothFresnelCoreLuminosity;
 			float _GeneralLuminosity, _LastFresnelLuminosity;
-			float _Visibility;
+			float _Visibility, _Luminosity;
 			
 			v2g vert (appdata v)
 			{
@@ -248,6 +249,7 @@
 				col = fixed4(color, alpha);
 
 				col = lerp(float4(0,0,0,0), col, _Visibility);
+				col.rgb *= _Luminosity;
 
 				return col;
 			}

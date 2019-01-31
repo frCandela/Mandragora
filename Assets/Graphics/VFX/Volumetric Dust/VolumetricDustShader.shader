@@ -1,8 +1,9 @@
-﻿Shader "Unlit/VolumetricDustShader"
+﻿Shader "Mandragora/VolumetricDustShader"
 {
 	Properties
 	{
 		_Color ("Color", Color) = (0.3, 0.3, 0.3, 1)
+		_Luminosity ("Luminosity", float) = 1
 		_FresnelIntensity ("Fresnel Intensity", Range(0,1)) = 0.21
 		_LightDistFactor ("Light Distance Attenuation", float) = 6.42
 		_DepthAttenFactor ("Depth Attenuation Factor", float) = 3.5
@@ -49,6 +50,7 @@
 			float4 _Color, _DepthColor;
 			float _FresnelIntensity, _LightDistFactor, _DepthAttenFactor;
 			float _MaxDepthFadeDistance, _MinDepthFadeDistance;
+			float _Luminosity;
 			
 			v2f vert (appdata v)
 			{
@@ -104,6 +106,7 @@
 				col = lerp(_DepthColor, col, depthAtten);
 				col.a = i.color.a * fresnel;
 				col.a *= depthFade;
+				col *= _Luminosity;
 				return col;
 			}
 			ENDCG

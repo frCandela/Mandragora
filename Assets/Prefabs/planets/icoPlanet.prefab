@@ -79,7 +79,8 @@ MonoBehaviour:
   heightDelta: 0.1
   borderRatio: 0.2
   m_baseScale: 0.1
-  nbLevels: 50
+  nbLevels: 10
+  m_defaultHeightLevel: 0
   levelColors:
   - {r: 0.5254902, g: 0.87843144, b: 0.854902, a: 0}
   - {r: 0.58431375, g: 0.7803922, b: 0.39607847, a: 0}
@@ -511,6 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecba034caf8fd5647a6847793c833fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_upwardRotation: {x: 0, y: 0, z: 0}
   isDistanceGrabbable: 1
   isDroppable: 1
   m_isGrabbable: 1

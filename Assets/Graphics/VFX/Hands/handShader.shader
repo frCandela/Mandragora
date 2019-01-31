@@ -22,12 +22,13 @@ Shader "Mandragora/handShader"
 		_FadeOpacity ("Fade Opacity", Range(0,1)) = 1
 		_FresnelPow ("Fresnel Power", float) = 1
 		_FresnelFlowIntensity ("Fresnel Flow Intensity", float) = 1
-		_ReflexionIntensity ("Reflexion Intensity", Range(0,1)) = 0.1
+		_ReflexionIntensity ("Reflexion Intensity", float) = 0.1
 		_ReflexionPower ("Reflexion Power", float) = 2
 	}
 	SubShader
 	{
-		Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True"  "LightMode" = "ForwardAdd" }
+		//Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True"  "LightMode" = "ForwardBase" }
+		Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True" }
 		LOD 100
 
 		ZWrite Off
