@@ -8,6 +8,7 @@ public class MTK_InteractHand : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] Animator m_handAnimator = null;
+    [SerializeField] Transform m_fingerCollider = null;
 
     [Header("Events")]
     public UnityEventMTK_Interactable m_onTouchInteractable;
@@ -15,7 +16,10 @@ public class MTK_InteractHand : MonoBehaviour
     public UnityEventMTK_Interactable m_onReleaseInteractable;
     public UnityEventBool m_onUseFail;
 
-    public MTK_Interactable m_objectInTrigger;
+    private MTK_Interactable m_objectInTrigger;
+    public MTK_Interactable objectInTrigger { get { return m_objectInTrigger; }}
+    private int m_nbContacts = 0;
+
     private MTK_InputManager m_inputManager;
     private MTK_JointType grabbedJoint;
 
@@ -28,14 +32,6 @@ public class MTK_InteractHand : MonoBehaviour
         foreach(MTK_Interactable interactable in FindObjectsOfType<MTK_Interactable>())
         {
             interactable.onIsGrabbableChange.AddListener(onIsGrabbableChange);
-        }
-    }
-
-    void onIsGrabbableChange( MTK_Interactable interactable)
-    {
-        if( interactable.isGrabbable)
-        {
-            //m_objectsInTrigger.RemoveAll(x => x == interactable);
         }
     }
 
@@ -92,7 +88,7 @@ public class MTK_InteractHand : MonoBehaviour
             m_grabbed = obj;
             grabbedJoint = obj.jointType;
 
-            m_grabbed.Outline = true;
+            //m_grabbed.Outline = true;
 
             m_handAnimator.SetBool("Visible", false);
 
@@ -121,41 +117,113 @@ public class MTK_InteractHand : MonoBehaviour
             m_handAnimator.SetBool("Grab", false);
 
             m_onReleaseInteractable.Invoke(m_grabbed);
+
+            RemoveObjectInTrigger();
+
             m_grabbed = null;
             m_objectInTrigger = null;
         }
     }
 
+    void onIsGrabbableChange(MTK_Interactable interactable)
+    {
+        if (interactable.isGrabbable)
+        {
+            //m_objectsInTrigger.RemoveAll(x => x == interactable);
+        }
+    }
+
+    void SetObjectInTrigger(MTK_Interactable interactable)
+    {
+        if( ! m_objectInTrigger)
+        {
+            interactable.Outline = true;
+            m_onTouchInteractable.Invoke(interactable);
+            m_objectInTrigger = interactable;
+        }
+        else
+        {
+            print("error SetObjectInTrigger");
+        }
+    }
+
+    void RemoveObjectInTrigger()
+    {
+        if (m_objectInTrigger)
+        {
+            m_objectInTrigger.Outline = false;
+            m_onUnTouchInteractable.Invoke(m_objectInTrigger);
+            m_objectInTrigger = null;            
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        MTK_Interactable candidate = other.GetComponent<MTK_Interactable>();
-        if (  (!candidate || !candidate.isGrabbable) && other.attachedRigidbody)
-            candidate = other.attachedRigidbody.GetComponent<MTK_Interactable>();
+        IcoSegment seg = other.gameObject.GetComponent<IcoSegment>();
+        if (seg && seg.IsInside(m_fingerCollider.position, other))
+        {
+            return;
+        }
 
+        MTK_Interactable candidate = other.GetComponent<MTK_Interactable>();
         if (candidate && candidate.isGrabbable)
         {
-            m_objectInTrigger = candidate;
-            m_onTouchInteractable.Invoke(candidate);
+            RemoveObjectInTrigger();
+            SetObjectInTrigger(candidate);
+        }
+        else if (other.attachedRigidbody)
+        {
+            candidate = other.attachedRigidbody.GetComponent<MTK_Interactable>();
+            if (candidate && candidate.isGrabbable)
+            {
+                if(m_objectInTrigger == candidate)
+                {
+                    ++m_nbContacts;
+                }
+                else
+                {
+                    if (m_objectInTrigger)
+                    {
+                        RemoveObjectInTrigger();
+                    }
 
-            candidate.Outline = true;
+                    SetObjectInTrigger(candidate);
+                    m_nbContacts = 1;
+                }
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        MTK_Interactable candidate = other.GetComponent<MTK_Interactable>();
-        if ((!candidate || !candidate.isGrabbable) && other.attachedRigidbody)
-            candidate = other.attachedRigidbody.GetComponent<MTK_Interactable>();
-
-        if (candidate )
+        IcoSegment seg = other.gameObject.GetComponent<IcoSegment>();
+        if (seg && seg.IsInside(m_fingerCollider.position, other))
         {
-            candidate.Outline = false;
-            m_onUnTouchInteractable.Invoke(candidate);
-            if(candidate == m_objectInTrigger)
+            return;
+        }
+
+        MTK_Interactable candidate = other.GetComponent<MTK_Interactable>();
+        if (candidate && candidate.isGrabbable)
+        {
+            if( candidate == m_objectInTrigger)
             {
-                m_objectInTrigger = null;
-                
+                RemoveObjectInTrigger();
             }
         }
-    }    
+        else if (other.attachedRigidbody)
+        {
+            candidate = other.attachedRigidbody.GetComponent<MTK_Interactable>();
+            if (candidate && candidate.isGrabbable)
+            {
+                if (m_objectInTrigger == candidate)
+                {
+                    --m_nbContacts;
+                    if (m_nbContacts <= 0)
+                    {
+                        RemoveObjectInTrigger();
+                    }
+                }
+            }
+        }
+    }
 }

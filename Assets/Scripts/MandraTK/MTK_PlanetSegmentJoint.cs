@@ -11,6 +11,7 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
 
     private float m_baseDistance = 0f;
     private Vector3 m_basePosition;
+    int m_oldHeight;
 
     // Planet rotation
     private bool m_grabbing = false;
@@ -21,6 +22,8 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
         rigidbody = transform.parent.GetComponent<Rigidbody>();
         m_icoPlanet = transform.parent.GetComponent<IcoPlanet>();
         m_icoSegment = GetComponent<IcoSegment>();
+
+        m_oldHeight = m_icoSegment.heightLevel;
     }
 
     public override bool Used()
@@ -74,6 +77,18 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
                 m_baseDistance += heightSteps * (m_icoPlanet.heightDelta * m_icoPlanet.transform.localScale.x);
                 m_icoSegment.UpdateSegment();
                 m_icoSegment.UpdateNeighbours();
+
+                if(m_oldHeight != m_icoSegment.heightLevel)
+                {
+                    if(m_icoSegment.heightLevel  <= 0)
+                        AkSoundEngine.PostEvent("Water_Play", gameObject);
+                    else if (heightSteps  > 0)
+                        AkSoundEngine.PostEvent("Stone_Up_Play", gameObject);
+                    else if (heightSteps < 0)
+                        AkSoundEngine.PostEvent("Stone_Down_Play", gameObject);
+                }
+                
+                m_oldHeight = m_icoSegment.heightLevel;
             }
 
             // Set configurable joint

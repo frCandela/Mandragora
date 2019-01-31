@@ -33,7 +33,10 @@ public class ConstellationStar : MonoBehaviour
 				m_animator.SetTrigger("Validated");
 			}
 			else
+			{
 				m_animator.SetTrigger("Failed");
+				AkSoundEngine.PostEvent("Constellation_Wrong_Play", gameObject);
+			}
 		}
 	}
 
