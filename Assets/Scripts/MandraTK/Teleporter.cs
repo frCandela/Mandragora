@@ -77,31 +77,34 @@ public class Teleporter : MonoBehaviour
 	{
 		set
 		{
-			foreach (MTK_TPZone zone in m_allTPZones)
+			if(enabled)
 			{
-				if(m_currentZone != zone)
-					zone.Active = value;
-			}
-
-			m_active = value;
-
-			if(m_available && !m_active)
-			{
-				if(TargetZone)
+				foreach (MTK_TPZone zone in m_allTPZones)
 				{
-					m_sound.Post(gameObject);
-					MTK_Fade.Start(new Color(1,0,1,0), m_fadeStart, MoveMtkManager);
-					m_available = false;
-
-					m_currentZone = TargetZone;
-					m_currentZone.Validate();
-
-					m_tpVFX.LaunchInTpVfx();
+					if(m_currentZone != zone)
+						zone.Active = value;
 				}
-			}
 
-			if(!value)
-				m_cancelTime = Time.time + m_tolerance;
+				m_active = value;
+
+				if(m_available && !m_active)
+				{
+					if(TargetZone)
+					{
+						m_sound.Post(gameObject);
+						MTK_Fade.Start(new Color(1,0,1,0), m_fadeStart, MoveMtkManager);
+						m_available = false;
+
+						m_currentZone = TargetZone;
+						m_currentZone.Validate();
+
+						m_tpVFX.LaunchInTpVfx();
+					}
+				}
+
+				if(!value)
+					m_cancelTime = Time.time + m_tolerance;
+			}
 		}
 	}
 

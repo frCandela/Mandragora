@@ -1379,8 +1379,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcb094e241aaa954a8a61471230d4366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectPrefab: {fileID: 114735128488080656, guid: d0bebc206878d8f48b719a43ae8cd47d,
-    type: 2}
+  m_maxSpeed: Infinity
+  m_accelerationForce: 1
   m_states:
   - valueGuid: 
     groupGuid: 
@@ -1398,6 +1398,8 @@ MonoBehaviour:
     groupGuid: 
     WwiseObjectReference: {fileID: 11400000, guid: 75e2da13e575c144491b259c8529435c,
       type: 2}
+  m_explosionEffect: {fileID: 1164661607641472, guid: 5ac12fa3f8ca53940add52e7f35b04b9,
+    type: 2}
 --- !u!114 &114841443795986506
 MonoBehaviour:
   m_ObjectHideFlags: 1

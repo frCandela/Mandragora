@@ -239,10 +239,11 @@ public class Constellation : MonoBehaviour
 
 		Vector3 targetPos = transform.position + (thisPos - playerPos).normalized * m_formationDistance;
 
+		transform.LookAt(targetPos);
+
 		for (float t = 0; t < 1; t += Time.fixedDeltaTime / timeToMove)
 		{
 			transform.position = Vector3.Lerp(transform.position, targetPos, t);
-			transform.LookAt(targetPos);
 
 			m_trailFX.position = transform.position;
 

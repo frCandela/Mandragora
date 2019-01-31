@@ -63,7 +63,6 @@ GameObject:
   - component: {fileID: 95808176537606648}
   - component: {fileID: 114611233154486174}
   - component: {fileID: 114472649029849908}
-  - component: {fileID: 114007432178732000}
   - component: {fileID: 114156572363093174}
   - component: {fileID: 114860966687227414}
   m_Layer: 0
@@ -596,7 +595,7 @@ Transform:
   m_GameObject: {fileID: 1913381970093024}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 3.6, z: 0}
-  m_LocalScale: {x: 36.196, y: 36.196, z: 36.196}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 4290785297268692}
   m_RootOrder: 3
@@ -638,8 +637,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1087257628441794}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.66, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4582583049481460}
@@ -1551,19 +1550,6 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114007432178732000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1087257628441794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92252d5e29a96994fb9a8650f5ddd041, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skyboxMat: {fileID: 0}
-  exposure: 0
 --- !u!114 &114024298644325164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1694,10 +1680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a795d4e2c9e984fad3320661fb741d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneUnlitFactor: 0
-  sunGO: {fileID: 0}
-  isLit: 1
-  lights: []
+  sceneUnlitFactor: 1
 --- !u!114 &114223648372644108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2000,8 +1983,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcb094e241aaa954a8a61471230d4366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectPrefab: {fileID: 114735128488080656, guid: d0bebc206878d8f48b719a43ae8cd47d,
-    type: 2}
+  m_maxSpeed: Infinity
+  m_accelerationForce: 1
   m_states:
   - valueGuid: 
     groupGuid: 
@@ -2019,6 +2002,8 @@ MonoBehaviour:
     groupGuid: 
     WwiseObjectReference: {fileID: 11400000, guid: 75e2da13e575c144491b259c8529435c,
       type: 2}
+  m_explosionEffect: {fileID: 1164661607641472, guid: 5ac12fa3f8ca53940add52e7f35b04b9,
+    type: 2}
 --- !u!114 &114436944804918424
 MonoBehaviour:
   m_ObjectHideFlags: 1

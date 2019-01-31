@@ -10,9 +10,25 @@ public class LightingManager : MonoBehaviour {
 	//public List<Light> lights;
 	private MeshRenderer sunRenderer;
 
+	List<MonoBehaviour> m_monoList;
+
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		//sunRenderer = sunGO.GetComponent<MeshRenderer>();
+
+		m_monoList = new List<MonoBehaviour>();
+
+		m_monoList.AddRange(FindObjectsOfType<TelekinesisPointer>());
+		m_monoList.AddRange(FindObjectsOfType<Teleporter>());
+
+		foreach (MonoBehaviour mono in m_monoList)
+			mono.enabled = false;
+	}
+
+	void ActivateControl()
+	{
+		foreach (MonoBehaviour mono in m_monoList)
+			mono.enabled = true;
 	}
 	
 	// Update is called once per frame
