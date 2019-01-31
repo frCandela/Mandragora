@@ -190,13 +190,7 @@ public class Constellation : MonoBehaviour
 			m_trail.emitting = true;
 		}));
 
-		Vector3 playerPos = Camera.main.transform.position;
-		playerPos.Scale(new Vector3(1,0,1));
-
-		Vector3 thisPos = transform.position;
-		thisPos.Scale(new Vector3(1,0,1));
-
-		StartCoroutine(Place(1.5f, transform.position + (thisPos - playerPos).normalized * m_formationDistance, tr.rotation));
+		StartCoroutine(Place(1.5f));
 	}
 
 	IEnumerator MoveTo(Vector3[] destinations, float timeToMove, float noiseScale, AnimationCurve curve, VoidDelegate endAction = null)
@@ -226,12 +220,20 @@ public class Constellation : MonoBehaviour
 			endAction.Invoke();
 	}
 
-	IEnumerator Place(float timeToMove, Vector3 targetPos, Quaternion rotation)
+	IEnumerator Place(float timeToMove)
 	{
+		Vector3 playerPos = Camera.main.transform.position;
+		playerPos.Scale(new Vector3(1,0,1));
+
+		Vector3 thisPos = transform.position;
+		thisPos.Scale(new Vector3(1,0,1));
+
+		Vector3 targetPos = transform.position + (thisPos - playerPos).normalized * m_formationDistance;
+
 		for (float t = 0; t < 1; t += Time.fixedDeltaTime / timeToMove)
 		{
 			transform.position = Vector3.Lerp(transform.position, targetPos, t);
-			// transform.rotation = Quaternion.Lerp(transform.rotation, rotation, t);
+			transform.LookAt(targetPos);
 
 			yield return new WaitForEndOfFrame();
 		}
