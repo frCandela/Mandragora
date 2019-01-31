@@ -13,6 +13,7 @@ public class Constellation : MonoBehaviour
 	[SerializeField] float m_formationDistance = 1;
 	[SerializeField] float m_recycleTime = 10;
 	[SerializeField] GameObject m_kinder;
+	[SerializeField] Transform m_trailFX;
 	[SerializeField] GameObject m_next;
 
 	[Header("Wwise events")]
@@ -65,11 +66,17 @@ public class Constellation : MonoBehaviour
 				m_trailDestination++;
 		}
 
+		Vector3 handPos;
+
 		if(m_transformFollow && m_currentStarID != m_endStarID && m_currentStarID != -1)
 		{
-			m_lineRenderer.SetPosition(m_endStarID, transform.InverseTransformPoint(m_transformFollow.position));
+			handPos = transform.InverseTransformPoint(m_transformFollow.position);
+
+			m_lineRenderer.SetPosition(m_endStarID, handPos);
+
+			m_trailFX.localPosition = handPos;
 			
-			if(m_maxDistance < Vector3.Distance(m_transformFollow.position, transform.position))
+			if(m_maxDistance < Vector3.Distance(m_transformFollow.position, m_lineRenderer.GetPosition(m_currentStarID)))
 				Fail();
 		}
 	}
@@ -234,6 +241,8 @@ public class Constellation : MonoBehaviour
 		{
 			transform.position = Vector3.Lerp(transform.position, targetPos, t);
 			transform.LookAt(targetPos);
+
+			m_trailFX.position = transform.position;
 
 			yield return new WaitForEndOfFrame();
 		}
