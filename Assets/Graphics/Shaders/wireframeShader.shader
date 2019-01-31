@@ -1,4 +1,4 @@
-﻿Shader "Mandragora/wireframeShader"
+﻿Shader "Mandragora/OLDWireframeShader"
 {
 	Properties
 	{
@@ -45,6 +45,7 @@
 
 			float4 _Color, _EmissiveColor;
 			float _WireframeWidth, _AlphaCutoff, _Emissive;
+			float _ManagerUnlitFactor;
 			
 			InterpolatorsVertex vert (appdata v)
 			{
@@ -96,6 +97,8 @@
 				// Apply Alpha
 				clip(wires - _AlphaCutoff);
 				col.a = wires;
+
+				col *= _ManagerUnlitFactor;
 				return col;
 
 			}
