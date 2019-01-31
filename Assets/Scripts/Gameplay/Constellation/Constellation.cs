@@ -199,7 +199,7 @@ public class Constellation : MonoBehaviour
 			m_trail.emitting = true;
 		}));
 
-		StartCoroutine(Place(1.5f));
+		StartCoroutine(Place(1.5f, tr));
 	}
 
 	IEnumerator MoveTo(Vector3[] destinations, float timeToMove, float noiseScale, AnimationCurve curve, VoidDelegate endAction = null)
@@ -229,12 +229,12 @@ public class Constellation : MonoBehaviour
 			endAction.Invoke();
 	}
 
-	IEnumerator Place(float timeToMove)
+	IEnumerator Place(float timeToMove, Transform hand)
 	{
 		Vector3 playerPos = Camera.main.transform.position;
 		playerPos.Scale(new Vector3(1,0,1));
 
-		Vector3 thisPos = transform.position;
+		Vector3 thisPos = hand.position;
 		thisPos.Scale(new Vector3(1,0,1));
 
 		Vector3 targetPos = transform.position + (thisPos - playerPos).normalized * m_formationDistance;
