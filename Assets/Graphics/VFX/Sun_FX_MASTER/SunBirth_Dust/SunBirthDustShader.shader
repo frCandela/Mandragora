@@ -1,4 +1,4 @@
-﻿Shader "Mandragora/VolumetricDustShader"
+﻿Shader "Mandragora/SunBirthDustShader"
 {
 	Properties
 	{
@@ -104,9 +104,10 @@
 				// Apply
 				fixed4 col = fixed4(i.color.rgb * lightColor * fresnel, 1);
 				col = lerp(_DepthColor, col, depthAtten);
+				col.rgb = _Color.rgb;
+				col.rgb *= _Luminosity;
 				col.a = i.color.a * fresnel;
 				col.a *= depthFade;
-				col *= _Luminosity;
 				return col;
 			}
 			ENDCG
