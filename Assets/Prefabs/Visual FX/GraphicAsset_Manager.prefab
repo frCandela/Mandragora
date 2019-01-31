@@ -19,10 +19,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4870980120634288}
-  - component: {fileID: 114852605731243928}
   - component: {fileID: 114391019993376786}
   - component: {fileID: 114078952280378668}
-  - component: {fileID: 114374585332649528}
   m_Layer: 0
   m_Name: GraphicAsset_Manager
   m_TagString: Untagged
@@ -55,18 +53,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: e18367da-4c62-40a4-8bfc-fef6705ff1da
---- !u!114 &114374585332649528
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1763586843274476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48a795d4e2c9e984fad3320661fb741d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneUnlitFactor: 1
 --- !u!114 &114391019993376786
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83,16 +69,3 @@ MonoBehaviour:
     _collection:
     - {fileID: 1763586843274476}
   _assetGuid: 69afe0a1fee230847839ccdf2a9b66f6
---- !u!114 &114852605731243928
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1763586843274476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1093fdf2fc99d8e449335715b64d1438, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clipPlanes:
-  - {fileID: 0}

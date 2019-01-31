@@ -9,7 +9,6 @@ public class TriggerButton : MonoBehaviour
     [SerializeField] private Color m_colorOff = Color.red;
 
     [SerializeField] public UnityEvent onButtonPressed;
-    [SerializeField] public UnityEvent onButtonReleased;
     [SerializeField] public AK.Wwise.Event wOnButtonReleased;
 
     private bool m_state = false;
@@ -50,8 +49,6 @@ public class TriggerButton : MonoBehaviour
     {
         if (m_state)
         {
-
-            //onButtonReleased.Invoke();
             m_state = false;
         }
     }

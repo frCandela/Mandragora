@@ -1776,13 +1776,13 @@ Transform:
   m_LocalPosition: {x: -3.399, y: 0.992, z: 4.79}
   m_LocalScale: {x: 0.20000005, y: 0.19999999, z: 0.20000005}
   m_Children:
-  - {fileID: 4397021795073070}
-  - {fileID: 4905450075289938}
   - {fileID: 4334718000809582}
-  - {fileID: 4291113969262600}
-  - {fileID: 4910343774906424}
-  - {fileID: 4003782967828006}
+  - {fileID: 4397021795073070}
   - {fileID: 4361759614802354}
+  - {fileID: 4905450075289938}
+  - {fileID: 4291113969262600}
+  - {fileID: 4003782967828006}
+  - {fileID: 4910343774906424}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2044,7 +2044,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4063190716382618}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4302200337192196
 Transform:
@@ -2122,7 +2122,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4063190716382618}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4358445529008662
 Transform:
@@ -2174,7 +2174,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4063190716382618}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4363788618822336
 Transform:
@@ -2252,7 +2252,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4063190716382618}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4404865499698140
 Transform:
@@ -2800,7 +2800,7 @@ Transform:
   - {fileID: 4187571419860964}
   - {fileID: 4623396197394592}
   m_Father: {fileID: 4063190716382618}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4910343774906424
 Transform:
@@ -2813,7 +2813,7 @@ Transform:
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 4063190716382618}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4936962899635116
 Transform:
@@ -8091,7 +8091,8 @@ MonoBehaviour:
   heightDelta: 0.1
   borderRatio: 0.2
   m_baseScale: 0.1
-  nbLevels: 50
+  nbLevels: 10
+  m_defaultHeightLevel: 0
   levelColors:
   - {r: 0.5254902, g: 0.87843144, b: 0.854902, a: 0}
   - {r: 0.58431375, g: 0.7803922, b: 0.39607847, a: 0}
