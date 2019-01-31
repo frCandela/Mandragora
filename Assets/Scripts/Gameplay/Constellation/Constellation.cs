@@ -15,6 +15,7 @@ public class Constellation : MonoBehaviour
 	[SerializeField] GameObject m_kinder;
 	[SerializeField] Transform m_trailFX;
 	[SerializeField] GameObject m_next;
+	[SerializeField] UnityEvent m_onComplete;
 
 	[Header("Wwise events")]
 	[SerializeField] AK.Wwise.Event m_validated;
@@ -76,7 +77,7 @@ public class Constellation : MonoBehaviour
 
 			m_trailFX.localPosition = handPos;
 			
-			if(m_maxDistance < Vector3.Distance(m_transformFollow.position, m_lineRenderer.GetPosition(m_currentStarID)))
+			if(Vector3.Distance(m_transformFollow.position, transform.TransformPoint(m_lineRenderer.GetPosition(m_currentStarID))) > m_maxDistance)
 				Fail();
 		}
 	}
@@ -156,6 +157,7 @@ public class Constellation : MonoBehaviour
 		m_validated.Post(gameObject);
 		m_kinder.SetActive(true);
 		m_trail.enabled = false;
+		m_onComplete.Invoke();
 
 		Vector3[] destination = new Vector3[m_starsTransform.Length];
 		for (int i = 0; i < destination.Length; i++)
