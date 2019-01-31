@@ -162,6 +162,7 @@ public class Constellation : MonoBehaviour
 				
 				m_kinder.transform.SetParent(transform.parent, true);
 
+				Destroy(m_lineRenderer);
 				Invoke("Recycle", m_recycleTime);
 			}));
 	}
