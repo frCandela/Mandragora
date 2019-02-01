@@ -26,8 +26,7 @@ public class PlanetScaler : Workshop
         }
     }
 
-
-
+    float m_oldDistance;
     void FixedUpdate ()
     {
         // If the scale sphere is grabbed
@@ -52,13 +51,15 @@ public class PlanetScaler : Workshop
             float ratio = distance / m_baseDist;
             m_newScale = Mathf.Clamp(ratio * m_intermediateScale, m_minScaleRatio * m_scaleEffect.originalScale.x, m_maxScaleRatio * m_scaleEffect.originalScale.x);
             
-            
+            AkSoundEngine.SetRTPCValue("Scale_Rate", Mathf.Abs(distance - m_oldDistance) * 10000);
 
             Vector3 anchorPoint = m_confJoint.connectedBody.transform.TransformPoint(m_confJoint.connectedAnchor);
             Vector3 dir = anchorPoint - m_confJoint.connectedBody.transform.position;
 
             dir = distance * dir.normalized;
             m_confJoint.connectedAnchor = m_confJoint.connectedBody.transform.InverseTransformPoint(m_confJoint.connectedBody.transform.position + dir);           
+        
+            m_oldDistance = distance;
         }
         else
         {
@@ -86,11 +87,15 @@ public class PlanetScaler : Workshop
                 m_scaleEffect = current.gameObject.AddComponent<ScaleEffect>();
                 m_scaleEffect.ApplyEffect();
             }
+
+            AkSoundEngine.PostEvent("LFO_Scale_Play", gameObject);
         }
         else
         {
             m_catchedObjectJoint = null;
             m_scaleEffect = null;
+
+            AkSoundEngine.PostEvent("LFO_Scale_Stop", gameObject);
         }
     }
 }
