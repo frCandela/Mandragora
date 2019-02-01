@@ -60,7 +60,6 @@ GameObject:
   - component: {fileID: 23959942182084732}
   - component: {fileID: 114730898571466524}
   - component: {fileID: 114789338733345712}
-  - component: {fileID: 64314823461789994}
   - component: {fileID: 114360345285445160}
   m_Layer: 0
   m_Name: dropZone_wire
@@ -75,8 +74,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1126165485160496}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.37, y: 1.61, z: 7.73}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4740336921089786}
@@ -151,20 +150,6 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1567059698270158}
-  m_Mesh: {fileID: 4300000, guid: 608997eb8a8ec784fb6940f954ab3009, type: 3}
---- !u!64 &64314823461789994
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1567059698270158}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 608997eb8a8ec784fb6940f954ab3009, type: 3}
 --- !u!114 &114224793743129438
 MonoBehaviour:

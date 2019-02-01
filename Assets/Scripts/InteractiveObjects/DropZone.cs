@@ -17,7 +17,6 @@ public class DropZone : MonoBehaviour
 
 
     private Outline m_outline;
-    MeshRenderer m_meshRenderer;
 
     private int m_nbObjectsInTrigger = 0;
     private float m_lastActivationTime;
@@ -25,7 +24,6 @@ public class DropZone : MonoBehaviour
     // Use this for initialization
     void Awake ()
     {
-        m_meshRenderer = GetComponent<MeshRenderer>();
         m_outline = GetComponent<Outline>();
         m_outline.enabled = false;
 
@@ -52,7 +50,6 @@ public class DropZone : MonoBehaviour
         if (catchedObject)
         {
             m_lastActivationTime = Time.time;
-            m_meshRenderer.enabled = true;
             onObjectCatched.Invoke(false);
             catchedObject.jointType.onJointBreak.RemoveListener(Release);
 
@@ -101,12 +98,6 @@ public class DropZone : MonoBehaviour
 
 
                 onObjectCatched.Invoke(true);
-                // SetRtpc(2);
-
-                if (m_meshRenderer)
-                {
-                    m_meshRenderer.enabled = false;
-                }
 
                 m_visual.SetActive(false);
             }
