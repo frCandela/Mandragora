@@ -10,7 +10,7 @@ public class DropZone : MonoBehaviour
     [SerializeField] private bool m_snapToCenter = true;
     [SerializeField] private float m_activationCooldown = 2f;
     [SerializeField] private float m_ejectForce = 1f;
-    [SerializeField] private GameObject m_visual;
+    private GameObject m_visual;
 
     public UnityEventBool onObjectCatched;
     public MTK_Interactable catchedObject { get; private set; }

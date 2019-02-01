@@ -525,7 +525,7 @@ GameObject:
   m_Layer: 10
   m_Name: Controller
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1272,7 +1272,6 @@ MonoBehaviour:
   m_fxManager: {fileID: 114126539199633794}
   m_interactHand: {fileID: 114996086991851426}
   m_handAnimator: {fileID: 95632092290309908}
-  m_origin: {fileID: 4887052006169230}
   m_minMagnitudeToAttract: 0.03
   m_maxForce: 0.1
   m_forceScale: 4
@@ -1986,7 +1985,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_handAnimator: {fileID: 95632092290309908}
-  m_fingerCollider: {fileID: 4712899157644010}
+  fingerCollider: {fileID: 4712899157644010}
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -2007,9 +2006,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  m_objectInTrigger: {fileID: 0}
   m_grabbed: {fileID: 0}
-  m_nbContacts: 0
 --- !u!135 &135541288935768184
 SphereCollider:
   m_ObjectHideFlags: 1

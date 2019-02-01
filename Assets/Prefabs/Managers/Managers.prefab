@@ -1413,7 +1413,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1511412060437866
 GameObject:
   m_ObjectHideFlags: 1
@@ -1522,7 +1522,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1528487513605634
 GameObject:
   m_ObjectHideFlags: 1
@@ -5890,7 +5890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 583ae33bd15883c4ba76271e3fcb181e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeSetup: {fileID: 114589116309680354}
+  activeSetup: {fileID: 114627048374823106}
   setupSimulation: {fileID: 114627048374823106}
   setupSteamVR: {fileID: 114589116309680354}
 --- !u!114 &114005520641924722
@@ -8140,6 +8140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_handAnimator: {fileID: 95301166536679700}
+  fingerCollider: {fileID: 4448368064507490}
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -8160,7 +8161,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  m_objectInTrigger: {fileID: 0}
   m_grabbed: {fileID: 0}
 --- !u!114 &114378950464158422
 MonoBehaviour:
@@ -8442,6 +8442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_handAnimator: {fileID: 95262933344856130}
+  fingerCollider: {fileID: 4275674664982126}
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -8462,7 +8463,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  m_objectInTrigger: {fileID: 0}
   m_grabbed: {fileID: 0}
 --- !u!114 &114476085499227716
 MonoBehaviour:
@@ -8567,6 +8567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_handAnimator: {fileID: 95080757080377698}
+  fingerCollider: {fileID: 4636767157377768}
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -8587,7 +8588,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  m_objectInTrigger: {fileID: 0}
   m_grabbed: {fileID: 0}
 --- !u!114 &114501880273278208
 MonoBehaviour:
@@ -8911,6 +8911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_handAnimator: {fileID: 95835154658372670}
+  fingerCollider: {fileID: 4413636331986754}
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -8931,7 +8932,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  m_objectInTrigger: {fileID: 0}
   m_grabbed: {fileID: 0}
 --- !u!114 &114560560077748832
 MonoBehaviour:

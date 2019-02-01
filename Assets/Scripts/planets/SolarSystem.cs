@@ -22,7 +22,6 @@ public class SolarSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
         if(other.attachedRigidbody)
         {
             

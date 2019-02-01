@@ -217,11 +217,15 @@ public class TelekinesisPointer : MonoBehaviour
 		}
 
 		m_connectedBody = Target.GetComponent<Rigidbody>();
-		m_connectedBody.AddForce((force - m_lastForceApplied) * Mathf.Sqrt(GetDistanceToTarget() * 10000));
-		m_connectedBody.AddTorque(force.z, force.x, force.y);
-		m_connectedBody.useGravity = false;
-		
-		m_lastForceApplied = force;
+
+		if(m_connectedBody)
+		{
+			m_connectedBody.AddForce((force - m_lastForceApplied) * Mathf.Sqrt(GetDistanceToTarget() * 10000));
+			m_connectedBody.AddTorque(force.z, force.x, force.y);
+			m_connectedBody.useGravity = false;
+			
+			m_lastForceApplied = force;
+		}
 	}
 
 	void UnAttract()
