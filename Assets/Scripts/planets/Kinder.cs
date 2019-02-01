@@ -25,7 +25,7 @@ public class Kinder : MTK_Interactable
 	void Activate()
 	{
 		base.OnEnable();
-		isDistanceGrabbable = true;
+		isGrabbable = true;
 		m_enabled = true;
 		m_rgbd.isKinematic = false;
 	}
@@ -76,14 +76,14 @@ public class Kinder : MTK_Interactable
         m_planet.GetComponent<Rigidbody>().isKinematic = false;
         m_planet.GetComponent<MTK_Interactable>().enabled = true;
 
-
 		AkSoundEngine.PostEvent("Kinder_Break_Play", gameObject);
-
-		foreach (MeshCollider c in m_planet.GetComponents<MeshCollider>())
-			c.enabled = true;
 		
 		Destroy(this);
+		Destroy(gameObject, 5);
 
+		m_planet.transform.SetParent(transform.parent, true);
 
+		foreach (Transform tr in m_planet.transform)
+			tr.localScale = Vector3.one;
 	}
 }
