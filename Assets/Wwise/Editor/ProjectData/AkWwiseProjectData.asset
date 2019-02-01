@@ -180,7 +180,7 @@ MonoBehaviour:
   - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 0995f2392612e04c91c38c7b63f5e42c
-    m_lastTime: -8586532649575089853
+    m_lastTime: -8586525917846195174
     List: []
   BankWwu:
   - PhysicalPath: SoundBanks\Default Work Unit.wwu
@@ -201,7 +201,7 @@ MonoBehaviour:
   - PhysicalPath: Events\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 6030b6aee3d39d4c9d884b8f3ae2474c
-    m_lastTime: -8586529265299624975
+    m_lastTime: -8586525916291932735
     List:
     - name: Bubbles_Play
       guid: 06a67f35ed42bc45923f62a7d6982e40
@@ -311,6 +311,54 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: First_Star_Play
+      guid: c29818963348114fa2e6b4017e466490
+      id: 1830000125
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: First_Star_Play
+        ObjectType: 3
+      Path: Default Work Unit\First_Star_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: First_Star_Stop
+      guid: 5b93b7f4e1e5044394b72e573067072b
+      id: 4015738987
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: First_Star_Stop
+        ObjectType: 3
+      Path: Default Work Unit\First_Star_Stop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Guide_Play
+      guid: edb5474d99ac60428deab90bf725a5e3
+      id: 283988552
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Guide_Play
+        ObjectType: 3
+      Path: Default Work Unit\Guide_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Guide_Stop
+      guid: 71011faf013c2a42a353590984272392
+      id: 2661658810
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Guide_Stop
+        ObjectType: 3
+      Path: Default Work Unit\Guide_Stop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Kinder_Break_Play
       guid: 5ba4cbe008ae154280f5dd8696691c9f
       id: 2153775971
@@ -344,6 +392,30 @@ MonoBehaviour:
       - ElementName: Kinder_Socle_Play
         ObjectType: 3
       Path: Default Work Unit\Kinder_Socle_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: LFO_Scale_Play
+      guid: 69bb817e2cfdca41aea9b49acc59da85
+      id: 1420672746
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: LFO_Scale_Play
+        ObjectType: 3
+      Path: Default Work Unit\LFO_Scale_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: LFO_Scale_Stop
+      guid: f64cb073b478c74db2888568574d85a8
+      id: 2866451220
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: LFO_Scale_Stop
+        ObjectType: 3
+      Path: Default Work Unit\LFO_Scale_Stop
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
@@ -440,6 +512,18 @@ MonoBehaviour:
       - ElementName: Play_Short_Ambisonic
         ObjectType: 3
       Path: Default Work Unit\Play_Short_Ambisonic
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Play_Sun_Light
+      guid: da3ef2cf744f5c448963b188301c01d7
+      id: 3140411261
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Sun_Light
+        ObjectType: 3
+      Path: Default Work Unit\Play_Sun_Light
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
@@ -572,6 +656,18 @@ MonoBehaviour:
       - ElementName: Stone_Up_Play
         ObjectType: 3
       Path: Default Work Unit\Stone_Up_Play
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Sun_Light_Play
+      guid: 0ff921b9cd8bc64f85b88b61cc54dbb9
+      id: 86621925
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Sun_Light_Play
+        ObjectType: 3
+      Path: Default Work Unit\Sun_Light_Play
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
@@ -735,7 +831,7 @@ MonoBehaviour:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 7023720d000eef46b000ec471e7f4b00
-    m_lastTime: -8586529282375779907
+    m_lastTime: -8586525923344672642
     List:
     - name: Constellation
       guid: be300520a9c24940a2a12910d9cb833c
@@ -782,6 +878,15 @@ MonoBehaviour:
       - ElementName: Scale
         ObjectType: 13
       Path: Default Work Unit\Scale
+    - name: Scale_Rate
+      guid: 354cbf8d79008a4c86b183117220a407
+      id: 267770614
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Scale_Rate
+        ObjectType: 13
+      Path: Default Work Unit\Scale_Rate
     - name: Star_Hand
       guid: 26a5fea9b742be4b80bd43e1a5497657
       id: 1202612439
@@ -989,5 +1094,13 @@ MonoBehaviour:
   - /MandragoWwise
   - /MandragoWwise/Events
   - /MandragoWwise/Events/Default Work Unit
+  - /MandragoWwise/SoundBanks
+  - /MandragoWwise/SoundBanks/Default Work Unit
+  - /MandragoWwise/States
+  - /MandragoWwise/States/Default Work Unit
+  - /MandragoWwise/States/Default Work Unit/Planets_Orbit
+  - /MandragoWwise/Virtual Acoustics
+  - /MandragoWwise/Virtual Acoustics/Factory Reflect Acoustic Textures
+  - /MandragoWwise/Virtual Acoustics/Factory Reflect Acoustic Textures/Textures
   autoPopulateEnabled: 1
   CurrentPluginConfig: 

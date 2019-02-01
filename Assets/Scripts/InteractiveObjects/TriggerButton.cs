@@ -11,27 +11,27 @@ public class TriggerButton : MonoBehaviour
     [SerializeField] public UnityEvent onButtonPressed;
     [SerializeField] public AK.Wwise.Event wOnButtonReleased;
 
+    MeshRenderer m_meshrenderer;
     private bool m_state = false;
 
     private void Start()
     {
+        m_meshrenderer = GetComponent<MeshRenderer>();
         SetColorOn(false);
     }
 
     public void SetColorOn( bool state )
     {
-        MeshRenderer mr = GetComponent<MeshRenderer>();
-        if (mr)
+        if (m_meshrenderer)
         {
             if ( state )
             {
-                mr.material.color = m_colorOn;
+                m_meshrenderer.material.color = m_colorOn;
             }
             else
             {
 
-                mr.material.color = m_colorOff;
-                wOnButtonReleased.Post(gameObject);
+                m_meshrenderer.material.color = m_colorOff;
             }
         }
     }
@@ -41,6 +41,7 @@ public class TriggerButton : MonoBehaviour
         if( ! m_state )
         {
             onButtonPressed.Invoke();
+            wOnButtonReleased.Post(gameObject);
             m_state = true;
         }
     }
@@ -49,6 +50,7 @@ public class TriggerButton : MonoBehaviour
     {
         if (m_state)
         {
+            wOnButtonReleased.Post(gameObject);
             m_state = false;
         }
     }

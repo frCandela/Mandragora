@@ -25,6 +25,11 @@ public class LightingManager : MonoBehaviour {
 			mono.enabled = false;
 	}
 
+	void TriggerSound()
+	{
+		AkSoundEngine.PostEvent("Sun_Light_Play", gameObject);
+	}
+
 	void ActivateControl()
 	{
 		foreach (MonoBehaviour mono in m_monoList)
