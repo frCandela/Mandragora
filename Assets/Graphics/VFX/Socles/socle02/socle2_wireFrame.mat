@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: socle bulle 1
-  m_Shader: {fileID: 4800000, guid: 9e7c3ad3ebba0f44883499ca27554bac, type: 3}
+  m_Name: socle2_wireFrame
+  m_Shader: {fileID: 4800000, guid: 2483d1ce70831b8409455671a782320a, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -55,28 +55,32 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AlphaCutoff: 0.84
     - _BumpScale: 1
     - _Cutoff: 0.5
-    - _DepthDistance: 40
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _Emissive: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LightDiffuse: 1
-    - _Luminosity: 6
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _PulseAmplitude: 0.5
+    - _PulseSpeed: 1
+    - _ReflexionIntensity: 1
+    - _ReflexionPower: 20
     - _SmoothnessTextureChannel: 0
-    - _SpecPow: 0.5
     - _SpecularHighlights: 1
-    - _SpecularIntensity: 7
     - _SrcBlend: 1
     - _UVSec: 0
+    - _WireframeWidth: 0.05
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _BackColor: {r: 0.19607845, g: 0.3254902, b: 0.49803925, a: 1}
+    - _Color: {r: 0.735849, g: 0.19544056, b: 0.09371662, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ShadowColor: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissiveColor: {r: 0.62352943, g: 0.49803922, b: 0.29803923, a: 1}
+    - _WireColor: {r: 1, g: 0.7019608, b: 0, a: 1}
