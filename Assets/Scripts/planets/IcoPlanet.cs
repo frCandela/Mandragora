@@ -69,9 +69,7 @@ public class IcoPlanet : MonoBehaviour
 
         GenerateMeshCollider();
         foreach (IcoSegment segment in m_segments)
-            segment.GetComponent<MeshCollider>().enabled = true;
-
-
+            segment.GetComponent<MeshCollider>().enabled = false;
     }
     
     public void GenerateMeshCollider()

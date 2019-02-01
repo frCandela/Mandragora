@@ -25,8 +25,9 @@ public class Kinder : MTK_Interactable
 	void Activate()
 	{
 		base.OnEnable();
-		isDistanceGrabbable = true;
+		isGrabbable = true;
 		m_enabled = true;
+		m_rgbd.isKinematic = false;
 	}
 
 	public void TriggerKinderSound()
@@ -39,7 +40,6 @@ public class Kinder : MTK_Interactable
 
 	public override void Grab(bool input)
 	{
-		m_rgbd.isKinematic = false;
 		AkSoundEngine.PostEvent("Pick_Up_Kinder_Play", gameObject);
 
 		base.Grab(input);
@@ -47,9 +47,6 @@ public class Kinder : MTK_Interactable
 
 	private void OnCollisionEnter(Collision other)
 	{
-		if(m_enabled)
-			m_rgbd.isKinematic = false;
-
 		if(other.relativeVelocity.sqrMagnitude > m_minBreakMagnitude)
 		{
 			other.contacts[0].thisCollider.gameObject.SetActive(false);
@@ -67,26 +64,37 @@ public class Kinder : MTK_Interactable
 		}
 	}
 
+	int m_needFix = 0;
+	private void FixedUpdate()
+	{
+		if(m_needFix > 0)
+		{
+			m_planet.GetComponent<MeshCollider>().enabled = !m_planet.GetComponent<MeshCollider>().enabled;
+			m_planet.GetComponent<Rigidbody>().isKinematic = !m_planet.GetComponent<MeshCollider>().enabled;
+			m_needFix--;
+		}
+	}
+
 	[ContextMenu("Break")]
 	void Break()
 	{
+		m_needFix = 101;
+
+		m_planet.transform.SetParent(transform.parent, true);
+
+		m_planet.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        m_planet.GetComponent<MTK_Interactable>().enabled = true;
+
+		foreach (Transform tr in m_planet.transform)
+			tr.localScale = Vector3.one;
+
 		Destroy(m_rgbd);
 		Destroy(GetComponent<Collider>());
 		m_shell.gameObject.SetActive(false);
 		m_breakPs.gameObject.SetActive(true);
 
-		m_planet.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-        m_planet.GetComponent<Rigidbody>().isKinematic = false;
-        m_planet.GetComponent<MTK_Interactable>().enabled = true;
-
-
 		AkSoundEngine.PostEvent("Kinder_Break_Play", gameObject);
 
-		foreach (MeshCollider c in m_planet.GetComponents<MeshCollider>())
-			c.enabled = true;
-		
-		Destroy(this);
-
-
+		Destroy(gameObject, 10);
 	}
 }

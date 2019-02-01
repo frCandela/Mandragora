@@ -153,7 +153,6 @@ public class Constellation : MonoBehaviour
 	[ContextMenu("Complete")]
 	void Complete()
 	{
-		m_lineRenderer.loop = true;
 		m_validated.Post(gameObject);
 		m_kinder.SetActive(true);
 		m_trail.enabled = false;

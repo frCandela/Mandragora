@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23206124979295696}
   - component: {fileID: 114184379223317708}
   - component: {fileID: 64860226703060534}
-  - component: {fileID: 114802782545955712}
+  - component: {fileID: 114062004701980914}
   m_Layer: 0
   m_Name: bol004
   m_TagString: Untagged
@@ -100,19 +100,7 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 67fa5eb915b31d748a92b1884e0d6392, type: 3}
---- !u!114 &114184379223317708
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1766798538235092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _guid: 67386a85-35d6-4d7b-b024-cba89701f7ca
---- !u!114 &114802782545955712
+--- !u!114 &114062004701980914
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,3 +116,15 @@ MonoBehaviour:
     _collection:
     - {fileID: 1766798538235092}
   _assetGuid: e2b6926d9f11f4540a575694b7dfa330
+--- !u!114 &114184379223317708
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1766798538235092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 1e111b2b-97fa-4252-9050-dbf13cfc727d
