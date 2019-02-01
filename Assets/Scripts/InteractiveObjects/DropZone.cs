@@ -10,6 +10,7 @@ public class DropZone : MonoBehaviour
     [SerializeField] private bool m_snapToCenter = true;
     [SerializeField] private float m_activationCooldown = 2f;
     [SerializeField] private float m_ejectForce = 1f;
+    [SerializeField] private GameObject m_visual;
 
     public UnityEventBool onObjectCatched;
     public MTK_Interactable catchedObject { get; private set; }
@@ -29,6 +30,8 @@ public class DropZone : MonoBehaviour
         m_outline.enabled = false;
 
         m_lastActivationTime = Time.time;
+
+        m_visual = transform.Find("dropZone_Final").gameObject;
     }
 	
 	// Update is called once per frame
@@ -63,6 +66,8 @@ public class DropZone : MonoBehaviour
 
             tmp.jointType.RemoveJoint();
             tmp.GetComponent<Rigidbody>().AddForce(m_ejectForce * Vector3.up, ForceMode.Impulse);
+
+            m_visual.SetActive(true);
         }
     }
 
@@ -102,6 +107,8 @@ public class DropZone : MonoBehaviour
                 {
                     m_meshRenderer.enabled = false;
                 }
+
+                m_visual.SetActive(false);
             }
         }
     }
