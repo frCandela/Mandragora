@@ -27,6 +27,7 @@ public class Kinder : MTK_Interactable
 		base.OnEnable();
 		isDistanceGrabbable = true;
 		m_enabled = true;
+		m_rgbd.isKinematic = false;
 	}
 
 	public void TriggerKinderSound()
@@ -39,7 +40,6 @@ public class Kinder : MTK_Interactable
 
 	public override void Grab(bool input)
 	{
-		m_rgbd.isKinematic = false;
 		AkSoundEngine.PostEvent("Pick_Up_Kinder_Play", gameObject);
 
 		base.Grab(input);
@@ -47,9 +47,6 @@ public class Kinder : MTK_Interactable
 
 	private void OnCollisionEnter(Collision other)
 	{
-		if(m_enabled)
-			m_rgbd.isKinematic = false;
-
 		if(other.relativeVelocity.sqrMagnitude > m_minBreakMagnitude)
 		{
 			other.contacts[0].thisCollider.gameObject.SetActive(false);
