@@ -1496,6 +1496,20 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114156572363093174, guid: e37a93b04e2a6ed49a932e07ff484ab3,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087257628441794, guid: e37a93b04e2a6ed49a932e07ff484ab3, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 95808176537606648, guid: e37a93b04e2a6ed49a932e07ff484ab3,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e37a93b04e2a6ed49a932e07ff484ab3, type: 2}
   m_IsPrefabAsset: 0
@@ -3988,6 +4002,52 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1713705679}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1749944395
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4063190716382618, guid: af40c8d06338024468161fe4a55d3914, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -4.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063190716382618, guid: af40c8d06338024468161fe4a55d3914, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.026
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063190716382618, guid: af40c8d06338024468161fe4a55d3914, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 7.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063190716382618, guid: af40c8d06338024468161fe4a55d3914, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063190716382618, guid: af40c8d06338024468161fe4a55d3914, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.9659258
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063190716382618, guid: af40c8d06338024468161fe4a55d3914, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063190716382618, guid: af40c8d06338024468161fe4a55d3914, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.2588191
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063190716382618, guid: af40c8d06338024468161fe4a55d3914, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295102925601136, guid: af40c8d06338024468161fe4a55d3914, type: 2}
+      propertyPath: m_Name
+      value: Planet Core
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: af40c8d06338024468161fe4a55d3914, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1755230503
 GameObject:
   m_ObjectHideFlags: 0

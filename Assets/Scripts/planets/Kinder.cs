@@ -64,26 +64,37 @@ public class Kinder : MTK_Interactable
 		}
 	}
 
+	int m_needFix = 0;
+	private void FixedUpdate()
+	{
+		if(m_needFix > 0)
+		{
+			m_planet.GetComponent<MeshCollider>().enabled = !m_planet.GetComponent<MeshCollider>().enabled;
+			m_planet.GetComponent<Rigidbody>().isKinematic = !m_planet.GetComponent<MeshCollider>().enabled;
+			m_needFix--;
+		}
+	}
+
 	[ContextMenu("Break")]
 	void Break()
 	{
+		m_needFix = 101;
+
+		m_planet.transform.SetParent(transform.parent, true);
+
+		m_planet.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        m_planet.GetComponent<MTK_Interactable>().enabled = true;
+
+		foreach (Transform tr in m_planet.transform)
+			tr.localScale = Vector3.one;
+
 		Destroy(m_rgbd);
 		Destroy(GetComponent<Collider>());
 		m_shell.gameObject.SetActive(false);
 		m_breakPs.gameObject.SetActive(true);
 
-		m_planet.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-        m_planet.GetComponent<Rigidbody>().isKinematic = false;
-        m_planet.GetComponent<MTK_Interactable>().enabled = true;
-
 		AkSoundEngine.PostEvent("Kinder_Break_Play", gameObject);
-		
-		Destroy(this);
-		Destroy(gameObject, 5);
 
-		m_planet.transform.SetParent(transform.parent, true);
-
-		foreach (Transform tr in m_planet.transform)
-			tr.localScale = Vector3.one;
+		Destroy(gameObject, 1);
 	}
 }

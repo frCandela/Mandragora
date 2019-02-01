@@ -524,7 +524,7 @@ GameObject:
   - component: {fileID: 114300824272870082}
   - component: {fileID: 114190106107289090}
   m_Layer: 12
-  m_Name: Model
+  m_Name: Planet Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7507,7 +7507,6 @@ MonoBehaviour:
   _guid: eb4cadac-e7a7-4aa3-829d-9bb79d8b7063
   _referenceCollection:
     _collection:
-    - {fileID: 1914191385887540, guid: 947c48b8a72e387428bcc9215cfcd8e2, type: 2}
     - {fileID: 1295102925601136}
   _assetGuid: 238b03143590a5e40bc8d39163889d87
 --- !u!114 &114075036012841272
@@ -8048,7 +8047,7 @@ MonoBehaviour:
   m_segmentMaterial: {fileID: 2100000, guid: 15a9f87a0af5d4d448e2ab9dbc34f827, type: 2}
   heightDelta: 0.1
   borderRatio: 0.2
-  m_baseScale: 0.1
+  m_baseScale: 1
   nbLevels: 10
   m_defaultHeightLevel: 0
   levelColors:
@@ -8740,7 +8739,6 @@ MonoBehaviour:
     - {fileID: 1523871822483606}
     - {fileID: 1118577117915562}
     - {fileID: 1295102925601136}
-    - {fileID: 0}
   _assetGuid: af40c8d06338024468161fe4a55d3914
 --- !u!114 &114717550744427828
 MonoBehaviour:
@@ -9247,7 +9245,7 @@ SphereCollider:
   m_GameObject: {fileID: 1540544305756864}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
