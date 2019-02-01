@@ -38,13 +38,6 @@ public class Kinder : MTK_Interactable
 		m_kinderCreation.Post(gameObject);
 	}
 
-	public override void Grab(bool input)
-	{
-		AkSoundEngine.PostEvent("Pick_Up_Kinder_Play", gameObject);
-
-		base.Grab(input);
-	}
-
 	private void OnCollisionEnter(Collision other)
 	{
 		if(other.relativeVelocity.sqrMagnitude > m_minBreakMagnitude)
