@@ -1,4 +1,4 @@
-﻿Shader "Mandragora/wireframeShader"
+﻿Shader "Mandragora/HandButtonWireframeShader"
 {
 	Properties
 	{
@@ -9,6 +9,7 @@
 		_AlphaCutoff ("Alpha Cutoff", Range(0,1)) = 0.5
 		_PulseSpeed ("Pulse Speed", float) = 1
 		_PulseAmplitude ("Pulse Amplitude", float) = 0.5
+		_AppearSlider ("Appear Slider", Range(0,1)) = 1
 	}
 	SubShader
 	{
@@ -36,23 +37,26 @@
 
 			struct InterpolatorsVertex {
                 float4 vertex : SV_POSITION;
-				float4 screenPos : TEXCOORD2;
+				float4 screenPos : TEXCOORD0;
+				float3 localPos : TEXCOORD1;
              };
 
 			// Uses Geometry Shader
 			struct InterpolatorsGeometry {
 				InterpolatorsVertex data;
-				float2 barycentricCoordinates : TEXCOORD3;
+				float2 barycentricCoordinates : TEXCOORD2;
 			};
 
 			float4 _Color, _EmissiveColor;
 			float _WireframeWidth, _AlphaCutoff, _Emissive;
 			float _PulseAmplitude, _PulseSpeed;
+			float _AppearSlider;
 			float _ManagerUnlitFactor;
 			
 			InterpolatorsVertex vert (appdata v)
 			{
 				InterpolatorsVertex o;
+				o.localPos = v.vertex.xyz;
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.screenPos = ComputeScreenPos(o.vertex);
 				return o;
@@ -99,14 +103,22 @@
 				pulse *= _PulseAmplitude;
 
 
+				// Test Appear Circle
+				float distFromCenter = length(i.data.localPos);
+				float isIn = distFromCenter / (_AppearSlider * 1500); // 1500 fit to local vertices scale of handButton.fbx
+				isIn = 1 - saturate(isIn);
+
+
 				// Apply color
 				fixed4 col;
 				col.rgb = wires * _Color.rgb;
 				col.rgb += (_Emissive + _Emissive * pulse) * _EmissiveColor.rgb;
 				// Apply Alpha
+				wires *= isIn;
 				clip(wires - _AlphaCutoff);
 				col.a = wires;
-				col *= _ManagerUnlitFactor;
+				col.a *= isIn;
+				//col *= _ManagerUnlitFactor;
 				return col;
 
 			}
