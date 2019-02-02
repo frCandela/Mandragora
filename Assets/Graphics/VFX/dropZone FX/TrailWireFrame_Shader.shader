@@ -47,7 +47,7 @@
 
 			float4 _Color, _EmissiveColor;
 			float _WireframeWidth, _AlphaCutoff, _Emissive;
-			//float _ManagerUnlitFactor;
+			float _ManagerUnlitFactor;
 			
 			InterpolatorsVertex vert (appdata v)
 			{
@@ -103,7 +103,7 @@
 				clip(wires - _AlphaCutoff);
 				col.a = wires;
 
-				//col *= _ManagerUnlitFactor;
+				col *= _ManagerUnlitFactor;
 				return col;
 
 			}

@@ -60,6 +60,7 @@
 			float _WireframeWidth, _AlphaCutoff, _Emissive, _TextureInfluence;
 			float3 _NoiseFreq, _NoiseAmplitude;
 			float _BoolenFactor;
+			float _ManagerUnlitFactor;
 			
 			InterpolatorsVertex vert (appdata v)
 			{
@@ -143,6 +144,8 @@
 				
 				clip(wires - _AlphaCutoff);
 				col.a = wires;
+
+				col *= _ManagerUnlitFactor;
 				return col;
 
 

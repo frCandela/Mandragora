@@ -118,7 +118,7 @@
 				clip(wires - _AlphaCutoff);
 				col.a = wires;
 				col.a *= isIn;
-				//col *= _ManagerUnlitFactor;
+				col *= _ManagerUnlitFactor;
 				return col;
 
 			}

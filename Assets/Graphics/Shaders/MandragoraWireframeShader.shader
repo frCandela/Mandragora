@@ -106,7 +106,7 @@
 				// Apply Alpha
 				clip(wires - _AlphaCutoff);
 				col.a = wires;
-				//col *= _ManagerUnlitFactor;
+				col *= _ManagerUnlitFactor;
 				return col;
 
 			}
