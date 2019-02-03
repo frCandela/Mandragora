@@ -8,7 +8,7 @@ public class MTK_InteractHand : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] Animator m_handAnimator = null;
-    [SerializeField] public Transform fingerCollider = null;
+    public Transform fingerCollider = null;
 
     [Header("Events")]
     public UnityEventMTK_Interactable m_onTouchInteractable;

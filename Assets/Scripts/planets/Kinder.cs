@@ -73,15 +73,13 @@ public class Kinder : MTK_Interactable
 	{
 		m_needFix = 101;
 
-		m_planet.transform.SetParent(transform.parent, true);
-
+		m_planet.transform.parent = transform.parent;
 		m_planet.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         m_planet.GetComponent<MTK_Interactable>().enabled = true;
+        m_planet.GetComponent<IcoPlanet>().RestoreScale();
 
-		foreach (Transform tr in m_planet.transform)
-			tr.localScale = Vector3.one;
 
-		Destroy(m_rgbd);
+        Destroy(m_rgbd);
 		Destroy(GetComponent<Collider>());
 		m_shell.gameObject.SetActive(false);
 		m_breakPs.gameObject.SetActive(true);
