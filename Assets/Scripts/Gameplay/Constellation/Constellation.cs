@@ -177,7 +177,8 @@ public class Constellation : MonoBehaviour
 
 	void Recycle()
 	{
-		Instantiate(m_next, transform.parent.position, transform.rotation, transform.parent);
+        if(m_next)
+		    Instantiate(m_next, transform.parent.position, transform.rotation, transform.parent);
 
 		Destroy(gameObject);
 	}

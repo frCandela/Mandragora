@@ -71,7 +71,23 @@ public class IcoPlanet : MonoBehaviour
         foreach (IcoSegment segment in m_segments)
             segment.GetComponent<MeshCollider>().enabled = false;
     }
+
+    [ContextMenu("RestoreScale")]
+    public void RestoreScale()
+    {
+        float wrongScale = m_segments[0].transform.localScale.x;
+
+        transform.parent = null;
+        foreach (IcoSegment segment in m_segments)
+        {
+            segment.transform.localScale = Vector3.one;
+            segment.transform.localRotation = Quaternion.identity;
+        }
+        transform.localScale = wrongScale * transform.localScale;
+    }
+
     
+    [ContextMenu("GenerateMeshCollider")]
     public void GenerateMeshCollider()
     {
         List<Vector3> m_vertices = new List<Vector3>();

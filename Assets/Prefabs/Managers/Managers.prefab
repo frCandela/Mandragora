@@ -146,7 +146,7 @@ GameObject:
   m_Layer: 10
   m_Name: Controller
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1113,7 +1113,7 @@ GameObject:
   m_Layer: 10
   m_Name: Controller
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2233,7 +2233,7 @@ GameObject:
   m_Layer: 10
   m_Name: Controller
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2387,7 +2387,7 @@ GameObject:
   m_Layer: 10
   m_Name: Controller
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6596,14 +6596,14 @@ MonoBehaviour:
   size: 0
   color: {r: 0, g: 1, b: 1, a: 1}
   vertices:
-  - {x: 1.3499999, y: 0.01, z: -1.1500003}
-  - {x: -1.3499999, y: 0.01, z: -1.1500003}
-  - {x: -1.3499999, y: 0.01, z: 1.1500003}
-  - {x: 1.3499999, y: 0.01, z: 1.1500003}
-  - {x: 1.4999999, y: 0.01, z: -1.3000003}
-  - {x: -1.4999999, y: 0.01, z: -1.3000003}
-  - {x: -1.4999999, y: 0.01, z: 1.3000003}
-  - {x: 1.4999999, y: 0.01, z: 1.3000003}
+  - {x: 1.0000001, y: 0.01, z: -0.85000014}
+  - {x: -1.0000001, y: 0.01, z: -0.85000014}
+  - {x: -1.0000001, y: 0.01, z: 0.85000014}
+  - {x: 1.0000001, y: 0.01, z: 0.85000014}
+  - {x: 1.1500001, y: 0.01, z: -1.0000001}
+  - {x: -1.1500001, y: 0.01, z: -1.0000001}
+  - {x: -1.1500001, y: 0.01, z: 1.0000001}
+  - {x: 1.1500001, y: 0.01, z: 1.0000001}
 --- !u!114 &114118832345337136
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8140,6 +8140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_handAnimator: {fileID: 95301166536679700}
+  fingerCollider: {fileID: 4448368064507490}
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -8160,7 +8161,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  m_objectInTrigger: {fileID: 0}
   m_grabbed: {fileID: 0}
 --- !u!114 &114378950464158422
 MonoBehaviour:
@@ -8442,6 +8442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_handAnimator: {fileID: 95262933344856130}
+  fingerCollider: {fileID: 4275674664982126}
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -8462,7 +8463,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  m_objectInTrigger: {fileID: 0}
   m_grabbed: {fileID: 0}
 --- !u!114 &114476085499227716
 MonoBehaviour:
@@ -8567,6 +8567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_handAnimator: {fileID: 95080757080377698}
+  fingerCollider: {fileID: 4636767157377768}
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -8587,7 +8588,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  m_objectInTrigger: {fileID: 0}
   m_grabbed: {fileID: 0}
 --- !u!114 &114501880273278208
 MonoBehaviour:
@@ -8911,6 +8911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_handAnimator: {fileID: 95835154658372670}
+  fingerCollider: {fileID: 4413636331986754}
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -8931,7 +8932,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  m_objectInTrigger: {fileID: 0}
   m_grabbed: {fileID: 0}
 --- !u!114 &114560560077748832
 MonoBehaviour:
