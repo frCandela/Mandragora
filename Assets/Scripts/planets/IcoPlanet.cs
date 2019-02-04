@@ -26,8 +26,6 @@ public class IcoPlanet : MonoBehaviour
     [SerializeField] public int nbLevels = 5;
     [SerializeField] public int m_defaultHeightLevel = 0;
     [SerializeField] public Color[] levelColors = new Color[10];
-    [SerializeField] public bool updatePlanet = false;
-
 
     [Header("Read only data")]
     [SerializeField]  private int trianglesCount;
@@ -77,6 +75,7 @@ public class IcoPlanet : MonoBehaviour
     {
         float wrongScale = m_segments[0].transform.localScale.x;
 
+
         transform.parent = null;
         foreach (IcoSegment segment in m_segments)
         {
@@ -85,8 +84,7 @@ public class IcoPlanet : MonoBehaviour
         }
         transform.localScale = wrongScale * transform.localScale;
     }
-
-    
+        
     [ContextMenu("GenerateMeshCollider")]
     public void GenerateMeshCollider()
     {
@@ -145,6 +143,7 @@ public class IcoPlanet : MonoBehaviour
         }
     }
 
+    [ContextMenu("UpdateTesselationLevel")]    
     public void UpdateTesselationLevel()
     {
         GameObject tmp = new GameObject("tmp");
@@ -210,28 +209,21 @@ public class IcoPlanet : MonoBehaviour
         sapins.SetActive(true);
     }
 
-    public bool updateTesselationLevel = false;
+
+    [ContextMenu("UpdatePlanet")]
+    public void UpdatePlanet()
+    {
+        trianglesCount = 0;
+        foreach (IcoSegment icoSeg in m_segments)
+        {
+            trianglesCount += icoSeg.triangleCount;
+            icoSeg.UpdateSegment();
+        }
+    }
+
     Quaternion m_oldRotation;
     private void Update()
     {
-        if(updatePlanet)
-        {
-            trianglesCount = 0;
-
-            updatePlanet = false;
-            foreach (IcoSegment icoSeg in m_segments)
-            {
-                trianglesCount += icoSeg.triangleCount;
-                icoSeg.UpdateSegment();
-            }
-        }
-
-        if(updateTesselationLevel)
-        {
-            updateTesselationLevel = false;
-            UpdateTesselationLevel();
-        }
-
         AkSoundEngine.SetRTPCValue("Wind", Quaternion.Angle(transform.rotation, m_oldRotation) * 50);
         m_oldRotation = transform.rotation;
     }

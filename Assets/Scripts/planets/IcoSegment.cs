@@ -14,12 +14,12 @@ public class IcoSegment : MonoBehaviour
 
     //public IcoPlanet icoPlanet { private get; set; }
     public IcoPlanet icoPlanet;
+    private float m_minimalHeight = -1f;
 
     public int triangleCount { get { return m_triangles.Count/3; } }
 
-    [SerializeField] private Vector3[] m_baseVertices = new Vector3[3];
-    [SerializeField] private IcoSegment[] m_neighbours = new IcoSegment[3];
-
+    private Vector3[] m_baseVertices = new Vector3[3];
+    private IcoSegment[] m_neighbours = new IcoSegment[3];
 
     public Mesh mesh { get { return m_mesh; } }
     private Mesh m_mesh;
@@ -32,6 +32,7 @@ public class IcoSegment : MonoBehaviour
     public enum SegmentType { full, corner1, corner2, corner3, side1, side2, side3, sidecorner, side2Corner, side3corner3, side3corner2 }
     private float m_lastUpdateTime = -1f;
 
+
     private void Awake()
     {
         m_mesh = new Mesh();
@@ -43,19 +44,16 @@ public class IcoSegment : MonoBehaviour
         m_meshCollider.convex = true;
     }
 
-    [Range(0, 2)] public float testos = 0;
-    public bool test = false;
-    private void Update()
+    [ContextMenu("UpdateSegment")]
+    public void TestMethod()
     {
-        if (test)
-        {
-            test = false;
-            UpdateSegment();
-            UpdateNeighbours();
-        }
-    }
-    
+        float t1 = Time.realtimeSinceStartup;
 
+        UpdateSegment();
+
+        float t2 = Time.realtimeSinceStartup;
+        print(t2 - t1);
+    }
 
     public Vector3 Center()
     {
@@ -71,7 +69,6 @@ public class IcoSegment : MonoBehaviour
         return Vector3.Cross(m_baseVertices[1] - m_baseVertices[0], m_baseVertices[2] - m_baseVertices[0]).normalized;
     }
 
-
     public IcoSegment LeftFrom( IcoSegment segment )
     {
         for( int i = 0; i < 3; ++i)
@@ -82,22 +79,6 @@ public class IcoSegment : MonoBehaviour
             }
         }
         return null;
-    }
-
-    public void TestMethod()
-    {
-        GenerateBaseGeometry(ref m_vertices, ref m_triangles);
-        SetCollider(m_vertices, m_triangles);
-        MakeSide3Corner3();
-        BakeNormals();
-    }
-
-    public void TestMethod2()// thumb button
-    {
-        GenerateBaseGeometry(ref m_vertices, ref m_triangles);
-        SetCollider(m_vertices, m_triangles);
-        MakeSide3Corner3();
-        BakeNormals();
     }
 
     public bool IsInside(Vector3 point, Collider col)
@@ -124,13 +105,7 @@ public class IcoSegment : MonoBehaviour
             m_lastUpdateTime = Time.time;
 
             heightLevel = Mathf.Clamp(heightLevel, 0, icoPlanet.nbLevels);
-            Color color = icoPlanet.levelColors[Mathf.Clamp(heightLevel, 0, icoPlanet.levelColors.Length - 1)];
-
-            GetComponent<MeshRenderer>().material.color = color;
-            //GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", color);
-
             GenerateBaseGeometry(ref m_vertices, ref m_triangles);
-            //SetCollider(m_vertices, m_triangles);
 
             SegmentType type;
             int orientation;
@@ -173,8 +148,8 @@ public class IcoSegment : MonoBehaviour
                 default:
                     print("error");
                     break;
-            }            
-            BakeNormals();
+            }
+            BakeMesh();
 
             SetCollider(m_vertices, m_triangles);
         }       
@@ -200,6 +175,8 @@ public class IcoSegment : MonoBehaviour
         m_baseVertices[0] = v0;
         m_baseVertices[1] = v1;
         m_baseVertices[2] = v2;
+
+        m_minimalHeight = v0.magnitude;
     }
 
     public void UpdateNeighbours()
@@ -232,9 +209,7 @@ public class IcoSegment : MonoBehaviour
         SetCollider(vertices, triangles);
     }
 
-
     // Generation
-
     private void SetCollider(List<Vector3> vertices, List<int> triangles)
     {
         // Set collider
@@ -244,20 +219,38 @@ public class IcoSegment : MonoBehaviour
         m_meshCollider.sharedMesh = m_sharedMeshCollider;
     }
 
-    private void BakeNormals()
+    private void BakeMesh()
     {
         // Update geometry 
         List<Vector3> newVertices = new List<Vector3>();
         List<int> newTriangles = new List<int>();
+        List<Color> newColors = new List<Color>();
+
         for (int i = 0; i < m_triangles.Count; ++i)
         {
+
             newVertices.Add(m_vertices[m_triangles[i]]);
             newTriangles.Add(i);
+            newColors.Add(GetColor(m_vertices[m_triangles[i]]));
         }
         m_mesh.Clear();
         m_mesh.vertices = newVertices.ToArray();
         m_mesh.triangles = newTriangles.ToArray();
+        m_mesh.colors = newColors.ToArray();
         m_mesh.RecalculateNormals();
+    }
+
+    private Color GetColor(Vector3 vertex )
+    {
+        float height = vertex.magnitude;
+        float snowHeight = m_minimalHeight + (icoPlanet.nbLevels - 2) * icoPlanet.heightDelta;
+        float maxHeight = m_minimalHeight + icoPlanet.nbLevels * icoPlanet.heightDelta;
+
+        float ratioR = (height-m_minimalHeight) / (icoPlanet.nbLevels * icoPlanet.heightDelta);
+        float ratioG = (height - m_minimalHeight) / (heightLevel * icoPlanet.heightDelta);
+        float ratioB = (height - snowHeight) /(maxHeight - snowHeight);
+
+        return new Color(ratioR, ratioG, ratioB, 1);
     }
 
     private void GenerateBaseGeometry(ref List<Vector3> vertices, ref List<int> triangles)
