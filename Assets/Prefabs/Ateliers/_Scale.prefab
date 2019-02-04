@@ -3286,7 +3286,7 @@ Transform:
   m_GameObject: {fileID: 1935210394499602}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.05, y: 11.89, z: 6.23}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_Children:
   - {fileID: 4931073485291286}
   - {fileID: 4123445903882782}
@@ -3423,8 +3423,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1036247988475312}
-  m_LocalRotation: {x: -0, y: -0.99974746, z: -0, w: 0.022473725}
-  m_LocalPosition: {x: 1.098, y: -0.238, z: -0.827}
+  m_LocalRotation: {x: 0, y: -0.9063079, z: 0, w: 0.42261827}
+  m_LocalPosition: {x: 1.0817883, y: -0.238, z: -0.8072703}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children:
   - {fileID: 4460932991139772}
@@ -3432,7 +3432,7 @@ Transform:
   - {fileID: 4519705671940480}
   m_Father: {fileID: 4790001367324382}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -135, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -130, z: 0}
 --- !u!4 &4132371570927868
 Transform:
   m_ObjectHideFlags: 1
@@ -4914,15 +4914,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1807767592768168}
-  m_LocalRotation: {x: 0.000000015599651, y: 0.0000000912696, z: 0.15268818, w: 0.98827446}
-  m_LocalPosition: {x: 0.2716998, y: 1.1129998, z: 0.033100285}
+  m_LocalRotation: {x: 0.000000074505806, y: 0.000000059604645, z: 0.49431756, w: 0.8692815}
+  m_LocalPosition: {x: 0.2977, y: 1.1442, z: 0.0331}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4956768213923996}
   - {fileID: 4312191909387422}
   m_Father: {fileID: 4126562541776758}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 17.565}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 59.249004}
 --- !u!4 &4755451206849490
 Transform:
   m_ObjectHideFlags: 1
@@ -16088,7 +16088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_maxScaleRatio: 1.5
-  m_minScaleRatio: 0.65
+  m_minScaleRatio: 0.8
 --- !u!114 &114515295527561064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -17430,7 +17430,7 @@ MonoBehaviour:
   m_segmentMaterial: {fileID: 2100000, guid: 15a9f87a0af5d4d448e2ab9dbc34f827, type: 2}
   heightDelta: 0.1
   borderRatio: 0.2
-  nbLevels: 10
+  nbLevels: 5
   m_defaultHeightLevel: 0
   levelColors:
   - {r: 0.5254902, g: 0.87843144, b: 0.854902, a: 0}
