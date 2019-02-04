@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4646097514595900}
   - component: {fileID: 137819606968053270}
   - component: {fileID: 114028596945913688}
+  - component: {fileID: 114699370032921174}
   m_Layer: 0
   m_Name: mesh_BlendVColor
   m_TagString: Untagged
@@ -43,7 +44,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114028596945913688
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1904774211618174}
@@ -52,7 +53,23 @@ MonoBehaviour:
   m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _guid: 2031059564
+  _guid: 24b00e81-e33d-4d24-9dca-b794378e17b7
+--- !u!114 &114699370032921174
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1904774211618174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1904774211618174}
+  _assetGuid: e8b7f379c3aa1bc4b8015617261f78c7
 --- !u!137 &137819606968053270
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 114910789260745036}
   - component: {fileID: 64142308104074436}
   m_Layer: 0
-  m_Name: Cylinder011
+  m_Name: Cylinder_02C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 114283027587847000}
   - component: {fileID: 64913190252224636}
   m_Layer: 0
-  m_Name: Cylinder007
+  m_Name: Cylinder_01B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 114403907541328180}
   - component: {fileID: 64989691758718918}
   m_Layer: 0
-  m_Name: Cylinder009
+  m_Name: Cylinder_02A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 114250341982298958}
   - component: {fileID: 64135035751843622}
   m_Layer: 0
-  m_Name: Cylinder010
+  m_Name: Cylinder_02B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 114513347400951452}
   - component: {fileID: 64075391418427836}
   m_Layer: 0
-  m_Name: Cylinder005
+  m_Name: Cylinder_01A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 114967462873155128}
   - component: {fileID: 64114875025194006}
   m_Layer: 0
-  m_Name: Cylinder008
+  m_Name: Cylinder_01C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -192,6 +192,7 @@ GameObject:
   - component: {fileID: 4053685756765092}
   - component: {fileID: 114304216239756348}
   - component: {fileID: 114579648346146330}
+  - component: {fileID: 95777406195439100}
   m_Layer: 0
   m_Name: socle03
   m_TagString: Untagged
@@ -842,6 +843,24 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300008, guid: 40680fd370856b64f93758eb01db20a7, type: 3}
+--- !u!95 &95777406195439100
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1860112494050088}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1c75be423f858be4d9df3fe5de3d1541, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114027190751299736
 MonoBehaviour:
   m_ObjectHideFlags: 1
