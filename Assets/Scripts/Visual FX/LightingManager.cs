@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
+
 public class LightingManager : MonoBehaviour {
 
 	[Range(0.0f, 1.0f)] public float sceneUnlitFactor;

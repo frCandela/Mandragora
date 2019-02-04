@@ -1,4 +1,4 @@
-﻿Shader "Mandragora/wireframeShader"
+﻿Shader "Mandragora/SunWireframe"
 {
 	Properties
 	{
@@ -60,6 +60,7 @@
 			float _WireframeWidth, _AlphaCutoff, _Emissive, _TextureInfluence;
 			float3 _NoiseFreq, _NoiseAmplitude;
 			float _BoolenFactor;
+			float _ManagerUnlitFactor;
 			
 			InterpolatorsVertex vert (appdata v)
 			{
@@ -141,8 +142,12 @@
 				col.rgb += _Emissive * _EmissiveColor.rgb;
 				//col.rgb = float3(i.data.boolean, i.data.boolean, i.data.boolean) * _BoolenFactor;
 				
+				col *= _ManagerUnlitFactor;
+				wires *= _ManagerUnlitFactor;
 				clip(wires - _AlphaCutoff);
 				col.a = wires;
+
+				
 				return col;
 
 

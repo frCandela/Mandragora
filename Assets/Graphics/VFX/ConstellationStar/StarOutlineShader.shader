@@ -12,7 +12,8 @@
 		_MaxLocalDist ("Max Local Distance", float) = 20.88
 		_MinLocalDist ("Min Local Distance", float) = 7.3
 		// Scale depending on the mesh local vertices, SETUP IT FIRST
-		_Scale ("[PAS TOUCHER] Scale", float) = 1
+		//_Scale ("[PAS TOUCHER] Scale", float) = 0.01
+		_AddedLuminosity ("Added Luminosity", float) = 1
 	}
 
 	CGINCLUDE
@@ -57,21 +58,35 @@
 			// Properties
 			float4 _Color;
 			float _Scale, _Luminosity;
+			float _AddedLuminosity, _TargetRadius;
+			float4 _TargetWorldPosition;
 
-			vertexOutput vert(vertexInput input)
+			struct vertexOutputBase
 			{
-				vertexOutput output;
+				float4 pos : SV_POSITION;
+				float distFromTarget : TEXCOORD2;
+				float4 color : COLOR;
+			};
+
+			vertexOutputBase vert(vertexInput input)
+			{
+				_Scale = 0.01; // Hardcoded Value fit to the fbx
+				vertexOutputBase output;
 				float4 newVertex = input.vertex;
 				newVertex *= 1 + cos(_Time.z + newVertex.x*1/_Scale + newVertex.y*1/_Scale + newVertex.z*1/_Scale)*0.2;
 				output.pos = UnityObjectToClipPos(newVertex);
+				float3 wPos = mul(unity_ObjectToWorld, newVertex).xyz;
+				output.distFromTarget = distance(_TargetWorldPosition.xyz, wPos);
 				output.color = _Color;
 
 				return output;
 			}
 
-			float4 frag(vertexOutput input) : COLOR
+			float4 frag(vertexOutputBase input) : COLOR
 			{
-				return input.color * _Luminosity;
+				float targetFactor = 1 - saturate(input.distFromTarget / _TargetRadius);
+				float lum = _Luminosity + (_AddedLuminosity * targetFactor);
+				return input.color * lum;
 			}
 
 			ENDCG
@@ -122,6 +137,8 @@
 
 			v2f vert(appdata input)
 			{
+				_Scale = 0.01; // Hardcoded Value fit to the fbx
+
 				v2f output;
 
 				float4 newPos = input.vertex;
