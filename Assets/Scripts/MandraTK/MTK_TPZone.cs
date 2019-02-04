@@ -39,6 +39,7 @@ public class MTK_TPZone : MonoBehaviour
 		if(!input)
 			if(!m_apparu)
 			{
+				AkSoundEngine.PostEvent("Play_Wind", gameObject);
 				m_animator.SetTrigger("Appears");
 				m_apparu = true;
 			}
