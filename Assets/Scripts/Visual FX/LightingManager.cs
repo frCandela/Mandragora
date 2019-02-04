@@ -11,6 +11,7 @@ public class LightingManager : MonoBehaviour {
 	//public bool isLit = true;
 	//public List<Light> lights;
 	private MeshRenderer sunRenderer;
+	MeshRenderer zoneRenderer;
 
 	List<MonoBehaviour> m_monoList;
 
@@ -22,9 +23,15 @@ public class LightingManager : MonoBehaviour {
 
 		m_monoList.AddRange(FindObjectsOfType<TelekinesisPointer>());
 		m_monoList.AddRange(FindObjectsOfType<Teleporter>());
+		zoneRenderer = FindObjectOfType<SteamVR_PlayArea>().GetComponent<MeshRenderer>();
 
 		foreach (MonoBehaviour mono in m_monoList)
 			mono.enabled = false;
+	}
+
+	private void Start()
+	{
+		zoneRenderer.enabled = false;
 	}
 
 	void TriggerSound()
@@ -36,6 +43,8 @@ public class LightingManager : MonoBehaviour {
 	{
 		foreach (MonoBehaviour mono in m_monoList)
 			mono.enabled = true;
+
+		zoneRenderer.enabled = true;
 	}
 	
 	// Update is called once per frame

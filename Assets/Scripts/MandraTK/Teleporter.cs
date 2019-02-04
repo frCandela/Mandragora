@@ -79,6 +79,8 @@ public class Teleporter : MonoBehaviour
 		{
 			if(enabled)
 			{
+				AkSoundEngine.PostEvent("Guide_Play", gameObject);
+
 				foreach (MTK_TPZone zone in m_allTPZones)
 				{
 					if(m_currentZone != zone)
@@ -103,7 +105,10 @@ public class Teleporter : MonoBehaviour
 				}
 
 				if(!value)
+				{
 					m_cancelTime = Time.time + m_tolerance;
+					AkSoundEngine.PostEvent("Guide_Stop", gameObject);
+				}
 			}
 		}
 	}
@@ -139,5 +144,7 @@ public class Teleporter : MonoBehaviour
 		m_mtkManager.transform.position = m_targetTransform.position;
 		m_mtkManager.transform.rotation = m_targetTransform.rotation;
 		MTK_Fade.Start(Color.clear, m_fadeEnd, () => m_available = true);
+
+		AkSoundEngine.PostEvent("Stop_Wind", gameObject);
 	}
 }

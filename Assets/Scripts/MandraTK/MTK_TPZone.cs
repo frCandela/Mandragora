@@ -21,6 +21,9 @@ public class MTK_TPZone : MonoBehaviour
 		set
 		{
 			m_animator.SetBool("Selected", value);
+
+			if(value)
+				AkSoundEngine.PostEvent("Play_Look_TP", gameObject);
 		}
 	}
 
