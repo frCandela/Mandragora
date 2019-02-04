@@ -22,7 +22,6 @@ public class IcoPlanet : MonoBehaviour
 
     [SerializeField] public float heightDelta = 0.2f;
     [SerializeField] public float borderRatio = 0.2f;
-    [SerializeField] public float m_baseScale = 0.3f;
     [SerializeField] public int nbLevels = 5;
     [SerializeField] public int m_defaultHeightLevel = 0;
     [SerializeField] public Color[] levelColors = new Color[10];
@@ -40,8 +39,13 @@ public class IcoPlanet : MonoBehaviour
     Mesh m_mesh;
     MeshCollider m_meshCollider;
 
+    Vector3 m_originalScale;
+
     void Start()
     {
+        m_originalScale = transform.localScale;
+        transform.localScale = Vector3.one * (transform.localScale.x /transform.lossyScale.x);
+
         if (m_initialize)
             Initialize();
 
@@ -54,9 +58,9 @@ public class IcoPlanet : MonoBehaviour
         foreach (IcoSegment segment in m_segments)
             segment.UpdateSegment();
 
-        transform.localScale = new Vector3(m_baseScale, m_baseScale, m_baseScale);
-
         transform.localPosition = Vector3.zero;
+        transform.localScale = m_originalScale;
+
 
         m_mesh = new Mesh();
         m_meshCollider = GetComponent<MeshCollider>();
