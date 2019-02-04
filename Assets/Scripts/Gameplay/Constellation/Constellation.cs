@@ -153,7 +153,6 @@ public class Constellation : MonoBehaviour
 	[ContextMenu("Complete")]
 	void Complete()
 	{
-		m_lineRenderer.loop = true;
 		m_validated.Post(gameObject);
 		m_kinder.SetActive(true);
 		m_trail.enabled = false;
@@ -178,7 +177,8 @@ public class Constellation : MonoBehaviour
 
 	void Recycle()
 	{
-		Instantiate(m_next, transform.parent.position, transform.rotation, transform.parent);
+        if(m_next)
+		    Instantiate(m_next, transform.parent.position, transform.rotation, transform.parent);
 
 		Destroy(gameObject);
 	}

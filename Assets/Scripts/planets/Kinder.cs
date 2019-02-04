@@ -38,13 +38,6 @@ public class Kinder : MTK_Interactable
 		m_kinderCreation.Post(gameObject);
 	}
 
-	public override void Grab(bool input)
-	{
-		AkSoundEngine.PostEvent("Pick_Up_Kinder_Play", gameObject);
-
-		base.Grab(input);
-	}
-
 	private void OnCollisionEnter(Collision other)
 	{
 		if(other.relativeVelocity.sqrMagnitude > m_minBreakMagnitude)
@@ -80,21 +73,19 @@ public class Kinder : MTK_Interactable
 	{
 		m_needFix = 101;
 
-		m_planet.transform.SetParent(transform.parent, true);
-
+		m_planet.transform.parent = transform.parent;
 		m_planet.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         m_planet.GetComponent<MTK_Interactable>().enabled = true;
+        m_planet.GetComponent<IcoPlanet>().RestoreScale();
 
-		foreach (Transform tr in m_planet.transform)
-			tr.localScale = Vector3.one;
 
-		Destroy(m_rgbd);
+        Destroy(m_rgbd);
 		Destroy(GetComponent<Collider>());
 		m_shell.gameObject.SetActive(false);
 		m_breakPs.gameObject.SetActive(true);
 
 		AkSoundEngine.PostEvent("Kinder_Break_Play", gameObject);
 
-		Destroy(gameObject, 1);
+		Destroy(gameObject, 10);
 	}
 }

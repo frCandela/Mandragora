@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 23179003933810750}
   - component: {fileID: 114044177586251340}
   - component: {fileID: 114488127868563226}
-  - component: {fileID: 64270439308038444}
   m_Layer: 0
   m_Name: dropZone_wire
   m_TagString: Untagged
@@ -86,23 +85,9 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1668976958139850}
   m_Mesh: {fileID: 4300000, guid: 608997eb8a8ec784fb6940f954ab3009, type: 3}
---- !u!64 &64270439308038444
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1668976958139850}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 608997eb8a8ec784fb6940f954ab3009, type: 3}
 --- !u!114 &114044177586251340
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1668976958139850}
@@ -118,7 +103,7 @@ MonoBehaviour:
   _assetGuid: c578702723b4810438c4c3096776072a
 --- !u!114 &114488127868563226
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1668976958139850}
