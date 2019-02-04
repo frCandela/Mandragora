@@ -2662,11 +2662,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 23586075998845578, guid: 4540e2ac1346dbd41aee8e91fd1fc241,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 21853ce4d1b4962498185955241cca88, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4540e2ac1346dbd41aee8e91fd1fc241, type: 2}
   m_IsPrefabAsset: 0
@@ -2797,56 +2792,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffb5441b7ea6e6540a92ffd21a0aef21, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &2101485644 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1880935083184296, guid: 4540e2ac1346dbd41aee8e91fd1fc241,
-    type: 2}
-  m_PrefabInternal: {fileID: 1992323068}
---- !u!114 &2101485647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2101485644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a38eae0578380c64b9dec27778992dd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_moveLerpCurve_Init:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_moveLerpCurve_Complete:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_noiseAmountCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_trailSpeed: 1
-  m_maxDistance: 1
-  m_formationDistance: 1
-  m_recycleTime: 10
-  m_kinder: {fileID: 0}
-  m_trailFX: {fileID: 0}
-  m_next: {fileID: 0}
-  m_onComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_validated:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_transformFollow: {fileID: 0}
 --- !u!1 &2105086195
 GameObject:
   m_ObjectHideFlags: 0
