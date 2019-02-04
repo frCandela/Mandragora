@@ -4047,8 +4047,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1521477211279930}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0.012301785, y: 0.29999998, z: -0.021186156}
   m_LocalScale: {x: 4.2, y: 4.2, z: 4.2}
   m_Children:
   - {fileID: 4692917353224572}
@@ -4071,7 +4071,7 @@ Transform:
   - {fileID: 4353562381755744}
   m_Father: {fileID: 4126562541776758}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!4 &4463263692063276
 Transform:
   m_ObjectHideFlags: 1
@@ -4236,7 +4236,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1702242117364990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.603, z: 0}
+  m_LocalPosition: {x: 0, y: 1.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4321077534544408}
@@ -4496,13 +4496,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1520039162414570}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.255, y: 0.792, z: 0}
+  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0.21328083, y: 1.063, z: -0.16666974}
   m_LocalScale: {x: 0.17, y: 0.17, z: 0.17}
   m_Children: []
   m_Father: {fileID: 4126562541776758}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!4 &4640103252918646
 Transform:
   m_ObjectHideFlags: 1
@@ -15136,7 +15136,6 @@ MonoBehaviour:
     - {fileID: 1702242117364990}
     - {fileID: 1520039162414570}
     - {fileID: 1521477211279930}
-    - {fileID: 0}
     - {fileID: 1797590710354584}
   _assetGuid: 51bc353e2e636514dbbf030abfca2e04
 --- !u!114 &114283833513671380
@@ -15570,11 +15569,9 @@ MonoBehaviour:
   _referenceCollection:
     _collection:
     - {fileID: 1914410363040810, guid: 51bc353e2e636514dbbf030abfca2e04, type: 2}
-    - {fileID: 1259588126959872, guid: 51bc353e2e636514dbbf030abfca2e04, type: 2}
-    - {fileID: 1247452871988380, guid: 51bc353e2e636514dbbf030abfca2e04, type: 2}
-    - {fileID: 1797590710354584}
     - {fileID: 1765585416970260}
     - {fileID: 1971158642708318}
+    - {fileID: 1797590710354584}
   _assetGuid: fb8a0447bbe953e4e91c984b47d414af
 --- !u!114 &114373643215622244
 MonoBehaviour:
