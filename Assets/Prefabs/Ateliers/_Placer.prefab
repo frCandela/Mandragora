@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 114292280733769052}
   - component: {fileID: 64080733431383232}
   m_Layer: 0
-  m_Name: Cylinder010
+  m_Name: Cylinder_02B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 114896621536779388}
   - component: {fileID: 64206281362996250}
   m_Layer: 0
-  m_Name: Cylinder011
+  m_Name: Cylinder_02C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 114076889309407414}
   - component: {fileID: 64124133744040848}
   m_Layer: 0
-  m_Name: Cylinder005
+  m_Name: Cylinder_01A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 114593048178791420}
   - component: {fileID: 64768870861859442}
   m_Layer: 0
-  m_Name: Cylinder008
+  m_Name: Cylinder_01C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -641,7 +641,7 @@ GameObject:
   - component: {fileID: 114391772466360644}
   - component: {fileID: 64049026306849884}
   m_Layer: 0
-  m_Name: Cylinder007
+  m_Name: Cylinder_01B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -849,7 +849,7 @@ GameObject:
   - component: {fileID: 114794962091990464}
   - component: {fileID: 64634558790068930}
   m_Layer: 0
-  m_Name: Cylinder009
+  m_Name: Cylinder_02A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -866,6 +866,7 @@ GameObject:
   - component: {fileID: 114770748210022186}
   - component: {fileID: 114873539394495304}
   - component: {fileID: 114166932308499918}
+  - component: {fileID: 95141242488513994}
   m_Layer: 0
   m_Name: socle03
   m_TagString: Untagged
@@ -3065,6 +3066,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.01, y: 0.09139848, z: 0.0770278}
   m_Center: {x: 0, y: -0.0045164824, z: 0.0032417774}
+--- !u!95 &95141242488513994
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1936983506655512}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1c75be423f858be4d9df3fe5de3d1541, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!95 &95284807788293816
 Animator:
   serializedVersion: 3
