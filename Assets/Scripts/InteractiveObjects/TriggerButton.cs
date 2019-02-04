@@ -7,7 +7,7 @@ public class TriggerButton : MonoBehaviour
 {
     [SerializeField] public UnityEvent onButtonPressed;
     [SerializeField] public AK.Wwise.Event wOnButtonReleased;
-    static float m_timeToTrigger = 1;
+    static float m_timeToTrigger = .5f;
 
     private bool m_state = false;
     private Animator m_animator;
