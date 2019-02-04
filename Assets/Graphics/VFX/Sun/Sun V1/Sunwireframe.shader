@@ -142,10 +142,12 @@
 				col.rgb += _Emissive * _EmissiveColor.rgb;
 				//col.rgb = float3(i.data.boolean, i.data.boolean, i.data.boolean) * _BoolenFactor;
 				
+				col *= _ManagerUnlitFactor;
+				wires *= _ManagerUnlitFactor;
 				clip(wires - _AlphaCutoff);
 				col.a = wires;
 
-				col *= _ManagerUnlitFactor;
+				
 				return col;
 
 

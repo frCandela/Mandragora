@@ -173,10 +173,10 @@
 
 				wireframeColor = lerp(wireframeColor, litColor, mixFactor);
 
-				wireframeColor *= _ManagerUnlitFactor;                    ////////// FACTOR UNLIT
-
 				col.rgb = lerp(wireframeColor, litColor, mixFactor);
 				col.a = saturate(mixFactor + wireAlpha);
+
+				col *= _ManagerUnlitFactor;                    ////////// FACTOR UNLIT
 
 
 				return col;
