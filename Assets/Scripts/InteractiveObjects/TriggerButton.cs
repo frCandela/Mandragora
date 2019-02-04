@@ -5,53 +5,64 @@ using UnityEngine.Events;
 
 public class TriggerButton : MonoBehaviour
 {
-    [SerializeField] private Color m_colorOn = Color.green;
-    [SerializeField] private Color m_colorOff = Color.red;
-
     [SerializeField] public UnityEvent onButtonPressed;
     [SerializeField] public AK.Wwise.Event wOnButtonReleased;
+    static float m_timeToTrigger = 1;
 
-    MeshRenderer m_meshrenderer;
     private bool m_state = false;
+    private Animator m_animator;
+
+    float m_blend;
+
+    bool State
+    {
+        get
+        {
+            return m_state;
+        }
+        set
+        {
+            m_animator.SetBool("isCharging", true);
+            wOnButtonReleased.Post(gameObject);
+
+            if(m_state)
+                m_blend = 0;
+
+            m_state = value;
+        }
+    }
 
     private void Start()
     {
-        m_meshrenderer = GetComponent<MeshRenderer>();
-        SetColorOn(false);
+        m_animator = GetComponent<Animator>();
     }
 
-    public void SetColorOn( bool state )
+    public void SetActive(bool value)
     {
-        if (m_meshrenderer)
-        {
-            if ( state )
-            {
-                m_meshrenderer.material.color = m_colorOn;
-            }
-            else
-            {
+        m_animator.SetBool("Active", value);
+    }
 
-                m_meshrenderer.material.color = m_colorOff;
-            }
+    private void Update()
+    {
+        m_animator.SetFloat("blend", m_blend);
+        m_blend = Mathf.Clamp01(m_blend + Time.deltaTime * (State ? 1 : -1) / m_timeToTrigger);
+
+        if(State && m_blend == 1)
+        {
+            onButtonPressed.Invoke();
+            State = false;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if( ! m_state )
-        {
-            onButtonPressed.Invoke();
-            wOnButtonReleased.Post(gameObject);
-            m_state = true;
-        }
+        if( ! State )
+            State = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (m_state)
-        {
-            wOnButtonReleased.Post(gameObject);
-            m_state = false;
-        }
+        if (State)
+            State = false;
     }
 }

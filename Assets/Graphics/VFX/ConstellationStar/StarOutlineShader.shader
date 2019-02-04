@@ -75,7 +75,7 @@
 				float4 newVertex = input.vertex;
 				newVertex *= 1 + cos(_Time.z + newVertex.x*1/_Scale + newVertex.y*1/_Scale + newVertex.z*1/_Scale)*0.2;
 				output.pos = UnityObjectToClipPos(newVertex);
-				float3 wPos = mul(unity_ObjectToWorld, newVertex).xyz;
+				float3 wPos = mul(unity_ObjectToWorld, input.vertex).xyz;
 				output.distFromTarget = distance(_TargetWorldPosition.xyz, wPos);
 				output.color = _Color;
 

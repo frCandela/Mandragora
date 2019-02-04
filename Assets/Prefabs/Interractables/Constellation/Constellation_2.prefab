@@ -1792,6 +1792,7 @@ GameObject:
   - component: {fileID: 4289254917859206}
   - component: {fileID: 96462826200501314}
   - component: {fileID: 114897097482786662}
+  - component: {fileID: 114031297004090092}
   m_Layer: 0
   m_Name: Indicator
   m_TagString: Untagged
@@ -2313,7 +2314,7 @@ Transform:
   - {fileID: 4299643320555610}
   - {fileID: 4098720502933910}
   m_Father: {fileID: 4371353292519782}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4140301548227186
 Transform:
@@ -2509,7 +2510,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4371353292519782}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4246312141651104
 Transform:
@@ -2585,7 +2586,7 @@ Transform:
   m_Children:
   - {fileID: 4606460895318788}
   m_Father: {fileID: 4371353292519782}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4277286118199584
 Transform:
@@ -2702,7 +2703,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4371353292519782}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4321187524665610
 Transform:
@@ -2754,11 +2755,11 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4679427875333888}
+  - {fileID: 4130221179996148}
   - {fileID: 4245389957541926}
   - {fileID: 4461293117381934}
   - {fileID: 4317374240859768}
   - {fileID: 4266170681393502}
-  - {fileID: 4130221179996148}
   m_Father: {fileID: 4246312141651104}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2918,7 +2919,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4371353292519782}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4467529028873314
 Transform:
@@ -9680,6 +9681,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: cbb09398-6d75-45df-8a8d-2848a3d10282
+--- !u!114 &114031297004090092
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1914475106696740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb9e6a0a0a446ec45903e4ee17c43525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0.2
 --- !u!114 &114039335037020500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9944,7 +9957,7 @@ MonoBehaviour:
   m_segmentMaterial: {fileID: 2100000, guid: 15a9f87a0af5d4d448e2ab9dbc34f827, type: 2}
   heightDelta: 0.1
   borderRatio: 0.2
-  m_baseScale: 0.1
+  m_baseScale: 0.3
   nbLevels: 10
   m_defaultHeightLevel: 0
   levelColors:

@@ -185,6 +185,8 @@ public class Constellation : MonoBehaviour
 
 	public void Init(Transform tr)
 	{
+		StartCoroutine(Place(1.5f, tr));
+		
 		Vector3 initPos = m_starsTransform[0].localPosition + m_starsTransform[0].GetChild(0).localPosition;
 		m_trail.transform.localPosition = initPos;
 
@@ -198,8 +200,6 @@ public class Constellation : MonoBehaviour
 			m_trailDestination = 0;
 			m_trail.emitting = true;
 		}));
-
-		StartCoroutine(Place(1.5f, tr));
 	}
 
 	IEnumerator MoveTo(Vector3[] destinations, float timeToMove, float noiseScale, AnimationCurve curve, VoidDelegate endAction = null)

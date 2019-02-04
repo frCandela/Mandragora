@@ -17,6 +17,7 @@ public class DropZone : MonoBehaviour
 
 
     private Outline m_outline;
+    [SerializeField] TriggerButton m_button;
 
     private int m_nbObjectsInTrigger = 0;
     private float m_lastActivationTime;
@@ -30,6 +31,8 @@ public class DropZone : MonoBehaviour
         m_lastActivationTime = Time.time;
 
         m_visual = transform.Find("dropZone_Final").gameObject;
+
+        onObjectCatched.AddListener((bool catched) => m_button.SetActive(catched));
     }
 	
 	// Update is called once per frame
