@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 33101905647171774}
   - component: {fileID: 23417717011859316}
   - component: {fileID: 114023800456447492}
+  - component: {fileID: 64089398323806740}
   m_Layer: 0
   m_Name: tronc003
   m_TagString: Untagged
@@ -411,6 +412,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1909262752233274}
   m_Mesh: {fileID: 4300000, guid: d2f156ba77c83ab4fb1d891effd664dd, type: 3}
+--- !u!64 &64089398323806740
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1604071913417864}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300008, guid: d2f156ba77c83ab4fb1d891effd664dd, type: 3}
 --- !u!114 &114023800456447492
 MonoBehaviour:
   m_ObjectHideFlags: 1
