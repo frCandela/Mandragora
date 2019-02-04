@@ -175,6 +175,7 @@ GameObject:
   - component: {fileID: 33753811486949802}
   - component: {fileID: 23634021493103928}
   - component: {fileID: 114026643736016824}
+  - component: {fileID: 64426119077665278}
   m_Layer: 0
   m_Name: socle_lum001
   m_TagString: Untagged
@@ -564,6 +565,7 @@ GameObject:
   - component: {fileID: 33400912445550690}
   - component: {fileID: 23689780302338626}
   - component: {fileID: 114072800849192624}
+  - component: {fileID: 64556790978554162}
   m_Layer: 0
   m_Name: Cylinder003
   m_TagString: Untagged
@@ -1541,6 +1543,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 14
   m_CollisionDetection: 0
+--- !u!64 &64426119077665278
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1397676284957594}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 183089d771b307a45b4173ac4d048c65, type: 3}
+--- !u!64 &64556790978554162
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1936725190858864}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300002, guid: 183089d771b307a45b4173ac4d048c65, type: 3}
 --- !u!64 &64622778922590896
 MeshCollider:
   m_ObjectHideFlags: 1

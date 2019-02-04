@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 33462444777561218}
   - component: {fileID: 23892209354880514}
   - component: {fileID: 114663261585595420}
+  - component: {fileID: 64110174668289688}
   m_Layer: 0
   m_Name: Cylinder003
   m_TagString: Untagged
@@ -59,6 +60,7 @@ GameObject:
   - component: {fileID: 33537895861382672}
   - component: {fileID: 23346172638998158}
   - component: {fileID: 114368820208664314}
+  - component: {fileID: 64079965716464816}
   m_Layer: 0
   m_Name: socle_lum001
   m_TagString: Untagged
@@ -223,6 +225,34 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1420395671067106}
   m_Mesh: {fileID: 4300000, guid: 183089d771b307a45b4173ac4d048c65, type: 3}
+--- !u!64 &64079965716464816
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420395671067106}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 183089d771b307a45b4173ac4d048c65, type: 3}
+--- !u!64 &64110174668289688
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1305757393127606}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300002, guid: 183089d771b307a45b4173ac4d048c65, type: 3}
 --- !u!95 &95807768692868716
 Animator:
   serializedVersion: 3
@@ -282,7 +312,7 @@ MonoBehaviour:
   _guid: e5d5c94f-f3c1-41ba-ad33-82026a1f0658
 --- !u!114 &114396040699804528
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1817673775040828}
@@ -301,7 +331,7 @@ MonoBehaviour:
   _assetGuid: f05d4bf2aec147b40b7aa59b8aa0af32
 --- !u!114 &114410404993038532
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1817673775040828}

@@ -75,7 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_initialize: 1
   m_nbSubdivisions: 1
-  m_segmentMaterial: {fileID: 2100000, guid: 15a9f87a0af5d4d448e2ab9dbc34f827, type: 2}
+  m_segmentMaterial: {fileID: 2100000, guid: 6e8e58b1ca5e1e646bec884a3fbd5201, type: 2}
   heightDelta: 0.1
   borderRatio: 0.2
   nbLevels: 5
@@ -84,7 +84,6 @@ MonoBehaviour:
   - {r: 0.5254902, g: 0.87843144, b: 0.854902, a: 0}
   - {r: 0.58431375, g: 0.7803922, b: 0.39607847, a: 0}
   - {r: 0.19215688, g: 0.6392157, b: 0.227451, a: 0}
-  updatePlanet: 0
   trianglesCount: 0
   m_vertices:
   - {x: 0.5, y: 0.525731, z: 0.688191}
@@ -408,7 +407,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  updateTesselationLevel: 0
 --- !u!114 &114447610224121772
 MonoBehaviour:
   m_ObjectHideFlags: 1
