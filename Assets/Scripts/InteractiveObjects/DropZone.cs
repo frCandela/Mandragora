@@ -10,6 +10,7 @@ public class DropZone : MonoBehaviour
     [SerializeField] private bool m_snapToCenter = true;
     [SerializeField] private float m_activationCooldown = 2f;
     [SerializeField] private float m_ejectForce = 1f;
+    [SerializeField] private Animator m_workshopAnimator;
     private GameObject m_visual;
 
     public UnityEventBool onObjectCatched;
@@ -32,7 +33,11 @@ public class DropZone : MonoBehaviour
 
         m_visual = transform.Find("dropZone_Final").gameObject;
 
-        onObjectCatched.AddListener((bool catched) => m_button.SetActive(catched));
+        onObjectCatched.AddListener((bool catched) =>
+        {
+            m_workshopAnimator.SetBool("isOn", catched);
+            m_button.SetActive(catched);
+        });
     }
 	
 	// Update is called once per frame
