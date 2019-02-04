@@ -16,6 +16,7 @@ public class Constellation : MonoBehaviour
 	[SerializeField] Transform m_trailFX;
 	[SerializeField] GameObject m_next;
 	[SerializeField] UnityEvent m_onComplete;
+	[SerializeField] Material m_trailMaterial;
 
 	[Header("Wwise events")]
 	[SerializeField] AK.Wwise.Event m_validated;
@@ -187,17 +188,18 @@ public class Constellation : MonoBehaviour
 	{
 		StartCoroutine(Place(1.5f, tr));
 		
-		Vector3 initPos = m_starsTransform[0].localPosition + m_starsTransform[0].GetChild(0).localPosition;
-		m_trail.transform.localPosition = initPos;
+		Vector3 initWolrdPos = m_starsTransform[0].localPosition + m_starsTransform[0].GetChild(0).localPosition;
 
 		StartCoroutine(MoveTo(m_starsInitPosition, 3, 20, m_moveLerpCurve_Init, () =>
 		{
 			m_lineRenderer.enabled = true;
 
 			for (int i = 0; i < m_starsTransform.Length; i++)
-				m_lineRenderer.SetPosition(i, initPos);
+				m_lineRenderer.SetPosition(i, initWolrdPos);
 
 			m_trailDestination = 0;
+			
+			m_trail.transform.localPosition = m_starsTransform[0].localPosition;
 			m_trail.emitting = true;
 		}));
 	}
@@ -211,19 +213,32 @@ public class Constellation : MonoBehaviour
 		for (int i = 0; i < m_starsTransform.Length; i++)
 			startPositions[i] = m_starsTransform[i].localPosition;
 
+		float movementAmount;
+		Vector3 lastPos = Vector3.zero;
+
 		for (float t = 0; t < 1; t += Time.fixedDeltaTime / timeToMove)
 		{
+			movementAmount = 0;
+
 			for (int i = 0; i < m_starsTransform.Length; i++)
 			{
 				m_starsTransform[i].localPosition = Vector3.Lerp(startPositions[i], destinations[i] + transform.rotation * transform.localPosition, curve.Evaluate(t))
 				+ (new Vector3(Mathf.PerlinNoise(t, i), Mathf.PerlinNoise(t, i + 1), Mathf.PerlinNoise(t, i + 2)) - Vector3.one/2)
 					* noiseScale * m_noiseAmountCurve.Evaluate(t);
 
+				movementAmount += (lastPos - m_starsTransform[i].localPosition).magnitude;
+
 				m_lineRenderer.SetPosition(i, m_starsTransform[i].localPosition);
+
+				lastPos = m_starsTransform[i].localPosition;
 			}
+
+			m_trailMaterial.SetVector("_NoiseSettings", new Vector4(.2f, .2f, Mathf.MoveTowards(m_trailMaterial.GetVector("_NoiseSettings").z, movementAmount / 200, Time.deltaTime), 0));
 
 			yield return new WaitForEndOfFrame();
 		}
+
+		m_trailMaterial.SetVector("_NoiseSettings", new Vector4(.2f, .2f, 0, 0));
 
 		if(endAction != null)
 			endAction.Invoke();
