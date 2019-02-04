@@ -87,5 +87,6 @@ public class Kinder : MTK_Interactable
 		AkSoundEngine.PostEvent("Kinder_Break_Play", gameObject);
 
 		Destroy(gameObject, 10);
+		MTK_InteractiblesManager.Instance.UnSubscribe(this);
 	}
 }
