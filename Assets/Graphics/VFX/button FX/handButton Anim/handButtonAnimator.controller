@@ -8,25 +8,19 @@ AnimatorController:
   m_Name: handButtonAnimator
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: button_Appears
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: button_isCharging
+  - m_Name: Active
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: button_ShutDown
-    m_Type: 9
+  - m_Name: isCharging
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: button_ChargingBlend
+  - m_Name: blend
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -68,7 +62,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
-  m_BlendParameter: button_ChargingBlend
+  m_BlendParameter: blend
   m_BlendParameterY: Blend
   m_MinThreshold: 0
   m_MaxThreshold: 1
@@ -104,7 +98,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: button_Appears
+    m_ConditionEvent: Active
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102571868556549852}
@@ -148,8 +142,8 @@ AnimatorStateTransition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: button_ShutDown
+  - m_ConditionMode: 2
+    m_ConditionEvent: Active
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102708261911659196}
@@ -173,7 +167,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: button_isCharging
+    m_ConditionEvent: isCharging
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102972414128974374}
@@ -197,7 +191,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: button_isCharging
+    m_ConditionEvent: isCharging
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102040018026635672}
@@ -372,7 +366,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 492, y: -12, z: 0}
+  m_AnyStatePosition: {x: 228, y: 540, z: 0}
   m_EntryPosition: {x: 204, y: 36, z: 0}
   m_ExitPosition: {x: 768, y: 36, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

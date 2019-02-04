@@ -2715,13 +2715,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4743197498954036}
-  - component: {fileID: 114552215583593442}
   - component: {fileID: 65161110701475610}
-  - component: {fileID: 114021979262849634}
   - component: {fileID: 114107197806132702}
   - component: {fileID: 95235849654641216}
-  - component: {fileID: 114070467806563218}
-  - component: {fileID: 114830241550046210}
   - component: {fileID: 114449339626482060}
   m_Layer: 0
   m_Name: handButton
@@ -3304,6 +3300,7 @@ Transform:
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children:
   - {fileID: 4460932991139772}
+  - {fileID: 4743197498954036}
   - {fileID: 4519705671940480}
   m_Father: {fileID: 4790001367324382}
   m_RootOrder: 0
@@ -3790,7 +3787,7 @@ Transform:
   - {fileID: 4341702166692880}
   - {fileID: 4596894880488106}
   m_Father: {fileID: 4519705671940480}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4324893839819550
 Transform:
@@ -4294,10 +4291,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4743197498954036}
   - {fileID: 4321077534544408}
   m_Father: {fileID: 4126562541776758}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4526365321125238
 Transform:
@@ -4871,14 +4867,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1807767592768168}
-  m_LocalRotation: {x: 0.000000014901158, y: 0.000000089406946, z: 0.15268819, w: 0.98827446}
-  m_LocalPosition: {x: 0.27169982, y: -0.68700016, z: 0.033099983}
+  m_LocalRotation: {x: 0.000000015599651, y: 0.0000000912696, z: 0.15268818, w: 0.98827446}
+  m_LocalPosition: {x: 0.2716998, y: 1.1129998, z: 0.033100285}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4956768213923996}
   - {fileID: 4312191909387422}
-  m_Father: {fileID: 4519705671940480}
-  m_RootOrder: 0
+  m_Father: {fileID: 4126562541776758}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 17.565}
 --- !u!4 &4753785880252410
 Transform:
@@ -14027,24 +14023,6 @@ MonoBehaviour:
     _collection:
     - {fileID: 1270295356967016}
   _assetGuid: 2cfe1417bc59c1a428a076a632d75770
---- !u!114 &114021979262849634
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1807767592768168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _guid: 8768280a-b128-459e-88b4-caaaebc4673b
-  _referenceCollection:
-    _collection:
-    - {fileID: 1807767592768168}
-    - {fileID: 1412769846592992}
-    - {fileID: 1142121756559798}
-  _assetGuid: 8593a817ae63d424bb75b58254270baf
 --- !u!114 &114034986993308076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14219,39 +14197,6 @@ MonoBehaviour:
   m_Script: {fileID: 1491221649, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114070467806563218
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1807767592768168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f07755d854b3fde45944b231788f959a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_colorOn: {r: 0, g: 1, b: 0, a: 1}
-  m_colorOff: {r: 1, g: 0, b: 0, a: 1}
-  onButtonPressed:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: Release
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  wOnButtonReleased:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: 5fb6128ddf55bf54995d8bf7d8be3738,
-      type: 2}
 --- !u!114 &114076478243016340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14399,7 +14344,7 @@ MonoBehaviour:
   m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _guid: 5e7b212c-be77-42da-a575-61baf75529c2
+  _guid: 4306ed88-31ac-451e-8731-5bf5f70abed9
 --- !u!114 &114112762572650452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -15312,6 +15257,8 @@ MonoBehaviour:
     - {fileID: 1521477211279930}
     - {fileID: 1797590710354584}
     - {fileID: 1807767592768168}
+    - {fileID: 1412769846592992}
+    - {fileID: 1142121756559798}
   _assetGuid: 51bc353e2e636514dbbf030abfca2e04
 --- !u!114 &114283833513671380
 MonoBehaviour:
@@ -16139,8 +16086,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f07755d854b3fde45944b231788f959a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_colorOn: {r: 0, g: 1, b: 0, a: 1}
-  m_colorOff: {r: 1, g: 0, b: 0, a: 1}
   onButtonPressed:
     m_PersistentCalls:
       m_Calls:
@@ -16554,17 +16499,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: e61cb7bc-6fcb-4535-bdc4-2a248fb52d0c
---- !u!114 &114552215583593442
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1807767592768168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1491221649, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114553358314747724
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -17370,17 +17304,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: SetColorOn
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
         m_MethodName: Appears
         m_Mode: 0
         m_Arguments:
@@ -17393,6 +17316,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  m_button: {fileID: 114449339626482060}
 --- !u!114 &114772815641295204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -17686,39 +17610,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: ad5f01ed-ec5c-4047-bc9a-32b6774279a0
---- !u!114 &114830241550046210
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1807767592768168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f07755d854b3fde45944b231788f959a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_colorOn: {r: 0, g: 1, b: 0, a: 1}
-  m_colorOff: {r: 1, g: 0, b: 0, a: 1}
-  onButtonPressed:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: Release
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  wOnButtonReleased:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: 5fb6128ddf55bf54995d8bf7d8be3738,
-      type: 2}
 --- !u!114 &114839581187242008
 MonoBehaviour:
   m_ObjectHideFlags: 1
