@@ -187,6 +187,7 @@ public class Constellation : MonoBehaviour
 	public void Init(Transform tr)
 	{
 		StartCoroutine(Place(1.5f, tr));
+		AkSoundEngine.PostEvent("Play_Formation_Constellation", gameObject);
 		
 		Vector3 initWolrdPos = m_starsTransform[0].localPosition + m_starsTransform[0].GetChild(0).localPosition;
 

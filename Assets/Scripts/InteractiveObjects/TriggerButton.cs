@@ -10,6 +10,7 @@ public class TriggerButton : MonoBehaviour
 
     private bool m_state = false;
     private Animator m_animator;
+    private Collider m_collider;
 
     float m_blend;
 
@@ -38,6 +39,7 @@ public class TriggerButton : MonoBehaviour
     private void Start()
     {
         m_animator = GetComponent<Animator>();
+        m_collider = GetComponent<Collider>();
     }
 
     public void SetActive(bool value)
@@ -46,6 +48,7 @@ public class TriggerButton : MonoBehaviour
             AkSoundEngine.PostEvent("Play_Button_ON", gameObject);
 
         m_animator.SetBool("Active", value);
+        m_collider.enabled = value;
     }
 
     private void Update()

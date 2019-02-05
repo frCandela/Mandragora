@@ -232,29 +232,32 @@ public class TelekinesisPointer : MonoBehaviour
 	{
 		m_wObjectStop.Post(Target.gameObject);
 
-		m_connectedBody.useGravity = true;
-
-		m_connectedBody = null;
+		if(m_connectedBody)
+		{
+			m_connectedBody.useGravity = true;
+			m_connectedBody = null;
+		}
 
         Target.isDistanceGrabbed = false;
-
         Target = null;
 	}
 
 	void GrabIfTarget(MTK_Interactable input)
 	{
-		if(m_connectedBody)
+		if(m_attract)
 		{
-			if(m_connectedBody.gameObject == input.gameObject)
+			if(Target.gameObject == input.gameObject)
 			{
 				m_inputManager.Haptic(1);
 
-				m_wObjectGrabbed.Post(m_connectedBody.gameObject);
-				m_wObjectStop.Post(m_connectedBody.gameObject);
+				m_wObjectGrabbed.Post(Target.gameObject);
+				m_wObjectStop.Post(Target.gameObject);
 				m_wHandStop.Post(gameObject);
 
 				input.transform.position = transform.position;
 				m_hand.Grab(Target);
+
+				SetLevitation(input, false);
 				UnAttract();
 			}
 		}
