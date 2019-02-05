@@ -8,20 +8,24 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
 
     private IcoPlanet m_icoPlanet;
     private IcoSegment m_icoSegment;
+    MTK_JointType_Fixed m_parentJoint;
 
     private float m_baseDistance = 0f;
-    private Vector3 m_basePosition;
+    private Quaternion m_baserotation;
     int m_oldHeight;
+
+    private Vector3 m_initVec;
 
     // Planet rotation
     private bool m_grabbing = false;
-    private ConfigurableJoint m_confJoint;
+    // private ConfigurableJoint m_confJoint;
 
     protected void Awake()
     {
         rigidbody = transform.parent.GetComponent<Rigidbody>();
         m_icoPlanet = transform.parent.GetComponent<IcoPlanet>();
         m_icoSegment = GetComponent<IcoSegment>();
+        m_parentJoint = GetComponentInParent<MTK_JointType_Fixed>();
 
         m_oldHeight = m_icoSegment.heightLevel;
     }
@@ -34,7 +38,7 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
     public override bool RemoveJoint()
     {
         m_grabbing = false;
-        Destroy(m_confJoint);
+        // Destroy(m_confJoint);
 
         return base.RemoveJoint();
     }
@@ -44,21 +48,22 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
         if( !Used())
         {
             m_baseDistance = Vector3.Distance(transform.position, other.transform.position);
+            m_baserotation = m_parentJoint.connectedGameobject.transform.rotation;
+
+            m_initVec = other.transform.position - transform.parent.position;
 
             // joint
-            m_anchor = transform.InverseTransformPoint(other.transform.position);
-            m_connectedAnchor = other.transform.InverseTransformPoint(other.transform.position);
-            
+            // m_anchor = transform.InverseTransformPoint(other.transform.position);            
 
-            m_confJoint = other.AddComponent<ConfigurableJoint>();
-            m_confJoint.connectedBody = transform.parent.GetComponent<Rigidbody>();
+            // m_confJoint = other.AddComponent<ConfigurableJoint>();
+            // m_confJoint.connectedBody = transform.parent.GetComponent<Rigidbody>();
 
-            m_confJoint.autoConfigureConnectedAnchor = false;
-            m_confJoint.xMotion = ConfigurableJointMotion.Locked;
-            m_confJoint.yMotion = ConfigurableJointMotion.Locked;
-            m_confJoint.zMotion = ConfigurableJointMotion.Locked;
+            // m_confJoint.autoConfigureConnectedAnchor = false;
+            // m_confJoint.xMotion = ConfigurableJointMotion.Locked;
+            // m_confJoint.yMotion = ConfigurableJointMotion.Locked;
+            // m_confJoint.zMotion = ConfigurableJointMotion.Locked;
 
-            m_confJoint.enableCollision = true;
+            // m_confJoint.enableCollision = true;
 
             return true;
         }
@@ -68,18 +73,16 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
         }
     }
 
-    Vector3 m_anchor;
-    Vector3 m_connectedAnchor;
-
-    private void FixedUpdate()
-    {
-        if(m_confJoint)
-        {
-            Vector3 localJointPos = transform.InverseTransformPoint(m_confJoint.transform.TransformPoint(m_confJoint.anchor));
-            Vector3 targetAnchor = localJointPos.magnitude * m_anchor.normalized;
-            m_confJoint.connectedAnchor = targetAnchor;
-        }
-    }
+    // Vector3 m_anchor;
+    // private void FixedUpdate()
+    // {
+    //     if(m_confJoint)
+    //     {
+    //         // Vector3 localJointPos = transform.InverseTransformPoint(m_confJoint.transform.TransformPoint(m_confJoint.anchor));
+    //         // Vector3 targetAnchor = localJointPos.magnitude * m_anchor.normalized;
+    //         // m_confJoint.connectedAnchor = targetAnchor;
+    //     }
+    // }
 
     private void Update()
     { 
@@ -108,6 +111,8 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
                 
                 m_oldHeight = m_icoSegment.heightLevel;
             }
+
+            m_parentJoint.connectedGameobject.transform.rotation = Quaternion.FromToRotation(m_initVec, m_connectedGameobject.transform.position - transform.parent.position) * m_baserotation;
         }
     }
 }

@@ -62,27 +62,33 @@ public class Kinder : MTK_Interactable
 		}
 	}
 
-	int m_needFix = 0;
-	private void FixedUpdate()
-	{
-		if(m_needFix > 0)
-		{
-			m_planet.GetComponent<MeshCollider>().enabled = !m_planet.GetComponent<MeshCollider>().enabled;
-			m_planet.GetComponent<Rigidbody>().isKinematic = !m_planet.GetComponent<MeshCollider>().enabled;
-			m_needFix--;
-		}
-	}
+	// int m_needFix = 0;
+	// private void FixedUpdate()
+	// {
+	// 	if(m_needFix > 0)
+	// 	{
+	// 		// m_planet.GetComponent<MeshCollider>().enabled = !m_planet.GetComponent<MeshCollider>().enabled;
+	// 		// m_planet.GetComponent<Rigidbody>().isKinematic = !m_planet.GetComponent<MeshCollider>().enabled;
+	// 		// m_planet.GetComponent<Rigidbody>().velocity = Vector3.up * 10;
+	// 		m_needFix--;
+	// 	}
+	// }
 
 	[ContextMenu("Break")]
 	void Break()
 	{
-		m_needFix = 101;
+		// m_needFix = 101;
 
 		Destroy(GetComponent<Animator>());
 
 		transform.SetParent(transform.parent.parent, true);
 
-		m_planet.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+		m_planet.GetComponent<MeshCollider>().enabled = true;
+
+		Rigidbody planetRgbd = m_planet.GetComponent<Rigidbody>();
+		planetRgbd.isKinematic = false;
+		planetRgbd.constraints = RigidbodyConstraints.None;
+
         m_planet.GetComponent<MTK_Interactable>().enabled = true;
 		m_planet.transform.SetParent(transform.parent.parent);
 
@@ -94,5 +100,7 @@ public class Kinder : MTK_Interactable
 		AkSoundEngine.PostEvent("Kinder_Break_Play", gameObject);
 
 		MTK_InteractiblesManager.Instance.UnSubscribe(this);
+
+		planetRgbd.velocity = Vector3.up * 1;
 	}
 }
