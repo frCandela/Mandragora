@@ -60,8 +60,8 @@
 			v2f vert (appdata v)
 			{
 				v2f o;
-				float4 wPos = mul(unity_ObjectToWorld, v.vertex);
-				o.worldVertex = ApplyNoise(wPos, _NoiseSettings.x, _NoiseSettings.y, _NoiseSettings.z);
+				float3 offsetedLocalPos = ApplyNoise(v.vertex, _NoiseSettings.x, _NoiseSettings.y, _NoiseSettings.z);
+				o.worldVertex = mul(unity_ObjectToWorld, float4(offsetedLocalPos, v.vertex.w));
 				o.vertex = mul(UNITY_MATRIX_VP, o.worldVertex);
 				o.normal = UnityObjectToWorldNormal(v.normal);
 				o.flatNormal = float3(0,0,0);
