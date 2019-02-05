@@ -116,7 +116,7 @@ public class TelekinesisPointer : MonoBehaviour
 					Attract(force);
 
 				// Levitation
-				if(IsLevitating(Target))
+				if(!m_connectedBody && IsLevitating(Target))
 				{
 					Rigidbody rgbd = Target.GetComponent<Rigidbody>();
 					rgbd.velocity = Vector3.ClampMagnitude(rgbd.velocity, .1f);
