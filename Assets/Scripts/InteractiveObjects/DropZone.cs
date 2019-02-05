@@ -75,6 +75,7 @@ public class DropZone : MonoBehaviour
             tmp.GetComponent<Rigidbody>().AddForce(m_ejectForce * Vector3.up, ForceMode.Impulse);
 
             m_visual.SetActive(true);
+            m_nbObjectsInTrigger = 0;
         }
     }
 
@@ -110,6 +111,7 @@ public class DropZone : MonoBehaviour
                 onObjectCatched.Invoke(true);
 
                 m_visual.SetActive(false);
+                m_nbObjectsInTrigger = 0;
             }
         }
     }
