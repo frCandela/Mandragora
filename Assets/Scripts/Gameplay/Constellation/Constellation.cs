@@ -70,7 +70,7 @@ public class Constellation : MonoBehaviour
 
 		Vector3 handPos;
 
-		if(m_transformFollow && m_currentStarID != m_endStarID && m_currentStarID != -1)
+		if(m_lineRenderer && m_transformFollow && m_currentStarID != m_endStarID && m_currentStarID != -1)
 		{
 			handPos = transform.InverseTransformPoint(m_transformFollow.position);
 
@@ -155,7 +155,9 @@ public class Constellation : MonoBehaviour
 		m_validated.Post(gameObject);
 		m_kinder.SetActive(true);
 		m_trail.enabled = false;
-		m_onComplete.Invoke();
+		m_trail.emitting = false;
+
+		m_onComplete.Invoke();		
 
 		m_kinder.transform.position = (Camera.main.transform.position * .92f)  + Vector3.down / 3;
 

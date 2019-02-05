@@ -23,7 +23,9 @@ public class LightingManager : MonoBehaviour {
 
 		m_monoList.AddRange(FindObjectsOfType<TelekinesisPointer>());
 		m_monoList.AddRange(FindObjectsOfType<Teleporter>());
-		zoneRenderer = FindObjectOfType<SteamVR_PlayArea>().GetComponent<MeshRenderer>();
+
+		if(FindObjectOfType<SteamVR_PlayArea>())
+			zoneRenderer = FindObjectOfType<SteamVR_PlayArea>().GetComponent<MeshRenderer>();
 
 		foreach (MonoBehaviour mono in m_monoList)
 			mono.enabled = false;
