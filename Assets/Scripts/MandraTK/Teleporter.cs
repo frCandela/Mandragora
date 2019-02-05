@@ -83,7 +83,7 @@ public class Teleporter : MonoBehaviour
 
 				foreach (MTK_TPZone zone in m_allTPZones)
 				{
-					if(m_currentZone != zone)
+					if(m_currentZone != zone && zone.m_enabled)
 						zone.Active = value;
 				}
 
@@ -127,7 +127,10 @@ public class Teleporter : MonoBehaviour
 		
 			if(Physics.Raycast(origin.position, origin.forward, out m_rayHit, 100, LayerMask.GetMask("TP")))
 			{
-				TargetZone = m_rayHit.collider.GetComponent<MTK_TPZone>();
+				MTK_TPZone candidate = m_rayHit.collider.GetComponent<MTK_TPZone>();
+
+				if(candidate && candidate.m_enabled)
+					TargetZone = candidate;
 			}
 			else
 			{

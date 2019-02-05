@@ -6,7 +6,7 @@ public class MTK_TPZone : MonoBehaviour
 {
 	Animator m_animator;
 
-	bool m_apparu = false;
+	public bool m_enabled = false;
 
 	public bool Active
 	{
@@ -40,11 +40,11 @@ public class MTK_TPZone : MonoBehaviour
 	public void Appears(bool input)
 	{
 		if(!input)
-			if(!m_apparu)
+			if(!m_enabled)
 			{
 				AkSoundEngine.PostEvent("Play_Way", gameObject);
 				m_animator.SetTrigger("Appears");
-				m_apparu = true;
+				m_enabled = true;
 			}
 	}
 }
