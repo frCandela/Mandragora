@@ -94,6 +94,7 @@ public class Teleporter : MonoBehaviour
 					if(TargetZone)
 					{
 						m_sound.Post(gameObject);
+						m_currentZone.OnExit();
 						MTK_Fade.Start(new Color(1,0,1,0), m_fadeStart, MoveMtkManager);
 						m_available = false;
 
@@ -144,7 +145,6 @@ public class Teleporter : MonoBehaviour
 
 	private void MoveMtkManager()
 	{
-		m_currentZone.OnExit();
 		m_mtkManager.transform.position = m_targetTransform.position;
 		m_mtkManager.transform.rotation = m_targetTransform.rotation;
 		MTK_Fade.Start(Color.clear, m_fadeEnd, () => m_available = true);

@@ -244,7 +244,7 @@ public class TelekinesisPointer : MonoBehaviour
 
 	void GrabIfTarget(MTK_Interactable input)
 	{
-		if(m_attract)
+		if(m_attract && Target && input)
 		{
 			if(Target.gameObject == input.gameObject)
 			{
