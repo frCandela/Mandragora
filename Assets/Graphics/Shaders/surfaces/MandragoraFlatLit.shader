@@ -24,6 +24,7 @@
 		fixed4 _Color, _EmissionColor, _ShadowColor;
 		float _Luminosity, _SpecPow, _SpecularIntensity;
 		float _DepthDistance, _LightDiffuse;
+		float _ManagerUnlitFactor;
 
 		struct MandragoraSurfaceFlatLitOutput
 		{
@@ -133,6 +134,8 @@
 			float moyAlbedo = (color.r + color.g + color.b)/3;
 			float3 depthColor = float3(moyAlbedo, moyAlbedo, moyAlbedo);
 			color.rgb = lerp(depthColor, color.rgb, depth);
+
+			color *= _ManagerUnlitFactor;
 
 		}
 
