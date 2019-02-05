@@ -31,7 +31,8 @@ public class LightingManager : MonoBehaviour {
 
 	private void Start()
 	{
-		zoneRenderer.enabled = false;
+		if(zoneRenderer)
+			zoneRenderer.enabled = false;
 	}
 
 	void TriggerSound()
@@ -49,7 +50,8 @@ public class LightingManager : MonoBehaviour {
 		foreach (MonoBehaviour mono in m_monoList)
 			mono.enabled = true;
 
-		zoneRenderer.enabled = true;
+		if(zoneRenderer)
+			zoneRenderer.enabled = true;
 	}
 	
 	// Update is called once per frame
