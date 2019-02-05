@@ -144,6 +144,7 @@ public class Teleporter : MonoBehaviour
 
 	private void MoveMtkManager()
 	{
+		m_currentZone.OnExit();
 		m_mtkManager.transform.position = m_targetTransform.position;
 		m_mtkManager.transform.rotation = m_targetTransform.rotation;
 		MTK_Fade.Start(Color.clear, m_fadeEnd, () => m_available = true);

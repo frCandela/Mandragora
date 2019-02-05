@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MTK_TPZone : MonoBehaviour
 {
 	Animator m_animator;
+	[SerializeField] UnityEvent m_onExitZone;
 
 	public bool m_enabled = false;
 
@@ -46,5 +48,10 @@ public class MTK_TPZone : MonoBehaviour
 				m_animator.SetTrigger("Appears");
 				m_enabled = true;
 			}
+	}
+
+	public void OnExit()
+	{
+		m_onExitZone.Invoke();
 	}
 }

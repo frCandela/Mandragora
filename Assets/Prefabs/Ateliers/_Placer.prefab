@@ -634,6 +634,7 @@ GameObject:
   - component: {fileID: 95852500333517960}
   - component: {fileID: 114230419892092686}
   - component: {fileID: 114068899203566224}
+  - component: {fileID: 114565487088927190}
   m_Layer: 8
   m_Name: TP Zone Placer
   m_TagString: Untagged
@@ -3372,6 +3373,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4671e845658f85c41a5126c96b7feae0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_onExitZone:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114819462918898722}
+        m_MethodName: Release
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   m_enabled: 0
 --- !u!114 &114242176833279810
 MonoBehaviour:
@@ -4117,6 +4134,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 5a36bd0b-e09e-4403-83ac-0fb082f8526f
+--- !u!114 &114565487088927190
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1778296624656868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 637162700, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objects:
+  - _target: {fileID: 1778296624656868}
+    _path: /0
+    _guidPath: a4863135-d4d5-46c4-a15f-961ab6d6266d
+    _isOverridden: 0
+    _components:
+    - _target: {fileID: 114230419892092686}
+      _type: MTK_TPZone
+      _index: 0
+      _isOverridden: 0
+      _properties:
+      - _path: m_onExitZone.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+        _animationCurveValue:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        _booleanValue: 0
+        _boundsValue:
+          m_Center: {x: 0, y: 0, z: 0}
+          m_Extent: {x: 0, y: 0, z: 0}
+        _colorValue: {r: 0, g: 0, b: 0, a: 0}
+        _doubleValue: 0
+        _floatValue: 0
+        _intValue: 0
+        _longValue: 0
+        _objectReferenceValue: {fileID: 114819462918898722}
+        _quaternionValue: {x: 0, y: 0, z: 0, w: 0}
+        _rectValue:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        _stringValue: 
+        _vector2Value: {x: 0, y: 0}
+        _vector3Value: {x: 0, y: 0, z: 0}
+        _vector4Value: {x: 0, y: 0, z: 0, w: 0}
+  _overrideObjects: []
 --- !u!114 &114566768220452640
 MonoBehaviour:
   m_ObjectHideFlags: 1
