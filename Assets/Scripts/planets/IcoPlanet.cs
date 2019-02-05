@@ -56,7 +56,6 @@ public class IcoPlanet : MonoBehaviour
         foreach (IcoSegment segment in m_segments)
             segment.UpdateSegment();
 
-        transform.localPosition = Vector3.zero;
         transform.localScale = m_originalScale;
 
 

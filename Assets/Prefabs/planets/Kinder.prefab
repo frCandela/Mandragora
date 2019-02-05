@@ -30,22 +30,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1021163876787672
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4597371857526694}
-  - component: {fileID: 114200187939295826}
-  m_Layer: 9
-  m_Name: Planet Core
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1028695630532868
 GameObject:
   m_ObjectHideFlags: 1
@@ -540,7 +524,7 @@ GameObject:
   - component: {fileID: 114300824272870082}
   - component: {fileID: 114190106107289090}
   m_Layer: 12
-  m_Name: Model
+  m_Name: Planet Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1782,7 +1766,6 @@ Transform:
   - {fileID: 4291113969262600}
   - {fileID: 4003782967828006}
   - {fileID: 4361759614802354}
-  - {fileID: 4597371857526694}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2422,19 +2405,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4905450075289938}
   m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4597371857526694
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1021163876787672}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_Children: []
-  m_Father: {fileID: 4063190716382618}
-  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4623396197394592
 Transform:
@@ -7737,18 +7707,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: f83c60aa-2b55-4798-8a3b-c04616a36a5a
---- !u!114 &114200187939295826
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1021163876787672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _guid: 912fc87a-41ba-4247-85ec-00717f367b44
 --- !u!114 &114200727246675892
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8777,7 +8735,7 @@ MonoBehaviour:
     - {fileID: 1523871822483606}
     - {fileID: 1118577117915562}
     - {fileID: 1295102925601136}
-    - {fileID: 1021163876787672}
+    - {fileID: 0}
   _assetGuid: af40c8d06338024468161fe4a55d3914
 --- !u!114 &114717550744427828
 MonoBehaviour:
