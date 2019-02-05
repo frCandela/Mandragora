@@ -27,11 +27,16 @@ public class Kinder : MTK_Interactable
 		base.OnEnable();
 		isGrabbable = true;
 		m_enabled = true;
-		m_rgbd.isKinematic = false;
+
+		if(m_rgbd)
+			m_rgbd.isKinematic = false;
 	}
 
 	public void TriggerKinderSound()
 	{
+		m_planet.transform.localPosition = Vector3.zero;
+		m_planet.transform.localScale = Vector3.one;
+
 		foreach (MeshCollider c in m_planet.GetComponents<MeshCollider>())
 			c.enabled = false;
 
@@ -73,11 +78,13 @@ public class Kinder : MTK_Interactable
 	{
 		m_needFix = 101;
 
+		Vector3 scale = m_planet.transform.lossyScale;
+
 		m_planet.transform.parent = transform.parent;
+		m_planet.transform.localScale = scale;
 		m_planet.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         m_planet.GetComponent<MTK_Interactable>().enabled = true;
-        m_planet.GetComponent<IcoPlanet>().RestoreScale();
-
+        // m_planet.GetComponent<IcoPlanet>().RestoreScale();
 
         Destroy(m_rgbd);
 		Destroy(GetComponent<Collider>());
