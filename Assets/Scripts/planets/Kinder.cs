@@ -78,15 +78,13 @@ public class Kinder : MTK_Interactable
 	{
 		m_needFix = 101;
 
-		// Vector3 scale = m_planet.transform.lossyScale;
+		Destroy(GetComponent<Animator>());
 
 		transform.SetParent(transform.parent.parent, true);
 
-		// m_planet.transform.parent = transform.parent;
-		// m_planet.transform.localScale = scale;
 		m_planet.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         m_planet.GetComponent<MTK_Interactable>().enabled = true;
-        // m_planet.GetComponent<IcoPlanet>().RestoreScale();
+		m_planet.transform.SetParent(transform.parent.parent);
 
         Destroy(m_rgbd);
 		Destroy(GetComponent<Collider>());
@@ -95,7 +93,6 @@ public class Kinder : MTK_Interactable
 
 		AkSoundEngine.PostEvent("Kinder_Break_Play", gameObject);
 
-		// Destroy(gameObject, 10);
 		MTK_InteractiblesManager.Instance.UnSubscribe(this);
 	}
 }
