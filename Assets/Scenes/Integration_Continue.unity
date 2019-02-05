@@ -172,10 +172,17 @@ Prefab:
       propertyPath: onObjectCatched.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2113613503}
-    - target: {fileID: 114068138636016900, guid: 3e71e23314c1f2f4fbde10d0b7a6c47e,
-        type: 2}
-      propertyPath: m_enabled
-      value: 1
+    - target: {fileID: 4078732980140490, guid: 3e71e23314c1f2f4fbde10d0b7a6c47e, type: 2}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003434778626656, guid: 3e71e23314c1f2f4fbde10d0b7a6c47e, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1296719710535222, guid: 3e71e23314c1f2f4fbde10d0b7a6c47e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e71e23314c1f2f4fbde10d0b7a6c47e, type: 2}
@@ -439,62 +446,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 2056219341}
   m_Script: {fileID: 11500000, guid: 4671e845658f85c41a5126c96b7feae0, type: 3}
---- !u!1 &1231222508 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1578148870217356, guid: 3e71e23314c1f2f4fbde10d0b7a6c47e,
-    type: 2}
-  m_PrefabInternal: {fileID: 364445043}
---- !u!114 &1231222515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1231222508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 637162700, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objects:
-  - _target: {fileID: 1231222508}
-    _path: /0
-    _guidPath: a4863135-d4d5-46c4-a15f-961ab6d6266d
-    _isOverridden: 0
-    _components:
-    - _target: {fileID: 502008816}
-      _type: MTK_TPZone
-      _index: 0
-      _isOverridden: 0
-      _properties:
-      - _path: m_enabled
-        _animationCurveValue:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        _booleanValue: 1
-        _boundsValue:
-          m_Center: {x: 0, y: 0, z: 0}
-          m_Extent: {x: 0, y: 0, z: 0}
-        _colorValue: {r: 0, g: 0, b: 0, a: 0}
-        _doubleValue: 0
-        _floatValue: 0
-        _intValue: 0
-        _longValue: 0
-        _objectReferenceValue: {fileID: 0}
-        _quaternionValue: {x: 0, y: 0, z: 0, w: 0}
-        _rectValue:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        _stringValue: 
-        _vector2Value: {x: 0, y: 0}
-        _vector3Value: {x: 0, y: 0, z: 0}
-        _vector4Value: {x: 0, y: 0, z: 0, w: 0}
-  _overrideObjects: []
 --- !u!1001 &1252026211
 Prefab:
   m_ObjectHideFlags: 0

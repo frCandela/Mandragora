@@ -1172,7 +1172,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1299209159766488
 GameObject:
   m_ObjectHideFlags: 1
@@ -2267,6 +2267,7 @@ GameObject:
   - component: {fileID: 95778531773005568}
   - component: {fileID: 114068138636016900}
   - component: {fileID: 114266167859823528}
+  - component: {fileID: 114231232748576904}
   m_Layer: 8
   m_Name: TP Zone Scale
   m_TagString: Untagged
@@ -3952,7 +3953,7 @@ Transform:
   m_GameObject: {fileID: 1913885926828056}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
   m_Children:
   - {fileID: 4379576162584762}
   - {fileID: 4416911618265734}
@@ -16046,7 +16047,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4671e845658f85c41a5126c96b7feae0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
 --- !u!114 &114081215122677116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -17091,6 +17092,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: b28ab934-19c9-44d1-8601-315625ea7ba2
+--- !u!114 &114231232748576904
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1578148870217356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 637162700, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objects:
+  - _target: {fileID: 1578148870217356}
+    _path: /0
+    _guidPath: a4863135-d4d5-46c4-a15f-961ab6d6266d
+    _isOverridden: 0
+    _components:
+    - _target: {fileID: 114068138636016900}
+      _type: MTK_TPZone
+      _index: 0
+      _isOverridden: 0
+      _properties:
+      - _path: m_enabled
+        _animationCurveValue:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        _booleanValue: 1
+        _boundsValue:
+          m_Center: {x: 0, y: 0, z: 0}
+          m_Extent: {x: 0, y: 0, z: 0}
+        _colorValue: {r: 0, g: 0, b: 0, a: 0}
+        _doubleValue: 0
+        _floatValue: 0
+        _intValue: 0
+        _longValue: 0
+        _objectReferenceValue: {fileID: 0}
+        _quaternionValue: {x: 0, y: 0, z: 0, w: 0}
+        _rectValue:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        _stringValue: 
+        _vector2Value: {x: 0, y: 0}
+        _vector3Value: {x: 0, y: 0, z: 0}
+        _vector4Value: {x: 0, y: 0, z: 0, w: 0}
+  _overrideObjects: []
 --- !u!114 &114231695918802966
 MonoBehaviour:
   m_ObjectHideFlags: 1
