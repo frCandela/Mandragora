@@ -6,7 +6,6 @@ using UnityEngine.Events;
 public class TriggerButton : MonoBehaviour
 {
     [SerializeField] public UnityEvent onButtonPressed;
-    [SerializeField] public AK.Wwise.Event wOnButtonReleased;
     static float m_timeToTrigger = .5f;
 
     private bool m_state = false;
@@ -23,7 +22,11 @@ public class TriggerButton : MonoBehaviour
         set
         {
             m_animator.SetBool("isCharging", true);
-            wOnButtonReleased.Post(gameObject);
+
+            if(value)
+                AkSoundEngine.PostEvent("Play_Load_Button_Off", gameObject);
+            else
+                AkSoundEngine.PostEvent("Stop_Load_Button_Off", gameObject);
 
             if(m_state)
                 m_blend = 0;
@@ -39,6 +42,9 @@ public class TriggerButton : MonoBehaviour
 
     public void SetActive(bool value)
     {
+        if(value)
+            AkSoundEngine.PostEvent("Play_Button_ON", gameObject);
+
         m_animator.SetBool("Active", value);
     }
 
@@ -49,6 +55,7 @@ public class TriggerButton : MonoBehaviour
 
         if(State && m_blend == 1)
         {
+            AkSoundEngine.PostEvent("Button_Play", gameObject);
             onButtonPressed.Invoke();
             State = false;
         }
