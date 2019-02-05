@@ -85,7 +85,6 @@ public class Constellation : MonoBehaviour
 	
 	public bool Check(int m_ID, Transform tr)
 	{
-		m_trail.emitting = false;
 		m_transformFollow = tr;
 
 		if(m_currentStarID == -1) // set first star
@@ -148,7 +147,6 @@ public class Constellation : MonoBehaviour
 		}
 
 		m_currentStarID = -1;
-		m_trail.emitting = true;
 	}
 
 	[ContextMenu("Complete")]
@@ -159,12 +157,14 @@ public class Constellation : MonoBehaviour
 		m_trail.enabled = false;
 		m_onComplete.Invoke();
 
+		m_kinder.transform.position = (Camera.main.transform.position * .92f)  + Vector3.down / 3;
+
 		Vector3[] destination = new Vector3[m_starsTransform.Length];
 		for (int i = 0; i < destination.Length; i++)
 			destination[i] = m_kinder.transform.localPosition;
 		
 		StartCoroutine(
-			MoveTo(destination, 1.5f, 5, m_moveLerpCurve_Complete, () =>
+			MoveTo(destination, 5, 5, m_moveLerpCurve_Complete, () =>
 			{
 				foreach (var tr in m_starsTransform)
 					Destroy(tr.gameObject, 1);
@@ -186,12 +186,14 @@ public class Constellation : MonoBehaviour
 
 	public void Init(Transform tr)
 	{
-		StartCoroutine(Place(1.5f, tr));
+		float time = 3;
+
+		StartCoroutine(Place(time, tr));
 		AkSoundEngine.PostEvent("Play_Formation_Constellation", gameObject);
 		
 		Vector3 initWolrdPos = m_starsTransform[0].localPosition + m_starsTransform[0].GetChild(0).localPosition;
 
-		StartCoroutine(MoveTo(m_starsInitPosition, 3, 20, m_moveLerpCurve_Init, () =>
+		StartCoroutine(MoveTo(m_starsInitPosition, time, 20, m_moveLerpCurve_Init, () =>
 		{
 			m_lineRenderer.enabled = true;
 
@@ -217,7 +219,9 @@ public class Constellation : MonoBehaviour
 		float movementAmount;
 		Vector3 lastPos = Vector3.zero;
 
-		for (float t = 0; t < 1; t += Time.fixedDeltaTime / timeToMove)
+		Vector4 initParams = m_trailMaterial.GetVector("_NoiseSettings");
+
+		for (float t = 0; t < 1; t += Time.deltaTime / timeToMove)
 		{
 			movementAmount = 0;
 
@@ -234,12 +238,12 @@ public class Constellation : MonoBehaviour
 				lastPos = m_starsTransform[i].localPosition;
 			}
 
-			m_trailMaterial.SetVector("_NoiseSettings", new Vector4(.2f, .2f, Mathf.MoveTowards(m_trailMaterial.GetVector("_NoiseSettings").z, movementAmount / 200, Time.deltaTime), 0));
+			m_trailMaterial.SetVector("_NoiseSettings", new Vector4(initParams.x, initParams.y, Mathf.MoveTowards(initParams.z, movementAmount / 20, Time.deltaTime), 0));
 
 			yield return new WaitForEndOfFrame();
 		}
 
-		m_trailMaterial.SetVector("_NoiseSettings", new Vector4(.2f, .2f, 0, 0));
+		m_trailMaterial.SetVector("_NoiseSettings", new Vector4(initParams.x, initParams.y, 0, 0));
 
 		if(endAction != null)
 			endAction.Invoke();
@@ -254,12 +258,13 @@ public class Constellation : MonoBehaviour
 		thisPos.Scale(new Vector3(1,0,1));
 
 		Vector3 targetPos = transform.position + (thisPos - playerPos).normalized * m_formationDistance;
+		float deltaAngle = Vector3.SignedAngle(Vector3.forward, (thisPos - playerPos).normalized, Vector3.up);
+		Quaternion targetRot = Quaternion.Euler(0, deltaAngle, 0);
 
-		transform.LookAt(targetPos);
-
-		for (float t = 0; t < 1; t += Time.fixedDeltaTime / timeToMove)
+		for (float t = 0; t < 1; t += Time.deltaTime / timeToMove)
 		{
 			transform.position = Vector3.Lerp(transform.position, targetPos, t);
+			transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, t);
 
 			m_trailFX.position = transform.position;
 
