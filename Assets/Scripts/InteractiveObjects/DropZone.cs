@@ -107,11 +107,10 @@ public class DropZone : MonoBehaviour
                 if(icoplanet)
                     icoplanet.Joined = true;
 
-
-                onObjectCatched.Invoke(true);
-
                 m_visual.SetActive(false);
                 m_nbObjectsInTrigger = 0;
+
+                onObjectCatched.Invoke(true);
             }
         }
     }

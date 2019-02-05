@@ -35,6 +35,10 @@ public class PlanetTerraformer : MonoBehaviour
                     segment.GetComponent<Collider>().enabled = true;
                 }
             }
+            else
+            {
+                m_dropzone.Release();
+            }
         }
         else if(m_icoPlanet)
         {       
