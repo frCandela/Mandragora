@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 114283281331570706}
   - component: {fileID: 114220474963353028}
   - component: {fileID: 114915112397488118}
+  - component: {fileID: 114117745356770590}
   m_Layer: 0
   m_Name: Workshop - Scaler
   m_TagString: Untagged
@@ -1949,6 +1950,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4460932991139772}
   - component: {fileID: 95701912159663576}
+  - component: {fileID: 114110675366421648}
   - component: {fileID: 114893618233300156}
   - component: {fileID: 114847524999454566}
   - component: {fileID: 114277263053830776}
@@ -2103,6 +2105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4501249132408400}
   - component: {fileID: 114058502687628404}
+  - component: {fileID: 4757152231225150}
   m_Layer: 0
   m_Name: Object001_newPivot
   m_TagString: Untagged
@@ -16765,6 +16768,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 2fcc4ae9-5894-44d2-850e-20af68489633
+--- !u!114 &114110675366421648
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1521477211279930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd6d0868963fe146865d6db759177f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_turnOn:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 6f6140c63eb81874d87e574fcaee374f,
+      type: 2}
+  m_turnOff:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 5d86f5567d6ca8a4ba53881524a90a56,
+      type: 2}
+  m_ambientOn:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: d143c82246b2dd84cba4a9be53a4cacf,
+      type: 2}
+  m_ambientOff:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 2a938ffb609080549a4333ff994a762b,
+      type: 2}
 --- !u!114 &114112022333151932
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -16817,6 +16847,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: f2f92106-1d1c-4daa-ad40-e44a124d7fa3
+--- !u!114 &114117745356770590
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1036247988475312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 637162700, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objects:
+  - _target: {fileID: 1702242117364990}
+    _path: drop zone/0
+    _guidPath: caaa65a1-fadd-410b-81db-a9fe59baf076
+    _isOverridden: 0
+    _components:
+    - _target: {fileID: 114769263590300550}
+      _type: DropZone
+      _index: 0
+      _isOverridden: 0
+      _properties:
+      - _path: m_sounds
+        _animationCurveValue:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        _booleanValue: 0
+        _boundsValue:
+          m_Center: {x: 0, y: 0, z: 0}
+          m_Extent: {x: 0, y: 0, z: 0}
+        _colorValue: {r: 0, g: 0, b: 0, a: 0}
+        _doubleValue: 0
+        _floatValue: 0
+        _intValue: 0
+        _longValue: 0
+        _objectReferenceValue: {fileID: 114110675366421648}
+        _quaternionValue: {x: 0, y: 0, z: 0, w: 0}
+        _rectValue:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        _stringValue: 
+        _vector2Value: {x: 0, y: 0}
+        _vector3Value: {x: 0, y: 0, z: 0}
+        _vector4Value: {x: 0, y: 0, z: 0, w: 0}
+  _overrideObjects: []
 --- !u!114 &114121465040036042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -18607,10 +18688,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  wOnButtonReleased:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: 5fb6128ddf55bf54995d8bf7d8be3738,
-      type: 2}
 --- !u!114 &114449889430068022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -20388,6 +20465,7 @@ MonoBehaviour:
   m_activationCooldown: 2
   m_ejectForce: 1
   m_workshopAnimator: {fileID: 95701912159663576}
+  m_sounds: {fileID: 114110675366421648}
   onObjectCatched:
     m_PersistentCalls:
       m_Calls:

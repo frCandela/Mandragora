@@ -253,6 +253,7 @@ GameObject:
   - component: {fileID: 114699582165802910}
   - component: {fileID: 114249121918187416}
   - component: {fileID: 114824977449825016}
+  - component: {fileID: 114897667279660568}
   m_Layer: 0
   m_Name: socle01
   m_TagString: Untagged
@@ -1974,6 +1975,7 @@ MonoBehaviour:
   m_activationCooldown: 2
   m_ejectForce: 1
   m_workshopAnimator: {fileID: 95612452207773284}
+  m_sounds: {fileID: 0}
   onObjectCatched:
     m_PersistentCalls:
       m_Calls:
@@ -2269,10 +2271,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  wOnButtonReleased:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: 5fb6128ddf55bf54995d8bf7d8be3738,
-      type: 2}
 --- !u!114 &114406856793474572
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2537,6 +2535,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 2508703825
+--- !u!114 &114897667279660568
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1537203344281024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd6d0868963fe146865d6db759177f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_turnOn:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 6f6140c63eb81874d87e574fcaee374f,
+      type: 2}
+  m_turnOff:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 5d86f5567d6ca8a4ba53881524a90a56,
+      type: 2}
+  m_ambientOn:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: d143c82246b2dd84cba4a9be53a4cacf,
+      type: 2}
+  m_ambientOff:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 2a938ffb609080549a4333ff994a762b,
+      type: 2}
 --- !u!114 &114923063801639470
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2603,8 +2628,6 @@ MonoBehaviour:
     _collection:
     - {fileID: 1288335247060806, guid: 3e71e23314c1f2f4fbde10d0b7a6c47e, type: 2}
     - {fileID: 1256204731910786, guid: 3e71e23314c1f2f4fbde10d0b7a6c47e, type: 2}
-    - {fileID: 0}
-    - {fileID: 0}
     - {fileID: 1969990254315476}
     - {fileID: 1827033460697228}
   _assetGuid: 8a7afd772960da749809fe5536698a00

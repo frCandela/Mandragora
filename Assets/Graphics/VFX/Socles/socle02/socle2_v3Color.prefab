@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 95807768692868716}
   - component: {fileID: 114396040699804528}
   - component: {fileID: 114410404993038532}
+  - component: {fileID: 114963053668846062}
   m_Layer: 0
   m_Name: socle2_v3Color
   m_TagString: Untagged
@@ -365,6 +366,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 24b00e81-e33d-4d24-9dca-b794378e17b7
+--- !u!114 &114963053668846062
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1817673775040828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd6d0868963fe146865d6db759177f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_turnOn:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 887378369ccb0cf45ac44bab5cf6eb97,
+      type: 2}
+  m_turnOff:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 33e455a622d0c1a499350eb1d12eea74,
+      type: 2}
+  m_ambientOn:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 627d008666c74c54699212060aaaeb2f,
+      type: 2}
+  m_ambientOff:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 67030e46e66d49242889e5503ae674af,
+      type: 2}
 --- !u!137 &137527409921255984
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

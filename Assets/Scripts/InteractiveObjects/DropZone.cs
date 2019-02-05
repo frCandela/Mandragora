@@ -11,6 +11,7 @@ public class DropZone : MonoBehaviour
     [SerializeField] private float m_activationCooldown = 2f;
     [SerializeField] private float m_ejectForce = 1f;
     [SerializeField] private Animator m_workshopAnimator;
+    [SerializeField] private SocleSounds m_sounds;
     private GameObject m_visual;
 
     public UnityEventBool onObjectCatched;
@@ -37,6 +38,7 @@ public class DropZone : MonoBehaviour
         {
             m_workshopAnimator.SetBool("isOn", catched);
             m_button.SetActive(catched);
+            m_sounds.State = catched;
         });
     }
 	

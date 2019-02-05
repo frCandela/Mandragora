@@ -481,6 +481,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4478641871255196}
   - component: {fileID: 95137978879566734}
+  - component: {fileID: 114887966955526696}
   - component: {fileID: 114884403447196456}
   - component: {fileID: 114871348364632528}
   - component: {fileID: 114265110530023070}
@@ -502,6 +503,7 @@ GameObject:
   - component: {fileID: 114964196440501308}
   - component: {fileID: 114410824812414290}
   - component: {fileID: 114958461773247588}
+  - component: {fileID: 114119518090733692}
   m_Layer: 0
   m_Name: Workshop - Tiles
   m_TagString: Untagged
@@ -2403,6 +2405,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 21af5c76-9bc7-413b-b104-b0e8e7849968
+--- !u!114 &114119518090733692
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1686010443425898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 637162700, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objects: []
+  _overrideObjects: []
 --- !u!114 &114146144127213918
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2598,7 +2613,7 @@ MonoBehaviour:
     - {fileID: 1507904736285248}
     - {fileID: 1686010443425898}
     - {fileID: 1847111996336900}
-    - {fileID: 0}
+    - {fileID: 1848683054412672}
   _assetGuid: 86ca467c0c4a2574a82c8de7b7e95631
 --- !u!114 &114521767706326804
 MonoBehaviour:
@@ -2666,7 +2681,7 @@ MonoBehaviour:
   m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _guid: 
+  _guid: 1037eb9f-d16d-4032-8fb6-4ebcac40df06
   _referenceCollection:
     _collection:
     - {fileID: 1848683054412672}
@@ -3014,6 +3029,33 @@ MonoBehaviour:
     - {fileID: 1518431219260512}
     - {fileID: 1397676284957594}
   _assetGuid: f05d4bf2aec147b40b7aa59b8aa0af32
+--- !u!114 &114887966955526696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1675645190155382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd6d0868963fe146865d6db759177f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_turnOn:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 887378369ccb0cf45ac44bab5cf6eb97,
+      type: 2}
+  m_turnOff:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 33e455a622d0c1a499350eb1d12eea74,
+      type: 2}
+  m_ambientOn:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 627d008666c74c54699212060aaaeb2f,
+      type: 2}
+  m_ambientOff:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 67030e46e66d49242889e5503ae674af,
+      type: 2}
 --- !u!114 &114893161247320580
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3100,10 +3142,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  wOnButtonReleased:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: 5fb6128ddf55bf54995d8bf7d8be3738,
-      type: 2}
 --- !u!114 &114939690088750080
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3146,6 +3184,7 @@ MonoBehaviour:
   m_activationCooldown: 2
   m_ejectForce: 1
   m_workshopAnimator: {fileID: 95137978879566734}
+  m_sounds: {fileID: 114887966955526696}
   onObjectCatched:
     m_PersistentCalls:
       m_Calls:
