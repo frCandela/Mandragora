@@ -114,6 +114,13 @@ public class TelekinesisPointer : MonoBehaviour
 				
 				if(force.sqrMagnitude > Mathf.Max(m_minMagnitudeToAttract, m_lastForceApplied.sqrMagnitude))
 					Attract(force);
+
+				// Levitation
+				if(IsLevitating(Target))
+				{
+					Rigidbody rgbd = Target.GetComponent<Rigidbody>();
+					rgbd.velocity = Vector3.ClampMagnitude(rgbd.velocity, .1f);
+				}
 			}
 
 			// Apply various forces
@@ -144,7 +151,7 @@ public class TelekinesisPointer : MonoBehaviour
 				interactable.GetComponent<Rigidbody>().drag = 0;
 
                 interactable.UseEffects = false;
-                rb.velocity = Vector3.up / 20;
+                rb.velocity = Vector3.up;
                 rb.angularVelocity = Random.onUnitSphere;
 
 				m_lastForceApplied = Vector3.zero;
