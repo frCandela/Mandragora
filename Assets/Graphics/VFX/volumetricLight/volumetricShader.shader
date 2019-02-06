@@ -12,6 +12,7 @@
 		_FadeIn ("IN Fade", Range(0,1)) = 0
 		_FadeOut ("OUT Fade", Range(0,1)) = 0
 		_FresnelSensibility ("Fresnel Sensibility", Range(0,1)) = 0.25
+		_FresnelPow ("Fresnel Power", float) = 1
 		_IsBackFace ("Is Back Face ?", Range(0,1)) = 1
 		_HighlightColor ("Highlight Color", Color) = (0,0,0,0)
 		_IsAlphaTex ("Is Alpha Tex ?", Range(0,1)) = 1
@@ -61,7 +62,7 @@
 			float _Opacity, _HighlightOpacity, _DistFade;
 			float _IntersectionOut, _IntersectionIn, _MaxInterDist;
 			float _FadeIn, _FadeOut;
-			float _Cursor, _FresnelSensibility, _IsAlphaTex, _IsAlphaUV, _IsBackFace;
+			float _Cursor, _FresnelSensibility, _FresnelPow, _IsAlphaTex, _IsAlphaUV, _IsBackFace;
 			float4 _AlphaMaskPow;
 			sampler2D _CameraDepthTexture, _AlphaMaskTex;
 			
@@ -93,6 +94,7 @@
 				float fresnel = dot( i.worldNormal, normalize(toCam));
 				fresnel = (fresnel - _FresnelSensibility) / (1 - _FresnelSensibility);
 				fresnel = saturate(fresnel);
+				fresnel = pow(fresnel, _FresnelPow);
 
 				// Depth Buffer
 				float2 screenUV = i.screenPos.xy/i.screenPos.w;
