@@ -61,6 +61,8 @@ public class ConstellationStar : MonoBehaviour
 		inputVel *= 1000;
 		m_rgbd.AddTorque(inputVel.z, inputVel.x, inputVel.y);
 
+		tr.GetComponentInParent<MTK_InputManager>().Haptic(1);
+
 		if(!Validated)
 		{
 			if(transform.position == m_initPosition) // Init phase
