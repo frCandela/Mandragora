@@ -102,5 +102,10 @@ public class Kinder : MTK_Interactable
 		MTK_InteractiblesManager.Instance.UnSubscribe(this);
 
 		planetRgbd.velocity = Vector3.up * 1;
+
+		foreach (Transform tr in m_planet.transform)
+		{
+			tr.localRotation = Quaternion.identity;
+		}
 	}
 }
