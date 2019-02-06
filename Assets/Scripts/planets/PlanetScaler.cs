@@ -13,6 +13,8 @@ public class PlanetScaler : Workshop
     private ScaleEffect m_scaleEffect;
     private MTK_JointType m_catchedObjectJoint;
 
+    MTK_InputManager m_currentInputmanager;
+
     private float m_baseDist = -1f;
     private float m_intermediateScale = -1f;
     private float m_newScale = -1f;
@@ -52,6 +54,11 @@ public class PlanetScaler : Workshop
             m_newScale = Mathf.Clamp(ratio * m_intermediateScale, m_minScaleRatio * m_scaleEffect.originalScale.x, m_maxScaleRatio * m_scaleEffect.originalScale.x);
             
             AkSoundEngine.SetRTPCValue("Scale_Rate", Mathf.Abs(distance - m_oldDistance) * 10000);
+
+            if(!m_currentInputmanager)
+                m_currentInputmanager = m_catchedObjectJoint.GetComponent<MTK_InertJoint>().connectedGameobject.GetComponentInParent<MTK_InputManager>();
+            else
+                m_currentInputmanager.Haptic(m_oldDistance - distance);
 
             Vector3 anchorPoint = m_confJoint.connectedBody.transform.TransformPoint(m_confJoint.connectedAnchor);
             Vector3 dir = anchorPoint - m_confJoint.connectedBody.transform.position;
