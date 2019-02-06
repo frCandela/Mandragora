@@ -154,14 +154,14 @@
             <param name="nestedPrefab">The nested prefab to convert in the 
             asset of the root prefab instance</param>
         </member>
-        <member name="M:VisualDesignCafe.NestedPrefabs.Unity.PrefabConverter.BackupObjectReferences(UnityEngine.GameObject)">
+        <member name="M:VisualDesignCafe.NestedPrefabs.Unity.PrefabConverter.BackupObjectReferences">
             <summary>
             Finds all properties with an object reference and creates a persistent object reference
             for them.
             </summary>
             <param name="prefab">The prefab in which to search for object references</param>
         </member>
-        <member name="M:VisualDesignCafe.NestedPrefabs.Unity.PrefabConverter.RestoreObjectReferences(UnityEngine.GameObject,System.Collections.Generic.List{VisualDesignCafe.NestedPrefabs.Unity.PersistentObjectReference})">
+        <member name="M:VisualDesignCafe.NestedPrefabs.Unity.PrefabConverter.RestoreObjectReferences(System.Collections.Generic.List{VisualDesignCafe.NestedPrefabs.Unity.PersistentObjectReference})">
             <summary>
             Restores the object references in the prefab from the 
             stored persistent object references.
@@ -233,7 +233,7 @@
             Connects the nested prefab to its original asset.
             </summary>
         </member>
-        <member name="M:VisualDesignCafe.NestedPrefabs.Unity.ProjectConverter.OpenUrl">
+        <member name="M:VisualDesignCafe.NestedPrefabs.Unity.ProjectConverter.OpenUrl(System.Boolean)">
             <summary>
             Subscribes to the MailChimp mailing list and then opens the 
             'Uninstalled Nested Prefabs' webpage.
@@ -245,6 +245,17 @@
             <summary>
             Automatically displays a dialog at startup to ask the user to conver the project.
             </summary>
+        </member>
+        <member name="M:VisualDesignCafe.NestedPrefabs.Unity.ProjectConverter.ManualUpdate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:VisualDesignCafe.NestedPrefabs.Unity.ProjectConverter.ValidateAutoUpdate">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:VisualDesignCafe.NestedPrefabs.Unity.ProjectConverter.OnEditorUpdate">
             <summary>
@@ -306,16 +317,6 @@
         <member name="M:VisualDesignCafe.NestedPrefabs.Unity.SerializedObjectWrapper.SaveModifications(UnityEditor.SerializedObject)">
             <summary>
             Compatibility method for ApplyModifiedPropertiesWithoutUndo because it is not publicly accessible in Unity 5.0
-            </summary>
-        </member>
-        <member name="M:VisualDesignCafe.NestedPrefabs.Unity.UserInfo.IsValidEmailAddress(System.String)">
-            <summary>
-            Checks if the email address is in a valid format
-            </summary>
-        </member>
-        <member name="M:VisualDesignCafe.NestedPrefabs.Unity.UserInfo.TryGetUserInfo(System.String@,System.String@,System.String@)">
-            <summary>
-            Retreives the user info from unity connect.
             </summary>
         </member>
     </members>

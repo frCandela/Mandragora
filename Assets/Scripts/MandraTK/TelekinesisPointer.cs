@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TelekinesisPointer : MonoBehaviour
 {
-	[SerializeField] FXManager m_fxManager;
+	FXManager m_fxManager;
 	[SerializeField] MTK_InteractHand m_interactHand;
 	[SerializeField] Animator m_handAnimator;
 
@@ -82,6 +82,8 @@ public class TelekinesisPointer : MonoBehaviour
 		m_hand.m_onTouchInteractable.AddListener(GrabIfTarget);
 
 		m_interactiblesManager = MTK_InteractiblesManager.Instance;
+
+		m_fxManager = GetComponentInChildren<FXManager>();
 	}
 
 	void Update()

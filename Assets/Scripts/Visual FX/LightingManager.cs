@@ -7,10 +7,6 @@ using UnityEngine;
 public class LightingManager : MonoBehaviour {
 
 	[Range(0.0f, 1.0f)] public float sceneUnlitFactor;
-	//public GameObject sunGO;
-	//public bool isLit = true;
-	//public List<Light> lights;
-	private MeshRenderer sunRenderer;
 	MeshRenderer zoneRenderer;
 
 	List<MonoBehaviour> m_monoList;

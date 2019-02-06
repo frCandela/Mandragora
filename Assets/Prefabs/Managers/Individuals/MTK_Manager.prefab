@@ -6079,7 +6079,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1211021042496548}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9042904a85a62f04b99e3ce191cdf701, type: 3}
   m_Name: 
@@ -6135,6 +6135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_handAnimator: {fileID: 95153248136159070}
+  fingerCollider: {fileID: 0}
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -6155,7 +6156,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  m_objectsInTrigger: []
   m_grabbed: {fileID: 0}
 --- !u!114 &114015442804073598
 MonoBehaviour:
@@ -6561,7 +6561,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1958870438028186}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9042904a85a62f04b99e3ce191cdf701, type: 3}
   m_Name: 
@@ -7226,7 +7226,6 @@ MonoBehaviour:
     - {fileID: 1086789517676346, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1232609348658996, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1394845039473234, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
-    - {fileID: 1563380455818206, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1791939903035546, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1147226328521890}
     - {fileID: 1040942377602004}
@@ -7261,7 +7260,6 @@ MonoBehaviour:
     - {fileID: 1812214547884742, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1194697909421302, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1734228186114144, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
-    - {fileID: 1646124523087738, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1075503395721018}
     - {fileID: 1590505769475606}
     - {fileID: 1211021042496548}
@@ -7519,6 +7517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_handAnimator: {fileID: 95685899702918326}
+  fingerCollider: {fileID: 0}
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -7539,7 +7538,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  m_objectsInTrigger: []
   m_grabbed: {fileID: 0}
 --- !u!114 &114348078505439306
 MonoBehaviour:
@@ -7558,7 +7556,6 @@ MonoBehaviour:
     - {fileID: 1976509550616232, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1106148064785344, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1017250061254120, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
-    - {fileID: 1204488600288852, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1954438191951474, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1674754682765762}
     - {fileID: 1989827260487584}
@@ -7593,7 +7590,6 @@ MonoBehaviour:
     - {fileID: 1922587071774470, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1542970543426956, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1789000594581910, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
-    - {fileID: 1714190125013412, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1802014580544756, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1749584837695274}
     - {fileID: 1380373516336684}
@@ -8847,6 +8843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_handAnimator: {fileID: 95446876141039542}
+  fingerCollider: {fileID: 0}
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -8867,7 +8864,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  m_objectsInTrigger: []
   m_grabbed: {fileID: 0}
 --- !u!114 &114651779117560774
 MonoBehaviour:
@@ -9296,7 +9292,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1260131514073058}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9042904a85a62f04b99e3ce191cdf701, type: 3}
   m_Name: 
@@ -9401,6 +9397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_handAnimator: {fileID: 95895398312247306}
+  fingerCollider: {fileID: 0}
   m_onTouchInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -9421,7 +9418,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  m_objectsInTrigger: []
   m_grabbed: {fileID: 0}
 --- !u!114 &114756484427626132
 MonoBehaviour:
@@ -9701,7 +9697,6 @@ MonoBehaviour:
     - {fileID: 1630661033885042, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1811720672220202, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1748384280400756, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
-    - {fileID: 1036676625576202, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1496940977699118, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1798849439128116}
     - {fileID: 1084601870816626}
@@ -9736,7 +9731,6 @@ MonoBehaviour:
     - {fileID: 1325000320597658, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1621023461276128, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1904042879730432, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
-    - {fileID: 1565085510673336, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1274261367517226, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1833783286752136}
     - {fileID: 1718263547090908}
@@ -10116,7 +10110,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1571872852339080}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9042904a85a62f04b99e3ce191cdf701, type: 3}
   m_Name: 
@@ -10200,7 +10194,6 @@ MonoBehaviour:
     - {fileID: 1630661033885042, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1811720672220202, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1748384280400756, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
-    - {fileID: 1036676625576202, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1496940977699118, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1651091290412136}
     - {fileID: 1286076626983588}
@@ -10235,7 +10228,6 @@ MonoBehaviour:
     - {fileID: 1325000320597658, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1621023461276128, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1904042879730432, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
-    - {fileID: 1565085510673336, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
     - {fileID: 1647744174585114}
     - {fileID: 1684732181007236}
     - {fileID: 1571872852339080}
@@ -10405,7 +10397,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1114825788458756}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9892a8b58dcf8d499c18f8b8020fac1, type: 3}
   m_Name: 
@@ -10418,6 +10410,7 @@ MonoBehaviour:
     valueGuid: 
     WwiseObjectReference: {fileID: 11400000, guid: 6a15dc77fb6af8b47b35c575a07ca4a5,
       type: 2}
+  m_currentZone: {fileID: 0}
 --- !u!114 &114971966969519516
 MonoBehaviour:
   m_ObjectHideFlags: 1
