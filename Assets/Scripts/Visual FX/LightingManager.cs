@@ -10,6 +10,8 @@ public class LightingManager : MonoBehaviour {
 	[SerializeField] MeshRenderer zoneRenderer;
 	[SerializeField] List<MonoBehaviour> m_monoList;
 
+	bool vibrate = false;
+
 	// Use this for initialization
 	void Awake ()
 	{
@@ -25,9 +27,13 @@ public class LightingManager : MonoBehaviour {
 		}
 	}
 
+	MTK_InputManager[] m_inputManagers;
 	void TriggerSound()
 	{
 		AkSoundEngine.PostEvent("Sun_Light_Play", gameObject);
+		vibrate = true;
+
+		m_inputManagers = FindObjectsOfType<MTK_InputManager>();
 	}
 
 	void PlaySunExplosion()
@@ -46,12 +52,22 @@ public class LightingManager : MonoBehaviour {
 		{
 			zoneRenderer.enabled = true;
 		}
+
+		vibrate = false;
 	}
 	
 	// Update is called once per frame
 	[ContextMenu("Update")]
 	void Update () {
 		Shader.SetGlobalFloat("_ManagerUnlitFactor", sceneUnlitFactor);
+
+		if(vibrate)
+		{
+			foreach (MTK_InputManager inputmng in m_inputManagers)
+			{
+				inputmng.Haptic(1);
+			}
+		}
 
 		/*if(!isLit) {
 			foreach(Light item in lights)
