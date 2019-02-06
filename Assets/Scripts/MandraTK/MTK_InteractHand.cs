@@ -160,7 +160,8 @@ public class MTK_InteractHand : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         IcoSegment seg = other.gameObject.GetComponent<IcoSegment>();
-        if (seg && seg.IsInside(fingerCollider.position, other))
+        
+        if (seg && fingerCollider && seg.IsInside(fingerCollider.position, other))
         {
             return;
         }
@@ -197,7 +198,7 @@ public class MTK_InteractHand : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         IcoSegment seg = other.gameObject.GetComponent<IcoSegment>();
-        if (seg && seg.IsInside(fingerCollider.position, other))
+        if (seg && fingerCollider && seg.IsInside(fingerCollider.position, other))
         {
             return;
         }

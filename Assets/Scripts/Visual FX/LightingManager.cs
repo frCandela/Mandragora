@@ -52,7 +52,6 @@ public class LightingManager : MonoBehaviour {
 		foreach (MonoBehaviour mono in m_monoList)
 		{
 			mono.enabled = true;
-			print(mono.name);
 		}
 
 		if(zoneRenderer)
