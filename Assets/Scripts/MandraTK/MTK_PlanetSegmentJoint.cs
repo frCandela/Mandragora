@@ -20,6 +20,8 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
     private bool m_grabbing = false;
     // private ConfigurableJoint m_confJoint;
 
+    MTK_InputManager m_currentController;
+
     protected void Awake()
     {
         rigidbody = transform.parent.GetComponent<Rigidbody>();
@@ -51,6 +53,8 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
             m_baserotation = m_parentJoint.connectedGameobject.transform.rotation;
 
             m_initVec = other.transform.position - transform.parent.position;
+
+            m_currentController = other.GetComponentInParent<MTK_InputManager>();
 
             // joint
             // m_anchor = transform.InverseTransformPoint(other.transform.position);            
@@ -98,6 +102,8 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
                 m_baseDistance += heightSteps * (m_icoPlanet.heightDelta * m_icoPlanet.transform.localScale.x);
                 m_icoSegment.UpdateSegment();
                 m_icoSegment.UpdateNeighbours();
+
+                m_currentController.Haptic(1);
 
                 if(m_oldHeight != m_icoSegment.heightLevel)
                 {
