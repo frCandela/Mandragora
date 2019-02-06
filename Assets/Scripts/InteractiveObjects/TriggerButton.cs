@@ -12,6 +12,8 @@ public class TriggerButton : MonoBehaviour
     private Animator m_animator;
     private Collider m_collider;
 
+    MTK_InputManager m_currentController;
+
     float m_blend;
 
     bool State
@@ -56,11 +58,16 @@ public class TriggerButton : MonoBehaviour
         m_animator.SetFloat("blend", m_blend);
         m_blend = Mathf.Clamp01(m_blend + Time.deltaTime * (State ? 1 : -1) / m_timeToTrigger);
 
-        if(State && m_blend == 1)
+        if(State)
         {
-            AkSoundEngine.PostEvent("Button_Play", gameObject);
-            onButtonPressed.Invoke();
-            State = false;
+            m_currentController.Haptic(.1f);
+
+            if(m_blend == 1)
+            {
+                AkSoundEngine.PostEvent("Button_Play", gameObject);
+                onButtonPressed.Invoke();
+                State = false;
+            }
         }
     }
 
@@ -68,6 +75,8 @@ public class TriggerButton : MonoBehaviour
     {
         if( ! State )
             State = true;
+
+        m_currentController = other.GetComponentInParent<MTK_InputManager>();
     }
 
     private void OnTriggerExit(Collider other)
