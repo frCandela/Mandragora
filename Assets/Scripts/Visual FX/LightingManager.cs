@@ -21,11 +21,11 @@ public class LightingManager : MonoBehaviour {
 
 		m_monoList = new List<MonoBehaviour>();
 
-		m_monoList.AddRange(FindObjectsOfType<TelekinesisPointer>());
-		m_monoList.AddRange(FindObjectsOfType<Teleporter>());
+		m_monoList.AddRange(Resources.FindObjectsOfTypeAll<TelekinesisPointer>());
+		m_monoList.AddRange(Resources.FindObjectsOfTypeAll<Teleporter>());
 
-		if(FindObjectOfType<SteamVR_PlayArea>())
-			zoneRenderer = FindObjectOfType<SteamVR_PlayArea>().GetComponent<MeshRenderer>();
+		if(Resources.FindObjectsOfTypeAll<SteamVR_PlayArea>().Length > 0)
+			zoneRenderer = Resources.FindObjectsOfTypeAll<SteamVR_PlayArea>()[0].GetComponent<MeshRenderer>();
 
 		foreach (MonoBehaviour mono in m_monoList)
 			mono.enabled = false;
@@ -50,7 +50,10 @@ public class LightingManager : MonoBehaviour {
 	void ActivateControl()
 	{
 		foreach (MonoBehaviour mono in m_monoList)
+		{
 			mono.enabled = true;
+			print(mono.name);
+		}
 
 		if(zoneRenderer)
 			zoneRenderer.enabled = true;
