@@ -113,11 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!95 &183591241 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 95758093072379818, guid: ffb5441b7ea6e6540a92ffd21a0aef21,
-    type: 2}
-  m_PrefabInternal: {fileID: 2056219341}
 --- !u!4 &339811002 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4290785297268692, guid: e37a93b04e2a6ed49a932e07ff484ab3,
@@ -309,7 +304,7 @@ Mesh:
   m_MeshMetrics[0]: 1
   m_MeshMetrics[1]: 1
   m_MeshOptimized: 0
---- !u!1001 &631926616
+--- !u!1001 &693789342
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -400,20 +395,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 33610586083663262, guid: 86ca467c0c4a2574a82c8de7b7e95631,
-        type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 2027212987}
-    - target: {fileID: 0}
-      propertyPath: _objects.Array.data[0]._components.Array.data[0]._properties.Array.data[1]._objectReferenceValue
-      value: 
-      objectReference: {fileID: 183591241}
     - target: {fileID: 114947099703286730, guid: 86ca467c0c4a2574a82c8de7b7e95631,
         type: 2}
       propertyPath: onObjectCatched.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1118387674}
+    - target: {fileID: 33610586083663262, guid: 86ca467c0c4a2574a82c8de7b7e95631,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 2027913658}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86ca467c0c4a2574a82c8de7b7e95631, type: 2}
   m_IsPrefabAsset: 0
@@ -538,11 +529,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e37a93b04e2a6ed49a932e07ff484ab3, type: 2}
   m_IsPrefabAsset: 0
---- !u!95 &1047479810 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 95148892381059144, guid: 86ca467c0c4a2574a82c8de7b7e95631,
-    type: 2}
-  m_PrefabInternal: {fileID: 762189594}
 --- !u!114 &1118387674 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114230419892092686, guid: ffb5441b7ea6e6540a92ffd21a0aef21,
@@ -850,7 +836,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!43 &2027212987
+--- !u!43 &2027913658
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1111,10 +1097,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: _objects.Array.data[0]._components.Array.data[0]._properties.Array.data[1]._objectReferenceValue
-      value: 
-      objectReference: {fileID: 1047479810}
     - target: {fileID: 114428491029571336, guid: 3e71e23314c1f2f4fbde10d0b7a6c47e,
         type: 2}
       propertyPath: m_onComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1125,10 +1107,6 @@ Prefab:
       propertyPath: onObjectCatched.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2113613503}
-    - target: {fileID: 1296719710535222, guid: 3e71e23314c1f2f4fbde10d0b7a6c47e, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e71e23314c1f2f4fbde10d0b7a6c47e, type: 2}
   m_IsPrefabAsset: 0
