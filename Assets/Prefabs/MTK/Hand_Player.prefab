@@ -134,8 +134,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4712899157644010}
-  - component: {fileID: 135541288935768184}
   - component: {fileID: 114081053047347702}
+  - component: {fileID: 136430495589296206}
   m_Layer: 11
   m_Name: End
   m_TagString: Untagged
@@ -1017,13 +1017,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1220933327822048}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.14406615, y: -0.000000048428767, z: 0.000000032363456, w: 0.9895681}
+  m_LocalPosition: {x: 0, y: -0.00229, z: -0.00068}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4753064029828472}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 16.566, y: 0, z: 0}
 --- !u!4 &4727362414084924
 Transform:
   m_ObjectHideFlags: 1
@@ -1622,10 +1622,6 @@ MonoBehaviour:
     - {fileID: 1865872268534128}
     - {fileID: 1580540576070528}
     - {fileID: 1788898252363904}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
     - {fileID: 1484953649601962}
     - {fileID: 1858238424420852}
     - {fileID: 1407315130898200}
@@ -2059,8 +2055,8 @@ MonoBehaviour:
     positionOffset: {x: 0, y: 0, z: 0}
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
---- !u!135 &135541288935768184
-SphereCollider:
+--- !u!136 &136430495589296206
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -2068,8 +2064,9 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.0004
+  m_Height: 0.005
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136512360138493680
 CapsuleCollider:
