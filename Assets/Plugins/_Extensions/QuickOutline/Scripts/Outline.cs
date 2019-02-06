@@ -125,13 +125,11 @@ public class Outline : MonoBehaviour
 
     void Bake()
     {
-
         // Generate smooth normals for each mesh
         var bakedMeshes = new HashSet<Mesh>();
 
         foreach (var meshFilter in GetComponentsInChildren<MeshFilter>())
         {
-
             // Skip duplicates
             if (!bakedMeshes.Add(meshFilter.sharedMesh))
             {
@@ -148,10 +146,53 @@ public class Outline : MonoBehaviour
 
     void LoadSmoothNormals()
     {
-
         // Retrieve or generate smooth normals
         foreach (var meshFilter in GetComponentsInChildren<MeshFilter>())
         {
+            if(meshFilter.sharedMesh.subMeshCount > 1)
+            {
+                // Combine submeshes
+                List<CombineInstance> combineInstances = new List<CombineInstance>();
+                
+                for (int j = 0; j < meshFilter.sharedMesh.subMeshCount; j++)
+                {
+                    CombineInstance ci = new CombineInstance ();
+
+                    ci.mesh = meshFilter.sharedMesh;
+                    ci.subMeshIndex = j;
+                    ci.transform = meshFilter.transform.localToWorldMatrix;
+
+                    combineInstances.Add(ci);
+                }
+                
+                Mesh combinedMesh = new Mesh();
+                combinedMesh.CombineMeshes(combineInstances.ToArray(), true, false);
+
+                // Assemble final mesh = merged + base
+                List<CombineInstance> finalCI = new List<CombineInstance>();
+                
+                for (int j = 0; j < meshFilter.sharedMesh.subMeshCount; j++)
+                {
+                    CombineInstance ci = new CombineInstance ();
+
+                    ci.mesh = meshFilter.sharedMesh;
+                    ci.subMeshIndex = j;
+                    ci.transform = meshFilter.transform.localToWorldMatrix;
+
+                    finalCI.Add(ci);
+                }
+
+                CombineInstance ciMerged = new CombineInstance ();
+                ciMerged.mesh = combinedMesh;
+                ciMerged.transform = meshFilter.transform.localToWorldMatrix;
+
+                finalCI.Add(ciMerged);
+
+                Mesh finalMesh = new Mesh();
+                finalMesh.CombineMeshes(finalCI.ToArray(), false, false);
+
+                meshFilter.sharedMesh = finalMesh;
+            }
 
             // Skip if smooth normals have already been adopted
             if (!registeredMeshes.Add(meshFilter.sharedMesh))
