@@ -90,7 +90,7 @@ public class MTK_InteractHand : MonoBehaviour
             m_grabbed = obj;
             grabbedJoint = obj.jointType;
 
-            //m_grabbed.Outline = true;
+            inputManager.Haptic(1);
 
             m_handAnimator.SetBool("Visible", false);
 
