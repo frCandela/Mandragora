@@ -74,85 +74,86 @@ public class PlanetObjectPlacer : MonoBehaviour
         {
             foreach (MTK_InteractHand hand in m_handsInTrigger)
             {
-                if (hand.m_grabbed && hand.m_grabbed != m_dropZone.catchedObject && !hand.m_grabbed.GetComponent<IcoPlanet>())
+                if(!hand.m_grabbed.GetComponent<IcoPlanet>())
                 {
-                    Hologram holo;
-                    if (!m_objectsHolograms.TryGetValue(hand, out holo))
+                    if (hand.m_grabbed && hand.m_grabbed != m_dropZone.catchedObject)
                     {
-                        GameObject go = new GameObject("hologram");
-                        MeshFilter mf = go.AddComponent<MeshFilter>();
-                        MeshRenderer mr = go.AddComponent<MeshRenderer>();
-                        holo = go.AddComponent<Hologram>();
-
-                        mf.mesh = hand.m_grabbed.GetComponent<MeshFilter>().mesh;
-                        mr.material = m_material;
-                        go.transform.localScale = hand.m_grabbed.transform.localScale;
-
-                        holo.referenceObject = hand.m_grabbed.gameObject;
-
-                        m_objectsHolograms.Add(hand, holo);
-                    }                    
-
-                    Vector3 origin = hand.m_grabbed.transform.position;
-                    Vector3 dir = m_dropZone.transform.position - hand.m_grabbed.transform.position;
-
-
-                    RaycastHit hit;
-                    if (Physics.Raycast(origin, dir, out hit, 1f, LayerMask.GetMask("Planet")))
-                    {
-                        Debug.DrawLine(origin, origin + dir, Color.green);
-
-                        if (hit.distance < m_hologramDistance)
+                        Hologram holo;
+                        if (!m_objectsHolograms.TryGetValue(hand, out holo))
                         {
-                            holo.gameObject.SetActive(true);
-                            holo.gameObject.transform.position = hit.point;
-                            // holo.gameObject.transform.up = hit.normal;
-                            holo.gameObject.transform.rotation = hand.m_grabbed.transform.rotation;
+                            GameObject go = new GameObject("hologram");
+                            MeshFilter mf = go.AddComponent<MeshFilter>();
+                            MeshRenderer mr = go.AddComponent<MeshRenderer>();
+                            holo = go.AddComponent<Hologram>();
 
-                            holo.projectedSegment = hit.collider.gameObject;
+                            mf.mesh = hand.m_grabbed.GetComponent<MeshFilter>().mesh;
+                            mr.material = m_material;
+                            go.transform.localScale = hand.m_grabbed.transform.localScale;
+
+                            holo.referenceObject = hand.m_grabbed.gameObject;
+
+                            m_objectsHolograms.Add(hand, holo);
+                        }                    
+
+                        Vector3 origin = hand.m_grabbed.transform.position;
+                        Vector3 dir = m_dropZone.transform.position - hand.m_grabbed.transform.position;
+
+
+                        RaycastHit hit;
+                        if (Physics.Raycast(origin, dir, out hit, 1f, LayerMask.GetMask("Planet")))
+                        {
+                            Debug.DrawLine(origin, origin + dir, Color.green);
+
+                            if (hit.distance < m_hologramDistance)
+                            {
+                                holo.gameObject.SetActive(true);
+                                holo.gameObject.transform.position = hit.point;
+                                // holo.gameObject.transform.up = hit.normal;
+                                holo.gameObject.transform.rotation = hand.m_grabbed.transform.rotation;
+
+                                holo.projectedSegment = hit.collider.gameObject;
+                            }
+                            else
+                            {
+                                holo.gameObject.SetActive(false);
+                            }
                         }
                         else
                         {
-                            holo.gameObject.SetActive(false);
+                            Debug.DrawLine(origin, origin + dir, Color.red);
                         }
                     }
-                    else
+                    else if (m_objectsHolograms.ContainsKey(hand))
                     {
-                        Debug.DrawLine(origin, origin + dir, Color.red);
+                        Hologram holo = m_objectsHolograms[hand];
+
+                        Outline outline = holo.referenceObject.GetComponent<Outline>();
+                        if( outline)
+                        {
+                            outline.enabled = false;
+                        }
+
+                        GameObject copy = Instantiate(holo.referenceObject);
+
+                        copy.transform.position = holo.transform.position;
+                        copy.transform.rotation = holo.transform.rotation;
+                        copy.transform.parent = holo.projectedSegment.transform;
+                        copy.layer = LayerMask.NameToLayer("Planet");
+
+                        MTK_Interactable interact = copy.GetComponent<MTK_Interactable>();
+                        interact.isDroppable = false;
+                        interact.isDistanceGrabbable = false;
+
+                        copy.AddComponent<ObjectOnPlanet>().referenceObject = holo.referenceObject;
+
+                        Destroy(copy.GetComponent<Rigidbody>());
+
+                        holo.referenceObject.transform.position = - 1000f * Vector3.up;
+                        holo.referenceObject.GetComponent<Rigidbody>().isKinematic = true;
+
+                        Destroy(holo.gameObject);
+                        m_objectsHolograms.Remove(hand);
                     }
-                }
-                else if (m_objectsHolograms.ContainsKey(hand))
-                {
-                    Hologram holo = m_objectsHolograms[hand];
-
-                    Outline outline = holo.referenceObject.GetComponent<Outline>();
-                    if( outline)
-                    {
-                        outline.enabled = false;
-                    }
-                    
-
-
-                    GameObject copy = Instantiate(holo.referenceObject);
-
-                    copy.transform.position = holo.transform.position;
-                    copy.transform.rotation = holo.transform.rotation;
-                    copy.transform.parent = holo.projectedSegment.transform;
-                    copy.layer = LayerMask.NameToLayer("Planet");
-
-                    MTK_Interactable interact = copy.GetComponent<MTK_Interactable>();
-                    interact.isDroppable = false;
-                    interact.isDistanceGrabbable = false;
-
-                    copy.AddComponent<ObjectOnPlanet>().referenceObject = holo.referenceObject;
-
-                    Destroy(copy.GetComponent<Rigidbody>());
-
-                    holo.referenceObject.transform.position = - 1000f * Vector3.up;
-                    holo.referenceObject.GetComponent<Rigidbody>().isKinematic = true;
-
-                    Destroy(holo.gameObject);
-                    m_objectsHolograms.Remove(hand);
                 }
             }
         }
