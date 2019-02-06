@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23563054513880414}
   - component: {fileID: 114320046134490990}
   - component: {fileID: 114407047147771190}
+  - component: {fileID: 114703825139310586}
   m_Layer: 0
   m_Name: Maison2
   m_TagString: Untagged
@@ -36,13 +37,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1312110581955556}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -9.412, y: 0.215, z: 4.639}
-  m_LocalScale: {x: 2.364405, y: 1.6812202, z: 1.496654}
+  m_LocalRotation: {x: -0.4600625, y: 0.5369753, z: 0.5369753, w: 0.46006256}
+  m_LocalPosition: {x: -1.29, y: 0.6068, z: 0.4926}
+  m_LocalScale: {x: 0.5374067, y: 0.38212532, z: 0.3401757}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 98.82201}
 --- !u!23 &23563054513880414
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -91,7 +92,7 @@ MeshFilter:
   m_Mesh: {fileID: 4300000, guid: bf4eb3cbc69b15a43bcbcdc4646b5b5d, type: 3}
 --- !u!114 &114320046134490990
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1312110581955556}
@@ -107,7 +108,7 @@ MonoBehaviour:
   _assetGuid: eae1356d742c5b44a834ab4866a0a007
 --- !u!114 &114407047147771190
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1312110581955556}
@@ -117,3 +118,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 2c9dc81f-9a80-4df9-aabd-b2ea9789b3e6
+--- !u!114 &114703825139310586
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1312110581955556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1491221649, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
