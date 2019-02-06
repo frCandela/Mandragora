@@ -14,11 +14,13 @@ Shader "Mandragora/PlanetsMandragoraFlatLit" {
 		_DepthDistance ("Depth Distance", float) = 40
 
 		_RampTexture ("Ground Layers Ramp Texture", 2D) = "white" {}
-		_SnowColor ("Snow Color(RGB), Step(A)", Color) = (1,1,1,0.5)
-		_UwaterColor ("Under Water Color (RGB)", Color) = (0,0,0,1)
+		_SnowColor ("Snow Color(RGB), Step(A)", Color) = (1,1,1,0.4)
+		_UwaterColor ("Under Water Color (RGB), Step(A)", Color) = (0,0,0,0.79)
+		_GrassColor ("Grass Color(RGB), Step(A)", Color) = (0,0,0,0.4)
 		_PlanetColorShadowAmount ("Amount of PlanetColor in Shadow", Range(0,1)) = 0.2
 
-		_NoiseSettings ("Noise Amp1(X) Freq1(Y) Amp2(Z) Freq2(W)", Vector) = (0,0,0,0)
+		_SinNoiseSettings ("Snow Noise Amp1(X) Freq1(Y) Amp2(Z) Freq2(W)", Vector) = (-0.07, 35, -0.1, 14.09)
+		_FlatNoiseSettings ("Grass Noise Amp1(X) Freq1(Y) Amp2(Z) Freq2(W)", Vector) = (0.35, 2.38, 0.1, 11.25)
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
@@ -33,12 +35,12 @@ Shader "Mandragora/PlanetsMandragoraFlatLit" {
 		#pragma target 3.0
 
 		sampler2D _RampTexture;
-		float4 _SnowColor, _UwaterColor;
+		float4 _SnowColor, _UwaterColor, _GrassColor;
 		fixed4 _EmissionColor, _ShadowColor;
 		float _Luminosity, _SpecPow, _SpecularIntensity;
 		float _DepthDistance, _LightDiffuse;
 		float _PlanetColorShadowAmount;
-		float4 _NoiseSettings;
+		float4 _SinNoiseSettings, _FlatNoiseSettings;
 
 		struct MandragoraSurfaceFlatLitOutput
 		{
@@ -67,9 +69,7 @@ Shader "Mandragora/PlanetsMandragoraFlatLit" {
      	}
 
 		
-		float Noise (float3 pos, float amplitude1, float frequency1, float amplitude2, float frequency2) {
-			float3 offsetedPos = pos + float3(10,10,10);
-
+		float SinNoise (float3 pos, float amplitude1, float frequency1, float amplitude2, float frequency2) {
 			float noise1;
 			noise1 = cos(pos.x*frequency1) + sin(pos.y*frequency1);
 			noise1 *= amplitude1;
@@ -78,8 +78,25 @@ Shader "Mandragora/PlanetsMandragoraFlatLit" {
 			noise2 = sin(pos.x*frequency2) + cos(pos.y*frequency2);
 			noise2 *= amplitude2;
 
-			float noise = noise1 * noise2;
+			float noise = noise1 + noise2;
 			return noise;
+		}
+
+		float FlatNoise (float3 pos, float amp1, float freq1, float amp2, float freq2) {
+			float noise1;
+			float noiseValue1 = frac((pos.x + pos.y + pos.z)*freq1);
+			float stepNoise1 = 1 - step(1, noiseValue1*2);
+			noise1 = (stepNoise1 * noiseValue1) + ((1 - stepNoise1) * (1 - noiseValue1));
+			noise1 *= amp1;
+
+			float noise2;
+			float noiseValue2 = frac((pos.x + pos.y + pos.z)*freq2);
+			float stepNoise2 = 1 - step(1, noiseValue2*2);
+			noise2 = (stepNoise2 * noiseValue2) + ((1 - stepNoise2) * (1 - noiseValue2));
+			noise2 *= amp2;
+
+			return noise1 + noise2;
+
 		}
 
 
@@ -97,21 +114,25 @@ Shader "Mandragora/PlanetsMandragoraFlatLit" {
 			// Colors with Ground Levels
 			float3 groundWaterSnowA = IN.color.rgb;
 			float3 finalColor = tex2D(_RampTexture, groundWaterSnowA.r).rgb; // Set Ground Color
-			finalColor = lerp(finalColor, _UwaterColor, groundWaterSnowA.g); // Set UnderWater Amount
-			float offsetedAlpha = _SnowColor.a + Noise(IN.localPos, _NoiseSettings.x, _NoiseSettings.y, _NoiseSettings.z, _NoiseSettings.w);
-			finalColor = lerp(finalColor, _SnowColor, step(offsetedAlpha, groundWaterSnowA.b)); // Set Snow Amount
+			float waterLerpFactor = saturate((saturate(1 - groundWaterSnowA.r) - _UwaterColor.a) / (1 - _UwaterColor.a));
+			finalColor = lerp(finalColor, _UwaterColor.rgb, waterLerpFactor); // Set UnderWater Amount
+			float offsetedGrassStep = _GrassColor.a + FlatNoise(IN.localPos, _FlatNoiseSettings.x, _FlatNoiseSettings.y, _FlatNoiseSettings.z, _FlatNoiseSettings.w);
+			offsetedGrassStep = saturate(offsetedGrassStep);
+			finalColor = lerp(finalColor, _GrassColor.rgb, step(offsetedGrassStep, groundWaterSnowA.g));
+			float offsetedSnowStep = _SnowColor.a + SinNoise(IN.localPos, _SinNoiseSettings.x, _SinNoiseSettings.y, _SinNoiseSettings.z, _SinNoiseSettings.w);
+			offsetedSnowStep = saturate(offsetedSnowStep);
+			finalColor = lerp(finalColor, _SnowColor, step(offsetedSnowStep, groundWaterSnowA.b)); // Set Snow Amount
 
 
 			// Apply
 			fixed4 c = float4(finalColor, 1);
 			o.Albedo = c.rgb + (c.rgb * _Luminosity);
-			o.Emission = _EmissionColor.rgb;
+			o.Emission = float3(0,0,0);
 			o.Alpha = c.a;
 
 
 			// shadow Color
 			o.Albedo.rgb = float3(max(o.Albedo.r, _ShadowColor.r), max(o.Albedo.g, _ShadowColor.g), max(o.Albedo.b, _ShadowColor.b));
-			//depth
 
 		}
 
@@ -119,7 +140,6 @@ Shader "Mandragora/PlanetsMandragoraFlatLit" {
 
 			// Light Process
             float NdotL = dot (s.Normal, lightDir);
-			//float powAtten = pow(atten, _LightDiffuse);
 			float powAtten = pow(atten, 1.5);
 			float lighting = saturate(powAtten * NdotL);
 
@@ -134,10 +154,6 @@ Shader "Mandragora/PlanetsMandragoraFlatLit" {
 			spec *= specAtten;
 			spec *= _SpecularIntensity;
 			float3 specColor = (s.Albedo + _LightColor0.rgb)/2;
-
-			// Albedo Moyenne
-			//float moyAlbedo = (s.Albedo.r + s.Albedo.g + s.Albedo.b)/3;
-
 			
 			// Apply
 			float4 c;
