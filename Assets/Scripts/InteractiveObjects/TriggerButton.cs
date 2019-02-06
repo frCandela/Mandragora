@@ -60,7 +60,8 @@ public class TriggerButton : MonoBehaviour
 
         if(State)
         {
-            m_currentController.Haptic(.1f);
+            if(m_currentController)
+                m_currentController.Haptic(.1f);
 
             if(m_blend == 1)
             {
