@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MTK_TPZone : MonoBehaviour
 {
 	Animator m_animator;
+	[SerializeField] UnityEvent m_onExitZone;
 
-	bool m_apparu = false;
+	public bool m_enabled = false;
 
 	public bool Active
 	{
@@ -40,11 +42,16 @@ public class MTK_TPZone : MonoBehaviour
 	public void Appears(bool input)
 	{
 		if(!input)
-			if(!m_apparu)
+			if(!m_enabled)
 			{
-				// AkSoundEngine.PostEvent("Play_Wind", gameObject);
+				AkSoundEngine.PostEvent("Play_Way", gameObject);
 				m_animator.SetTrigger("Appears");
-				m_apparu = true;
+				m_enabled = true;
 			}
+	}
+
+	public void OnExit()
+	{
+		m_onExitZone.Invoke();
 	}
 }

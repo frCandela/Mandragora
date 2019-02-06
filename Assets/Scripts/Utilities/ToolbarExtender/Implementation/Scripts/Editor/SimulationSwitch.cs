@@ -23,9 +23,10 @@ namespace UnityToolbarExtender
 	static class SimulationSwitch
 	{		
 		static MTK_Manager m_mtkManager;
+		static Animator m_lightManager;
 		static string m_keyPrefName = "SimulationMode";
 
-		static bool Enabled
+		static bool EnableSimulation
 		{
 			get
 			{
@@ -44,6 +45,25 @@ namespace UnityToolbarExtender
 			}
 		}
 
+		static bool EnableFast
+		{
+			get
+			{
+				return false;
+			}
+			set
+			{
+				if(value)
+				{
+					if(!m_lightManager)
+					m_lightManager = GameObject.FindObjectOfType<LightingManager>().GetComponent<Animator>();
+
+					if(m_lightManager && EditorApplication.isPlaying)
+						m_lightManager.Play("DEBUG");
+				}
+			}
+		}
+
 		static SimulationSwitch()
 		{
 			ToolbarExtender.LeftToolbarGUI.Add(OnToolbarGUI);
@@ -53,7 +73,8 @@ namespace UnityToolbarExtender
 		{
 			GUILayout.FlexibleSpace();
 
-			Enabled = GUILayout.Toggle(Enabled, new GUIContent("S", "Simulation Mode"), ToolbarStyles.commandButtonStyle);
+			EnableFast = GUILayout.Toggle(false, new GUIContent("F", "Fast Mode"), ToolbarStyles.commandButtonStyle);
+			EnableSimulation = GUILayout.Toggle(EnableSimulation, new GUIContent("S", "Simulation Mode"), ToolbarStyles.commandButtonStyle);
 		}
 	}
 }

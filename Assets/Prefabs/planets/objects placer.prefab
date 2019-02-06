@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 114356276586393538}
   - component: {fileID: 114093021029129446}
   - component: {fileID: 95023808619973378}
+  - component: {fileID: 114083413143090066}
   m_Layer: 0
   m_Name: socle03
   m_TagString: Untagged
@@ -864,7 +865,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: b094ccdb03ee64f4080992083879784a, type: 2}
+  - {fileID: 2100000, guid: b509747527075b847bf7946733806c92, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1110,7 +1111,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 10
   m_Drag: 0
-  m_AngularDrag: 1
+  m_AngularDrag: 100
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1325,6 +1326,33 @@ MonoBehaviour:
     - {fileID: 1731103256830648}
     - {fileID: 1628247692326958}
   _assetGuid: 7a016283fe343dc4897bd649e6b993a4
+--- !u!114 &114083413143090066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1282151944694360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd6d0868963fe146865d6db759177f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_turnOn:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 610a7cc779fc4f144aee1d8a495cb989,
+      type: 2}
+  m_turnOff:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 542c4b60f46618a47ad35b8aadd44e9c,
+      type: 2}
+  m_ambientOn:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 93919082edaadab488b933d5193a6c86,
+      type: 2}
+  m_ambientOff:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: a156508bfb979a2448b7a7e5e0c0e1bf,
+      type: 2}
 --- !u!114 &114093021029129446
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1351,6 +1379,7 @@ MonoBehaviour:
   m_activationCooldown: 2
   m_ejectForce: 1
   m_workshopAnimator: {fileID: 95023808619973378}
+  m_sounds: {fileID: 0}
   onObjectCatched:
     m_PersistentCalls:
       m_Calls: []
@@ -1408,10 +1437,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  wOnButtonReleased:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: 5fb6128ddf55bf54995d8bf7d8be3738,
-      type: 2}
 --- !u!114 &114267759418422430
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -83,7 +83,7 @@ public class Teleporter : MonoBehaviour
 
 				foreach (MTK_TPZone zone in m_allTPZones)
 				{
-					if(m_currentZone != zone)
+					if(m_currentZone != zone && zone.m_enabled)
 						zone.Active = value;
 				}
 
@@ -94,6 +94,7 @@ public class Teleporter : MonoBehaviour
 					if(TargetZone)
 					{
 						m_sound.Post(gameObject);
+						m_currentZone.OnExit();
 						MTK_Fade.Start(new Color(1,0,1,0), m_fadeStart, MoveMtkManager);
 						m_available = false;
 
@@ -127,7 +128,10 @@ public class Teleporter : MonoBehaviour
 		
 			if(Physics.Raycast(origin.position, origin.forward, out m_rayHit, 100, LayerMask.GetMask("TP")))
 			{
-				TargetZone = m_rayHit.collider.GetComponent<MTK_TPZone>();
+				MTK_TPZone candidate = m_rayHit.collider.GetComponent<MTK_TPZone>();
+
+				if(candidate && candidate.m_enabled)
+					TargetZone = candidate;
 			}
 			else
 			{
@@ -144,7 +148,5 @@ public class Teleporter : MonoBehaviour
 		m_mtkManager.transform.position = m_targetTransform.position;
 		m_mtkManager.transform.rotation = m_targetTransform.rotation;
 		MTK_Fade.Start(Color.clear, m_fadeEnd, () => m_available = true);
-
-		AkSoundEngine.PostEvent("Stop_Wind", gameObject);
 	}
 }

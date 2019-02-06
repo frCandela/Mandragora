@@ -37,11 +37,9 @@ public class IcoPlanet : MonoBehaviour
     Mesh m_mesh;
     MeshCollider m_meshCollider;
 
-    Vector3 m_originalScale;
-
     void Start()
     {
-        m_originalScale = transform.localScale;
+        Vector3 m_originalScale = transform.localScale;
         transform.localScale = Vector3.one * (transform.localScale.x /transform.lossyScale.x);
 
         if (m_initialize)
@@ -56,7 +54,6 @@ public class IcoPlanet : MonoBehaviour
         foreach (IcoSegment segment in m_segments)
             segment.UpdateSegment();
 
-        transform.localPosition = Vector3.zero;
         transform.localScale = m_originalScale;
 
 
@@ -72,21 +69,6 @@ public class IcoPlanet : MonoBehaviour
         GenerateMeshCollider();
         foreach (IcoSegment segment in m_segments)
             segment.GetComponent<MeshCollider>().enabled = false;
-    }
-
-    [ContextMenu("RestoreScale")]
-    public void RestoreScale()
-    {
-        float wrongScale = m_segments[0].transform.localScale.x;
-
-
-        transform.parent = null;
-        foreach (IcoSegment segment in m_segments)
-        {
-            segment.transform.localScale = Vector3.one;
-            segment.transform.localRotation = Quaternion.identity;
-        }
-        transform.localScale = wrongScale * transform.localScale;
     }
         
     [ContextMenu("GenerateMeshCollider")]

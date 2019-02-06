@@ -24,11 +24,13 @@ public class PlanetObjectPlacer : MonoBehaviour
 
     void EnablePlacing( bool state )
     {
+        IcoPlanet ico = m_dropZone.catchedObject.GetComponent<IcoPlanet>();
+
         if( state )
         {
             m_placingEnabled = true;
 
-            if(m_dropZone.catchedObject.GetComponent<IcoPlanet>())
+            if(ico)
             {
                 foreach (Transform segment in m_dropZone.catchedObject.transform)
                 {
@@ -41,12 +43,16 @@ public class PlanetObjectPlacer : MonoBehaviour
                     }
                 }
             }
+            else
+            {
+                m_dropZone.Release();
+            }
         }
         else
         {
             m_placingEnabled = false;
 
-            if (m_dropZone.catchedObject.GetComponent<IcoPlanet>())
+            if (ico)
             {
                 foreach (Transform segment in m_dropZone.catchedObject.transform)
                 {

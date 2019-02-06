@@ -65,7 +65,7 @@ public class Outline : MonoBehaviour
 
     void OnEnable()
     {
-        if( renderers == null )
+        if( renderers == null || renderers.Length == 0)
         {
             Initialize();
         }            

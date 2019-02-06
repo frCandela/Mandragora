@@ -27,11 +27,16 @@ public class Kinder : MTK_Interactable
 		base.OnEnable();
 		isGrabbable = true;
 		m_enabled = true;
-		m_rgbd.isKinematic = false;
+
+		if(m_rgbd)
+			m_rgbd.isKinematic = false;
 	}
 
 	public void TriggerKinderSound()
 	{
+		m_planet.transform.localPosition = Vector3.zero;
+		m_planet.transform.localScale = Vector3.one;
+
 		foreach (MeshCollider c in m_planet.GetComponents<MeshCollider>())
 			c.enabled = false;
 
@@ -57,27 +62,35 @@ public class Kinder : MTK_Interactable
 		}
 	}
 
-	int m_needFix = 0;
-	private void FixedUpdate()
-	{
-		if(m_needFix > 0)
-		{
-			m_planet.GetComponent<MeshCollider>().enabled = !m_planet.GetComponent<MeshCollider>().enabled;
-			m_planet.GetComponent<Rigidbody>().isKinematic = !m_planet.GetComponent<MeshCollider>().enabled;
-			m_needFix--;
-		}
-	}
+	// int m_needFix = 0;
+	// private void FixedUpdate()
+	// {
+	// 	if(m_needFix > 0)
+	// 	{
+	// 		// m_planet.GetComponent<MeshCollider>().enabled = !m_planet.GetComponent<MeshCollider>().enabled;
+	// 		// m_planet.GetComponent<Rigidbody>().isKinematic = !m_planet.GetComponent<MeshCollider>().enabled;
+	// 		// m_planet.GetComponent<Rigidbody>().velocity = Vector3.up * 10;
+	// 		m_needFix--;
+	// 	}
+	// }
 
 	[ContextMenu("Break")]
 	void Break()
 	{
-		m_needFix = 101;
+		// m_needFix = 101;
 
-		m_planet.transform.parent = transform.parent;
-		m_planet.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+		Destroy(GetComponent<Animator>());
+
+		transform.SetParent(transform.parent.parent, true);
+
+		m_planet.GetComponent<MeshCollider>().enabled = true;
+
+		Rigidbody planetRgbd = m_planet.GetComponent<Rigidbody>();
+		planetRgbd.isKinematic = false;
+		planetRgbd.constraints = RigidbodyConstraints.None;
+
         m_planet.GetComponent<MTK_Interactable>().enabled = true;
-        m_planet.GetComponent<IcoPlanet>().RestoreScale();
-
+		m_planet.transform.SetParent(transform.parent.parent);
 
         Destroy(m_rgbd);
 		Destroy(GetComponent<Collider>());
@@ -86,7 +99,8 @@ public class Kinder : MTK_Interactable
 
 		AkSoundEngine.PostEvent("Kinder_Break_Play", gameObject);
 
-		Destroy(gameObject, 10);
 		MTK_InteractiblesManager.Instance.UnSubscribe(this);
+
+		planetRgbd.velocity = Vector3.up * 1;
 	}
 }

@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 114304216239756348}
   - component: {fileID: 114579648346146330}
   - component: {fileID: 95777406195439100}
+  - component: {fileID: 114158288036690696}
   m_Layer: 0
   m_Name: socle03
   m_TagString: Untagged
@@ -885,6 +886,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: c5e262ae-49ef-4ac5-9d7c-eb7eb79ed12f
+--- !u!114 &114158288036690696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1860112494050088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd6d0868963fe146865d6db759177f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_turnOn:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 610a7cc779fc4f144aee1d8a495cb989,
+      type: 2}
+  m_turnOff:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 542c4b60f46618a47ad35b8aadd44e9c,
+      type: 2}
+  m_ambientOn:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 93919082edaadab488b933d5193a6c86,
+      type: 2}
+  m_ambientOff:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: a156508bfb979a2448b7a7e5e0c0e1bf,
+      type: 2}
 --- !u!114 &114250341982298958
 MonoBehaviour:
   m_ObjectHideFlags: 1

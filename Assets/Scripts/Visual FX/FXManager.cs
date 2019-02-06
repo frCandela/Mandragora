@@ -18,7 +18,9 @@ public class FXManager : MonoBehaviour
 	{
 		Transform currentEffect = m_effectsList[effectName];
 
-		// currentEffect.SetParent(target, true);
+		if(effectName == "Grab")
+			currentEffect.SetParent(target, true);
+			
 		currentEffect.position = target.position;
 		currentEffect.GetComponent<ParticleSystem>().Play();
 

@@ -11,6 +11,7 @@ public class DropZone : MonoBehaviour
     [SerializeField] private float m_activationCooldown = 2f;
     [SerializeField] private float m_ejectForce = 1f;
     [SerializeField] private Animator m_workshopAnimator;
+    [SerializeField] private SocleSounds m_sounds;
     private GameObject m_visual;
 
     public UnityEventBool onObjectCatched;
@@ -37,6 +38,7 @@ public class DropZone : MonoBehaviour
         {
             m_workshopAnimator.SetBool("isOn", catched);
             m_button.SetActive(catched);
+            m_sounds.State = catched;
         });
     }
 	
@@ -73,6 +75,7 @@ public class DropZone : MonoBehaviour
             tmp.GetComponent<Rigidbody>().AddForce(m_ejectForce * Vector3.up, ForceMode.Impulse);
 
             m_visual.SetActive(true);
+            m_nbObjectsInTrigger = 0;
         }
     }
 
@@ -104,10 +107,10 @@ public class DropZone : MonoBehaviour
                 if(icoplanet)
                     icoplanet.Joined = true;
 
+                m_visual.SetActive(false);
+                m_nbObjectsInTrigger = 0;
 
                 onObjectCatched.Invoke(true);
-
-                m_visual.SetActive(false);
             }
         }
     }
