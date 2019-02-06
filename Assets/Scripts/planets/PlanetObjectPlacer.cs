@@ -74,7 +74,7 @@ public class PlanetObjectPlacer : MonoBehaviour
         {
             foreach (MTK_InteractHand hand in m_handsInTrigger)
             {
-                if (hand.m_grabbed && hand.m_grabbed != m_dropZone.catchedObject)
+                if (hand.m_grabbed && hand.m_grabbed != m_dropZone.catchedObject && !hand.m_grabbed.GetComponent<IcoPlanet>())
                 {
                     Hologram holo;
                     if (!m_objectsHolograms.TryGetValue(hand, out holo))
