@@ -7,6 +7,7 @@ public class TelekinesisPointer : MonoBehaviour
 	FXManager m_fxManager;
 	[SerializeField] MTK_InteractHand m_interactHand;
 	[SerializeField] Animator m_handAnimator;
+	[SerializeField] Transform m_repere;
 
 	[Header("Settings")]
 	[SerializeField, Range(0,0.1f)]
@@ -109,7 +110,7 @@ public class TelekinesisPointer : MonoBehaviour
 			// Detect movement to trigger attraction
 			if(m_attract)
 			{
-				Vector3 force = (transform.position - m_lastPos) * 10;
+				Vector3 force = (m_repere.position - m_lastPos) * 10;
 
 				if(force.sqrMagnitude > m_maxForce)
 					force = force.normalized * m_maxForce;
@@ -139,7 +140,7 @@ public class TelekinesisPointer : MonoBehaviour
 		}
 
 		// Update force
-		m_lastPos = transform.position;
+		m_lastPos = m_repere.position;
 	}
 
     void SetLevitation(MTK_Interactable interactable, bool value)
