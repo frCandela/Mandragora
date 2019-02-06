@@ -33,7 +33,7 @@ public class PlanetScaler : Workshop
     {
         // If the scale sphere is grabbed
         if(m_dropzone.catchedObject && m_dropzone.catchedObject.jointType &&
-            m_dropzone.catchedObject.jointType.Used())
+           m_dropzone.catchedObject.jointType.Used())
         {
             if (m_baseDist == -1f)
             {
@@ -86,6 +86,7 @@ public class PlanetScaler : Workshop
         {
             m_catchedObjectJoint = current.jointType;
             current.jointType.onJointBreak.AddListener(ResetHand);
+            current.isGrabbable = false;
 
             m_scaleEffect = current.GetComponent<ScaleEffect>();
 
@@ -96,6 +97,8 @@ public class PlanetScaler : Workshop
             }
 
             AkSoundEngine.PostEvent("LFO_Scale_Play", gameObject);
+
+            StartCoroutine(AnimateWorkshop(2, () => current.isGrabbable = true));
         }
         else
         {
@@ -104,5 +107,22 @@ public class PlanetScaler : Workshop
 
             AkSoundEngine.PostEvent("LFO_Scale_Stop", gameObject);
         }
+    }
+
+    IEnumerator AnimateWorkshop(float duration, VoidDelegate onFinish)
+    {
+        float scaleIncrement = 0;
+        Vector3 initScale = m_scaleEffect.transform.localScale;
+
+        for (float t = 0; t < 1; t += Time.deltaTime / duration)
+        {
+            scaleIncrement = Mathf.Sin(t * Mathf.PI);
+
+            m_scaleEffect.transform.localScale = initScale + Vector3.one * scaleIncrement;
+
+            yield return new WaitForEndOfFrame();
+        }
+        
+        onFinish.Invoke();
     }
 }
