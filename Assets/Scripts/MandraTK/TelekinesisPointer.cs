@@ -230,7 +230,7 @@ public class TelekinesisPointer : MonoBehaviour
 
 		if(m_connectedBody)
 		{
-			m_connectedBody.AddForce((force - m_lastForceApplied) * Mathf.Sqrt(GetDistanceToTarget() * 10000));
+			m_connectedBody.AddForce((m_lastForceApplied - force) * Mathf.Sqrt(GetDistanceToTarget() * 10000));
 			m_connectedBody.AddTorque(force.z, force.x, force.y);
 			m_connectedBody.useGravity = false;
 			
