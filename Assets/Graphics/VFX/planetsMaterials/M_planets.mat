@@ -55,7 +55,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RampTexture:
-        m_Texture: {fileID: 2800000, guid: 52e095822ae2769448d8b9aa847067e4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2d6b360f453e81143bd0f1428860bbb1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -73,7 +73,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _PlanetColorShadowAmount: 0.5
+    - _PlanetColorShadowAmount: 0.2
     - _SmoothnessTextureChannel: 0
     - _SpecPow: 48
     - _SpecularHighlights: 1
@@ -84,7 +84,10 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FlatNoiseSettings: {r: 0.35, g: 2.38, b: 0.1, a: 11.25}
+    - _GrassColor: {r: 0.00965035, g: 1, b: 0, a: 0.4}
     - _NoiseSettings: {r: 0.24, g: 11.4, b: 0.25, a: 4.37}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 0}
-    - _SnowColor: {r: 1, g: 1, b: 1, a: 0.7607843}
-    - _UwaterColor: {r: 0, g: 0.036266256, b: 0.3018868, a: 1}
+    - _SinNoiseSettings: {r: -0.07, g: 35, b: -0.1, a: 14.09}
+    - _SnowColor: {r: 1, g: 1, b: 1, a: 0.4}
+    - _UwaterColor: {r: 0, g: 0.11688254, b: 1, a: 0.7882353}
