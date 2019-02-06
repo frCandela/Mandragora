@@ -23,6 +23,9 @@ GameObject:
   - component: {fileID: 23848465306701842}
   - component: {fileID: 114745330493858470}
   - component: {fileID: 114280210393130674}
+  - component: {fileID: 64243187482021656}
+  - component: {fileID: 114816084554500502}
+  - component: {fileID: 114542556945026532}
   m_Layer: 0
   m_Name: Rock2
   m_TagString: Untagged
@@ -36,13 +39,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1530348540811032}
-  m_LocalRotation: {x: -0.000000053385083, y: 0.7071068, z: -0.7071068, w: 0.000000053385083}
-  m_LocalPosition: {x: -8.036, y: 0.215, z: 4.1725216}
-  m_LocalScale: {x: 16.71137, y: 18.940311, z: 12.456226}
+  m_LocalRotation: {x: -0.11612341, y: 0.14844178, z: -0.98192275, w: -0.01755474}
+  m_LocalPosition: {x: -6.8897, y: 1.7009, z: -7.254}
+  m_LocalScale: {x: 9.609862, y: 10.891614, z: 7.1629453}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 17.193, y: 13.489, z: 179.99998}
 --- !u!23 &23848465306701842
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -85,9 +88,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1530348540811032}
   m_Mesh: {fileID: 4300000, guid: b51954b6a3b71ee41b937e91530fdffb, type: 3}
+--- !u!64 &64243187482021656
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1530348540811032}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: b51954b6a3b71ee41b937e91530fdffb, type: 3}
 --- !u!114 &114280210393130674
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1530348540811032}
@@ -97,9 +114,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: c83d74c0-72d1-4f79-b99b-d24175707b2f
+--- !u!114 &114542556945026532
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1530348540811032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecba034caf8fd5647a6847793c833fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_upwardRotation: {x: 0, y: 0, z: 0}
+  isDistanceGrabbable: 1
+  isDroppable: 1
+  m_isGrabbable: 1
+  onIsGrabbableChange:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEventMTK_Interactable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  m_wOnUseStart:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
+  m_onUseStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_wOnUseStop:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
+  m_onUseStop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_wOnGrabStart:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
+  m_onGrabStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_wOnGrabStop:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
+  m_onGrabSop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  isDistanceGrabbed: 0
 --- !u!114 &114745330493858470
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1530348540811032}
@@ -113,3 +183,56 @@ MonoBehaviour:
     _collection:
     - {fileID: 1530348540811032}
   _assetGuid: cf074ccc16bf24a4c9f862156bb726c8
+--- !u!114 &114816084554500502
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1530348540811032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecba034caf8fd5647a6847793c833fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_upwardRotation: {x: 0, y: 0, z: 0}
+  isDistanceGrabbable: 1
+  isDroppable: 1
+  m_isGrabbable: 1
+  onIsGrabbableChange:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEventMTK_Interactable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  m_wOnUseStart:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
+  m_onUseStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_wOnUseStop:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
+  m_onUseStop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_wOnGrabStart:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
+  m_onGrabStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_wOnGrabStop:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
+  m_onGrabSop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  isDistanceGrabbed: 0

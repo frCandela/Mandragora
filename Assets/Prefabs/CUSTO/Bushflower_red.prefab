@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 23469804341072398}
   - component: {fileID: 114332669028773194}
   - component: {fileID: 114716673499740622}
+  - component: {fileID: 64704332118897122}
+  - component: {fileID: 114553224890347412}
   m_Layer: 0
   m_Name: Bushflower_red
   m_TagString: Untagged
@@ -36,13 +38,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1539852674959594}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -9.7, y: 0.215, z: 4.634}
+  m_LocalRotation: {x: -0.19823791, y: 0.67875016, z: 0.6787501, w: 0.19823804}
+  m_LocalPosition: {x: -6.462, y: 1.4066, z: -6.588}
   m_LocalScale: {x: 46.88272, y: 46.88272, z: 46.88272}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 147.438}
 --- !u!23 &23469804341072398
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -86,9 +88,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1539852674959594}
   m_Mesh: {fileID: 4300000, guid: 21b4ad725d451d547ab28f5ae99bfd3b, type: 3}
+--- !u!64 &64704332118897122
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1539852674959594}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 21b4ad725d451d547ab28f5ae99bfd3b, type: 3}
 --- !u!114 &114332669028773194
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1539852674959594}
@@ -102,9 +118,62 @@ MonoBehaviour:
     _collection:
     - {fileID: 1539852674959594}
   _assetGuid: 51c94fe44cee467418952770a6f21e96
+--- !u!114 &114553224890347412
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1539852674959594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecba034caf8fd5647a6847793c833fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_upwardRotation: {x: 0, y: 0, z: 0}
+  isDistanceGrabbable: 1
+  isDroppable: 1
+  m_isGrabbable: 1
+  onIsGrabbableChange:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEventMTK_Interactable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  m_wOnUseStart:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
+  m_onUseStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_wOnUseStop:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
+  m_onUseStop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_wOnGrabStart:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
+  m_onGrabStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_wOnGrabStop:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
+  m_onGrabSop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  isDistanceGrabbed: 0
 --- !u!114 &114716673499740622
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1539852674959594}
