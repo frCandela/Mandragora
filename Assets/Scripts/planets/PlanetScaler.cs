@@ -98,10 +98,17 @@ public class PlanetScaler : Workshop
 
             AkSoundEngine.PostEvent("LFO_Scale_Play", gameObject);
 
-            StartCoroutine(AnimateWorkshop(2, () => current.isGrabbable = true));
+            StartCoroutine(AnimateWorkshop(2, () => 
+            {
+                current.isGrabbable = true;
+                m_dropzone.EnableButton();
+            }));
         }
         else
         {
+            if(m_scaleEffect)
+                m_scaleEffect.RemoveEffect();
+
             m_catchedObjectJoint = null;
             m_scaleEffect = null;
 

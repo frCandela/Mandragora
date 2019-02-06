@@ -37,7 +37,6 @@ public class DropZone : MonoBehaviour
         onObjectCatched.AddListener((bool catched) =>
         {
             m_workshopAnimator.SetBool("isOn", catched);
-            m_button.SetActive(catched);
             m_sounds.State = catched;
         });
     }
@@ -53,6 +52,11 @@ public class DropZone : MonoBehaviour
         {
             m_outline.enabled = false;
         }        
+    }
+
+    public void EnableButton()
+    {
+        m_button.SetActive(true);
     }
 
     public void Release()
@@ -76,6 +80,8 @@ public class DropZone : MonoBehaviour
 
             m_visual.SetActive(true);
             m_nbObjectsInTrigger = 0;
+
+            m_button.SetActive(false);
         }
     }
 

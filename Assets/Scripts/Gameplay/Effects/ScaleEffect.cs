@@ -14,6 +14,7 @@ public class ScaleEffect : Effect
     public override bool ApplyEffect()
     {
         originalScale = transform.localScale;
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
 
         return true;
     }
@@ -21,5 +22,7 @@ public class ScaleEffect : Effect
     public override void RemoveEffect()
     {
         transform.localScale = originalScale;
+
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
     }
 }
