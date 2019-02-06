@@ -248,7 +248,7 @@ public class SteamVR_PlayArea : MonoBehaviour
 	{
 		if (Application.isPlaying)
 		{
-			GetComponent<MeshRenderer>().enabled = drawInGame;
+			// GetComponent<MeshRenderer>().enabled = drawInGame;
 
 			// No need to remain enabled at runtime.
 			// Anyone that wants to change properties at runtime

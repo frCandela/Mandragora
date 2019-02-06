@@ -7,22 +7,12 @@ using UnityEngine;
 public class LightingManager : MonoBehaviour {
 
 	[Range(0.0f, 1.0f)] public float sceneUnlitFactor;
-	MeshRenderer zoneRenderer;
-
-	List<MonoBehaviour> m_monoList;
+	[SerializeField] MeshRenderer zoneRenderer;
+	[SerializeField] List<MonoBehaviour> m_monoList;
 
 	// Use this for initialization
-	void Awake () {
-		//sunRenderer = sunGO.GetComponent<MeshRenderer>();
-
-		m_monoList = new List<MonoBehaviour>();
-
-		m_monoList.AddRange(Resources.FindObjectsOfTypeAll<TelekinesisPointer>());
-		m_monoList.AddRange(Resources.FindObjectsOfTypeAll<Teleporter>());
-
-		if(Resources.FindObjectsOfTypeAll<SteamVR_PlayArea>().Length > 0)
-			zoneRenderer = Resources.FindObjectsOfTypeAll<SteamVR_PlayArea>()[0].GetComponent<MeshRenderer>();
-
+	void Awake ()
+	{
 		foreach (MonoBehaviour mono in m_monoList)
 			mono.enabled = false;
 	}
@@ -30,7 +20,9 @@ public class LightingManager : MonoBehaviour {
 	private void Start()
 	{
 		if(zoneRenderer)
+		{
 			zoneRenderer.enabled = false;
+		}
 	}
 
 	void TriggerSound()
@@ -51,7 +43,9 @@ public class LightingManager : MonoBehaviour {
 		}
 
 		if(zoneRenderer)
+		{
 			zoneRenderer.enabled = true;
+		}
 	}
 	
 	// Update is called once per frame
