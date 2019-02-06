@@ -7,6 +7,7 @@ public class MTK_TPZone : MonoBehaviour
 {
 	Animator m_animator;
 	[SerializeField] UnityEvent m_onExitZone;
+	[SerializeField] Animator m_pipeAnimator;
 
 	public bool m_enabled = false;
 
@@ -46,6 +47,10 @@ public class MTK_TPZone : MonoBehaviour
 			{
 				AkSoundEngine.PostEvent("Play_Way", gameObject);
 				m_animator.SetTrigger("Appears");
+
+				if(m_pipeAnimator)
+					m_pipeAnimator.SetTrigger("Trigger");
+					
 				m_enabled = true;
 			}
 	}
