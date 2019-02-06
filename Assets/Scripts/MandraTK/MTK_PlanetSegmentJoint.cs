@@ -98,27 +98,63 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
 
             if (heightSteps != 0)
             {
-                m_icoSegment.heightLevel += heightSteps;
-                m_baseDistance += heightSteps * (m_icoPlanet.heightDelta * m_icoPlanet.transform.localScale.x);
-                m_icoSegment.UpdateSegment();
-                m_icoSegment.UpdateNeighbours();
-
+                Increment(heightSteps);
                 m_currentController.Haptic(1);
-
-                if(m_oldHeight != m_icoSegment.heightLevel)
-                {
-                    if(m_icoSegment.heightLevel  <= 0)
-                        AkSoundEngine.PostEvent("Water_Play", gameObject);
-                    else if (heightSteps  > 0)
-                        AkSoundEngine.PostEvent("Stone_Up_Play", gameObject);
-                    else if (heightSteps < 0)
-                        AkSoundEngine.PostEvent("Stone_Down_Play", gameObject);
-                }
-                
-                m_oldHeight = m_icoSegment.heightLevel;
             }
 
             m_parentJoint.connectedGameobject.transform.rotation = Quaternion.FromToRotation(m_initVec, m_connectedGameobject.transform.position - transform.parent.position) * m_baserotation;
+        }
+    }
+
+    void Increment(int amount)
+    {
+        m_icoSegment.heightLevel += amount;
+        m_baseDistance += amount * (m_icoPlanet.heightDelta * m_icoPlanet.transform.localScale.x);
+        m_icoSegment.UpdateSegment();
+        m_icoSegment.UpdateNeighbours();
+
+        if(m_oldHeight != m_icoSegment.heightLevel)
+        {
+            if(m_icoSegment.heightLevel  <= 0)
+                AkSoundEngine.PostEvent("Water_Play", gameObject);
+            else if (amount  > 0)
+                AkSoundEngine.PostEvent("Stone_Up_Play", gameObject);
+            else if (amount < 0)
+                AkSoundEngine.PostEvent("Stone_Down_Play", gameObject);
+        }
+        
+        m_oldHeight = m_icoSegment.heightLevel;
+    }
+
+    [ContextMenu("Animate")]
+    public void RandomAnimation()
+    {
+        StartCoroutine(Animate(Random.Range(.1f, .5f), Random.Range(-m_icoPlanet.nbLevels, m_icoPlanet.nbLevels)));
+    }
+
+    IEnumerator Animate(float timeBetweenSteps, int stepsAmount)
+    {
+        if(stepsAmount != 0)
+        {
+            yield return new WaitForSeconds(.5f);
+
+            GetComponent<MTK_Interactable>().isGrabbable = false;
+
+            int increment = (int)Mathf.Sign(stepsAmount);
+
+            for (int i = 0; i < stepsAmount; i++)
+            {
+                Increment(increment);
+                yield return new WaitForSeconds(timeBetweenSteps);
+            }
+
+            for (int i = 0; i < stepsAmount; i++)
+            {
+                Increment(-increment);
+                yield return new WaitForSeconds(timeBetweenSteps);
+            }
+
+            GetComponent<MTK_Interactable>().isGrabbable = true;
         }
     }
 }

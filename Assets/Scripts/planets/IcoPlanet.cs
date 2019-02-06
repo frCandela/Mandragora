@@ -37,6 +37,9 @@ public class IcoPlanet : MonoBehaviour
     Mesh m_mesh;
     MeshCollider m_meshCollider;
 
+    List<MTK_PlanetSegmentJoint> m_segmentJoints = new List<MTK_PlanetSegmentJoint>();
+
+
     void Start()
     {
         Vector3 m_originalScale = transform.localScale;
@@ -70,7 +73,17 @@ public class IcoPlanet : MonoBehaviour
         foreach (IcoSegment segment in m_segments)
             segment.GetComponent<MeshCollider>().enabled = false;
     }
-        
+    
+    [ContextMenu("Animate")]
+    public void Animate()
+    {
+        foreach (MTK_PlanetSegmentJoint seg in m_segmentJoints)
+        {
+            if(Random.Range(0,1.0f) < .5f)
+                seg.RandomAnimation();
+        }
+    }
+
     [ContextMenu("GenerateMeshCollider")]
     public void GenerateMeshCollider()
     {
@@ -121,7 +134,7 @@ public class IcoPlanet : MonoBehaviour
             icoSeg.icoPlanet = this;
             icoSeg.SetBaseVertices(v0, v1, v2);
 
-            segment.AddComponent<MTK_PlanetSegmentJoint>();
+            m_segmentJoints.Add(segment.AddComponent<MTK_PlanetSegmentJoint>());
             MTK_Interactable interactable = segment.AddComponent<MTK_Interactable>();
             interactable.isDistanceGrabbable = false;
             interactable.isGrabbable = false;

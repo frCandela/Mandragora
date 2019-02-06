@@ -14,6 +14,11 @@ public class PlanetTerraformer : MonoBehaviour
         m_dropzone = GetComponent<DropZone>();
         m_dropzone.onObjectCatched.AddListener(EnableTerraformation);
     }
+
+    void EnableButton()
+    {
+        m_dropzone.EnableButton();
+    }
 	
 	// Update is called once per frame
     void EnableTerraformation( bool state )
@@ -21,6 +26,10 @@ public class PlanetTerraformer : MonoBehaviour
         if( state )
         {
             m_icoPlanet = m_dropzone.catchedObject.GetComponent<IcoPlanet>();
+            m_icoPlanet.Animate();
+
+            Invoke("EnableButton", 2);
+
             if (m_icoPlanet)
             {
                 MTK_Interactable interactable = m_icoPlanet.GetComponent<MTK_Interactable>();
