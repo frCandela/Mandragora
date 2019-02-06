@@ -5,7 +5,6 @@
 		_Color ("Main Color", Color) = (0,0,0,1)
 		_Luminosity ("Luminosity", float) = 1
 		_Completion ("Pipe Completion", Range(0,1)) = 0.5
-		_Direction ("Pipe Direction (0 / 1)", Range(0, 1)) = 1
 	}
 	SubShader
 	{
@@ -48,7 +47,6 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 				float slider = step(i.uv.y, _Completion);
-				slider = lerp(slider, 1 - slider, _Direction);
 				fixed4 col = _Color * _Luminosity;
 				col *= slider;
 				//col *= _ManagerUnlitFactor;

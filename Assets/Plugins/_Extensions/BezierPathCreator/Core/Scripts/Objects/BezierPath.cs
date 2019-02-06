@@ -54,6 +54,13 @@ namespace PathCreation
         [SerializeField, HideInInspector]
         bool flipNormals;
 
+        public void Reverse()
+        {
+            points.Reverse();
+
+            NotifyPathModified();
+        }
+
         #endregion
 
         #region Constructors

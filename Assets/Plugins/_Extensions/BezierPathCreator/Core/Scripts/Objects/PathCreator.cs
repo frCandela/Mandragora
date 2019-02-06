@@ -66,6 +66,12 @@ namespace PathCreation
             initialized = true;
         }
 
+        [ContextMenu("Invert")]
+        void Invert()
+        {
+            editorData.bezierPath.Reverse();
+        }
+
         public PathCreatorData EditorData
         {
             get
