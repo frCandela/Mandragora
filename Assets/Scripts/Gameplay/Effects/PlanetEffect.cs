@@ -98,6 +98,11 @@ public class PlanetEffect : Effect
 
     private void OnCollisionEnter(Collision other)
     {
-        Destroy(Instantiate(explosionEffect, transform.position, transform.rotation), 10);
+        if( ! m_rb.useGravity)
+        {
+            Vector3 dir = (transform.position - other.transform.position).normalized;
+            m_rb.AddForce(10 * dir, ForceMode.Impulse);
+            Destroy(Instantiate(explosionEffect, transform.position, transform.rotation), 10);
+        }            
     }
 }
