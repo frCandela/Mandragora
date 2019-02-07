@@ -23,8 +23,7 @@ public class SolarSystem : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if(other.attachedRigidbody)
-        {
-            
+        {            
             MTK_Interactable interactable = other.attachedRigidbody.GetComponent<MTK_Interactable>();
             if (interactable && interactable.isGrabbable && !interactable.isDistanceGrabbed)
             {

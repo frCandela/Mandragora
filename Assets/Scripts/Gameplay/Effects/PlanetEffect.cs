@@ -17,7 +17,7 @@ public class PlanetEffect : Effect
     public float accelerationForce = 1;
 
     public bool m_radiusDecided = false;
-
+    public bool effectActive = true;
     public override bool ApplyEffect()
     {
         m_rb = GetComponent<Rigidbody>();
@@ -57,20 +57,20 @@ public class PlanetEffect : Effect
             m_lastVel = m_rb.velocity;
             m_rb.useGravity = true;
         }
-
         AkSoundEngine.PostEvent("Planet_Rotation_Stop", gameObject);
     }
 
     Vector3 axis;
     float baseVel;
     Vector3 m_lastVel;
+
     private void FixedUpdate()
     {
-        Vector3 dir = transform.position - sunRigidbody.transform.position;
-        float radius = dir.magnitude;
-        dir.Normalize();
-        if (!m_joint.Used())
+        if (!m_joint.Used()&& effectActive)
         {
+            Vector3 dir = transform.position - sunRigidbody.transform.position;
+            float radius = dir.magnitude;
+            dir.Normalize();
             if (baseVel > maxSpeed)
             {
                // float delta = (baseVel - maxSpeed) * Time.fixedDeltaTime / accelerationDuration;
