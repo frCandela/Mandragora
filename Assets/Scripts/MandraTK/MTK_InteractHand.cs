@@ -21,6 +21,7 @@ public class MTK_InteractHand : MonoBehaviour
     private int m_nbContacts = 0;
 
     private MTK_InputManager m_inputManager;
+    private MTK_Setup m_setup;
     private MTK_JointType grabbedJoint;
 
     [HideInInspector] public MTK_Interactable m_grabbed = null;
@@ -38,6 +39,7 @@ public class MTK_InteractHand : MonoBehaviour
     private void Start()
     {
         m_inputManager = GetComponentInParent<MTK_InputManager>();
+        m_setup = GetComponentInParent<MTK_Setup>();
     }
 
     public void TryGrab(bool input)
@@ -96,6 +98,8 @@ public class MTK_InteractHand : MonoBehaviour
             m_handAnimator.SetBool("Visible", false);
 
             m_handAnimator.SetBool("Grab", true);
+
+            m_setup.NotifyGrab(m_grabbed);
         }
     }
 
@@ -123,6 +127,7 @@ public class MTK_InteractHand : MonoBehaviour
 
             RemoveObjectInTrigger();
 
+            m_setup.NotifyRelease(m_grabbed);
             m_grabbed = null;
             m_objectInTrigger = null;
         }

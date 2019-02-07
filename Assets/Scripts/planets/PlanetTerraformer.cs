@@ -26,12 +26,13 @@ public class PlanetTerraformer : MonoBehaviour
         if( state )
         {
             m_icoPlanet = m_dropzone.catchedObject.GetComponent<IcoPlanet>();
-            m_icoPlanet.Animate();
-
-            Invoke("EnableButton", 2);
-
+            
             if (m_icoPlanet)
             {
+                m_icoPlanet.Animate();
+
+                Invoke("EnableButton", 2);
+
                 MTK_Interactable interactable = m_icoPlanet.GetComponent<MTK_Interactable>();
                 interactable.isDistanceGrabbable = false;
                 interactable.isGrabbable = false;

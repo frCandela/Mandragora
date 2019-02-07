@@ -21,7 +21,7 @@ public class ScaleEffect : Effect
 
     public override void RemoveEffect()
     {
-        transform.localScale = originalScale;
+        // transform.localScale = originalScale;
 
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
     }
