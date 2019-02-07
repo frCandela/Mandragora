@@ -44,6 +44,43 @@ AnimationClip:
     path: Mesh Holder
     classID: 23
     script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 5
+        inSlope: -2.6542075
+        outSlope: -2.6542075
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.14183782
+      - serializedVersion: 3
+        time: 2.0666666
+        value: 1.9525412
+        inSlope: -0.60466033
+        outSlope: -0.60466033
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.65958923
+        outWeight: 0.08265846
+      - serializedVersion: 3
+        time: 13
+        value: 1.2
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: material._Luminosity
+    path: Mesh Holder
+    classID: 23
+    script: {fileID: 0}
   m_PPtrCurves: []
   m_SampleRate: 60
   m_WrapMode: 0
@@ -59,13 +96,20 @@ AnimationClip:
       typeID: 23
       customType: 22
       isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 617520026
+      attribute: 2385068519
+      script: {fileID: 0}
+      typeID: 23
+      customType: 22
+      isPPtrCurve: 0
     pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 7
+    m_StopTime: 13
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -106,6 +150,43 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._Completion
+    path: Mesh Holder
+    classID: 23
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 5
+        inSlope: -2.6542075
+        outSlope: -2.6542075
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.14183782
+      - serializedVersion: 3
+        time: 2.0666666
+        value: 1.9525412
+        inSlope: -0.60466033
+        outSlope: -0.60466033
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.65958923
+        outWeight: 0.08265846
+      - serializedVersion: 3
+        time: 13
+        value: 1.2
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: material._Luminosity
     path: Mesh Holder
     classID: 23
     script: {fileID: 0}
