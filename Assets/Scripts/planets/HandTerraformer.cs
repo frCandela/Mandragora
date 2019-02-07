@@ -65,10 +65,13 @@ public class HandTerraformer : MonoBehaviour
 
     void TerraformDown(bool state)
     {
+        print("zob");
         if (state)
         {
+
+
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, 1000f))
+            if (Physics.Raycast(transform.position, transform.forward, out hit, 1000f, LayerMask.GetMask("Planet")))
             {
                 IcoSegment segment = hit.collider.gameObject.GetComponent<IcoSegment>();
                 if (segment)

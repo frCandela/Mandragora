@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,9 +32,12 @@ public class PlanetObjectPlacer : MonoBehaviour
 
             if(ico)
             {
+                ico.GetComponent<MeshCollider>().enabled = false;
+
                 foreach (Transform segment in m_dropZone.catchedObject.transform)
                 {
-                    if(segment.GetComponent<IcoSegment>())
+                    segment.GetComponent<MeshCollider>().enabled = true;
+                    if (segment.GetComponent<IcoSegment>())
                     {
                         foreach (Transform decoration in segment)
                         {
@@ -54,10 +57,12 @@ public class PlanetObjectPlacer : MonoBehaviour
 
             if (ico)
             {
+                ico.GetComponent<MeshCollider>().enabled = true;
                 foreach (Transform segment in m_dropZone.catchedObject.transform)
                 {
                     if (segment.GetComponent<IcoSegment>())
                     {
+                        segment.GetComponent<MeshCollider>().enabled = true;
                         foreach (Transform decoration in segment)
                         {
                             decoration.GetComponent<MTK_Interactable>().isGrabbable = false;

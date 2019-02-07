@@ -24,7 +24,6 @@ public class IcoPlanet : MonoBehaviour
     [SerializeField] public float borderRatio = 0.2f;
     [SerializeField] public int nbLevels = 5;
     [SerializeField] public int m_defaultHeightLevel = 0;
-    [SerializeField] public Color[] levelColors = new Color[10];
 
     [Header("Read only data")]
     [SerializeField]  private int trianglesCount;
@@ -143,8 +142,10 @@ public class IcoPlanet : MonoBehaviour
     }
 
     [ContextMenu("UpdateTesselationLevel")]    
-    public void UpdateTesselationLevel()
+    public void SetTesselationLevel( int nbSubdivisions)
     {
+        m_nbSubdivisions = nbSubdivisions;
+
         GameObject tmp = new GameObject("tmp");
         tmp.transform.parent = transform;
         int count = transform.childCount;
@@ -153,22 +154,17 @@ public class IcoPlanet : MonoBehaviour
             transform.GetChild(0).parent = tmp.transform;
         }
 
-        GameObject sapins = new GameObject("sapins");
-        sapins.transform.parent = transform;
+        GameObject decoration = new GameObject("decoration");
+        decoration.transform.parent = transform;
         foreach (Transform child in tmp.transform)
         {
             foreach (Transform sapin in child)
             {
-                sapin.SetParent(sapins.transform, true);
+                sapin.SetParent(decoration.transform, true);
             }
         }
 
-        sapins.SetActive(false);
-        transform.position = 1000 * Vector3.up;
-
-
-
-
+        decoration.SetActive(false);
         Initialize();
 
         foreach (IcoSegment segment in m_segments)
@@ -183,10 +179,8 @@ public class IcoPlanet : MonoBehaviour
                 IcoSegment seg = hit.collider.GetComponent<IcoSegment>();
                 if (seg)
                     segment.heightLevel = seg.heightLevel;
-                else
-                    print(hit.collider.name);
-            }
-
+            }            
+                
         }
 
         tmp.SetActive(false);
@@ -201,13 +195,10 @@ public class IcoPlanet : MonoBehaviour
         foreach (IcoSegment segment in m_segments)
             segment.UpdateSegment();
 
-        Destroy(tmp);
+        Destroy(tmp);       
 
-        transform.position = Vector3.zero;
-
-        sapins.SetActive(true);
+        decoration.SetActive(true);
     }
-
 
     [ContextMenu("UpdatePlanet")]
     public void UpdatePlanet()

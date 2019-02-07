@@ -13,7 +13,7 @@ public abstract class Workshop : MonoBehaviour
         m_dropzone.onObjectCatched.AddListener(EnableWorkshop);
     }
 
-	protected void EnableWorkshop(bool state)
+    protected void EnableWorkshop(bool state)
 	{
 		MTK_Interactable current = m_dropzone.catchedObject;
 
