@@ -44,6 +44,7 @@
 			float _FresnelPow, _FresnelIntensity, _FresnelOpacity, _Luminosity, _Opacity;
 			float _ReflexionIntensity, _ReflexionPower;
 			fixed4 _Color;
+			float _ManagerUnlitFactor;
 			
 			v2f vert (appdata v)
 			{
@@ -108,6 +109,8 @@
 				col.rgb *= _Luminosity;
 
 				col.a = saturate(fresnel * _Color.a + alphaLightReflexion) * _Opacity;
+
+				col *= _ManagerUnlitFactor;
 
 				// DEBUG
 				//col.rgb = _LightColor0.rgb;

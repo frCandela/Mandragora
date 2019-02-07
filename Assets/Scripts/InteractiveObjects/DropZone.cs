@@ -90,6 +90,8 @@ public class DropZone : MonoBehaviour
     {        
         if (catchedObject)
         {
+            catchedObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+
             m_lastActivationTime = Time.time;
             onObjectCatched.Invoke(false);
             catchedObject.jointType.onJointBreak.RemoveListener(Release);
@@ -106,6 +108,7 @@ public class DropZone : MonoBehaviour
             tmp.GetComponent<Rigidbody>().AddForce(m_ejectForce * Vector3.up, ForceMode.Impulse);
 
             m_nbObjectsInTrigger = 0;
+            objInTrigger = null;
 
             m_button.SetActive(false);
         }
@@ -133,6 +136,7 @@ public class DropZone : MonoBehaviour
                 AkSoundEngine.PostEvent("Socle_Activated_Play", gameObject);
                 catchedObject = interactable;
                 interactable.jointType.onJointBreak.AddListener(Release);
+                interactable.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
 
                 IcoPlanet icoplanet = interactable.GetComponent<IcoPlanet>();
 

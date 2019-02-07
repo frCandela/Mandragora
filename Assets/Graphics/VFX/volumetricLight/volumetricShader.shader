@@ -65,6 +65,7 @@
 			float _Cursor, _FresnelSensibility, _FresnelPow, _IsAlphaTex, _IsAlphaUV, _IsBackFace;
 			float4 _AlphaMaskPow;
 			sampler2D _CameraDepthTexture, _AlphaMaskTex;
+			float _ManagerUnlitFactor;
 			
 			v2f vert (appdata v)
 			{
@@ -146,6 +147,8 @@
 				col.a *= _Opacity + _HighlightOpacity * highLight;
 				col.a *= inValue;
 				col.a *= alphaMask;
+
+				col *= _ManagerUnlitFactor;
 
 				// DEBUG
 				//col = fixed4(alphaMaskX, alphaMaskX, alphaMaskX, 1);

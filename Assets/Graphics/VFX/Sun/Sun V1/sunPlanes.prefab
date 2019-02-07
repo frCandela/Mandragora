@@ -11,24 +11,6 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1554064191739738}
   m_IsPrefabAsset: 1
---- !u!1 &1015923353738328
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4389963408317602}
-  - component: {fileID: 33610775488989514}
-  - component: {fileID: 23542035127505290}
-  - component: {fileID: 114472206963390854}
-  m_Layer: 13
-  m_Name: sunLightPlane
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1055562038147366
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,12 +23,12 @@ GameObject:
   - component: {fileID: 23816107641087888}
   - component: {fileID: 114951245373931458}
   m_Layer: 13
-  m_Name: sunLightPlane (1)
+  m_Name: sunLightPlane_rase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1132459327778956
 GameObject:
   m_ObjectHideFlags: 0
@@ -77,12 +59,12 @@ GameObject:
   - component: {fileID: 23566088842144048}
   - component: {fileID: 114501263361427654}
   m_Layer: 13
-  m_Name: sunLightPlane (1)
+  m_Name: sunLightPlane_jaune
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1330668357175764
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +111,7 @@ Transform:
   m_LocalScale: {x: 1.0583175, y: 1.058318, z: 0.58884186}
   m_Children: []
   m_Father: {fileID: 4456491641454206}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!4 &4330599806859406
 Transform:
@@ -144,19 +126,6 @@ Transform:
   m_Father: {fileID: 4456491641454206}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!4 &4389963408317602
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1015923353738328}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0.32000002}
-  m_LocalScale: {x: 1.2891402, y: 1.2891399, z: 0.7172734}
-  m_Children: []
-  m_Father: {fileID: 4456491641454206}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!4 &4456491641454206
 Transform:
   m_ObjectHideFlags: 1
@@ -169,7 +138,6 @@ Transform:
   m_Children:
   - {fileID: 4770823039340896}
   - {fileID: 4330599806859406}
-  - {fileID: 4389963408317602}
   - {fileID: 4826316404988294}
   - {fileID: 4247472211955650}
   m_Father: {fileID: 0}
@@ -199,7 +167,7 @@ Transform:
   m_LocalScale: {x: 1.1874802, y: 1.1874808, z: 0.6607073}
   m_Children: []
   m_Father: {fileID: 4456491641454206}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!23 &23398513944422618
 MeshRenderer:
@@ -271,41 +239,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!23 &23542035127505290
-MeshRenderer:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1015923353738328}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
-  m_Materials:
-  - {fileID: 2100000, guid: 09d10493683a03249b6c5d2fed75063f, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!23 &23566088842144048
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -321,7 +254,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: fb70bf17ade338143962d3c773dc5f8c, type: 2}
+  - {fileID: 2100000, guid: e9f6b459ecca686479a37135c01b0634, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -356,7 +289,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 9f0f0257901692640be30be24ef759dd, type: 2}
+  - {fileID: 2100000, guid: f62fe2569cfbf064a9792a138c4fccae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -397,13 +330,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1141722560823616}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!33 &33610775488989514
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1015923353738328}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &33968407169967142
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -435,18 +361,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 339942b8-5306-4db2-a808-2902af717b5a
---- !u!114 &114472206963390854
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1015923353738328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _guid: 3852bec5-0ccc-4368-b228-2422d38571b7
 --- !u!114 &114501263361427654
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -487,7 +401,7 @@ MonoBehaviour:
     _collection:
     - {fileID: 1554064191739738}
     - {fileID: 1132459327778956}
-    - {fileID: 1015923353738328}
+    - {fileID: 0}
     - {fileID: 1330668357175764}
     - {fileID: 1055562038147366}
     - {fileID: 1141722560823616}
