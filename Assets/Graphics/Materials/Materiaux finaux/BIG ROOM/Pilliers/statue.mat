@@ -6,13 +6,13 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: M_dropZone_wireframe
-  m_Shader: {fileID: 4800000, guid: 8a0c2badfd6a27949bdd0a10c4207299, type: 3}
+  m_Name: statue
+  m_Shader: {fileID: 4800000, guid: f9bc9beb6ba45f6439a1e4c315379148, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -55,31 +55,34 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AlphaCutoff: 0.99
-    - _BoolenFactor: 196.82
     - _BumpScale: 1
     - _Cutoff: 0.5
+    - _DepthDistance: 40
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Emissive: 0.5
+    - _FresnelIntensity: 1.68
+    - _FresnelOpacity: 0.701
+    - _FresnelPow: 0.81
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _LightDiffuse: 1
+    - _Luminosity: 1.07
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Opacity: 1
     - _Parallax: 0.02
-    - _Slider: 0.001
+    - _ReflexionIntensity: 0.209
+    - _ReflexionPower: 32.28
     - _SmoothnessTextureChannel: 0
+    - _SpecPow: 48
     - _SpecularHighlights: 1
+    - _SpecularIntensity: 3
     - _SrcBlend: 1
-    - _TextureInfluence: 0
     - _UVSec: 0
-    - _WireframeWidth: 18.03
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 0.87414986, b: 0.0047169924, a: 1}
+    - _Color: {r: 0, g: 0.37325683, b: 0.6132076, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissiveColor: {r: 1, g: 0.779317, b: 0.6084906, a: 1}
-    - _NoiseAmplitude: {r: 0.05, g: 0.05, b: 0.05, a: 0}
-    - _NoiseFreq: {r: 5, g: 5, b: 5, a: 0}
+    - _ShadowColor: {r: 0, g: 0, b: 0, a: 0}
