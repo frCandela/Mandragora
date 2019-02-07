@@ -74,8 +74,8 @@ public class MTK_InteractHand : MonoBehaviour
     {
         if(obj)
         {
-            if(!obj.GetComponent<ScaleEffect>() && !obj.GetComponent<IcoSegment>())
-                obj.transform.position = transform.position;
+            // if(!obj.GetComponent<ScaleEffect>() && !obj.GetComponent<IcoSegment>())
+            //     obj.transform.position = transform.position;
             
             if (obj.jointType.Used())
                 obj.jointType.RemoveJoint();

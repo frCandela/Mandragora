@@ -22,7 +22,7 @@ public abstract class MTK_Setup : MonoBehaviour
 
         m_scalerDrop.enabled = true;
 
-        if(grabbed.GetComponent<Icosphere>())
+        if(grabbed.GetComponent<IcoPlanet>())
             m_tileDrop.enabled = m_placerDrop.enabled = true;
     }
 
