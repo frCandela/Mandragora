@@ -83,7 +83,7 @@ public class Teleporter : MonoBehaviour
 
 				foreach (MTK_TPZone zone in m_allTPZones)
 				{
-					if(m_currentZone != zone && zone.m_enabled)
+					if(CurrentZone != zone && zone.m_enabled)
 						zone.Active = value;
 				}
 
@@ -94,12 +94,12 @@ public class Teleporter : MonoBehaviour
 					if(TargetZone)
 					{
 						m_sound.Post(gameObject);
-						m_currentZone.OnExit();
+						CurrentZone.OnExit();
 						MTK_Fade.Start(new Color(1,0,1,0), m_fadeStart, MoveMtkManager);
 						m_available = false;
 
-						m_currentZone = TargetZone;
-						m_currentZone.Validate();
+						CurrentZone = TargetZone;
+						CurrentZone.Validate();
 
 						m_tpVFX.LaunchInTpVfx();
 					}

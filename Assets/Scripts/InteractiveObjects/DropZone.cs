@@ -24,11 +24,15 @@ public class DropZone : MonoBehaviour
     private int m_nbObjectsInTrigger = 0;
     private float m_lastActivationTime;
 
+    Collider m_collider;
+
     // Use this for initialization
     void Awake ()
     {
         m_outline = GetComponent<Outline>();
         m_outline.enabled = false;
+
+        m_collider = GetComponent<Collider>();
 
         m_lastActivationTime = Time.time;
 
@@ -39,6 +43,29 @@ public class DropZone : MonoBehaviour
             m_workshopAnimator.SetBool("isOn", catched);
             m_sounds.State = catched;
         });
+    }
+    
+    private void OnEnable()
+    {
+        if(!catchedObject)
+        {
+            m_visual.SetActive(true);
+        }
+    }
+
+    private void OnDisable()
+    {
+        m_visual.SetActive(false);
+
+        if(objInTrigger)
+        {
+            Catch(objInTrigger);
+        }
+
+        if(!catchedObject)
+        {
+            Release();
+        }
     }
 	
 	// Update is called once per frame
@@ -78,7 +105,6 @@ public class DropZone : MonoBehaviour
             tmp.jointType.RemoveJoint();
             tmp.GetComponent<Rigidbody>().AddForce(m_ejectForce * Vector3.up, ForceMode.Impulse);
 
-            m_visual.SetActive(true);
             m_nbObjectsInTrigger = 0;
 
             m_button.SetActive(false);
@@ -121,13 +147,15 @@ public class DropZone : MonoBehaviour
         }
     }
 
+    MTK_Interactable objInTrigger;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.attachedRigidbody)
+        if (enabled && other.attachedRigidbody)
         {
             MTK_Interactable interact = other.attachedRigidbody.GetComponent<MTK_Interactable>();
             if (interact && interact.isDroppable)
             {
+                objInTrigger = interact;
                 m_nbObjectsInTrigger++;
             }
         }
@@ -135,11 +163,12 @@ public class DropZone : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.attachedRigidbody)
+        if (enabled && other.attachedRigidbody)
         {
             MTK_Interactable interact = other.attachedRigidbody.GetComponent<MTK_Interactable>();
             if (interact && interact.isDroppable)
             {
+                objInTrigger = null;
                 m_nbObjectsInTrigger--;
             }
         }
@@ -147,12 +176,12 @@ public class DropZone : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.attachedRigidbody)
+        if (enabled && other.attachedRigidbody)
         {
-            MTK_Interactable interactable = other.attachedRigidbody.GetComponent<MTK_Interactable>();
-            if (interactable && interactable.isDroppable)
+            MTK_Interactable interact = other.attachedRigidbody.GetComponent<MTK_Interactable>();
+            if (interact && interact.isDroppable)
             {
-                Catch(interactable);
+                Catch(interact);
             }
         }
     }
