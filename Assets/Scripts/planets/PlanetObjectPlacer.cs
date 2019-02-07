@@ -8,11 +8,15 @@ public class PlanetObjectPlacer : MonoBehaviour
 
     [SerializeField] private DropZone m_dropZone;
     [SerializeField] private Material m_material;
+    [SerializeField] private GameObject m_previewObject;
 
     private List<MTK_InteractHand> m_handsInTrigger;
 
     private Dictionary<MTK_InteractHand, Hologram> m_objectsHolograms;
     private bool m_placingEnabled = false;
+
+    Vector3 previewInitPos;
+    Quaternion previewInitRos;
 
 	// Use this for initialization
 	void Start ()
@@ -20,6 +24,9 @@ public class PlanetObjectPlacer : MonoBehaviour
         m_objectsHolograms = new Dictionary<MTK_InteractHand, Hologram>();
         m_handsInTrigger = new List<MTK_InteractHand>();
         m_dropZone.onObjectCatched.AddListener(EnablePlacing);
+
+        previewInitPos = m_previewObject.transform.position;
+        previewInitRos = m_previewObject.transform.rotation;
     }
 
     void EnablePlacing( bool state )
@@ -28,10 +35,10 @@ public class PlanetObjectPlacer : MonoBehaviour
 
         if( state )
         {
-            m_placingEnabled = true;
-
             if(ico)
             {
+                StartCoroutine(Animate()); //place after init ?
+
                 ico.GetComponent<MeshCollider>().enabled = false;
 
                 foreach (Transform segment in m_dropZone.catchedObject.transform)
@@ -73,6 +80,83 @@ public class PlanetObjectPlacer : MonoBehaviour
         }
     }
 
+    IEnumerator Animate()
+    {
+        m_previewObject.SetActive(true);
+
+        Hologram holo = CreateHologram(m_previewObject);
+        Vector3 rotationAxis = (m_dropZone.transform.position - Camera.main.transform.position).normalized;
+
+        for (float t = 0; t < 2; t += Time.deltaTime)
+        {
+            m_previewObject.transform.RotateAround(m_dropZone.transform.position, -rotationAxis, Time.deltaTime * 20);
+            DrawHologram(holo, m_previewObject.transform);
+            yield return new WaitForEndOfFrame();
+        }
+
+        Destroy(holo.gameObject);
+
+        m_previewObject.SetActive(false);
+        m_previewObject.transform.position = previewInitPos;
+        m_previewObject.transform.rotation = previewInitRos;
+
+        m_placingEnabled = true;
+
+        m_dropZone.EnableButton();
+    }
+
+    Hologram CreateHologram(GameObject reference)
+    {
+        Hologram holo;
+
+        GameObject go = new GameObject("hologram");
+        MeshFilter mf = go.AddComponent<MeshFilter>();
+        MeshRenderer mr = go.AddComponent<MeshRenderer>();
+        holo = go.AddComponent<Hologram>();
+
+        mf.mesh = reference.GetComponent<MeshFilter>().mesh;
+        Material[] ghostMaterials = new Material[mf.mesh.subMeshCount];
+        for (int i = 0; i < ghostMaterials.Length; i++)
+            ghostMaterials[i] = m_material;
+            
+        mr.materials = ghostMaterials;
+        go.transform.localScale = reference.transform.lossyScale;
+
+        holo.referenceObject = reference;
+
+        return holo;
+    }
+
+    void DrawHologram(Hologram holo, Transform originTransform)
+    {
+        Vector3 origin = originTransform.position;
+        Vector3 dir = m_dropZone.transform.position - origin;
+
+        RaycastHit hit;
+        if (Physics.Raycast(origin, dir, out hit, 1f, LayerMask.GetMask("Planet")))
+        {
+            Debug.DrawLine(origin, origin + dir, Color.green);
+
+            if (hit.distance < m_hologramDistance)
+            {
+                holo.gameObject.SetActive(true);
+                holo.gameObject.transform.position = hit.point;
+                // holo.gameObject.transform.up = hit.normal;
+                holo.gameObject.transform.rotation = originTransform.rotation;
+
+                holo.projectedSegment = hit.collider.gameObject;
+            }
+            else
+            {
+                holo.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            Debug.DrawLine(origin, origin + dir, Color.red);
+        }
+    }
+
     private void Update()
     {
         if(m_placingEnabled && m_dropZone.catchedObject.GetComponent<IcoPlanet>())
@@ -84,47 +168,11 @@ public class PlanetObjectPlacer : MonoBehaviour
                     Hologram holo;
                     if (!m_objectsHolograms.TryGetValue(hand, out holo))
                     {
-                        GameObject go = new GameObject("hologram");
-                        MeshFilter mf = go.AddComponent<MeshFilter>();
-                        MeshRenderer mr = go.AddComponent<MeshRenderer>();
-                        holo = go.AddComponent<Hologram>();
-
-                        mf.mesh = hand.m_grabbed.GetComponent<MeshFilter>().mesh;
-                        mr.material = m_material;
-                        go.transform.localScale = hand.m_grabbed.transform.localScale;
-
-                        holo.referenceObject = hand.m_grabbed.gameObject;
-
+                        holo = CreateHologram(hand.m_grabbed.gameObject);
                         m_objectsHolograms.Add(hand, holo);
-                    }                    
-
-                    Vector3 origin = hand.m_grabbed.transform.position;
-                    Vector3 dir = m_dropZone.transform.position - hand.m_grabbed.transform.position;
-
-
-                    RaycastHit hit;
-                    if (Physics.Raycast(origin, dir, out hit, 1f, LayerMask.GetMask("Planet")))
-                    {
-                        Debug.DrawLine(origin, origin + dir, Color.green);
-
-                        if (hit.distance < m_hologramDistance)
-                        {
-                            holo.gameObject.SetActive(true);
-                            holo.gameObject.transform.position = hit.point;
-                            // holo.gameObject.transform.up = hit.normal;
-                            holo.gameObject.transform.rotation = hand.m_grabbed.transform.rotation;
-
-                            holo.projectedSegment = hit.collider.gameObject;
-                        }
-                        else
-                        {
-                            holo.gameObject.SetActive(false);
-                        }
                     }
-                    else
-                    {
-                        Debug.DrawLine(origin, origin + dir, Color.red);
-                    }
+
+                    DrawHologram(holo, hand.m_grabbed.transform);
                 }
                 else if (m_objectsHolograms.ContainsKey(hand))
                 {
@@ -187,8 +235,5 @@ public class PlanetObjectPlacer : MonoBehaviour
             m_handsInTrigger.Remove(hand);
             m_objectsHolograms.Remove(hand);
         }
-
     }
-
-
 }
