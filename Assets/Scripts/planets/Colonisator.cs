@@ -80,6 +80,8 @@ public class Colonisator : MonoBehaviour
     void CleanupPlanet( IcoPlanet planet )
     {
         // Set transforms
+        planet.GetComponent<Rigidbody>().isKinematic = true; ;
+
         planet.transform.parent = transform;
         planet.transform.rotation = Quaternion.identity;
         planet.transform.position = Vector3.zero;
@@ -122,13 +124,13 @@ public class Colonisator : MonoBehaviour
 
         m_colonized = true;
 
-        print("YOLOOO");        
-
         m_room.SetActive(false);
 
         CleanupPlanet(m_icoPlanet);
-        
-        m_icoPlanet.SetTesselationLevel(2);
+
+        m_icoPlanet.heightDelta = 0.02f;
+        m_icoPlanet.nbLevels = 50;
+        m_icoPlanet.SetTesselationLevel(3);
         m_icoPlanet.transform.localScale = new Vector3(m_planetScale, m_planetScale, m_planetScale);
 
         m_manager.transform.position = Vector3.zero;
