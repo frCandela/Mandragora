@@ -118,7 +118,7 @@
 
 				// Base Color Calculation - Apply
 				float baseColAlpha = (1 - col.a) * _BaseColorOpacity;
-				col.rgb *= lerp(float3(1,1,1), _BaseColor.rgb, baseColAlpha);
+				col.rgb += lerp(float3(0,0,0), _BaseColor.rgb, baseColAlpha);
 				col.a = saturate(col.a + baseColAlpha);
 				
 				return col;
