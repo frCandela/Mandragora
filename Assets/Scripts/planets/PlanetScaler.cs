@@ -118,14 +118,12 @@ public class PlanetScaler : Workshop
 
     IEnumerator AnimateWorkshop(float duration, VoidDelegate onFinish)
     {
-        float scaleIncrement = 0;
+        float scaleIncrement = m_scaleEffect.transform.localScale.x;
         Vector3 initScale = m_scaleEffect.transform.localScale;
 
         for (float t = 0; t < 1; t += Time.deltaTime / duration)
         {
-            scaleIncrement = Mathf.Sin(t * Mathf.PI);
-
-            m_scaleEffect.transform.localScale = initScale + Vector3.one * scaleIncrement;
+            m_scaleEffect.transform.localScale = initScale + Vector3.one * Mathf.Sin(t * Mathf.PI) * scaleIncrement;
 
             yield return new WaitForEndOfFrame();
         }
