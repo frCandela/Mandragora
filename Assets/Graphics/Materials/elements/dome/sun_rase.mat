@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: sun_rase
-  m_Shader: {fileID: 4800000, guid: cfc82a044ed4eb649bf6447684a81d25, type: 3}
+  m_Shader: {fileID: 4800000, guid: 753c756c0670bf94b81e9f75f2e7d002, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -63,30 +63,35 @@ Material:
     - _Cursor: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DistFade: 0
+    - _DistFade: 1.48
     - _DstBlend: 0
-    - _FresnelSensibility: 0.1
+    - _FadeIn: 0.004
+    - _FadeOut: 0.1
+    - _FresnelPow: 1
+    - _FresnelSensibility: 0.135
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _HighlightOpacity: 1
-    - _IsAlphaTex: 1
+    - _IntersectionIn: 0
+    - _IntersectionOut: 0.056
+    - _IsAlphaTex: 0
     - _IsAlphaUV: 1
-    - _IsBackFace: 1
-    - _MaxInterDist: 0.008
+    - _IsBackFace: 0
+    - _MaxInterDist: 2.05
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Opacity: 1
     - _Parallax: 0.02
-    - _PositiveNegativeDepth: 1
+    - _PositiveNegativeDepth: 0.032
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _AlphaMaskPow: {r: 20.3, g: 0.2, b: 0, a: 0}
+    - _AlphaMaskPow: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HighlightColor: {r: 1, g: 0.69363093, b: 0.24056602, a: 0}
+    - _HighlightColor: {r: 1, g: 0.69363093, b: 0.24056599, a: 1}

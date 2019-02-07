@@ -6,19 +6,31 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: M_dropZone_wireframe
-  m_Shader: {fileID: 4800000, guid: 8a0c2badfd6a27949bdd0a10c4207299, type: 3}
+  m_Name: MTL_sunShinePlane V2
+  m_Shader: {fileID: 4800000, guid: df55568f824e3ed418c286e296af4ba6, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AlphaMask:
+        m_Texture: {fileID: 2800000, guid: 6b1db71ae08ebc241baf7cf8c6ecfef7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AlphaMaskTex:
+        m_Texture: {fileID: 2800000, guid: 6b1db71ae08ebc241baf7cf8c6ecfef7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Detail:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -38,6 +50,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _IntersectionRampTex:
+        m_Texture: {fileID: 2800000, guid: f6d20581a3f6b074aba60cfa148fd7da, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -54,32 +70,51 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _intersectionRampTex:
+        m_Texture: {fileID: 2800000, guid: f6d20581a3f6b074aba60cfa148fd7da, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AlphaCutoff: 0.99
-    - _BoolenFactor: 196.82
     - _BumpScale: 1
+    - _Cursor: 1
+    - _CursorOne: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _DistFade: 1
     - _DstBlend: 0
-    - _Emissive: 0.5
+    - _FadeIn: 0
+    - _FadeOut: 1
+    - _FresnelSensibility: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _HighlightOpacity: 1
+    - _IntersectionDamper: 0.18
+    - _IntersectionIn: 0
+    - _IntersectionMax: 0.52
+    - _IntersectionMin: 0.033
+    - _IntersectionOut: 0
+    - _IsAlphaTex: 0
+    - _IsAlphaUV: 1
+    - _IsBackFace: 1
+    - _MaxInterDist: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Opacity: 0
     - _Parallax: 0.02
-    - _Slider: 0.001
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _TextureInfluence: 0
     - _UVSec: 0
-    - _WireframeWidth: 18.03
     - _ZWrite: 1
+    - _distFade: 18.9
+    - _maxDepth: 0.41
+    - _maxDistFade: 1.06
+    - _minDistFade: 0
     m_Colors:
-    - _Color: {r: 1, g: 0.87414986, b: 0.0047169924, a: 1}
+    - _AlphaMaskPow: {r: 19.73, g: 0.09, b: 0, a: 0}
+    - _Color: {r: 1, g: 0.19551288, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissiveColor: {r: 1, g: 0.779317, b: 0.6084906, a: 1}
-    - _NoiseAmplitude: {r: 0.05, g: 0.05, b: 0.05, a: 0}
-    - _NoiseFreq: {r: 5, g: 5, b: 5, a: 0}
+    - _HighlightColor: {r: 1, g: 0.73933965, b: 0.0990566, a: 1}
+    - _IntersectionColor: {r: 0.9743724, g: 1, b: 0, a: 1}
