@@ -177,7 +177,7 @@ public class TelekinesisPointer : MonoBehaviour
 
     void TriggerAttract(bool input)
 	{
-		m_handAnimator.SetBool("Attract", input);
+		//m_handAnimator.SetBool("Attract", input);
 
 		if(input)
 		{
@@ -219,8 +219,8 @@ public class TelekinesisPointer : MonoBehaviour
 
 	void Attract(Vector3 force)
 	{
-		m_handAnimator.SetBool("Attract", false);
-		m_handAnimator.SetBool("Grab", true);
+		//m_handAnimator.SetBool("Attract", false);
+		m_handAnimator.SetBool("Attract", true);
 
         SetLevitation(Target, false);
         m_fxManager.DeActivate("Grab");
@@ -245,8 +245,8 @@ public class TelekinesisPointer : MonoBehaviour
 
 	void UnAttract()
 	{
-		m_handAnimator.SetBool("Attract", false);
-		m_handAnimator.SetBool("Grab", true);
+		//m_handAnimator.SetBool("Attract", false);
+		m_handAnimator.SetBool("Attract", true);
 
 		m_wObjectStop.Post(Target.gameObject);
 

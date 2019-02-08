@@ -37,6 +37,11 @@ public class MTK_InteractHand : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        m_handAnimator.SetFloat("BlendGrab", m_inputManager.GetTriggerValue());
+    }
+
     private void Start()
     {
         m_inputManager = GetComponentInParent<MTK_InputManager>();
@@ -99,7 +104,9 @@ public class MTK_InteractHand : MonoBehaviour
             m_telekinesis.Active = false;
 
             m_handAnimator.SetBool("Visible", false);
-            m_handAnimator.SetBool("Grab", true);
+            m_handAnimator.SetBool("Attract", true);
+
+            print("true");
 
             m_setup.NotifyGrab(m_grabbed);
         }
@@ -124,7 +131,7 @@ public class MTK_InteractHand : MonoBehaviour
             m_telekinesis.Active = true;
            
             m_handAnimator.SetBool("Visible", true);
-            m_handAnimator.SetBool("Grab", false);
+            m_handAnimator.SetBool("Attract", false);
 
             m_onReleaseInteractable.Invoke(m_grabbed);
 
