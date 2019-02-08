@@ -7,6 +7,7 @@ public class SolarSystem : MonoBehaviour
 {
     [SerializeField] private float m_maxSpeed = float.PositiveInfinity;
     [SerializeField] private float m_accelerationForce = 1;
+    [SerializeField] private float impactForce = 3f;
 
     [SerializeField] public List<AK.Wwise.State> m_states = new List<AK.Wwise.State>();
     List<PlanetEffect> m_planetEffectsList = new List<PlanetEffect>();
@@ -34,7 +35,7 @@ public class SolarSystem : MonoBehaviour
                     {
                         eff.maxSpeed = m_maxSpeed;
                         eff.accelerationForce = m_accelerationForce;
-
+                        eff.impactForce = impactForce;
                         eff.sunRigidbody = m_rb;
                         m_planetEffectsList.Add(eff);
 
@@ -43,7 +44,6 @@ public class SolarSystem : MonoBehaviour
                         UpdateState(m_planetEffectsList.Count);
                     }
                 }
-
             }
         }
 
