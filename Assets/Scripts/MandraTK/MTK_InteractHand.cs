@@ -47,6 +47,14 @@ public class MTK_InteractHand : MonoBehaviour
         m_inputManager = GetComponentInParent<MTK_InputManager>();
         m_setup = GetComponentInParent<MTK_Setup>();
         m_telekinesis = GetComponent<TelekinesisPointer>();
+
+
+        m_inputManager.m_onPad.AddListener(OnPad);
+    }
+
+    public void OnPad(bool input)
+    {
+        m_handAnimator.SetBool("ThumbPressed", input);        
     }
 
     public void TryGrab(bool input)
@@ -105,8 +113,6 @@ public class MTK_InteractHand : MonoBehaviour
 
             m_handAnimator.SetBool("Visible", false);
             m_handAnimator.SetBool("Attract", true);
-
-            print("true");
 
             m_setup.NotifyGrab(m_grabbed);
         }
