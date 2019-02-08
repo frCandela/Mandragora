@@ -11,6 +11,8 @@
 		_Luminosity ("Luminosity", float) = 1
 		_Range ("Color Range", Range(0,0.5)) = 0.1
 		_BrightOffset ("Brightness Offset", float) = 0
+		_MaxLuminosity ("Maximum Luminosity", float) = 0
+		_MinLuminosity ("Minimum Luminosity", float) = 0
 	}
 	SubShader
 	{
@@ -41,7 +43,7 @@
 			float4 _PlanarCoordsR, _PlanarCoordsG, _PlanarCoordsB;
 			float4 _Color;
 			float _Luminosity;
-			float _Range, _BrightOffset;
+			float _Range, _BrightOffset, _MaxLuminosity, _MinLuminosity;
 			//float _ManagerUnlitFactor;
 			
 			v2f vert (appdata v)
@@ -53,12 +55,9 @@
 				float2 UVs = mul(unity_ObjectToWorld, v.vertex).xz;
 				float4 planUvRG;
 				float2 planUvB;
-				float cosTimeR = cos(_Time.x + 1) * 0.5 + 0.5;
-				float cosTimeG = cos(_Time.x + 2) * 0.5 + 0.5;
-				float cosTimeB = cos(_Time.x) * 0.5 + 0.5;
-				planUvRG.xy = (UVs * _PlanarCoordsR.x) + (_PlanarCoordsR.yz * _Time.y * _PlanarCoordsR.w * cosTimeR);
-				planUvRG.zw = (UVs * _PlanarCoordsG.x) + (_PlanarCoordsG.yz * _Time.y * _PlanarCoordsG.w * cosTimeG);
-				planUvB = (UVs * _PlanarCoordsB.x) + (_PlanarCoordsB.yz * _Time.y * _PlanarCoordsB.w * cosTimeB);
+				planUvRG.xy = (UVs * _PlanarCoordsR.x) + (_PlanarCoordsR.yz * _Time.y * _PlanarCoordsR.w);
+				planUvRG.zw = (UVs * _PlanarCoordsG.x) + (_PlanarCoordsG.yz * _Time.y * _PlanarCoordsG.w);
+				planUvB = (UVs * _PlanarCoordsB.x) + (_PlanarCoordsB.yz * _Time.y * _PlanarCoordsB.w);
 				o.planarUVsRG = planUvRG;
 				o.planarUVsB = planUvB;
 
@@ -69,20 +68,21 @@
 			{
 				float sinTime = sin(_Time.x) * 0.5 + 0.5;
 
-				float texR = tex2D(_MainTex, i.planarUVsRG.xy).r;
-				float texG = tex2D(_MainTex, i.planarUVsRG.zw).g;
-				float texB = tex2D(_MainTex, i.planarUVsB).b;
+				float texR = tex2D(_MainTex, i.planarUVsRG.xy).r * 0.5 + 0.5;
+				float texG = tex2D(_MainTex, i.planarUVsRG.zw).g * 0.5 + 0.5;
+				float texB = tex2D(_MainTex, i.planarUVsB).b * 0.5 + 0.5;
 
 				float texValue = texR * texG * texB;
 
-				float rangedValue = 1 - saturate(abs(texValue * sinTime - 0.5) / _Range);
-				rangedValue = clamp(sqrt(rangedValue), 0.001, 0.999);
+				float rangedValue = clamp(sqrt(texValue), 0.001, 0.999);
 				rangedValue += _BrightOffset;
+				rangedValue = clamp(rangedValue, _MinLuminosity, _MaxLuminosity);
 				float3 texColor = tex2D(_RampTex, float2(rangedValue, 0)).rgb;
 
 				fixed4 col = float4(0,0,0,1);
 				col.rgb = saturate(texColor * _Color.rgb);
 				col.rgb *= _Luminosity;
+				
 				return col;
 			}
 			ENDCG
