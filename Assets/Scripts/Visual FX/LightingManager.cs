@@ -24,6 +24,8 @@ public class LightingManager : MonoBehaviour {
 
 	private void Start()
 	{
+		AkSoundEngine.PostEvent("Play_Intro", gameObject);
+
 		if(zoneRenderer)
 		{
 			zoneRenderer.enabled = false;
@@ -33,6 +35,7 @@ public class LightingManager : MonoBehaviour {
 	MTK_InputManager[] m_inputManagers;
 	void TriggerSound()
 	{
+		AkSoundEngine.PostEvent("Stop_Intro", gameObject);
 		AkSoundEngine.PostEvent("Sun_Light_Play", gameObject);
 		vibrate = true;
 

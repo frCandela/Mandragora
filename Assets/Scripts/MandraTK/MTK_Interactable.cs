@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class MTK_Interactable : MonoBehaviour
 {
+    [SerializeField] AK.Wwise.Event m_wOnCollision;
+
     [SerializeField] public Vector3 m_upwardRotation;
 
     [SerializeField] public bool isDistanceGrabbable = true;
@@ -131,5 +133,11 @@ public class MTK_Interactable : MonoBehaviour
             m_onUseStop.Invoke();
             m_wOnUseStop.Post(gameObject);
         }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if(m_wOnCollision != null)
+            m_wOnCollision.Post(gameObject);
     }
 }
