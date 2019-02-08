@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a3bdb2cd68f901469e7cc149151eb49, type: 3}
-  m_Name: testProfile
+  m_Name: MandragoraProfile
   m_EditorClassIdentifier: 
   debugViews:
     m_Enabled: 1
@@ -29,11 +29,11 @@ MonoBehaviour:
     m_Settings:
       excludeSkybox: 1
   antialiasing:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       method: 0
       fxaaSettings:
-        preset: 2
+        preset: 3
       taaSettings:
         jitterSpread: 0.75
         sharpen: 0.3
@@ -127,10 +127,10 @@ MonoBehaviour:
         saturation: 1.07
         contrast: 0.97
       channelMixer:
-        red: {x: 1.07, y: 0, z: 0}
+        red: {x: 1.3, y: 0, z: 0}
         green: {x: 0, y: 1, z: 0}
         blue: {x: 0, y: 0, z: 1}
-        currentEditingChannel: 2
+        currentEditingChannel: 0
       colorWheels:
         mode: 0
         log:
