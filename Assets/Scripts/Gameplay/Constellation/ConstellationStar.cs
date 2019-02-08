@@ -67,7 +67,6 @@ public class ConstellationStar : MonoBehaviour
 		{
 			if(transform.position == m_initPosition) // Init phase
 			{
-				m_hit.Post(gameObject);
 				m_constellation.Init(tr);
 			}
 			else // Completion phase
