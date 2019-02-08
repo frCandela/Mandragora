@@ -23,6 +23,7 @@ public class MTK_InteractHand : MonoBehaviour
     private MTK_InputManager m_inputManager;
     private MTK_Setup m_setup;
     private MTK_JointType grabbedJoint;
+    private TelekinesisPointer m_telekinesis;
 
     [HideInInspector] public MTK_Interactable m_grabbed = null;
 
@@ -40,6 +41,7 @@ public class MTK_InteractHand : MonoBehaviour
     {
         m_inputManager = GetComponentInParent<MTK_InputManager>();
         m_setup = GetComponentInParent<MTK_Setup>();
+        m_telekinesis = GetComponent<TelekinesisPointer>();
     }
 
     public void TryGrab(bool input)
@@ -94,6 +96,7 @@ public class MTK_InteractHand : MonoBehaviour
             grabbedJoint = obj.jointType;
 
             inputManager.Haptic(1);
+            m_telekinesis.Active = false;
 
             m_handAnimator.SetBool("Visible", false);
             m_handAnimator.SetBool("Grab", true);
@@ -118,6 +121,7 @@ public class MTK_InteractHand : MonoBehaviour
             }
 
             grabbedJoint.onJointBreak.RemoveListener(Release);
+            m_telekinesis.Active = true;
            
             m_handAnimator.SetBool("Visible", true);
             m_handAnimator.SetBool("Grab", false);
