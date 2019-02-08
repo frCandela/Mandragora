@@ -59,6 +59,7 @@ public class LightingManager : MonoBehaviour {
 		vibrate = false;
 	}
 	
+	float m_vibrationIntensity = 0;
 	// Update is called once per frame
 	[ContextMenu("Update")]
 	void Update () {
@@ -66,10 +67,10 @@ public class LightingManager : MonoBehaviour {
 
 		if(vibrate)
 		{
+			m_vibrationIntensity += Time.deltaTime /20;
+
 			foreach (MTK_InputManager inputmng in m_inputManagers)
-			{
-				inputmng.Haptic(1);
-			}
+				inputmng.Haptic(m_vibrationIntensity);
 		}
 
 		/*if(!isLit) {

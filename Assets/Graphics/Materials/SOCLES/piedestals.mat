@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: M_planetWater
-  m_Shader: {fileID: 4800000, guid: 4f4c6d17ccad4dc42a1b8654f366b764, type: 3}
+  m_Name: piedestals
+  m_Shader: {fileID: 4800000, guid: 709cdf9991082284cb89239435b311f1, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -55,33 +55,38 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _BaseColorOpacity: 0.56
+    - _AlphaCutoff: 0.84
     - _BumpScale: 1
     - _Cutoff: 0.5
+    - _DepthDistance: 40
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FresnelIntensity: 3.51
-    - _FresnelOpacity: 0.94
-    - _FresnelPow: 2
+    - _Emissive: 20.48
+    - _FresnelIntensity: 1.2
+    - _FresnelOpacity: 0.21
+    - _FresnelPow: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Luminosity: 4.2
+    - _LightDiffuse: 374.4
+    - _Luminosity: 24
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Opacity: 1
     - _Parallax: 0.02
-    - _ReflexionIntensity: 0.03
-    - _ReflexionPower: 1.52
+    - _ReflexionIntensity: 0.28
+    - _ReflexionPower: 20
     - _SmoothnessTextureChannel: 0
+    - _SpecPow: 21.16
     - _SpecularHighlights: 1
+    - _SpecularIntensity: 11.3
     - _SrcBlend: 1
     - _UVSec: 0
+    - _WireframeWidth: 0.05
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.24603951, g: 0.45089492, b: 0.5377358, a: 1}
-    - _Color: {r: 0, g: 0.3158722, b: 1, a: 1}
+    - _Color: {r: 1, g: 0.65787435, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 0.013705952, g: 0.3431462, b: 0.41509432, a: 1}
-    - _NoiseSettings: {r: 0.01, g: 50, b: 1.5, a: 0}
+    - _EmissiveColor: {r: 0.6226415, g: 0.49725476, b: 0.2966358, a: 1}
+    - _ShadowColor: {r: 0.5660378, g: 0.47452998, b: 0.33374867, a: 0}

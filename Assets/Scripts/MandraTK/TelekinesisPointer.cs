@@ -34,6 +34,7 @@ public class TelekinesisPointer : MonoBehaviour
 
     public bool isAttracting { get { return m_connectedBody || Target; } }
     Rigidbody m_connectedBody;
+	[HideInInspector] public bool Active = true;
     
     bool m_attract;
 	float m_initDistanceToTarget;
@@ -89,58 +90,59 @@ public class TelekinesisPointer : MonoBehaviour
 
 	void Update()
 	{
-		if(!m_attract)
+		if(Active)
 		{
-			if(m_interactHand.objectInTrigger)
+			if(!m_attract)
 			{
-				Target = null;
-			}
-			else if(!m_connectedBody)
-			{
-				Target = m_interactiblesManager.GetClosestToView(transform, 15);
-			}
-		}
-
-		//Debug.DrawRay(transform.position, transform.forward * 10, Color.red, Time.deltaTime);
-		
-		if(Target)
-		{
-			float distanceScale = Mathf.Min(GetDistanceToTarget() / m_initDistanceToTarget, 1); // 1 -> 0
-
-			// Detect movement to trigger attraction
-			if(m_attract)
-			{
-				Vector3 force = (m_repere.position - m_lastPos) * 10;
-
-				if(force.sqrMagnitude > m_maxForce)
-					force = force.normalized * m_maxForce;
-				
-				if(force.sqrMagnitude > Mathf.Max(m_minMagnitudeToAttract, m_lastForceApplied.sqrMagnitude))
-					Attract(force);
-
-				// Levitation
-				if(!m_connectedBody && IsLevitating(Target))
+				if(m_interactHand.objectInTrigger)
 				{
-					Rigidbody rgbd = Target.GetComponent<Rigidbody>();
-					rgbd.velocity = Vector3.ClampMagnitude(rgbd.velocity, .1f);
+					Target = null;
+				}
+				else if(!m_connectedBody)
+				{
+					Target = m_interactiblesManager.GetClosestToView(transform.position, m_repere.position - transform.position, 15);
+				}
+			}
+			
+			if(Target)
+			{
+				float distanceScale = Mathf.Min(GetDistanceToTarget() / m_initDistanceToTarget, 1); // 1 -> 0
+
+				// Detect movement to trigger attraction
+				if(m_attract)
+				{
+					Vector3 force = (m_repere.position - m_lastPos) * 10;
+
+					if(force.sqrMagnitude > m_maxForce)
+						force = force.normalized * m_maxForce;
+					
+					if(force.sqrMagnitude > Mathf.Max(m_minMagnitudeToAttract, m_lastForceApplied.sqrMagnitude))
+						Attract(force);
+
+					// Levitation
+					if(!m_connectedBody && IsLevitating(Target))
+					{
+						Rigidbody rgbd = Target.GetComponent<Rigidbody>();
+						rgbd.velocity = Vector3.ClampMagnitude(rgbd.velocity, .1f);
+					}
+				}
+
+				// Apply various forces
+				if(m_connectedBody)
+				{
+					Vector3 targetVel = (transform.position - Target.transform.position).normalized * m_forceScale;
+					targetVel += distanceScale * m_lastForceApplied * GetDistanceToTarget();
+
+					m_connectedBody.rotation = Quaternion.RotateTowards(m_connectedBody.rotation, transform.rotation * Quaternion.Euler(Target.m_upwardRotation), Time.deltaTime * (1 - distanceScale) * 500);
+					m_connectedBody.velocity = Vector3.MoveTowards(m_connectedBody.velocity, targetVel * (Mathf.Sqrt(GetDistanceToTarget()) * m_distanceSpeedScale), Time.deltaTime * (20 + (1-distanceScale) * 10));
+
+					m_inputManager.Haptic((1- distanceScale) / 10);
 				}
 			}
 
-			// Apply various forces
-			if(m_connectedBody)
-			{
-				Vector3 targetVel = (transform.position - Target.transform.position).normalized * m_forceScale;
-				targetVel += distanceScale * m_lastForceApplied * GetDistanceToTarget();
-
-				m_connectedBody.rotation = Quaternion.RotateTowards(m_connectedBody.rotation, transform.rotation * Quaternion.Euler(Target.m_upwardRotation), Time.deltaTime * (1 - distanceScale) * 500);
-				m_connectedBody.velocity = Vector3.MoveTowards(m_connectedBody.velocity, targetVel * (Mathf.Sqrt(GetDistanceToTarget()) * m_distanceSpeedScale), Time.deltaTime * (20 + (1-distanceScale) * 10));
-
-				m_inputManager.Haptic((1- distanceScale) / 10);
-			}
+			// Update force
+			m_lastPos = m_repere.position;
 		}
-
-		// Update force
-		m_lastPos = m_repere.position;
 	}
 
     void SetLevitation(MTK_Interactable interactable, bool value)
@@ -175,6 +177,8 @@ public class TelekinesisPointer : MonoBehaviour
 
     void TriggerAttract(bool input)
 	{
+		m_handAnimator.SetBool("Attract", input);
+
 		if(input)
 		{
 			if(Target)
@@ -211,12 +215,13 @@ public class TelekinesisPointer : MonoBehaviour
 			if(m_connectedBody)
 				UnAttract();
 		}
-
-		m_handAnimator.SetBool("Attract", m_attract);
 	}
 
 	void Attract(Vector3 force)
 	{
+		m_handAnimator.SetBool("Attract", false);
+		m_handAnimator.SetBool("Grab", true);
+
         SetLevitation(Target, false);
         m_fxManager.DeActivate("Grab");
 
@@ -240,6 +245,9 @@ public class TelekinesisPointer : MonoBehaviour
 
 	void UnAttract()
 	{
+		m_handAnimator.SetBool("Attract", false);
+		m_handAnimator.SetBool("Grab", true);
+
 		m_wObjectStop.Post(Target.gameObject);
 
 		if(m_connectedBody)

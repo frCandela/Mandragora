@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 91aed7311a869cd47aaf6d698aa91a45
+guid: c783245c891d8c44ca1ad8c0a052e0de
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -67,11 +67,11 @@ ModelImporter:
     4300000: Plane005
     7400000: ArmatureAction
     7400002: Armature|ArmatureAction
-    7400004: Armature|AttractPose
+    7400004: Armature|AttractPose_F
     7400006: Armature|BasePose
-    7400008: Armature|GrabPose
-    7400010: Armature|PointPose
-    7400012: Armature|PointPose.001
+    7400008: Armature|GrabPose_F
+    7400010: Armature|PointPose.001
+    7400012: Armature|PointPose_F
     9500000: //RootNode
     11400000: Armature
     11400002: b_1A
@@ -107,7 +107,7 @@ ModelImporter:
     13700000: Plane005
   externalObjects: {}
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -141,8 +141,8 @@ ModelImporter:
     addColliders: 0
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -160,10 +160,10 @@ ModelImporter:
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
-    normalImportMode: 0
+    normalImportMode: 1
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
