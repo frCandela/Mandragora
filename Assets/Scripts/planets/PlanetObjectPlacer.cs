@@ -178,34 +178,37 @@ public class PlanetObjectPlacer : MonoBehaviour
                 {
                     Hologram holo = m_objectsHolograms[hand];
 
-                    Outline outline = holo.referenceObject.GetComponent<Outline>();
-                    if( outline)
+                    if(holo && holo.isActiveAndEnabled)
                     {
-                        outline.enabled = false;
-                    }
+                        Outline outline = holo.referenceObject.GetComponent<Outline>();
+                        if (outline)
+                        {
+                            outline.enabled = false;
+                        }
 
-                    GameObject copy = Instantiate(holo.referenceObject);
+                        GameObject copy = Instantiate(holo.referenceObject);
 
-                    copy.transform.position = holo.transform.position;
-                    copy.transform.rotation = holo.transform.rotation;
-                    copy.transform.parent = holo.projectedSegment.transform;
-                    copy.layer = LayerMask.NameToLayer("Planet");
+                        copy.transform.position = holo.transform.position;
+                        copy.transform.rotation = holo.transform.rotation;
+                        copy.transform.parent = holo.projectedSegment.transform;
+                        copy.layer = LayerMask.NameToLayer("Planet");
 
-                    MTK_Interactable interact = copy.GetComponent<MTK_Interactable>();
-                    interact.isDroppable = false;
-                    interact.isDistanceGrabbable = false;
+                        MTK_Interactable interact = copy.GetComponent<MTK_Interactable>();
+                        interact.isDroppable = false;
+                        interact.isDistanceGrabbable = false;
 
-                    copy.AddComponent<ObjectOnPlanet>().referenceObject = holo.referenceObject;
+                        copy.AddComponent<ObjectOnPlanet>().referenceObject = holo.referenceObject;
 
-                    Destroy(copy.GetComponent<Rigidbody>());
+                        Destroy(copy.GetComponent<Rigidbody>());
 
-                    holo.referenceObject.transform.position = - 1000f * Vector3.up;
-                    holo.referenceObject.GetComponent<Rigidbody>().isKinematic = true;
+                        holo.referenceObject.transform.position = -1000f * Vector3.up;
+                        holo.referenceObject.GetComponent<Rigidbody>().isKinematic = true;
 
-                    Destroy(holo.gameObject);
-                    m_objectsHolograms.Remove(hand);
+                        Destroy(holo.gameObject);
+                        m_objectsHolograms.Remove(hand);
 
-                    hand.GetComponentInParent<MTK_InputManager>().Haptic(1);
+                        hand.GetComponentInParent<MTK_InputManager>().Haptic(1);
+                    }                   
                 }
             }
         }
