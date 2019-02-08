@@ -16,6 +16,11 @@ public class MTK_InputManagerSteamVR : MTK_InputManager
         SetInput();
     }
 
+    public override float GetTriggerValue()
+    {
+        return m_trackedController.triggerValue;
+    }
+
     void TriggerPressed(object sender, ClickedEventArgs e)
     {
         m_interractHand.TryGrab(true);

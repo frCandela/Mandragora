@@ -11,7 +11,6 @@ public class Constellation : MonoBehaviour
 	[SerializeField] float m_trailSpeed = 1;
 	[SerializeField] float m_maxDistance = 1;
 	[SerializeField] float m_formationDistance = 1;
-	[SerializeField] float m_recycleTime = 10;
 	[SerializeField] GameObject m_kinder;
 	[SerializeField] Transform m_trailFX;
 	[SerializeField] GameObject m_next;
@@ -174,11 +173,10 @@ public class Constellation : MonoBehaviour
 				m_kinder.transform.SetParent(transform.parent, true);
 
 				Destroy(m_lineRenderer);
-				Invoke("Recycle", m_recycleTime);
 			}));
 	}
 
-	void Recycle()
+	public void Recycle()
 	{
         if(m_next)
 		    Instantiate(m_next, transform.parent.position, transform.rotation, transform.parent);

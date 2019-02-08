@@ -12,12 +12,15 @@ public class LightingManager : MonoBehaviour {
 
 	bool vibrate = false;
 
-	// Use this for initialization
-	void Awake ()
-	{
-		foreach (MonoBehaviour mono in m_monoList)
-			mono.enabled = false;
-	}
+    // Use this for initialization
+    void Awake()
+    {
+        foreach (MonoBehaviour mono in m_monoList)
+        {
+            if (mono)
+                mono.enabled = false;
+        }
+    }
 
 	private void Start()
 	{
@@ -56,6 +59,7 @@ public class LightingManager : MonoBehaviour {
 		vibrate = false;
 	}
 	
+	float m_vibrationIntensity = 0;
 	// Update is called once per frame
 	[ContextMenu("Update")]
 	void Update () {
@@ -63,10 +67,10 @@ public class LightingManager : MonoBehaviour {
 
 		if(vibrate)
 		{
+			m_vibrationIntensity += Time.deltaTime /20;
+
 			foreach (MTK_InputManager inputmng in m_inputManagers)
-			{
-				inputmng.Haptic(1);
-			}
+				inputmng.Haptic(m_vibrationIntensity);
 		}
 
 		/*if(!isLit) {

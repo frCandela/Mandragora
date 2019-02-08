@@ -21,8 +21,9 @@ public class SteamVR_TrackedController : MonoBehaviour
 	public bool padPressed = false;
 	public bool padTouched = false;
 	public bool gripped = false;
+    public float triggerValue = 0f;
 
-	public event ClickedEventHandler MenuButtonClicked;
+    public event ClickedEventHandler MenuButtonClicked;
 	public event ClickedEventHandler MenuButtonUnclicked;
 	public event ClickedEventHandler TriggerClicked;
 	public event ClickedEventHandler TriggerUnclicked;
@@ -156,6 +157,7 @@ public class SteamVR_TrackedController : MonoBehaviour
         if (system != null && system.GetControllerState(controllerIndex, ref controllerState, (uint)System.Runtime.InteropServices.Marshal.SizeOf(typeof(VRControllerState_t))))
 		{
             ulong trigger = controllerState.ulButtonPressed & (1UL << ((int)EVRButtonId.k_EButton_SteamVR_Trigger));
+            triggerValue = controllerState.rAxis1.x;
             if (controllerState.rAxis1.x == 1f && !triggerPressed)
 			{
 				triggerPressed = true;

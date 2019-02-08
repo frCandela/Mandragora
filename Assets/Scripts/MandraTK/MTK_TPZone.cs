@@ -57,6 +57,10 @@ public class MTK_TPZone : MonoBehaviour
 
 	public void OnExit()
 	{
+		Constellation constellation = transform.parent.GetComponentInChildren<Constellation>();
+		if(constellation)
+			constellation.Recycle();
+
 		m_onExitZone.Invoke();
 	}
 }

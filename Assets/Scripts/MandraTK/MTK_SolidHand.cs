@@ -26,7 +26,7 @@ public class MTK_SolidHand : MonoBehaviour
                 m_collider.isTrigger = false;
                 m_telekinesisPointer.enabled = false;
 
-                m_handAnimator.SetBool("Grab", input);
+                m_handAnimator.SetBool("Attract", input);
             }
         }
         else
@@ -34,7 +34,7 @@ public class MTK_SolidHand : MonoBehaviour
             m_collider.isTrigger = true;
             m_telekinesisPointer.enabled = true;
 
-            m_handAnimator.SetBool("Grab", input);
+            m_handAnimator.SetBool("Attract", input);
         }
     }
 }
