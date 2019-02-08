@@ -921,7 +921,7 @@ Transform:
   m_GameObject: {fileID: 1888532187764072}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0.044, y: 0, z: 0.023}
-  m_LocalScale: {x: 2.1, y: 2.1, z: 2.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4940208317180356}
   m_RootOrder: 1
@@ -1682,7 +1682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a795d4e2c9e984fad3320661fb741d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneUnlitFactor: 0
+  sceneUnlitFactor: 1
   zoneRenderer: {fileID: 0}
   m_monoList:
   - {fileID: 0}
@@ -16405,7 +16405,7 @@ ParticleSystem:
       m_RotationOrder: 4
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 1
+  scalingMode: 0
   randomSeed: 0
   InitialModule:
     serializedVersion: 3
