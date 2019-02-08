@@ -172,6 +172,7 @@ GameObject:
   - component: {fileID: 114541866079617884}
   - component: {fileID: 114180360454186628}
   - component: {fileID: 95828000861010832}
+  - component: {fileID: 114415049290416236}
   m_Layer: 0
   m_Name: guidingPipe_02
   m_TagString: Untagged
@@ -505,6 +506,7 @@ GameObject:
   - component: {fileID: 114884403447196456}
   - component: {fileID: 114871348364632528}
   - component: {fileID: 114265110530023070}
+  - component: {fileID: 114590726240798280}
   m_Layer: 0
   m_Name: socle2_v3Color
   m_TagString: Untagged
@@ -979,7 +981,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1835634158429700}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: -0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2398,7 +2400,7 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1675645190155382}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 183089d771b307a45b4173ac4d048c65, type: 3}
   m_Controller: {fileID: 9100000, guid: 8d37e48334ad51145b0b52fc5703f7e4, type: 2}
   m_CullingMode: 1
@@ -2803,12 +2805,12 @@ MonoBehaviour:
     vertexHandleSize: 0.2
     showNormalsInVertexMode: 0
     showDisplayOptions: 1
-    showPathOptions: 1
+    showPathOptions: 0
     showVertexPathDisplayOptions: 0
-    showVertexPathOptions: 1
+    showVertexPathOptions: 0
     showNormals: 1
     showNormalsHelpInfo: 0
-    tabIndex: 0
+    tabIndex: 1
   initialized: 1
 --- !u!114 &114339521670294670
 MonoBehaviour:
@@ -2870,6 +2872,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 0b47ce8e-7790-4042-a1d7-f53020111db1
+--- !u!114 &114415049290416236
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1267879017583242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1491221649, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114422936274819836
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2951,7 +2964,7 @@ MonoBehaviour:
   m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _guid: 
+  _guid: e2b751f2-2d0e-4ab9-99ed-be26623dfd10
   _referenceCollection:
     _collection:
     - {fileID: 1267879017583242}
@@ -3041,6 +3054,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 3d4a2039-5ed2-4f25-9e3f-4bdc345ed2b9
+--- !u!114 &114590726240798280
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1675645190155382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 223dc2a93f9f2bd46b65c340f1be9fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!114 &114607059951036320
 MonoBehaviour:
   m_ObjectHideFlags: 1

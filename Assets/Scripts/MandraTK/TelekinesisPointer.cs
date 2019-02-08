@@ -137,6 +137,8 @@ public class TelekinesisPointer : MonoBehaviour
 					m_connectedBody.velocity = Vector3.MoveTowards(m_connectedBody.velocity, targetVel * (Mathf.Sqrt(GetDistanceToTarget()) * m_distanceSpeedScale), Time.deltaTime * (20 + (1-distanceScale) * 10));
 
 					m_inputManager.Haptic((1- distanceScale) / 10);
+
+					AkSoundEngine.SetRTPCValue("Grab_Distance", GetDistanceToTarget());
 				}
 			}
 

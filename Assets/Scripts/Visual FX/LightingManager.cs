@@ -10,6 +10,8 @@ public class LightingManager : MonoBehaviour {
 	[SerializeField] MeshRenderer zoneRenderer;
 	[SerializeField] List<MonoBehaviour> m_monoList;
 
+	[SerializeField] Animator[] m_soclesAnimators;
+
 	bool vibrate = false;
 
     // Use this for initialization
@@ -45,6 +47,9 @@ public class LightingManager : MonoBehaviour {
 	void PlaySunExplosion()
 	{
 		AkSoundEngine.PostEvent("Play_Sun_Explosion", gameObject);
+
+		foreach (Animator animator in m_soclesAnimators)
+			animator.enabled = true;
 	}
 
 	void ActivateControl()
