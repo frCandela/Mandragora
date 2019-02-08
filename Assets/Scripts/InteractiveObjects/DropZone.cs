@@ -12,6 +12,7 @@ public class DropZone : MonoBehaviour
     [SerializeField] private float m_ejectForce = 1f;
     [SerializeField] private Animator m_workshopAnimator;
     [SerializeField] private SocleSounds m_sounds;
+    [SerializeField] private AnimationCurve m_planetShineAnimCurve;
     private GameObject m_visual;
 
     public UnityEventBool onObjectCatched;
@@ -102,7 +103,10 @@ public class DropZone : MonoBehaviour
             IcoPlanet icoplanet = tmp.GetComponent<IcoPlanet>();
 
             if(icoplanet)
+            {
                 icoplanet.Joined = false;
+                StartCoroutine(AnimatePlanet(icoplanet, 0.04f, 4.2f));
+            }
 
             tmp.jointType.RemoveJoint();
             tmp.GetComponent<Rigidbody>().AddForce(m_ejectForce * Vector3.up, ForceMode.Impulse);
@@ -141,7 +145,10 @@ public class DropZone : MonoBehaviour
                 IcoPlanet icoplanet = interactable.GetComponent<IcoPlanet>();
 
                 if(icoplanet)
+                {
                     icoplanet.Joined = true;
+                    StartCoroutine(AnimatePlanet(icoplanet, 0.12f, 15));
+                }
 
                 m_visual.SetActive(false);
                 m_nbObjectsInTrigger = 0;
@@ -150,6 +157,35 @@ public class DropZone : MonoBehaviour
             }
         }
     }
+
+    IEnumerator AnimatePlanet(IcoPlanet icoplanet, float targetShadowAmount, float targetLuminosity)
+    {
+        List<Material> materials = new List<Material>();
+        Material waterMaterial = icoplanet.transform.GetChild(0).GetComponent<MeshRenderer>().material;
+
+        foreach (Transform tr in icoplanet.transform)
+            materials.Add(tr.GetComponent<MeshRenderer>().material);
+
+        materials.RemoveAt(0);
+
+        float baseShadowAmount = materials[0].GetFloat("_PlanetColorShadowAmount"),
+                baseLuminosity = waterMaterial.GetFloat("_Luminosity");
+
+        float currentLuminosity;
+
+        for (float t = 0; t < 1; t += Time.deltaTime)
+        {
+            currentLuminosity = Mathf.LerpUnclamped(baseShadowAmount, targetShadowAmount, m_planetShineAnimCurve.Evaluate(t));
+
+            foreach (Material mat in materials)
+                mat.SetFloat("_PlanetColorShadowAmount", currentLuminosity);
+
+            waterMaterial.SetFloat("_Luminosity", Mathf.Lerp(baseLuminosity, targetLuminosity, m_planetShineAnimCurve.Evaluate(t)));
+
+            yield return new WaitForEndOfFrame();
+        }
+    }
+    
 
     MTK_Interactable objInTrigger;
     private void OnTriggerEnter(Collider other)
