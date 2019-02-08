@@ -97,7 +97,7 @@ public class TelekinesisPointer : MonoBehaviour
 			}
 			else if(!m_connectedBody)
 			{
-				Target = m_interactiblesManager.GetClosestToView(transform, 15);
+				Target = m_interactiblesManager.GetClosestToView(transform.position, m_repere.position - transform.position, 15);
 			}
 		}
 
@@ -175,6 +175,8 @@ public class TelekinesisPointer : MonoBehaviour
 
     void TriggerAttract(bool input)
 	{
+		m_handAnimator.SetBool("Attract", input);
+
 		if(input)
 		{
 			if(Target)
@@ -211,12 +213,13 @@ public class TelekinesisPointer : MonoBehaviour
 			if(m_connectedBody)
 				UnAttract();
 		}
-
-		m_handAnimator.SetBool("Attract", m_attract);
 	}
 
 	void Attract(Vector3 force)
 	{
+		m_handAnimator.SetBool("Attract", false);
+		m_handAnimator.SetBool("Grab", true);
+
         SetLevitation(Target, false);
         m_fxManager.DeActivate("Grab");
 
@@ -240,6 +243,9 @@ public class TelekinesisPointer : MonoBehaviour
 
 	void UnAttract()
 	{
+		m_handAnimator.SetBool("Attract", false);
+		m_handAnimator.SetBool("Grab", true);
+
 		m_wObjectStop.Post(Target.gameObject);
 
 		if(m_connectedBody)

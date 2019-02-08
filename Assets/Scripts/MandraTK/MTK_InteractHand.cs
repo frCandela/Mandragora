@@ -96,7 +96,6 @@ public class MTK_InteractHand : MonoBehaviour
             inputManager.Haptic(1);
 
             m_handAnimator.SetBool("Visible", false);
-
             m_handAnimator.SetBool("Grab", true);
 
             m_setup.NotifyGrab(m_grabbed);
