@@ -142,7 +142,7 @@ public class IcoPlanet : MonoBehaviour
     }
 
     [ContextMenu("UpdateTesselationLevel")]    
-    public void SetTesselationLevel( int nbSubdivisions)
+    public void SetTesselationLevel( int nbSubdivisions, int heightMultiplier = 1)
     {
         m_nbSubdivisions = nbSubdivisions;
 
@@ -178,7 +178,7 @@ public class IcoPlanet : MonoBehaviour
             {
                 IcoSegment seg = hit.collider.GetComponent<IcoSegment>();
                 if (seg)
-                    segment.heightLevel = seg.heightLevel;
+                    segment.heightLevel = heightMultiplier * seg.heightLevel;
             }            
                 
         }

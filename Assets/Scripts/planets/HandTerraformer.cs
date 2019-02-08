@@ -11,8 +11,8 @@ public class HandTerraformer : MonoBehaviour
     {
         m_inputManager = GetComponentInParent<MTK_InputManager>();
         m_inputManager.m_onTrigger.AddListener(Terraform);
-        m_inputManager.m_onGrip.AddListener(Teleport);
-        m_inputManager.m_onPad.AddListener(TerraformDown);
+        m_inputManager.m_onGrip.AddListener(TerraformDown );
+        m_inputManager.m_onPad.AddListener(Teleport);
 
         m_colonisator = FindObjectOfType<Colonisator>();
     }

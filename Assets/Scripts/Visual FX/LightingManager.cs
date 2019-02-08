@@ -12,12 +12,15 @@ public class LightingManager : MonoBehaviour {
 
 	bool vibrate = false;
 
-	// Use this for initialization
-	void Awake ()
-	{
-		foreach (MonoBehaviour mono in m_monoList)
-			mono.enabled = false;
-	}
+    // Use this for initialization
+    void Awake()
+    {
+        foreach (MonoBehaviour mono in m_monoList)
+        {
+            if (mono)
+                mono.enabled = false;
+        }
+    }
 
 	private void Start()
 	{

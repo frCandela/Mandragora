@@ -41,12 +41,12 @@ public class PlanetObjectPlacer : MonoBehaviour
 
                 ico.GetComponent<MeshCollider>().enabled = false;
 
-                foreach (Transform segment in m_dropZone.catchedObject.transform)
+                foreach (IcoSegment segment in ico.Segments)
                 {
                     segment.GetComponent<MeshCollider>().enabled = true;
                     if (segment.GetComponent<IcoSegment>())
                     {
-                        foreach (Transform decoration in segment)
+                        foreach (Transform decoration in segment.transform)
                         {
                             decoration.GetComponent<MTK_Interactable>().isGrabbable = true;
                         }

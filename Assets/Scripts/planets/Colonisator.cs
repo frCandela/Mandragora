@@ -5,11 +5,12 @@ using UnityEngine.Assertions;
 
 public class Colonisator : MonoBehaviour
 {
-    [SerializeField, Range(0, 79)] public int selectedSegment = 0;
+    [SerializeField] public int selectedSegment = 0;
 
     [SerializeField] private float m_planetScale = 100;
 
     [SerializeField] private GameObject m_room;
+    [SerializeField] private GameObject m_newRoom;
     [SerializeField] private GameObject m_laserPrefab;
 
     private IcoPlanet m_icoPlanet;
@@ -19,6 +20,7 @@ public class Colonisator : MonoBehaviour
     private void Awake()
     {
         Assert.IsTrue(m_room);
+        Assert.IsTrue(m_newRoom);
         Assert.IsTrue(m_laserPrefab);
         Assert.IsTrue(transform.position == Vector3.zero, "Colonisator gameobject position must be zero");
         Assert.IsTrue(transform.rotation == Quaternion.identity, "Colonisator gameobject rotation must be zero");
@@ -26,19 +28,12 @@ public class Colonisator : MonoBehaviour
 
         m_manager = FindObjectOfType<MTK_Manager>();
         m_setup = m_manager.activeSetup;
+        m_newRoom.SetActive(false);
     }
-
-
-    /*[SerializeField] private GameObject m_prefab;
-    [SerializeField] private IcoPlanet m_icoPlanet;
-    [SerializeField] private GameObject m_previousScene;
-    [SerializeField] private GameObject m_managers;
-    [SerializeField] private float m_planetScale = 100;*/
 
     private bool m_colonized = false;
 
     // Update is called once per frame
-
     void Update()
     {
         if(m_colonized)
@@ -110,8 +105,6 @@ public class Colonisator : MonoBehaviour
         }
     }
 
-
-
     [ContextMenu("Colonize")]
     void Colonize()
     {
@@ -128,16 +121,15 @@ public class Colonisator : MonoBehaviour
 
         CleanupPlanet(m_icoPlanet);
 
-        m_icoPlanet.heightDelta = 0.02f;
-        m_icoPlanet.nbLevels = 50;
-        m_icoPlanet.SetTesselationLevel(3);
+        m_icoPlanet.heightDelta /= 4;
+        m_icoPlanet.nbLevels *= 4;
+        m_icoPlanet.SetTesselationLevel(3, 4);
         m_icoPlanet.transform.localScale = new Vector3(m_planetScale, m_planetScale, m_planetScale);
 
         m_manager.transform.position = Vector3.zero;
         m_manager.transform.rotation = Quaternion.identity;
         m_setup.transform.position = Vector3.zero;
         m_setup.transform.rotation = Quaternion.identity;
-
 
         foreach (MTK_InteractHand hand in FindObjectsOfType<MTK_InteractHand>())
         {
@@ -149,6 +141,8 @@ public class Colonisator : MonoBehaviour
             laser.transform.localScale = new Vector3(0.01f, 0.01f, 100);
             laser.transform.localRotation = Quaternion.identity;
         }
+
+        m_newRoom.SetActive(true);
 
         /* m_icoPlanet.transform.position = Vector3.zero;
          m_icoPlanet.transform.rotation = Quaternion.identity;
