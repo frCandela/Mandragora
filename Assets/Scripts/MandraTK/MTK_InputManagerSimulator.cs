@@ -23,8 +23,9 @@ public class MTK_InputManagerSimulator : MTK_InputManager
         m_lastPos = transform.position;
 	}
 
+
     void Update()
-    {
+    {  
         // Manage inputs
         if (Input.GetMouseButtonDown(1))        
             m_onGrip.Invoke(true);        
@@ -69,6 +70,11 @@ public class MTK_InputManagerSimulator : MTK_InputManager
     public override void Haptic(float Time)
     {
         //print("bzz bzz");
+    }
+
+    public override float GetTriggerValue()
+    {
+        return (Input.GetMouseButton(0) ? 1f: 0f);
     }
 
     public override Vector3 GetAngularVelocity()
