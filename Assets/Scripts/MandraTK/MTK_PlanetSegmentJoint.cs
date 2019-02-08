@@ -121,6 +121,8 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
                 AkSoundEngine.PostEvent("Stone_Up_Play", gameObject);
             else if (amount < 0)
                 AkSoundEngine.PostEvent("Stone_Down_Play", gameObject);
+            
+            AkSoundEngine.PostEvent("Play_Terra", gameObject);
         }
         
         m_oldHeight = m_icoSegment.heightLevel;

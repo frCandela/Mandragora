@@ -115,6 +115,8 @@ public class Colonisator : MonoBehaviour
             return;
         }
 
+        AkSoundEngine.PostEvent("Play_Amb_TP", gameObject);
+
         m_colonized = true;
 
         m_room.SetActive(false);

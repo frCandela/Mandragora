@@ -8653,6 +8653,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecba034caf8fd5647a6847793c833fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_wOnCollision:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
   m_upwardRotation: {x: 0, y: 0, z: 0}
   isDistanceGrabbable: 1
   isDroppable: 1
@@ -8900,6 +8903,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef03e48061d8ce445bf28af5c0596928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_wOnCollision:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
   m_upwardRotation: {x: 0, y: 0, z: 0}
   isDistanceGrabbable: 1
   isDroppable: 1
@@ -8927,7 +8933,8 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   m_wOnGrabStart:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: b1f77984a07060c498b3098ba9dbb575,
+      type: 2}
   m_onGrabStart:
     m_PersistentCalls:
       m_Calls:

@@ -21,8 +21,12 @@ public class SocleSounds : MonoBehaviour
 			else
 			{
 				m_turnOff.Post(gameObject);
-				m_ambientOn.Post(gameObject);
 			}
 		}
+	}
+
+	void PlayAmbient()
+	{
+		m_ambientOn.Post(gameObject);
 	}
 }
