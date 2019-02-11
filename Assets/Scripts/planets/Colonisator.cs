@@ -106,7 +106,7 @@ public class Colonisator : MonoBehaviour
     }
 
     [ContextMenu("Colonize")]
-    void Colonize()
+    public void Colonize()
     {
         m_icoPlanet = FindPlanet();
         if ( ! m_icoPlanet)

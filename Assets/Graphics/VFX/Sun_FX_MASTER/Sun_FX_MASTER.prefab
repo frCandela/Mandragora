@@ -127,6 +127,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1154376419572672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4954015208709396}
+  - component: {fileID: 114817253016734868}
+  - component: {fileID: 135242487882528902}
+  - component: {fileID: 114801223414174020}
+  m_Layer: 8
+  m_Name: TP Zone Planet
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &1200130880068564
 GameObject:
   m_ObjectHideFlags: 1
@@ -268,7 +286,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1541584806552234
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,6 +688,7 @@ Transform:
   - {fileID: 4797410110117698}
   - {fileID: 4465683208728830}
   - {fileID: 4542656373960110}
+  - {fileID: 4954015208709396}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -972,6 +991,19 @@ Transform:
   m_Father: {fileID: 4797410110117698}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -62.478004, z: 0}
+--- !u!4 &4954015208709396
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1154376419572672}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.85, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4290785297268692}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23156020517419326
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -1691,6 +1723,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  m_soclesAnimators:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114182097840615720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2038,6 +2074,7 @@ MonoBehaviour:
       type: 2}
   m_explosionEffect: {fileID: 1164661607641472, guid: 5ac12fa3f8ca53940add52e7f35b04b9,
     type: 2}
+  m_planetTPZone: {fileID: 0}
 --- !u!114 &114436944804918424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2195,6 +2232,7 @@ MonoBehaviour:
     - {fileID: 1913381970093024}
     - {fileID: 1541584806552234}
     - {fileID: 1343622811073326}
+    - {fileID: 1154376419572672}
   _assetGuid: e37a93b04e2a6ed49a932e07ff484ab3
 --- !u!114 &114627982084150570
 MonoBehaviour:
@@ -2330,6 +2368,37 @@ MonoBehaviour:
   m_Script: {fileID: 1491221649, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114801223414174020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1154376419572672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 604b097f-24cc-4bdc-9789-9d6f0507b402
+--- !u!114 &114817253016734868
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1154376419572672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4671e845658f85c41a5126c96b7feae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_onExitZone:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_pipeAnimator: {fileID: 0}
+  m_enabled: 1
+  m_tpToPlanet: 1
 --- !u!114 &114820603460185086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2532,6 +2601,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.99999994
   m_Center: {x: -0.000000059604645, y: 0, z: 1.7763568e-15}
+--- !u!135 &135242487882528902
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1154376419572672}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135692643860707466
 SphereCollider:
   m_ObjectHideFlags: 1

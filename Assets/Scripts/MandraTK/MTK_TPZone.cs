@@ -10,12 +10,14 @@ public class MTK_TPZone : MonoBehaviour
 	[SerializeField] Animator m_pipeAnimator;
 
 	public bool m_enabled = false;
+	public bool m_tpToPlanet = false;
 
 	public bool Active
 	{
 		set
 		{
-			m_animator.SetBool("Active", value);
+			if(m_animator)
+				m_animator.SetBool("Active", value);
 		}
 	}
 
@@ -23,7 +25,8 @@ public class MTK_TPZone : MonoBehaviour
 	{
 		set
 		{
-			m_animator.SetBool("Selected", value);
+			if(m_animator)
+				m_animator.SetBool("Selected", value);
 
 			if(value)
 				AkSoundEngine.PostEvent("Play_Look_TP", gameObject);
@@ -37,7 +40,8 @@ public class MTK_TPZone : MonoBehaviour
 
 	public void Validate()
 	{
-		m_animator.SetTrigger("Validate");
+		if(m_animator)
+			m_animator.SetTrigger("Validate");
 	}
 
 	public void Appears(bool input)
@@ -46,7 +50,9 @@ public class MTK_TPZone : MonoBehaviour
 			if(!m_enabled)
 			{
 				AkSoundEngine.PostEvent("Play_Way", gameObject);
-				m_animator.SetTrigger("Appears");
+
+				if(m_animator)
+					m_animator.SetTrigger("Appears");
 
 				if(m_pipeAnimator)
 					m_pipeAnimator.SetTrigger("Trigger");

@@ -15,6 +15,9 @@ public class SolarSystem : MonoBehaviour
     private Rigidbody m_rb;
 
     [SerializeField] GameObject m_explosionEffect;
+    [SerializeField] MTK_TPZone m_planetTPZone;
+
+    List<IcoPlanet> m_planetList = new List<IcoPlanet>();
 
     private void Awake()
     {
@@ -28,6 +31,8 @@ public class SolarSystem : MonoBehaviour
             MTK_Interactable interactable = other.attachedRigidbody.GetComponent<MTK_Interactable>();
             if (interactable && interactable.isGrabbable && !interactable.isDistanceGrabbed)
             {
+                UpdateTPZone(interactable.GetComponent<IcoPlanet>(), true);
+                
                 if( !other.attachedRigidbody.gameObject.GetComponent< PlanetEffect>())
                 {
                     PlanetEffect eff = other.attachedRigidbody.gameObject.AddComponent<PlanetEffect>();
@@ -46,7 +51,6 @@ public class SolarSystem : MonoBehaviour
                 }
             }
         }
-
     }
 
     private void OnTriggerExit(Collider other)
@@ -54,14 +58,29 @@ public class SolarSystem : MonoBehaviour
         if(other.attachedRigidbody)
         {
             PlanetEffect effect = other.attachedRigidbody.GetComponent<PlanetEffect>();
+
             if (effect)
             {
+                UpdateTPZone(other.GetComponent<IcoPlanet>(), false);
                 m_planetEffectsList.Remove(effect);
                 Destroy(effect);
 
                 UpdateState(m_planetEffectsList.Count);
             }
         }
+    }
+
+    void UpdateTPZone(IcoPlanet planet, bool enter)
+    {
+        if(planet)
+        {
+            if(enter)
+                m_planetList.Add(planet);
+            else
+                m_planetList.Remove(planet);
+        }
+
+        m_planetTPZone.gameObject.SetActive(m_planetList.Count > 0);
     }
 
     void UpdateState(int count)
