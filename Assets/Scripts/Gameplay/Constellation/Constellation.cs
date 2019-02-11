@@ -149,7 +149,7 @@ public class Constellation : MonoBehaviour
 	}
 
 	[ContextMenu("Complete")]
-	void Complete()
+	public void Complete()
 	{
 		m_validated.Post(gameObject);
 		m_kinder.SetActive(true);
