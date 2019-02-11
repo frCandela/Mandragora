@@ -17,6 +17,8 @@ public class SolarSystem : MonoBehaviour
     [SerializeField] GameObject m_explosionEffect;
     [SerializeField] MTK_TPZone m_planetTPZone;
 
+    bool m_canTPPlanet = false;
+
     List<IcoPlanet> m_planetList = new List<IcoPlanet>();
 
     private void Awake()
@@ -72,15 +74,34 @@ public class SolarSystem : MonoBehaviour
 
     void UpdateTPZone(IcoPlanet planet, bool enter)
     {
-        if(planet)
+        if(m_canTPPlanet)
         {
-            if(enter)
-                m_planetList.Add(planet);
-            else
-                m_planetList.Remove(planet);
-        }
+            if(planet)
+            {
+                foreach (IcoPlanet pl in m_planetList)
+                {
+                    ParticleSystem.EmissionModule emission = planet.GetComponentInChildren<ParticleSystem>().emission;
+                    emission.rateOverTime = new ParticleSystem.MinMaxCurve(0);
+                }
 
-        m_planetTPZone.gameObject.SetActive(m_planetList.Count > 0);
+                if(enter)
+                {
+                    ParticleSystem.EmissionModule emission = planet.GetComponentInChildren<ParticleSystem>().emission;
+                    emission.rateOverTime = new ParticleSystem.MinMaxCurve(20);
+
+                    m_planetList.Add(planet);
+                }
+                else
+                    m_planetList.Remove(planet);
+            }
+
+            m_planetTPZone.gameObject.SetActive(m_planetList.Count > 0);
+        }
+    }
+
+    public void EnablePlanetTP()
+    {
+        m_canTPPlanet = true;
     }
 
     void UpdateState(int count)
