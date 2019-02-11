@@ -347,7 +347,7 @@ Transform:
   m_GameObject: {fileID: 1036297416199490}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0.044, y: 0, z: 0.023}
-  m_LocalScale: {x: 2.1, y: 2.1, z: 2.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4218477229713718}
   m_RootOrder: 1
@@ -982,7 +982,6 @@ MonoBehaviour:
     _collection:
     - {fileID: 1979123152362876}
     - {fileID: 1017643417323750}
-    - {fileID: 0}
     - {fileID: 1977674269710592}
     - {fileID: 1212680336418912}
     - {fileID: 1666938238167558}
@@ -1293,8 +1292,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcb094e241aaa954a8a61471230d4366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxSpeed: Infinity
-  m_accelerationForce: 1
+  m_maxSpeed: 4
+  m_accelerationForce: 2
+  impactForce: 3
   m_states:
   - valueGuid: 
     groupGuid: 
@@ -1314,6 +1314,7 @@ MonoBehaviour:
       type: 2}
   m_explosionEffect: {fileID: 1164661607641472, guid: 5ac12fa3f8ca53940add52e7f35b04b9,
     type: 2}
+  m_planetTPZone: {fileID: 0}
 --- !u!114 &114841443795986506
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6106,7 +6107,7 @@ ParticleSystem:
       m_RotationOrder: 4
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 1
+  scalingMode: 0
   randomSeed: 0
   InitialModule:
     serializedVersion: 3

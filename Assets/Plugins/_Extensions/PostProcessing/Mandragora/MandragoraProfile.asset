@@ -130,7 +130,7 @@ MonoBehaviour:
         red: {x: 1.3, y: 0, z: 0}
         green: {x: 0, y: 1, z: 0}
         blue: {x: 0, y: 0, z: 1}
-        currentEditingChannel: 0
+        currentEditingChannel: 2
       colorWheels:
         mode: 0
         log:
@@ -231,10 +231,19 @@ MonoBehaviour:
             serializedVersion: 2
             m_Curve:
             - serializedVersion: 3
-              time: 0
+              time: 0.007843138
               value: 0
-              inSlope: 1
-              outSlope: 1
+              inSlope: 1.0805086
+              outSlope: 1.0805086
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 0.21568628
+              value: 0.22636807
+              inSlope: 1.0222921
+              outSlope: 1.0222921
               tangentMode: 0
               weightedMode: 0
               inWeight: 0
@@ -295,10 +304,10 @@ MonoBehaviour:
           m_ZeroValue: 0.5
           m_Range: 1
         e_CurrentEditingCurve: 0
-        e_CurveY: 1
+        e_CurveY: 0
         e_CurveR: 0
         e_CurveG: 0
-        e_CurveB: 0
+        e_CurveB: 1
   userLut:
     m_Enabled: 0
     m_Settings:

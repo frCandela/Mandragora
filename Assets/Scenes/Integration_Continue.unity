@@ -140,6 +140,12 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 95808176537606648, guid: e37a93b04e2a6ed49a932e07ff484ab3,
     type: 2}
   m_PrefabInternal: {fileID: 801188924}
+--- !u!114 &490010113 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114797936638189224, guid: 57480e21441a06d43be930388f95c5be,
+    type: 2}
+  m_PrefabInternal: {fileID: 1032654553}
+  m_Script: {fileID: 11500000, guid: 45c3982f9a9c2b543bfcb363622d1b5c, type: 3}
 --- !u!114 &502008816 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114068138636016900, guid: 3e71e23314c1f2f4fbde10d0b7a6c47e,
@@ -164,16 +170,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1850777734}
     m_Modifications:
-    - target: {fileID: 114156572363093174, guid: e37a93b04e2a6ed49a932e07ff484ab3,
-        type: 2}
-      propertyPath: m_monoList.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114156572363093174, guid: e37a93b04e2a6ed49a932e07ff484ab3,
-        type: 2}
-      propertyPath: m_soclesAnimators.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4290785297268692, guid: e37a93b04e2a6ed49a932e07ff484ab3, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -236,11 +232,6 @@ Prefab:
       propertyPath: m_monoList.Array.data[4]
       value: 
       objectReference: {fileID: 98586520}
-    - target: {fileID: 114156572363093174, guid: e37a93b04e2a6ed49a932e07ff484ab3,
-        type: 2}
-      propertyPath: m_monoList.Array.data[5]
-      value: 
-      objectReference: {fileID: 1647720649}
     - target: {fileID: 114156572363093174, guid: e37a93b04e2a6ed49a932e07ff484ab3,
         type: 2}
       propertyPath: m_soclesAnimators.Array.data[0]
@@ -495,63 +486,54 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114627048374823106, guid: 4c7f9cfbce7c40047944962a6635d609,
-        type: 2}
-      propertyPath: m_scalerDrop
-      value: 
-      objectReference: {fileID: 1212414614}
-    - target: {fileID: 114627048374823106, guid: 4c7f9cfbce7c40047944962a6635d609,
-        type: 2}
-      propertyPath: m_tileDrop
-      value: 
-      objectReference: {fileID: 1355989720}
-    - target: {fileID: 114627048374823106, guid: 4c7f9cfbce7c40047944962a6635d609,
-        type: 2}
-      propertyPath: m_placerDrop
-      value: 
-      objectReference: {fileID: 1316485455}
-    - target: {fileID: 114589116309680354, guid: 4c7f9cfbce7c40047944962a6635d609,
-        type: 2}
-      propertyPath: m_scalerDrop
-      value: 
-      objectReference: {fileID: 1212414614}
-    - target: {fileID: 114589116309680354, guid: 4c7f9cfbce7c40047944962a6635d609,
-        type: 2}
-      propertyPath: m_tileDrop
-      value: 
-      objectReference: {fileID: 1355989720}
-    - target: {fileID: 114589116309680354, guid: 4c7f9cfbce7c40047944962a6635d609,
-        type: 2}
-      propertyPath: m_placerDrop
-      value: 
-      objectReference: {fileID: 1316485455}
     - target: {fileID: 33139759368360112, guid: 4c7f9cfbce7c40047944962a6635d609,
         type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1785503679}
+      objectReference: {fileID: 1744386180}
+    - target: {fileID: 114589116309680354, guid: 4c7f9cfbce7c40047944962a6635d609,
+        type: 2}
+      propertyPath: m_scalerDrop
+      value: 
+      objectReference: {fileID: 1212414614}
+    - target: {fileID: 114589116309680354, guid: 4c7f9cfbce7c40047944962a6635d609,
+        type: 2}
+      propertyPath: m_tileDrop
+      value: 
+      objectReference: {fileID: 1355989720}
+    - target: {fileID: 114589116309680354, guid: 4c7f9cfbce7c40047944962a6635d609,
+        type: 2}
+      propertyPath: m_placerDrop
+      value: 
+      objectReference: {fileID: 1316485455}
+    - target: {fileID: 114627048374823106, guid: 4c7f9cfbce7c40047944962a6635d609,
+        type: 2}
+      propertyPath: m_scalerDrop
+      value: 
+      objectReference: {fileID: 1212414614}
+    - target: {fileID: 114627048374823106, guid: 4c7f9cfbce7c40047944962a6635d609,
+        type: 2}
+      propertyPath: m_tileDrop
+      value: 
+      objectReference: {fileID: 1355989720}
+    - target: {fileID: 114627048374823106, guid: 4c7f9cfbce7c40047944962a6635d609,
+        type: 2}
+      propertyPath: m_placerDrop
+      value: 
+      objectReference: {fileID: 1316485455}
+    - target: {fileID: 114980441265172024, guid: 4c7f9cfbce7c40047944962a6635d609,
+        type: 2}
+      propertyPath: m_colonisator
+      value: 
+      objectReference: {fileID: 490010113}
     - target: {fileID: 114980441265172024, guid: 4c7f9cfbce7c40047944962a6635d609,
         type: 2}
       propertyPath: m_currentZone
       value: 
       objectReference: {fileID: 502008816}
-    - target: {fileID: 1503500826950340, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1527154424799454, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
   m_IsPrefabAsset: 0
---- !u!114 &1647720649 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114283281331570706, guid: 3e71e23314c1f2f4fbde10d0b7a6c47e,
-    type: 2}
-  m_PrefabInternal: {fileID: 2062817408}
-  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
 --- !u!95 &1672168859 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 95141242488513994, guid: ffb5441b7ea6e6540a92ffd21a0aef21,
@@ -788,7 +770,7 @@ Mesh:
   m_MeshMetrics[0]: 1
   m_MeshMetrics[1]: 1
   m_MeshOptimized: 0
---- !u!43 &1785503679
+--- !u!43 &1744386180
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

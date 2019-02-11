@@ -21178,6 +21178,30 @@ MonoBehaviour:
   m_ejectForce: 1
   m_workshopAnimator: {fileID: 95701912159663576}
   m_sounds: {fileID: 114110675366421648}
+  m_planetShineAnimCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 7.457605
+      outSlope: 7.457605
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.023807133
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -7.762455
+      outSlope: -7.762455
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.052109957
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   onObjectCatched:
     m_PersistentCalls:
       m_Calls:

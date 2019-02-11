@@ -263,7 +263,6 @@ GameObject:
   - component: {fileID: 54931594678908444}
   - component: {fileID: 114426485114205566}
   - component: {fileID: 114819462918898722}
-  - component: {fileID: 114857416196706556}
   - component: {fileID: 114821427609530784}
   m_Layer: 0
   m_Name: drop zone
@@ -7040,6 +7039,30 @@ MonoBehaviour:
   m_ejectForce: 1
   m_workshopAnimator: {fileID: 95141242488513994}
   m_sounds: {fileID: 114497020142594836}
+  m_planetShineAnimCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -7.762455
+      outSlope: -7.762455
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.052109957
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   onObjectCatched:
     m_PersistentCalls:
       m_Calls: []
@@ -7138,18 +7161,6 @@ MonoBehaviour:
     _collection:
     - {fileID: 1370007856480648}
   _assetGuid: 001ebdd94c4684e4e9751808c00a978b
---- !u!114 &114857416196706556
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1242909553713272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aca4e48990148864ba4bc93bac656fde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_catchedObjectJoint: {fileID: 0}
 --- !u!114 &114870264130069704
 MonoBehaviour:
   m_ObjectHideFlags: 1
