@@ -16,6 +16,7 @@ public class DropZone : MonoBehaviour
     private GameObject m_visual;
 
     public UnityEventBool onObjectCatched;
+    public UnityEventBool onPlanetCatched;
     public MTK_Interactable catchedObject { get; private set; }
 
 
@@ -106,6 +107,7 @@ public class DropZone : MonoBehaviour
             {
                 icoplanet.Joined = false;
                 StartCoroutine(AnimatePlanet(icoplanet, 0.04f, 4.2f));
+                onPlanetCatched.Invoke(false);
             }
 
             tmp.jointType.RemoveJoint();
@@ -148,6 +150,7 @@ public class DropZone : MonoBehaviour
                 {
                     icoplanet.Joined = true;
                     StartCoroutine(AnimatePlanet(icoplanet, 0.12f, 15));
+                    onPlanetCatched.Invoke(true);
                 }
 
                 m_visual.SetActive(false);
