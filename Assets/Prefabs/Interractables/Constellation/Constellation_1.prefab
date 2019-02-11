@@ -2150,7 +2150,6 @@ GameObject:
   - component: {fileID: 4952850679833676}
   - component: {fileID: 33415367649309500}
   - component: {fileID: 23262954616457768}
-  - component: {fileID: 114943880881300816}
   - component: {fileID: 114261921298447916}
   - component: {fileID: 114656666012254086}
   m_Layer: 0
@@ -3167,6 +3166,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4994001405061346}
+  - {fileID: 4952850679833676}
   m_Father: {fileID: 4996653547253482}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3852,7 +3852,7 @@ Transform:
   m_LocalScale: {x: 1.06, y: 1.06, z: 1.06}
   m_Children: []
   m_Father: {fileID: 4526986895555552}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4969627223790620
 Transform:
@@ -12564,7 +12564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4dc0174f21e8dd4cbc37a6c2127ec26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_initPosition: {x: -7.394658, y: 1.7837749, z: -4.622432}
+  m_initPosition: {x: -4.819278, y: 1.6693481, z: 8.549435}
   m_hit:
     valueGuid: 
     WwiseObjectReference: {fileID: 11400000, guid: 5185c7090382b0c448077183776d320e,
@@ -13481,6 +13481,8 @@ MonoBehaviour:
     _collection:
     - {fileID: 1442121254503746}
     - {fileID: 1768624198720508}
+    - {fileID: 0}
+    - {fileID: 1974440466817810}
   _assetGuid: 238b03143590a5e40bc8d39163889d87
 --- !u!114 &114790227523078004
 MonoBehaviour:
@@ -13823,7 +13825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4dc0174f21e8dd4cbc37a6c2127ec26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_initPosition: {x: -4.801267, y: 1.6846212, z: 8.519028}
+  m_initPosition: {x: 1.4555182, y: 4.6077213, z: 8.519028}
   m_hit:
     valueGuid: 
     WwiseObjectReference: {fileID: 11400000, guid: 5185c7090382b0c448077183776d320e,
