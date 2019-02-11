@@ -107,7 +107,7 @@ public class DropZone : MonoBehaviour
             {
                 icoplanet.Joined = false;
                 StartCoroutine(AnimatePlanet(icoplanet, 0.04f, 4.2f));
-                onPlanetCatched.Invoke(true);
+                onPlanetCatched.Invoke(false);
             }
 
             tmp.jointType.RemoveJoint();
@@ -150,7 +150,7 @@ public class DropZone : MonoBehaviour
                 {
                     icoplanet.Joined = true;
                     StartCoroutine(AnimatePlanet(icoplanet, 0.12f, 15));
-                    onPlanetCatched.Invoke(false);
+                    onPlanetCatched.Invoke(true);
                 }
 
                 m_visual.SetActive(false);
