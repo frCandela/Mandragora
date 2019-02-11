@@ -9,6 +9,7 @@ public class Teleporter : MonoBehaviour
 	[Header("Settings")]
 	[SerializeField, Range(0,1)]
 	float m_tolerance = 0.1f;
+	[SerializeField] Colonisator m_colonisator;
 
 	[Header("Fade Time")]
 	[SerializeField, Range(0,5)] float m_fadeStart;
@@ -145,8 +146,14 @@ public class Teleporter : MonoBehaviour
 
 	private void MoveMtkManager()
 	{
-		m_mtkManager.transform.position = m_targetTransform.position;
-		m_mtkManager.transform.rotation = m_targetTransform.rotation;
+		if(CurrentZone.m_tpToPlanet)
+			m_colonisator.Colonize();
+		else
+		{
+			m_mtkManager.transform.position = m_targetTransform.position;
+			m_mtkManager.transform.rotation = m_targetTransform.rotation;
+		}
+		
 		MTK_Fade.Start(Color.clear, m_fadeEnd, () => m_available = true);
 	}
 }

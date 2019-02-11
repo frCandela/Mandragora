@@ -10,6 +10,7 @@ public class MTK_TPZone : MonoBehaviour
 	[SerializeField] Animator m_pipeAnimator;
 
 	public bool m_enabled = false;
+	public bool m_tpToPlanet = false;
 
 	public bool Active
 	{

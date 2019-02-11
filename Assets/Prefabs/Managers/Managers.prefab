@@ -1564,7 +1564,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1504733350459920
 GameObject:
   m_ObjectHideFlags: 1
@@ -1650,7 +1650,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1538336679277318
 GameObject:
   m_ObjectHideFlags: 1
@@ -6170,7 +6170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 583ae33bd15883c4ba76271e3fcb181e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeSetup: {fileID: 114589116309680354}
+  activeSetup: {fileID: 114627048374823106}
   setupSimulation: {fileID: 114627048374823106}
   setupSteamVR: {fileID: 114589116309680354}
 --- !u!114 &114017504656082978
@@ -12088,6 +12088,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_mtkManager: {fileID: 114002115068100890}
   m_tolerance: 0.1
+  m_colonisator: {fileID: 0}
   m_fadeStart: 1.4
   m_fadeEnd: 0.8
   m_sound:
