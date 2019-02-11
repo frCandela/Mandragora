@@ -209,6 +209,7 @@ public class PlanetObjectPlacer : MonoBehaviour
 
                         hand.GetComponentInParent<MTK_InputManager>().Haptic(1);
                     }                   
+                    AkSoundEngine.PostEvent("Play_Pose", gameObject);
                 }
             }
         }
