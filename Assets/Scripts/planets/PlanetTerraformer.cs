@@ -33,10 +33,6 @@ public class PlanetTerraformer : MonoBehaviour
 
                 Invoke("EnableButton", 2);
 
-                MTK_Interactable interactable = m_icoPlanet.GetComponent<MTK_Interactable>();
-                interactable.isDistanceGrabbable = false;
-                interactable.isGrabbable = false;
-
                 m_icoPlanet.GetComponent<Collider>().enabled = false;
 
                 foreach ( IcoSegment segment in m_icoPlanet.Segments)
