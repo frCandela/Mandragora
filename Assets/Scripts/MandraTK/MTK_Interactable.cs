@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Events;
 
+[DisallowMultipleComponent]
 public class MTK_Interactable : MonoBehaviour
 {
     [SerializeField] AK.Wwise.Event m_wOnCollision;
@@ -76,6 +78,9 @@ public class MTK_Interactable : MonoBehaviour
     // Use this for initialization
     void Awake ()
     {
+        Assert.IsTrue(GetComponents<MTK_Interactable>().Length <= 1);
+
+
         m_outline = GetComponent<Outline>();
         if(m_outline == null)
             m_outline = gameObject.AddComponent<Outline>();
