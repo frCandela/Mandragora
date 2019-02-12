@@ -64,10 +64,10 @@ public class SolarSystem : MonoBehaviour
         if(other.attachedRigidbody)
         {
             PlanetEffect effect = other.attachedRigidbody.GetComponent<PlanetEffect>();
+            UpdateTPZone(other.GetComponent<IcoPlanet>(), false);
 
             if (effect)
             {
-                UpdateTPZone(other.GetComponent<IcoPlanet>(), false);
                 m_planetEffectsList.Remove(effect);
                 Destroy(effect);
 
@@ -84,13 +84,13 @@ public class SolarSystem : MonoBehaviour
             {
                 foreach (IcoPlanet pl in m_planetList)
                 {
-                    ParticleSystem.EmissionModule emission = planet.GetComponentInChildren<ParticleSystem>().emission;
+                    ParticleSystem.EmissionModule emission = planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
                     emission.rateOverTime = new ParticleSystem.MinMaxCurve(0);
                 }
 
                 if(enter)
                 {
-                    ParticleSystem.EmissionModule emission = planet.GetComponentInChildren<ParticleSystem>().emission;
+                    ParticleSystem.EmissionModule emission = planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
                     emission.rateOverTime = new ParticleSystem.MinMaxCurve(20);
 
                     m_planetList.Add(planet);
