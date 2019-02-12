@@ -19,7 +19,11 @@ public class SolarSystem : MonoBehaviour
 
     bool m_canTPPlanet = false;
 
+    public IcoPlanet lastPlanet { get { return m_planetList.Count > 0 ? m_planetList[m_planetList.Count - 1] : null; } }
+
     List<IcoPlanet> m_planetList = new List<IcoPlanet>();
+
+
 
     private void Awake()
     {

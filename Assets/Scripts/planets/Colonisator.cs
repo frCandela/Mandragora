@@ -106,9 +106,9 @@ public class Colonisator : MonoBehaviour
     }
 
     [ContextMenu("Colonize")]
-    public void Colonize()
+    public void Colonize( IcoPlanet planet )
     {
-        m_icoPlanet = FindPlanet();
+        m_icoPlanet = planet;
         if ( ! m_icoPlanet)
         {
             print("Failed to colonize space");
