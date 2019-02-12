@@ -153,11 +153,21 @@ public class Teleporter : MonoBehaviour
 
 	private void MoveMtkManager()
 	{
-		if(CurrentZone.m_tpToPlanet && m_solarSystem.lastPlanet.GetComponent<PlanetEffect>().effectActive)
-        {            
-            m_colonisator.Colonize(m_solarSystem.lastPlanet);
+
+        if (CurrentZone.m_tpToPlanet)
+        {
+           /* if(m_solarSystem.lastPlanet)
+            {
+                PlanetEffect effect = m_solarSystem.lastPlanet.GetComponent<PlanetEffect>();
+                if (m_solarSystem.lastPlanet && effect && effect.effectActive)
+                {*/
+                    m_colonisator.Colonize(m_solarSystem.lastPlanet);
+                /*}
+            }*/
+
+
         }
-		else
+        else
 		{
 			m_mtkManager.transform.position = m_targetTransform.position;
 			m_mtkManager.transform.rotation = m_targetTransform.rotation;

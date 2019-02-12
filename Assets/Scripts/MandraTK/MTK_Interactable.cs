@@ -78,7 +78,7 @@ public class MTK_Interactable : MonoBehaviour
     // Use this for initialization
     void Awake ()
     {
-        Assert.IsTrue(GetComponents<MTK_Interactable>().Length <= 1);
+        Assert.IsTrue(GetComponents<MTK_Interactable>().Length <= 1, gameObject.name);
 
 
         m_outline = GetComponent<Outline>();

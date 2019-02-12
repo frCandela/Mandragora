@@ -97,6 +97,7 @@ public class DropZone : MonoBehaviour
             m_lastActivationTime = Time.time;
             onObjectCatched.Invoke(false);
             catchedObject.jointType.onJointBreak.RemoveListener(Release);
+            catchedObject.isDistanceGrabbable = true;
 
             MTK_Interactable tmp = catchedObject;
             catchedObject = null;
@@ -143,6 +144,7 @@ public class DropZone : MonoBehaviour
                 catchedObject = interactable;
                 interactable.jointType.onJointBreak.AddListener(Release);
                 interactable.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+                interactable.isDistanceGrabbable = false;
 
                 IcoPlanet icoplanet = interactable.GetComponent<IcoPlanet>();
 
