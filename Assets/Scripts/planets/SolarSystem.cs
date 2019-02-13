@@ -23,8 +23,6 @@ public class SolarSystem : MonoBehaviour
 
     List<IcoPlanet> m_planetList = new List<IcoPlanet>();
 
-
-
     private void Awake()
     {
         m_rb = GetComponent<Rigidbody>();
@@ -93,10 +91,15 @@ public class SolarSystem : MonoBehaviour
                     ParticleSystem.EmissionModule emission = planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
                     emission.rateOverTime = new ParticleSystem.MinMaxCurve(20);
 
-                    m_planetList.Add(planet);
+                    if( ! m_planetList.Contains(planet) )
+                    {
+                        m_planetList.Add(planet);
+                    }
                 }
                 else
+                {
                     m_planetList.Remove(planet);
+                }   
             }
 
             m_planetTPZone.gameObject.SetActive(m_planetList.Count > 0);
@@ -115,4 +118,35 @@ public class SolarSystem : MonoBehaviour
             AkSoundEngine.SetState(m_states[count].GroupId, m_states[count].Id);
         }
     }
+
+    public void SetPlanetOutOfZone(IcoPlanet planet, bool state )
+    {
+        //print("SetPlanetOutOfZone " + planet.name + " :" + state);
+        if( state )
+        {
+            if(m_planetList.Count>0)
+            {
+                if (planet == m_planetList[m_planetList.Count - 1])
+                {
+                    ParticleSystem.EmissionModule emission = planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
+                    emission.rateOverTime = new ParticleSystem.MinMaxCurve(0);
+
+                    if (m_planetList.Count > 1)
+                    {
+                        emission = planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
+                        emission.rateOverTime = new ParticleSystem.MinMaxCurve(20);
+                    }
+                    else
+                    {
+                        m_planetTPZone.gameObject.SetActive(false);
+                    }
+                }
+            }
+        }
+        else
+        {
+
+        }
+    }
+
 }
