@@ -24,6 +24,8 @@ Shader "Mandragora/handShader"
 		_FresnelFlowIntensity ("Fresnel Flow Intensity", float) = 1
 		_ReflexionIntensity ("Reflexion Intensity", float) = 0.1
 		_ReflexionPower ("Reflexion Power", float) = 2
+		_SunLightWorldPos ("Sun Light World Position", Vector) = (0, 1.8, 0, 0)
+		_SunLightColor ("Sun Light Color", Color) = (0.4811321, 0.2182329, 0.01588645, 1)
 	}
 	SubShader
 	{
@@ -73,6 +75,7 @@ Shader "Mandragora/handShader"
 			float _ReflexionIntensity, _ReflexionPower;
 			float _LimitBloom;
 			fixed4 _StarsColor1, _StarsColor2, _StarsColor3, _FadeColor, _HSBC;
+			float4 _SunLightColor, _SunLightWorldPos;
 
 			float _Visibility;
 			
@@ -187,16 +190,14 @@ Shader "Mandragora/handShader"
 				flatNormals = lerp(invertedNormal, flatNormals, facing);
 
 				// Process light direction
-				int lightID = _WorldSpaceLightPos0.w;
-				float3 directionalLightDir = normalize(_WorldSpaceLightPos0.xyz);
-				float3 pointLightDir = normalize(worldPosition - _WorldSpaceLightPos0.xyz);
-				float3 lightDir = lerp(directionalLightDir, pointLightDir, lightID);
+				float3 pointLightDir = normalize(i.data.worldVertex - _SunLightWorldPos.xyz);
+				float3 lightDir = pointLightDir;
 
 				// Process Reflection with this Light
 				float3 H = normalize(lightDir + toCam);
 				float NdotH = 1 - saturate(dot(flatNormals, H));
 				NdotH = pow(NdotH, _ReflexionPower);
-				float3 lightReflexion = NdotH * _LightColor0.rgb * _ReflexionIntensity * redVertexColor;
+				float3 lightReflexion = NdotH * _SunLightColor.rgb * _ReflexionIntensity * redVertexColor;
 				lightReflexion *= facing;
 
 

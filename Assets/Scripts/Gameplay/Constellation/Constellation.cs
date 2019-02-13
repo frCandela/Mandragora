@@ -16,6 +16,8 @@ public class Constellation : MonoBehaviour
 	[SerializeField] GameObject m_next;
 	[SerializeField] UnityEvent m_onComplete;
 	[SerializeField] Material m_trailMaterial;
+	[SerializeField] Vector3 m_trailMaterialInitParams = new Vector3(0.15f, 3.0f, 2.0f);
+	[SerializeField] AnimationCurve m_trailAmplitudeOverTimeCurve;
 
 	[Header("Wwise events")]
 	[SerializeField] AK.Wwise.Event m_validated;
@@ -51,6 +53,9 @@ public class Constellation : MonoBehaviour
 			m_starsTransform[i] = m_stars[i].transform;
 			m_starsInitPosition[i] = m_starsTransform[i].localPosition;
 		}
+
+		// Set Base Value for trail animation
+		m_trailMaterial.SetVector("_NoiseSettings", Vector4.zero);
 	}
 
 	private void Update()
@@ -238,12 +243,25 @@ public class Constellation : MonoBehaviour
 				lastPos = m_starsTransform[i].localPosition;
 			}
 
-			m_trailMaterial.SetVector("_NoiseSettings", new Vector4(initParams.x, initParams.y, Mathf.MoveTowards(initParams.z, movementAmount / 20, Time.deltaTime), 0));
+			// get a new "t" between [0.5, 1.0] of original "t"
+			float tNew = t * 2 - 1;
+			float trailValue = m_trailAmplitudeOverTimeCurve.Evaluate(tNew);
+
+			// Youe version
+			//m_trailMaterial.SetVector("_NoiseSettings", new Vector4(initParams.x, initParams.y, Mathf.MoveTowards(initParams.z, movementAmount / 20, Time.deltaTime), 0));
+
+			// Raoul version
+			m_trailMaterial.SetVector("_NoiseSettings", new Vector4(m_trailMaterialInitParams.x, m_trailMaterialInitParams.y, m_trailMaterialInitParams.z * trailValue, 0f));
+			
 
 			yield return new WaitForEndOfFrame();
 		}
 
-		m_trailMaterial.SetVector("_NoiseSettings", new Vector4(initParams.x, initParams.y, 0, 0));
+		// Youe version
+		//Vector4 lastInitParams = m_trailMaterial.GetVector("_NoiseSettings");
+
+		// Raoul version : Secure everything to zero
+		m_trailMaterial.SetVector("_NoiseSettings", Vector4.zero);
 
 		if(endAction != null)
 			endAction.Invoke();

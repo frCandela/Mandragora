@@ -13,11 +13,13 @@
 		_BaseColor ("Base Color", Color) = (1,1,1,1)
 		_BaseColorOpacity ("Base Color Opacity", Range(0,1)) = 1
 		_NoiseSettings ("Noise Amplitude(X) Frequency(Y) Speed(Z)", Vector) = (1,1,1,0)
+		_SunLightWorldPos ("Sun Light World Position", Vector) = (0, 1.8, 0, 0)
+		_SunLightColor ("Sun Light Color", Color) = (0.4811321, 0.2182329, 0.01588645, 1)
 	}
 	SubShader
 	{
-		Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True" "LightMode" = "ForwardAdd" }
-		//Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True" }
+		// Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True" "LightMode" = "ForwardAdd" }
+		Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True" }
 		LOD 100
 		Blend SrcAlpha OneMinusSrcAlpha
 
@@ -48,6 +50,7 @@
 			float _ReflexionIntensity, _ReflexionPower;
 			fixed4 _FresnelColor, _BaseColor;
 			float3 _NoiseSettings;
+			float4 _SunLightColor, _SunLightWorldPos;
 
 			float4 ApplyNoise(float4 pos, float amp, float freq, float speed) {
 				float3 newPos;
@@ -85,17 +88,15 @@
 				float3 toCam = normalize(_WorldSpaceCameraPos.xyz - i.worldVertex);
 
 				// Process light direction
-				int lightID = _WorldSpaceLightPos0.w;
-				float3 directionalLightDir = normalize(_WorldSpaceLightPos0.xyz);
-				float3 pointLightDir = normalize(i.worldVertex - _WorldSpaceLightPos0.xyz);
-				float3 lightDir = lerp(directionalLightDir, pointLightDir, lightID);
+				float3 pointLightDir = normalize(i.worldVertex - _SunLightWorldPos.xyz);
+				float3 lightDir = pointLightDir;
 
 				// Process Reflection with this Light
 				float3 H = normalize(-lightDir + toCam);
 				float NdotH = dot(i.normal, H);
 				NdotH = saturate(NdotH);
 				NdotH = pow(NdotH, _ReflexionPower);
-				float3 lightReflexion = NdotH * _LightColor0.rgb * _ReflexionIntensity;
+				float3 lightReflexion = NdotH * _SunLightColor.rgb * _ReflexionIntensity;
 				float alphaLightReflexion = (lightReflexion.r + lightReflexion.g + lightReflexion.b)/3;
 
 

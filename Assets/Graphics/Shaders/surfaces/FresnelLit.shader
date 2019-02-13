@@ -10,11 +10,13 @@
 		_FresnelOpacity ("Fresnel Opacity", Range(0,1)) = 0.5
 		_ReflexionIntensity ("Reflexion Intensity", Range(0,1)) = 0.04
 		_ReflexionPower ("Reflexion Power", float) = 20
+		_SunLightWorldPos ("Sun Light World Position", Vector) = (0, 1.8, 0, 0)
+		_SunLightColor ("Sun Light Color", Color) = (0.4811321, 0.2182329, 0.01588645, 1)
 	}
 	SubShader
 	{
-		Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True" "LightMode" = "ForwardAdd" }
-		//Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True" }
+		//Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True" "LightMode" = "ForwardAdd" }
+		Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True" }
 		LOD 100
 		Blend SrcAlpha OneMinusSrcAlpha
 
@@ -44,6 +46,7 @@
 			float _FresnelPow, _FresnelIntensity, _FresnelOpacity, _Luminosity, _Opacity;
 			float _ReflexionIntensity, _ReflexionPower;
 			fixed4 _Color;
+			float4 _SunLightWorldPos, _SunLightColor;
 			float _ManagerUnlitFactor;
 			
 			v2f vert (appdata v)
@@ -78,24 +81,22 @@
 				//i.normal = lerp(invertedNormal, i.normal, facing);
 
 				// Process light direction
-				int lightID = _WorldSpaceLightPos0.w;
-				float3 directionalLightDir = normalize(_WorldSpaceLightPos0.xyz);
-				float3 pointLightDir = normalize(i.worldVertex - _WorldSpaceLightPos0.xyz);
-				float3 lightDir = lerp(directionalLightDir, pointLightDir, lightID);
+				float3 pointLightDir = normalize(i.worldVertex - _SunLightWorldPos.xyz);
+				float3 lightDir = pointLightDir;
 
 				// Process Reflection with this Light
 				float3 H = normalize(-lightDir + toCam);
 				float NdotH = dot(i.normal, H);
 				NdotH = saturate(NdotH);
 				NdotH = pow(NdotH, _ReflexionPower);
-				float3 lightReflexion = NdotH * _LightColor0.rgb * _ReflexionIntensity;
+				float3 lightReflexion = NdotH * _SunLightColor.rgb * _ReflexionIntensity;
 				float alphaLightReflexion = (lightReflexion.r + lightReflexion.g + lightReflexion.b)/3;
 			//	lightReflexion *= facing;
 
 
 				// Calculate Fresnel
-				float3 viewDir = normalize(ObjSpaceViewDir(i.vertex));
-				float fresnel = dot(viewDir, i.normal) * 0.5 + 0.5;
+				float3 viewDir = normalize(-toCam);
+				float fresnel = dot(viewDir, -i.normal) * 0.5 + 0.5;
 				fresnel = 1 - fresnel;
 				fresnel = pow(saturate(fresnel), _FresnelPow);
 				fresnel *= _FresnelIntensity;
