@@ -66,6 +66,19 @@ public class LightingManager : MonoBehaviour {
 
 		vibrate = false;
 	}
+
+	public void DeActivateControl()
+	{
+		foreach (MonoBehaviour mono in m_monoList)
+		{
+			mono.enabled = false;
+		}
+
+		if(zoneRenderer)
+		{
+			zoneRenderer.enabled = false;
+		}
+	}
 	
 	float m_vibrationIntensity = 0;
 	// Update is called once per frame

@@ -129,6 +129,8 @@ public class Colonisator : MonoBehaviour
             return;
         }
 
+        FindObjectOfType<LightingManager>().DeActivateControl();
+
         AkSoundEngine.PostEvent("Play_Amb_TP", gameObject);
 
         m_colonized = true;
