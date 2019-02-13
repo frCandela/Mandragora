@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 114650370004148382}
   - component: {fileID: 114364767229743928}
   - component: {fileID: 64444338682450152}
-  - component: {fileID: 114670127563359836}
   - component: {fileID: 114223461346861684}
   m_Layer: 0
   m_Name: Rock1
@@ -113,6 +112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecba034caf8fd5647a6847793c833fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_wOnCollision:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 0}
   m_upwardRotation: {x: 0, y: 0, z: 0}
   isDistanceGrabbable: 1
   isDroppable: 1
@@ -183,56 +185,3 @@ MonoBehaviour:
     _collection:
     - {fileID: 1041918290555056}
   _assetGuid: 83572ec30243326498cf9e29a96f6a60
---- !u!114 &114670127563359836
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1041918290555056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecba034caf8fd5647a6847793c833fbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_upwardRotation: {x: 0, y: 0, z: 0}
-  isDistanceGrabbable: 1
-  isDroppable: 1
-  m_isGrabbable: 1
-  onIsGrabbableChange:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEventMTK_Interactable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  m_wOnUseStart:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onUseStart:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnUseStop:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onUseStop:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnGrabStart:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onGrabStart:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnGrabStop:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onGrabSop:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  isDistanceGrabbed: 0

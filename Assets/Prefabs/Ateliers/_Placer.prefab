@@ -76,14 +76,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4441187521842642}
+  - component: {fileID: 114838037213730408}
   - component: {fileID: 33112164288844504}
   - component: {fileID: 23984286329236606}
   - component: {fileID: 114174346142380108}
   - component: {fileID: 114626549998497482}
   - component: {fileID: 64495273532249664}
-  - component: {fileID: 114886766604363576}
   - component: {fileID: 114131696113774538}
-  - component: {fileID: 114838037213730408}
   m_Layer: 0
   m_Name: Rock2
   m_TagString: Untagged
@@ -121,14 +120,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4090117242431908}
+  - component: {fileID: 114512002282765178}
   - component: {fileID: 33860508284978730}
   - component: {fileID: 23068203810550370}
   - component: {fileID: 114595972126932270}
   - component: {fileID: 114568749380383482}
   - component: {fileID: 64065153522103468}
-  - component: {fileID: 114220988153427008}
   - component: {fileID: 114968169222564518}
-  - component: {fileID: 114512002282765178}
   m_Layer: 0
   m_Name: Rock2
   m_TagString: Untagged
@@ -297,14 +295,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4282999440971760}
+  - component: {fileID: 114270098508851938}
   - component: {fileID: 33224163053359548}
   - component: {fileID: 23156643940903418}
   - component: {fileID: 114927944354009282}
   - component: {fileID: 114172667927010292}
   - component: {fileID: 64515970035211304}
-  - component: {fileID: 114641143658409370}
   - component: {fileID: 114017492752325044}
-  - component: {fileID: 114270098508851938}
   m_Layer: 0
   m_Name: Rock1
   m_TagString: Untagged
@@ -339,14 +336,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4628351595657104}
+  - component: {fileID: 114601683704502652}
   - component: {fileID: 33029336271133766}
   - component: {fileID: 23671389630126968}
   - component: {fileID: 114278144743584322}
   - component: {fileID: 114132585586431710}
   - component: {fileID: 64180663912276636}
-  - component: {fileID: 114663909697788352}
   - component: {fileID: 114457580984956644}
-  - component: {fileID: 114601683704502652}
   m_Layer: 0
   m_Name: Rock2 (1)
   m_TagString: Untagged
@@ -446,7 +442,6 @@ GameObject:
   - component: {fileID: 114510067450194028}
   - component: {fileID: 114149642146127972}
   - component: {fileID: 64190137830982920}
-  - component: {fileID: 114530922593747300}
   - component: {fileID: 114571588130567978}
   - component: {fileID: 114245276361242234}
   m_Layer: 0
@@ -503,14 +498,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4506272245926806}
+  - component: {fileID: 114261370098021104}
   - component: {fileID: 33758727441232678}
   - component: {fileID: 23943295534136982}
   - component: {fileID: 114676916063313686}
   - component: {fileID: 114508608693401978}
   - component: {fileID: 64623192630329406}
-  - component: {fileID: 114623868211508932}
   - component: {fileID: 114267537996405504}
-  - component: {fileID: 114261370098021104}
   m_Layer: 0
   m_Name: Rock1 (1)
   m_TagString: Untagged
@@ -4420,7 +4414,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hologramDistance: 0.5
-  m_dropZone: {fileID: 114819462918898722}
   m_material: {fileID: 2100000, guid: 214c415162c50bc43aeb861321018af0, type: 2}
   m_previewObject: {fileID: 1303230221570678}
 --- !u!114 &114068899203566224
@@ -4859,62 +4852,6 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1512710398264880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecba034caf8fd5647a6847793c833fbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_wOnCollision:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_upwardRotation: {x: 0, y: 0, z: 0}
-  isDistanceGrabbable: 1
-  isDroppable: 1
-  m_isGrabbable: 1
-  onIsGrabbableChange:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEventMTK_Interactable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  m_wOnUseStart:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onUseStart:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnUseStop:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onUseStop:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnGrabStart:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onGrabStart:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnGrabStop:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onGrabSop:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  isDistanceGrabbed: 0
---- !u!114 &114220988153427008
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1142109697114550}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ecba034caf8fd5647a6847793c833fbf, type: 3}
@@ -6029,62 +5966,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: bf6ad292-df09-43a5-bd06-8f16df12fd0f
---- !u!114 &114530922593747300
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1390079749399694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecba034caf8fd5647a6847793c833fbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_wOnCollision:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_upwardRotation: {x: 0, y: 0, z: 0}
-  isDistanceGrabbable: 1
-  isDroppable: 1
-  m_isGrabbable: 1
-  onIsGrabbableChange:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEventMTK_Interactable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  m_wOnUseStart:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onUseStart:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnUseStop:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onUseStop:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnGrabStart:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onGrabStart:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnGrabStop:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onGrabSop:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  isDistanceGrabbed: 0
 --- !u!114 &114533440193581954
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6398,62 +6279,6 @@ MonoBehaviour:
   m_Script: {fileID: 1491221649, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114623868211508932
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1404739802039272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecba034caf8fd5647a6847793c833fbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_wOnCollision:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_upwardRotation: {x: 0, y: 0, z: 0}
-  isDistanceGrabbable: 1
-  isDroppable: 1
-  m_isGrabbable: 1
-  onIsGrabbableChange:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEventMTK_Interactable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  m_wOnUseStart:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onUseStart:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnUseStop:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onUseStop:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnGrabStart:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onGrabStart:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnGrabStop:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onGrabSop:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  isDistanceGrabbed: 0
 --- !u!114 &114626549998497482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6478,62 +6303,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: a4863135-d4d5-46c4-a15f-961ab6d6266d
---- !u!114 &114641143658409370
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1308560360382736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecba034caf8fd5647a6847793c833fbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_wOnCollision:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_upwardRotation: {x: 0, y: 0, z: 0}
-  isDistanceGrabbable: 1
-  isDroppable: 1
-  m_isGrabbable: 1
-  onIsGrabbableChange:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEventMTK_Interactable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  m_wOnUseStart:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onUseStart:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnUseStop:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onUseStop:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnGrabStart:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onGrabStart:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnGrabStop:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onGrabSop:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  isDistanceGrabbed: 0
 --- !u!114 &114642978208380144
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6628,62 +6397,6 @@ MonoBehaviour:
     _collection:
     - {fileID: 1979992885098190}
   _assetGuid: 3cdf9eacbaa460845b619d03d12d79f8
---- !u!114 &114663909697788352
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1333148537305356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecba034caf8fd5647a6847793c833fbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_wOnCollision:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_upwardRotation: {x: 0, y: 0, z: 0}
-  isDistanceGrabbable: 1
-  isDroppable: 1
-  m_isGrabbable: 1
-  onIsGrabbableChange:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEventMTK_Interactable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  m_wOnUseStart:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onUseStart:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnUseStop:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onUseStop:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnGrabStart:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onGrabStart:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnGrabStop:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onGrabSop:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  isDistanceGrabbed: 0
 --- !u!114 &114665211732134070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7213,62 +6926,6 @@ MonoBehaviour:
   m_Script: {fileID: 1491221649, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114886766604363576
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1100927260638420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecba034caf8fd5647a6847793c833fbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_wOnCollision:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_upwardRotation: {x: 0, y: 0, z: 0}
-  isDistanceGrabbable: 1
-  isDroppable: 1
-  m_isGrabbable: 1
-  onIsGrabbableChange:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEventMTK_Interactable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  m_wOnUseStart:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onUseStart:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnUseStop:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onUseStop:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnGrabStart:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onGrabStart:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_wOnGrabStop:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 0}
-  m_onGrabSop:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  isDistanceGrabbed: 0
 --- !u!114 &114896621536779388
 MonoBehaviour:
   m_ObjectHideFlags: 1

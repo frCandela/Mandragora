@@ -23,6 +23,8 @@ public class Teleporter : MonoBehaviour
 	MTK_TPZone[] m_allTPZones;
 	Transform m_targetTransform;
 
+    SolarSystem m_solarSystem;
+
 	MTK_TPZone m_targetZone;
 	MTK_TPZone TargetZone
 	{
@@ -48,7 +50,12 @@ public class Teleporter : MonoBehaviour
 		}
 	}
 
-	[SerializeField] MTK_TPZone m_currentZone;
+    private void Awake()
+    {
+        m_solarSystem = FindObjectOfType<SolarSystem>();
+    }
+
+    [SerializeField] MTK_TPZone m_currentZone;
 	MTK_TPZone CurrentZone
 	{
 		get
@@ -146,9 +153,21 @@ public class Teleporter : MonoBehaviour
 
 	private void MoveMtkManager()
 	{
-		if(CurrentZone.m_tpToPlanet)
-			m_colonisator.Colonize();
-		else
+
+        if (CurrentZone.m_tpToPlanet)
+        {
+           /* if(m_solarSystem.lastPlanet)
+            {
+                PlanetEffect effect = m_solarSystem.lastPlanet.GetComponent<PlanetEffect>();
+                if (m_solarSystem.lastPlanet && effect && effect.effectActive)
+                {*/
+                    m_colonisator.Colonize(m_solarSystem.lastPlanet);
+                /*}
+            }*/
+
+
+        }
+        else
 		{
 			m_mtkManager.transform.position = m_targetTransform.position;
 			m_mtkManager.transform.rotation = m_targetTransform.rotation;

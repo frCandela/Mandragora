@@ -131,7 +131,7 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
     [ContextMenu("Animate")]
     public void RandomAnimation()
     {
-        StartCoroutine(Animate(Random.Range(.1f, .5f), Random.Range(-m_icoPlanet.nbLevels, m_icoPlanet.nbLevels)));
+        StartCoroutine(Animate(Random.Range(.1f, .5f), (int)Mathf.Clamp(Random.Range(-m_icoPlanet.nbLevels, m_icoPlanet.nbLevels), -m_icoSegment.heightLevel, m_icoPlanet.nbLevels - m_icoSegment.heightLevel)));
     }
 
     IEnumerator Animate(float timeBetweenSteps, int stepsAmount)
