@@ -49,14 +49,6 @@ public class MTK_InteractHand : MonoBehaviour
 
     public MTK_InputManager inputManager { get { return m_inputManager; } }
 
-    private void Awake()
-    {
-        foreach(MTK_Interactable interactable in FindObjectsOfType<MTK_Interactable>())
-        {
-            interactable.onIsGrabbableChange.AddListener(onIsGrabbableChange);
-        }
-    }
-
     private void Update()
     {
         m_handAnimator.SetFloat("BlendGrab", m_inputManager.GetTriggerValue());
@@ -163,14 +155,6 @@ public class MTK_InteractHand : MonoBehaviour
             m_grabbed = null;
 
             // ObjectInTrigger = null;
-        }
-    }
-
-    void onIsGrabbableChange(MTK_Interactable interactable)
-    {
-        if (interactable.isGrabbable)
-        {
-            //m_objectsInTrigger.RemoveAll(x => x == interactable);
         }
     }
 
