@@ -47,6 +47,20 @@ public class Colonisator : MonoBehaviour
                 m_manager.transform.position = m_icoPlanet.transform.TransformPoint(center);
             }
         }
+
+        if( Input.GetKeyDown(KeyCode.T) )
+        {
+            foreach (MTK_InteractHand hand in FindObjectsOfType<MTK_InteractHand>())
+            {
+                hand.gameObject.AddComponent<HandTerraformer>();
+
+                GameObject laser = Instantiate(m_laserPrefab);
+                laser.transform.parent = hand.transform;
+                laser.transform.localPosition = new Vector3(0, 0, 50);
+                laser.transform.localScale = new Vector3(0.01f, 0.01f, 100);
+                laser.transform.localRotation = Quaternion.identity;
+            }
+        }
     }
 
     IcoPlanet FindPlanet()
@@ -132,17 +146,6 @@ public class Colonisator : MonoBehaviour
         m_manager.transform.rotation = Quaternion.identity;
         m_setup.transform.position = Vector3.zero;
         m_setup.transform.rotation = Quaternion.identity;
-
-        foreach (MTK_InteractHand hand in FindObjectsOfType<MTK_InteractHand>())
-        {
-            hand.gameObject.AddComponent<HandTerraformer>();
-
-            GameObject laser = Instantiate(m_laserPrefab);
-            laser.transform.parent = hand.transform;
-            laser.transform.localPosition = new Vector3(0, 0, 50);
-            laser.transform.localScale = new Vector3(0.01f, 0.01f, 100);
-            laser.transform.localRotation = Quaternion.identity;
-        }
 
         m_newRoom.SetActive(true);
 
