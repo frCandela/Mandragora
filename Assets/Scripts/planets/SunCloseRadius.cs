@@ -28,14 +28,16 @@ public class SunCloseRadius : MonoBehaviour
             {
                 effect.GetComponent<Rigidbody>().useGravity = true;
             }
+        }
 
-            IcoPlanet planet = other.attachedRigidbody.GetComponent<IcoPlanet>();
-            if (planet)
-            {
-                m_solarSystem.SetPlanetOutOfZone(planet, true);
-            }
+        IcoPlanet planet = other.attachedRigidbody.GetComponent<IcoPlanet>();
+        if (planet)
+        {
+            m_solarSystem.SetPlanetOutOfZone(planet, true);
         }
     }    
+
+
 
     private void OnTriggerExit(Collider other)
     {
@@ -44,12 +46,12 @@ public class SunCloseRadius : MonoBehaviour
         {
             effect.effectActive = true;
             effect.GetComponent<Rigidbody>().useGravity = false;
+        }
 
-            IcoPlanet planet = other.attachedRigidbody.GetComponent<IcoPlanet>();
-            if (planet)
-            {
-                m_solarSystem.SetPlanetOutOfZone(planet, false);
-            }
+        IcoPlanet planet = other.attachedRigidbody.GetComponent<IcoPlanet>();
+        if (planet)
+        {
+            m_solarSystem.SetPlanetOutOfZone(planet, false);
         }
     }
 

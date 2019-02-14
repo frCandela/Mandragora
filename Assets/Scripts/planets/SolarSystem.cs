@@ -12,6 +12,7 @@ public class SolarSystem : MonoBehaviour
     [SerializeField] public List<AK.Wwise.State> m_states = new List<AK.Wwise.State>();
     List<PlanetEffect> m_planetEffectsList = new List<PlanetEffect>();
 
+
     private Rigidbody m_rb;
 
     [SerializeField] GameObject m_explosionEffect;
@@ -19,9 +20,24 @@ public class SolarSystem : MonoBehaviour
 
     bool m_canTPPlanet = false;
 
-    public IcoPlanet lastPlanet { get { return m_planetList.Count > 0 ? m_planetList[m_planetList.Count - 1] : null; } }
+    public IcoPlanet lastPlanet
+    {
+        get
+        {
+            for (int i = m_planetList.Count - 1; i >= 0; --i)
+            {
+                IcoPlanet planet = m_planetList[m_planetList.Count - 1];
+                if (!m_planetListOutOfZone.Contains(planet))
+                {
+                    return planet;
+                }
+            }
+            return null;
+        }
+    }
 
     List<IcoPlanet> m_planetList = new List<IcoPlanet>();
+    List<IcoPlanet> m_planetListOutOfZone = new List<IcoPlanet>();
 
     private void Awake()
     {
@@ -74,23 +90,38 @@ public class SolarSystem : MonoBehaviour
         }
     }
 
+    void SetParticles()
+    {
+        if (m_planetList.Count > 0)
+        {
+            ParticleSystem.EmissionModule emission;
+            foreach (IcoPlanet pl in m_planetList)
+            {
+                emission = pl.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
+                emission.rateOverTime = new ParticleSystem.MinMaxCurve(0);
+            }
+
+            for( int i = m_planetList.Count - 1; i >= 0; --i)
+            {
+                IcoPlanet planet = m_planetList[m_planetList.Count - 1];
+                if( ! m_planetListOutOfZone.Contains(planet))
+                {
+                    emission = planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
+                    emission.rateOverTime = new ParticleSystem.MinMaxCurve(20);
+                    break;
+                }
+            }
+        }
+    }    
+
     void UpdateTPZone(IcoPlanet planet, bool enter)
     {
         if(m_canTPPlanet)
         {
             if(planet)
             {
-                foreach (IcoPlanet pl in m_planetList)
-                {
-                    ParticleSystem.EmissionModule emission = planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
-                    emission.rateOverTime = new ParticleSystem.MinMaxCurve(0);
-                }
-
                 if(enter)
                 {
-                    ParticleSystem.EmissionModule emission = planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
-                    emission.rateOverTime = new ParticleSystem.MinMaxCurve(20);
-
                     if( ! m_planetList.Contains(planet) )
                     {
                         m_planetList.Add(planet);
@@ -99,10 +130,13 @@ public class SolarSystem : MonoBehaviour
                 else
                 {
                     m_planetList.Remove(planet);
+                    ParticleSystem.EmissionModule emission = planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
+                    emission.rateOverTime = new ParticleSystem.MinMaxCurve(0);
                 }   
             }
 
-            m_planetTPZone.gameObject.SetActive(m_planetList.Count > 0);
+            m_planetTPZone.gameObject.SetActive(lastPlanet != null);
+            SetParticles();
         }
     }
 
@@ -121,32 +155,19 @@ public class SolarSystem : MonoBehaviour
 
     public void SetPlanetOutOfZone(IcoPlanet planet, bool state )
     {
-        //print("SetPlanetOutOfZone " + planet.name + " :" + state);
-        if( state )
+        if (state)
         {
-            if(m_planetList.Count>0)
+            if ( !m_planetListOutOfZone.Contains(planet))
             {
-                if (planet == m_planetList[m_planetList.Count - 1])
-                {
-                    ParticleSystem.EmissionModule emission = planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
-                    emission.rateOverTime = new ParticleSystem.MinMaxCurve(0);
-
-                    if (m_planetList.Count > 1)
-                    {
-                        emission = planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
-                        emission.rateOverTime = new ParticleSystem.MinMaxCurve(20);
-                    }
-                    else
-                    {
-                        m_planetTPZone.gameObject.SetActive(false);
-                    }
-                }
-            }
+                m_planetListOutOfZone.Add(planet);
+            }            
         }
         else
         {
-
+            m_planetListOutOfZone.Remove(planet);
         }
+        SetParticles();
+        m_planetTPZone.gameObject.SetActive(lastPlanet != null);
     }
 
 }
