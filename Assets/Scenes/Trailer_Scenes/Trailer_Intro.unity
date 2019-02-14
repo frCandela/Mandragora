@@ -953,6 +953,14 @@ Prefab:
       propertyPath: m_currentZone
       value: 
       objectReference: {fileID: 502008816}
+    - target: {fileID: 1527154424799454, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1503500826950340, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c7f9cfbce7c40047944962a6635d609, type: 2}
   m_IsPrefabAsset: 0
@@ -1136,11 +1144,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114769263590300550, guid: 3e71e23314c1f2f4fbde10d0b7a6c47e,
-        type: 2}
-      propertyPath: onObjectCatched.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2113613503}
     - target: {fileID: 114428491029571336, guid: 3e71e23314c1f2f4fbde10d0b7a6c47e,
         type: 2}
       propertyPath: m_onComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1149,9 +1152,3 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e71e23314c1f2f4fbde10d0b7a6c47e, type: 2}
   m_IsPrefabAsset: 0
---- !u!114 &2113613503 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114622214200260336, guid: 86ca467c0c4a2574a82c8de7b7e95631,
-    type: 2}
-  m_PrefabInternal: {fileID: 762189594}
-  m_Script: {fileID: 11500000, guid: 4671e845658f85c41a5126c96b7feae0, type: 3}
