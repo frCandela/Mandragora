@@ -141,52 +141,39 @@ public class IcoPlanet : MonoBehaviour
         }
     }
 
-    [ContextMenu("UpdateTesselationLevel")]    
+    [ContextMenu("TestTesselation")]
+    void TestTesselation()
+    {
+        SetTesselationLevel(3, 4);
+    }
+
     public void SetTesselationLevel( int nbSubdivisions, int heightMultiplier = 1)
     {
         m_nbSubdivisions = nbSubdivisions;
 
-        GameObject tmp = new GameObject("tmp");
-        tmp.transform.parent = transform;
-        int count = transform.childCount;
-        for (int i = 0; i < count; ++i)
-        {
-            transform.GetChild(0).parent = tmp.transform;
-        }
+        List<IcoSegment> oldSegmentsList = m_segments;
 
-        GameObject decoration = new GameObject("decoration");
-        decoration.transform.parent = transform;
-        foreach (Transform child in tmp.transform)
-        {
-            foreach (Transform sapin in child)
-            {
-                sapin.SetParent(decoration.transform, true);
-            }
-        }
-
-        Destroy(decoration.GetComponentInChildren<ParticleSystem>().gameObject);
-
-        decoration.SetActive(false);
+        // Generate new geometry
         Initialize();
 
-        foreach (IcoSegment segment in m_segments)
+        // Set height levels on the new geometry
+        foreach (IcoSegment segment in m_segments)        
         {
-            Vector3 center = 1.5f * segment.Center();
-            Vector3 dir = -0.5f * center;
+            Vector3 center = segment.Center();
+            float closestAngle = float.MaxValue;
+            IcoSegment closestSegment = oldSegmentsList[0];
 
-            Ray ray = new Ray(transform.position + center, dir);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, LayerMask.GetMask("Planet")))
+            foreach (IcoSegment oldSeg in oldSegmentsList)
             {
-                IcoSegment seg = hit.collider.GetComponent<IcoSegment>();
-                if (seg)
-                    segment.heightLevel = heightMultiplier * seg.heightLevel;
-            }            
-                
+                float angle = Vector3.Angle(center, oldSeg.Center());
+                if (angle < closestAngle)
+                {
+                    closestAngle = angle;
+                    closestSegment = oldSeg;
+                }
+            }
+            segment.heightLevel = heightMultiplier * closestSegment.heightLevel;
         }
-
-        tmp.SetActive(false);
-        Destroy(tmp);
 
         foreach (IcoSegment segment in m_segments)
             segment.GenerateCollider();
@@ -197,9 +184,8 @@ public class IcoPlanet : MonoBehaviour
         foreach (IcoSegment segment in m_segments)
             segment.UpdateSegment();
 
-        Destroy(tmp);       
-
-        decoration.SetActive(true);
+        foreach (IcoSegment segment in oldSegmentsList)
+            Destroy(segment);
     }
 
     [ContextMenu("UpdatePlanet")]
