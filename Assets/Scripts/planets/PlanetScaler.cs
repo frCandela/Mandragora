@@ -79,12 +79,12 @@ public class PlanetScaler : Workshop
 
     protected override IEnumerator AnimateWorkshop(float duration, VoidDelegate onFinish)
     {
-        float scaleIncrement = m_scaleEffect.transform.localScale.x;
+        float scaleIncrement = m_scaleEffect.transform.localScale.x / 2;
         Vector3 initScale = m_scaleEffect.transform.localScale;
 
-        for (float t = 0; t < 1; t += Time.deltaTime / duration)
+        for (float t = 0; t < 2; t += Time.deltaTime / duration)
         {
-            m_scaleEffect.transform.localScale = initScale + Vector3.one * Mathf.Sin(t * Mathf.PI) * scaleIncrement;
+            m_scaleEffect.transform.localScale = initScale + initScale.normalized * Mathf.Sin(t * Mathf.PI) * scaleIncrement;
 
             yield return new WaitForEndOfFrame();
         }
