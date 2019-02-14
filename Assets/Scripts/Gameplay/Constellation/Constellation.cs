@@ -154,7 +154,7 @@ public class Constellation : MonoBehaviour
 	}
 
 	[ContextMenu("Complete")]
-	void Complete()
+	public void Complete()
 	{
 		m_validated.Post(gameObject);
 		m_kinder.SetActive(true);
@@ -193,7 +193,7 @@ public class Constellation : MonoBehaviour
 	{
 		float time = 3;
 
-		StartCoroutine(Place(time, tr));
+		StartCoroutine(Place(time * 10, tr));
 		AkSoundEngine.PostEvent("Play_Formation_Constellation", gameObject);
 		
 		Vector3 initWolrdPos = m_starsTransform[0].localPosition + m_starsTransform[0].GetChild(0).localPosition;

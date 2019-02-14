@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Events;
 
+[DisallowMultipleComponent]
 public class MTK_Interactable : MonoBehaviour
 {
+    [SerializeField] AK.Wwise.Event m_wOnCollision;
+
     [SerializeField] public Vector3 m_upwardRotation;
 
     [SerializeField] public bool isDistanceGrabbable = true;
@@ -74,6 +78,9 @@ public class MTK_Interactable : MonoBehaviour
     // Use this for initialization
     void Awake ()
     {
+        Assert.IsTrue(GetComponents<MTK_Interactable>().Length <= 1, gameObject.name);
+
+
         m_outline = GetComponent<Outline>();
         if(m_outline == null)
             m_outline = gameObject.AddComponent<Outline>();
@@ -84,10 +91,10 @@ public class MTK_Interactable : MonoBehaviour
         m_onUseStop = new UnityEvent();
         m_onGrabStart = new UnityEvent();
         m_onGrabSop = new UnityEvent();
-        m_wOnUseStart = new AK.Wwise.Event();
-        m_wOnUseStop = new AK.Wwise.Event();
-        m_wOnGrabStart = new AK.Wwise.Event();
-        m_wOnGrabStop = new AK.Wwise.Event();
+        //m_wOnUseStart = new AK.Wwise.Event();
+        //m_wOnUseStop = new AK.Wwise.Event();
+        //m_wOnGrabStart = new AK.Wwise.Event();
+        //m_wOnGrabStop = new AK.Wwise.Event();
 
         m_joints = GetComponents<MTK_JointType>();
         if (m_joints.Length == 0)
@@ -131,5 +138,11 @@ public class MTK_Interactable : MonoBehaviour
             m_onUseStop.Invoke();
             m_wOnUseStop.Post(gameObject);
         }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if(m_wOnCollision != null)
+            m_wOnCollision.Post(gameObject);
     }
 }

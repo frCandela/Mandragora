@@ -9,6 +9,7 @@ public class Teleporter : MonoBehaviour
 	[Header("Settings")]
 	[SerializeField, Range(0,1)]
 	float m_tolerance = 0.1f;
+	[SerializeField] Colonisator m_colonisator;
 
 	[Header("Fade Time")]
 	[SerializeField, Range(0,5)] float m_fadeStart;
@@ -22,6 +23,8 @@ public class Teleporter : MonoBehaviour
 	MTK_TPZone[] m_allTPZones;
 	Transform m_targetTransform;
 
+    SolarSystem m_solarSystem;
+
 	MTK_TPZone m_targetZone;
 	MTK_TPZone TargetZone
 	{
@@ -33,21 +36,26 @@ public class Teleporter : MonoBehaviour
 		{
 			if(value != m_targetZone)
 			{
-				if(m_targetZone)
-					m_targetZone.Selected = false;
+				// if(m_targetZone)
+				// 	m_targetZone.Selected = false;
 
 				m_targetZone = value;
 
 				if(m_targetZone)
 				{
 					m_targetTransform = m_targetZone.transform;
-					m_targetZone.Selected = true;
+					// m_targetZone.Selected = true;
 				}
 			}
 		}
 	}
 
-	[SerializeField] MTK_TPZone m_currentZone;
+    private void Awake()
+    {
+        m_solarSystem = FindObjectOfType<SolarSystem>();
+    }
+
+    [SerializeField] MTK_TPZone m_currentZone;
 	MTK_TPZone CurrentZone
 	{
 		get
@@ -145,8 +153,26 @@ public class Teleporter : MonoBehaviour
 
 	private void MoveMtkManager()
 	{
-		m_mtkManager.transform.position = m_targetTransform.position;
-		m_mtkManager.transform.rotation = m_targetTransform.rotation;
+
+        if (CurrentZone.m_tpToPlanet)
+        {
+           /* if(m_solarSystem.lastPlanet)
+            {
+                PlanetEffect effect = m_solarSystem.lastPlanet.GetComponent<PlanetEffect>();
+                if (m_solarSystem.lastPlanet && effect && effect.effectActive)
+                {*/
+                    m_colonisator.Colonize(m_solarSystem.lastPlanet);
+                /*}
+            }*/
+
+
+        }
+        else
+		{
+			m_mtkManager.transform.position = m_targetTransform.position;
+			m_mtkManager.transform.rotation = m_targetTransform.rotation;
+		}
+		
 		MTK_Fade.Start(Color.clear, m_fadeEnd, () => m_available = true);
 	}
 }

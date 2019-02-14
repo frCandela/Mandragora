@@ -65,6 +65,7 @@ GameObject:
   - component: {fileID: 114472649029849908}
   - component: {fileID: 114156572363093174}
   - component: {fileID: 114860966687227414}
+  - component: {fileID: 114746015106638614}
   m_Layer: 0
   m_Name: Sun_FX_MASTER
   m_TagString: Untagged
@@ -126,6 +127,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1154376419572672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4954015208709396}
+  - component: {fileID: 114817253016734868}
+  - component: {fileID: 135242487882528902}
+  - component: {fileID: 114801223414174020}
+  m_Layer: 8
+  m_Name: TP Zone Planet
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &1200130880068564
 GameObject:
   m_ObjectHideFlags: 1
@@ -261,13 +280,14 @@ GameObject:
   - component: {fileID: 114669612263941596}
   - component: {fileID: 114247180675326730}
   - component: {fileID: 114655853963459610}
+  - component: {fileID: 114260558302206572}
   m_Layer: 13
   m_Name: SunFinal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1541584806552234
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,6 +689,7 @@ Transform:
   - {fileID: 4797410110117698}
   - {fileID: 4465683208728830}
   - {fileID: 4542656373960110}
+  - {fileID: 4954015208709396}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -971,6 +992,19 @@ Transform:
   m_Father: {fileID: 4797410110117698}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -62.478004, z: 0}
+--- !u!4 &4954015208709396
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1154376419572672}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.85, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4290785297268692}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23156020517419326
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -1690,6 +1724,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  m_soclesAnimators:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114182097840615720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1804,6 +1842,57 @@ MonoBehaviour:
   multiPositionArray: []
   MultiPositionType: 1
   multiPositionTypeLabel: 0
+--- !u!114 &114260558302206572
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1505970533697666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 637162700, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objects:
+  - _target: {fileID: 1505970533697666}
+    _path: /0
+    _guidPath: e8e3d134-7ffd-4df6-9e74-daf9801d5d4e
+    _isOverridden: 0
+    _components:
+    - _target: {fileID: 114415001113612024}
+      _type: SolarSystem
+      _index: 0
+      _isOverridden: 0
+      _properties:
+      - _path: m_planetTPZone
+        _animationCurveValue:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        _booleanValue: 0
+        _boundsValue:
+          m_Center: {x: 0, y: 0, z: 0}
+          m_Extent: {x: 0, y: 0, z: 0}
+        _colorValue: {r: 0, g: 0, b: 0, a: 0}
+        _doubleValue: 0
+        _floatValue: 0
+        _intValue: 0
+        _longValue: 0
+        _objectReferenceValue: {fileID: 114817253016734868}
+        _quaternionValue: {x: 0, y: 0, z: 0, w: 0}
+        _rectValue:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        _stringValue: 
+        _vector2Value: {x: 0, y: 0}
+        _vector3Value: {x: 0, y: 0, z: 0}
+        _vector4Value: {x: 0, y: 0, z: 0, w: 0}
+  _overrideObjects: []
 --- !u!114 &114268367761188542
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2016,8 +2105,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcb094e241aaa954a8a61471230d4366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxSpeed: Infinity
-  m_accelerationForce: 1
+  m_maxSpeed: 4
+  m_accelerationForce: 2
+  impactForce: 0.5
   m_states:
   - valueGuid: 
     groupGuid: 
@@ -2037,6 +2127,7 @@ MonoBehaviour:
       type: 2}
   m_explosionEffect: {fileID: 1164661607641472, guid: 5ac12fa3f8ca53940add52e7f35b04b9,
     type: 2}
+  m_planetTPZone: {fileID: 114817253016734868}
 --- !u!114 &114436944804918424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2194,6 +2285,7 @@ MonoBehaviour:
     - {fileID: 1913381970093024}
     - {fileID: 1541584806552234}
     - {fileID: 1343622811073326}
+    - {fileID: 1154376419572672}
   _assetGuid: e37a93b04e2a6ed49a932e07ff484ab3
 --- !u!114 &114627982084150570
 MonoBehaviour:
@@ -2297,6 +2389,27 @@ MonoBehaviour:
   m_Script: {fileID: 1491221649, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114746015106638614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1087257628441794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 223dc2a93f9f2bd46b65c340f1be9fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 0
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!114 &114792992018694924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2308,6 +2421,37 @@ MonoBehaviour:
   m_Script: {fileID: 1491221649, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114801223414174020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1154376419572672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 604b097f-24cc-4bdc-9789-9d6f0507b402
+--- !u!114 &114817253016734868
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1154376419572672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4671e845658f85c41a5126c96b7feae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_onExitZone:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_pipeAnimator: {fileID: 0}
+  m_enabled: 1
+  m_tpToPlanet: 1
 --- !u!114 &114820603460185086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2510,6 +2654,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.99999994
   m_Center: {x: -0.000000059604645, y: 0, z: 1.7763568e-15}
+--- !u!135 &135242487882528902
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1154376419572672}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135692643860707466
 SphereCollider:
   m_ObjectHideFlags: 1

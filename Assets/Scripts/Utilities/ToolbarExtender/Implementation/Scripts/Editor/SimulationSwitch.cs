@@ -55,12 +55,8 @@ namespace UnityToolbarExtender
 			{
 				if(value)
 				{
-					if(!m_lightManager)
-					m_lightManager = GameObject.FindObjectOfType<LightingManager>().GetComponent<Animator>();
-
-					if(m_lightManager && EditorApplication.isPlaying)
-						m_lightManager.Play("DEBUG");
-				}
+                    MTK_Manager.FastLoad();
+                }
 			}
 		}
 

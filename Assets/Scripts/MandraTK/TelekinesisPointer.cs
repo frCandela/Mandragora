@@ -94,7 +94,7 @@ public class TelekinesisPointer : MonoBehaviour
 		{
 			if(!m_attract)
 			{
-				if(m_interactHand.objectInTrigger)
+				if(m_interactHand.ObjectInTrigger)
 				{
 					Target = null;
 				}
@@ -137,6 +137,8 @@ public class TelekinesisPointer : MonoBehaviour
 					m_connectedBody.velocity = Vector3.MoveTowards(m_connectedBody.velocity, targetVel * (Mathf.Sqrt(GetDistanceToTarget()) * m_distanceSpeedScale), Time.deltaTime * (20 + (1-distanceScale) * 10));
 
 					m_inputManager.Haptic((1- distanceScale) / 10);
+
+					AkSoundEngine.SetRTPCValue("Grab_Distance", GetDistanceToTarget());
 				}
 			}
 
@@ -235,7 +237,7 @@ public class TelekinesisPointer : MonoBehaviour
 
 		if(m_connectedBody)
 		{
-			m_connectedBody.AddForce((m_lastForceApplied - force) * Mathf.Sqrt(GetDistanceToTarget() * 10000));
+			m_connectedBody.AddForce((m_lastForceApplied - force) * Mathf.Sqrt(GetDistanceToTarget() * 1000));
 			m_connectedBody.AddTorque(force.z, force.x, force.y);
 			m_connectedBody.useGravity = false;
 			

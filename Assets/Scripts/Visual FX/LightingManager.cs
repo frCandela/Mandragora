@@ -10,6 +10,8 @@ public class LightingManager : MonoBehaviour {
 	[SerializeField] MeshRenderer zoneRenderer;
 	[SerializeField] List<MonoBehaviour> m_monoList;
 
+	[SerializeField] Animator[] m_soclesAnimators;
+
 	bool vibrate = false;
 
     // Use this for initialization
@@ -24,6 +26,8 @@ public class LightingManager : MonoBehaviour {
 
 	private void Start()
 	{
+		AkSoundEngine.PostEvent("Play_Intro", gameObject);
+
 		if(zoneRenderer)
 		{
 			zoneRenderer.enabled = false;
@@ -33,6 +37,7 @@ public class LightingManager : MonoBehaviour {
 	MTK_InputManager[] m_inputManagers;
 	void TriggerSound()
 	{
+		AkSoundEngine.PostEvent("Stop_Intro", gameObject);
 		AkSoundEngine.PostEvent("Sun_Light_Play", gameObject);
 		vibrate = true;
 
@@ -42,6 +47,9 @@ public class LightingManager : MonoBehaviour {
 	void PlaySunExplosion()
 	{
 		AkSoundEngine.PostEvent("Play_Sun_Explosion", gameObject);
+
+		foreach (Animator animator in m_soclesAnimators)
+			animator.enabled = true;
 	}
 
 	void ActivateControl()
@@ -57,6 +65,19 @@ public class LightingManager : MonoBehaviour {
 		}
 
 		vibrate = false;
+	}
+
+	public void DeActivateControl()
+	{
+		foreach (MonoBehaviour mono in m_monoList)
+		{
+			mono.enabled = false;
+		}
+
+		if(zoneRenderer)
+		{
+			zoneRenderer.enabled = false;
+		}
 	}
 	
 	float m_vibrationIntensity = 0;

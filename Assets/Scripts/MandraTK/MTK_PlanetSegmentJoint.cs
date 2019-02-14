@@ -121,6 +121,8 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
                 AkSoundEngine.PostEvent("Stone_Up_Play", gameObject);
             else if (amount < 0)
                 AkSoundEngine.PostEvent("Stone_Down_Play", gameObject);
+            
+            AkSoundEngine.PostEvent("Play_Terra", gameObject);
         }
         
         m_oldHeight = m_icoSegment.heightLevel;
@@ -129,7 +131,7 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
     [ContextMenu("Animate")]
     public void RandomAnimation()
     {
-        StartCoroutine(Animate(Random.Range(.1f, .5f), Random.Range(-m_icoPlanet.nbLevels, m_icoPlanet.nbLevels)));
+        StartCoroutine(Animate(Random.Range(.1f, .5f), (int)Mathf.Clamp(Random.Range(-m_icoPlanet.nbLevels, m_icoPlanet.nbLevels), -m_icoSegment.heightLevel, m_icoPlanet.nbLevels - m_icoSegment.heightLevel)));
     }
 
     IEnumerator Animate(float timeBetweenSteps, int stepsAmount)

@@ -26,7 +26,6 @@ GameObject:
   - component: {fileID: 65677871760535956}
   - component: {fileID: 65428307720361092}
   - component: {fileID: 114098488157779984}
-  - component: {fileID: 114419210769668950}
   m_Layer: 0
   m_Name: champi3
   m_TagString: Untagged
@@ -125,6 +124,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecba034caf8fd5647a6847793c833fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_wOnCollision:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: ead6c5ebfafa94b4e9bbb4993f245ae3,
+      type: 2}
   m_upwardRotation: {x: 0, y: 0, z: 0}
   isDistanceGrabbable: 1
   isDroppable: 1
@@ -152,7 +155,8 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   m_wOnGrabStart:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 5b1377e1c5627df4e97eb0e0dbf07b7b,
+      type: 2}
   m_onGrabStart:
     m_PersistentCalls:
       m_Calls: []
@@ -167,17 +171,6 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   isDistanceGrabbed: 0
---- !u!114 &114419210769668950
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1279040102387532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1491221649, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114805611124245544
 MonoBehaviour:
   m_ObjectHideFlags: 1

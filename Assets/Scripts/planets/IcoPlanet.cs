@@ -164,6 +164,8 @@ public class IcoPlanet : MonoBehaviour
             }
         }
 
+        Destroy(decoration.GetComponentInChildren<ParticleSystem>().gameObject);
+
         decoration.SetActive(false);
         Initialize();
 

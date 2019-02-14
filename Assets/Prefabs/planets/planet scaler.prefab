@@ -1931,7 +1931,7 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1537203344281024}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 383d5ce8b7198334c96452f54295f2e9, type: 3}
   m_Controller: {fileID: 9100000, guid: 3a2ef150db081ff4ab82498bfa15736b, type: 2}
   m_CullingMode: 1
@@ -1976,7 +1976,36 @@ MonoBehaviour:
   m_ejectForce: 1
   m_workshopAnimator: {fileID: 95612452207773284}
   m_sounds: {fileID: 0}
+  m_planetShineAnimCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 7.457605
+      outSlope: 7.457605
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.023807133
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -7.762455
+      outSlope: -7.762455
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.052109957
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   onObjectCatched:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEventBool, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onPlanetCatched:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}

@@ -9,12 +9,14 @@ public class PlanetEffect : Effect
     public Rigidbody sunRigidbody;
     public GameObject explosionEffect;
 
+
     private MTK_JointType m_joint;
 
     public float m_maxRadius;
 
     public float maxSpeed = float.PositiveInfinity;
     public float accelerationForce = 1;
+    public float impactForce = 3f;
 
     public bool m_radiusDecided = false;
     public bool effectActive = true;
@@ -25,7 +27,7 @@ public class PlanetEffect : Effect
 
         m_maxRadius = float.MaxValue;
         
-        if(m_lastVel != Vector3.zero)
+        if(m_rb && m_lastVel != Vector3.zero)
             m_rb.velocity = m_lastVel;
 
         if (m_rb && !m_rb.isKinematic)
@@ -101,7 +103,7 @@ public class PlanetEffect : Effect
         if( ! m_rb.useGravity)
         {
             Vector3 dir = (transform.position - other.transform.position).normalized;
-            m_rb.AddForce(10 * dir, ForceMode.Impulse);
+            m_rb.AddForce(impactForce * dir, ForceMode.Impulse);
             Destroy(Instantiate(explosionEffect, transform.position, transform.rotation), 10);
         }            
     }
