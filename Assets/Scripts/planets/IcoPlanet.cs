@@ -119,25 +119,25 @@ public class IcoPlanet : MonoBehaviour
             Vector3 v1 = m_vertices[3 * i + 1];
             Vector3 v2 = m_vertices[3 * i + 2];
 
-            GameObject segment = new GameObject();
-            segment.transform.position = transform.position;
-            segment.name = "segment" + i;
-            segment.transform.parent = transform;
-            segment.AddComponent<MeshRenderer>();
-            segment.GetComponent<MeshRenderer>().material = m_segmentMaterial;
-            segment.layer = LayerMask.NameToLayer("Planet");
+            GameObject segment = transform.GetChild(1 + i).gameObject;
+            // segment.transform.position = transform.position;
+            // segment.name = "segment" + i;
+            // segment.transform.parent = transform;
+            // segment.AddComponent<MeshRenderer>();
+            // segment.GetComponent<MeshRenderer>().material = m_segmentMaterial;
+            // segment.layer = LayerMask.NameToLayer("Planet");
 
-            IcoSegment icoSeg = segment.AddComponent<IcoSegment>();
+            IcoSegment icoSeg = segment.GetComponent<IcoSegment>();
             m_segments.Add(icoSeg);
-            icoSeg.heightLevel = m_defaultHeightLevel;
-            icoSeg.icoPlanet = this;
+            // icoSeg.heightLevel = m_defaultHeightLevel;
+            // icoSeg.icoPlanet = this;
             icoSeg.SetBaseVertices(v0, v1, v2);
 
-            m_segmentJoints.Add(segment.AddComponent<MTK_PlanetSegmentJoint>());
-            MTK_Interactable interactable = segment.AddComponent<MTK_Interactable>();
-            interactable.isDistanceGrabbable = false;
-            interactable.isGrabbable = false;
-            interactable.isDroppable = false;
+            m_segmentJoints.Add(segment.GetComponent<MTK_PlanetSegmentJoint>());
+            MTK_Interactable interactable = segment.GetComponent<MTK_Interactable>();
+            // interactable.isDistanceGrabbable = false;
+            // interactable.isGrabbable = false;
+            // interactable.isDroppable = false;
         }
     }
 
@@ -218,5 +218,7 @@ public class IcoPlanet : MonoBehaviour
     {
         AkSoundEngine.SetRTPCValue("Wind", Quaternion.Angle(transform.rotation, m_oldRotation) * 50);
         m_oldRotation = transform.rotation;
+
+        UpdatePlanet();
     }
 }

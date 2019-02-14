@@ -19,7 +19,7 @@ public class IcoSegment : MonoBehaviour
     public int triangleCount { get { return m_triangles.Count/3; } }
 
     private Vector3[] m_baseVertices = new Vector3[3];
-    private IcoSegment[] m_neighbours = new IcoSegment[3];
+    [SerializeField] IcoSegment[] m_neighbours = new IcoSegment[3];
 
     public Mesh mesh { get { return m_mesh; } }
     private Mesh m_mesh;
