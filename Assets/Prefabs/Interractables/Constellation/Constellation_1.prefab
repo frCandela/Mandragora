@@ -12265,6 +12265,40 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_trailMaterial: {fileID: 2100000, guid: cf955bdc131539a4da93ab38c84a188b, type: 2}
+  m_trailMaterialInitParams: {x: 0.15, y: 3, z: 2}
+  m_trailAmplitudeOverTimeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3.6363635
+      outSlope: 3.6363635
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.275
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.01875
+      outSlope: -0.01875
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.45977008
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   m_validated:
     valueGuid: 
     WwiseObjectReference: {fileID: 11400000, guid: bccf3e36d82aede48933236a997bcb0c,
