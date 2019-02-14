@@ -112,15 +112,21 @@ public class MTK_Interactable : MonoBehaviour
         if (input)
         {
             m_onGrabStart.Invoke();
-            m_wOnGrabStart.Post(gameObject);
+
+            if(m_wOnGrabStart !=null)
+                m_wOnGrabStart.Post(gameObject);
         }
         else
         {
             m_onGrabSop.Invoke();
-            m_wOnGrabStop.Post(gameObject);
+
+            if(m_wOnGrabStop !=null)
+                m_wOnGrabStop.Post(gameObject);
 
             m_onUseStop.Invoke();
-            m_wOnUseStop.Post(gameObject);
+
+            if(m_wOnUseStop != null)
+                m_wOnUseStop.Post(gameObject);
 
             UseEffects = true;
         }
@@ -131,12 +137,16 @@ public class MTK_Interactable : MonoBehaviour
         if(input)
         {
             m_onUseStart.Invoke();
-            m_wOnUseStart.Post(gameObject);
+
+            if(m_wOnUseStart != null)
+                m_wOnUseStart.Post(gameObject);
         }
         else
         {
             m_onUseStop.Invoke();
-            m_wOnUseStop.Post(gameObject);
+
+            if(m_wOnUseStop != null)
+                m_wOnUseStop.Post(gameObject);
         }
     }
 
