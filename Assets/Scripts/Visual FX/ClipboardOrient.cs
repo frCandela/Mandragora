@@ -5,6 +5,8 @@ using UnityEngine;
 public class ClipboardOrient : MonoBehaviour {
 
 	public List<Transform> clipPlanes;
+	public Transform target;
+
 
 	
 	// Update is called once per frame
@@ -13,7 +15,7 @@ public class ClipboardOrient : MonoBehaviour {
 			foreach(Transform item in clipPlanes)
 			{
 				if(item != null) {
-					item.LookAt(Camera.main.transform, Vector3.up);
+					item.LookAt(target.transform, Vector3.up);
 				}
 			}
 		
