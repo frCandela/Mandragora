@@ -25,7 +25,6 @@ GameObject:
   - component: {fileID: 114727373893390966}
   - component: {fileID: 64145916836014876}
   - component: {fileID: 114549266891945036}
-  - component: {fileID: 114698142646997178}
   m_Layer: 0
   m_Name: Volcan
   m_TagString: Untagged
@@ -130,6 +129,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecba034caf8fd5647a6847793c833fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_wOnCollision:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 51ffa3841429e3a4d9254280ed7be4d9,
+      type: 2}
   m_upwardRotation: {x: 0, y: 0, z: 0}
   isDistanceGrabbable: 1
   isDroppable: 1
@@ -157,7 +160,8 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   m_wOnGrabStart:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: bf24c0d445867824b8c5204928661392,
+      type: 2}
   m_onGrabStart:
     m_PersistentCalls:
       m_Calls: []
@@ -172,17 +176,6 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   isDistanceGrabbed: 0
---- !u!114 &114698142646997178
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1163437053379494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1491221649, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114727373893390966
 MonoBehaviour:
   m_ObjectHideFlags: 1

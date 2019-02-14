@@ -91,10 +91,10 @@ public class MTK_Interactable : MonoBehaviour
         m_onUseStop = new UnityEvent();
         m_onGrabStart = new UnityEvent();
         m_onGrabSop = new UnityEvent();
-        m_wOnUseStart = new AK.Wwise.Event();
-        m_wOnUseStop = new AK.Wwise.Event();
-        m_wOnGrabStart = new AK.Wwise.Event();
-        m_wOnGrabStop = new AK.Wwise.Event();
+        //m_wOnUseStart = new AK.Wwise.Event();
+        //m_wOnUseStop = new AK.Wwise.Event();
+        //m_wOnGrabStart = new AK.Wwise.Event();
+        //m_wOnGrabStop = new AK.Wwise.Event();
 
         m_joints = GetComponents<MTK_JointType>();
         if (m_joints.Length == 0)
