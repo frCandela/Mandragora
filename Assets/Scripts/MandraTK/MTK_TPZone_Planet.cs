@@ -16,7 +16,7 @@ public class MTK_TPZone_Planet : MTK_TPZone
 		}
 		set
 		{
-			if(m_planet)
+			if(m_planet && m_planet.transform.GetChild(0) && m_planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>())
 			{
 				ParticleSystem.EmissionModule emission;
 				emission = m_planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
