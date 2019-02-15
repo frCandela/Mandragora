@@ -76,8 +76,6 @@ public class PlanetObjectPlacer : Workshop
 
     protected override IEnumerator AnimateWorkshop(float duration, VoidDelegate onFinish)
     {
-
-        print("anim");
         m_previewObject.SetActive(true);
 
         Hologram holo = CreateHologram(m_previewObject);
