@@ -64,8 +64,8 @@ public class Teleporter : MonoBehaviour
 
 				m_currentZone = value;
 
-				if(m_currentZone)
-					m_currentZone.Selected = true;
+				// if(m_currentZone)
+				// 	m_currentZone.Selected = true;
 			}
 		}
 	}

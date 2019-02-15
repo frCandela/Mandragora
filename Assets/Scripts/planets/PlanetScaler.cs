@@ -65,6 +65,7 @@ public class PlanetScaler : Workshop
             }
 
             AkSoundEngine.PostEvent("LFO_Scale_Play", gameObject);
+            AkSoundEngine.PostEvent("Play_Scale_RTPC", gameObject);
         }
         else
         {
@@ -74,6 +75,7 @@ public class PlanetScaler : Workshop
             m_scaleEffect = null;
 
             AkSoundEngine.PostEvent("LFO_Scale_Stop", gameObject);
+            AkSoundEngine.PostEvent("Stop_Scale_RTPC", gameObject);
         }
     }
 
@@ -90,5 +92,10 @@ public class PlanetScaler : Workshop
         }
         
         onFinish.Invoke();
+    }
+
+    protected override void OnObjectGrabStop()
+    {
+        AkSoundEngine.SetRTPCValue("Scale_Rate", 0);
     }
 }

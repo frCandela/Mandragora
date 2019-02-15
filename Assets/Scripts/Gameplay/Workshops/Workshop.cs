@@ -47,6 +47,7 @@ public abstract class Workshop : MonoBehaviour
         }
         else
         {
+			OnObjectGrabStop();
             Destroy(m_confJoint);
         }
 	}
@@ -85,5 +86,6 @@ public abstract class Workshop : MonoBehaviour
 	protected abstract void OnWorkshopUpdateState(bool state, MTK_Interactable current);
 	protected abstract IEnumerator AnimateWorkshop(float duration, VoidDelegate onFinish);
 	protected abstract void OnObjectGrabStart();
+	protected abstract void OnObjectGrabStop();
 	protected abstract void OnObjectGrabStay();
 }
