@@ -49,6 +49,7 @@ public class LightingManager : MonoBehaviour {
 	{
 		AkSoundEngine.PostEvent("Play_Sun_Explosion", gameObject);
 		AkSoundEngine.PostEvent("UnMute_Drop", gameObject);
+		AkSoundEngine.PostEvent("Music_Play", gameObject);
 
 		foreach (Animator animator in m_soclesAnimators)
 			animator.enabled = true;
