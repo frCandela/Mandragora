@@ -107,7 +107,7 @@ public class SolarSystem : MonoBehaviour
                 if( ! m_planetListOutOfZone.Contains(planet))
                 {
                     emission = planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
-                    emission.rateOverTime = new ParticleSystem.MinMaxCurve(20);
+                    emission.rateOverTime = new ParticleSystem.MinMaxCurve(10);
                     break;
                 }
             }
