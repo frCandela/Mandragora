@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class Workshop : MonoBehaviour
 {
 	protected DropZone m_dropzone;
+	[SerializeField] AK.Wwise.Event m_sound;
 
 	private ConfigurableJoint m_confJoint;
 	protected MTK_JointType m_catchedObjectJoint;
@@ -60,6 +61,7 @@ public abstract class Workshop : MonoBehaviour
 
 		if(state)
 		{
+			m_sound.Post(gameObject);
 			current.isDistanceGrabbable = false;
             current.IndexJointUsed = 1;
 

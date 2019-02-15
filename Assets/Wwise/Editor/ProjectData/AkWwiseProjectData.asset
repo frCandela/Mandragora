@@ -180,13 +180,13 @@ MonoBehaviour:
   - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 0995f2392612e04c91c38c7b63f5e42c
-    m_lastTime: -8586519712756188722
+    m_lastTime: -8586513646583170864
     List: []
   BankWwu:
   - PhysicalPath: SoundBanks\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: a97016e8726c1f408dafc159e6c344b5
-    m_lastTime: -8586546650012591908
+    m_lastTime: -8586514510871334095
     List:
     - name: Soundbank
       guid: 9916953bbad2944d9b906b3cd5a8867d
@@ -201,7 +201,7 @@ MonoBehaviour:
   - PhysicalPath: Events\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 6030b6aee3d39d4c9d884b8f3ae2474c
-    m_lastTime: -8586519705952625879
+    m_lastTime: -8586513615732119129
     List:
     - name: Bubbles_Play
       guid: 06a67f35ed42bc45923f62a7d6982e40
@@ -443,6 +443,18 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: Mute_Drop
+      guid: 6fc4d14f631b5546b30bab89b602d0a9
+      id: 1462632038
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Mute_Drop
+        ObjectType: 3
+      Path: Default Work Unit\Mute_Drop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Pick_Up_Kinder_Play
       guid: f321e6268592754b96f4376a846c7c35
       id: 2989308307
@@ -512,6 +524,54 @@ MonoBehaviour:
       - ElementName: Play_Amb_TP
         ObjectType: 3
       Path: Default Work Unit\Play_Amb_TP
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Play_Ambiant
+      guid: cd627a9485168746abe810ca671d3e31
+      id: 1562995970
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Ambiant
+        ObjectType: 3
+      Path: Default Work Unit\Play_Ambiant
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Play_Anim_Extrud
+      guid: 8287d789b14bc7408ee0e184064b2e60
+      id: 424646902
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Anim_Extrud
+        ObjectType: 3
+      Path: Default Work Unit\Play_Anim_Extrud
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Play_Anim_Scale
+      guid: 236ccc009822624c8b9c997383b51803
+      id: 2053837382
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Anim_Scale
+        ObjectType: 3
+      Path: Default Work Unit\Play_Anim_Scale
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Play_Anim_Tiles
+      guid: b8ee1ebe5d548648ac614949fd4bf129
+      id: 2056595799
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Anim_Tiles
+        ObjectType: 3
+      Path: Default Work Unit\Play_Anim_Tiles
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
@@ -623,6 +683,18 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: Play_House_Drop
+      guid: e7f0a2f2c60b444794ad8d5dc016bc5f
+      id: 1196909878
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_House_Drop
+        ObjectType: 3
+      Path: Default Work Unit\Play_House_Drop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Play_Ice_Mountain
       guid: 22152003ddd5644aa093074f23e20550
       id: 2241449967
@@ -731,6 +803,18 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: Play_Pillier
+      guid: a21eb7b4842cfc4da43d7c4faf6b000b
+      id: 1999510261
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Pillier
+        ObjectType: 3
+      Path: Default Work Unit\Play_Pillier
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Play_Pipe
       guid: 86d07f94309d1342aeb8819b7b4fe8f6
       id: 1601844230
@@ -755,15 +839,27 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
-    - name: Play_Pose_d_objet
+    - name: Play_Pose
       guid: 98e0a915aa85e5409d2eb566012e0a69
-      id: 891514969
+      id: 1753137113
       PathAndIcons:
       - ElementName: Default Work Unit
         ObjectType: 12
-      - ElementName: Play_Pose_d_objet
+      - ElementName: Play_Pose
         ObjectType: 3
-      Path: Default Work Unit\Play_Pose_d_objet
+      Path: Default Work Unit\Play_Pose
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Play_Scale_RTPC
+      guid: 5f29795ffc6328449e730e4f3e13fa55
+      id: 110126054
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Scale_RTPC
+        ObjectType: 3
+      Path: Default Work Unit\Play_Scale_RTPC
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
@@ -1187,6 +1283,18 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: Stop_Ambiant
+      guid: 4e9997b565a4cd41841061167865f32d
+      id: 3313406164
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Stop_Ambiant
+        ObjectType: 3
+      Path: Default Work Unit\Stop_Ambiant
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Stop_Begin_TP
       guid: 61f31e1504ab4549883fc9f6bf473e78
       id: 478331110
@@ -1232,6 +1340,18 @@ MonoBehaviour:
       - ElementName: Stop_Pipe
         ObjectType: 3
       Path: Default Work Unit\Stop_Pipe
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Stop_Scale_RTPC
+      guid: fcb85567e33fb749ac381174d26c3e8a
+      id: 3536788120
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Stop_Scale_RTPC
+        ObjectType: 3
+      Path: Default Work Unit\Stop_Scale_RTPC
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
@@ -1427,6 +1547,18 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: UnMute_Drop
+      guid: c828286da8ec804aa981ff2a3b567a58
+      id: 4266323997
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: UnMute_Drop
+        ObjectType: 3
+      Path: Default Work Unit\UnMute_Drop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Water_Play
       guid: b3d3d6cd6cf9344b84225365a374524f
       id: 3482313411
@@ -1467,7 +1599,7 @@ MonoBehaviour:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 7023720d000eef46b000ec471e7f4b00
-    m_lastTime: -8586519669481139807
+    m_lastTime: -8586514537157709026
     List:
     - name: Constellation
       guid: be300520a9c24940a2a12910d9cb833c
@@ -1727,7 +1859,7 @@ MonoBehaviour:
   - PhysicalPath: Switches\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 263ffd4ab6313748971495623bcd18e9
-    m_lastTime: -8586519712752704531
+    m_lastTime: -8586514537144278318
     List:
     - name: Drop_Material
       guid: 763e752ecf244e4db38a075838142d62
@@ -1779,5 +1911,16 @@ MonoBehaviour:
   - /MandragoWwise
   - /MandragoWwise/Events
   - /MandragoWwise/Events/Default Work Unit
+  - /MandragoWwise/SoundBanks
+  - /MandragoWwise/SoundBanks/Default Work Unit
+  - /MandragoWwise/States
+  - /MandragoWwise/States/Default Work Unit
+  - /MandragoWwise/States/Default Work Unit/Planets_Orbit
+  - /MandragoWwise/Switches
+  - /MandragoWwise/Switches/Default Work Unit
+  - /MandragoWwise/Switches/Default Work Unit/Drop_Material
+  - /MandragoWwise/Virtual Acoustics
+  - /MandragoWwise/Virtual Acoustics/Factory Reflect Acoustic Textures
+  - /MandragoWwise/Virtual Acoustics/Factory Reflect Acoustic Textures/Textures
   autoPopulateEnabled: 1
   CurrentPluginConfig: 

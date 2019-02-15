@@ -29,6 +29,7 @@ public class PlanetTerraformer : MonoBehaviour
             
             if (m_icoPlanet)
             {
+                AkSoundEngine.PostEvent("Play_Anim_Extrud", gameObject);
                 m_icoPlanet.Animate();
 
                 Invoke("EnableButton", 2);
