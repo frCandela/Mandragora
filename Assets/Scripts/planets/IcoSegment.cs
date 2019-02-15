@@ -47,12 +47,7 @@ public class IcoSegment : MonoBehaviour
     [ContextMenu("UpdateSegment")]
     public void TestMethod()
     {
-        float t1 = Time.realtimeSinceStartup;
-
-        UpdateSegment();
-
-        float t2 = Time.realtimeSinceStartup;
-        print(t2 - t1);
+        UpdateSegment();        
     }
 
     public Vector3 Center()
@@ -157,16 +152,26 @@ public class IcoSegment : MonoBehaviour
 
     public void FindNeighbours()
     {
-        Vector3 center = 0.9f * (m_baseVertices[0] + m_baseVertices[1] + m_baseVertices[2]) / 3f;
         for (int i = 0; i < 3; ++i)
         {
-            Vector3 edge = 0.9f * (m_baseVertices[i] + m_baseVertices[(i + 1) % 3]) / 2;
-            Ray ray = new Ray(transform.position + center, edge - center);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, LayerMask.GetMask("Planet")))
+            Vector3 edge = (m_baseVertices[i] + m_baseVertices[(i + 1) % 3]) / 2;
+            float closestAngle = float.MaxValue;
+            IcoSegment closestSegment = icoPlanet.Segments[0];
+
+            foreach (IcoSegment otherSeg in icoPlanet.Segments)
             {
-                m_neighbours[i] = hit.collider.GetComponent<IcoSegment>();
+                if (otherSeg != this)
+                {
+                    float angle = Vector3.Angle(edge, otherSeg.Center());
+                    if (angle < closestAngle)
+                    {
+                        closestAngle = angle;
+                        closestSegment = otherSeg;
+                    }
+                }
             }
+            m_neighbours[i] = closestSegment;
+
         }
     }
 

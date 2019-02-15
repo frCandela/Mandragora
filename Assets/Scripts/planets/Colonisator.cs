@@ -81,15 +81,18 @@ public class Colonisator : MonoBehaviour
         return planets[0];
     }
 
-    void InitializePlanet()
-    {
-
-    }
-
     void CleanupPlanet( IcoPlanet planet )
     {
+        foreach (Transform child in planet.transform)
+        {
+            if (!child.GetComponent<IcoSegment>())
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
         // Set transforms
-        planet.GetComponent<Rigidbody>().isKinematic = true; ;
+        planet.GetComponent<Rigidbody>().isKinematic = true;
 
         planet.transform.parent = transform;
         planet.transform.rotation = Quaternion.identity;
@@ -117,9 +120,16 @@ public class Colonisator : MonoBehaviour
             foreach (MTK_JointType joint in segment.GetComponents<MTK_JointType>())
                 Destroy(joint);
         }
+
     }
 
-    [ContextMenu("Colonize")]
+    [ContextMenu("Colonie")]
+    public void test()
+    {
+        Colonize(FindPlanet());
+    }
+
+
     public void Colonize( IcoPlanet planet )
     {
         m_icoPlanet = planet;
@@ -150,25 +160,5 @@ public class Colonisator : MonoBehaviour
         m_setup.transform.rotation = Quaternion.identity;
 
         m_newRoom.SetActive(true);
-
-        /* m_icoPlanet.transform.position = Vector3.zero;
-         m_icoPlanet.transform.rotation = Quaternion.identity;
-         m_icoPlanet.GetComponent<Rigidbody>().isKinematic = true;
-         Destroy(m_icoPlanet.GetComponent<MTK_Interactable>());
-
-         foreach ( IcoSegment segment in m_icoPlanet.Segments)
-         {
-             Destroy(segment.GetComponent<MTK_Interactable>());
-         }
-
-         m_previousScene.SetActive(false);
-
-         m_icoPlanet.transform.localScale = new Vector3(1, 1, 1);
-         m_icoPlanet.m_nbSubdivisions = 3;
-         m_icoPlanet.UpdateTesselationLevel();
-         m_icoPlanet.transform.localScale = new Vector3(m_planetScale, m_planetScale, m_planetScale);
-
-*/
-
     }
 }
