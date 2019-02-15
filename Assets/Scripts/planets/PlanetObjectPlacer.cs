@@ -9,9 +9,8 @@ public class PlanetObjectPlacer : Workshop
     [SerializeField] private Material m_material;
     [SerializeField] private GameObject m_previewObject;
 
-    private List<MTK_InteractHand> m_handsInTrigger;
+    private List<Pair<MTK_InteractHand, Hologram>> m_handsInTrigger;
 
-    private Dictionary<MTK_InteractHand, Hologram> m_objectsHolograms;
     private bool m_placingEnabled = false;
 
     Vector3 previewInitPos;
@@ -20,8 +19,7 @@ public class PlanetObjectPlacer : Workshop
 	// Use this for initialization
 	void Start ()
     {
-        m_objectsHolograms = new Dictionary<MTK_InteractHand, Hologram>();
-        m_handsInTrigger = new List<MTK_InteractHand>();
+        m_handsInTrigger = new List<Pair<MTK_InteractHand, Hologram>>();
 
         previewInitPos = m_previewObject.transform.position;
         previewInitRos = m_previewObject.transform.rotation;
@@ -78,6 +76,8 @@ public class PlanetObjectPlacer : Workshop
 
     protected override IEnumerator AnimateWorkshop(float duration, VoidDelegate onFinish)
     {
+
+        print("anim");
         m_previewObject.SetActive(true);
 
         Hologram holo = CreateHologram(m_previewObject);
@@ -131,15 +131,11 @@ public class PlanetObjectPlacer : Workshop
         RaycastHit hit;
         if (Physics.Raycast(origin, dir, out hit, 1f, LayerMask.GetMask("Planet")))
         {
-            Debug.DrawLine(origin, origin + dir, Color.green);
-
             if (hit.distance < m_hologramDistance)
             {
                 holo.gameObject.SetActive(true);
                 holo.gameObject.transform.position = hit.point;
-                // holo.gameObject.transform.up = hit.normal;
                 holo.gameObject.transform.rotation = originTransform.rotation;
-
                 holo.projectedSegment = hit.collider.gameObject;
             }
             else
@@ -147,93 +143,122 @@ public class PlanetObjectPlacer : Workshop
                 holo.gameObject.SetActive(false);
             }
         }
-        else
+    }
+
+    void AnchorHologram(Hologram holo)
+    {
+        Outline outline = holo.referenceObject.GetComponent<Outline>();
+        if (outline)
         {
-            Debug.DrawLine(origin, origin + dir, Color.red);
+            outline.enabled = false;
         }
+
+        GameObject copy = Instantiate(holo.referenceObject);
+        copy.transform.position = holo.transform.position;
+        copy.transform.rotation = holo.transform.rotation;
+        copy.transform.parent = holo.projectedSegment.transform;
+        copy.layer = LayerMask.NameToLayer("Planet");
+
+        MTK_Interactable interact = copy.GetComponent<MTK_Interactable>();
+        interact.isDroppable = false;
+        interact.isDistanceGrabbable = false;
+
+        copy.AddComponent<ObjectOnPlanet>().referenceObject = holo.referenceObject;
+
+        Destroy(copy.GetComponent<Rigidbody>());
+
+        holo.referenceObject.transform.position = -1000f * Vector3.up;
+        holo.referenceObject.GetComponent<Rigidbody>().isKinematic = true;
     }
 
     private void Update()
     {
-        if(m_placingEnabled && m_dropzone.catchedObject  && m_dropzone.catchedObject.GetComponent<IcoPlanet>())
+        Destroy(null);
+
+        if( m_placingEnabled )
         {
-            foreach (MTK_InteractHand hand in m_handsInTrigger)
+            for (int i = 0; i < m_handsInTrigger.Count; ++i)
             {
-                if (hand.m_grabbed && hand.m_grabbed != m_dropzone.catchedObject && !hand.m_grabbed.GetComponent<IcoPlanet>())
-                {
-                    Hologram holo;
-                    if (!m_objectsHolograms.TryGetValue(hand, out holo))
-                    {
-                        holo = CreateHologram(hand.m_grabbed.gameObject);
-                        m_objectsHolograms.Add(hand, holo);
-                    }
+                MTK_InteractHand hand = m_handsInTrigger[i].First;
+                Hologram holo = m_handsInTrigger[i].Second;
 
-                    DrawHologram(holo, hand.m_grabbed.transform);
-                }
-                else if (m_objectsHolograms.ContainsKey(hand))
+                if (hand.m_grabbed != null )
                 {
-                    Hologram holo = m_objectsHolograms[hand];
-
-                    if(holo && holo.isActiveAndEnabled)
+                    if(hand.m_grabbed != m_dropzone.catchedObject)
                     {
-                        Outline outline = holo.referenceObject.GetComponent<Outline>();
-                        if (outline)
+                        if( ! holo )
                         {
-                            outline.enabled = false;
+                            holo = CreateHologram(hand.m_grabbed.gameObject);
+                            m_handsInTrigger[i].Second = holo;
                         }
-
-                        GameObject copy = Instantiate(holo.referenceObject);
-
-                        copy.transform.position = holo.transform.position;
-                        copy.transform.rotation = holo.transform.rotation;
-                        copy.transform.parent = holo.projectedSegment.transform;
-                        copy.layer = LayerMask.NameToLayer("Planet");
-
-                        MTK_Interactable interact = copy.GetComponent<MTK_Interactable>();
-                        interact.isDroppable = false;
-                        interact.isDistanceGrabbable = false;
-
-                        copy.AddComponent<ObjectOnPlanet>().referenceObject = holo.referenceObject;
-
-                        Destroy(copy.GetComponent<Rigidbody>());
-
-                        holo.referenceObject.transform.position = -1000f * Vector3.up;
-                        holo.referenceObject.GetComponent<Rigidbody>().isKinematic = true;
-
-                        Destroy(holo.gameObject);
-                        m_objectsHolograms.Remove(hand);
+                        holo.gameObject.SetActive(true);
+                        DrawHologram(holo, hand.m_grabbed.transform);
+                    }
+                }
+                else
+                {
+                    if( holo )
+                    {
+                        if (holo.isActiveAndEnabled)
+                        {
+                            AnchorHologram(holo);
+                        }
 
                         hand.GetComponentInParent<MTK_InputManager>().Haptic(1);
                         AkSoundEngine.PostEvent("Play_Pose", gameObject);
+
+                        m_handsInTrigger[i].Second = null;
+                        Destroy(holo.gameObject);
                     }
                 }
             }
         }
     }    
 
+    void RegisterHand(MTK_InteractHand hand,  bool state)
+    {
+        if(state)
+        {
+            m_handsInTrigger.Add(new Pair<MTK_InteractHand, Hologram>( hand, null));
+        }
+        else
+        {
+            for( int i = 0; i < m_handsInTrigger.Count; ++i)
+            {
+                if(m_handsInTrigger[i].First == hand)
+                {
+                    if (m_handsInTrigger[i].Second)
+                    {
+                        Destroy(m_handsInTrigger[i].Second.gameObject);
+                    }
+                }
+                m_handsInTrigger.RemoveAt(i);
+                break;
+            }            
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if( other.attachedRigidbody)
         {
-            MTK_InteractHand hand = other.attachedRigidbody.GetComponent<MTK_InteractHand>();
-            
+            MTK_InteractHand hand = other.attachedRigidbody.GetComponent<MTK_InteractHand>();            
             if( hand)
             {
-                m_handsInTrigger.Add(hand);
+                RegisterHand(hand, true);
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        MTK_InteractHand hand = other.attachedRigidbody.GetComponent<MTK_InteractHand>();
-        if (hand)
+        if (other.attachedRigidbody)
         {
-            if (m_objectsHolograms.ContainsKey(hand))
-                Destroy(m_objectsHolograms[hand].gameObject);
-
-            m_handsInTrigger.Remove(hand);
-            m_objectsHolograms.Remove(hand);
+            MTK_InteractHand hand = other.attachedRigidbody.GetComponent<MTK_InteractHand>();
+            if (hand)
+            {
+                RegisterHand(hand, false);
+            }
         }
     }
 
