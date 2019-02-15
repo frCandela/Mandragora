@@ -33,15 +33,6 @@ public class MTK_TPZone_Planet : MTK_TPZone
 	{
 		set
 		{
-			print("Planet - Active");
-
-			ParticleSystem.EmissionModule emission;
-			emission = m_planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
-
-			if(value)
-				emission.rateOverTime = new ParticleSystem.MinMaxCurve(10);
-			else
-				emission.rateOverTime = new ParticleSystem.MinMaxCurve(0);
 		}
 	}
 
@@ -49,29 +40,25 @@ public class MTK_TPZone_Planet : MTK_TPZone
 	{
 		set
 		{
-			print("Planet - Selected");
-
 			if(value)
 				AkSoundEngine.PostEvent("Play_Look_TP", gameObject);
+
+			ParticleSystem.EmissionModule emission;
+			emission = m_planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
+
+			if(value)
+				emission.rateOverTime = new ParticleSystem.MinMaxCurve(30);
+			else
+				emission.rateOverTime = new ParticleSystem.MinMaxCurve(0);
 		}
 	}
 
 	public override void Validate()
 	{
-		print("Planet - Validate");
 	}
 
 	public override void Appears(bool input)
 	{
-		if(!input)
-			if(!m_enabled)
-			{
-				AkSoundEngine.PostEvent("Play_Way", gameObject);
-
-				print("Planet - Appears");
-					
-				m_enabled = true;
-			}
 	}
 
 	public override void OnExit()

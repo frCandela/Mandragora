@@ -34,15 +34,15 @@ public class Teleporter : MonoBehaviour
 		{
 			if(value != m_targetZone)
 			{
-				// if(m_targetZone)
-				// 	m_targetZone.Selected = false;
+				if(m_targetZone)
+					m_targetZone.Selected = false;
 
 				m_targetZone = value;
 
 				if(m_targetZone)
 				{
 					m_targetTransform = m_targetZone.transform;
-					// m_targetZone.Selected = true;
+					m_targetZone.Selected = true;
 				}
 			}
 		}
