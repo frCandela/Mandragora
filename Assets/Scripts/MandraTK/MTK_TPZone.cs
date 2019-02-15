@@ -62,10 +62,10 @@ public class MTK_TPZone : MonoBehaviour
 
 	public virtual void OnExit()
 	{
+		m_onExitZone.Invoke();
+
 		Constellation constellation = transform.parent.GetComponentInChildren<Constellation>();
 		if(constellation)
 			constellation.Recycle();
-
-		m_onExitZone.Invoke();
 	}
 }

@@ -2075,6 +2075,7 @@ GameObject:
   - component: {fileID: 114893618233300156}
   - component: {fileID: 114847524999454566}
   - component: {fileID: 114277263053830776}
+  - component: {fileID: 114474926164756894}
   m_Layer: 0
   m_Name: socle01
   m_TagString: Untagged
@@ -17175,8 +17176,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114769263590300550}
-        m_MethodName: set_enabled
-        m_Mode: 6
+        m_MethodName: Release
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -17189,7 +17190,6 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   m_pipeAnimator: {fileID: 0}
   m_enabled: 1
-  m_tpToPlanet: 0
 --- !u!114 &114081215122677116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -19881,6 +19881,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 26fb38b0-8059-40d9-a28f-037518b54fa6
+--- !u!114 &114474926164756894
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1521477211279930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 223dc2a93f9f2bd46b65c340f1be9fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!114 &114488195287400658
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 114742190006146234}
   - component: {fileID: 114069143177055948}
   - component: {fileID: 114707115952135676}
+  - component: {fileID: 114152055796808020}
   m_Layer: 0
   m_Name: socle01
   m_TagString: Untagged
@@ -1599,6 +1600,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: db84442c-1302-4642-8945-9b2e186a1b4c
+--- !u!114 &114152055796808020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1355295992743524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 223dc2a93f9f2bd46b65c340f1be9fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!114 &114197751679254418
 MonoBehaviour:
   m_ObjectHideFlags: 1
