@@ -26,6 +26,7 @@ public class LightingManager : MonoBehaviour {
 
 	private void Start()
 	{
+		AkSoundEngine.PostEvent("Mute_Drop", gameObject);
 		AkSoundEngine.PostEvent("Play_Intro", gameObject);
 
 		if(zoneRenderer)
@@ -47,6 +48,8 @@ public class LightingManager : MonoBehaviour {
 	void PlaySunExplosion()
 	{
 		AkSoundEngine.PostEvent("Play_Sun_Explosion", gameObject);
+		AkSoundEngine.PostEvent("UnMute_Drop", gameObject);
+		AkSoundEngine.PostEvent("Music_Play", gameObject);
 
 		foreach (Animator animator in m_soclesAnimators)
 			animator.enabled = true;

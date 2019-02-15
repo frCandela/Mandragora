@@ -83,7 +83,6 @@ GameObject:
   - component: {fileID: 114359897389804670}
   - component: {fileID: 114027346118812648}
   - component: {fileID: 114614970105558664}
-  - component: {fileID: 114944568282057528}
   m_Layer: 13
   m_Name: SunFinal
   m_TagString: Untagged
@@ -1367,34 +1366,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: d4fd6d96-5065-4cd7-91c9-2a3f51b567c7
---- !u!114 &114944568282057528
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1104615863379388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8d8814bf4ffe5d4eb28f9aad618cb4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerList: f7e1664c
-  useOtherObject: 0
-  actionOnEventType: 0
-  curveInterpolation: 4
-  enableActionOnEvent: 0
-  data:
-    valueGuid: 
-    WwiseObjectReference: {fileID: 11400000, guid: 0b1fc9e6be95fc84c89a0bcb32cb6b43,
-      type: 2}
-  m_callbackData: {fileID: 0}
-  playingId: 0
-  soundEmitterObject: {fileID: 0}
-  transitionDuration: 0
-  valueGuid: 
-  multiPositionArray: []
-  MultiPositionType: 1
-  multiPositionTypeLabel: 0
 --- !u!114 &114962831866639826
 MonoBehaviour:
   m_ObjectHideFlags: 1

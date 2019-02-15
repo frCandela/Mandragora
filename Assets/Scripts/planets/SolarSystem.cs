@@ -16,7 +16,7 @@ public class SolarSystem : MonoBehaviour
     private Rigidbody m_rb;
 
     [SerializeField] GameObject m_explosionEffect;
-    [SerializeField] MTK_TPZone m_planetTPZone;
+    [SerializeField] MTK_TPZone_Planet m_planetTPZone;
 
     bool m_canTPPlanet = false;
 
@@ -90,30 +90,6 @@ public class SolarSystem : MonoBehaviour
         }
     }
 
-    void SetParticles()
-    {
-        if (m_planetList.Count > 0)
-        {
-            ParticleSystem.EmissionModule emission;
-            foreach (IcoPlanet pl in m_planetList)
-            {
-                emission = pl.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
-                emission.rateOverTime = new ParticleSystem.MinMaxCurve(0);
-            }
-
-            for( int i = m_planetList.Count - 1; i >= 0; --i)
-            {
-                IcoPlanet planet = m_planetList[m_planetList.Count - 1];
-                if( ! m_planetListOutOfZone.Contains(planet))
-                {
-                    emission = planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
-                    emission.rateOverTime = new ParticleSystem.MinMaxCurve(10);
-                    break;
-                }
-            }
-        }
-    }    
-
     void UpdateTPZone(IcoPlanet planet, bool enter)
     {
         if(m_canTPPlanet)
@@ -130,13 +106,10 @@ public class SolarSystem : MonoBehaviour
                 else
                 {
                     m_planetList.Remove(planet);
-                    ParticleSystem.EmissionModule emission = planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
-                    emission.rateOverTime = new ParticleSystem.MinMaxCurve(0);
                 }   
             }
 
-            m_planetTPZone.gameObject.SetActive(lastPlanet != null);
-            SetParticles();
+            m_planetTPZone.Planet = lastPlanet;
         }
     }
 
@@ -166,8 +139,7 @@ public class SolarSystem : MonoBehaviour
         {
             m_planetListOutOfZone.Remove(planet);
         }
-        SetParticles();
-        m_planetTPZone.gameObject.SetActive(lastPlanet != null);
-    }
 
+        m_planetTPZone.Planet = lastPlanet;
+    }
 }

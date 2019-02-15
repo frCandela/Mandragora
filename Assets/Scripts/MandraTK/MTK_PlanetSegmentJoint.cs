@@ -106,14 +106,14 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
         }
     }
 
-    void Increment(int amount)
+    void Increment(int amount, bool sound = true)
     {
         m_icoSegment.heightLevel += amount;
         m_baseDistance += amount * (m_icoPlanet.heightDelta * m_icoPlanet.transform.localScale.x);
         m_icoSegment.UpdateSegment();
         m_icoSegment.UpdateNeighbours();
 
-        if(m_oldHeight != m_icoSegment.heightLevel)
+        if(sound && m_oldHeight != m_icoSegment.heightLevel)
         {
             if(m_icoSegment.heightLevel  <= 0)
                 AkSoundEngine.PostEvent("Water_Play", gameObject);
@@ -146,13 +146,13 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
 
             for (int i = 0; i < stepsAmount; i++)
             {
-                Increment(increment);
+                Increment(increment, false);
                 yield return new WaitForSeconds(timeBetweenSteps);
             }
 
             for (int i = 0; i < stepsAmount; i++)
             {
-                Increment(-increment);
+                Increment(-increment, false);
                 yield return new WaitForSeconds(timeBetweenSteps);
             }
 

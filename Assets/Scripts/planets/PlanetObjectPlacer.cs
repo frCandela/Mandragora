@@ -16,8 +16,8 @@ public class PlanetObjectPlacer : Workshop
     Vector3 previewInitPos;
     Quaternion previewInitRos;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         m_handsInTrigger = new List<Pair<MTK_InteractHand, Hologram>>();
 
@@ -268,6 +268,11 @@ public class PlanetObjectPlacer : Workshop
     }
 
     protected override void OnObjectGrabStay()
+    {
+        // throw new System.NotImplementedException();
+    }
+
+    protected override void OnObjectGrabStop()
     {
         // throw new System.NotImplementedException();
     }
