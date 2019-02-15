@@ -135,9 +135,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4954015208709396}
-  - component: {fileID: 114817253016734868}
   - component: {fileID: 135242487882528902}
   - component: {fileID: 114801223414174020}
+  - component: {fileID: 95891672112147830}
+  - component: {fileID: 114218773351808230}
   m_Layer: 8
   m_Name: TP Zone Planet
   m_TagString: Untagged
@@ -1500,6 +1501,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!95 &95891672112147830
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1154376419572672}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: f801dba6d43e8224c8428f13624047a2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!108 &108149773330832216
 Light:
   m_ObjectHideFlags: 1
@@ -1740,6 +1759,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: a182b259-6244-48cd-93e9-bd21a479985b
+--- !u!114 &114218773351808230
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1154376419572672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79392c87faa6f944a92e3ab084f0e537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_onExitZone:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_pipeAnimator: {fileID: 0}
+  m_enabled: 0
+  m_solarSystem: {fileID: 114415001113612024}
 --- !u!114 &114223648372644108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1880,7 +1918,7 @@ MonoBehaviour:
         _floatValue: 0
         _intValue: 0
         _longValue: 0
-        _objectReferenceValue: {fileID: 114817253016734868}
+        _objectReferenceValue: {fileID: 114218773351808230}
         _quaternionValue: {x: 0, y: 0, z: 0, w: 0}
         _rectValue:
           serializedVersion: 2
@@ -2127,7 +2165,7 @@ MonoBehaviour:
       type: 2}
   m_explosionEffect: {fileID: 1164661607641472, guid: 5ac12fa3f8ca53940add52e7f35b04b9,
     type: 2}
-  m_planetTPZone: {fileID: 114817253016734868}
+  m_planetTPZone: {fileID: 114218773351808230}
 --- !u!114 &114436944804918424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2433,25 +2471,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 604b097f-24cc-4bdc-9789-9d6f0507b402
---- !u!114 &114817253016734868
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1154376419572672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4671e845658f85c41a5126c96b7feae0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_onExitZone:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_pipeAnimator: {fileID: 0}
-  m_enabled: 1
-  m_tpToPlanet: 1
 --- !u!114 &114820603460185086
 MonoBehaviour:
   m_ObjectHideFlags: 1

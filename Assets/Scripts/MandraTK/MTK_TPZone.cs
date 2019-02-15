@@ -10,9 +10,8 @@ public class MTK_TPZone : MonoBehaviour
 	[SerializeField] Animator m_pipeAnimator;
 
 	public bool m_enabled = false;
-	public bool m_tpToPlanet = false;
 
-	public bool Active
+	public virtual bool Active
 	{
 		set
 		{
@@ -21,7 +20,7 @@ public class MTK_TPZone : MonoBehaviour
 		}
 	}
 
-	public bool Selected
+	public virtual bool Selected
 	{
 		set
 		{
@@ -38,13 +37,13 @@ public class MTK_TPZone : MonoBehaviour
 		m_animator = GetComponent<Animator>();
 	}
 
-	public void Validate()
+	public virtual void Validate()
 	{
 		if(m_animator)
 			m_animator.SetTrigger("Validate");
 	}
 
-	public void Appears(bool input)
+	public virtual void Appears(bool input)
 	{
 		if(!input)
 			if(!m_enabled)
@@ -61,7 +60,7 @@ public class MTK_TPZone : MonoBehaviour
 			}
 	}
 
-	public void OnExit()
+	public virtual void OnExit()
 	{
 		Constellation constellation = transform.parent.GetComponentInChildren<Constellation>();
 		if(constellation)
