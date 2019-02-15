@@ -44,12 +44,16 @@ public class MTK_TPZone_Planet : MTK_TPZone
 				AkSoundEngine.PostEvent("Play_Look_TP", gameObject);
 
 			ParticleSystem.EmissionModule emission;
-			emission = m_planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
 
-			if(value)
-				emission.rateOverTime = new ParticleSystem.MinMaxCurve(30);
-			else
-				emission.rateOverTime = new ParticleSystem.MinMaxCurve(0);
+			if(m_planet.transform.GetChild(0) && m_planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>())
+			{
+				emission = m_planet.transform.GetChild(0).GetComponentInChildren<ParticleSystem>().emission;
+
+				if(value)
+					emission.rateOverTime = new ParticleSystem.MinMaxCurve(30);
+				else
+					emission.rateOverTime = new ParticleSystem.MinMaxCurve(0);
+			}
 		}
 	}
 
