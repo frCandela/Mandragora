@@ -36,6 +36,10 @@ public class PlanetTerraformer : MonoBehaviour
 
                 m_icoPlanet.GetComponent<Collider>().enabled = false;
 
+                MTK_Interactable interactable = m_icoPlanet.GetComponent<MTK_Interactable>();
+                interactable.isDistanceGrabbable = false;
+                interactable.isGrabbable = false;
+
                 foreach ( IcoSegment segment in m_icoPlanet.Segments)
                 {
                     segment.GetComponent<MTK_Interactable>().isGrabbable = true;
