@@ -10,6 +10,7 @@ public class TpVfxInstanciate : MonoBehaviour {
 	public float TpChargeDuration;
 	private float launchTimer;
 	private bool isLaunch;
+	public Transform targetCamera;
 
 	// Use this for initialization
 	void Start () {
@@ -20,8 +21,8 @@ public class TpVfxInstanciate : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		// if(Input.GetKeyDown(KeyCode.Space))
-		// 	LaunchInTpVfx();
+		if(Input.GetKeyDown(KeyCode.Space))
+		 	LaunchInTpVfx();
 
 		if(isLaunch)
 		{
@@ -37,7 +38,8 @@ public class TpVfxInstanciate : MonoBehaviour {
 
 	public void LaunchInTpVfx ()
 	{
-		transform.position = Camera.main.transform.position;
+		//transform.position = Camera.main.transform.position;
+		transform.position = targetCamera.position;
 
 		launchTimer = Time.time;
 		isLaunch = true;
