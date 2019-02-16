@@ -6,31 +6,19 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: MTL_sunShinePlane V2
-  m_Shader: {fileID: 4800000, guid: df55568f824e3ed418c286e296af4ba6, type: 3}
+  m_Name: MTL_SunV03
+  m_Shader: {fileID: 4800000, guid: be36c70c8bb9991429570d15dde1db32, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2990
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _AlphaMask:
-        m_Texture: {fileID: 2800000, guid: 6b1db71ae08ebc241baf7cf8c6ecfef7, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _AlphaMaskTex:
-        m_Texture: {fileID: 2800000, guid: 6b1db71ae08ebc241baf7cf8c6ecfef7, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Detail:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -50,12 +38,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _IntersectionRampTex:
-        m_Texture: {fileID: 2800000, guid: f6d20581a3f6b074aba60cfa148fd7da, type: 3}
+    - _FlowMap:
+        m_Texture: {fileID: 2800000, guid: e991f57094339944fb73d796f86f08d6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e991f57094339944fb73d796f86f08d6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -70,51 +58,53 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _intersectionRampTex:
-        m_Texture: {fileID: 2800000, guid: f6d20581a3f6b074aba60cfa148fd7da, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
-    - _Cursor: 1
-    - _CursorOne: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DistFade: 1
+    - _DistortionStrength: 0.03
     - _DstBlend: 0
-    - _FadeIn: 0
-    - _FadeOut: 1
-    - _FresnelSensibility: 0
+    - _ExplosionFactor: 0
+    - _FFresnelPow: 0.89
+    - _FlatFresnelIntensity: 0
+    - _FlatFresnelLuminosity: 0
+    - _FlowFactor: 0.62
+    - _FlowFreq: 0.1
+    - _FlowMapScale: 2.45
+    - _FlowTimeOffset: 2.4
+    - _FresnelIntensity: 0.068
+    - _GeneralLuminosity: 0.249
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HighlightOpacity: 0
-    - _IntersectionDamper: 0.18
-    - _IntersectionIn: 0
-    - _IntersectionMax: 0.52
-    - _IntersectionMin: 0.033
-    - _IntersectionOut: 0
-    - _IsAlphaTex: 0
-    - _IsAlphaUV: 1
-    - _IsBackFace: 1
-    - _MaxInterDist: 0
+    - _LastFresnelLuminosity: 1.76
+    - _LastFresnelPow: 0.88
+    - _Luminosity: 1
     - _Metallic: 0
     - _Mode: 0
+    - _NoiseAmplitude: 0.01
     - _OcclusionStrength: 1
-    - _Opacity: 0
     - _Parallax: 0.02
+    - _SFresnelPow: 8.5
+    - _SmoothFresnelCoreLuminosity: 0.8
+    - _SmoothFresnelIntensity: 0.24
+    - _SmoothFresnelLuminosity: 1.95
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _TriplanarPow: 3.07
+    - _TriplanarScale: 0.48
     - _UVSec: 0
+    - _Visibility: 1
     - _ZWrite: 1
-    - _distFade: 18.9
-    - _maxDepth: 0.41
-    - _maxDistFade: 1.06
-    - _minDistFade: 0
+    - v: 1
     m_Colors:
-    - _AlphaMaskPow: {r: 19.73, g: 0.09, b: 0, a: 0}
-    - _Color: {r: 1, g: 0.19551288, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color1: {r: 1, g: 0.6136515, b: 0.16509432, a: 1}
+    - _Color2: {r: 1, g: 0.121568635, b: 0, a: 1}
+    - _Color3: {r: 1, g: 0.717697, b: 0.13679248, a: 1}
+    - _Color4: {r: 1, g: 0.47041166, b: 0.19339621, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HighlightColor: {r: 1, g: 0.73933965, b: 0.0990566, a: 1}
-    - _IntersectionColor: {r: 0.9743724, g: 1, b: 0, a: 1}
+    - _NoiseAmplitude: {r: 0.01, g: 0.01, b: 0.01, a: 0}
+    - _NoiseFreq: {r: 14, g: 12, b: 10, a: 0}
+    - _TriplanarOffset: {r: -2.18, g: 1, b: 1, a: 1}
