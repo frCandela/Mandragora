@@ -233,9 +233,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4755278465358142}
-  - component: {fileID: 135832480264838526}
   - component: {fileID: 114400199011589320}
   - component: {fileID: 114022118244576704}
+  - component: {fileID: 65327116972289926}
   m_Layer: 13
   m_Name: PlatformGravityZone
   m_TagString: Untagged
@@ -869,8 +869,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1343622811073326}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.46, y: 6.85, z: -0.16}
-  m_LocalScale: {x: 0.4020367, y: 0.4020367, z: 0.4020367}
+  m_LocalPosition: {x: 7.46, y: 4.31, z: -0.16}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4290785297268692}
   m_RootOrder: 2
@@ -1482,6 +1482,18 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65327116972289926
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1343622811073326}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.7319012, y: 2.31043, z: 4.636627}
+  m_Center: {x: -0.31720734, y: 0.655215, z: 0.07184601}
 --- !u!95 &95808176537606648
 Animator:
   serializedVersion: 3
@@ -2679,18 +2691,6 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 16.37
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &135832480264838526
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1343622811073326}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 9.83
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198176629341066244
 ParticleSystem:

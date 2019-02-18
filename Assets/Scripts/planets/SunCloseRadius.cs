@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-[RequireComponent(typeof(SphereCollider))]
 public class SunCloseRadius : MonoBehaviour
 {
     [SerializeField] private bool disableGravity = false;
@@ -15,7 +14,7 @@ public class SunCloseRadius : MonoBehaviour
         m_solarSystem = FindObjectOfType<SolarSystem>();
 
         Assert.IsNotNull(m_solarSystem, "No solarSystem found");
-        Assert.IsTrue(GetComponent<SphereCollider>().isTrigger, "SphereCollider must be a trigger");
+        Assert.IsTrue(GetComponent<Collider>().isTrigger, "Collider must be a trigger");
     }
 
     private void OnTriggerStay(Collider other)

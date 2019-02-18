@@ -55,18 +55,21 @@ public class SolarSystem : MonoBehaviour
                 
                 if( !other.attachedRigidbody.gameObject.GetComponent< PlanetEffect>())
                 {
-                    PlanetEffect eff = other.attachedRigidbody.gameObject.AddComponent<PlanetEffect>();
-                    if (eff)
+                    if(!other.GetComponentInParent<IcoSegment>())
                     {
-                        eff.maxSpeed = m_maxSpeed;
-                        eff.accelerationForce = m_accelerationForce;
-                        eff.impactForce = impactForce;
-                        eff.sunRigidbody = m_rb;
-                        m_planetEffectsList.Add(eff);
+                        PlanetEffect eff = other.attachedRigidbody.gameObject.AddComponent<PlanetEffect>();
+                        if (eff)
+                        {
+                            eff.maxSpeed = m_maxSpeed;
+                            eff.accelerationForce = m_accelerationForce;
+                            eff.impactForce = impactForce;
+                            eff.sunRigidbody = m_rb;
+                            m_planetEffectsList.Add(eff);
 
-                        eff.explosionEffect = m_explosionEffect;
+                            eff.explosionEffect = m_explosionEffect;
 
-                        UpdateState(m_planetEffectsList.Count);
+                            UpdateState(m_planetEffectsList.Count);
+                        }
                     }
                 }
             }
