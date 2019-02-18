@@ -138,11 +138,11 @@ public class DropZone : MonoBehaviour
                     interactable.transform.position = transform.position;
                 }
 
-                interactable.jointType.JoinWith(gameObject);
-                GetComponent<Joint>().breakForce = float.MaxValue;
+                // interactable.jointType.JoinWith(gameObject);
+                // GetComponent<Joint>().breakForce = float.MaxValue;
                 AkSoundEngine.PostEvent("Socle_Activated_Play", gameObject);
                 catchedObject = interactable;
-                interactable.jointType.onJointBreak.AddListener(Release);
+                // interactable.jointType.onJointBreak.AddListener(Release);
                 interactable.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
                 interactable.isDistanceGrabbable = false;
 
