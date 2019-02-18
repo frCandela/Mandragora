@@ -41,13 +41,14 @@ public class PlanetScaler : Workshop
         float ratio = distance / m_baseDist;
         m_newScale = Mathf.Clamp(ratio * m_intermediateScale, m_minScaleRatio * m_scaleEffect.originalScale.x, m_maxScaleRatio * m_scaleEffect.originalScale.x);
         
-        AkSoundEngine.SetRTPCValue("Scale_Rate", Mathf.Abs(distance - m_oldDistance) * 10000);
+        AkSoundEngine.SetRTPCValue("Scale_Rate", Mathf.Abs(m_newScale - m_oldScale) * 10000);
         
         m_oldDistance = distance;
     }
 
     protected override void OnObjectGrabStart()
     {
+        AkSoundEngine.PostEvent("Play_Scale_RTPC", gameObject);
         m_baseDist = Vector3.Distance(transform.position, m_catchedObjectJoint.connectedGameobject.transform.position);
         m_intermediateScale = m_scaleEffect.transform.localScale.x;
     }
@@ -65,7 +66,6 @@ public class PlanetScaler : Workshop
             }
 
             AkSoundEngine.PostEvent("LFO_Scale_Play", gameObject);
-            AkSoundEngine.PostEvent("Play_Scale_RTPC", gameObject);
         }
         else
         {
@@ -75,7 +75,6 @@ public class PlanetScaler : Workshop
             m_scaleEffect = null;
 
             AkSoundEngine.PostEvent("LFO_Scale_Stop", gameObject);
-            AkSoundEngine.PostEvent("Stop_Scale_RTPC", gameObject);
         }
     }
 
@@ -97,5 +96,6 @@ public class PlanetScaler : Workshop
     protected override void OnObjectGrabStop()
     {
         AkSoundEngine.SetRTPCValue("Scale_Rate", 0);
+        AkSoundEngine.PostEvent("Stop_Scale_RTPC", gameObject);
     }
 }
