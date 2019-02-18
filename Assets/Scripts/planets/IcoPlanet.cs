@@ -9,9 +9,15 @@ public class IcoPlanet : MonoBehaviour
         set
         {
             if(value)
+            {
                 AkSoundEngine.PostEvent("Soundseed_Play", gameObject);
+                AkSoundEngine.PostEvent("Mute_Planet", gameObject);
+            }
             else
+            {
                 AkSoundEngine.PostEvent("Soundseed_Stop", gameObject);
+                AkSoundEngine.PostEvent("UnMute_Planet", gameObject);
+            }
         }
     }
 

@@ -80,8 +80,6 @@ public class Teleporter : MonoBehaviour
 		{
 			if(enabled)
 			{
-				AkSoundEngine.PostEvent("Guide_Play", gameObject);
-
 				foreach (MTK_TPZone zone in m_allTPZones)
 				{
 					if(CurrentZone != zone && zone.m_enabled)
@@ -106,7 +104,9 @@ public class Teleporter : MonoBehaviour
 					}
 				}
 
-				if(!value)
+				if(value)
+					AkSoundEngine.PostEvent("Guide_Play", gameObject);
+				else
 				{
 					m_cancelTime = Time.time + m_tolerance;
 					AkSoundEngine.PostEvent("Guide_Stop", gameObject);
