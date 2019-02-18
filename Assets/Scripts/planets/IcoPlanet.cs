@@ -77,7 +77,7 @@ public class IcoPlanet : MonoBehaviour
     {
         foreach (MTK_PlanetSegmentJoint seg in m_segmentJoints)
         {
-            if(Random.Range(0,1.0f) < .3f)
+            if(Random.Range(0,1.0f) < .5f)
                 seg.RandomAnimation();
         }
     }
