@@ -12424,7 +12424,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_wOnCollision:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 46be61be66fa8434f90bb5b0b7a7aabb,
+      type: 2}
   m_upwardRotation: {x: 0, y: 0, z: 0}
   isDistanceGrabbable: 1
   isDroppable: 1
@@ -12452,7 +12453,8 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   m_wOnGrabStart:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: a8e4c490866d5ef4084629773cb735ec,
+      type: 2}
   m_onGrabStart:
     m_PersistentCalls:
       m_Calls: []
@@ -14677,6 +14679,13 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_trailMaterial: {fileID: 2100000, guid: cf955bdc131539a4da93ab38c84a188b, type: 2}
+  m_trailMaterialInitParams: {x: 0.15, y: 3, z: 2}
+  m_trailAmplitudeOverTimeCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   m_validated:
     valueGuid: 
     WwiseObjectReference: {fileID: 11400000, guid: bccf3e36d82aede48933236a997bcb0c,
