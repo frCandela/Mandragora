@@ -53,6 +53,7 @@ public class TelekinesisPointer : MonoBehaviour
 			{
 				if(m_currentInteractable)
 				{
+					m_wObjectStop.Post(m_currentInteractable.gameObject);
 					m_currentInteractable.Outline = false;
 					m_currentInteractable = null;
 				}
@@ -62,7 +63,10 @@ public class TelekinesisPointer : MonoBehaviour
 				if(m_currentInteractable != value)
 				{
 					if(m_currentInteractable)
+					{
 						m_currentInteractable.Outline = false;
+						m_wObjectStop.Post(m_currentInteractable.gameObject);
+					}
 
 					m_currentInteractable = value;
 					m_currentInteractable.Outline = true;
