@@ -23,9 +23,8 @@ GameObject:
   - component: {fileID: 23571567773857818}
   - component: {fileID: 114063880870806298}
   - component: {fileID: 114673736157254418}
-  - component: {fileID: 65648670467984470}
-  - component: {fileID: 65444061047135348}
   - component: {fileID: 114560552668233316}
+  - component: {fileID: 64059191019153670}
   m_Layer: 0
   m_Name: Champi
   m_TagString: Untagged
@@ -89,8 +88,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1224305274275578}
   m_Mesh: {fileID: 4300000, guid: 6c8914666c5085147bbce534fa7575ca, type: 3}
---- !u!65 &65444061047135348
-BoxCollider:
+--- !u!64 &64059191019153670
+MeshCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -98,21 +97,11 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.0005426964, y: 0.00064743764, z: 0.0005811367}
-  m_Center: {x: -0.00006252031, y: 0.0000026968685, z: 0.00027697286}
---- !u!65 &65648670467984470
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1224305274275578}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.0025146375, y: 0.0024712302, z: 0.0012708008}
-  m_Center: {x: 0, y: -3.0425688e-18, z: 0.0010838534}
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 6c8914666c5085147bbce534fa7575ca, type: 3}
 --- !u!114 &114063880870806298
 MonoBehaviour:
   m_ObjectHideFlags: 1
