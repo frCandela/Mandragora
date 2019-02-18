@@ -38,7 +38,6 @@ public class IcoPlanet : MonoBehaviour
 
     List<MTK_PlanetSegmentJoint> m_segmentJoints = new List<MTK_PlanetSegmentJoint>();
 
-
     void Start()
     {
         Vector3 m_originalScale = transform.localScale;
@@ -78,7 +77,7 @@ public class IcoPlanet : MonoBehaviour
     {
         foreach (MTK_PlanetSegmentJoint seg in m_segmentJoints)
         {
-            if(Random.Range(0,1.0f) < .5f)
+            if(Random.Range(0,1.0f) < .3f)
                 seg.RandomAnimation();
         }
     }

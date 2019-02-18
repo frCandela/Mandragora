@@ -131,7 +131,7 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
     [ContextMenu("Animate")]
     public void RandomAnimation()
     {
-        StartCoroutine(Animate(Random.Range(.1f, .5f), (int)Mathf.Clamp(Random.Range(-m_icoPlanet.nbLevels, m_icoPlanet.nbLevels), -m_icoSegment.heightLevel, m_icoPlanet.nbLevels - m_icoSegment.heightLevel)));
+        StartCoroutine(Animate(Random.Range(.1f, .5f), (int)Mathf.Clamp(Random.Range(-m_icoPlanet.nbLevels, m_icoPlanet.nbLevels), -m_icoSegment.heightLevel, m_icoPlanet.nbLevels - m_icoSegment.heightLevel) / 2));
     }
 
     IEnumerator Animate(float timeBetweenSteps, int stepsAmount)
@@ -146,13 +146,13 @@ public class MTK_PlanetSegmentJoint : MTK_JointType
 
             for (int i = 0; i < stepsAmount; i++)
             {
-                Increment(increment, false);
+                Increment(increment, true);
                 yield return new WaitForSeconds(timeBetweenSteps);
             }
 
             for (int i = 0; i < stepsAmount; i++)
             {
-                Increment(-increment, false);
+                Increment(-increment, true);
                 yield return new WaitForSeconds(timeBetweenSteps);
             }
 
