@@ -171,8 +171,6 @@ public class PlanetObjectPlacer : Workshop
 
     private void Update()
     {
-        Destroy(null);
-
         if( m_placingEnabled )
         {
             for (int i = 0; i < m_handsInTrigger.Count; ++i)

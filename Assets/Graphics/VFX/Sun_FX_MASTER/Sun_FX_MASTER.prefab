@@ -233,9 +233,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4755278465358142}
-  - component: {fileID: 114400199011589320}
   - component: {fileID: 114022118244576704}
   - component: {fileID: 65327116972289926}
+  - component: {fileID: 114007613936162914}
   m_Layer: 13
   m_Name: PlatformGravityZone
   m_TagString: Untagged
@@ -297,8 +297,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4143182841811184}
   - component: {fileID: 135692643860707466}
-  - component: {fileID: 114485581936383946}
   - component: {fileID: 114182097840615720}
+  - component: {fileID: 114057413131814176}
   m_Layer: 13
   m_Name: SunCloseRadius
   m_TagString: Untagged
@@ -1604,6 +1604,28 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114007613936162914
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1343622811073326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5210b1732f4b20e4e8ab034895e36080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_objectsInTrigger: []
+  onEnter:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEventGameObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onExit:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEventGameObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114022118244576704
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1667,6 +1689,28 @@ MonoBehaviour:
   m_Script: {fileID: 1491221649, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114057413131814176
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1541584806552234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5210b1732f4b20e4e8ab034895e36080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_objectsInTrigger: []
+  onEnter:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEventGameObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onExit:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEventGameObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114084215322712086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1913,6 +1957,62 @@ MonoBehaviour:
         _vector2Value: {x: 0, y: 0}
         _vector3Value: {x: 0, y: 0, z: 0}
         _vector4Value: {x: 0, y: 0, z: 0, w: 0}
+      - _path: m_exclusionCloseRadius
+        _animationCurveValue:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        _booleanValue: 0
+        _boundsValue:
+          m_Center: {x: 0, y: 0, z: 0}
+          m_Extent: {x: 0, y: 0, z: 0}
+        _colorValue: {r: 0, g: 0, b: 0, a: 0}
+        _doubleValue: 0
+        _floatValue: 0
+        _intValue: 0
+        _longValue: 0
+        _objectReferenceValue: {fileID: 114057413131814176}
+        _quaternionValue: {x: 0, y: 0, z: 0, w: 0}
+        _rectValue:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        _stringValue: 
+        _vector2Value: {x: 0, y: 0}
+        _vector3Value: {x: 0, y: 0, z: 0}
+        _vector4Value: {x: 0, y: 0, z: 0, w: 0}
+      - _path: m_exclusionPlatform
+        _animationCurveValue:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        _booleanValue: 0
+        _boundsValue:
+          m_Center: {x: 0, y: 0, z: 0}
+          m_Extent: {x: 0, y: 0, z: 0}
+        _colorValue: {r: 0, g: 0, b: 0, a: 0}
+        _doubleValue: 0
+        _floatValue: 0
+        _intValue: 0
+        _longValue: 0
+        _objectReferenceValue: {fileID: 114007613936162914}
+        _quaternionValue: {x: 0, y: 0, z: 0, w: 0}
+        _rectValue:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        _stringValue: 
+        _vector2Value: {x: 0, y: 0}
+        _vector3Value: {x: 0, y: 0, z: 0}
+        _vector4Value: {x: 0, y: 0, z: 0, w: 0}
   _overrideObjects: []
 --- !u!114 &114268367761188542
 MonoBehaviour:
@@ -2103,18 +2203,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guid: 73730b2d-09f3-426e-a8ac-fb0893acd243
---- !u!114 &114400199011589320
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1343622811073326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0876cae0ed0e7b44486adaf9bef9c39f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableGravity: 1
 --- !u!114 &114415001113612024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2146,6 +2234,8 @@ MonoBehaviour:
     groupGuid: 
     WwiseObjectReference: {fileID: 11400000, guid: 75e2da13e575c144491b259c8529435c,
       type: 2}
+  m_exclusionPlatform: {fileID: 114007613936162914}
+  m_exclusionCloseRadius: {fileID: 114057413131814176}
   m_explosionEffect: {fileID: 1164661607641472, guid: 5ac12fa3f8ca53940add52e7f35b04b9,
     type: 2}
   m_planetTPZone: {fileID: 114218773351808230}
@@ -2195,18 +2285,6 @@ MonoBehaviour:
   m_Script: {fileID: 1491221649, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114485581936383946
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1541584806552234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0876cae0ed0e7b44486adaf9bef9c39f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableGravity: 0
 --- !u!114 &114511284776080770
 MonoBehaviour:
   m_ObjectHideFlags: 1
