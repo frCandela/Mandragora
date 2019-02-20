@@ -24,7 +24,7 @@ public class IcoPlanet : MonoBehaviour
     [Header("Parameters")]
     [SerializeField] private bool m_initialize = true;
     [SerializeField, Range(0, 3)] public int m_nbSubdivisions = 0;
-    [SerializeField] private Material m_segmentMaterial;
+    [SerializeField] public Material m_segmentMaterial;
 
     [SerializeField] public float heightDelta = 0.2f;
     [SerializeField] public float borderRatio = 0.2f;

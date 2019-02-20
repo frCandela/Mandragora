@@ -12,6 +12,7 @@ public class Colonisator : MonoBehaviour
     [SerializeField] private GameObject m_room;
     [SerializeField] private GameObject m_newRoom;
     [SerializeField] private GameObject m_laserPrefab;
+    [SerializeField] private Material m_newSegmentMaterial;
 
     private IcoPlanet m_icoPlanet;
     private MTK_Manager m_manager;
@@ -25,6 +26,7 @@ public class Colonisator : MonoBehaviour
         Assert.IsTrue(transform.position == Vector3.zero, "Colonisator gameobject position must be zero");
         Assert.IsTrue(transform.rotation == Quaternion.identity, "Colonisator gameobject rotation must be zero");
         Assert.IsTrue(transform.lossyScale == Vector3.one, "Colonisator gameobject scale must be one");
+        Assert.IsTrue(m_newSegmentMaterial);
 
         m_manager = FindObjectOfType<MTK_Manager>();
         m_setup = m_manager.activeSetup;
@@ -151,6 +153,7 @@ public class Colonisator : MonoBehaviour
 
         m_icoPlanet.heightDelta /= 4;
         m_icoPlanet.nbLevels *= 4;
+        m_icoPlanet.m_segmentMaterial = m_newSegmentMaterial;
         m_icoPlanet.SetTesselationLevel(3, 4);
         m_icoPlanet.transform.localScale = new Vector3(m_planetScale, m_planetScale, m_planetScale);
 
