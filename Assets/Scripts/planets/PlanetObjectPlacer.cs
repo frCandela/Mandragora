@@ -224,7 +224,7 @@ public class PlanetObjectPlacer : Workshop
         }
         else
         {
-            for( int i = 0; i < m_handsInTrigger.Count; ++i)
+            for( int i = 0; i < m_handsInTrigger.Count; i++)
             {
                 if(m_handsInTrigger[i].First == hand)
                 {
@@ -232,9 +232,9 @@ public class PlanetObjectPlacer : Workshop
                     {
                         Destroy(m_handsInTrigger[i].Second.gameObject);
                     }
-                }
-                m_handsInTrigger.RemoveAt(i);
-                break;
+                    m_handsInTrigger.RemoveAt(i);
+                    break;
+                }                             
             }            
         }
     }
