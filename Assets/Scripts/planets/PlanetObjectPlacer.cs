@@ -63,7 +63,7 @@ public class PlanetObjectPlacer : Workshop
                 {
                     if (segment.GetComponent<IcoSegment>())
                     {
-                        segment.GetComponent<MeshCollider>().enabled = true;
+                        segment.GetComponent<MeshCollider>().enabled = false;
                         foreach (Transform decoration in segment)
                         {
                             decoration.GetComponent<MTK_Interactable>().isGrabbable = false;

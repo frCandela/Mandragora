@@ -40,7 +40,7 @@ public class SunCloseRadius : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        PlanetEffect effect = other.GetComponent<PlanetEffect>();
+        PlanetEffect effect = other.attachedRigidbody.GetComponent<PlanetEffect>();
         if (effect)
         {
             effect.effectActive = true;
