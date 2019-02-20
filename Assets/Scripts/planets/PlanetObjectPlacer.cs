@@ -83,6 +83,9 @@ public class PlanetObjectPlacer : Workshop
 
         for (float t = 0; t < 2; t += Time.deltaTime / duration)
         {
+            // o - 1 - 1
+            m_previewObject.transform.localScale = holo.transform.localScale = Vector3.one * 40 * Mathf.Lerp(0, 1, Mathf.PingPong(t, 1));
+
             m_previewObject.transform.RotateAround(m_dropzone.transform.position, -rotationAxis, Time.deltaTime * 20);
             DrawHologram(holo, m_previewObject.transform);
             yield return new WaitForEndOfFrame();
