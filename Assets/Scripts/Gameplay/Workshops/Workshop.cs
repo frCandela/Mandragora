@@ -11,6 +11,8 @@ public abstract class Workshop : MonoBehaviour
 	private ConfigurableJoint m_confJoint;
 	protected MTK_JointType m_catchedObjectJoint;
 
+	private FixedJoint m_fixedJoint;
+
 	void Awake ()
     {
         m_dropzone = GetComponent<DropZone>();
@@ -37,6 +39,10 @@ public abstract class Workshop : MonoBehaviour
 				m_confJoint.zMotion = ConfigurableJointMotion.Locked;
 
 				OnObjectGrabStart();
+				m_fixedJoint = GetComponent<FixedJoint>();
+
+				if(m_fixedJoint)
+					m_fixedJoint.connectedBody = null;
             }
 			
             Vector3 anchorPoint = m_confJoint.connectedBody.transform.TransformPoint(m_confJoint.connectedAnchor);
@@ -48,6 +54,9 @@ public abstract class Workshop : MonoBehaviour
         }
         else
         {
+			if(m_fixedJoint && m_fixedJoint.connectedBody == null)
+				m_fixedJoint.connectedBody = m_dropzone.catchedObject.GetComponent<Rigidbody>();
+				
 			OnObjectGrabStop();
             Destroy(m_confJoint);
         }
