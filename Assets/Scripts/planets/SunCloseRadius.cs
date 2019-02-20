@@ -5,8 +5,6 @@ using UnityEngine.Assertions;
 
 public class SunCloseRadius : MonoBehaviour
 {
-    [SerializeField] private bool disableGravity = false;
-
     private SolarSystem m_solarSystem;
 
     private void Awake()
@@ -23,16 +21,6 @@ public class SunCloseRadius : MonoBehaviour
         if (effect)
         {
             effect.effectActive = false;
-            if (disableGravity)
-            {
-                effect.GetComponent<Rigidbody>().useGravity = true;
-            }
-        }
-
-        IcoPlanet planet = other.attachedRigidbody.GetComponent<IcoPlanet>();
-        if (planet)
-        {
-            m_solarSystem.SetPlanetOutOfZone(planet, true);
         }
     }    
 
@@ -40,17 +28,10 @@ public class SunCloseRadius : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        PlanetEffect effect = other.GetComponent<PlanetEffect>();
+        PlanetEffect effect = other.attachedRigidbody.GetComponent<PlanetEffect>();
         if (effect)
         {
             effect.effectActive = true;
-            effect.GetComponent<Rigidbody>().useGravity = false;
-        }
-
-        IcoPlanet planet = other.attachedRigidbody.GetComponent<IcoPlanet>();
-        if (planet)
-        {
-            m_solarSystem.SetPlanetOutOfZone(planet, false);
         }
     }
 

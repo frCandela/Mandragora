@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 [DisallowMultipleComponent]
 public class SolarSystem : MonoBehaviour
@@ -8,10 +9,10 @@ public class SolarSystem : MonoBehaviour
     [SerializeField] private float m_maxSpeed = float.PositiveInfinity;
     [SerializeField] private float m_accelerationForce = 1;
     [SerializeField] private float impactForce = 3f;
-
     [SerializeField] public List<AK.Wwise.State> m_states = new List<AK.Wwise.State>();
-    List<PlanetEffect> m_planetEffectsList = new List<PlanetEffect>();
 
+    [SerializeField] SmartTrigger m_exclusionPlatform;
+    [SerializeField] SmartTrigger m_exclusionCloseRadius;
 
     private Rigidbody m_rb;
 
@@ -27,7 +28,7 @@ public class SolarSystem : MonoBehaviour
             for (int i = m_planetList.Count - 1; i >= 0; --i)
             {
                 IcoPlanet planet = m_planetList[m_planetList.Count - 1];
-                if (!m_planetListOutOfZone.Contains(planet))
+                if (!m_exclusionPlatform.m_objectsInTrigger.Contains(planet.gameObject))
                 {
                     return planet;
                 }
@@ -36,12 +37,60 @@ public class SolarSystem : MonoBehaviour
         }
     }
 
+    List<PlanetEffect> m_planetEffectsList = new List<PlanetEffect>();
     List<IcoPlanet> m_planetList = new List<IcoPlanet>();
-    List<IcoPlanet> m_planetListOutOfZone = new List<IcoPlanet>();
 
     private void Awake()
     {
         m_rb = GetComponent<Rigidbody>();
+
+        Assert.IsNotNull(m_exclusionPlatform);
+        Assert.IsNotNull(m_exclusionCloseRadius);
+
+        m_exclusionCloseRadius.onEnter.AddListener(onEnterCloseRadius);
+        m_exclusionCloseRadius.onExit.AddListener(onExitCloseRadius);
+
+        m_exclusionPlatform.onEnter.AddListener(onEnterExclusionZone);
+        m_exclusionPlatform.onExit.AddListener(onExitExclusionZone);
+    }
+
+
+    void onEnterCloseRadius(GameObject obj)
+    {
+        PlanetEffect effect = obj.GetComponent<PlanetEffect>();
+        if (effect)
+        {
+            effect.effectActive = false;
+        }
+    }
+
+    void onExitCloseRadius( GameObject obj)
+    {
+        PlanetEffect effect = obj.GetComponent<PlanetEffect>();
+        if (effect)
+        {
+            effect.effectActive = true;
+        }
+    }
+
+    void onEnterExclusionZone(GameObject obj)
+    {
+        PlanetEffect effect = obj.GetComponent<PlanetEffect>();
+        if (effect)
+        {
+            effect.effectActive = false;
+            effect.GetComponent<Rigidbody>().useGravity = true;
+        }
+    }
+
+    void onExitExclusionZone(GameObject obj)
+    {
+        PlanetEffect effect = obj.GetComponent<PlanetEffect>();
+        if (effect)
+        {
+            effect.effectActive = true;
+            effect.GetComponent<Rigidbody>().useGravity = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -69,6 +118,12 @@ public class SolarSystem : MonoBehaviour
                             eff.explosionEffect = m_explosionEffect;
 
                             UpdateState(m_planetEffectsList.Count);
+
+                            if( m_exclusionPlatform.m_objectsInTrigger.Contains( eff.gameObject ))
+                            {
+                                eff.effectActive = false;
+                                eff.GetComponent<Rigidbody>().useGravity = true;
+                            }
                         }
                     }
                 }
@@ -127,22 +182,5 @@ public class SolarSystem : MonoBehaviour
         {
             AkSoundEngine.SetState(m_states[count].GroupId, m_states[count].Id);
         }
-    }
-
-    public void SetPlanetOutOfZone(IcoPlanet planet, bool state )
-    {
-        if (state)
-        {
-            if ( !m_planetListOutOfZone.Contains(planet))
-            {
-                m_planetListOutOfZone.Add(planet);
-            }            
-        }
-        else
-        {
-            m_planetListOutOfZone.Remove(planet);
-        }
-
-        m_planetTPZone.Planet = lastPlanet;
     }
 }
