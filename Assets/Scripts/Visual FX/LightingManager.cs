@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// [ExecuteInEditMode]
-
+[ExecuteInEditMode]
 public class LightingManager : MonoBehaviour {
 
 	[Range(0.0f, 1.0f)] public float sceneUnlitFactor;
@@ -26,8 +25,13 @@ public class LightingManager : MonoBehaviour {
 
 	private void Start()
 	{
-		AkSoundEngine.PostEvent("Mute_Drop", gameObject);
-		AkSoundEngine.PostEvent("Play_Intro", gameObject);
+#if UNITY_EDITOR
+		if (Application.isPlaying)
+		{
+			AkSoundEngine.PostEvent("Mute_Drop", gameObject);
+			AkSoundEngine.PostEvent("Play_Intro", gameObject);
+		}
+#endif
 
 		if(zoneRenderer)
 		{

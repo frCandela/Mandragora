@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 114525500938066700}
   - component: {fileID: 114273186622765808}
   - component: {fileID: 114870723213804624}
-  - component: {fileID: 64593354520198012}
   - component: {fileID: 64807640274578364}
   m_Layer: 0
   m_Name: Rock2_ice
@@ -88,20 +87,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1953231531463850}
   m_Mesh: {fileID: 4300000, guid: b51954b6a3b71ee41b937e91530fdffb, type: 3}
---- !u!64 &64593354520198012
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1953231531463850}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: b51954b6a3b71ee41b937e91530fdffb, type: 3}
 --- !u!64 &64807640274578364
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -157,7 +142,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_wOnCollision:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 51ffa3841429e3a4d9254280ed7be4d9,
+      type: 2}
   m_upwardRotation: {x: 0, y: 0, z: 0}
   isDistanceGrabbable: 1
   isDroppable: 1
@@ -185,7 +171,8 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   m_wOnGrabStart:
     valueGuid: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 5d927e1b54e1e4445a8083f518505c10,
+      type: 2}
   m_onGrabStart:
     m_PersistentCalls:
       m_Calls: []
