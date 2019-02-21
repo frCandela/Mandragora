@@ -204,10 +204,10 @@ public class IcoPlanet : MonoBehaviour
         }
     }
 
-    Quaternion m_oldRotation;
-    private void Update()
-    {
-        AkSoundEngine.SetRTPCValue("Wind", Quaternion.Angle(transform.rotation, m_oldRotation) * 50);
-        m_oldRotation = transform.rotation;
-    }
+    // Quaternion m_oldRotation;
+    // private void Update()
+    // {
+        // AkSoundEngine.SetRTPCValue("Wind", Quaternion.Angle(transform.rotation, m_oldRotation) * 50);
+        // m_oldRotation = transform.rotation;
+    // }
 }

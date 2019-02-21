@@ -41,11 +41,6 @@ public abstract class Workshop : MonoBehaviour
 				OnObjectGrabStart();
 				m_fixedJoint = GetComponent<FixedJoint>();
 
-				IcoPlanet icoplanet = m_dropzone.catchedObject.GetComponent<IcoPlanet>();
-
-                if(icoplanet)
-					icoplanet.Joined = true;
-
 				if(m_fixedJoint)
 					m_fixedJoint.connectedBody = null;
             }
@@ -62,11 +57,6 @@ public abstract class Workshop : MonoBehaviour
 			if(m_fixedJoint && m_fixedJoint.connectedBody == null)
 			{
 				m_fixedJoint.connectedBody = m_dropzone.catchedObject.GetComponent<Rigidbody>();
-
-				IcoPlanet icoplanet = m_dropzone.catchedObject.GetComponent<IcoPlanet>();
-
-                if(icoplanet)
-                    icoplanet.Joined = false;
 			}
 				
 			OnObjectGrabStop();

@@ -19,7 +19,6 @@ public class DropZone : MonoBehaviour
     public UnityEventBool onPlanetCatched;
     public MTK_Interactable catchedObject { get; private set; }
 
-
     private Outline m_outline;
     [SerializeField] TriggerButton m_button;
 
@@ -27,6 +26,8 @@ public class DropZone : MonoBehaviour
     private float m_lastActivationTime;
 
     Collider m_collider;
+
+    Quaternion m_oldRotation;
 
     // Use this for initialization
     void Awake ()
@@ -53,6 +54,9 @@ public class DropZone : MonoBehaviour
         {
             m_visual.SetActive(true);
         }
+
+        AkSoundEngine.PostEvent("Soundseed_Play", gameObject);
+        AkSoundEngine.PostEvent("Mute_Planet", gameObject);
     }
 
     private void OnDisable()
@@ -68,6 +72,9 @@ public class DropZone : MonoBehaviour
         {
             Release();
         }
+        
+        AkSoundEngine.PostEvent("Soundseed_Stop", gameObject);
+        AkSoundEngine.PostEvent("UnMute_Planet", gameObject);
     }
 	
 	// Update is called once per frame
@@ -80,7 +87,13 @@ public class DropZone : MonoBehaviour
         else
         {
             m_outline.enabled = false;
-        }        
+        }
+
+        if(catchedObject)
+        {
+            AkSoundEngine.SetRTPCValue("Wind", Quaternion.Angle(catchedObject.transform.rotation, m_oldRotation) * 50);
+            m_oldRotation = catchedObject.transform.rotation;
+        }
     }
 
     public void EnableButton()
@@ -106,7 +119,6 @@ public class DropZone : MonoBehaviour
 
             if(icoplanet)
             {
-                icoplanet.Joined = false;
                 StartCoroutine(AnimatePlanet(icoplanet, 0.04f, 4.2f));
                 onPlanetCatched.Invoke(false);
             }
@@ -150,7 +162,6 @@ public class DropZone : MonoBehaviour
 
                 if(icoplanet)
                 {
-                    icoplanet.Joined = true;
                     StartCoroutine(AnimatePlanet(icoplanet, 0.12f, 15));
                     onPlanetCatched.Invoke(true);
                 }
