@@ -19,6 +19,16 @@ public class PlanetTerraformer : MonoBehaviour
     {
         m_dropzone.EnableButton();
     }
+
+    Quaternion m_oldRotation;
+    private void Update()
+    {
+        if(m_dropzone.catchedObject)
+        {
+            AkSoundEngine.SetRTPCValue("Wind", Quaternion.Angle(m_dropzone.catchedObject.transform.rotation, m_oldRotation) * 50);
+            m_oldRotation = m_dropzone.catchedObject.transform.rotation;
+        }
+    }
 	
 	// Update is called once per frame
     void EnableTerraformation( bool state )
@@ -45,6 +55,9 @@ public class PlanetTerraformer : MonoBehaviour
                     segment.GetComponent<MTK_Interactable>().isGrabbable = true;
                     segment.GetComponent<Collider>().enabled = true;
                 }
+
+                AkSoundEngine.PostEvent("Soundseed_Play", gameObject);
+                AkSoundEngine.PostEvent("Mute_Planet", gameObject);
             }
             else
             {
@@ -67,6 +80,9 @@ public class PlanetTerraformer : MonoBehaviour
             m_icoPlanet.GenerateMeshCollider();
 
             m_icoPlanet = null;
+
+            AkSoundEngine.PostEvent("Soundseed_Stop", gameObject);
+            AkSoundEngine.PostEvent("UnMute_Planet", gameObject);
         }
     }
 }
