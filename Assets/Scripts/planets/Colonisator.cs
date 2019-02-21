@@ -52,16 +52,7 @@ public class Colonisator : MonoBehaviour
 
         if( Input.GetKeyDown(KeyCode.T) )
         {
-            foreach (MTK_InteractHand hand in FindObjectsOfType<MTK_InteractHand>())
-            {
-                hand.gameObject.AddComponent<HandTerraformer>();
 
-                GameObject laser = Instantiate(m_laserPrefab);
-                laser.transform.parent = hand.transform;
-                laser.transform.localPosition = new Vector3(0, 0, 50);
-                laser.transform.localScale = new Vector3(0.01f, 0.01f, 100);
-                laser.transform.localRotation = Quaternion.identity;
-            }
         }
     }
 
@@ -125,7 +116,7 @@ public class Colonisator : MonoBehaviour
 
     }
 
-    [ContextMenu("Colonie")]
+    [ContextMenu("Colonize")]
     public void test()
     {
         Colonize(FindPlanet());
@@ -163,5 +154,16 @@ public class Colonisator : MonoBehaviour
         m_setup.transform.rotation = Quaternion.identity;
 
         m_newRoom.SetActive(true);
+
+        foreach (MTK_InteractHand hand in FindObjectsOfType<MTK_InteractHand>())
+        {
+            hand.gameObject.AddComponent<HandTerraformer>();
+
+            GameObject laser = Instantiate(m_laserPrefab);
+            laser.transform.parent = hand.transform;
+            laser.transform.localPosition = new Vector3(0, 0, 50);
+            laser.transform.localScale = new Vector3(0.01f, 0.01f, 100);
+            laser.transform.localRotation = Quaternion.identity;
+        }
     }
 }
